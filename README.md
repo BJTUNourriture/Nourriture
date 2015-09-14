@@ -1,25 +1,28 @@
-## Nourriture
+# Nourriture
 
 Beijing JiaoTong University
 Software Project Training
 Xin Xing
 
-#Back : 
+##Back : 
 
 - Synphony or Django
 - MongoDB
 - ...
 
-#Front : 
+##Front : 
 
 - Twitter Bootstrap
 - AngularJS
 - Jade
 - ...
 
-#Android :
+##Android :
 
 - Android 5.0 Lollipop
 - Material Design
 - ...
+
+
+## Licence MIT
 
