@@ -1,0 +1,9 @@
+{
+  "name": "nourriture",
+  "author": "BJTU",
+  "version": "0.0.0",
+  "dependencies": {
+    "jquery": "~1.9.0"
+  }
+}
+
