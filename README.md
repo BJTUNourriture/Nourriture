@@ -8,7 +8,7 @@ Xin Xing
 
 ##Back : 
 
-- Synphony or Django
+- Django REST API
 - MongoDB
 - ...
 
