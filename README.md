@@ -8,21 +8,19 @@ Xin Xing
 
 ##Back : 
 
-- Django REST API
+- ExpressJS
 - MongoDB
 - ...
 
 ##Front : 
 
-- Twitter Bootstrap
 - AngularJS
-- Jade
+- Handelbars
 - ...
 
 ##Android :
 
-- Android 5.0 Lollipop
-- Material Design
+- Android 5.0 Lollipop API
 - ...
 
 
