@@ -19,16 +19,16 @@ router.get('/', function(req, res) {
   res.send('NOURRITURE BASE JSON');
 });
 
-/* GET Userlist page. */
-router.get('/userlist', function(req, res) {
-    var db = req.db;
-    var collection = db.get('usercollection');
-    collection.find({},{},function(e,docs){
-        res.render('userlist', {
-            "userlist" : docs
-        });
-    });
-});
+// /* GET Userlist page. */
+// router.get('/userlist', function(req, res) {
+//     var db = req.db;
+//     var collection = db.get('usercollection');
+//     collection.find({},{},function(e,docs){
+//         res.render('userlist', {
+//             "userlist" : docs
+//         });
+//     });
+// });
 
 // // define the about route
 // router.get('/about', function(req, res) {
