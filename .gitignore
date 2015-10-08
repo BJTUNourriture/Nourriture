@@ -31,3 +31,6 @@ npm-debug.log
 
 #Data MongoDB
 source/server/data/
+
+#IDE Jetbrains
+.idea/
