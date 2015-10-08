@@ -14,6 +14,7 @@ var clientController = require('./oauth/controllers/client');
 var oauth2Controller = require('./oauth/controllers/oauth2');
 
 
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -110,10 +111,42 @@ router.route('/oauth2/token')
 app.use('/api', router);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
+});
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+// var mongoose = require('mongoose');
+// mongoose.connect('mongodb://localhost/nourriture');
+
+//var db = require('mongoskin').db('mongodb://localhost:27017/nourriture');
+
+
+/*db.collection('usercollection').find().toArray(function(err, result) {
+  if (err) throw err;
+  console.log(result);
+});*/
+
+app.use('/', routes);
+//app.use('/users', users);
+
+// Make our db accessible to our router
+app.use(function(req,res,next){
+    req.db = db;
+    next();
+});
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
 // error handlers
@@ -121,6 +154,7 @@ app.use(function (req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
+
     app.use(function (err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
@@ -128,6 +162,13 @@ if (app.get('env') === 'development') {
             error: err
         });
     });
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
+  });
 }
 
 // production error handler
@@ -142,4 +183,13 @@ app.use(function (err, req, res, next) {
 
 app.listen("8000");
 console.log("App listening on port 8000");
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
+});
+
+
 module.exports = app;
