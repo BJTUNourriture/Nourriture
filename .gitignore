@@ -30,4 +30,4 @@ node_modules
 npm-debug.log
 
 #Data MongoDB
-../data/
+source/server/data/
