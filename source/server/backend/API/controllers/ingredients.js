@@ -46,6 +46,24 @@ exports.getIngredientById = function (req, res, flag) {
 	return (1);
 };
 
+exports.getIngredientsByName = function (req, res, flag) {
+	var name = flag === true ? req.body.name : req.params.name;
+	if (!name)
+		return flag === true ? -1 : res.json({message : 'The id musn\'t be null'});
+	Ingredients.find({
+		"name": { "$regex": name, "$options": "i" } 
+		},
+		function (err, docs) {
+			if (err)
+				return (res.send(err));
+			else if (docs.length <= 0)
+				return (res.json({message : 'The name was not found.'}))
+			return (res.json(docs));
+		}
+	);
+	return (1);
+};
+
 /*
 ** DELETES
 */

@@ -121,8 +121,8 @@ router.route('/ingredients/id/:id')
 
 //endpoints by name
 router.route('/ingredients/name/:name')
-  .delete(ingredientsController.deleteIngredientByName);
-  
+  .delete(ingredientsController.deleteIngredientByName)
+  .get(ingredientsController.getIngredientsByName);
 
 // Register all our routes with /api
 app.use('/api', router);
