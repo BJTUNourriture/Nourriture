@@ -2,6 +2,7 @@
  * Created by sylflo on 9/28/15.
  */
 var User = require('../models/user');
+var Create_token = require('../misc/create_token_at_init_user');
 
 exports.postUsers = function (req, res) {
 
@@ -10,16 +11,21 @@ exports.postUsers = function (req, res) {
         password: req.body.password
     });
 
-    console.log("postUser");
 
     user.save(function (err) {
         if (err) {
-            console.log("toto");
-            res.send(err);
+            console.log("user save function", err);
+            return res.send(err);
         }
 
-        res.json({message: 'New beer drinker added to the locker room!'});
     });
+
+    Create_token(user, res);
+
+
+
+
+
 };
 
 exports.getUsers = function (req, res) {
@@ -31,3 +37,5 @@ exports.getUsers = function (req, res) {
         res.json(users);
     });
 };
+
+
