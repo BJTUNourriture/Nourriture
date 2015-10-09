@@ -18,9 +18,9 @@ exports.postIngredient = function (req, res) {
 	//saves the ingredient to the db
 	 ingredient.save(function (err) {
         if (err)
-        	return res.send(err);
+        	return (res.send(err));
 
-        return res.json({message: 'Ingredient succesfully created!'});
+        return (res.json({message: 'Ingredient succesfully created!'}));
     });
 };
 
@@ -37,17 +37,17 @@ exports.deleteIngredients = function (req, res) {
 };
 
 exports.deleteIngredientById = function (req, res, flag) {
-	if (flag)
-		if (!req.body.id)
-			return (-1);
-		Ingredients.remove({
-			_id : req.body.id
+	var id = flag ? req.body.id : req.params.id;
+		if (!id)
+			return flag ? (-1) : res.json({message : 'The id musn\'t be null'});
+	Ingredients.remove({
+		_id : id
 		},
 		function (err, ingredient) {
 			if (err)
 				return (res.send(err));
 			return (res.json({message : 'Ingredient succesfully deleted!'}));
 		}
-		);
-		return (1);
+	);
+	return (1);
 };
