@@ -115,9 +115,14 @@ router.route('/ingredients')
   .delete(ingredientsController.deleteIngredients);
 
 //endpoints by id
-router.route('/ingredients/:id')
+router.route('/ingredients/id/:id')
   .delete(ingredientsController.deleteIngredientById);
+
+//endpoints by name
+router.route('/ingredients/name/:name')
+  .delete(ingredientsController.deleteIngredientByName);
   
+
 // Register all our routes with /api
 app.use('/api', router);
 
