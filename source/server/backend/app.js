@@ -12,7 +12,7 @@ var userController = require('./oauth/controllers/user');
 var authController = require('./oauth/controllers/auth');
 var clientController = require('./oauth/controllers/client');
 var oauth2Controller = require('./oauth/controllers/oauth2');
-
+var ingredientsController = require('./API/controllers/ingredients');
 
 
 var routes = require('./routes/index');
@@ -110,6 +110,7 @@ router.route('/oauth2/token')
 ** Endpoints for Ingredients
 */
 router.route('/ingredients')
+  .post(ingredientsController.postIngredient);
 
 // Register all our routes with /api
 app.use('/api', router);
