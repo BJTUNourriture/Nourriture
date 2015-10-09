@@ -39,32 +39,7 @@ function create_token(user, res) {
         }
 
         // Delete auth code now that it has been used
-        authCode.remove(function (err) {
-            if (err) {
-                console.log("remove thing authCode");
-                return res.send(err);
-            }
-
-            // Create a new access token
-            var token = new Token({
-                value: uid(256),
-                clientId: authCode.clientId,
-                userId: authCode.userId
-            });
-
-            // Save the access token and check for errors
-            token.save(function (err) {
-                if (err) {
-                    console.log("Token created");
-                    return res.send(err);
-                }
-
-                //callback(null, token);
-            });
-            return res.json({message: 'New user added un token give', token: token});
-
-        });
-
+       remove_authCode_and_createToken(authCode, res);
 
     });
 }
@@ -107,6 +82,35 @@ function create_code(client, user, value_code) {
     });
 
     return code;
+
+}
+
+function remove_authCode_and_createToken(authCode, res) {
+    authCode.remove(function (err) {
+        if (err) {
+            console.log("remove thing authCode");
+            return res.send(err);
+        }
+
+        // Create a new access token
+        var token = new Token({
+            value: uid(256),
+            clientId: authCode.clientId,
+            userId: authCode.userId
+        });
+
+        // Save the access token and check for errors
+        token.save(function (err) {
+            if (err) {
+                console.log("Token created");
+                return res.send(err);
+            }
+
+            //callback(null, token);
+        });
+        return res.json({message: 'New user added un token give', token: token});
+
+    });
 
 }
 
