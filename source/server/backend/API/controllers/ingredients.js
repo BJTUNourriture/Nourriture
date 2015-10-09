@@ -3,8 +3,6 @@
 var Ingredients = require('../models/ingredients');
 
 exports.postIngredient = function (req, res) {
-	console.log(req);
-
 	//binds the new ingredient
 	var ingredient = new Ingredients({
 		name : req.body.name,
@@ -37,15 +35,17 @@ exports.deleteIngredients = function (req, res) {
 };
 
 exports.deleteIngredientById = function (req, res, flag) {
-	var id = flag ? req.body.id : req.params.id;
-		if (!id)
-			return flag ? (-1) : res.json({message : 'The id musn\'t be null'});
+	var id = flag === true ? req.body.id : req.params.id;
+	if (!id)
+		return flag === true ? -1 : res.json({message : 'The id musn\'t be null'});
 	Ingredients.remove({
 		_id : id
 		},
-		function (err, ingredient) {
+		function (err, removed) {
 			if (err)
 				return (res.send(err));
+			else if (removed.result.n === 0)
+				return (res.json({message : 'The id was not found.'}))
 			return (res.json({message : 'Ingredient succesfully deleted!'}));
 		}
 	);

@@ -109,10 +109,15 @@ router.route('/oauth2/token')
 /* 
 ** Endpoints for Ingredients
 */
+//full JSON endpoints
 router.route('/ingredients')
   .post(ingredientsController.postIngredient)
   .delete(ingredientsController.deleteIngredients);
 
+//endpoints by id
+router.route('/ingredients/:id')
+  .delete(ingredientsController.deleteIngredientById);
+  
 // Register all our routes with /api
 app.use('/api', router);
 

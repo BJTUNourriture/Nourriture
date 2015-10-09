@@ -24,14 +24,12 @@ var ingredientsSchema = new mongoose.Schema({
 	tags : [{
 		name : {
 			type : String,
-			unique : true,
 			required : true
 		},
 		description : String,
 		flag : {
 			name : {
 				type : String,
-				unique : true,
 				required : true
 			},
 			level : Number
