@@ -25,7 +25,8 @@ exports.postIngredient = function (req, res) {
 exports.deleteIngredients = function (req, res) {
 	var i = -1;
 	var callbackReturn = -1;
-	var functionPointer = [module.exports.deleteIngredientById(req, res, true)];
+	var functionPointer = [module.exports.deleteIngredientById(req, res, true),
+							module.exports.deleteIngredientByName(req, res, true)];
 	var usage = "No correct argument given. Specify an id or a name";
 
 	while ((callbackReturn = functionPointer[++i]) == -1
@@ -46,6 +47,24 @@ exports.deleteIngredientById = function (req, res, flag) {
 				return (res.send(err));
 			else if (removed.result.n === 0)
 				return (res.json({message : 'The id was not found.'}))
+			return (res.json({message : 'Ingredient succesfully deleted!'}));
+		}
+	);
+	return (1);
+};
+
+exports.deleteIngredientByName = function (req, res, flag) {
+	var name = flag === true ? req.body.name : req.params.name;
+	if (!name)
+		return flag === true ? -1 : res.json({message : 'The name musn\'t be null'});
+	Ingredients.remove({
+		name : name
+		},
+		function (err, removed) {
+			if (err)
+				return (res.send(err));
+			else if (removed.result.n === 0)
+				return (res.json({message : 'The name was not found.'}))
 			return (res.json({message : 'Ingredient succesfully deleted!'}));
 		}
 	);
