@@ -2,6 +2,10 @@
 
 var Ingredients = require('../models/ingredients');
 
+/*
+** POSTS
+*/
+
 exports.postIngredient = function (req, res) {
 	//binds the new ingredient
 	var ingredient = new Ingredients({
@@ -21,6 +25,30 @@ exports.postIngredient = function (req, res) {
         return (res.json({message: 'Ingredient succesfully created!'}));
     });
 };
+
+/*
+** GETS
+*/
+
+exports.getIngredientById = function (req, res, flag) {
+	var id = flag === true ? req.body.id : req.params.id;
+	if (!id)
+		return flag === true ? -1 : res.json({message : 'The id musn\'t be null'});
+	Ingredients.findById(id,
+		function (err, doc) {
+			if (err)
+				return (res.send(err));
+			else if (doc === null)
+				return (res.json({message : 'The id was not found.'}))
+			return (res.json(doc));
+		}
+	);
+	return (1);
+};
+
+/*
+** DELETES
+*/
 
 exports.deleteIngredients = function (req, res) {
 	var i = -1;

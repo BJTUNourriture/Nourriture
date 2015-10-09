@@ -116,7 +116,8 @@ router.route('/ingredients')
 
 //endpoints by id
 router.route('/ingredients/id/:id')
-  .delete(ingredientsController.deleteIngredientById);
+  .delete(ingredientsController.deleteIngredientById)
+  .get(ingredientsController.getIngredientById);
 
 //endpoints by name
 router.route('/ingredients/name/:name')
