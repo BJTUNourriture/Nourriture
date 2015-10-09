@@ -16,7 +16,12 @@ router.use(function timeLog(req, res, next) {
 });
 // define the home page route
 router.get('/', function(req, res) {
+  if (req.query.code != null) {
+    console.log("Params code = ", req.query.code);
+  }
+
   res.send('NOURRITURE BASE JSON');
+
 });
 
 // /* GET Userlist page. */
