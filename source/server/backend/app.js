@@ -41,7 +41,7 @@ app.use(session({
 
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/nourriture');
+mongoose.connect('mongodb://127.0.0.1:27017/nourriture');
 
 // Use the passport package in our application
 app.use(passport.initialize());
@@ -106,6 +106,10 @@ router.route('/oauth2/authorize')
 router.route('/oauth2/token')
     .post(authController.isClientAuthenticated, oauth2Controller.token);
 
+/* 
+** Endpoints for Ingredients
+*/
+router.route('/ingredients')
 
 // Register all our routes with /api
 app.use('/api', router);
