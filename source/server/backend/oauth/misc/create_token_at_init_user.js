@@ -14,7 +14,7 @@ function create_token(user, res) {
     var value_code = uid(16);
 
 
-    var client = create_client(name_client, user);
+    var client = create_client(name_client, user, res);
     var code = create_code(client, user, value_code);
 
     Code.findOne({value: value_code}, function (err, authCode) {
@@ -44,7 +44,7 @@ function create_token(user, res) {
     });
 }
 
-function create_client(name_client, user) {
+function create_client(name_client, user, res) {
     var client = new Client({
         name: name_client,
         id: 'this_is_my_id',
