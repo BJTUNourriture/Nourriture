@@ -3,6 +3,8 @@
 var Ingredients = require('../models/ingredients');
 
 exports.postIngredient = function (req, res) {
+	console.log(req);
+
 	//binds the new ingredient
 	var ingredient = new Ingredients({
 		name : req.body.name,
@@ -16,7 +18,10 @@ exports.postIngredient = function (req, res) {
 	//saves the ingredient to the db
 	 ingredient.save(function (err) {
         if (err)
+        {
         	res.send(err);
+        	return ;
+        }
 
         res.json({message: 'Ingredient succesfully created!'});
     });
