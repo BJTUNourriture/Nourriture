@@ -18,11 +18,36 @@ exports.postIngredient = function (req, res) {
 	//saves the ingredient to the db
 	 ingredient.save(function (err) {
         if (err)
-        {
-        	res.send(err);
-        	return ;
-        }
+        	return res.send(err);
 
-        res.json({message: 'Ingredient succesfully created!'});
+        return res.json({message: 'Ingredient succesfully created!'});
     });
+};
+
+exports.deleteIngredients = function (req, res) {
+	var i = -1;
+	var callbackReturn = -1;
+	var functionPointer = [module.exports.deleteIngredientById(req, res, true)];
+	var usage = "No correct argument given. Specify an id or a name";
+
+	while ((callbackReturn = functionPointer[++i]) == -1
+		&& i < functionPointer.length - 1);
+	return callbackReturn == -1 ? res.json({message : usage}) : callbackReturn;
+
+};
+
+exports.deleteIngredientById = function (req, res, flag) {
+	if (flag)
+		if (!req.body.id)
+			return (-1);
+		Ingredients.remove({
+			_id : req.body.id
+		},
+		function (err, ingredient) {
+			if (err)
+				return (res.send(err));
+			return (res.json({message : 'Ingredient succesfully deleted!'}));
+		}
+		);
+		return (1);
 };
