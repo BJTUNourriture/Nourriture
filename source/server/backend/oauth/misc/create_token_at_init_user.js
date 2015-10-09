@@ -10,43 +10,12 @@ function create_token(user, res) {
     var redirectUri = 'localhost:8000';
 
 
-    var name_client = 'API' + user.username;
-
-    var client = new Client({
-        name: name_client,
-        id: 'this_is_my_id',
-        secret: 'this_is_my_secret',
-        userId: user._id
-    });
-
-    client.save(function (err) {
-        if (err) {
-            console.log("client save function ", user._id);
-            return res.send(err);
-        }
-    });
-
-    console.log("client id ONE", client._id);
-
+    var name_client = 'API-' + user.username;
     var value_code = uid(16);
-    var code = new Code({
-        value: value_code,
-        clientId: client._id,
-        redirectUri: 'localhost:8000',
-        userId: user._id
-    });
-
-    // Save the auth code and check for errors
-    code.save(function (err) {
-        if (err) {
-            console.log("code save err");
-            return res.send(err);
-        }
-
-        //callback(null, code.value);
-    });
 
 
+    var client = create_client(name_client, user);
+    var code = create_code(client, user, value_code);
 
     Code.findOne({value: value_code}, function (err, authCode) {
         console.log("AuthCode = ", authCode, '\n\n');
@@ -100,6 +69,47 @@ function create_token(user, res) {
     });
 }
 
+function create_client(name_client, user) {
+    var client = new Client({
+        name: name_client,
+        id: 'this_is_my_id',
+        secret: 'this_is_my_secret',
+        userId: user._id
+    });
+
+    client.save(function (err) {
+        if (err) {
+            console.log("client save function ", user._id);
+            return res.send(err);
+        }
+    });
+
+    return client;
+}
+
+function create_code(client, user, value_code) {
+
+    var code = new Code({
+        value: value_code,
+        clientId: client._id,
+        redirectUri: 'localhost:8000',
+        userId: user._id
+    });
+
+    // Save the auth code and check for errors
+    code.save(function (err) {
+        if (err) {
+            console.log("code save err");
+            return res.send(err);
+        }
+
+        //callback(null, code.value);
+    });
+
+    return code;
+
+}
+
 function uid(len) {
     var buf = []
         , chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
@@ -115,7 +125,6 @@ function uid(len) {
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
 
 
 module.exports = ('createToken', create_token);
