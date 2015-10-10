@@ -112,7 +112,8 @@ router.route('/oauth2/token')
 //full JSON endpoints
 router.route('/ingredients')
   .post(ingredientsController.postIngredient)
-  .delete(ingredientsController.deleteIngredients);
+  .delete(ingredientsController.deleteIngredients)
+  .get(ingredientsController.getAllIngredients);
 
 //endpoints by id
 router.route('/ingredients/id/:id')
