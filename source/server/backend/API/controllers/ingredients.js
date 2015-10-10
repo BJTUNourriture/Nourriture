@@ -65,7 +65,7 @@ exports.postIngredient = function (req, res) {
 *
 * @apiError message The id of the ingredient was not found
 * @apiErrorExample Error-Response:
-*     HTTP/1.1 200 OK
+*     HTTP/1.1 404 Not Found
 *     {
 *       "message": "The id was not found."
 *     }
@@ -73,13 +73,13 @@ exports.postIngredient = function (req, res) {
 exports.getIngredientById = function (req, res, flag) {
 	var id = flag === true ? req.body.id : req.params.id;
 	if (!id)
-		return flag === true ? -1 : res.json({message : 'The id musn\'t be null'});
+		return flag === true ? -1 : res.json(400, {message : 'The id musn\'t be null'});
 	Ingredients.findById(id,
 		function (err, doc) {
 			if (err)
 				return (res.send(err));
 			else if (doc === null)
-				return (res.json({message : 'The id was not found.'}))
+				return (res.json(404, {message : 'The id was not found.'}))
 			return (res.json(doc));
 		}
 	);
@@ -89,7 +89,7 @@ exports.getIngredientById = function (req, res, flag) {
 exports.getIngredientsByName = function (req, res, flag) {
 	var name = flag === true ? req.body.name : req.params.name;
 	if (!name)
-		return flag === true ? -1 : res.json({message : 'The id musn\'t be null'});
+		return flag === true ? -1 : res.json(400, {message : 'The id musn\'t be null'});
 	Ingredients.find({
 		"name": { "$regex": name, "$options": "i" } 
 		},
@@ -97,7 +97,7 @@ exports.getIngredientsByName = function (req, res, flag) {
 			if (err)
 				return (res.send(err));
 			else if (docs.length <= 0)
-				return (res.json({message : 'The name was not found.'}))
+				return (res.json(404, {message : 'The name was not found.'}))
 			return (res.json(docs));
 		}
 	);
@@ -124,7 +124,7 @@ exports.deleteIngredients = function (req, res) {
 exports.deleteIngredientById = function (req, res, flag) {
 	var id = flag === true ? req.body.id : req.params.id;
 	if (!id)
-		return flag === true ? -1 : res.json({message : 'The id musn\'t be null'});
+		return flag === true ? -1 : res.json(400, {message : 'The id musn\'t be null'});
 	Ingredients.remove({
 		_id : id
 		},
@@ -132,7 +132,7 @@ exports.deleteIngredientById = function (req, res, flag) {
 			if (err)
 				return (res.send(err));
 			else if (removed.result.n === 0)
-				return (res.json({message : 'The id was not found.'}))
+				return (res.json(404, {message : 'The id was not found.'}))
 			return (res.json({message : 'Ingredient succesfully deleted!'}));
 		}
 	);
@@ -142,7 +142,7 @@ exports.deleteIngredientById = function (req, res, flag) {
 exports.deleteIngredientByName = function (req, res, flag) {
 	var name = flag === true ? req.body.name : req.params.name;
 	if (!name)
-		return flag === true ? -1 : res.json({message : 'The name musn\'t be null'});
+		return flag === true ? -1 : res.json(400, {message : 'The name musn\'t be null'});
 	Ingredients.remove({
 		name : name
 		},
@@ -150,7 +150,7 @@ exports.deleteIngredientByName = function (req, res, flag) {
 			if (err)
 				return (res.send(err));
 			else if (removed.result.n === 0)
-				return (res.json({message : 'The name was not found.'}))
+				return (res.json(404, {message : 'The name was not found.'}))
 			return (res.json({message : 'Ingredient succesfully deleted!'}));
 		}
 	);
