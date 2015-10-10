@@ -1,0 +1,35 @@
+2015-10-09T15:43:46.116Z - error: [3261] 
+/home/storm/Projects/Nourriture/source/server/backend/node_modules/mongodb/lib/server.js:228
+        process.nextTick(function() { throw err; })
+                                      ^
+2015-10-09T15:43:46.117Z - error: [3261] Error: connect ECONNREFUSED ::1:27017
+    at Object.exports._errnoException (util.js:849:11)
+    at exports._exceptionWithHostPort (util.js:872:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1060:14)
+2015-10-09T15:43:46.124Z - error: [3262] 
+/home/storm/Projects/Nourriture/source/server/backend/node_modules/mongodb/lib/server.js:228
+        process.nextTick(function() { throw err; })
+                                      ^
+Error: connect ECONNREFUSED ::1:27017
+    at Object.exports._errnoException (util.js:849:11)
+    at exports._exceptionWithHostPort (util.js:872:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1060:14)
+2015-10-09T15:43:46.126Z - error: Worker 3262 exited with code 1
+2015-10-09T15:43:46.130Z - error: [3256] 
+/home/storm/Projects/Nourriture/source/server/backend/node_modules/mongodb/lib/server.js:228
+        process.nextTick(function() { throw err; })
+                                      ^
+Error: connect ECONNREFUSED ::1:27017
+    at Object.exports._errnoException (util.js:849:11)
+    at exports._exceptionWithHostPort (util.js:872:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1060:14)
+2015-10-09T15:43:46.132Z - error: Worker 3256 exited with code 1
+2015-10-09T15:43:46.136Z - error: [3267] 
+/home/storm/Projects/Nourriture/source/server/backend/node_modules/mongodb/lib/server.js:228
+        process.nextTick(function() { throw err; })
+                                      ^
+Error: connect ECONNREFUSED ::1:27017
+    at Object.exports._errnoException (util.js:849:11)
+    at exports._exceptionWithHostPort (util.js:872:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1060:14)
+2015-10-09T15:43:46.138Z - error: Worker 3267 exited with code 1

@@ -30,6 +30,46 @@ exports.postIngredient = function (req, res) {
 ** GETS
 */
 
+/**
+* @api {get} /ingredients/id/:id Request Ingredient informations with id
+* @apiName getIngredientById
+* @apiGroup Ingredients
+* @apiVersion 0.1.0
+*
+* @apiParam {Number} id Ingredients unique ID
+*
+* @apiSuccess {String} _id Id of the ingredient
+* @apiSuccess {String} name Name of the ingredient
+* @apiSuccess {String} description Description of the ingredient
+* @apiSuccess {Number} fat Fat (in grams) contained in the ingredient
+* @apiSuccess {Number} carbohydrates Carbohydrates (in grams) contained in the ingredient
+* @apiSuccess {Number} proteins Proteins (in grams) contained in the ingredient
+* @apiSuccess {Object[]} tags List of the tags of the ingredient
+* @apiSuccessExample Success-Response:
+*     HTTP/1.1 200 OK
+*     {
+*       "name": "Tomato",
+*       "description": "Very yummy fruit."
+*		 "fat" : 0.3,
+*		 "carbohydrates" : 5.8,
+*		 "protein" : 1.3,
+*		 "tags" : [{
+*					"name" : "fruit",
+*					"description" : "Tag concerning fruits",
+*					"flag" : {
+*								"name" : "SAFE",
+*								"level" : 0
+*							 }
+*				   }]
+*     }
+*
+* @apiError message The id of the ingredient was not found
+* @apiErrorExample Error-Response:
+*     HTTP/1.1 200 OK
+*     {
+*       "message": "The id was not found."
+*     }
+*/
 exports.getIngredientById = function (req, res, flag) {
 	var id = flag === true ? req.body.id : req.params.id;
 	if (!id)
