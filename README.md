@@ -26,3 +26,17 @@ Xin Xing
 
 ## Licence MIT
 
+## API Basic Usage
+### Start the mongod server
+```Shell
+mongod --dbpath <path_to_your_db>
+```
+### Start nodemon in ./source/server/backend
+#### If you don't have nodemon
+```Shell
+sudo npm install nodemon -g
+```
+
+```Shell
+nodemon app.js
+```
