@@ -98,16 +98,31 @@ exports.postIngredient = function (req, res) {
 */
 
 exports.putIngredientById = function (req, res) {
-	if (!req.params.id)
-		return (res.json(400, {message : 'The id musn\'t be null'}));
+	if (!req.params.id || Object.keys(req.body).length === 0)
+		return (res.status(400).json({message : 'The id musn\'t be null and the request must not be empty.'}));
 	Ingredients.findById(req.params.id,
-		function (err, doc) {
+		function (err, ingredient) {
 			var fields = ["name", "description", "fat", "carbohydrates", "proteins", "tags"];
 			var sent_fields = Object.keys(req.body);
-			for (key in sent_fields)
-				if (!(key in fields))
-					return (res.json(400, {message : 'The key '+key+' does not exist for Ingredients.'}));
-			return (res.json({message : "Ingredient successfully updated!"}));
+
+			if (err)
+				return (res.send(err));
+			else if (ingredient === null)
+				return (res.status(404).json({message : 'The id was not found.'}))
+
+			for (i=0; i < sent_fields.length; i++)
+			{
+				if (!(fields.indexOf(sent_fields[i]) > -1))
+					return (res.status(400).json({message : 'The key <'+sent_fields[i]+'> does not exist for Ingredients.'}));
+				ingredient[sent_fields[i]] = req.body[sent_fields[i]];
+			}
+
+			ingredient.save(function(err) {
+				if (err)
+					return (res.send(err));
+				return (res.json({message : "Ingredient successfully updated!"}));
+			});
+			return (1);
 		}
 	);
 }
