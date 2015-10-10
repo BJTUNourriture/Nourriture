@@ -4,7 +4,8 @@ define({ "api": [
     "url": "/ingredients/id/:id",
     "title": "Request Ingredient informations with id",
     "name": "getIngredientById",
-    "group": "Ingredients__",
+    "group": "Ingredients",
+    "version": "0.1.0",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -13,7 +14,7 @@ define({ "api": [
             "type": "<p>Number</p> ",
             "optional": false,
             "field": "id",
-            "description": "<p>Ingredients unique ID</p> <ul> <li></li> </ul> "
+            "description": "<p>Ingredients unique ID</p> "
           }
         ]
       }
@@ -75,7 +76,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "*     HTTP/1.1 200 OK\n*     {\n*       \"name\": \"Tomato\",\n*       \"description\": \"Very yummy fruit.\"\n*\t\t \"fat\" : 0.3,\n*\t\t \"carbohydrates\" : 5.8,\n*\t\t \"protein\" : 1.3,\n*\t\t \"tags\" : [{\n*\t\t\t\t\t\"name\" : \"fruit\",\n*\t\t\t\t\t\"description\" : \"Tag concerning fruits\",\n*\t\t\t\t\t\"flag\" : {\n*\t\t\t\t\t\t\t\t\"name\" : \"SAFE\",\n*\t\t\t\t\t\t\t\t\"level\" : 0\n*\t\t\t\t\t\t\t }\n*\t\t\t\t   }]\n*     }\n*",
+          "content": "    HTTP/1.1 200 OK\n    {\n      \"name\": \"Tomato\",\n      \"description\": \"Very yummy fruit.\"\n\t\t \"fat\" : 0.3,\n\t\t \"carbohydrates\" : 5.8,\n\t\t \"protein\" : 1.3,\n\t\t \"tags\" : [{\n\t\t\t\t\t\"name\" : \"fruit\",\n\t\t\t\t\t\"description\" : \"Tag concerning fruits\",\n\t\t\t\t\t\"flag\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"SAFE\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }]\n    }",
           "type": "json"
         }
       ]
@@ -86,21 +87,20 @@ define({ "api": [
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "The",
-            "description": "<p>id was not found The id of the ingredient was not found</p> "
+            "field": "message",
+            "description": "<p>The id of the ingredient was not found</p> "
           }
         ]
       },
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "*     HTTP/1.1 200 OK\n*     {\n*       \"message\": \"The id was not found.\"\n*     }",
+          "content": "HTTP/1.1 200 OK\n{\n  \"message\": \"The id was not found.\"\n}",
           "type": "json"
         }
       ]
     },
-    "version": "0.0.0",
     "filename": "API/controllers/ingredients.js",
-    "groupTitle": "Ingredients__"
+    "groupTitle": "Ingredients"
   }
 ] });
