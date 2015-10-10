@@ -3,8 +3,7 @@
 /**
 * @apiDefine IngredientObjectParam
 *
-* @apiParam {String} _id Id of the ingredient
-* @apiParam {String} [name] Name of the ingredient
+* @apiParam {String} name Name of the ingredient
 * @apiParam {String} [description] Description of the ingredient
 * @apiParam {Number} [fat] Fat (in grams) contained in the ingredient
 * @apiParam {Number} [carbohydrates] Carbohydrates (in grams) contained in the ingredient
@@ -16,7 +15,7 @@
 * @apiDefine IngredientObjectSuccess
 *
 * @apiSuccess {String} _id Id of the ingredient
-* @apiSuccess {String} [name] Name of the ingredient
+* @apiSuccess {String} name Name of the ingredient
 * @apiSuccess {String} [description] Description of the ingredient
 * @apiSuccess {Number} [fat] Fat (in grams) contained in the ingredient
 * @apiSuccess {Number} [carbohydrates] Carbohydrates (in grams) contained in the ingredient
@@ -40,7 +39,6 @@ var Ingredients = require('../models/ingredients');
 *
 * @apiParamExample {json} Request-Example:
 *     {
-*		"_id" : "561830c5fecdba4f72668fe8",
 *       "name": "Tomato",
 *       "description": "Very yummy fruit."
 *		 "fat" : 0.3,
