@@ -64,16 +64,18 @@ var router = express.Router();
 //full JSON endpoints
 router.route('/ingredients')
   .post(ingredientsController.postIngredient)
-  .delete(ingredientsController.deleteIngredients);
+  .delete(ingredientsController.deleteIngredients)
+  .get(ingredientsController.getAllIngredients);
 
 //endpoints by id
 router.route('/ingredients/id/:id')
-  .delete(ingredientsController.deleteIngredientById);
+  .delete(ingredientsController.deleteIngredientById)
+  .get(ingredientsController.getIngredientById);
 
 //endpoints by name
 router.route('/ingredients/name/:name')
-  .delete(ingredientsController.deleteIngredientByName);
-  
+  .delete(ingredientsController.deleteIngredientByName)
+  .get(ingredientsController.getIngredientsByName);
 
 // Register all our routes with /api
 app.use('/api', oauth);

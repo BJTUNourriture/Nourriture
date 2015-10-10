@@ -1,7 +1,78 @@
 // API/controllers/ingredients.js
 
+/**
+* @apiDefine IngredientObjectParam
+*
+* @apiParam {String} _id Id of the ingredient
+* @apiParam {String} [name] Name of the ingredient
+* @apiParam {String} [description] Description of the ingredient
+* @apiParam {Number} [fat] Fat (in grams) contained in the ingredient
+* @apiParam {Number} [carbohydrates] Carbohydrates (in grams) contained in the ingredient
+* @apiParam {Number} [proteins] Proteins (in grams) contained in the ingredient
+* @apiParam {Object[]} [tags] List of the tags of the ingredient
+*/
+
+/**
+* @apiDefine IngredientObjectSuccess
+*
+* @apiSuccess {String} _id Id of the ingredient
+* @apiSuccess {String} [name] Name of the ingredient
+* @apiSuccess {String} [description] Description of the ingredient
+* @apiSuccess {Number} [fat] Fat (in grams) contained in the ingredient
+* @apiSuccess {Number} [carbohydrates] Carbohydrates (in grams) contained in the ingredient
+* @apiSuccess {Number} [proteins] Proteins (in grams) contained in the ingredient
+* @apiSuccess {Object[]} [tags] List of the tags of the ingredient
+*/
+
 var Ingredients = require('../models/ingredients');
 
+/*
+** POSTS
+*/
+
+/**
+* @api {post} /ingredients/ Create a new Ingredient
+* @apiName postIngredient
+* @apiGroup Ingredients
+* @apiVersion 0.1.0
+*
+* @apiUse IngredientObjectParam
+*
+* @apiParamExample {json} Request-Example:
+*     {
+*		"_id" : "561830c5fecdba4f72668fe8",
+*       "name": "Tomato",
+*       "description": "Very yummy fruit."
+*		 "fat" : 0.3,
+*		 "carbohydrates" : 5.8,
+*		 "protein" : 1.3,
+*		 "tags" : [{
+*					"name" : "fruit",
+*					"description" : "Tag concerning fruits",
+*					"flag" : {
+*								"name" : "SAFE",
+*								"level" : 0
+*							 }
+*				   }]
+*     }
+*
+* @apiSuccess message Ingredient succesfully created!
+*
+* @apiSuccessExample Success-Response:
+*     HTTP/1.1 200 OK
+*	  {
+*		"message" : "Ingredient succesfully created!"
+*	  }
+*
+* @apiErrorExample Error Response:
+*	  HTTP/1.1 200 OK
+*	  {
+*		...
+*		mongoose custom error
+*		...
+*	  }
+*
+*/
 exports.postIngredient = function (req, res) {
 	//binds the new ingredient
 	var ingredient = new Ingredients({
@@ -22,6 +93,173 @@ exports.postIngredient = function (req, res) {
     });
 };
 
+/*
+** GETS
+*/
+
+/**
+* @apiDefine getIngredientAnswer
+*
+* @apiSuccessExample Success-Response:
+*     HTTP/1.1 200 OK
+*     {
+*		"_id" : "561830c5fecdba4f72668fe8",
+*       "name": "Tomato",
+*       "description": "Very yummy fruit."
+*		 "fat" : 0.3,
+*		 "carbohydrates" : 5.8,
+*		 "protein" : 1.3,
+*		 "tags" : [{
+*					"name" : "fruit",
+*					"description" : "Tag concerning fruits",
+*					"flag" : {
+*								"name" : "SAFE",
+*								"level" : 0
+*							 }
+*				   }]
+*     }
+*/
+
+/**
+* @api {get} /ingredients/ Request all the Ingredients
+* @apiName getAllIngredients
+* @apiGroup Ingredients
+* @apiVersion 0.1.0
+*
+* @apiUse IngredientObjectSuccess
+*
+* @apiUse getIngredientAnswer
+*
+* @apiError message There are no existing ingredients.
+* @apiErrorExample Error-Response:
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "The are no existing ingredients."
+*     }
+*/
+
+exports.getAllIngredients = function(req, res) {
+	Ingredients.find({},
+		function(err, docs) {
+			if (err)
+				return (res.send(err));
+			else if (docs.length <= 0)
+				return (res.json(404, {message : 'There are no existing ingredients.'}))
+			return (res.json(docs));
+		}
+	);
+	return (1);
+};
+
+/**
+* @api {get} /ingredients/id/:id Request Ingredient informations by id
+* @apiName getIngredientById
+* @apiGroup Ingredients
+* @apiVersion 0.1.0
+*
+* @apiParam {Number} id Ingredients unique ID
+*
+* @apiUse IngredientObjectSuccess
+*
+* @apiUse getIngredientAnswer
+*
+* @apiError message The id of the ingredient was not found
+* @apiErrorExample Error-Response:
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "The id was not found."
+*     }
+*/
+exports.getIngredientById = function (req, res, flag) {
+	var id = flag === true ? req.body.id : req.params.id;
+	if (!id)
+		return flag === true ? -1 : res.json(400, {message : 'The id musn\'t be null'});
+	Ingredients.findById(id,
+		function (err, doc) {
+			if (err)
+				return (res.send(err));
+			else if (doc === null)
+				return (res.json(404, {message : 'The id was not found.'}))
+			return (res.json(doc));
+		}
+	);
+	return (1);
+};
+
+/**
+* @api {get} /ingredients/name/:name Request Ingredient informations by name
+* @apiName getIngredientByName
+* @apiGroup Ingredients
+* @apiVersion 0.1.0
+*
+* @apiParam {String} name Ingredient partial or full name
+*
+* @apiUse IngredientObjectSuccess
+*
+* @apiUse getIngredientAnswer
+*
+* @apiError message The name of the ingredient was not found
+* @apiErrorExample Error-Response:
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "The name was not found."
+*     }
+*/
+exports.getIngredientsByName = function (req, res, flag) {
+	var name = flag === true ? req.body.name : req.params.name;
+	if (!name)
+		return flag === true ? -1 : res.json(400, {message : 'The name musn\'t be null'});
+	Ingredients.find({
+		"name": { "$regex": name, "$options": "i" } 
+		},
+		function (err, docs) {
+			if (err)
+				return (res.send(err));
+			else if (docs.length <= 0)
+				return (res.json(404, {message : 'The name was not found.'}))
+			return (res.json(docs));
+		}
+	);
+	return (1);
+};
+
+/*
+** DELETES
+*/
+
+/**
+* @apiDefine deleteIngredientSuccess
+* @apiSuccess message Ingredient succesfully created!
+* @apiSuccessExample Success-Response:
+*     HTTP/1.1 200 OK
+*	  {
+*		"message" : "Ingredient succesfully deleted!"
+*	  }
+*/
+
+/**
+* @api {delete} /ingredients/ Delete Ingredients (JSON)
+* @apiName deleteIngredients
+* @apiGroup Ingredients
+* @apiVersion 0.1.0
+*
+* @apiParam {Number} [id] Ingredient unique ID
+* @apiParam {Sting} [name] Ingredient full name
+*
+* @apiParamExample {json} Request-Example:
+*	  {
+*		"id" : "56183b64753d867e016c80d2"
+*	  }
+*
+* @apiUse deleteIngredientSuccess
+*
+* @apiError message The id was not found.
+* @apiErrorExample Error-Reponse
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "The id was not found."
+*     }
+*/
 exports.deleteIngredients = function (req, res) {
 	var i = -1;
 	var callbackReturn = -1;
@@ -35,10 +273,27 @@ exports.deleteIngredients = function (req, res) {
 
 };
 
+/**
+* @api {delete} /ingredients/id/:id Delete Ingredient by id
+* @apiName deleteIngredientById
+* @apiGroup Ingredients
+* @apiVersion 0.1.0
+*
+* @apiParam {Number} id Ingredient unique ID
+*
+* @apiUse deleteIngredientSuccess
+*
+* @apiError message The id was not found.
+* @apiErrorExample Error-Reponse
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "The id was not found."
+*     }
+*/
 exports.deleteIngredientById = function (req, res, flag) {
 	var id = flag === true ? req.body.id : req.params.id;
 	if (!id)
-		return flag === true ? -1 : res.json({message : 'The id musn\'t be null'});
+		return flag === true ? -1 : res.json(400, {message : 'The id musn\'t be null'});
 	Ingredients.remove({
 		_id : id
 		},
@@ -46,17 +301,34 @@ exports.deleteIngredientById = function (req, res, flag) {
 			if (err)
 				return (res.send(err));
 			else if (removed.result.n === 0)
-				return (res.json({message : 'The id was not found.'}))
+				return (res.json(404, {message : 'The id was not found.'}))
 			return (res.json({message : 'Ingredient succesfully deleted!'}));
 		}
 	);
 	return (1);
 };
 
+/**
+* @api {delete} /ingredients/name/:name Delete Ingredient by name
+* @apiName deleteIngredientByName
+* @apiGroup Ingredients
+* @apiVersion 0.1.0
+*
+* @apiParam {String} name Ingredient full name
+*
+* @apiUse deleteIngredientSuccess
+*
+* @apiError message The name was not found.
+* @apiErrorExample Error-Reponse
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "The name was not found."
+*     }
+*/
 exports.deleteIngredientByName = function (req, res, flag) {
 	var name = flag === true ? req.body.name : req.params.name;
 	if (!name)
-		return flag === true ? -1 : res.json({message : 'The name musn\'t be null'});
+		return flag === true ? -1 : res.json(400, {message : 'The name musn\'t be null'});
 	Ingredients.remove({
 		name : name
 		},
@@ -64,7 +336,7 @@ exports.deleteIngredientByName = function (req, res, flag) {
 			if (err)
 				return (res.send(err));
 			else if (removed.result.n === 0)
-				return (res.json({message : 'The name was not found.'}))
+				return (res.json(404, {message : 'The name was not found.'}))
 			return (res.json({message : 'Ingredient succesfully deleted!'}));
 		}
 	);
