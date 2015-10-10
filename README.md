@@ -31,12 +31,12 @@ Xin Xing
 ```Shell
 mongod --dbpath <path_to_your_db>
 ```
-### Start nodemon in ./source/server/backend
-#### If you don't have nodemon
+### install nodemon
 ```Shell
 sudo npm install nodemon -g
 ```
+
 #### Launch nodemon
 ```Shell
-nodemon app.js
+nodemon ./source/server/backendapp.js
 ```
