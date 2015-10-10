@@ -40,6 +40,7 @@ var Ingredients = require('../models/ingredients');
 *
 * @apiParamExample {json} Request-Example:
 *     {
+*		"_id" : "561830c5fecdba4f72668fe8",
 *       "name": "Tomato",
 *       "description": "Very yummy fruit."
 *		 "fat" : 0.3,
@@ -54,6 +55,8 @@ var Ingredients = require('../models/ingredients');
 *							 }
 *				   }]
 *     }
+*
+* @apiSuccess message Ingredient succesfully created!
 *
 * @apiSuccessExample Success-Response:
 *     HTTP/1.1 200 OK
@@ -100,6 +103,7 @@ exports.postIngredient = function (req, res) {
 * @apiSuccessExample Success-Response:
 *     HTTP/1.1 200 OK
 *     {
+*		"_id" : "561830c5fecdba4f72668fe8",
 *       "name": "Tomato",
 *       "description": "Very yummy fruit."
 *		 "fat" : 0.3,
@@ -188,7 +192,7 @@ exports.getIngredientById = function (req, res, flag) {
 * @apiGroup Ingredients
 * @apiVersion 0.1.0
 *
-* @apiParam {String} name Ingredients unique name
+* @apiParam {String} name Ingredient partial or full name
 *
 * @apiUse IngredientObjectSuccess
 *
@@ -223,6 +227,39 @@ exports.getIngredientsByName = function (req, res, flag) {
 ** DELETES
 */
 
+/**
+* @apiDefine deleteIngredientSuccess
+* @apiSuccess message Ingredient succesfully created!
+* @apiSuccessExample Success-Response:
+*     HTTP/1.1 200 OK
+*	  {
+*		"message" : "Ingredient succesfully deleted!"
+*	  }
+*/
+
+/**
+* @api {delete} /ingredients/ Delete Ingredients (JSON)
+* @apiName deleteIngredients
+* @apiGroup Ingredients
+* @apiVersion 0.1.0
+*
+* @apiParam {Number} [id] Ingredient unique ID
+* @apiParam {Sting} [name] Ingredient full name
+*
+* @apiParamExample {json} Request-Example:
+*	  {
+*		"id" : "56183b64753d867e016c80d2"
+*	  }
+*
+* @apiUse deleteIngredientSuccess
+*
+* @apiError message The id was not found.
+* @apiErrorExample Error-Reponse
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "The id was not found."
+*     }
+*/
 exports.deleteIngredients = function (req, res) {
 	var i = -1;
 	var callbackReturn = -1;
@@ -236,6 +273,23 @@ exports.deleteIngredients = function (req, res) {
 
 };
 
+/**
+* @api {delete} /ingredients/id/:id Delete Ingredient by id
+* @apiName deleteIngredientById
+* @apiGroup Ingredients
+* @apiVersion 0.1.0
+*
+* @apiParam {Number} id Ingredient unique ID
+*
+* @apiUse deleteIngredientSuccess
+*
+* @apiError message The id was not found.
+* @apiErrorExample Error-Reponse
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "The id was not found."
+*     }
+*/
 exports.deleteIngredientById = function (req, res, flag) {
 	var id = flag === true ? req.body.id : req.params.id;
 	if (!id)
@@ -254,6 +308,23 @@ exports.deleteIngredientById = function (req, res, flag) {
 	return (1);
 };
 
+/**
+* @api {delete} /ingredients/name/:name Delete Ingredient by name
+* @apiName deleteIngredientByName
+* @apiGroup Ingredients
+* @apiVersion 0.1.0
+*
+* @apiParam {String} name Ingredient full name
+*
+* @apiUse deleteIngredientSuccess
+*
+* @apiError message The name was not found.
+* @apiErrorExample Error-Reponse
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "The name was not found."
+*     }
+*/
 exports.deleteIngredientByName = function (req, res, flag) {
 	var name = flag === true ? req.body.name : req.params.name;
 	if (!name)
