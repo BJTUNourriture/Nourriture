@@ -36,7 +36,7 @@ mongod --dbpath <path_to_your_db>
 ```Shell
 sudo npm install nodemon -g
 ```
-
+#### Launch nodemon
 ```Shell
 nodemon app.js
 ```
