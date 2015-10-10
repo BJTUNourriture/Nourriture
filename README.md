@@ -38,5 +38,5 @@ sudo npm install nodemon -g
 
 ### Launch nodemon
 ```Shell
-nodemon ./source/server/backendapp.js
+nodemon ./source/server/backend/app.js
 ```
