@@ -94,6 +94,25 @@ exports.postIngredient = function (req, res) {
 };
 
 /*
+** PUTS
+*/
+
+exports.putIngredientById = function (req, res) {
+	if (!req.params.id)
+		return (res.json(400, {message : 'The id musn\'t be null'}));
+	Ingredients.findById(req.params.id,
+		function (err, doc) {
+			var fields = ["name", "description", "fat", "carbohydrates", "proteins", "tags"];
+			var sent_fields = Object.keys(req.body);
+			for (key in sent_fields)
+				if (!(key in fields))
+					return (res.json(400, {message : 'The key '+key+' does not exist for Ingredients.'}));
+			return (res.json({message : "Ingredient successfully updated!"}));
+		}
+	);
+}
+
+/*
 ** GETS
 */
 

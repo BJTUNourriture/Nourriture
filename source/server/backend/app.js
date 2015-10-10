@@ -70,6 +70,7 @@ router.route('/ingredients')
 //endpoints by id
 router.route('/ingredients/id/:id')
   .delete(ingredientsController.deleteIngredientById)
+  .put(ingredientsController.putIngredientById)
   .get(ingredientsController.getIngredientById);
 
 //endpoints by name
@@ -78,7 +79,7 @@ router.route('/ingredients/name/:name')
   .get(ingredientsController.getIngredientsByName);
 
 // Register all our routes with /api
-app.use('/api', oauth);
+app.use('/api', oauth, router);
 
 // catch 404 and forward to error handler
 // catch 404 and forward to error handler
@@ -93,7 +94,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use('/', routes);
+//app.use('/', routes);
 //app.use('/users', users);
 
 // Make our db accessible to our router
