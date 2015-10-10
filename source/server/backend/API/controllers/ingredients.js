@@ -102,30 +102,44 @@ exports.putIngredientById = function (req, res) {
 		return (res.status(400).json({message : 'The id musn\'t be null and the request must not be empty.'}));
 	Ingredients.findById(req.params.id,
 		function (err, ingredient) {
-			var fields = ["name", "description", "fat", "carbohydrates", "proteins", "tags"];
-			var sent_fields = Object.keys(req.body);
-
-			if (err)
-				return (res.send(err));
-			else if (ingredient === null)
-				return (res.status(404).json({message : 'The id was not found.'}))
-
-			for (i=0; i < sent_fields.length; i++)
-			{
-				if (!(fields.indexOf(sent_fields[i]) > -1))
-					return (res.status(400).json({message : 'The key <'+sent_fields[i]+'> does not exist for Ingredients.'}));
-				ingredient[sent_fields[i]] = req.body[sent_fields[i]];
-			}
-
-			ingredient.save(function(err) {
-				if (err)
-					return (res.send(err));
-				return (res.json({message : "Ingredient successfully updated!"}));
-			});
-			return (1);
-		}
-	);
+			return (module.exports.updateIngredient(req, res, err, ingredient));
+		});
 }
+
+exports.putIngredientByName = function (req, res) {
+	if (!req.params.name || Object.keys(req.body).length === 0)
+		return (res.status(400).json({message : 'The name musn\'t be null and the request must not be empty.'}));
+	Ingredients.findOne({
+		"name" : req.params.name 
+		},
+		function (err, ingredient) {
+			return (module.exports.updateIngredient(req, res, err, ingredient));
+		});
+}
+
+exports.updateIngredient = function(req, res, err, ingredient) {
+	var fields = ["name", "description", "fat", "carbohydrates", "proteins", "tags"];
+	var sent_fields = Object.keys(req.body);
+
+	if (err)
+		return (res.send(err));
+	else if (ingredient === null)
+		return (res.status(404).json({message : 'Ingredient not found.'}))
+
+	for (i=0; i < sent_fields.length; i++)
+	{
+		if (!(fields.indexOf(sent_fields[i]) > -1))
+			return (res.status(400).json({message : 'The key <'+sent_fields[i]+'> does not exist for Ingredients.'}));
+		ingredient[sent_fields[i]] = req.body[sent_fields[i]];
+	}
+
+	ingredient.save(function(err) {
+		if (err)
+			return (res.send(err));
+		return (res.json({message : "Ingredient successfully updated!"}));
+	});
+	return (1);
+};
 
 /*
 ** GETS

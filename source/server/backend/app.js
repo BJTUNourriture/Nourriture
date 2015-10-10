@@ -76,6 +76,7 @@ router.route('/ingredients/id/:id')
 //endpoints by name
 router.route('/ingredients/name/:name')
   .delete(ingredientsController.deleteIngredientByName)
+  .put(ingredientsController.putIngredientByName)
   .get(ingredientsController.getIngredientsByName);
 
 // Register all our routes with /api
