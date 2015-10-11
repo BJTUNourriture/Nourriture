@@ -55,6 +55,16 @@ app.use('/', routes);
 /*app.use('/users', users);*/
 
 
+app.get('/auth/google',
+    passport.authenticate('passport-google', { scope: 'https://www.googleapis.com/auth/plus.login' }));
+
+app.get('/auth/google/callback',
+    passport.authenticate('passport-google', { failureRedirect: '/login' }),
+    function(req, res) {
+        // Successful authentication, redirect home.
+        res.redirect('/');
+    });
+
 
 var router = express.Router();
 
@@ -122,8 +132,8 @@ app.use(function (err, req, res, next) {
     });
 });
 
-app.listen("8000");
-console.log("App listening on port 8000");
+app.listen("8101");
+console.log("App listening on port 8101");
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {

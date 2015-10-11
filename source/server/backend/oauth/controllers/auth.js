@@ -4,6 +4,7 @@
 var passport = require('passport');
 var BasicStrategy = require('passport-http').BasicStrategy;
 var BearerStrategy = require('passport-http-bearer').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var User = require('../models/user');
 var Client = require('../models/client');
 var Token = require('../models/token');
@@ -73,6 +74,19 @@ passport.use(new BearerStrategy(
     }
 ));
 
+passport.use('passport-google', new GoogleStrategy({
+        clientID: '229011235874-jvr387qssa4pmincbbbh368is28b32fu.apps.googleusercontent.com',
+        clientSecret: 'R71nGX21b1Sd4bMy79p2C0hM',
+        callbackURL: "http://127.0.0.1:8000/auth/google/callback"
+    },
+    function(accessToken, refreshToken, profile, done) {
+        console.log(accessToken, " YOu are logged in");
+     /*   User.findOrCreate({ googleId: profile.id }, function (err, user) {
+            return done(err, user);
+        });*/
+    }
+));
+
 
 exports.isClientAuthenticated = passport.authenticate('client-basic', { session : false });
-exports.isAuthenticated = passport.authenticate(['basic', 'bearer'], { session : false });
+exports.isAuthenticated = passport.authenticate(['basic', 'bearer', 'passport-google'], { session : false });
