@@ -1,9 +1,19 @@
 // API/controllers/ingredients.js
 
 /**
-* @apiDefine IngredientObjectParam
+* @apiDefine IngredientObjectPostParam
 *
-* @apiParam {String} _id Id of the ingredient
+* @apiParam {String} name Name of the ingredient
+* @apiParam {String} [description] Description of the ingredient
+* @apiParam {Number} [fat] Fat (in grams) contained in the ingredient
+* @apiParam {Number} [carbohydrates] Carbohydrates (in grams) contained in the ingredient
+* @apiParam {Number} [proteins] Proteins (in grams) contained in the ingredient
+* @apiParam {Object[]} [tags] List of the tags of the ingredient
+*/
+
+/**
+* @apiDefine IngredientObjectPutParam
+*
 * @apiParam {String} [name] Name of the ingredient
 * @apiParam {String} [description] Description of the ingredient
 * @apiParam {Number} [fat] Fat (in grams) contained in the ingredient
@@ -16,7 +26,7 @@
 * @apiDefine IngredientObjectSuccess
 *
 * @apiSuccess {String} _id Id of the ingredient
-* @apiSuccess {String} [name] Name of the ingredient
+* @apiSuccess {String} name Name of the ingredient
 * @apiSuccess {String} [description] Description of the ingredient
 * @apiSuccess {Number} [fat] Fat (in grams) contained in the ingredient
 * @apiSuccess {Number} [carbohydrates] Carbohydrates (in grams) contained in the ingredient
@@ -24,23 +34,11 @@
 * @apiSuccess {Object[]} [tags] List of the tags of the ingredient
 */
 
-var Ingredients = require('../models/ingredients');
-
-/*
-** POSTS
-*/
-
 /**
-* @api {post} /ingredients/ Create a new Ingredient
-* @apiName postIngredient
-* @apiGroup Ingredients
-* @apiVersion 0.1.0
-*
-* @apiUse IngredientObjectParam
+* @apiDefine IngredientRequestJSON
 *
 * @apiParamExample {json} Request-Example:
 *     {
-*		"_id" : "561830c5fecdba4f72668fe8",
 *       "name": "Tomato",
 *       "description": "Very yummy fruit."
 *		 "fat" : 0.3,
@@ -55,16 +53,33 @@ var Ingredients = require('../models/ingredients');
 *							 }
 *				   }]
 *     }
+*/
+
+var Ingredients = require('../models/ingredients');
+
+/*
+** POSTS
+*/
+
+/**
+* @api {post} /ingredients/ Create a new Ingredient
+* @apiName postIngredient
+* @apiGroup Ingredients
+* @apiVersion 0.1.0
+*
+* @apiUse IngredientObjectPostParam
+*
+* @apiUse IngredientRequestJSON
 *
 * @apiSuccess message Ingredient succesfully created!
 *
-* @apiSuccessExample Success-Response:
+* @apiSuccessExample Success-Response
 *     HTTP/1.1 200 OK
 *	  {
 *		"message" : "Ingredient succesfully created!"
 *	  }
 *
-* @apiErrorExample Error Response:
+* @apiErrorExample Bad Value Definition
 *	  HTTP/1.1 200 OK
 *	  {
 *		...
@@ -97,35 +112,111 @@ exports.postIngredient = function (req, res) {
 ** PUTS
 */
 
+/**
+* @apiDefine IngredientServerAnswersPut
+*
+* @apiSuccessExample Success-Response
+*     HTTP/1.1 200 OK
+*	  {
+*		"message" : "Ingredient successfully updated!"
+*	  }
+*
+* @apiError message Ingredient not found.
+*
+* @apiErrorExample Invalid Parameter Value
+*	  HTTP/1.1 404 Bad Request
+*	  {
+*		"message" : "Ingredient not found."
+*	  }
+*
+* @apiError message The key <key> does not exist for Ingredients.
+*
+* @apiErrorExample Bad key sent
+*	  HTTP/1.1 400 Bad Request
+*	  {
+*		"message" : "The key <key> does not exist for Ingredients."
+*	  }
+*
+* @apiErrorExample Bad Value Definition
+*	  HTTP/1.1 200 OK
+*	  {
+*		...
+*		mongoose custom error
+*		...
+*	  }
+*/
+
+/**
+* @api {put} /ingredients/id/:id Update an Ingredient by Id
+* @apiName putIngredientById
+* @apiGroup Ingredients
+* @apiVersion 0.1.0
+*
+* @apiUse IngredientObjectPutParam
+*
+* @apiUse IngredientRequestJSON
+*
+* @apiUse IngredientServerAnswersPut
+*
+*/
 exports.putIngredientById = function (req, res) {
 	if (!req.params.id || Object.keys(req.body).length === 0)
 		return (res.status(400).json({message : 'The id musn\'t be null and the request must not be empty.'}));
 	Ingredients.findById(req.params.id,
 		function (err, ingredient) {
-			var fields = ["name", "description", "fat", "carbohydrates", "proteins", "tags"];
-			var sent_fields = Object.keys(req.body);
-
-			if (err)
-				return (res.send(err));
-			else if (ingredient === null)
-				return (res.status(404).json({message : 'The id was not found.'}))
-
-			for (i=0; i < sent_fields.length; i++)
-			{
-				if (!(fields.indexOf(sent_fields[i]) > -1))
-					return (res.status(400).json({message : 'The key <'+sent_fields[i]+'> does not exist for Ingredients.'}));
-				ingredient[sent_fields[i]] = req.body[sent_fields[i]];
-			}
-
-			ingredient.save(function(err) {
-				if (err)
-					return (res.send(err));
-				return (res.json({message : "Ingredient successfully updated!"}));
-			});
-			return (1);
-		}
-	);
+			return (module.exports.updateIngredient(req, res, err, ingredient));
+		});
 }
+
+/**
+* @api {put} /ingredients/name/:name Update an Ingredient by name
+* @apiName putIngredientByName
+* @apiGroup Ingredients
+* @apiVersion 0.1.0
+*
+* @apiUse IngredientObjectPutParam
+*
+* @apiUse IngredientRequestJSON
+*
+* @apiSuccess message Ingredient successfully updated!
+*
+* @apiUse IngredientServerAnswersPut
+*
+*/
+exports.putIngredientByName = function (req, res) {
+	if (!req.params.name || Object.keys(req.body).length === 0)
+		return (res.status(400).json({message : 'The name musn\'t be null and the request must not be empty.'}));
+	Ingredients.findOne({
+		"name" : req.params.name 
+		},
+		function (err, ingredient) {
+			return (module.exports.updateIngredient(req, res, err, ingredient));
+		});
+}
+
+exports.updateIngredient = function(req, res, err, ingredient) {
+	var fields = ["name", "description", "fat", "carbohydrates", "proteins", "tags"];
+	var sent_fields = Object.keys(req.body);
+
+	if (err)
+		return (res.send(err));
+	else if (ingredient === null)
+		return (res.status(404).json({message : 'Ingredient not found.'}))
+
+	for (i=0; i < sent_fields.length; i++)
+	{
+		if (!(fields.indexOf(sent_fields[i]) > -1))
+			return (res.status(400).json({message : 'The key <'+sent_fields[i]+'> does not exist for Ingredients.'}));
+		ingredient[sent_fields[i]] = req.body[sent_fields[i]];
+	}
+
+	ingredient.save(function(err) {
+		if (err)
+			return (res.send(err));
+		return (res.json({message : "Ingredient successfully updated!"}));
+	});
+	return (1);
+};
 
 /*
 ** GETS
@@ -140,10 +231,10 @@ exports.putIngredientById = function (req, res) {
 *		"_id" : "561830c5fecdba4f72668fe8",
 *       "name": "Tomato",
 *       "description": "Very yummy fruit."
-*		 "fat" : 0.3,
-*		 "carbohydrates" : 5.8,
-*		 "protein" : 1.3,
-*		 "tags" : [{
+*		"fat" : 0.3,
+*		"carbohydrates" : 5.8,
+*		"protein" : 1.3,
+*		"tags" : [{
 *					"name" : "fruit",
 *					"description" : "Tag concerning fruits",
 *					"flag" : {
@@ -165,7 +256,7 @@ exports.putIngredientById = function (req, res) {
 * @apiUse getIngredientAnswer
 *
 * @apiError message There are no existing ingredients.
-* @apiErrorExample Error-Response:
+* @apiErrorExample Invalid Parameter Value
 *     HTTP/1.1 404 Not Found
 *     {
 *       "message": "The are no existing ingredients."
@@ -198,7 +289,7 @@ exports.getAllIngredients = function(req, res) {
 * @apiUse getIngredientAnswer
 *
 * @apiError message The id of the ingredient was not found
-* @apiErrorExample Error-Response:
+* @apiErrorExample Invalid Parameter Value
 *     HTTP/1.1 404 Not Found
 *     {
 *       "message": "The id was not found."
@@ -233,7 +324,7 @@ exports.getIngredientById = function (req, res, flag) {
 * @apiUse getIngredientAnswer
 *
 * @apiError message The name of the ingredient was not found
-* @apiErrorExample Error-Response:
+* @apiErrorExample Invalid Parameter Value
 *     HTTP/1.1 404 Not Found
 *     {
 *       "message": "The name was not found."
@@ -288,7 +379,7 @@ exports.getIngredientsByName = function (req, res, flag) {
 * @apiUse deleteIngredientSuccess
 *
 * @apiError message The id was not found.
-* @apiErrorExample Error-Reponse
+* @apiErrorExample Invalid Parameter Value
 *     HTTP/1.1 404 Not Found
 *     {
 *       "message": "The id was not found."
@@ -318,7 +409,7 @@ exports.deleteIngredients = function (req, res) {
 * @apiUse deleteIngredientSuccess
 *
 * @apiError message The id was not found.
-* @apiErrorExample Error-Reponse
+* @apiErrorExample Invalid Parameter Value
 *     HTTP/1.1 404 Not Found
 *     {
 *       "message": "The id was not found."
@@ -353,7 +444,7 @@ exports.deleteIngredientById = function (req, res, flag) {
 * @apiUse deleteIngredientSuccess
 *
 * @apiError message The name was not found.
-* @apiErrorExample Error-Reponse
+* @apiErrorExample Invalid Parameter Value
 *     HTTP/1.1 404 Not Found
 *     {
 *       "message": "The name was not found."

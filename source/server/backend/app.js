@@ -58,9 +58,6 @@ app.use('/', routes);
 
 var router = express.Router();
 
-
-
-
 // Register all our routes with /api
 app.use('/api', oauth, api, router);
 
