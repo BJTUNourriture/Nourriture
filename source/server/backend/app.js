@@ -7,11 +7,12 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var session = require('express-session');
 
-var ingredientsController = require('./API/controllers/ingredients');
 
 var oauth = require('./routes/oauth');
+var api = require('./routes/api');
 var routes = require('./routes/index');
 var users = require('./routes/users');
+//var social_network = require('./routes/social_network');
 
 var app = express();
 
@@ -58,28 +59,10 @@ app.use('/', routes);
 var router = express.Router();
 
 
-/* 
-** Endpoints for Ingredients
-*/
-//full JSON endpoints
-router.route('/ingredients')
-  .post(ingredientsController.postIngredient)
-  .delete(ingredientsController.deleteIngredients)
-  .get(ingredientsController.getAllIngredients);
 
-//endpoints by id
-router.route('/ingredients/id/:id')
-  .delete(ingredientsController.deleteIngredientById)
-  .put(ingredientsController.putIngredientById)
-  .get(ingredientsController.getIngredientById);
-
-//endpoints by name
-router.route('/ingredients/name/:name')
-  .delete(ingredientsController.deleteIngredientByName)
-  .get(ingredientsController.getIngredientsByName);
 
 // Register all our routes with /api
-app.use('/api', oauth, router);
+app.use('/api', oauth, api, router);
 
 // catch 404 and forward to error handler
 // catch 404 and forward to error handler
