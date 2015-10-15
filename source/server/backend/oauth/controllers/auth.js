@@ -4,7 +4,7 @@
 var passport = require('passport');
 var BasicStrategy = require('passport-http').BasicStrategy;
 var BearerStrategy = require('passport-http-bearer').Strategy;
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 var User = require('../models/user');
 var Client = require('../models/client');
 var Token = require('../models/token');
@@ -87,13 +87,13 @@ passport.use(new BearerStrategy(
 ));
 
 passport.use(new GoogleStrategy({
-        clientID: '229011235874-iimjsj4ch55a5n67itije3pfq12ueuh2.apps.googleusercontent.com',
+        clientID:     '229011235874-iimjsj4ch55a5n67itije3pfq12ueuh2.apps.googleusercontent.com',
         clientSecret: 'H45chsqoalyiVAMe3CaPiCTb',
-        callbackURL: "http://nourriture.sylflo.fr/auth/google/callback"
+        callbackURL: "http://127.0.0.1:3000/auth/google/callback",
+        passReqToCallback   : true
     },
-    function (accessToken, refreshToken, profile, done) {
-        console.log("google token auth", accessToken);
-        User.findOrCreate({username: profile.id, password: "toto"}, function (err, user) {
+    function(request, accessToken, refreshToken, profile, done) {
+        User.findOrCreate({ googleId: profile.id }, function (err, user) {
             return done(err, user);
         });
     }

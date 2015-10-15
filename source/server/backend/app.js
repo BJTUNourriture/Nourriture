@@ -56,15 +56,17 @@ app.use('/', routes);
 
 
 app.get('/auth/google',
-    passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/plus.login' }));
+    passport.authenticate('google', {
+            scope: ['https://www.googleapis.com/auth/plus.login',
+                , 'https://www.googleapis.com/auth/plus.profile.emails.read']
+        }
+    ));
 
 app.get('/auth/google/callback',
-    passport.authenticate('google', { failureRedirect: '/' }),
-    function(req, res) {
-        // Successful authentication, redirect home.
-        res.redirect('/');
-    });
-
+    passport.authenticate('google', {
+        successRedirect: '/auth/google/success',
+        failureRedirect: '/auth/google/failure'
+    }));
 
 var router = express.Router();
 
@@ -73,13 +75,13 @@ app.use('/api', oauth, api, router);
 
 // catch 404 and forward to error handler
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -88,16 +90,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.use('/users', users);
 
 // Make our db accessible to our router
-app.use(function(req,res,next){
+app.use(function (req, res, next) {
     req.db = db;
     next();
 });
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handlers
@@ -113,13 +115,13 @@ if (app.get('env') === 'development') {
             error: err
         });
     });
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
+    app.use(function (err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
     });
-  });
 }
 
 // production error handler
@@ -134,12 +136,12 @@ app.use(function (err, req, res, next) {
 
 app.listen("8101");
 console.log(" App listening on port 8101");
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
 });
 
 
