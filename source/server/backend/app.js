@@ -56,7 +56,7 @@ app.use('/', routes);
 
 
 app.get('/auth/google',
-    passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/plus.login' }));
+    passport.authenticate('google_authenticate', { scope: 'https://www.googleapis.com/auth/plus.login' }));
 
 app.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/' }),
