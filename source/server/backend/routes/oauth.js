@@ -11,8 +11,6 @@ var express = require('express');
 var router = express.Router();
 var app = express();
 
-// Initial dummy route for testing
-// http://localhost:3000/api
 
 //Create endpoint handlers for /users
 router.route('/users')

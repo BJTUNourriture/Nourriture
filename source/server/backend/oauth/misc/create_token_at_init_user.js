@@ -7,7 +7,7 @@ var Code = require('../models/code');
 var Token = require('../models/token');
 
 function create_token(user, res) {
-    var redirectUri = 'localhost:8000';
+    var redirectUri = 'localhost:8101';
 
 
     var name_client = 'API-' + user.username;
