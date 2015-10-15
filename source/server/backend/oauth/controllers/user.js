@@ -7,6 +7,7 @@ var Create_token = require('../misc/create_token_at_init_user');
 exports.postUsers = function (req, res) {
 
     var user = new User({
+        email: req.body.email,
         username: req.body.username,
         password: req.body.password
     });
