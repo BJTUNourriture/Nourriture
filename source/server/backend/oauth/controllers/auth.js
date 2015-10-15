@@ -86,27 +86,31 @@ passport.use(new BearerStrategy(
     }
 ));
 
-passport.use('google', new GoogleStrategy({
+passport.use(new GoogleStrategy({
         clientID:     '229011235874-iimjsj4ch55a5n67itije3pfq12ueuh2.apps.googleusercontent.com',
         clientSecret: 'H45chsqoalyiVAMe3CaPiCTb',
         callbackURL: "http://127.0.0.1:8101/auth/google/callback",
         passReqToCallback   : true
     },
     function(request, accessToken, refreshToken, profile, done) {
-        // asynchronous verification, for effect...
-        process.nextTick(function () {
+        User.findOrCreate({ username: profile.id, password: "toto" }, function (err, user) {
 
-            // To keep the example simple, the user's Google profile is returned to
-            // represent the logged-in user.  In a typical application, you would want
-            // to associate the Google account with a user record in your database,
-            // and return that user instead.
-            console.log("Profile", profile);
-            console.log("Token", accessToken);
-            return done(null, profile);
+            
+
+            return done(err, user);
         });
     }
 ));
 
+
+passport.serializeUser(function(user, done) {
+    done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+    done(null, user);
+});
+
 exports.isClientAuthenticated = passport.authenticate('client-basic', {session: false});
-exports.isAuthenticated = passport.authenticate(['basic', 'bearer', 'google'], { session : false });
+exports.isAuthenticated = passport.authenticate(['basic', 'bearer'], { session : false });
 //exports.isAuthenticated = [];
