@@ -20,6 +20,7 @@ var UserSchema = new mongoose.Schema({
         type: String,
         unique: true
     },
+    gender : String,
     facebook         : {
         id           : String,
         token        : String,
@@ -32,7 +33,10 @@ var UserSchema = new mongoose.Schema({
         username     : String
     },
     google           : {
-        id           : String,
+        id           : {
+                type: String,
+                unique: true
+    },
         token        : String,
         displayName  : String
     }
