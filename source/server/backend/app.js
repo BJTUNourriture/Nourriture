@@ -56,10 +56,10 @@ app.use('/', routes);
 
 
 app.get('/auth/google',
-    passport.authenticate('passport-google', { scope: 'https://www.googleapis.com/auth/plus.login' }));
+    passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/plus.login' }));
 
 app.get('/auth/google/callback',
-    passport.authenticate('passport-google', { failureRedirect: '/login' }),
+    passport.authenticate('google', { failureRedirect: '/' }),
     function(req, res) {
         // Successful authentication, redirect home.
         res.redirect('/');

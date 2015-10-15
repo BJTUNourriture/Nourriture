@@ -74,19 +74,18 @@ passport.use(new BearerStrategy(
     }
 ));
 
-passport.use('passport-google', new GoogleStrategy({
+passport.use('google', new GoogleStrategy({
         clientID: '229011235874-jvr387qssa4pmincbbbh368is28b32fu.apps.googleusercontent.com',
         clientSecret: 'R71nGX21b1Sd4bMy79p2C0hM',
         callbackURL: "http://nourriture.sylflo.fr/auth/google/callback"
     },
     function(accessToken, refreshToken, profile, done) {
-        console.log(accessToken, " YOu are logged in");
-     /*   User.findOrCreate({ googleId: profile.id }, function (err, user) {
+        console.log("google token auth", accessToken);
+        /*User.findOrCreate({ googleId: profile.id }, function (err, user) {
             return done(err, user);
         });*/
     }
 ));
 
-
 exports.isClientAuthenticated = passport.authenticate('client-basic', { session : false });
-exports.isAuthenticated = passport.authenticate(['basic', 'bearer', 'passport-google'], { session : false });
+exports.isAuthenticated = passport.authenticate(['basic', 'bearer', 'google'], { session : false });
