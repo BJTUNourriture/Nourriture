@@ -64,7 +64,7 @@ app.get('/auth/google',
 
 app.get('/auth/google/callback',
     passport.authenticate('google', {
-        successRedirect: '/auth/google/success',
+        successRedirect: 'http://127.0.0.1:8102/',
         failureRedirect: '/auth/google/failure'
     }));
 
