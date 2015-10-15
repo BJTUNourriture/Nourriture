@@ -2,9 +2,20 @@
  * Created by sylflo on 10/11/15.
  */
 
+var authController = require('../oauth/controllers/auth');
+var userController = require('../API/controllers/users');
 var ingredientsController = require('../API/controllers/ingredients');
 var express = require('express');
 var router = express.Router();
+
+
+/* Endpoints for User */
+router.route('/users')
+    .post(userController.postUsers)
+    .get(authController.isAuthenticated, userController.getUsers);
+
+module.exports = router;
+
 
 /*
  ** Endpoints for Ingredients

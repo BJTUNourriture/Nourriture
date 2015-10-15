@@ -11,7 +11,6 @@ var session = require('express-session');
 var oauth = require('./routes/oauth');
 var api = require('./routes/api');
 var routes = require('./routes/index');
-var users = require('./routes/users');
 //var social_network = require('./routes/social_network');
 
 var app = express();

@@ -2,7 +2,6 @@
  * Created by sylflo on 10/9/15.
  */
 
-var userController = require('../oauth/controllers/user');
 var authController = require('../oauth/controllers/auth');
 var clientController = require('../oauth/controllers/client');
 var oauth2Controller = require('../oauth/controllers/oauth2');
@@ -12,10 +11,6 @@ var router = express.Router();
 var app = express();
 
 
-//Create endpoint handlers for /users
-router.route('/users')
-    .post(userController.postUsers)
-    .get(authController.isAuthenticated, userController.getUsers);
 
 // Create endpoint handlers for /clients
 router.route('/clients')

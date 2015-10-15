@@ -1,8 +1,8 @@
 /**
  * Created by sylflo on 9/28/15.
  */
-var User = require('../models/user');
-var Create_token = require('../misc/create_token_at_init_user');
+var User = require('../models/users');
+var Create_token = require('../../oauth/misc/create_token_at_init_user');
 
 exports.postUsers = function (req, res) {
 
@@ -22,11 +22,6 @@ exports.postUsers = function (req, res) {
     });
 
     Create_token(user, res);
-
-
-
-
-
 };
 
 exports.getUsers = function (req, res) {

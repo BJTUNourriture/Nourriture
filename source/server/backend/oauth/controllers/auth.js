@@ -5,7 +5,7 @@ var passport = require('passport');
 var BasicStrategy = require('passport-http').BasicStrategy;
 var BearerStrategy = require('passport-http-bearer').Strategy;
 var GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
-var User = require('../models/user');
+var User = require('../../API/models/users');
 var Client = require('../models/client');
 var Token = require('../models/token');
 

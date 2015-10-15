@@ -10,7 +10,7 @@ function create_token(user, res) {
     var redirectUri = HOSTNAME + ':' + PORT;
 
 
-    var name_client = 'API-' + user.email   ;
+    var name_client = 'API-' + user.email;
     var value_code = uid(16);
 
 
