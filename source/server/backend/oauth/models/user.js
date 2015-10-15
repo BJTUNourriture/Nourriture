@@ -1,21 +1,29 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
+var findOrCreate = require('mongoose-findorcreate');
+
 
 var UserSchema = new mongoose.Schema({
     username: {
         type: String,
         unique: true,
-        required: true
     },
     password: {
         type: String,
+    },
+    email : {
+        type: String,
+        unique: true,
         required: true
     },
-
+    token : {
+        type: String,
+        unique: true
+    },
+    gender : String,
     facebook         : {
         id           : String,
         token        : String,
-        email        : String,
         name         : String
     },
     twitter          : {
@@ -25,10 +33,12 @@ var UserSchema = new mongoose.Schema({
         username     : String
     },
     google           : {
-        id           : String,
+        id           : {
+                type: String,
+                unique: true
+    },
         token        : String,
-        email        : String,
-        name         : String
+        displayName  : String
     }
 
 });
@@ -59,6 +69,8 @@ UserSchema.methods.verifyPassword = function (password, cb) {
         cb(null, isMatch);
     });
 };
+
+UserSchema.plugin(findOrCreate);
 
 // Export the Mongoose model
 module.exports = mongoose.model('User', UserSchema);
