@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
+var findOrCreate = require('mongoose-findorcreate');
+
 
 var UserSchema = new mongoose.Schema({
     username: {
@@ -59,6 +61,8 @@ UserSchema.methods.verifyPassword = function (password, cb) {
         cb(null, isMatch);
     });
 };
+
+UserSchema.plugin(findOrCreate);
 
 // Export the Mongoose model
 module.exports = mongoose.model('User', UserSchema);

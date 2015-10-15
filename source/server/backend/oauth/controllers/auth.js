@@ -40,12 +40,16 @@ passport.use(new BasicStrategy(
 ));
 
 passport.use('client-basic', new BasicStrategy(
-    function(username, password, callback) {
-        Client.findOne({ id: username }, function (err, client) {
-            if (err) { return callback(err); }
+    function (username, password, callback) {
+        Client.findOne({id: username}, function (err, client) {
+            if (err) {
+                return callback(err);
+            }
 
             // No client found with that id or bad password
-            if (!client || client.secret !== password) { return callback(null, false); }
+            if (!client || client.secret !== password) {
+                return callback(null, false);
+            }
 
             // Success
             return callback(null, client);
@@ -54,21 +58,29 @@ passport.use('client-basic', new BasicStrategy(
 ));
 
 passport.use(new BearerStrategy(
-    function(accessToken, callback) {
-        Token.findOne({value: accessToken }, function (err, token) {
-            if (err) { return callback(err); }
+    function (accessToken, callback) {
+        Token.findOne({value: accessToken}, function (err, token) {
+            if (err) {
+                return callback(err);
+            }
 
             // No token found
-            if (!token) { return callback(null, false); }
+            if (!token) {
+                return callback(null, false);
+            }
 
-            User.findOne({ _id: token.userId }, function (err, user) {
-                if (err) { return callback(err); }
+            User.findOne({_id: token.userId}, function (err, user) {
+                if (err) {
+                    return callback(err);
+                }
 
                 // No user found
-                if (!user) { return callback(null, false); }
+                if (!user) {
+                    return callback(null, false);
+                }
 
                 // Simple example with no scope
-                callback(null, user, { scope: '*' });
+                callback(null, user, {scope: '*'});
             });
         });
     }
@@ -79,14 +91,14 @@ passport.use(new GoogleStrategy({
         clientSecret: 'H45chsqoalyiVAMe3CaPiCTb',
         callbackURL: "http://nourriture.sylflo.fr/auth/google/callback"
     },
-    function(accessToken, refreshToken, profile, done) {
+    function (accessToken, refreshToken, profile, done) {
         console.log("google token auth", accessToken);
-        User.findOrCreate({ username: profile.id }, function (err, user) {
+        User.findOrCreate({username: profile.id, password: "toto"}, function (err, user) {
             return done(err, user);
         });
     }
 ));
 
-exports.isClientAuthenticated = passport.authenticate('client-basic', { session : false });
+exports.isClientAuthenticated = passport.authenticate('client-basic', {session: false});
 //exports.isAuthenticated = passport.authenticate(['basic', 'bearer', 'google'], { session : false });
 exports.isAuthenticated = [];

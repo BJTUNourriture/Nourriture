@@ -23,6 +23,7 @@
     "passport-local": "^1.0.0",
     "serve-favicon": "~2.3.0",
     "passport-google-oauth": "^0.2.0",
-    "passport-facebook-token": "^3.0.5"
+    "passport-facebook-token": "^3.0.5",
+    "mongoose-findorcreate": "^0.1.2"
   }
 }
