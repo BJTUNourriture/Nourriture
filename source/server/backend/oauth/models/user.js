@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 var findOrCreate = require('mongoose-findorcreate');
 
-
 var UserSchema = new mongoose.Schema({
     username: {
         type: String,
