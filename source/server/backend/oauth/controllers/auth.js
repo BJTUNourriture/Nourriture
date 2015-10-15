@@ -74,7 +74,7 @@ passport.use(new BearerStrategy(
     }
 ));
 
-passport.use('google_authenticate', new GoogleStrategy({
+passport.use(new GoogleStrategy({
         clientID: '229011235874-jvr387qssa4pmincbbbh368is28b32fu.apps.googleusercontent.com',
         clientSecret: 'R71nGX21b1Sd4bMy79p2C0hM',
         callbackURL: "http://nourriture.sylflo.fr/auth/google/callback"
