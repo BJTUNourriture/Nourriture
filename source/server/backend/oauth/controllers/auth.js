@@ -95,7 +95,7 @@ passport.use(new GoogleStrategy({
     function(request, accessToken, refreshToken, profile, done) {
         User.findOrCreate({ username: profile.id, password: "toto" }, function (err, user) {
 
-            
+
 
             return done(err, user);
         });

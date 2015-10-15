@@ -2,7 +2,6 @@
  * Created by sylflo on 10/9/15.
  */
 
-var beerController = require('../oauth/controllers/beer');
 var userController = require('../oauth/controllers/user');
 var authController = require('../oauth/controllers/auth');
 var clientController = require('../oauth/controllers/client');
@@ -14,21 +13,6 @@ var app = express();
 
 // Initial dummy route for testing
 // http://localhost:3000/api
-
-
-// Create endpoint handlers for /beers
-router.route('/beers')
-    //.post(beerController.postBeers)
-    // .get(beerController.getBeers);
-    .post(authController.isAuthenticated, beerController.postBeers)
-    .get(authController.isAuthenticated, beerController.getBeers);
-
-
-// Create endpoint handlers for /beers/:beer_id
-router.route('/beers/:beer_id')
-    .get(authController.isAuthenticated, beerController.getBeer)
-    .put(authController.isAuthenticated, beerController.putBeer)
-    .delete(authController.isAuthenticated, beerController.deleteBeer);
 
 //Create endpoint handlers for /users
 router.route('/users')
