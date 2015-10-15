@@ -11,10 +11,13 @@ var session = require('express-session');
 var oauth = require('./routes/oauth');
 var api = require('./routes/api');
 var routes = require('./routes/index');
-var users = require('./routes/users');
 //var social_network = require('./routes/social_network');
 
 var app = express();
+
+/* Init const var */
+PORT = "8101";
+HOSTNAME = "127.0.0.1";
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -134,8 +137,8 @@ app.use(function (err, req, res, next) {
     });
 });
 
-app.listen("8101");
-console.log(" App listening on port 8101");
+app.listen(PORT);
+console.log(" App listening on port ", PORT);
 app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {

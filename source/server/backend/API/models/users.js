@@ -10,34 +10,36 @@ var UserSchema = new mongoose.Schema({
     password: {
         type: String,
     },
-    email : {
+    email: {
         type: String,
         unique: true,
         required: true
     },
-    token : {
+    token: {
         type: String,
-        unique: true
+        unique: true,
+        sparse: true
     },
-    gender : String,
-    facebook         : {
-        id           : String,
-        token        : String,
-        name         : String
+    gender: String,
+    facebook: {
+        id: String,
+        token: String,
+        name: String
     },
-    twitter          : {
-        id           : String,
-        token        : String,
-        displayName  : String,
-        username     : String
+    twitter: {
+        id: String,
+        token: String,
+        displayName: String,
+        username: String
     },
-    google           : {
-        id           : {
-                type: String,
-                unique: true
-    },
-        token        : String,
-        displayName  : String
+    google: {
+        id: {
+            type: String,
+            unique: true,
+            sparse: true
+        },
+        token: String,
+        displayName: String
     }
 
 });

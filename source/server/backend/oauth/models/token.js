@@ -11,5 +11,4 @@ var TokenSchema   = new mongoose.Schema({
     clientId: { type: String, required: true }
 });
 
-// Export the Mongoose model
 module.exports = mongoose.model('Token', TokenSchema);

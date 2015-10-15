@@ -5,7 +5,7 @@ var passport = require('passport');
 var BasicStrategy = require('passport-http').BasicStrategy;
 var BearerStrategy = require('passport-http-bearer').Strategy;
 var GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
-var User = require('../models/user');
+var User = require('../../API/models/users');
 var Client = require('../models/client');
 var Token = require('../models/token');
 
@@ -93,6 +93,7 @@ passport.use(new GoogleStrategy({
         passReqToCallback   : true
     },
     function(request, accessToken, refreshToken, profile, done) {
+
         User.findOrCreate({email : profile.email, google : {id : profile.id, displayName : profile.displayName}}, function (err, user) {
             return done(err, user);
         });

@@ -7,10 +7,10 @@ var Code = require('../models/code');
 var Token = require('../models/token');
 
 function create_token(user, res) {
-    var redirectUri = 'localhost:8000';
+    var redirectUri = HOSTNAME + ':' + PORT;
 
 
-    var name_client = 'API-' + user.username;
+    var name_client = 'API-' + user.email;
     var value_code = uid(16);
 
 
@@ -67,7 +67,7 @@ function create_code(client, user, value_code) {
     var code = new Code({
         value: value_code,
         clientId: client._id,
-        redirectUri: 'localhost:8000',
+        redirectUri: HOSTNAME + ':' + PORT,
         userId: user._id
     });
 

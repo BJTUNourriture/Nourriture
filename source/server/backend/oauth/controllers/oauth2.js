@@ -2,7 +2,7 @@
  * Created by sylflo on 9/28/15.
  */
 var oauth2orize = require('oauth2orize');
-var User = require('../models/user');
+var User = require('../../API/models/users');
 var Client = require('../models/client');
 var Token = require('../models/token');
 var Code = require('../models/code');
