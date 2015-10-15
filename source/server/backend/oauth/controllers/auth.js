@@ -86,10 +86,10 @@ passport.use(new BearerStrategy(
     }
 ));
 
-passport.use(new GoogleStrategy({
+passport.use('google', new GoogleStrategy({
         clientID:     '229011235874-iimjsj4ch55a5n67itije3pfq12ueuh2.apps.googleusercontent.com',
         clientSecret: 'H45chsqoalyiVAMe3CaPiCTb',
-        callbackURL: "http://nourriture.sylflo.fr/auth/google/callback",
+        callbackURL: "http://127.0.0.1:8101/auth/google/callback",
         passReqToCallback   : true
     },
     function(request, accessToken, refreshToken, profile, done) {
@@ -100,11 +100,13 @@ passport.use(new GoogleStrategy({
             // represent the logged-in user.  In a typical application, you would want
             // to associate the Google account with a user record in your database,
             // and return that user instead.
+            console.log("Profile", profile);
+            console.log("Token", accessToken);
             return done(null, profile);
         });
     }
 ));
 
 exports.isClientAuthenticated = passport.authenticate('client-basic', {session: false});
-//exports.isAuthenticated = passport.authenticate(['basic', 'bearer', 'google'], { session : false });
-exports.isAuthenticated = [];
+exports.isAuthenticated = passport.authenticate(['basic', 'bearer', 'google'], { session : false });
+//exports.isAuthenticated = [];
