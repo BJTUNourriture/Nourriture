@@ -101,22 +101,22 @@ var Recipes = require('../models/recipes');
 */
 
 exports.postRecipe = function(req, res) {
+	var default_fields = ["difficulty", "date_edited", "date_posted", "average_score", "time_preparation", "average_price"];
 	var recipe = new Recipes({
 		title : req.body.title,
 		author_id : req.body.author_id,
 		author_name : req.body.author_name,
 		description : req.body.description,
-		date_posted : req.body.date_posted,
-		date_edited : req.body.date_edited,
-		difficulty : req.body.difficulty,
-		average_score : req.body.average_score,
-		time_preparation : req.body.time_preparation,
-		average_price : req.body.average_price,
 		ingredients : req.body.ingredients,
 		comments : req.body.comments,
 		pictures : req.body.pictures
 	});
 
+	for (i = 0; i < default_fields.length; i++)
+	{
+		if (req.body[default_fields[i]] !== undefined)
+			recipe.set(default_fields[i], req.body[default_fields[i]]);
+	}
 	recipe.save(function (err) {
         if (err)
         	return (res.status(400).send(err));

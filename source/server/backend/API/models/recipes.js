@@ -26,7 +26,8 @@ var recipesSchema = new mongoose.Schema({
 		type: Number,
 		min: 0,
 		max: 3,
-		default : 0
+		default : 0,
+		null : false
 	},
 	average_score : {
 		type : Number,
