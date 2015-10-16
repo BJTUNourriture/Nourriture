@@ -1,9 +1,13 @@
+# Backend usage
 
-#launch mongo:
-  $ mongod --dbpath data
+## Generate documentation with apidocjs
 
-#install dependencies:
-  $ cd backend && npm install
+Install apidocjs
 
-#run the app:
-  $ DEBUG=backend:* npm start
+```
+npm install apidoc -g
+```
+
+Read the doc on [their website](http://apidocjs.com/)
+
+To generate new documentation simply launch `./generateDoc.sh`

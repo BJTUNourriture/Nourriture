@@ -79,7 +79,26 @@ var recipesSchema = new mongoose.Schema({
 			required : true
 		},
 		big_sized_url : String
-	}]
+	}],
+	ingredients : {
+		type : [{
+			id_ingredient : {
+				type : String,
+				required : true
+			},
+			name_ingredient : {
+				type : String,
+				required : true
+			},
+			amount_ingredient : {
+				type : Number,
+				min : 0,
+				max : 1000000,
+				default : 0
+			}
+		}],
+		required : true
+	}
 });
 
 module.exports = mongoose.model('Recipes', recipesSchema);

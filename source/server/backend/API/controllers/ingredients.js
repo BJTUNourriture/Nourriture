@@ -80,7 +80,7 @@ var Ingredients = require('../models/ingredients');
 *	  }
 *
 * @apiErrorExample Bad Value Definition
-*	  HTTP/1.1 200 OK
+*	  HTTP/1.1 400 BAD REQUEST
 *	  {
 *		...
 *		mongoose custom error
@@ -102,7 +102,7 @@ exports.postIngredient = function (req, res) {
 	//saves the ingredient to the db
 	 ingredient.save(function (err) {
         if (err)
-        	return (res.send(err));
+        	return (res.status(400).send(err));
 
         return (res.json({message: 'Ingredient succesfully created!'}));
     });
