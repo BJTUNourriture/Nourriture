@@ -36,7 +36,7 @@ var recipesSchema = new mongoose.Schema({
 	},
 	time_preparation : {
 		type : Number,
-		min : 0
+		min : 0,
 		max : 90000,
 		default : 0
 	},
@@ -59,7 +59,7 @@ var recipesSchema = new mongoose.Schema({
 			type : Date,
 			required : true
 		},
-		date_edited : Date
+		date_edited : Date,
 		content : {
 			type : String,
 			required : true

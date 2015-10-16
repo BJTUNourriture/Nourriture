@@ -37,18 +37,18 @@
 *     {
 *       "title": "Pumpkin pie",
 *       "author_id": "561fc840d6c25173533e267f",
-*       "author_id": "Kek man",
+*       "author_name": "Kek man",
 *       "description" : "It's Halloween time!",
 *		"date_posted" : "2015-03-31T22:00:00.000Z",
 *		"date_edited" : "2015-04-01T18:34:23.000Z",
 *		"difficulty" : 1,
 *		"average_score" : 0,
 *		"time_preparation" : 60,
-*		"average_price" : 1
+*		"average_price" : 1,
 *		"ingredients" : [{
 *						"id_ingredient" : "689ed840d6c25173533g895",
 *						"name_ingredient" : "Pumpkin",
-*						"amount_ingredient" : 100,
+*						"amount_ingredient" : 100
 *				   	}],
 *		"comments" : [{
 *						"id_author" : "386fc840d6c25173533e546h",
@@ -61,7 +61,7 @@
 *		"pictures" : [{
 *						"thumbnail_url" : "/thumbnails/1.jpg",
 *						"medium_sized_url" : "/medium_sized/1.jpg",
-*						"big_sized_url" : "/big_sized/1.jpg",
+*						"big_sized_url" : "/big_sized/1.jpg"
 *				   	}]
 *     }
 */
@@ -99,3 +99,28 @@ var Recipes = require('../models/recipes');
 *	  }
 *
 */
+
+exports.postRecipe = function(req, res) {
+	var recipe = new Recipes({
+		title : req.body.title,
+		author_id : req.body.author_id,
+		author_name : req.body.author_name,
+		description : req.body.description,
+		date_posted : req.body.date_posted,
+		date_edited : req.body.date_edited,
+		difficulty : req.body.difficulty,
+		average_score : req.body.average_score,
+		time_preparation : req.body.time_preparation,
+		average_price : req.body.average_price,
+		ingredients : req.body.ingredients,
+		comments : req.body.comments,
+		pictures : req.body.pictures
+	});
+
+	recipe.save(function (err) {
+        if (err)
+        	return (res.status(400).send(err));
+
+        return (res.json({message: 'Recipe succesfully created!'}));
+    });
+};

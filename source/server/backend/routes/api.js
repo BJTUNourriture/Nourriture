@@ -5,6 +5,7 @@
 var authController = require('../oauth/controllers/auth');
 var userController = require('../API/controllers/users');
 var ingredientsController = require('../API/controllers/ingredients');
+var recipesController = require('../API/controllers/recipes');
 var express = require('express');
 var router = express.Router();
 
@@ -37,5 +38,11 @@ router.route('/ingredients/name/:name')
     .delete(ingredientsController.deleteIngredientByName)
     .get(ingredientsController.getIngredientsByName);
 
+
+/*
+** Endpoints for Recipes
+*/
+router.route('/recipes')
+    .post(recipesController.postRecipe);
 
 module.exports = router;
