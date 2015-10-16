@@ -16,12 +16,10 @@ Xin Xing
 
 - AngularJS
 - Handelbars
-- ...
 
 ##Android :
 
 - Android 5.0 Lollipop API
-- ...
 
 
 ## Licence MIT
