@@ -45,4 +45,12 @@ router.route('/ingredients/name/:name')
 router.route('/recipes')
     .post(recipesController.postRecipe);
 
+/*
+** Endpoints for Suggestions
+*/
+
+//router.route('/suggestions')
+//   .get(suggestionsController.getSuggestions);
+
+
 module.exports = router;
