@@ -34,6 +34,12 @@ mongod --dbpath <path_to_your_db>
 sudo npm install nodemon -g
 ```
 
+### Install dependencies
+Go where `package.json` is located (root directory)
+```Shell
+npm install
+```
+
 ### Launch nodemon
 ```Shell
 nodemon ./source/server/backend/app.js
