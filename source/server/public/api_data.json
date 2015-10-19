@@ -768,7 +768,7 @@
             "group": "Success 200",
             "optional": false,
             "field": "message",
-            "description": "<p>Ingredient succesfully created!</p> "
+            "description": "<p>Ingredient succesfully deleted!</p> "
           }
         ]
       },
@@ -829,7 +829,7 @@
             "group": "Success 200",
             "optional": false,
             "field": "message",
-            "description": "<p>Ingredient succesfully created!</p> "
+            "description": "<p>Ingredient succesfully deleted!</p> "
           }
         ]
       },
@@ -904,7 +904,7 @@
             "group": "Success 200",
             "optional": false,
             "field": "message",
-            "description": "<p>Ingredient succesfully created!</p> "
+            "description": "<p>Ingredient succesfully deleted!</p> "
           }
         ]
       },

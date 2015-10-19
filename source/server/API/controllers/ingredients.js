@@ -354,7 +354,7 @@ exports.getIngredientsByName = function (req, res, flag) {
 
 /**
 * @apiDefine deleteIngredientSuccess
-* @apiSuccess message Ingredient succesfully created!
+* @apiSuccess message Ingredient succesfully deleted!
 * @apiSuccessExample Success-Response:
 *     HTTP/1.1 200 OK
 *	  {
