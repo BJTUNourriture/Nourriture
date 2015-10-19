@@ -42,7 +42,7 @@ router.route('/ingredients/name/:name')
     .get(ingredientsController.getIngredientsByName);
 
 /*
- ** Endpoints for groups
+ ** Endpoints for Groups
  */
 //full JSON endpoints
 router.route('/groups')
@@ -65,8 +65,10 @@ router.route('/groups/name/:name')
 /*
 ** Endpoints for Recipes
 */
+
 router.route('/recipes')
-    .post(recipesController.postRecipe);
+    .post(recipesController.postRecipe)
+    .get(recipesController.getAllRecipes);
 
 /*
 ** Endpoints for Suggestions

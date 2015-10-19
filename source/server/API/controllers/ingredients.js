@@ -259,7 +259,7 @@ exports.updateIngredient = function(req, res, err, ingredient) {
 * @apiErrorExample Invalid Parameter Value
 *     HTTP/1.1 404 Not Found
 *     {
-*       "message": "The are no existing ingredients."
+*       "message": "There are no existing ingredients."
 *     }
 */
 
