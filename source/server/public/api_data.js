@@ -1637,28 +1637,28 @@ define({ "api": [
             "group": "Success 200",
             "type": "<p>Object[]</p> ",
             "optional": false,
-            "field": "ingredients",
-            "description": "<p>List of the ingredients needed for the recipe</p> "
+            "field": "recipes",
+            "description": "<p>List of the recipes needed for the recipe</p> "
           },
           {
             "group": "Success 200",
             "type": "<p>String</p> ",
             "optional": false,
-            "field": "ingredients.id_ingredient",
+            "field": "recipes.id_ingredient",
             "description": "<p>Id of the ingredient</p> "
           },
           {
             "group": "Success 200",
             "type": "<p>String</p> ",
             "optional": false,
-            "field": "ingredients.name_ingredient",
+            "field": "recipes.name_ingredient",
             "description": "<p>Name of the ingredient</p> "
           },
           {
             "group": "Success 200",
             "type": "<p>Number</p> ",
             "optional": true,
-            "field": "ingredients.amount_ingredient",
+            "field": "recipes.amount_ingredient",
             "description": "<p>[default : 0, min : 0, max : 1000000] Grams of the ingredient needed</p> "
           },
           {
@@ -1743,7 +1743,481 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\"_id\" : \"281fc840d6c25173533er546\"\n      \"title\": \"Pumpkin pie\",\n      \"author_id\": \"561fc840d6c25173533e267f\",\n      \"author_name\": \"Kek man\",\n      \"description\" : \"It's Halloween time!\",\n\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\"difficulty\" : 1,\n\t\t\"average_score\" : 0,\n\t\t\"time_preparation\" : 60,\n\t\t\"average_price\" : 1,\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\t\"id_ingredient\" : \"689ed840d6c25173533g895\",\n\t\t\t\t\t\t\"name_ingredient\" : \"Pumpkin\",\n\t\t\t\t\t\t\"amount_ingredient\" : 100\n\t\t\t\t   \t}],\n\t\t\"comments\" : [{\n\t\t\t\t\t\t\"id_author\" : \"386fc840d6c25173533e546h\",\n\t\t\t\t\t\t\"name_author\" : \"Pacza\",\n\t\t\t\t\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\t\t\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\t\t\t\t\"content\" : \"Thank you! Very nice recipe!\",\n\t\t\t\t\t\t\"visible\" : true\n\t\t\t\t   \t}],\n\t\t\"pictures\" : [{\n\t\t\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t\t\t   \t}]\n    }",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\"_id\" : \"281fc840d6c25173533er546\"\n      \"title\": \"Pumpkin pie\",\n      \"author_id\": \"561fc840d6c25173533e267f\",\n      \"author_name\": \"Kek man\",\n      \"description\" : \"It's Halloween time!\",\n\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\"difficulty\" : 1,\n\t\t\"average_score\" : 0,\n\t\t\"time_preparation\" : 60,\n\t\t\"average_price\" : 1,\n\t\t\"recipes\" : [{\n\t\t\t\t\t\t\"id_ingredient\" : \"689ed840d6c25173533g895\",\n\t\t\t\t\t\t\"name_ingredient\" : \"Pumpkin\",\n\t\t\t\t\t\t\"amount_ingredient\" : 100\n\t\t\t\t   \t}],\n\t\t\"comments\" : [{\n\t\t\t\t\t\t\"id_author\" : \"386fc840d6c25173533e546h\",\n\t\t\t\t\t\t\"name_author\" : \"Pacza\",\n\t\t\t\t\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\t\t\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\t\t\t\t\"content\" : \"Thank you! Very nice recipe!\",\n\t\t\t\t\t\t\"visible\" : true\n\t\t\t\t   \t}],\n\t\t\"pictures\" : [{\n\t\t\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t\t\t   \t}]\n    }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/recipes/id/:id",
+    "title": "Request Recipe informations by id",
+    "name": "getRecipeById",
+    "group": "Recipes",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Recipes unique ID</p> "
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The id of the recipe was not found</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"The id was not found.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/recipes.js",
+    "groupTitle": "Recipes",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>Id of the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "title",
+            "description": "<p>Name of the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "author_id",
+            "description": "<p>Id of the author of the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "author_name",
+            "description": "<p>Name of the author of the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Description of the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Date</p> ",
+            "optional": true,
+            "field": "date_posted",
+            "description": "<p>[default : Date.now] Date when the recipe was posted</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Date</p> ",
+            "optional": true,
+            "field": "date_edited",
+            "description": "<p>Date when the recipe was edited</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "difficulty",
+            "description": "<p>[default : 0, min : 0, max : 3] Difficulty set for the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "average_score",
+            "description": "<p>[default : 0, min : 0, max : 5] Average score voted by the users for the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "time_preparation",
+            "description": "<p>[default : 0, min : 0, max : 90000] Time it takes to make the recipe (in min)</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "average_price",
+            "description": "<p>[default : 0, min : 0, max : 3] Average cost of the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": false,
+            "field": "recipes",
+            "description": "<p>List of the recipes needed for the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "recipes.id_ingredient",
+            "description": "<p>Id of the ingredient</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "recipes.name_ingredient",
+            "description": "<p>Name of the ingredient</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "recipes.amount_ingredient",
+            "description": "<p>[default : 0, min : 0, max : 1000000] Grams of the ingredient needed</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "comments",
+            "description": "<p>List of the comments posted for the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "comments.id_author",
+            "description": "<p>Id of the author of the comment</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "comments.name_author",
+            "description": "<p>Name of the author of the comment</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Date</p> ",
+            "optional": false,
+            "field": "comments.date_posted",
+            "description": "<p>[default : Date.now] Date when the comment was posted</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Date</p> ",
+            "optional": true,
+            "field": "comments.date_edited",
+            "description": "<p>Date when the comment was edited</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "comments.content",
+            "description": "<p>The comment itself</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Boolean</p> ",
+            "optional": true,
+            "field": "comments.visible",
+            "description": "<p>[default : true] Is the comment visible by others</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "pictures",
+            "description": "<p>List of the pictures posted by the author for the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "pictures.thumbnail_url",
+            "description": "<p>Url of the thumbnail version of the picture</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "pictures.medium_sized_url",
+            "description": "<p>Url of the medium size version of the picture</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "pictures.big_sized_url",
+            "description": "<p>Url of the big size version of the picture</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\"_id\" : \"281fc840d6c25173533er546\"\n      \"title\": \"Pumpkin pie\",\n      \"author_id\": \"561fc840d6c25173533e267f\",\n      \"author_name\": \"Kek man\",\n      \"description\" : \"It's Halloween time!\",\n\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\"difficulty\" : 1,\n\t\t\"average_score\" : 0,\n\t\t\"time_preparation\" : 60,\n\t\t\"average_price\" : 1,\n\t\t\"recipes\" : [{\n\t\t\t\t\t\t\"id_ingredient\" : \"689ed840d6c25173533g895\",\n\t\t\t\t\t\t\"name_ingredient\" : \"Pumpkin\",\n\t\t\t\t\t\t\"amount_ingredient\" : 100\n\t\t\t\t   \t}],\n\t\t\"comments\" : [{\n\t\t\t\t\t\t\"id_author\" : \"386fc840d6c25173533e546h\",\n\t\t\t\t\t\t\"name_author\" : \"Pacza\",\n\t\t\t\t\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\t\t\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\t\t\t\t\"content\" : \"Thank you! Very nice recipe!\",\n\t\t\t\t\t\t\"visible\" : true\n\t\t\t\t   \t}],\n\t\t\"pictures\" : [{\n\t\t\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t\t\t   \t}]\n    }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/recipes/title/:title",
+    "title": "Request Recipe informations by title",
+    "name": "getRecipeByTitle",
+    "group": "Recipes",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "title",
+            "description": "<p>Recipe partial or full title</p> "
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The title of the recipe was not found</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"The title was not found.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/recipes.js",
+    "groupTitle": "Recipes",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>Id of the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "title",
+            "description": "<p>Name of the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "author_id",
+            "description": "<p>Id of the author of the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "author_name",
+            "description": "<p>Name of the author of the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Description of the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Date</p> ",
+            "optional": true,
+            "field": "date_posted",
+            "description": "<p>[default : Date.now] Date when the recipe was posted</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Date</p> ",
+            "optional": true,
+            "field": "date_edited",
+            "description": "<p>Date when the recipe was edited</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "difficulty",
+            "description": "<p>[default : 0, min : 0, max : 3] Difficulty set for the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "average_score",
+            "description": "<p>[default : 0, min : 0, max : 5] Average score voted by the users for the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "time_preparation",
+            "description": "<p>[default : 0, min : 0, max : 90000] Time it takes to make the recipe (in min)</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "average_price",
+            "description": "<p>[default : 0, min : 0, max : 3] Average cost of the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": false,
+            "field": "recipes",
+            "description": "<p>List of the recipes needed for the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "recipes.id_ingredient",
+            "description": "<p>Id of the ingredient</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "recipes.name_ingredient",
+            "description": "<p>Name of the ingredient</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "recipes.amount_ingredient",
+            "description": "<p>[default : 0, min : 0, max : 1000000] Grams of the ingredient needed</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "comments",
+            "description": "<p>List of the comments posted for the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "comments.id_author",
+            "description": "<p>Id of the author of the comment</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "comments.name_author",
+            "description": "<p>Name of the author of the comment</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Date</p> ",
+            "optional": false,
+            "field": "comments.date_posted",
+            "description": "<p>[default : Date.now] Date when the comment was posted</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Date</p> ",
+            "optional": true,
+            "field": "comments.date_edited",
+            "description": "<p>Date when the comment was edited</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "comments.content",
+            "description": "<p>The comment itself</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Boolean</p> ",
+            "optional": true,
+            "field": "comments.visible",
+            "description": "<p>[default : true] Is the comment visible by others</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "pictures",
+            "description": "<p>List of the pictures posted by the author for the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "pictures.thumbnail_url",
+            "description": "<p>Url of the thumbnail version of the picture</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "pictures.medium_sized_url",
+            "description": "<p>Url of the medium size version of the picture</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "pictures.big_sized_url",
+            "description": "<p>Url of the big size version of the picture</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\"_id\" : \"281fc840d6c25173533er546\"\n      \"title\": \"Pumpkin pie\",\n      \"author_id\": \"561fc840d6c25173533e267f\",\n      \"author_name\": \"Kek man\",\n      \"description\" : \"It's Halloween time!\",\n\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\"difficulty\" : 1,\n\t\t\"average_score\" : 0,\n\t\t\"time_preparation\" : 60,\n\t\t\"average_price\" : 1,\n\t\t\"recipes\" : [{\n\t\t\t\t\t\t\"id_ingredient\" : \"689ed840d6c25173533g895\",\n\t\t\t\t\t\t\"name_ingredient\" : \"Pumpkin\",\n\t\t\t\t\t\t\"amount_ingredient\" : 100\n\t\t\t\t   \t}],\n\t\t\"comments\" : [{\n\t\t\t\t\t\t\"id_author\" : \"386fc840d6c25173533e546h\",\n\t\t\t\t\t\t\"name_author\" : \"Pacza\",\n\t\t\t\t\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\t\t\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\t\t\t\t\"content\" : \"Thank you! Very nice recipe!\",\n\t\t\t\t\t\t\"visible\" : true\n\t\t\t\t   \t}],\n\t\t\"pictures\" : [{\n\t\t\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t\t\t   \t}]\n    }",
           "type": "json"
         }
       ]
@@ -1863,28 +2337,28 @@ define({ "api": [
             "group": "Parameter",
             "type": "<p>Object[]</p> ",
             "optional": false,
-            "field": "ingredients",
-            "description": "<p>List of the ingredients needed for the recipe</p> "
+            "field": "recipes",
+            "description": "<p>List of the recipes needed for the recipe</p> "
           },
           {
             "group": "Parameter",
             "type": "<p>String</p> ",
             "optional": false,
-            "field": "ingredients.id_ingredient",
+            "field": "recipes.id_ingredient",
             "description": "<p>Id of the ingredient</p> "
           },
           {
             "group": "Parameter",
             "type": "<p>String</p> ",
             "optional": false,
-            "field": "ingredients.name_ingredient",
+            "field": "recipes.name_ingredient",
             "description": "<p>Name of the ingredient</p> "
           },
           {
             "group": "Parameter",
             "type": "<p>Number</p> ",
             "optional": true,
-            "field": "ingredients.amount_ingredient",
+            "field": "recipes.amount_ingredient",
             "description": "<p>[default : 0, min : 0, max : 1000000] Grams of the ingredient needed</p> "
           },
           {
@@ -1969,7 +2443,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "    {\n      \"title\": \"Pumpkin pie\",\n      \"author_id\": \"561fc840d6c25173533e267f\",\n      \"author_name\": \"Kek man\",\n      \"description\" : \"It's Halloween time!\",\n\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\"difficulty\" : 1,\n\t\t\"average_score\" : 0,\n\t\t\"time_preparation\" : 60,\n\t\t\"average_price\" : 1,\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\t\"id_ingredient\" : \"689ed840d6c25173533g895\",\n\t\t\t\t\t\t\"name_ingredient\" : \"Pumpkin\",\n\t\t\t\t\t\t\"amount_ingredient\" : 100\n\t\t\t\t   \t}],\n\t\t\"comments\" : [{\n\t\t\t\t\t\t\"id_author\" : \"386fc840d6c25173533e546h\",\n\t\t\t\t\t\t\"name_author\" : \"Pacza\",\n\t\t\t\t\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\t\t\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\t\t\t\t\"content\" : \"Thank you! Very nice recipe!\",\n\t\t\t\t\t\t\"visible\" : true\n\t\t\t\t   \t}],\n\t\t\"pictures\" : [{\n\t\t\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t\t\t   \t}]\n    }",
+          "content": "    {\n      \"title\": \"Pumpkin pie\",\n      \"author_id\": \"561fc840d6c25173533e267f\",\n      \"author_name\": \"Kek man\",\n      \"description\" : \"It's Halloween time!\",\n\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\"difficulty\" : 1,\n\t\t\"average_score\" : 0,\n\t\t\"time_preparation\" : 60,\n\t\t\"average_price\" : 1,\n\t\t\"recipes\" : [{\n\t\t\t\t\t\t\"id_ingredient\" : \"689ed840d6c25173533g895\",\n\t\t\t\t\t\t\"name_ingredient\" : \"Pumpkin\",\n\t\t\t\t\t\t\"amount_ingredient\" : 100\n\t\t\t\t   \t}],\n\t\t\"comments\" : [{\n\t\t\t\t\t\t\"id_author\" : \"386fc840d6c25173533e546h\",\n\t\t\t\t\t\t\"name_author\" : \"Pacza\",\n\t\t\t\t\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\t\t\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\t\t\t\t\"content\" : \"Thank you! Very nice recipe!\",\n\t\t\t\t\t\t\"visible\" : true\n\t\t\t\t   \t}],\n\t\t\"pictures\" : [{\n\t\t\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t\t\t   \t}]\n    }",
           "type": "json"
         }
       ]

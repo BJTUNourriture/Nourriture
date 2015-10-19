@@ -1,4 +1,4 @@
-// API/controllers/ingredients.js
+// API/controllers/recipes.js
 
 /**
 * @apiDefine RecipeObjectPostParam
@@ -13,10 +13,10 @@
 * @apiParam {Number} [average_score] [default : 0, min : 0, max : 5] Average score voted by the users for the recipe
 * @apiParam {Number} [time_preparation] [default : 0, min : 0, max : 90000] Time it takes to make the recipe (in min)
 * @apiParam {Number} [average_price] [default : 0, min : 0, max : 3] Average cost of the recipe
-* @apiParam {Object[]} ingredients List of the ingredients needed for the recipe
-* @apiParam {String} ingredients.id_ingredient Id of the ingredient
-* @apiParam {String} ingredients.name_ingredient Name of the ingredient
-* @apiParam {Number} [ingredients.amount_ingredient] [default : 0, min : 0, max : 1000000] Grams of the ingredient needed
+* @apiParam {Object[]} recipes List of the recipes needed for the recipe
+* @apiParam {String} recipes.id_ingredient Id of the ingredient
+* @apiParam {String} recipes.name_ingredient Name of the ingredient
+* @apiParam {Number} [recipes.amount_ingredient] [default : 0, min : 0, max : 1000000] Grams of the ingredient needed
 * @apiParam {Object[]} [comments] List of the comments posted for the recipe
 * @apiParam {String} comments.id_author Id of the author of the comment
 * @apiParam {String} comments.name_author Name of the author of the comment
@@ -44,10 +44,10 @@
 * @apiSuccess {Number} [average_score] [default : 0, min : 0, max : 5] Average score voted by the users for the recipe
 * @apiSuccess {Number} [time_preparation] [default : 0, min : 0, max : 90000] Time it takes to make the recipe (in min)
 * @apiSuccess {Number} [average_price] [default : 0, min : 0, max : 3] Average cost of the recipe
-* @apiSuccess {Object[]} ingredients List of the ingredients needed for the recipe
-* @apiSuccess {String} ingredients.id_ingredient Id of the ingredient
-* @apiSuccess {String} ingredients.name_ingredient Name of the ingredient
-* @apiSuccess {Number} [ingredients.amount_ingredient] [default : 0, min : 0, max : 1000000] Grams of the ingredient needed
+* @apiSuccess {Object[]} recipes List of the recipes needed for the recipe
+* @apiSuccess {String} recipes.id_ingredient Id of the ingredient
+* @apiSuccess {String} recipes.name_ingredient Name of the ingredient
+* @apiSuccess {Number} [recipes.amount_ingredient] [default : 0, min : 0, max : 1000000] Grams of the ingredient needed
 * @apiSuccess {Object[]} [comments] List of the comments posted for the recipe
 * @apiSuccess {String} comments.id_author Id of the author of the comment
 * @apiSuccess {String} comments.name_author Name of the author of the comment
@@ -76,7 +76,7 @@
 *		"average_score" : 0,
 *		"time_preparation" : 60,
 *		"average_price" : 1,
-*		"ingredients" : [{
+*		"recipes" : [{
 *						"id_ingredient" : "689ed840d6c25173533g895",
 *						"name_ingredient" : "Pumpkin",
 *						"amount_ingredient" : 100
@@ -138,7 +138,7 @@ exports.postRecipe = function(req, res) {
 		author_id : req.body.author_id,
 		author_name : req.body.author_name,
 		description : req.body.description,
-		ingredients : req.body.ingredients,
+		recipes : req.body.recipes,
 		comments : req.body.comments,
 		pictures : req.body.pictures
 	});
@@ -176,7 +176,7 @@ exports.postRecipe = function(req, res) {
 *		"average_score" : 0,
 *		"time_preparation" : 60,
 *		"average_price" : 1,
-*		"ingredients" : [{
+*		"recipes" : [{
 *						"id_ingredient" : "689ed840d6c25173533g895",
 *						"name_ingredient" : "Pumpkin",
 *						"amount_ingredient" : 100
@@ -222,6 +222,78 @@ exports.getAllRecipes = function(req, res) {
 				return (res.send(err));
 			else if (docs.length <= 0)
 				return (res.json(404, {message : 'There are no existing recipes.'}))
+			return (res.json(docs));
+		}
+	);
+	return (1);
+};
+
+/**
+* @api {get} /recipes/id/:id Request Recipe informations by id
+* @apiName getRecipeById
+* @apiGroup Recipes
+* @apiVersion 0.1.0
+*
+* @apiParam {Number} id Recipes unique ID
+*
+* @apiUse RecipeObjectSuccess
+*
+* @apiUse getRecipeAnswer
+*
+* @apiError message The id of the recipe was not found
+* @apiErrorExample Invalid Parameter Value
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "The id was not found."
+*     }
+*/
+exports.getRecipeById = function (req, res, flag) {
+	var id = flag === true ? req.body.id : req.params.id;
+	if (!id)
+		return flag === true ? -1 : res.json(400, {message : 'The id musn\'t be null'});
+	Recipes.findById(id,
+		function (err, doc) {
+			if (err)
+				return (res.send(err));
+			else if (doc === null)
+				return (res.json(404, {message : 'The id was not found.'}))
+			return (res.json(doc));
+		}
+	);
+	return (1);
+};
+
+/**
+* @api {get} /recipes/title/:title Request Recipe informations by title
+* @apiName getRecipeByTitle
+* @apiGroup Recipes
+* @apiVersion 0.1.0
+*
+* @apiParam {String} title Recipe partial or full title
+*
+* @apiUse RecipeObjectSuccess
+*
+* @apiUse getRecipeAnswer
+*
+* @apiError message The title of the recipe was not found
+* @apiErrorExample Invalid Parameter Value
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "The title was not found."
+*     }
+*/
+exports.getRecipeByTitle = function (req, res, flag) {
+	var title = flag === true ? req.body.title : req.params.title;
+	if (!title)
+		return flag === true ? -1 : res.json(400, {message : 'The title musn\'t be null'});
+	Recipes.find({
+		"title": { "$regex": title, "$options": "i" } 
+		},
+		function (err, docs) {
+			if (err)
+				return (res.send(err));
+			else if (docs.length <= 0)
+				return (res.json(404, {message : 'The title was not found.'}))
 			return (res.json(docs));
 		}
 	);

@@ -70,6 +70,12 @@ router.route('/recipes')
     .post(recipesController.postRecipe)
     .get(recipesController.getAllRecipes);
 
+router.route('/recipes/id/:id')
+    .get(recipesController.getRecipeById);
+
+router.route('/recipes/title/:title')
+    .get(recipesController.getRecipeByTitle);
+
 /*
 ** Endpoints for Suggestions
 */
