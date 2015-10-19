@@ -5,6 +5,7 @@
 var authController = require('../oauth/controllers/auth');
 var userController = require('../API/controllers/users');
 var ingredientsController = require('../API/controllers/ingredients');
+var groupsController = require('../API/controllers/groups');
 var recipesController = require('../API/controllers/recipes');
 var express = require('express');
 var router = express.Router();
@@ -39,6 +40,26 @@ router.route('/ingredients/id/:id')
 router.route('/ingredients/name/:name')
     .delete(ingredientsController.deleteIngredientByName)
     .get(ingredientsController.getIngredientsByName);
+
+/*
+ ** Endpoints for groups
+ */
+//full JSON endpoints
+router.route('/groups')
+    .post(groupsController.postGroup)
+    .delete(groupsController.deleteGroups)
+    .get(groupsController.getAllGroups);
+
+//endpoints by id
+router.route('/groups/id/:id')
+    .delete(groupsController.deleteGroupById)
+    .put(groupsController.putGroupById)
+    .get(groupsController.getGroupById);
+
+//endpoints by name
+router.route('/groups/name/:name')
+    .delete(groupsController.deleteGroupByName)
+    .get(groupsController.getGroupByName);
 
 
 /*
