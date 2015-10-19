@@ -13,7 +13,9 @@ var router = express.Router();
 /* Endpoints for User */
 router.route('/users')
     .post(userController.postUsers)
-    .get(authController.isAuthenticated, userController.getUsers);
+    .get(userController.getUsers);
+// add for oAuth
+//   .get(authController.isAuthenticated, userController.getUsers);
 
 module.exports = router;
 
@@ -44,5 +46,13 @@ router.route('/ingredients/name/:name')
 */
 router.route('/recipes')
     .post(recipesController.postRecipe);
+
+/*
+** Endpoints for Suggestions
+*/
+
+//router.route('/suggestions')
+//   .get(suggestionsController.getSuggestions);
+
 
 module.exports = router;

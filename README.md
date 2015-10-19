@@ -6,13 +6,13 @@ Software Project Training
 
 Xin Xing
 
-##Back : 
+##Back :
 
 - ExpressJS
 - MongoDB
 - ...
 
-##Front : 
+##Front :
 
 - AngularJS
 - Handelbars
@@ -42,7 +42,7 @@ npm install
 
 ### Launch nodemon
 ```Shell
-nodemon ./source/server/backend/app.js
+nodemon ./source/server/app.js
 ```
 ### Go to the docpage
 Go to [the project homepage](http://127.0.0.1:8000/) and read the doc!

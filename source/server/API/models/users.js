@@ -40,8 +40,25 @@ var UserSchema = new mongoose.Schema({
         },
         token: String,
         displayName: String
+    },
+    alergy: {
+        type: Array,
+    },
+    religion: {
+        type: String,
+    },
+    likedreceip: {
+        type: Array,
+    },
+    photos: {
+        type: Array,
+    },
+    groups: {
+        type: Array,
+    },
+    calories: {
+        type: String,
     }
-
 });
 
 UserSchema.pre('save', function (callback) {
