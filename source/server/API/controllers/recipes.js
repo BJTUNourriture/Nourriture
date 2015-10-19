@@ -13,10 +13,10 @@
 * @apiParam {Number} [average_score] [default : 0, min : 0, max : 5] Average score voted by the users for the recipe
 * @apiParam {Number} [time_preparation] [default : 0, min : 0, max : 90000] Time it takes to make the recipe (in min)
 * @apiParam {Number} [average_price] [default : 0, min : 0, max : 3] Average cost of the recipe
-* @apiParam {Object[]} recipes List of the recipes needed for the recipe
-* @apiParam {String} recipes.id_ingredient Id of the ingredient
-* @apiParam {String} recipes.name_ingredient Name of the ingredient
-* @apiParam {Number} [recipes.amount_ingredient] [default : 0, min : 0, max : 1000000] Grams of the ingredient needed
+* @apiParam {Object[]} ingredients List of the ingredients needed for the recipe
+* @apiParam {String} ingredients.id_ingredient Id of the ingredient
+* @apiParam {String} ingredients.name_ingredient Name of the ingredient
+* @apiParam {Number} [ingredients.amount_ingredient] [default : 0, min : 0, max : 1000000] Grams of the ingredient needed
 * @apiParam {Object[]} [comments] List of the comments posted for the recipe
 * @apiParam {String} comments.id_author Id of the author of the comment
 * @apiParam {String} comments.name_author Name of the author of the comment
@@ -27,6 +27,36 @@
 * @apiParam {Object[]} [pictures] List of the pictures posted by the author for the recipe
 * @apiParam {String} pictures.thumbnail_url Url of the thumbnail version of the picture
 * @apiParam {String} pictures.medium_sized_url Url of the medium size version of the picture
+* @apiParam {String} [pictures.big_sized_url] Url of the big size version of the picture
+*/
+
+/**
+* @apiDefine RecipeObjectPutParam
+*
+* @apiParam {String} [title] Name of the recipe
+* @apiParam {String} [author_id] Id of the author of the recipe
+* @apiParam {String} [author_name] Name of the author of the recipe
+* @apiParam {String} [description] Description of the recipe
+* @apiParam {Date} [date_posted] [default : Date.now] Date when the recipe was posted
+* @apiParam {Date} [date_edited] Date when the recipe was edited
+* @apiParam {Number} [difficulty] [default : 0, min : 0, max : 3] Difficulty set for the recipe
+* @apiParam {Number} [average_score] [default : 0, min : 0, max : 5] Average score voted by the users for the recipe
+* @apiParam {Number} [time_preparation] [default : 0, min : 0, max : 90000] Time it takes to make the recipe (in min)
+* @apiParam {Number} [average_price] [default : 0, min : 0, max : 3] Average cost of the recipe
+* @apiParam {Object[]} [ingredients] List of the ingredients needed for the recipe
+* @apiParam {String} [ingredients.id_ingredient] Id of the ingredient
+* @apiParam {String} [ingredients.name_ingredient] Name of the ingredient
+* @apiParam {Number} [ingredients.amount_ingredient] [default : 0, min : 0, max : 1000000] Grams of the ingredient needed
+* @apiParam {Object[]} [comments] List of the comments posted for the recipe
+* @apiParam {String} [comments.id_author] Id of the author of the comment
+* @apiParam {String} [comments.name_author] Name of the author of the comment
+* @apiParam {Date} [comments.date_posted] [default : Date.now] Date when the comment was posted
+* @apiParam {Date} [comments.date_edited] Date when the comment was edited
+* @apiParam {String} [comments.content] The comment itself
+* @apiParam {Boolean} [comments.visible] [default : true] Is the comment visible by others
+* @apiParam {Object[]} [pictures] List of the pictures posted by the author for the recipe
+* @apiParam {String} [pictures.thumbnail_url] Url of the thumbnail version of the picture
+* @apiParam {String} [pictures.medium_sized_url] Url of the medium size version of the picture
 * @apiParam {String} [pictures.big_sized_url] Url of the big size version of the picture
 */
 
@@ -44,10 +74,10 @@
 * @apiSuccess {Number} [average_score] [default : 0, min : 0, max : 5] Average score voted by the users for the recipe
 * @apiSuccess {Number} [time_preparation] [default : 0, min : 0, max : 90000] Time it takes to make the recipe (in min)
 * @apiSuccess {Number} [average_price] [default : 0, min : 0, max : 3] Average cost of the recipe
-* @apiSuccess {Object[]} recipes List of the recipes needed for the recipe
-* @apiSuccess {String} recipes.id_ingredient Id of the ingredient
-* @apiSuccess {String} recipes.name_ingredient Name of the ingredient
-* @apiSuccess {Number} [recipes.amount_ingredient] [default : 0, min : 0, max : 1000000] Grams of the ingredient needed
+* @apiSuccess {Object[]} ingredients List of the ingredients needed for the recipe
+* @apiSuccess {String} ingredients.id_ingredient Id of the ingredient
+* @apiSuccess {String} ingredients.name_ingredient Name of the ingredient
+* @apiSuccess {Number} [ingredients.amount_ingredient] [default : 0, min : 0, max : 1000000] Grams of the ingredient needed
 * @apiSuccess {Object[]} [comments] List of the comments posted for the recipe
 * @apiSuccess {String} comments.id_author Id of the author of the comment
 * @apiSuccess {String} comments.name_author Name of the author of the comment
@@ -76,7 +106,7 @@
 *		"average_score" : 0,
 *		"time_preparation" : 60,
 *		"average_price" : 1,
-*		"recipes" : [{
+*		"ingredients" : [{
 *						"id_ingredient" : "689ed840d6c25173533g895",
 *						"name_ingredient" : "Pumpkin",
 *						"amount_ingredient" : 100
@@ -156,6 +186,116 @@ exports.postRecipe = function(req, res) {
 };
 
 /*
+** PUTS
+*/
+
+/**
+* @apiDefine RecipeServerAnswersPut
+*
+* @apiSuccessExample Success-Response
+*     HTTP/1.1 200 OK
+*	  {
+*		"message" : "Recipe successfully updated!"
+*	  }
+*
+* @apiError message Recipe not found.
+*
+* @apiErrorExample Invalid Parameter Value
+*	  HTTP/1.1 404 Bad Request
+*	  {
+*		"message" : "Recipe not found."
+*	  }
+*
+* @apiError message The key <key> does not exist for Recipes.
+*
+* @apiErrorExample Bad key sent
+*	  HTTP/1.1 400 Bad Request
+*	  {
+*		"message" : "The key <key> does not exist for Recipes."
+*	  }
+*
+* @apiErrorExample Bad Value Definition
+*	  HTTP/1.1 200 OK
+*	  {
+*		...
+*		mongoose custom error
+*		...
+*	  }
+*/
+
+/**
+* @api {put} /recipes/id/:id Update a Recipe by Id
+* @apiName putRecipeById
+* @apiGroup Recipes
+* @apiVersion 0.1.0
+*
+* @apiUse RecipeObjectPutParam
+*
+* @apiUse RecipeRequestJSON
+*
+* @apiUse RecipeServerAnswersPut
+*
+*/
+exports.putRecipeById = function (req, res) {
+	if (!req.params.id || Object.keys(req.body).length === 0)
+		return (res.status(400).json({message : 'The id musn\'t be null and the request must not be empty.'}));
+	Recipes.findById(req.params.id,
+		function (err, recipe) {
+			return (module.exports.updateRecipe(req, res, err, recipe));
+		});
+}
+
+/**
+* @api {put} /recipes/title/:title Update a Recipe by title
+* @apiName putRecipeByTitle
+* @apiGroup Recipes
+* @apiVersion 0.1.0
+*
+* @apiUse RecipeObjectPutParam
+*
+* @apiUse RecipeRequestJSON
+*
+* @apiSuccess message Recipe successfully updated!
+*
+* @apiUse RecipeServerAnswersPut
+*
+*/
+exports.putRecipeByTitle = function (req, res) {
+	if (!req.params.title || Object.keys(req.body).length === 0)
+		return (res.status(400).json({message : 'The title musn\'t be null and the request must not be empty.'}));
+	Recipes.findOne({
+		"title" : req.params.title
+		},
+		function (err, recipe) {
+			return (module.exports.updateRecipe(req, res, err, recipe));
+		});
+}
+
+exports.updateRecipe = function(req, res, err, recipe) {
+	var fields = ["title", "author_id", "author_name", "description", "type", "date_posted", "date_edited", "difficulty", "average_score", "average_price", "time_preparation", "comments", "pictures", "ingredients"];
+	var sent_fields = Object.keys(req.body);
+
+	if (err)
+		return (res.send(err));
+	else if (recipe === null)
+		return (res.status(404).json({message : 'Recipe not found.'}))
+
+	for (i=0; i < sent_fields.length; i++)
+	{
+		if (!(fields.indexOf(sent_fields[i]) > -1))
+			return (res.status(400).json({message : 'The key <'+sent_fields[i]+'> does not exist for Recipes.'}));
+		recipe[sent_fields[i]] = req.body[sent_fields[i]];
+	}
+
+	recipe.save(function(err) {
+		if (err)
+			return (res.send(err));
+		return (res.json({message : "Recipe successfully updated!"}));
+	});
+	return (1);
+};
+
+/*
 ** GETS
 */
 
@@ -176,7 +316,7 @@ exports.postRecipe = function(req, res) {
 *		"average_score" : 0,
 *		"time_preparation" : 60,
 *		"average_price" : 1,
-*		"recipes" : [{
+*		"ingredients" : [{
 *						"id_ingredient" : "689ed840d6c25173533g895",
 *						"name_ingredient" : "Pumpkin",
 *						"amount_ingredient" : 100

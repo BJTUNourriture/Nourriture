@@ -71,9 +71,11 @@ router.route('/recipes')
     .get(recipesController.getAllRecipes);
 
 router.route('/recipes/id/:id')
+    .put(recipesController.putRecipeById)
     .get(recipesController.getRecipeById);
 
 router.route('/recipes/title/:title')
+    .put(recipesController.putRecipeByTitle)
     .get(recipesController.getRecipeByTitle);
 
 /*
