@@ -68,14 +68,17 @@ router.route('/groups/name/:name')
 
 router.route('/recipes')
     .post(recipesController.postRecipe)
+    .delete(recipesController.deleteRecipes)
     .get(recipesController.getAllRecipes);
 
 router.route('/recipes/id/:id')
     .put(recipesController.putRecipeById)
+    .delete(recipesController.deleteRecipeById)
     .get(recipesController.getRecipeById);
 
 router.route('/recipes/title/:title')
     .put(recipesController.putRecipeByTitle)
+    .delete(recipesController.deleteRecipeByTitle)
     .get(recipesController.getRecipeByTitle);
 
 /*

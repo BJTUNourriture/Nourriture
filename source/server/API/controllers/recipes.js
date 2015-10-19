@@ -439,3 +439,123 @@ exports.getRecipeByTitle = function (req, res, flag) {
 	);
 	return (1);
 };
+
+/*
+** DELETES
+*/
+
+/**
+* @apiDefine deleteRecipeSuccess
+* @apiSuccess message Recipe succesfully deleted!
+* @apiSuccessExample Success-Response:
+*     HTTP/1.1 200 OK
+*	  {
+*		"message" : "Recipe succesfully deleted!"
+*	  }
+*/
+
+/**
+* @api {delete} /recipes/ Delete Recipes (JSON)
+* @apiName deleteIngredients
+* @apiGroup Recipes
+* @apiVersion 0.1.0
+*
+* @apiParam {Number} [id] Recipe unique ID
+* @apiParam {Sting} [title] Recipe full name
+*
+* @apiParamExample {json} Request-Example:
+*	  {
+*		"id" : "56183b64753d867e016c80d2"
+*	  }
+*
+* @apiUse deleteRecipeSuccess
+*
+* @apiError message The id was not found.
+* @apiErrorExample Invalid Parameter Value
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "The id was not found."
+*     }
+*/
+exports.deleteRecipes = function (req, res) {
+	var i = -1;
+	var callbackReturn = -1;
+	var functionPointer = [module.exports.deleteRecipeById(req, res, true),
+							module.exports.deleteRecipeByTitle(req, res, true)];
+	var usage = "No correct argument given. Specify an id or a title";
+
+	while ((callbackReturn = functionPointer[++i]) == -1
+		&& i < functionPointer.length - 1);
+	return callbackReturn == -1 ? res.json({message : usage}) : callbackReturn;
+
+};
+
+/**
+* @api {delete} /recipes/id/:id Delete Recipe by id
+* @apiName deleteRecipeById
+* @apiGroup Recipes
+* @apiVersion 0.1.0
+*
+* @apiParam {Number} id Recipe unique ID
+*
+* @apiUse deleteRecipeSuccess
+*
+* @apiError message The id was not found.
+* @apiErrorExample Invalid Parameter Value
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "The id was not found."
+*     }
+*/
+exports.deleteRecipeById = function (req, res, flag) {
+	var id = flag === true ? req.body.id : req.params.id;
+	if (!id)
+		return flag === true ? -1 : res.json(400, {message : 'The id musn\'t be null'});
+	Recipes.remove({
+		_id : id
+		},
+		function (err, removed) {
+			if (err)
+				return (res.send(err));
+			else if (removed.result.n === 0)
+				return (res.json(404, {message : 'The id was not found.'}))
+			return (res.json({message : 'Recipe succesfully deleted!'}));
+		}
+	);
+	return (1);
+};
+
+/**
+* @api {delete} /recipes/title/:title Delete Recipe by title
+* @apiName deleteRecipeByTitle
+* @apiGroup Recipes
+* @apiVersion 0.1.0
+*
+* @apiParam {String} name Recipe full name
+*
+* @apiUse deleteRecipeSuccess
+*
+* @apiError message The title was not found.
+* @apiErrorExample Invalid Parameter Value
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "The title was not found."
+*     }
+*/
+exports.deleteRecipeByTitle = function (req, res, flag) {
+	var title = flag === true ? req.body.title : req.params.title;
+	if (!title)
+		return flag === true ? -1 : res.json(400, {message : 'The title musn\'t be null'});
+	Recipes.remove({
+		title : title
+		},
+		function (err, removed) {
+			if (err)
+				return (res.send(err));
+			else if (removed.result.n === 0)
+				return (res.json(404, {message : 'The title was not found.'}))
+			return (res.json({message : 'Recipe succesfully deleted!'}));
+		}
+	);
+	return (1);
+};

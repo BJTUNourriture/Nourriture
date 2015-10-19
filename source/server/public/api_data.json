@@ -1526,6 +1526,203 @@
     }
   },
   {
+    "type": "delete",
+    "url": "/recipes/",
+    "title": "Delete Recipes (JSON)",
+    "name": "deleteIngredients",
+    "group": "Recipes",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "id",
+            "description": "<p>Recipe unique ID</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Sting</p> ",
+            "optional": true,
+            "field": "title",
+            "description": "<p>Recipe full name</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "  {\n\t\"id\" : \"56183b64753d867e016c80d2\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The id was not found.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"The id was not found.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/recipes.js",
+    "groupTitle": "Recipes",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Recipe succesfully deleted!</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n\t  {\n\t\t\"message\" : \"Recipe succesfully deleted!\"\n\t  }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "delete",
+    "url": "/recipes/id/:id",
+    "title": "Delete Recipe by id",
+    "name": "deleteRecipeById",
+    "group": "Recipes",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Recipe unique ID</p> "
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The id was not found.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"The id was not found.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/recipes.js",
+    "groupTitle": "Recipes",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Recipe succesfully deleted!</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n\t  {\n\t\t\"message\" : \"Recipe succesfully deleted!\"\n\t  }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "delete",
+    "url": "/recipes/title/:title",
+    "title": "Delete Recipe by title",
+    "name": "deleteRecipeByTitle",
+    "group": "Recipes",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Recipe full name</p> "
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The title was not found.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"The title was not found.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/recipes.js",
+    "groupTitle": "Recipes",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Recipe succesfully deleted!</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n\t  {\n\t\t\"message\" : \"Recipe succesfully deleted!\"\n\t  }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
     "type": "get",
     "url": "/recipes/",
     "title": "Request all the Recipes",
