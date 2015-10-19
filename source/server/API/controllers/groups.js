@@ -3,9 +3,9 @@
 /**
 * @apiDefine GroupObjectPostParam
 *
-* @apiParam {String} [name] Name of the group
+* @apiParam {String} name Name of the group
 * @apiParam {String} [description] Description of the group
-* @apiParam {String} [admin_id] ID of the group's owner
+* @apiParam {String} admin_id ID of the group's owner
 * @apiParam {Object[]} [tags] List of the tags of the group
 */
 
@@ -21,9 +21,10 @@
 /**
 * @apiDefine GroupObjectSuccess
 *
-* @apiSuccess {String} [name] Name of the group
+* @apiSuccess {String} _id Id of the group
+* @apiSuccess {String} name Name of the group
 * @apiSuccess {String} [description] Description of the group
-* @apiSuccess {String} [admin_id] ID of the group's owner
+* @apiSuccess {String} admin_id ID of the group's owner
 * @apiSuccess {Object[]} [tags] List of the tags of the group
 */
 
@@ -80,7 +81,7 @@ var Groups = require('../models/groups');
 *
 */
 exports.postGroup = function (req, res) {
-	//binds the new ingredient
+	//binds the new group
 	var group = new Groups({
 		name : req.body.name,
 		description : req.body.description,
@@ -88,7 +89,7 @@ exports.postGroup = function (req, res) {
 		tags : req.body.tags
 	});
 
-	//saves the ingredient to the db
+	//saves the group to the db
 	 group.save(function (err) {
         if (err)
         	return (res.status(400).send(err));
@@ -356,8 +357,8 @@ exports.getGroupByName = function (req, res, flag) {
 * @apiGroup Groups
 * @apiVersion 0.1.0
 *
-* @apiParam {Number} [id] Ingredient unique ID
-* @apiParam {Sting} [name] Ingredient full name
+* @apiParam {Number} [id] group unique ID
+* @apiParam {Sting} [name] group full name
 *
 * @apiParamExample {json} Request-Example:
 *	  {

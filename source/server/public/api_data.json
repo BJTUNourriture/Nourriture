@@ -1,6 +1,727 @@
 [
   {
     "type": "delete",
+    "url": "/groups/id/:id",
+    "title": "Delete Group by id",
+    "name": "deleteGroupById",
+    "group": "Groups",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Group unique ID</p> "
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The id was not found.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"The id was not found.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/groups.js",
+    "groupTitle": "Groups",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Group succesfully created!</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n\t  {\n\t\t\"message\" : \"Group succesfully deleted!\"\n\t  }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "delete",
+    "url": "/groups/name/:name",
+    "title": "Delete Group by name",
+    "name": "deleteGroupByName",
+    "group": "Groups",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Group full name</p> "
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The name was not found.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"The name was not found.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/groups.js",
+    "groupTitle": "Groups",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Group succesfully created!</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n\t  {\n\t\t\"message\" : \"Group succesfully deleted!\"\n\t  }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "delete",
+    "url": "/groups/",
+    "title": "Delete Groups (JSON)",
+    "name": "deleteGroups",
+    "group": "Groups",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "id",
+            "description": "<p>group unique ID</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Sting</p> ",
+            "optional": true,
+            "field": "name",
+            "description": "<p>group full name</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "  {\n\t\"id\" : \"56183b64753d867e016c80d2\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The id was not found.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"The id was not found.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/groups.js",
+    "groupTitle": "Groups",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Group succesfully created!</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n\t  {\n\t\t\"message\" : \"Group succesfully deleted!\"\n\t  }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/group/",
+    "title": "Request all Groups",
+    "name": "getAllGroups",
+    "group": "Groups",
+    "version": "0.1.0",
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>There are no existing groups.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"The are no existing groups.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/groups.js",
+    "groupTitle": "Groups",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>Id of the group</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Name of the group</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Description of the group</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "admin_id",
+            "description": "<p>ID of the group's owner</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "tags",
+            "description": "<p>List of the tags of the group</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\"_id\" : \"561830c5fecdba4f72668fe8\",\n      \"name\": \"Le gang du gras\",\n      \"description\": \"Fat for life\"\n\t\t\"admin_id\": \"561fc840d6c25173533e267f\"\n\t\t \"tags\" : [{\n\t\t\t\t\t\"name\" : \"fruit\",\n\t\t\t\t\t\"description\" : \"Don't event try\",\n\t\t\t\t\t\"flag\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"FORBIDDEN\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }]\n    }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/groups/id/:id",
+    "title": "Request Group informations by id",
+    "name": "getGroupById",
+    "group": "Groups",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Groups unique ID</p> "
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The id of the group was not found</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"The id was not found.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/groups.js",
+    "groupTitle": "Groups",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>Id of the group</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Name of the group</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Description of the group</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "admin_id",
+            "description": "<p>ID of the group's owner</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "tags",
+            "description": "<p>List of the tags of the group</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\"_id\" : \"561830c5fecdba4f72668fe8\",\n      \"name\": \"Le gang du gras\",\n      \"description\": \"Fat for life\"\n\t\t\"admin_id\": \"561fc840d6c25173533e267f\"\n\t\t \"tags\" : [{\n\t\t\t\t\t\"name\" : \"fruit\",\n\t\t\t\t\t\"description\" : \"Don't event try\",\n\t\t\t\t\t\"flag\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"FORBIDDEN\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }]\n    }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/groups/name/:name",
+    "title": "Request Group informations by name",
+    "name": "getGroupByName",
+    "group": "Groups",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Group partial or full name</p> "
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The name of the group was not found</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"The name was not found.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/groups.js",
+    "groupTitle": "Groups",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>Id of the group</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Name of the group</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Description of the group</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "admin_id",
+            "description": "<p>ID of the group's owner</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "tags",
+            "description": "<p>List of the tags of the group</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\"_id\" : \"561830c5fecdba4f72668fe8\",\n      \"name\": \"Le gang du gras\",\n      \"description\": \"Fat for life\"\n\t\t\"admin_id\": \"561fc840d6c25173533e267f\"\n\t\t \"tags\" : [{\n\t\t\t\t\t\"name\" : \"fruit\",\n\t\t\t\t\t\"description\" : \"Don't event try\",\n\t\t\t\t\t\"flag\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"FORBIDDEN\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }]\n    }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
+    "url": "/groups/",
+    "title": "Create a new Group",
+    "name": "postGroup",
+    "group": "Groups",
+    "version": "0.1.0",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Group succesfully created!</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response",
+          "content": "    HTTP/1.1 200 OK\n\t  {\n\t\t\"message\" : \"Group succesfully created!\"\n\t  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Bad Value Definition",
+          "content": "  HTTP/1.1 400 BAD REQUEST\n  {\n\t...\n\tmongoose custom error\n\t...\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/groups.js",
+    "groupTitle": "Groups",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Name of the group</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Description of the group</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "admin_id",
+            "description": "<p>ID of the group's owner</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "tags",
+            "description": "<p>List of the tags of the group</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "    {\n      \"name\": \"Le gang du gras\",\n      \"description\": \"Fat for life\"\n\t\t\"admin_id\": \"561fc840d6c25173533e267f\"\n\t\t \"tags\" : [{\n\t\t\t\t\t\"name\" : \"fruit\",\n\t\t\t\t\t\"description\" : \"Don't event try\",\n\t\t\t\t\t\"flag\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"FORBIDDEN\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }]\n    }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "put",
+    "url": "/groups/id/:id",
+    "title": "Update a group by Id",
+    "name": "putGroupById",
+    "group": "Groups",
+    "version": "0.1.0",
+    "filename": "API/controllers/groups.js",
+    "groupTitle": "Groups",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "name",
+            "description": "<p>Name of the group</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Description of the group</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "admin_id",
+            "description": "<p>ID of the group's owner</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "tags",
+            "description": "<p>List of the tags of the group</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "    {\n      \"name\": \"Le gang du gras\",\n      \"description\": \"Fat for life\"\n\t\t\"admin_id\": \"561fc840d6c25173533e267f\"\n\t\t \"tags\" : [{\n\t\t\t\t\t\"name\" : \"fruit\",\n\t\t\t\t\t\"description\" : \"Don't event try\",\n\t\t\t\t\t\"flag\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"FORBIDDEN\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }]\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response",
+          "content": "    HTTP/1.1 200 OK\n\t  {\n\t\t\"message\" : \"Group successfully updated!\"\n\t  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Group not found.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "  HTTP/1.1 404 Bad Request\n  {\n\t\"message\" : \"Group not found.\"\n  }",
+          "type": "json"
+        },
+        {
+          "title": "Bad key sent",
+          "content": "  HTTP/1.1 400 Bad Request\n  {\n\t\"message\" : \"The key <key> does not exist for Groups.\"\n  }",
+          "type": "json"
+        },
+        {
+          "title": "Bad Value Definition",
+          "content": "  HTTP/1.1 200 OK\n  {\n\t...\n\tmongoose custom error\n\t...\n  }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "put",
+    "url": "/groups/name/:name",
+    "title": "Update a group by name",
+    "name": "putGroupByName",
+    "group": "Groups",
+    "version": "0.1.0",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Group successfully updated!</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response",
+          "content": "    HTTP/1.1 200 OK\n\t  {\n\t\t\"message\" : \"Group successfully updated!\"\n\t  }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/groups.js",
+    "groupTitle": "Groups",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "name",
+            "description": "<p>Name of the group</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Description of the group</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "admin_id",
+            "description": "<p>ID of the group's owner</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "tags",
+            "description": "<p>List of the tags of the group</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "    {\n      \"name\": \"Le gang du gras\",\n      \"description\": \"Fat for life\"\n\t\t\"admin_id\": \"561fc840d6c25173533e267f\"\n\t\t \"tags\" : [{\n\t\t\t\t\t\"name\" : \"fruit\",\n\t\t\t\t\t\"description\" : \"Don't event try\",\n\t\t\t\t\t\"flag\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"FORBIDDEN\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }]\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Group not found.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "  HTTP/1.1 404 Bad Request\n  {\n\t\"message\" : \"Group not found.\"\n  }",
+          "type": "json"
+        },
+        {
+          "title": "Bad key sent",
+          "content": "  HTTP/1.1 400 Bad Request\n  {\n\t\"message\" : \"The key <key> does not exist for Groups.\"\n  }",
+          "type": "json"
+        },
+        {
+          "title": "Bad Value Definition",
+          "content": "  HTTP/1.1 200 OK\n  {\n\t...\n\tmongoose custom error\n\t...\n  }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "delete",
     "url": "/ingredients/id/:id",
     "title": "Delete Ingredient by id",
     "name": "deleteIngredientById",
