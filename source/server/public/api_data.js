@@ -1,6 +1,685 @@
 define({ "api": [
   {
     "type": "delete",
+    "url": "/allergies/",
+    "title": "Delete Allergies (JSON)",
+    "name": "deleteAllergies",
+    "group": "Allergies",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "id",
+            "description": "<p>Allergy unique ID</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Sting</p> ",
+            "optional": true,
+            "field": "name",
+            "description": "<p>Allergy full name</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "  {\n\t\"id\" : \"56183b64753d867e016c80d2\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The id was not found.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"The id was not found.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/allergies.js",
+    "groupTitle": "Allergies",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Allergy succesfully deleted!</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n\t  {\n\t\t\"message\" : \"Allergy succesfully deleted!\"\n\t  }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "delete",
+    "url": "/allergies/id/:id",
+    "title": "Delete Allergy by id",
+    "name": "deleteAllergyById",
+    "group": "Allergies",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Allergy unique ID</p> "
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The id was not found.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"The id was not found.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/allergies.js",
+    "groupTitle": "Allergies",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Allergy succesfully deleted!</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n\t  {\n\t\t\"message\" : \"Allergy succesfully deleted!\"\n\t  }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "delete",
+    "url": "/allergies/name/:name",
+    "title": "Delete Allergy by name",
+    "name": "deleteAllergyByName",
+    "group": "Allergies",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Allergy full name</p> "
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The name was not found.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"The name was not found.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/allergies.js",
+    "groupTitle": "Allergies",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Allergy succesfully deleted!</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n\t  {\n\t\t\"message\" : \"Allergy succesfully deleted!\"\n\t  }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/allergies/",
+    "title": "Request all the Allergies",
+    "name": "getAllAllergies",
+    "group": "Allergies",
+    "version": "0.1.0",
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>There are no existing allergies.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"There are no existing allergies.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/allergies.js",
+    "groupTitle": "Allergies",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>Id of the allergy</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Name of the allergy</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Description of the allergy</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "ingredients",
+            "description": "<p>List of the ingredients the allergy is based on</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    {\n      \"_id\": \"561830k5fecdba4f72668fe8\",\n      \"name\": \"Nuts\",\n      \"description\": \"All nuts\"\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\"name\": \"Peanut\",\n                  \"description\": \"Very yummy fruit.\"\n\t\t            \"fat\" : 0.3,\n\t\t            \"carbohydrates\" : 5.8,\n\t\t            \"protein\" : 1.3,\n\t                \"tags\" : [{\n\t\t\t\t\t            \"name\" : \"fruit\",\n\t\t\t\t\t            \"description\" : \"Tag concerning fruits\",\n\t\t\t\t\t            \"flag\" : {\n\t\t\t\t\t\t\t\t            \"name\" : \"SAFE\",\n\t\t\t\t\t\t\t\t            \"level\" : 0\n\t\t\t\t\t\t\t            }\n\t\t\t\t            }]\n\t\t\t\t   },]\n    }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/allergies/id/:id",
+    "title": "Request Allergy informations by id",
+    "name": "getAllergyById",
+    "group": "Allergies",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Allergies unique ID</p> "
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The id of the allergy was not found</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"The id was not found.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/allergies.js",
+    "groupTitle": "Allergies",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>Id of the allergy</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Name of the allergy</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Description of the allergy</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "ingredients",
+            "description": "<p>List of the ingredients the allergy is based on</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    {\n      \"_id\": \"561830k5fecdba4f72668fe8\",\n      \"name\": \"Nuts\",\n      \"description\": \"All nuts\"\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\"name\": \"Peanut\",\n                  \"description\": \"Very yummy fruit.\"\n\t\t            \"fat\" : 0.3,\n\t\t            \"carbohydrates\" : 5.8,\n\t\t            \"protein\" : 1.3,\n\t                \"tags\" : [{\n\t\t\t\t\t            \"name\" : \"fruit\",\n\t\t\t\t\t            \"description\" : \"Tag concerning fruits\",\n\t\t\t\t\t            \"flag\" : {\n\t\t\t\t\t\t\t\t            \"name\" : \"SAFE\",\n\t\t\t\t\t\t\t\t            \"level\" : 0\n\t\t\t\t\t\t\t            }\n\t\t\t\t            }]\n\t\t\t\t   },]\n    }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/allergies/name/:name",
+    "title": "Request Allergy informations by name",
+    "name": "getAllergyByName",
+    "group": "Allergies",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Allergy partial or full name</p> "
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The name of the allergy was not found</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"The name was not found.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/allergies.js",
+    "groupTitle": "Allergies",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>Id of the allergy</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Name of the allergy</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Description of the allergy</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "ingredients",
+            "description": "<p>List of the ingredients the allergy is based on</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    {\n      \"_id\": \"561830k5fecdba4f72668fe8\",\n      \"name\": \"Nuts\",\n      \"description\": \"All nuts\"\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\"name\": \"Peanut\",\n                  \"description\": \"Very yummy fruit.\"\n\t\t            \"fat\" : 0.3,\n\t\t            \"carbohydrates\" : 5.8,\n\t\t            \"protein\" : 1.3,\n\t                \"tags\" : [{\n\t\t\t\t\t            \"name\" : \"fruit\",\n\t\t\t\t\t            \"description\" : \"Tag concerning fruits\",\n\t\t\t\t\t            \"flag\" : {\n\t\t\t\t\t\t\t\t            \"name\" : \"SAFE\",\n\t\t\t\t\t\t\t\t            \"level\" : 0\n\t\t\t\t\t\t\t            }\n\t\t\t\t            }]\n\t\t\t\t   },]\n    }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
+    "url": "/allergies/",
+    "title": "Create a new Allergy",
+    "name": "postAllergy",
+    "group": "Allergies",
+    "version": "0.1.0",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Allergy succesfully created!</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response",
+          "content": "    HTTP/1.1 200 OK\n\t  {\n\t\t\"message\" : \"Allergy succesfully created!\"\n\t  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Bad Value Definition",
+          "content": "  HTTP/1.1 400 BAD REQUEST\n  {\n\t...\n\tmongoose custom error\n\t...\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/allergies.js",
+    "groupTitle": "Allergies",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "name",
+            "description": "<p>Name of the allergy</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Description of the allergy</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "ingredients",
+            "description": "<p>List of the ingredients the allergy is based on</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "    {\n      \"name\": \"Nuts\",\n      \"description\": \"All nuts\"\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\"name\": \"Peanut\",\n                  \"description\": \"Very yummy fruit.\"\n\t\t            \"fat\" : 0.3,\n\t\t            \"carbohydrates\" : 5.8,\n\t\t            \"protein\" : 1.3,\n\t                \"tags\" : [{\n\t\t\t\t\t            \"name\" : \"fruit\",\n\t\t\t\t\t            \"description\" : \"Tag concerning fruits\",\n\t\t\t\t\t            \"flag\" : {\n\t\t\t\t\t\t\t\t            \"name\" : \"SAFE\",\n\t\t\t\t\t\t\t\t            \"level\" : 0\n\t\t\t\t\t\t\t            }\n\t\t\t\t            }]\n\t\t\t\t   },]\n    }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "put",
+    "url": "/allergies/id/:id",
+    "title": "Update an Allergy by Id",
+    "name": "putAllergyById",
+    "group": "Allergies",
+    "version": "0.1.0",
+    "filename": "API/controllers/allergies.js",
+    "groupTitle": "Allergies",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "name",
+            "description": "<p>Name of the allergy</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Description of the allergy</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "ingredients",
+            "description": "<p>List of the ingredients the allergy is based on</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "    {\n      \"name\": \"Nuts\",\n      \"description\": \"All nuts\"\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\"name\": \"Peanut\",\n                  \"description\": \"Very yummy fruit.\"\n\t\t            \"fat\" : 0.3,\n\t\t            \"carbohydrates\" : 5.8,\n\t\t            \"protein\" : 1.3,\n\t                \"tags\" : [{\n\t\t\t\t\t            \"name\" : \"fruit\",\n\t\t\t\t\t            \"description\" : \"Tag concerning fruits\",\n\t\t\t\t\t            \"flag\" : {\n\t\t\t\t\t\t\t\t            \"name\" : \"SAFE\",\n\t\t\t\t\t\t\t\t            \"level\" : 0\n\t\t\t\t\t\t\t            }\n\t\t\t\t            }]\n\t\t\t\t   },]\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response",
+          "content": "    HTTP/1.1 200 OK\n\t  {\n\t\t\"message\" : \"Allergy successfully updated!\"\n\t  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Allergy not found.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "  HTTP/1.1 404 Bad Request\n  {\n\t\"message\" : \"Allergy not found.\"\n  }",
+          "type": "json"
+        },
+        {
+          "title": "Bad key sent",
+          "content": "  HTTP/1.1 400 Bad Request\n  {\n\t\"message\" : \"The key <key> does not exist for Allergies.\"\n  }",
+          "type": "json"
+        },
+        {
+          "title": "Bad Value Definition",
+          "content": "  HTTP/1.1 200 OK\n  {\n\t...\n\tmongoose custom error\n\t...\n  }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "put",
+    "url": "/allergies/name/:name",
+    "title": "Update an Allergy by name",
+    "name": "putAllergyByName",
+    "group": "Allergies",
+    "version": "0.1.0",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Allergy successfully updated!</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response",
+          "content": "    HTTP/1.1 200 OK\n\t  {\n\t\t\"message\" : \"Allergy successfully updated!\"\n\t  }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/allergies.js",
+    "groupTitle": "Allergies",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "name",
+            "description": "<p>Name of the allergy</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Description of the allergy</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "ingredients",
+            "description": "<p>List of the ingredients the allergy is based on</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "    {\n      \"name\": \"Nuts\",\n      \"description\": \"All nuts\"\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\"name\": \"Peanut\",\n                  \"description\": \"Very yummy fruit.\"\n\t\t            \"fat\" : 0.3,\n\t\t            \"carbohydrates\" : 5.8,\n\t\t            \"protein\" : 1.3,\n\t                \"tags\" : [{\n\t\t\t\t\t            \"name\" : \"fruit\",\n\t\t\t\t\t            \"description\" : \"Tag concerning fruits\",\n\t\t\t\t\t            \"flag\" : {\n\t\t\t\t\t\t\t\t            \"name\" : \"SAFE\",\n\t\t\t\t\t\t\t\t            \"level\" : 0\n\t\t\t\t\t\t\t            }\n\t\t\t\t            }]\n\t\t\t\t   },]\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Allergy not found.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "  HTTP/1.1 404 Bad Request\n  {\n\t\"message\" : \"Allergy not found.\"\n  }",
+          "type": "json"
+        },
+        {
+          "title": "Bad key sent",
+          "content": "  HTTP/1.1 400 Bad Request\n  {\n\t\"message\" : \"The key <key> does not exist for Allergies.\"\n  }",
+          "type": "json"
+        },
+        {
+          "title": "Bad Value Definition",
+          "content": "  HTTP/1.1 200 OK\n  {\n\t...\n\tmongoose custom error\n\t...\n  }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "delete",
     "url": "/groups/id/:id",
     "title": "Delete Group by id",
     "name": "deleteGroupById",

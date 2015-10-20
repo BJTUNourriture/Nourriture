@@ -7,6 +7,7 @@ var userController = require('../API/controllers/users');
 var ingredientsController = require('../API/controllers/ingredients');
 var groupsController = require('../API/controllers/groups');
 var recipesController = require('../API/controllers/recipes');
+var allergiesController = require('../API/controllers/allergies');
 var express = require('express');
 var router = express.Router();
 
@@ -80,6 +81,29 @@ router.route('/recipes/title/:title')
     .put(recipesController.putRecipeByTitle)
     .delete(recipesController.deleteRecipeByTitle)
     .get(recipesController.getRecipeByTitle);
+
+/*
+** Endpoints for Allergies
+*/
+/*
+// full JSON endpoints
+router.route('/allergies')
+    .post(allergiesController.postAllergy)
+    .delete(allergiesController.deleteAllergies)
+    .get(allergiesController.getAllAllergies)
+
+// endpoints by id
+router.route('/allergies/id/:id')
+    .put(allergiesController.putAllergyById)
+    .delete(allergiesController.deleteAllergyById)
+    .get(allergiesController.getAllergyById)
+
+// endpoints by name
+router.rout('/allergies/name/:name')
+    .put(allergiesController.putAllergyByName)
+    .delete(allergiesController.deleteAllergyByName)
+    .get(allergiesController.getAllergyByName)
+*/
 
 /*
 ** Endpoints for Suggestions
