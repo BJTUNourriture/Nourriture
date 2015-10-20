@@ -260,7 +260,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    {\n      \"_id\": \"561830k5fecdba4f72668fe8\",\n      \"name\": \"Nuts\",\n      \"description\": \"All nuts\"\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\"name\": \"Peanut\",\n                  \"description\": \"Very yummy fruit.\"\n\t\t            \"fat\" : 0.3,\n\t\t            \"carbohydrates\" : 5.8,\n\t\t            \"protein\" : 1.3,\n\t                \"tags\" : [{\n\t\t\t\t\t            \"name\" : \"fruit\",\n\t\t\t\t\t            \"description\" : \"Tag concerning fruits\",\n\t\t\t\t\t            \"flag\" : {\n\t\t\t\t\t\t\t\t            \"name\" : \"SAFE\",\n\t\t\t\t\t\t\t\t            \"level\" : 0\n\t\t\t\t\t\t\t            }\n\t\t\t\t            }]\n\t\t\t\t   },]\n    }",
+          "content": "    {\n      \"_id\": \"561830k5fecdba4f72668fe8\"\n      \"name\": \"Nuts\",\n      \"description\": \"All nuts\"\n\t\t\"ingredients\" : [{\n\t\t\t\t\t        \"id_ingredient\" : \"689ed300d6c22573533g895\",\n\t\t\t\t\t\t    \"name_ingredient\" : \"Peanut\"\n\t\t\t\t   \t    },\n                      {\n                          \"id_ingredient\" : \"234kf542a9g78512468a450\",\n                          \"name_ingredient\" : \"cashew nut\"\n                      }]\n    }",
           "type": "json"
         }
       ]
@@ -343,7 +343,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    {\n      \"_id\": \"561830k5fecdba4f72668fe8\",\n      \"name\": \"Nuts\",\n      \"description\": \"All nuts\"\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\"name\": \"Peanut\",\n                  \"description\": \"Very yummy fruit.\"\n\t\t            \"fat\" : 0.3,\n\t\t            \"carbohydrates\" : 5.8,\n\t\t            \"protein\" : 1.3,\n\t                \"tags\" : [{\n\t\t\t\t\t            \"name\" : \"fruit\",\n\t\t\t\t\t            \"description\" : \"Tag concerning fruits\",\n\t\t\t\t\t            \"flag\" : {\n\t\t\t\t\t\t\t\t            \"name\" : \"SAFE\",\n\t\t\t\t\t\t\t\t            \"level\" : 0\n\t\t\t\t\t\t\t            }\n\t\t\t\t            }]\n\t\t\t\t   },]\n    }",
+          "content": "    {\n      \"_id\": \"561830k5fecdba4f72668fe8\"\n      \"name\": \"Nuts\",\n      \"description\": \"All nuts\"\n\t\t\"ingredients\" : [{\n\t\t\t\t\t        \"id_ingredient\" : \"689ed300d6c22573533g895\",\n\t\t\t\t\t\t    \"name_ingredient\" : \"Peanut\"\n\t\t\t\t   \t    },\n                      {\n                          \"id_ingredient\" : \"234kf542a9g78512468a450\",\n                          \"name_ingredient\" : \"cashew nut\"\n                      }]\n    }",
           "type": "json"
         }
       ]
@@ -426,7 +426,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    {\n      \"_id\": \"561830k5fecdba4f72668fe8\",\n      \"name\": \"Nuts\",\n      \"description\": \"All nuts\"\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\"name\": \"Peanut\",\n                  \"description\": \"Very yummy fruit.\"\n\t\t            \"fat\" : 0.3,\n\t\t            \"carbohydrates\" : 5.8,\n\t\t            \"protein\" : 1.3,\n\t                \"tags\" : [{\n\t\t\t\t\t            \"name\" : \"fruit\",\n\t\t\t\t\t            \"description\" : \"Tag concerning fruits\",\n\t\t\t\t\t            \"flag\" : {\n\t\t\t\t\t\t\t\t            \"name\" : \"SAFE\",\n\t\t\t\t\t\t\t\t            \"level\" : 0\n\t\t\t\t\t\t\t            }\n\t\t\t\t            }]\n\t\t\t\t   },]\n    }",
+          "content": "    {\n      \"_id\": \"561830k5fecdba4f72668fe8\"\n      \"name\": \"Nuts\",\n      \"description\": \"All nuts\"\n\t\t\"ingredients\" : [{\n\t\t\t\t\t        \"id_ingredient\" : \"689ed300d6c22573533g895\",\n\t\t\t\t\t\t    \"name_ingredient\" : \"Peanut\"\n\t\t\t\t   \t    },\n                      {\n                          \"id_ingredient\" : \"234kf542a9g78512468a450\",\n                          \"name_ingredient\" : \"cashew nut\"\n                      }]\n    }",
           "type": "json"
         }
       ]
@@ -498,7 +498,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "    {\n      \"name\": \"Nuts\",\n      \"description\": \"All nuts\"\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\"name\": \"Peanut\",\n                  \"description\": \"Very yummy fruit.\"\n\t\t            \"fat\" : 0.3,\n\t\t            \"carbohydrates\" : 5.8,\n\t\t            \"protein\" : 1.3,\n\t                \"tags\" : [{\n\t\t\t\t\t            \"name\" : \"fruit\",\n\t\t\t\t\t            \"description\" : \"Tag concerning fruits\",\n\t\t\t\t\t            \"flag\" : {\n\t\t\t\t\t\t\t\t            \"name\" : \"SAFE\",\n\t\t\t\t\t\t\t\t            \"level\" : 0\n\t\t\t\t\t\t\t            }\n\t\t\t\t            }]\n\t\t\t\t   },]\n    }",
+          "content": "    {\n      \"name\": \"Nuts\",\n      \"description\": \"All nuts\"\n\t\t\"ingredients\" : [{\n\t\t\t\t\t        \"id_ingredient\" : \"689ed300d6c22573533g895\",\n\t\t\t\t\t\t    \"name_ingredient\" : \"Peanut\"\n\t\t\t\t   \t    },\n                      {\n                          \"id_ingredient\" : \"234kf542a9g78512468a450\",\n                          \"name_ingredient\" : \"cashew nut\"\n                      }]\n    }",
           "type": "json"
         }
       ]
@@ -542,7 +542,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "    {\n      \"name\": \"Nuts\",\n      \"description\": \"All nuts\"\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\"name\": \"Peanut\",\n                  \"description\": \"Very yummy fruit.\"\n\t\t            \"fat\" : 0.3,\n\t\t            \"carbohydrates\" : 5.8,\n\t\t            \"protein\" : 1.3,\n\t                \"tags\" : [{\n\t\t\t\t\t            \"name\" : \"fruit\",\n\t\t\t\t\t            \"description\" : \"Tag concerning fruits\",\n\t\t\t\t\t            \"flag\" : {\n\t\t\t\t\t\t\t\t            \"name\" : \"SAFE\",\n\t\t\t\t\t\t\t\t            \"level\" : 0\n\t\t\t\t\t\t\t            }\n\t\t\t\t            }]\n\t\t\t\t   },]\n    }",
+          "content": "    {\n      \"name\": \"Nuts\",\n      \"description\": \"All nuts\"\n\t\t\"ingredients\" : [{\n\t\t\t\t\t        \"id_ingredient\" : \"689ed300d6c22573533g895\",\n\t\t\t\t\t\t    \"name_ingredient\" : \"Peanut\"\n\t\t\t\t   \t    },\n                      {\n                          \"id_ingredient\" : \"234kf542a9g78512468a450\",\n                          \"name_ingredient\" : \"cashew nut\"\n                      }]\n    }",
           "type": "json"
         }
       ]
@@ -643,7 +643,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "    {\n      \"name\": \"Nuts\",\n      \"description\": \"All nuts\"\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\"name\": \"Peanut\",\n                  \"description\": \"Very yummy fruit.\"\n\t\t            \"fat\" : 0.3,\n\t\t            \"carbohydrates\" : 5.8,\n\t\t            \"protein\" : 1.3,\n\t                \"tags\" : [{\n\t\t\t\t\t            \"name\" : \"fruit\",\n\t\t\t\t\t            \"description\" : \"Tag concerning fruits\",\n\t\t\t\t\t            \"flag\" : {\n\t\t\t\t\t\t\t\t            \"name\" : \"SAFE\",\n\t\t\t\t\t\t\t\t            \"level\" : 0\n\t\t\t\t\t\t\t            }\n\t\t\t\t            }]\n\t\t\t\t   },]\n    }",
+          "content": "    {\n      \"name\": \"Nuts\",\n      \"description\": \"All nuts\"\n\t\t\"ingredients\" : [{\n\t\t\t\t\t        \"id_ingredient\" : \"689ed300d6c22573533g895\",\n\t\t\t\t\t\t    \"name_ingredient\" : \"Peanut\"\n\t\t\t\t   \t    },\n                      {\n                          \"id_ingredient\" : \"234kf542a9g78512468a450\",\n                          \"name_ingredient\" : \"cashew nut\"\n                      }]\n    }",
           "type": "json"
         }
       ]

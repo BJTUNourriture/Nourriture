@@ -33,20 +33,13 @@
 *       "name": "Nuts",
 *       "description": "All nuts"
 *		"ingredients" : [{
-*					"name": "Peanut",
-*                   "description": "Very yummy fruit."
-*		            "fat" : 0.3,
-*		            "carbohydrates" : 5.8,
-*		            "protein" : 1.3,
-*	                "tags" : [{
-*					            "name" : "fruit",
-*					            "description" : "Tag concerning fruits",
-*					            "flag" : {
-*								            "name" : "SAFE",
-*								            "level" : 0
-*							            }
-*				            }]
-*				   },]
+*					        "id_ingredient" : "689ed300d6c22573533g895",
+*						    "name_ingredient" : "Peanut"
+*				   	    },
+*                       {
+*                           "id_ingredient" : "234kf542a9g78512468a450",
+*                           "name_ingredient" : "cashew nut"
+*                       }]
 *     }
 */
 
@@ -219,24 +212,17 @@ exports.updateAllergy = function(req, res, err, allergy) {
 *
 * @apiSuccessExample Success-Response:
 *     {
-*       "_id": "561830k5fecdba4f72668fe8",
+*       "_id": "561830k5fecdba4f72668fe8"
 *       "name": "Nuts",
 *       "description": "All nuts"
 *		"ingredients" : [{
-*					"name": "Peanut",
-*                   "description": "Very yummy fruit."
-*		            "fat" : 0.3,
-*		            "carbohydrates" : 5.8,
-*		            "protein" : 1.3,
-*	                "tags" : [{
-*					            "name" : "fruit",
-*					            "description" : "Tag concerning fruits",
-*					            "flag" : {
-*								            "name" : "SAFE",
-*								            "level" : 0
-*							            }
-*				            }]
-*				   },]
+*					        "id_ingredient" : "689ed300d6c22573533g895",
+*						    "name_ingredient" : "Peanut"
+*				   	    },
+*                       {
+*                           "id_ingredient" : "234kf542a9g78512468a450",
+*                           "name_ingredient" : "cashew nut"
+*                       }]
 *     }
 */
 
