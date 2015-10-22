@@ -7,6 +7,9 @@
 * @apiParam {String} author_id Id of the author of the recipe
 * @apiParam {String} author_name Name of the author of the recipe
 * @apiParam {String} [description] Description of the recipe
+* @apiParam {Object[]} [type] Type of the recipe
+* @apiParam {String} type.id_type Id of the type
+* @apiParam {String} type.name Name of the type
 * @apiParam {Date} [date_posted] [default : Date.now] Date when the recipe was posted
 * @apiParam {Date} [date_edited] Date when the recipe was edited
 * @apiParam {Number} [difficulty] [default : 0, min : 0, max : 3] Difficulty set for the recipe
@@ -37,6 +40,9 @@
 * @apiParam {String} [author_id] Id of the author of the recipe
 * @apiParam {String} [author_name] Name of the author of the recipe
 * @apiParam {String} [description] Description of the recipe
+* @apiParam {Object[]} [type] Type of the recipe
+* @apiParam {String} type.id_type Id of the type
+* @apiParam {String} type.name Name of the type
 * @apiParam {Date} [date_posted] [default : Date.now] Date when the recipe was posted
 * @apiParam {Date} [date_edited] Date when the recipe was edited
 * @apiParam {Number} [difficulty] [default : 0, min : 0, max : 3] Difficulty set for the recipe
@@ -68,6 +74,9 @@
 * @apiSuccess {String} author_id Id of the author of the recipe
 * @apiSuccess {String} author_name Name of the author of the recipe
 * @apiSuccess {String} [description] Description of the recipe
+* @apiSuccess {Object[]} [type] Type of the recipe
+* @apiSuccess {String} type.id_type Id of the type
+* @apiSuccess {String} type.name Name of the type
 * @apiSuccess {Date} [date_posted] [default : Date.now] Date when the recipe was posted
 * @apiSuccess {Date} [date_edited] Date when the recipe was edited
 * @apiSuccess {Number} [difficulty] [default : 0, min : 0, max : 3] Difficulty set for the recipe
@@ -100,6 +109,10 @@
 *       "author_id": "561fc840d6c25173533e267f",
 *       "author_name": "Kek man",
 *       "description" : "It's Halloween time!",
+*		"type" : {
+*				"id_type" : "689ed840d6c25173533g895",
+*				"name" : "pie"
+*		},
 *		"date_posted" : "2015-03-31T22:00:00.000Z",
 *		"date_edited" : "2015-04-01T18:34:23.000Z",
 *		"difficulty" : 1,
@@ -310,6 +323,10 @@ exports.updateRecipe = function(req, res, err, recipe) {
 *       "author_id": "561fc840d6c25173533e267f",
 *       "author_name": "Kek man",
 *       "description" : "It's Halloween time!",
+*		"type" : {
+*				"id_type" : "689ed840d6c25173533g895",
+*				"name" : "pie"
+*		},
 *		"date_posted" : "2015-03-31T22:00:00.000Z",
 *		"date_edited" : "2015-04-01T18:34:23.000Z",
 *		"difficulty" : 1,

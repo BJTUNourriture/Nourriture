@@ -2469,6 +2469,27 @@ define({ "api": [
           },
           {
             "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "type",
+            "description": "<p>Type of the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "type.id_type",
+            "description": "<p>Id of the type</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "type.name",
+            "description": "<p>Name of the type</p> "
+          },
+          {
+            "group": "Success 200",
             "type": "<p>Date</p> ",
             "optional": true,
             "field": "date_posted",
@@ -2619,7 +2640,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\"_id\" : \"281fc840d6c25173533er546\"\n      \"title\": \"Pumpkin pie\",\n      \"author_id\": \"561fc840d6c25173533e267f\",\n      \"author_name\": \"Kek man\",\n      \"description\" : \"It's Halloween time!\",\n\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\"difficulty\" : 1,\n\t\t\"average_score\" : 0,\n\t\t\"time_preparation\" : 60,\n\t\t\"average_price\" : 1,\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\t\"id_ingredient\" : \"689ed840d6c25173533g895\",\n\t\t\t\t\t\t\"name_ingredient\" : \"Pumpkin\",\n\t\t\t\t\t\t\"amount_ingredient\" : 100\n\t\t\t\t   \t}],\n\t\t\"comments\" : [{\n\t\t\t\t\t\t\"id_author\" : \"386fc840d6c25173533e546h\",\n\t\t\t\t\t\t\"name_author\" : \"Pacza\",\n\t\t\t\t\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\t\t\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\t\t\t\t\"content\" : \"Thank you! Very nice recipe!\",\n\t\t\t\t\t\t\"visible\" : true\n\t\t\t\t   \t}],\n\t\t\"pictures\" : [{\n\t\t\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t\t\t   \t}]\n    }",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\"_id\" : \"281fc840d6c25173533er546\"\n      \"title\": \"Pumpkin pie\",\n      \"author_id\": \"561fc840d6c25173533e267f\",\n      \"author_name\": \"Kek man\",\n      \"description\" : \"It's Halloween time!\",\n\t\t\"type\" : {\n\t\t\t\t\"id_type\" : \"689ed840d6c25173533g895\",\n\t\t\t\t\"name\" : \"pie\"\n\t\t},\n\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\"difficulty\" : 1,\n\t\t\"average_score\" : 0,\n\t\t\"time_preparation\" : 60,\n\t\t\"average_price\" : 1,\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\t\"id_ingredient\" : \"689ed840d6c25173533g895\",\n\t\t\t\t\t\t\"name_ingredient\" : \"Pumpkin\",\n\t\t\t\t\t\t\"amount_ingredient\" : 100\n\t\t\t\t   \t}],\n\t\t\"comments\" : [{\n\t\t\t\t\t\t\"id_author\" : \"386fc840d6c25173533e546h\",\n\t\t\t\t\t\t\"name_author\" : \"Pacza\",\n\t\t\t\t\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\t\t\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\t\t\t\t\"content\" : \"Thank you! Very nice recipe!\",\n\t\t\t\t\t\t\"visible\" : true\n\t\t\t\t   \t}],\n\t\t\"pictures\" : [{\n\t\t\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t\t\t   \t}]\n    }",
           "type": "json"
         }
       ]
@@ -2706,6 +2727,27 @@ define({ "api": [
           },
           {
             "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "type",
+            "description": "<p>Type of the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "type.id_type",
+            "description": "<p>Id of the type</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "type.name",
+            "description": "<p>Name of the type</p> "
+          },
+          {
+            "group": "Success 200",
             "type": "<p>Date</p> ",
             "optional": true,
             "field": "date_posted",
@@ -2856,7 +2898,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\"_id\" : \"281fc840d6c25173533er546\"\n      \"title\": \"Pumpkin pie\",\n      \"author_id\": \"561fc840d6c25173533e267f\",\n      \"author_name\": \"Kek man\",\n      \"description\" : \"It's Halloween time!\",\n\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\"difficulty\" : 1,\n\t\t\"average_score\" : 0,\n\t\t\"time_preparation\" : 60,\n\t\t\"average_price\" : 1,\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\t\"id_ingredient\" : \"689ed840d6c25173533g895\",\n\t\t\t\t\t\t\"name_ingredient\" : \"Pumpkin\",\n\t\t\t\t\t\t\"amount_ingredient\" : 100\n\t\t\t\t   \t}],\n\t\t\"comments\" : [{\n\t\t\t\t\t\t\"id_author\" : \"386fc840d6c25173533e546h\",\n\t\t\t\t\t\t\"name_author\" : \"Pacza\",\n\t\t\t\t\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\t\t\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\t\t\t\t\"content\" : \"Thank you! Very nice recipe!\",\n\t\t\t\t\t\t\"visible\" : true\n\t\t\t\t   \t}],\n\t\t\"pictures\" : [{\n\t\t\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t\t\t   \t}]\n    }",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\"_id\" : \"281fc840d6c25173533er546\"\n      \"title\": \"Pumpkin pie\",\n      \"author_id\": \"561fc840d6c25173533e267f\",\n      \"author_name\": \"Kek man\",\n      \"description\" : \"It's Halloween time!\",\n\t\t\"type\" : {\n\t\t\t\t\"id_type\" : \"689ed840d6c25173533g895\",\n\t\t\t\t\"name\" : \"pie\"\n\t\t},\n\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\"difficulty\" : 1,\n\t\t\"average_score\" : 0,\n\t\t\"time_preparation\" : 60,\n\t\t\"average_price\" : 1,\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\t\"id_ingredient\" : \"689ed840d6c25173533g895\",\n\t\t\t\t\t\t\"name_ingredient\" : \"Pumpkin\",\n\t\t\t\t\t\t\"amount_ingredient\" : 100\n\t\t\t\t   \t}],\n\t\t\"comments\" : [{\n\t\t\t\t\t\t\"id_author\" : \"386fc840d6c25173533e546h\",\n\t\t\t\t\t\t\"name_author\" : \"Pacza\",\n\t\t\t\t\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\t\t\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\t\t\t\t\"content\" : \"Thank you! Very nice recipe!\",\n\t\t\t\t\t\t\"visible\" : true\n\t\t\t\t   \t}],\n\t\t\"pictures\" : [{\n\t\t\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t\t\t   \t}]\n    }",
           "type": "json"
         }
       ]
@@ -2943,6 +2985,27 @@ define({ "api": [
           },
           {
             "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "type",
+            "description": "<p>Type of the recipe</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "type.id_type",
+            "description": "<p>Id of the type</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "type.name",
+            "description": "<p>Name of the type</p> "
+          },
+          {
+            "group": "Success 200",
             "type": "<p>Date</p> ",
             "optional": true,
             "field": "date_posted",
@@ -3093,7 +3156,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\"_id\" : \"281fc840d6c25173533er546\"\n      \"title\": \"Pumpkin pie\",\n      \"author_id\": \"561fc840d6c25173533e267f\",\n      \"author_name\": \"Kek man\",\n      \"description\" : \"It's Halloween time!\",\n\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\"difficulty\" : 1,\n\t\t\"average_score\" : 0,\n\t\t\"time_preparation\" : 60,\n\t\t\"average_price\" : 1,\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\t\"id_ingredient\" : \"689ed840d6c25173533g895\",\n\t\t\t\t\t\t\"name_ingredient\" : \"Pumpkin\",\n\t\t\t\t\t\t\"amount_ingredient\" : 100\n\t\t\t\t   \t}],\n\t\t\"comments\" : [{\n\t\t\t\t\t\t\"id_author\" : \"386fc840d6c25173533e546h\",\n\t\t\t\t\t\t\"name_author\" : \"Pacza\",\n\t\t\t\t\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\t\t\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\t\t\t\t\"content\" : \"Thank you! Very nice recipe!\",\n\t\t\t\t\t\t\"visible\" : true\n\t\t\t\t   \t}],\n\t\t\"pictures\" : [{\n\t\t\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t\t\t   \t}]\n    }",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\"_id\" : \"281fc840d6c25173533er546\"\n      \"title\": \"Pumpkin pie\",\n      \"author_id\": \"561fc840d6c25173533e267f\",\n      \"author_name\": \"Kek man\",\n      \"description\" : \"It's Halloween time!\",\n\t\t\"type\" : {\n\t\t\t\t\"id_type\" : \"689ed840d6c25173533g895\",\n\t\t\t\t\"name\" : \"pie\"\n\t\t},\n\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\"difficulty\" : 1,\n\t\t\"average_score\" : 0,\n\t\t\"time_preparation\" : 60,\n\t\t\"average_price\" : 1,\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\t\"id_ingredient\" : \"689ed840d6c25173533g895\",\n\t\t\t\t\t\t\"name_ingredient\" : \"Pumpkin\",\n\t\t\t\t\t\t\"amount_ingredient\" : 100\n\t\t\t\t   \t}],\n\t\t\"comments\" : [{\n\t\t\t\t\t\t\"id_author\" : \"386fc840d6c25173533e546h\",\n\t\t\t\t\t\t\"name_author\" : \"Pacza\",\n\t\t\t\t\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\t\t\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\t\t\t\t\"content\" : \"Thank you! Very nice recipe!\",\n\t\t\t\t\t\t\"visible\" : true\n\t\t\t\t   \t}],\n\t\t\"pictures\" : [{\n\t\t\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t\t\t   \t}]\n    }",
           "type": "json"
         }
       ]
@@ -3169,6 +3232,27 @@ define({ "api": [
           },
           {
             "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "type",
+            "description": "<p>Type of the recipe</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "type.id_type",
+            "description": "<p>Id of the type</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "type.name",
+            "description": "<p>Name of the type</p> "
+          },
+          {
+            "group": "Parameter",
             "type": "<p>Date</p> ",
             "optional": true,
             "field": "date_posted",
@@ -3319,7 +3403,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "    {\n      \"title\": \"Pumpkin pie\",\n      \"author_id\": \"561fc840d6c25173533e267f\",\n      \"author_name\": \"Kek man\",\n      \"description\" : \"It's Halloween time!\",\n\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\"difficulty\" : 1,\n\t\t\"average_score\" : 0,\n\t\t\"time_preparation\" : 60,\n\t\t\"average_price\" : 1,\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\t\"id_ingredient\" : \"689ed840d6c25173533g895\",\n\t\t\t\t\t\t\"name_ingredient\" : \"Pumpkin\",\n\t\t\t\t\t\t\"amount_ingredient\" : 100\n\t\t\t\t   \t}],\n\t\t\"comments\" : [{\n\t\t\t\t\t\t\"id_author\" : \"386fc840d6c25173533e546h\",\n\t\t\t\t\t\t\"name_author\" : \"Pacza\",\n\t\t\t\t\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\t\t\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\t\t\t\t\"content\" : \"Thank you! Very nice recipe!\",\n\t\t\t\t\t\t\"visible\" : true\n\t\t\t\t   \t}],\n\t\t\"pictures\" : [{\n\t\t\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t\t\t   \t}]\n    }",
+          "content": "    {\n      \"title\": \"Pumpkin pie\",\n      \"author_id\": \"561fc840d6c25173533e267f\",\n      \"author_name\": \"Kek man\",\n      \"description\" : \"It's Halloween time!\",\n\t\t\"type\" : {\n\t\t\t\t\"id_type\" : \"689ed840d6c25173533g895\",\n\t\t\t\t\"name\" : \"pie\"\n\t\t},\n\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\"difficulty\" : 1,\n\t\t\"average_score\" : 0,\n\t\t\"time_preparation\" : 60,\n\t\t\"average_price\" : 1,\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\t\"id_ingredient\" : \"689ed840d6c25173533g895\",\n\t\t\t\t\t\t\"name_ingredient\" : \"Pumpkin\",\n\t\t\t\t\t\t\"amount_ingredient\" : 100\n\t\t\t\t   \t}],\n\t\t\"comments\" : [{\n\t\t\t\t\t\t\"id_author\" : \"386fc840d6c25173533e546h\",\n\t\t\t\t\t\t\"name_author\" : \"Pacza\",\n\t\t\t\t\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\t\t\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\t\t\t\t\"content\" : \"Thank you! Very nice recipe!\",\n\t\t\t\t\t\t\"visible\" : true\n\t\t\t\t   \t}],\n\t\t\"pictures\" : [{\n\t\t\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t\t\t   \t}]\n    }",
           "type": "json"
         }
       ]
@@ -3367,6 +3451,27 @@ define({ "api": [
           },
           {
             "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "type",
+            "description": "<p>Type of the recipe</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "type.id_type",
+            "description": "<p>Id of the type</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "type.name",
+            "description": "<p>Name of the type</p> "
+          },
+          {
+            "group": "Parameter",
             "type": "<p>Date</p> ",
             "optional": true,
             "field": "date_posted",
@@ -3517,7 +3622,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "    {\n      \"title\": \"Pumpkin pie\",\n      \"author_id\": \"561fc840d6c25173533e267f\",\n      \"author_name\": \"Kek man\",\n      \"description\" : \"It's Halloween time!\",\n\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\"difficulty\" : 1,\n\t\t\"average_score\" : 0,\n\t\t\"time_preparation\" : 60,\n\t\t\"average_price\" : 1,\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\t\"id_ingredient\" : \"689ed840d6c25173533g895\",\n\t\t\t\t\t\t\"name_ingredient\" : \"Pumpkin\",\n\t\t\t\t\t\t\"amount_ingredient\" : 100\n\t\t\t\t   \t}],\n\t\t\"comments\" : [{\n\t\t\t\t\t\t\"id_author\" : \"386fc840d6c25173533e546h\",\n\t\t\t\t\t\t\"name_author\" : \"Pacza\",\n\t\t\t\t\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\t\t\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\t\t\t\t\"content\" : \"Thank you! Very nice recipe!\",\n\t\t\t\t\t\t\"visible\" : true\n\t\t\t\t   \t}],\n\t\t\"pictures\" : [{\n\t\t\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t\t\t   \t}]\n    }",
+          "content": "    {\n      \"title\": \"Pumpkin pie\",\n      \"author_id\": \"561fc840d6c25173533e267f\",\n      \"author_name\": \"Kek man\",\n      \"description\" : \"It's Halloween time!\",\n\t\t\"type\" : {\n\t\t\t\t\"id_type\" : \"689ed840d6c25173533g895\",\n\t\t\t\t\"name\" : \"pie\"\n\t\t},\n\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\"difficulty\" : 1,\n\t\t\"average_score\" : 0,\n\t\t\"time_preparation\" : 60,\n\t\t\"average_price\" : 1,\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\t\"id_ingredient\" : \"689ed840d6c25173533g895\",\n\t\t\t\t\t\t\"name_ingredient\" : \"Pumpkin\",\n\t\t\t\t\t\t\"amount_ingredient\" : 100\n\t\t\t\t   \t}],\n\t\t\"comments\" : [{\n\t\t\t\t\t\t\"id_author\" : \"386fc840d6c25173533e546h\",\n\t\t\t\t\t\t\"name_author\" : \"Pacza\",\n\t\t\t\t\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\t\t\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\t\t\t\t\"content\" : \"Thank you! Very nice recipe!\",\n\t\t\t\t\t\t\"visible\" : true\n\t\t\t\t   \t}],\n\t\t\"pictures\" : [{\n\t\t\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t\t\t   \t}]\n    }",
           "type": "json"
         }
       ]
@@ -3622,6 +3727,27 @@ define({ "api": [
           },
           {
             "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "type",
+            "description": "<p>Type of the recipe</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "type.id_type",
+            "description": "<p>Id of the type</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "type.name",
+            "description": "<p>Name of the type</p> "
+          },
+          {
+            "group": "Parameter",
             "type": "<p>Date</p> ",
             "optional": true,
             "field": "date_posted",
@@ -3772,7 +3898,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "    {\n      \"title\": \"Pumpkin pie\",\n      \"author_id\": \"561fc840d6c25173533e267f\",\n      \"author_name\": \"Kek man\",\n      \"description\" : \"It's Halloween time!\",\n\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\"difficulty\" : 1,\n\t\t\"average_score\" : 0,\n\t\t\"time_preparation\" : 60,\n\t\t\"average_price\" : 1,\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\t\"id_ingredient\" : \"689ed840d6c25173533g895\",\n\t\t\t\t\t\t\"name_ingredient\" : \"Pumpkin\",\n\t\t\t\t\t\t\"amount_ingredient\" : 100\n\t\t\t\t   \t}],\n\t\t\"comments\" : [{\n\t\t\t\t\t\t\"id_author\" : \"386fc840d6c25173533e546h\",\n\t\t\t\t\t\t\"name_author\" : \"Pacza\",\n\t\t\t\t\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\t\t\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\t\t\t\t\"content\" : \"Thank you! Very nice recipe!\",\n\t\t\t\t\t\t\"visible\" : true\n\t\t\t\t   \t}],\n\t\t\"pictures\" : [{\n\t\t\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t\t\t   \t}]\n    }",
+          "content": "    {\n      \"title\": \"Pumpkin pie\",\n      \"author_id\": \"561fc840d6c25173533e267f\",\n      \"author_name\": \"Kek man\",\n      \"description\" : \"It's Halloween time!\",\n\t\t\"type\" : {\n\t\t\t\t\"id_type\" : \"689ed840d6c25173533g895\",\n\t\t\t\t\"name\" : \"pie\"\n\t\t},\n\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\"difficulty\" : 1,\n\t\t\"average_score\" : 0,\n\t\t\"time_preparation\" : 60,\n\t\t\"average_price\" : 1,\n\t\t\"ingredients\" : [{\n\t\t\t\t\t\t\"id_ingredient\" : \"689ed840d6c25173533g895\",\n\t\t\t\t\t\t\"name_ingredient\" : \"Pumpkin\",\n\t\t\t\t\t\t\"amount_ingredient\" : 100\n\t\t\t\t   \t}],\n\t\t\"comments\" : [{\n\t\t\t\t\t\t\"id_author\" : \"386fc840d6c25173533e546h\",\n\t\t\t\t\t\t\"name_author\" : \"Pacza\",\n\t\t\t\t\t\t\"date_posted\" : \"2015-03-31T22:00:00.000Z\",\n\t\t\t\t\t\t\"date_edited\" : \"2015-04-01T18:34:23.000Z\",\n\t\t\t\t\t\t\"content\" : \"Thank you! Very nice recipe!\",\n\t\t\t\t\t\t\"visible\" : true\n\t\t\t\t   \t}],\n\t\t\"pictures\" : [{\n\t\t\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t\t\t   \t}]\n    }",
           "type": "json"
         }
       ]
