@@ -14,8 +14,14 @@ var router = express.Router();
 
 /* Endpoints for User */
 router.route('/users')
-    .post(userController.postUsers)
     .get(userController.getUsers);
+
+router.route('/users/register')
+    .post(userController.postUser);
+
+router.route('/users/sign-in')
+    .post(userController.signinUser);
+
 // add for oAuth
 //   .get(authController.isAuthenticated, userController.getUsers);
 

@@ -9,7 +9,7 @@ var User = require('../../API/models/users');
 var Client = require('../models/client');
 var Token = require('../models/token');
 
-passport.use(new BasicStrategy(
+passport.use('basic', new BasicStrategy(
     function (username, password, callback) {
         User.findOne({username: username}, function (err, user) {
             if (err) {
@@ -31,7 +31,6 @@ passport.use(new BasicStrategy(
                 if (!isMatch) {
                     return callback(null, false);
                 }
-
                 // Success
                 return callback(null, user);
             });

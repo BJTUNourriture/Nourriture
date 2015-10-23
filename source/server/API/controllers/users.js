@@ -43,7 +43,7 @@ var User = require('../models/users');
 //var Create_token = require('../../oauth/misc/create_token_at_init_user');
 
 
-exports.postUsers = function (req, res) {
+exports.postUser = function (req, res) {
 
     var user = new User({
         email: req.body.email,
@@ -61,9 +61,18 @@ exports.postUsers = function (req, res) {
         }
         return (res.json({message: 'User succesfully created!'}));
     });
-
-    //Create_token(user, res);
 };
+
+exports.signinUser = function(req, res, next) {
+    passport.authenticate('basic', function(err, user, info) {
+        if (err)
+            return (next(err));
+        if (!user)
+            return (res.status(401).json({message : "Verify the username and password provided."}));
+        var token = jwt.sign(user, secret, {expiresInMinutes: 60 * 5});
+        return (res.json({key : token}));
+    })(req, res, next);
+}
 
 /*
 ** GET
