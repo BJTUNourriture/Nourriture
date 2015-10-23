@@ -12,13 +12,15 @@
 * @apiDefine SearchRequestJSON
 *
 * @apiParamExample {json} Request-Example:
-*     {
-*       "name": "Toma",
-*	"order": [{ "field": "fat",
-*		     "order": "desc" }],
-*	"metadata": [{ "items": "4",
-*			"page": "2"}]
-*     }
+*{
+*    "name": "fu",
+*    "order": {"order": "desc",
+*              "field": "fat"
+*    },
+*    "metadata": {"items": 1,
+*                  "page": 1
+*    }
+*}
 */
 
 var Ingredients = require('../models/ingredients');
@@ -64,46 +66,58 @@ var Ingredients = require('../models/ingredients');
 
 exports.postSearchIngredients = function (req, res, flag) {
 	var name =  req.body.name;
-	var order = req.body.order;
+	var order = req.body.order
 	var order_order = req.body.order.order;
 	var order_field = req.body.order.field;
-	var items_number = req.body.metadata.items;
-	var items_page = req.body.metadata.page;
 	var query = {};
 	query[order_field] = order_order;
-	if (!name)
-		return flag === true ? -1 : res.json(400, {message : 'The name musn\'t be null'})
+	var items_number = req.body.metadata.items;
+	var items_page = req.body.metadata.page;
+	var tag_list = req.body.tags;
+
+	//If name and tags are not set
+
+	if (!name && !tag_list)
+		return flag === true ? -1 : res.json(400, {message : 'You must at least set a name or a tag to search'})
+
 	if (!items_number || !items_page)
 		return flag === true ? -1 : res.json(400, {message : 'You must set the metadata'})
-	if (!order)
-		Ingredients.find({
-			"name": { "$regex": name, "$options": "i" } 
-			},
-			function (err, docs) {
-				if (err)
-					return (res.send(err));
-				else if (docs.length <= 0)
-					return (res.json(404, {message : 'Nothing find for this search'}))
-				return (res.json(docs));
-			} 
-	).skip((items_page - 1) * items_number).limit(items_number);
-	if (order)
-		if (order_order == 'desc')
-			order_order = -1
-		else
-			order_order = 1
-		if (!order_field)
-			return flag === true ? -1 : res.json(400, {message : 'The order field must be set'})
-		Ingredients.find({
-			"name": { "$regex": name, "$options": "i" }
-			},
-			function (err, docs) {
-				if (err)
-					return (res.send(err));
-				else if (docs.length <= 0)
-					return (res.json(404, {message : 'Nothing find for this search'}))
-				return (res.json(docs));
-			}
-	).skip((items_page - 1) * items_number).sort(query).limit(items_number);
+
+	//If name, tags and order are set
+
+	if (name && tag_list)
+		if (!order)
+			Ingredients.find({
+				"name": { "$regex": name, "$options": "i" },
+				"tags.name": { $all: tag_list}
+				},
+				function (err, docs) {
+					if (err)
+						return (res.send(err));
+					else if (docs.length <= 0)
+						return (res.json(404, {message : 'Nothing find for this search'}))
+					return (res.json(docs));
+				} 
+		).skip((items_page - 1) * items_number).limit(items_number);
+		if (order)
+			if (order_order == 'desc')
+				order_order = -1
+			else
+				order_order = 1
+			if (!order_field)
+				return flag === true ? -1 : res.json(400, {message : 'The order field must be set'})
+			Ingredients.find({
+				"name": { "$regex": name, "$options": "i" },
+				"tags.name": { $all: tag_list}
+				},
+				function (err, docs) {
+					if (err)
+						return (res.send(err));
+					else if (docs.length <= 0)
+						return (res.json(404, {message : 'Nothing find for this search'}))
+					return (res.json(docs));
+				}
+		).skip((items_page - 1) * items_number).sort(query).limit(items_number);	
+
 	return (1);
 };

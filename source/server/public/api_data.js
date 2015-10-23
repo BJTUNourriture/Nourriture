@@ -3980,7 +3980,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "    {\n      \"name\": \"Toma\",\n\t\"order\": [{ \"field\": \"fat\",\n\t\t     \"order\": \"desc\" }],\n\t\"metadata\": [{ \"items\": \"4\",\n\t\t\t\"page\": \"2\"}]\n    }",
+          "content": "{\n   \"name\": \"fu\",\n   \"order\": {\"order\": \"desc\",\n             \"field\": \"fat\"\n   },\n   \"metadata\": {\"items\": 1,\n                 \"page\": 1\n   }\n}",
           "type": "json"
         }
       ]
