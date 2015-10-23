@@ -16,6 +16,15 @@ var routes = require('./routes/index');
 
 var app = express();
 
+var verifyJwt = expressJwt({
+  secret: '18B63D7DDDD8C614227C8F31D8A25DEB92F249C391267DF9A28A5ACC00458837',
+  getToken: function fromHeaderOrQuerystring (req) {
+    if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Topkek')
+        return req.headers.authorization.split(' ')[1];
+    return null;
+  }
+});
+
 /* Init const var */
 PORT = "8101";
 HOSTNAME = "127.0.0.1";
@@ -41,7 +50,6 @@ app.use(session({
     saveUninitialized: true,
     resave: true
 }));
-
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1:27017/nourriture');
@@ -166,6 +174,5 @@ app.use(function (err, req, res, next) {
         error: {}
     });
 });
-
 
 module.exports = app;

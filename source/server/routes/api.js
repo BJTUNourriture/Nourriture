@@ -13,22 +13,18 @@ var jwt    = require('jsonwebtoken')
 var passport = require('passport');
 var searchController = require('../API/controllers/search');
 var express = require('express');
+var expressJwt = require('express-jwt');
 var router = express.Router();
 
-/* Endpoints for connect with Social Network */
-router.route('/auth/google')
-    .get(passport.authenticate('google', {
-            scope: ['https://www.googleapis.com/auth/plus.login',
-                , 'https://www.googleapis.com/auth/plus.profile.emails.read']
-        }
-    ));
-
-router.route('/auth/google/callback')
-    .get(passport.authenticate('google', {
-        successRedirect: 'http://127.0.0.1:8101/',
-        failureRedirect: 'api/auth/google/failure'
-    }));
-
+//verify the jwt
+var verifyJwt = expressJwt({
+  secret: '18B63D7DDDD8C614227C8F31D8A25DEB92F249C391267DF9A28A5ACC00458837',
+  getToken: function fromHeaderOrQuerystring (req) {
+    if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Topkek')
+        return req.headers.authorization.split(' ')[1];
+    return null;
+  }
+});
 
 /* Endpoints for User */
 
@@ -47,7 +43,6 @@ router.route('/users/register')
 // add for oAuth
 //   .get(authController.isAuthenticated, userController.getUsers);
 
-
 /*
  ** Endpoints for Ingredients
  */
@@ -55,7 +50,7 @@ router.route('/users/register')
 router.route('/ingredients')
     .post(ingredientsController.postIngredient)
     .delete(ingredientsController.deleteIngredients)
-    .get(ingredientsController.getAllIngredients);
+    .get(verifyJwt, ingredientsController.getAllIngredients);
 
 //endpoints by id
 router.route('/ingredients/id/:id')

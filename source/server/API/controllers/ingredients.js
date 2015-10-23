@@ -263,7 +263,7 @@ exports.updateIngredient = function(req, res, err, ingredient) {
 *     }
 */
 
-exports.getAllIngredients = function(req, res) {
+exports.getAllIngredients = function(req, res, next) {
 	Ingredients.find({},
 		function(err, docs) {
 			if (err)
