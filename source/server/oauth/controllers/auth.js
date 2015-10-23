@@ -9,9 +9,10 @@ var User = require('../../API/models/users');
 var Client = require('../models/client');
 var Token = require('../models/token');
 
-passport.use('basic', new BasicStrategy(
+passport.use('basic-nourriture', new BasicStrategy(
     function (username, password, callback) {
-        User.findOne({username: username}, function (err, user) {
+        console.log(req);
+        User.findOne({username: req.body.username}, function (err, user) {
             if (err) {
                 return callback(err);
             }
@@ -20,16 +21,14 @@ passport.use('basic', new BasicStrategy(
             if (!user) {
                 return callback(null, false);
             }
-
             // Make sure the password is correct
-            user.verifyPassword(password, function (err, isMatch) {
+            user.verifyPassword(req.body.password, function (err, isMatch) {
                 if (err) {
                     return callback(err);
                 }
-
                 // Password did not match
                 if (!isMatch) {
-                    return callback(null, false);
+                    return callback(null, isMatch);
                 }
                 // Success
                 return callback(null, user);
@@ -109,5 +108,5 @@ passport.deserializeUser(function(user, done) {
 });
 
 exports.isClientAuthenticated = passport.authenticate('client-basic', {session: false});
-exports.isAuthenticated = passport.authenticate(['basic', 'bearer'], { session : false });
+exports.isAuthenticated = passport.authenticate(['basic', 'bearer', 'basic-nourriture'], { session : false });
 //exports.isAuthenticated = [];

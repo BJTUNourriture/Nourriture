@@ -64,14 +64,24 @@ exports.postUser = function (req, res) {
 };
 
 exports.signinUser = function(req, res, next) {
-    passport.authenticate('basic', function(err, user, info) {
+    if (!req.body.username)
+        return (res.status(401).json({message : "Username field must not be empty"}));
+    if (!req.body.password)
+        return (res.status(401).json({message : "Password field must not be empty"}));
+    User.findOne({username: req.body.username}, function (err, user) {
         if (err)
-            return (next(err));
+            return (res.status(400).send(err));
         if (!user)
-            return (res.status(401).json({message : "Verify the username and password provided."}));
-        var token = jwt.sign(user, secret, {expiresInMinutes: 60 * 5});
-        return (res.json({key : token}));
-    })(req, res, next);
+            return (res.status(401).json({message : "Please verify the username provided."}));
+        user.verifyPassword(req.body.password, function (err, isMatch) {
+            if (err)
+                return (res.status(400).send(err));
+            if (!isMatch)
+                return (res.status(401).json({message : "Please verify the password provided."}));
+            var token = jwt.sign(user, req.app.get("jwtSecret"), {expiresIn: 3600 * 5});
+            return (res.json({key : token}));
+        });
+    });
 }
 
 /*
