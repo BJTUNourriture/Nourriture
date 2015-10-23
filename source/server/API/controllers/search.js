@@ -14,7 +14,7 @@
 * @apiParamExample {json} Request-Example:
 *     {
 *       "name": "Toma",
-*	"order": [{ "field": "calories",
+*	"order": [{ "field": "fat",
 *		     "order": "desc" }],
 *	"metadata": [{ "items": "4",
 *			"page": "2"}]
@@ -35,6 +35,29 @@
 * 
 * @apiUse SearchRequestJSON
 *
-* @apiSuccess message Search succesfully return!
+* @apiSuccessExample Success-Response
+*     HTTP/1.1 200 OK
+*	  {
+*		"metadata": [{"current_page": "2",
+*			      "total_page": "24",
+*			       "order": {"field": "fat",
+*					 "order": "desc"},
+*				"name": "Tom"}],
+*		"Ingredients": [{"_id" : "561830c5fecdba4f72668fe8",
+*      				"name": "Tomato",
+*      				"description": "Very yummy fruit."
+*				"fat" : 0.3,
+*				"carbohydrates" : 5.8,
+*				"protein" : 1.3,
+*				"tags" : [{
+*					"name" : "fruit",
+*					"description" : "Tag concerning fruits",
+*					"flag" : {
+*								"name" : "SAFE",
+*								"level" : 0
+*							 }
+*				   }]
+*	  }
+*
 *
 */

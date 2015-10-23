@@ -3941,16 +3941,13 @@ define({ "api": [
     "group": "Search",
     "version": "0.1.0",
     "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "optional": false,
-            "field": "message",
-            "description": "<p>Search succesfully return!</p> "
-          }
-        ]
-      }
+      "examples": [
+        {
+          "title": "Success-Response",
+          "content": "    HTTP/1.1 200 OK\n\t  {\n\t\t\"metadata\": [{\"current_page\": \"2\",\n\t\t\t      \"total_page\": \"24\",\n\t\t\t       \"order\": {\"field\": \"fat\",\n\t\t\t\t\t \"order\": \"desc\"},\n\t\t\t\t\"name\": \"Tom\"}],\n\t\t\"Ingredients\": [{\"_id\" : \"561830c5fecdba4f72668fe8\",\n     \t\t\t\t\"name\": \"Tomato\",\n     \t\t\t\t\"description\": \"Very yummy fruit.\"\n\t\t\t\t\"fat\" : 0.3,\n\t\t\t\t\"carbohydrates\" : 5.8,\n\t\t\t\t\"protein\" : 1.3,\n\t\t\t\t\"tags\" : [{\n\t\t\t\t\t\"name\" : \"fruit\",\n\t\t\t\t\t\"description\" : \"Tag concerning fruits\",\n\t\t\t\t\t\"flag\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"SAFE\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }]\n\t  }",
+          "type": "json"
+        }
+      ]
     },
     "filename": "API/controllers/search.js",
     "groupTitle": "Search",
@@ -3983,7 +3980,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "    {\n      \"name\": \"Toma\",\n\t\"order\": [{ \"field\": \"calories\",\n\t\t     \"order\": \"desc\" }],\n\t\"metadata\": [{ \"items\": \"4\",\n\t\t\t\"page\": \"2\"}]\n    }",
+          "content": "    {\n      \"name\": \"Toma\",\n\t\"order\": [{ \"field\": \"fat\",\n\t\t     \"order\": \"desc\" }],\n\t\"metadata\": [{ \"items\": \"4\",\n\t\t\t\"page\": \"2\"}]\n    }",
           "type": "json"
         }
       ]
