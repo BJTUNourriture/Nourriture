@@ -2,6 +2,9 @@
  * Created by sylflo on 9/28/15.
  */
 
+var jwt = require('jsonwebtoken');
+var passport = require('passport');
+
  // API/controllers/users.js
 
  /**
@@ -90,3 +93,4 @@ exports.getUsers = function (req, res) {
         res.json(users);
     });
 };
+
