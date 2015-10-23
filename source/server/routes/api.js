@@ -5,6 +5,7 @@
 var authController = require('../oauth/controllers/auth');
 var userController = require('../API/controllers/users');
 var ingredientsController = require('../API/controllers/ingredients');
+var typesController = require('../API/controllers/types');
 var groupsController = require('../API/controllers/groups');
 var recipesController = require('../API/controllers/recipes');
 var allergiesController = require('../API/controllers/allergies');
@@ -46,7 +47,27 @@ router.route('/ingredients/id/:id')
 //endpoints by name
 router.route('/ingredients/name/:name')
     .delete(ingredientsController.deleteIngredientByName)
+    .put(ingredientsController.putIngredientByName)
     .get(ingredientsController.getIngredientsByName);
+
+/*
+ ** Endpoints for Types
+ */
+//full JSON endpoints
+router.route('/types')
+    .post(typesController.postType)
+    .delete(typesController.deleteTypes)
+    .get(typesController.getAllTypes);
+
+//endpoints by id
+router.route('/types/id/:id')
+    .delete(typesController.deleteTypeById)
+    .get(typesController.getTypeById);
+
+//endpoints by name
+router.route('/types/name/:name')
+    .delete(typesController.deleteTypeByName)
+    .get(typesController.getTypesByName);
 
 /*
  ** Endpoints for Groups
@@ -66,6 +87,7 @@ router.route('/groups/id/:id')
 //endpoints by name
 router.route('/groups/name/:name')
     .delete(groupsController.deleteGroupByName)
+    .put(groupsController.putGroupByName)
     .get(groupsController.getGroupByName);
 
 
