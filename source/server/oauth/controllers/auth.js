@@ -11,6 +11,7 @@ var Token = require('../models/token');
 
 /*
 passport.use('basic-nourriture', new BasicStrategy(
+>>>>>>> e4631d9f7310d8c77f2bd62c7e1886ce1a6f2b21
     function (username, password, callback) {
         console.log(req);
         User.findOne({username: req.body.username}, function (err, user) {
@@ -31,6 +32,8 @@ passport.use('basic-nourriture', new BasicStrategy(
                 if (!isMatch) {
                     return callback(null, isMatch);
                 }
+
+                console.log("This is working !!!!!!!!!!!!1");
                 // Success
                 return callback(null, user);
             });
@@ -89,7 +92,7 @@ passport.use(new BearerStrategy(
 passport.use(new GoogleStrategy({
         clientID:     '229011235874-iimjsj4ch55a5n67itije3pfq12ueuh2.apps.googleusercontent.com',
         clientSecret: 'H45chsqoalyiVAMe3CaPiCTb',
-        callbackURL: "http://127.0.0.1:8101/auth/google/callback",
+        callbackURL: "http://127.0.0.1:8101/api/auth/google/callback",
         passReqToCallback   : true
     },
     function(request, accessToken, refreshToken, profile, done) {

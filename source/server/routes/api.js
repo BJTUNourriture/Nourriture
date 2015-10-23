@@ -9,6 +9,7 @@ var typesController = require('../API/controllers/types');
 var groupsController = require('../API/controllers/groups');
 var recipesController = require('../API/controllers/recipes');
 var allergiesController = require('../API/controllers/allergies');
+var passport = require('passport');
 var searchController = require('../API/controllers/search');
 var express = require('express');
 var expressJwt = require('express-jwt');
@@ -26,7 +27,7 @@ var verifyJwt = expressJwt({
 
 /* Endpoints for User */
 router.route('/users')
-    .get(userController.getUsers);
+    .get(authController.isAuthenticated, userController.getUsers);
 
 router.route('/users/register')
     .post(userController.postUser);
@@ -36,8 +37,6 @@ router.route('/users/sign-in')
 
 // add for oAuth
 //   .get(authController.isAuthenticated, userController.getUsers);
-
-module.exports = router;
 
 /*
  ** Endpoints for Ingredients
