@@ -92,7 +92,7 @@ passport.use(new GoogleStrategy({
     },
     function(request, accessToken, refreshToken, profile, done) {
 
-        User.findOrCreate({email : profile.email, google : {id : profile.id, displayName : profile.displayName}}, function (err, user) {
+        User.findOrCreate({username : profile.email, email : profile.email, google : {id : profile.id, displayName : profile.displayName}}, function (err, user) {
             return done(err, user);
         });
     }

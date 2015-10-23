@@ -42,7 +42,6 @@ var passport = require('passport');
 var User = require('../models/users');
 //var Create_token = require('../../oauth/misc/create_token_at_init_user');
 
-
 exports.postUser = function (req, res) {
 
     var user = new User({
