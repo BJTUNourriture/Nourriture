@@ -19,6 +19,9 @@ var app = express();
 PORT = "8101";
 HOSTNAME = "127.0.0.1";
 
+//jwt secret key set
+app.set('jwtSecret', '18B63D7DDDD8C614227C8F31D8A25DEB92F249C391267DF9A28A5ACC00458837');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

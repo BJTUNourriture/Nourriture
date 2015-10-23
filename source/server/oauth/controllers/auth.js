@@ -9,9 +9,12 @@ var User = require('../../API/models/users');
 var Client = require('../models/client');
 var Token = require('../models/token');
 
-passport.use(new BasicStrategy(
+/*
+passport.use('basic-nourriture', new BasicStrategy(
+>>>>>>> e4631d9f7310d8c77f2bd62c7e1886ce1a6f2b21
     function (username, password, callback) {
-        User.findOne({username: username}, function (err, user) {
+        console.log(req);
+        User.findOne({username: req.body.username}, function (err, user) {
             if (err) {
                 return callback(err);
             }
@@ -20,16 +23,14 @@ passport.use(new BasicStrategy(
             if (!user) {
                 return callback(null, false);
             }
-
             // Make sure the password is correct
-            user.verifyPassword(password, function (err, isMatch) {
+            user.verifyPassword(req.body.password, function (err, isMatch) {
                 if (err) {
                     return callback(err);
                 }
-
                 // Password did not match
                 if (!isMatch) {
-                    return callback(null, false);
+                    return callback(null, isMatch);
                 }
 
                 console.log("This is working !!!!!!!!!!!!1");
@@ -39,6 +40,7 @@ passport.use(new BasicStrategy(
         });
     }
 ));
+*/
 
 passport.use('client-basic', new BasicStrategy(
     function (username, password, callback) {
@@ -95,7 +97,7 @@ passport.use(new GoogleStrategy({
     },
     function(request, accessToken, refreshToken, profile, done) {
 
-        User.findOrCreate({email : profile.email, google : {id : profile.id, displayName : profile.displayName}}, function (err, user) {
+        User.findOrCreate({username : profile.email, email : profile.email, google : {id : profile.id, displayName : profile.displayName}}, function (err, user) {
             return done(err, user);
         });
     }

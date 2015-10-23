@@ -5,9 +5,9 @@
 var jwt = require('jsonwebtoken');
 var passport = require('passport');
 
- // API/controllers/users.js
+// API/controllers/users.js
 
- /**
+/**
  * @apiDefine UserObjectPostParam
  *
  * @apiParam {String} username Name of the user
@@ -20,7 +20,7 @@ var passport = require('passport');
  * @apiParam {String[]} [group]
  * @apiParam {String} [calories]
  */
- /**
+/**
  * @apiDefine UserRequestJSON
  *
  * @apiParamExample {json} Request-Example:
@@ -42,7 +42,6 @@ var passport = require('passport');
 var User = require('../models/users');
 //var Create_token = require('../../oauth/misc/create_token_at_init_user');
 
-
 exports.postUser = function (req, res) {
 
     var user = new User({
@@ -63,36 +62,46 @@ exports.postUser = function (req, res) {
     });
 };
 
-exports.signinUser = function(req, res, next) {
-
-    passport.authenticate('basic', function(err, user, info) {
+exports.signinUser = function (req, res, next) {
+    if (!req.body.username)
+        return (res.status(401).json({message: "Username field must not be empty"}));
+    if (!req.body.password)
+        return (res.status(401).json({message: "Password field must not be empty"}));
+    User.findOne({username: req.body.username}, function (err, user) {
         if (err)
-            return (next(err));
+            return (res.status(400).send(err));
         if (!user)
-            return (res.status(401).json({message : "Verify the username and password provided."}));
-        var token = jwt.sign(user, secret, {expiresInMinutes: 60 * 5});
-        return (res.json({key : token}));
-    })(req, res, next);
+            return (res.status(401).json({message: "Please verify the username provided."}));
+        user.verifyPassword(req.body.password, function (err, isMatch) {
+            if (err)
+                return (res.status(400).send(err));
+            if (!isMatch)
+                return (res.status(401).json({message: "Please verify the password provided."}));
+            var token = jwt.sign(user, req.app.get("jwtSecret"), {expiresIn: 3600 * 5});
+            return (res.json({key: token}));
+        });
+    });
 };
 
+
 /*
-** GET
-*/
+ ** GET
+ */
 
 /**
-* @api {get} /users/ Retrive all Users
-* @apiName postUser
-* @apiGroup Users
-* @apiVersion 0.1.0
-*
-* @apiUse UserObjectPostParam
-*
-* @apiUse UserRequestJSON
-*
-* @apiSuccess message Recipe succesfully created!
-*
-*
-*/
+ * @api {get} /users/ Retrive all Users
+ * @apiName postUser
+ * @apiGroup Users
+ * @apiVersion 0.1.0
+ *
+ * @apiUse UserObjectPostParam
+ *
+ * @apiUse UserRequestJSON
+ *
+ * @apiSuccess message Recipe succesfully created!
+ *
+ *
+ */
 
 exports.getUsers = function (req, res) {
 
