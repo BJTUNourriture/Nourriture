@@ -8,13 +8,28 @@ var ingredientsController = require('../API/controllers/ingredients');
 var groupsController = require('../API/controllers/groups');
 var recipesController = require('../API/controllers/recipes');
 var allergiesController = require('../API/controllers/allergies');
+var passport = require('passport');
 var express = require('express');
 var router = express.Router();
+
+/* Endpoints for connect with Social Network */
+router.route('/auth/google')
+    .get(passport.authenticate('google', {
+            scope: ['https://www.googleapis.com/auth/plus.login',
+                , 'https://www.googleapis.com/auth/plus.profile.emails.read']
+        }
+    ));
+
+router.route('/auth/google/callback')
+    .get(passport.authenticate('google', {
+        successRedirect: 'http://127.0.0.1:8101/',
+        failureRedirect: 'api/auth/google/failure'
+    }));
 
 
 /* Endpoints for User */
 router.route('/users')
-    .get(userController.getUsers);
+    .get(authController.isAuthenticated, userController.getUsers);
 
 router.route('/users/register')
     .post(userController.postUser);
@@ -24,8 +39,6 @@ router.route('/users/sign-in')
 
 // add for oAuth
 //   .get(authController.isAuthenticated, userController.getUsers);
-
-module.exports = router;
 
 
 /*

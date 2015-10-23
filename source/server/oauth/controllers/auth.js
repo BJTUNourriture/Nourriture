@@ -9,7 +9,7 @@ var User = require('../../API/models/users');
 var Client = require('../models/client');
 var Token = require('../models/token');
 
-passport.use('basic', new BasicStrategy(
+passport.use(new BasicStrategy(
     function (username, password, callback) {
         User.findOne({username: username}, function (err, user) {
             if (err) {
@@ -31,6 +31,8 @@ passport.use('basic', new BasicStrategy(
                 if (!isMatch) {
                     return callback(null, false);
                 }
+
+                console.log("This is working !!!!!!!!!!!!1");
                 // Success
                 return callback(null, user);
             });
@@ -88,7 +90,7 @@ passport.use(new BearerStrategy(
 passport.use(new GoogleStrategy({
         clientID:     '229011235874-iimjsj4ch55a5n67itije3pfq12ueuh2.apps.googleusercontent.com',
         clientSecret: 'H45chsqoalyiVAMe3CaPiCTb',
-        callbackURL: "http://127.0.0.1:8101/auth/google/callback",
+        callbackURL: "http://127.0.0.1:8101/api/auth/google/callback",
         passReqToCallback   : true
     },
     function(request, accessToken, refreshToken, profile, done) {

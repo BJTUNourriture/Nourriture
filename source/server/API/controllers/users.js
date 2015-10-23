@@ -64,6 +64,7 @@ exports.postUser = function (req, res) {
 };
 
 exports.signinUser = function(req, res, next) {
+
     passport.authenticate('basic', function(err, user, info) {
         if (err)
             return (next(err));
@@ -72,7 +73,7 @@ exports.signinUser = function(req, res, next) {
         var token = jwt.sign(user, secret, {expiresInMinutes: 60 * 5});
         return (res.json({key : token}));
     })(req, res, next);
-}
+};
 
 /*
 ** GET
