@@ -11,8 +11,18 @@ var recipesController = require('../API/controllers/recipes');
 var allergiesController = require('../API/controllers/allergies');
 var searchController = require('../API/controllers/search');
 var express = require('express');
+var expressJwt = require('express-jwt');
 var router = express.Router();
 
+//verify the jwt
+var verifyJwt = expressJwt({
+  secret: '18B63D7DDDD8C614227C8F31D8A25DEB92F249C391267DF9A28A5ACC00458837',
+  getToken: function fromHeaderOrQuerystring (req) {
+    if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Topkek')
+        return req.headers.authorization.split(' ')[1];
+    return null;
+  }
+});
 
 /* Endpoints for User */
 router.route('/users')
@@ -29,7 +39,6 @@ router.route('/users/sign-in')
 
 module.exports = router;
 
-
 /*
  ** Endpoints for Ingredients
  */
@@ -37,7 +46,7 @@ module.exports = router;
 router.route('/ingredients')
     .post(ingredientsController.postIngredient)
     .delete(ingredientsController.deleteIngredients)
-    .get(ingredientsController.getAllIngredients);
+    .get(verifyJwt, ingredientsController.getAllIngredients);
 
 //endpoints by id
 router.route('/ingredients/id/:id')
