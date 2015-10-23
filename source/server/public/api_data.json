@@ -3957,7 +3957,7 @@
           {
             "group": "Parameter",
             "type": "<p>String</p> ",
-            "optional": true,
+            "optional": false,
             "field": "name",
             "description": "<p>Name of the ingredient (Regex)</p> "
           },
@@ -3971,7 +3971,7 @@
           {
             "group": "Parameter",
             "type": "<p>Object[]</p> ",
-            "optional": true,
+            "optional": false,
             "field": "metadata",
             "description": "<p>Number of items to return, page of the items</p> "
           }

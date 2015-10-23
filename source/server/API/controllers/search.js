@@ -3,9 +3,9 @@
 /**
 * @apiDefine SearchObjectPostParam
 *
-* @apiParam {String} [name] Name of the ingredient (Regex)
+* @apiParam {String} name Name of the ingredient (Regex)
 * @apiParam {Object[]} [order] Order of the return of the search
-* @apiParam {Object[]} [metadata] Number of items to return, page of the items
+* @apiParam {Object[]} metadata Number of items to return, page of the items
 */
 
 /**
