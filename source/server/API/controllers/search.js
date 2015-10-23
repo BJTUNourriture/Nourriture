@@ -21,6 +21,8 @@
 *     }
 */
 
+var Ingredients = require('../models/ingredients');
+
 /*
 ** POSTS
 */
@@ -58,6 +60,44 @@
 *							 }
 *				   }]
 *	  }
-*
-*
 */
+
+exports.postSearchIngredients = function (req, res, flag) {
+	var name =  req.body.name;
+	var order = req.body.order;
+	var order_order = req.body.order.order;
+	var order_field = req.body.order.field;
+	var query = {};
+	query[order_field] = order_order;
+	if (!name)
+		return flag === true ? -1 : res.json(400, {message : 'The name musn\'t be null'})
+	if (!order)
+		Ingredients.find({
+			"name": { "$regex": name, "$options": "i" } 
+			},
+			function (err, docs) {
+				if (err)
+					return (res.send(err));
+				else if (docs.length <= 0)
+					return (res.json(404, {message : 'Nothing find for this search'}))
+				return (res.json(docs));
+			} 
+	);
+	if (order)
+		if (order_order == 'desc')
+			order_order = -1
+		else
+			order_order = 1
+		Ingredients.find({
+			"name": { "$regex": name, "$options": "i" }
+			},
+			function (err, docs) {
+				if (err)
+					return (res.send(err));
+				else if (docs.length <= 0)
+					return (res.json(404, {message : 'Nothing find for this search'}))
+				return (res.json(docs));
+			}
+	).sort(query);
+	return (1);
+};

@@ -139,8 +139,8 @@ router.rout('/allergies/name/:name')
 */
 
 
-//router.route('/suggestions')
-//   .get(suggestionsController.getSuggestions);
+router.route('/search/ingredients/')
+   .post(searchController.postSearchIngredients);
 
 
 /*
