@@ -3934,6 +3934,62 @@
     }
   },
   {
+    "type": "post",
+    "url": "/search/ingredients/",
+    "title": "Search some Ingredients",
+    "name": "postSearch",
+    "group": "Search",
+    "version": "0.1.0",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Search succesfully return!</p> "
+          }
+        ]
+      }
+    },
+    "filename": "API/controllers/search.js",
+    "groupTitle": "Search",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "name",
+            "description": "<p>Name of the ingredient (Regex)</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "order",
+            "description": "<p>Order of the return of the search</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "metadata",
+            "description": "<p>Number of items to return, page of the items</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "    {\n      \"name\": \"Toma\",\n\t\"order\": [{ \"field\": \"calories\",\n\t\t     \"order\": \"desc\" }],\n\t\"metadata\": [{ \"items\": \"4\",\n\t\t\t\"page\": \"2\"}]\n    }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
     "type": "delete",
     "url": "/types/id/:id",
     "title": "Delete Type by id",

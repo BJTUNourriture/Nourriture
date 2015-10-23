@@ -9,6 +9,7 @@ var typesController = require('../API/controllers/types');
 var groupsController = require('../API/controllers/groups');
 var recipesController = require('../API/controllers/recipes');
 var allergiesController = require('../API/controllers/allergies');
+var searchController = require('../API/controllers/search');
 var express = require('express');
 var router = express.Router();
 
@@ -132,6 +133,15 @@ router.rout('/allergies/name/:name')
     .delete(allergiesController.deleteAllergyByName)
     .get(allergiesController.getAllergyByName)
 */
+
+/*
+** Endpoints for Search
+*/
+
+
+//router.route('/suggestions')
+//   .get(suggestionsController.getSuggestions);
+
 
 /*
 ** Endpoints for Suggestions
