@@ -12,9 +12,17 @@ var jwt = require('jsonwebtoken');
 var oauth = require('./routes/oauth');
 var api = require('./routes/api');
 var routes = require('./routes/index');
-//var social_network = require('./routes/social_network');
 
 var app = express();
+
+var verifyJwt = expressJwt({
+  secret: '18B63D7DDDD8C614227C8F31D8A25DEB92F249C391267DF9A28A5ACC00458837',
+  getToken: function fromHeaderOrQuerystring (req) {
+    if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Topkek')
+        return req.headers.authorization.split(' ')[1];
+    return null;
+  }
+});
 
 /* Init const var */
 PORT = "8101";
@@ -42,7 +50,6 @@ app.use(session({
     resave: true
 }));
 
-
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1:27017/nourriture');
 
@@ -62,18 +69,39 @@ app.use('/', routes);
 /*app.use('/users', users);*/
 
 
-app.get('/auth/google',
+
+/*app.get('/auth/google',
     passport.authenticate('google', {
             scope: ['https://www.googleapis.com/auth/plus.login',
                 , 'https://www.googleapis.com/auth/plus.profile.emails.read']
         }
-    ));
+    ));*/
+/*
 
 app.get('/auth/google/callback',
     passport.authenticate('google', {
-        successRedirect: 'http://127.0.0.1:8102/',
+        successRedirect: 'http://127.0.0.1:8101/',
         failureRedirect: '/auth/google/failure'
     }));
+*/
+
+app.post('/login', function(req, res, next) {
+    passport.authenticate('basic', function(err, user, info) {
+        if (err) { return next(err) }
+        if (!user) {
+            return res.status(401).json("error");
+        }
+        else {
+            console.log(user);
+            return res.json("success");
+        }
+
+        /*//user has authenticated correctly thus we create a JWT token
+        var token = jwt.encode({ username: 'somedata'}, tokenSecret);
+        res.json({ token : token });*/
+
+    })(req, res, next);
+});
 
 var router = express.Router();
 
@@ -150,6 +178,5 @@ app.use(function (err, req, res, next) {
         error: {}
     });
 });
-
 
 module.exports = app;
