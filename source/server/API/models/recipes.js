@@ -16,7 +16,16 @@ var recipesSchema = new mongoose.Schema({
 		required : true
 	},
 	description : String,
-	type : String,
+	type : {
+		id_type : {
+			type : String,
+			required : true
+		},
+		name : {
+			type : String,
+			required : true,
+		}
+	},
 	date_posted : {
 		type : Date,
 		default : Date.now

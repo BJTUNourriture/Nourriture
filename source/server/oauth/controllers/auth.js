@@ -9,6 +9,7 @@ var User = require('../../API/models/users');
 var Client = require('../models/client');
 var Token = require('../models/token');
 
+/*
 passport.use('basic-nourriture', new BasicStrategy(
     function (username, password, callback) {
         console.log(req);
@@ -36,6 +37,7 @@ passport.use('basic-nourriture', new BasicStrategy(
         });
     }
 ));
+*/
 
 passport.use('client-basic', new BasicStrategy(
     function (username, password, callback) {
@@ -108,5 +110,5 @@ passport.deserializeUser(function(user, done) {
 });
 
 exports.isClientAuthenticated = passport.authenticate('client-basic', {session: false});
-exports.isAuthenticated = passport.authenticate(['basic', 'bearer', 'basic-nourriture'], { session : false });
+exports.isAuthenticated = passport.authenticate(['basic', 'bearer'], { session : false });
 //exports.isAuthenticated = [];
