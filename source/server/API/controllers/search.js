@@ -67,10 +67,14 @@ exports.postSearchIngredients = function (req, res, flag) {
 	var order = req.body.order;
 	var order_order = req.body.order.order;
 	var order_field = req.body.order.field;
+	var items_number = req.body.metadata.items;
+	var items_page = req.body.metadata.page;
 	var query = {};
 	query[order_field] = order_order;
 	if (!name)
 		return flag === true ? -1 : res.json(400, {message : 'The name musn\'t be null'})
+	if (!items_number || !items_page)
+		return flag === true ? -1 : res.json(400, {message : 'You must set the metadata'})
 	if (!order)
 		Ingredients.find({
 			"name": { "$regex": name, "$options": "i" } 
@@ -82,12 +86,14 @@ exports.postSearchIngredients = function (req, res, flag) {
 					return (res.json(404, {message : 'Nothing find for this search'}))
 				return (res.json(docs));
 			} 
-	);
+	).skip((items_page - 1) * items_number).limit(items_number);
 	if (order)
 		if (order_order == 'desc')
 			order_order = -1
 		else
 			order_order = 1
+		if (!order_field)
+			return flag === true ? -1 : res.json(400, {message : 'The order field must be set'})
 		Ingredients.find({
 			"name": { "$regex": name, "$options": "i" }
 			},
@@ -98,6 +104,6 @@ exports.postSearchIngredients = function (req, res, flag) {
 					return (res.json(404, {message : 'Nothing find for this search'}))
 				return (res.json(docs));
 			}
-	).sort(query);
+	).skip((items_page - 1) * items_number).sort(query).limit(items_number);
 	return (1);
 };
