@@ -9,6 +9,7 @@ var typesController = require('../API/controllers/types');
 var groupsController = require('../API/controllers/groups');
 var recipesController = require('../API/controllers/recipes');
 var allergiesController = require('../API/controllers/allergies');
+var jwt    = require('jsonwebtoken')
 var passport = require('passport');
 var searchController = require('../API/controllers/search');
 var express = require('express');
@@ -30,14 +31,18 @@ router.route('/auth/google/callback')
 
 
 /* Endpoints for User */
+
+router.route('/users/sign-in')
+    .post(userController.signinUser);
+
 router.route('/users')
-    .get(authController.isAuthenticated, userController.getUsers);
+    .get(/*authController.isAuthenticated,*/ userController.getUsers);
 
 router.route('/users/register')
     .post(userController.postUser);
 
-router.route('/users/sign-in')
-    .post(userController.signinUser);
+
+
 
 // add for oAuth
 //   .get(authController.isAuthenticated, userController.getUsers);
@@ -106,8 +111,8 @@ router.route('/groups/name/:name')
 
 
 /*
-** Endpoints for Recipes
-*/
+ ** Endpoints for Recipes
+ */
 
 router.route('/recipes')
     .post(recipesController.postRecipe)
@@ -125,31 +130,31 @@ router.route('/recipes/title/:title')
     .get(recipesController.getRecipeByTitle);
 
 /*
-** Endpoints for Allergies
-*/
+ ** Endpoints for Allergies
+ */
 /*
-// full JSON endpoints
-router.route('/allergies')
-    .post(allergiesController.postAllergy)
-    .delete(allergiesController.deleteAllergies)
-    .get(allergiesController.getAllAllergies)
+ // full JSON endpoints
+ router.route('/allergies')
+ .post(allergiesController.postAllergy)
+ .delete(allergiesController.deleteAllergies)
+ .get(allergiesController.getAllAllergies)
 
-// endpoints by id
-router.route('/allergies/id/:id')
-    .put(allergiesController.putAllergyById)
-    .delete(allergiesController.deleteAllergyById)
-    .get(allergiesController.getAllergyById)
+ // endpoints by id
+ router.route('/allergies/id/:id')
+ .put(allergiesController.putAllergyById)
+ .delete(allergiesController.deleteAllergyById)
+ .get(allergiesController.getAllergyById)
 
-// endpoints by name
-router.rout('/allergies/name/:name')
-    .put(allergiesController.putAllergyByName)
-    .delete(allergiesController.deleteAllergyByName)
-    .get(allergiesController.getAllergyByName)
-*/
+ // endpoints by name
+ router.rout('/allergies/name/:name')
+ .put(allergiesController.putAllergyByName)
+ .delete(allergiesController.deleteAllergyByName)
+ .get(allergiesController.getAllergyByName)
+ */
 
 /*
-** Endpoints for Search
-*/
+ ** Endpoints for Search
+ */
 
 
 //router.route('/suggestions')
@@ -157,8 +162,8 @@ router.rout('/allergies/name/:name')
 
 
 /*
-** Endpoints for Suggestions
-*/
+ ** Endpoints for Suggestions
+ */
 
 //router.route('/suggestions')
 //   .get(suggestionsController.getSuggestions);

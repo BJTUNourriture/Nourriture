@@ -44,6 +44,12 @@ var User = require('../models/users');
 
 exports.postUser = function (req, res) {
 
+    console.log("email = ", req.body.email);
+    console.log("username = ", req.body.username);
+    console.log("password = ", req.body.password);
+
+
+
     var user = new User({
         email: req.body.email,
         username: req.body.username,

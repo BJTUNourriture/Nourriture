@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var session = require('express-session');
 var expressJwt = require('express-jwt');
+
 var jwt = require('jsonwebtoken');
 
 var oauth = require('./routes/oauth');
@@ -49,53 +50,48 @@ mongoose.connect('mongodb://127.0.0.1:27017/nourriture');
 app.use(passport.initialize());
 
 
-//var db = require('mongoskin').db('mongodb://localhost:27017/nourriture');
-// Make our db accessible to our router
-/*app.use(function (req, res, next) {
- req.db = db;
- next();
- });*/
-
-
 app.use('/', routes);
-/*app.use('/users', users);*/
 
 
 
-/*app.get('/auth/google',
-    passport.authenticate('google', {
-            scope: ['https://www.googleapis.com/auth/plus.login',
-                , 'https://www.googleapis.com/auth/plus.profile.emails.read']
-        }
-    ));*/
-/*
+app.use(function (req, res, next) {
 
-app.get('/auth/google/callback',
-    passport.authenticate('google', {
-        successRedirect: 'http://127.0.0.1:8101/',
-        failureRedirect: '/auth/google/failure'
-    }));
-*/
+    // check header or url parameters or post parameters for token
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
-app.post('/login', function(req, res, next) {
-    passport.authenticate('basic', function(err, user, info) {
-        if (err) { return next(err) }
-        if (!user) {
-            return res.status(401).json("error");
-        }
-        else {
-            console.log(user);
-            return res.json("success");
-        }
+    // decode token
+    if (token) {
 
-        /*//user has authenticated correctly thus we create a JWT token
-        var token = jwt.encode({ username: 'somedata'}, tokenSecret);
-        res.json({ token : token });*/
+        // verifies secret and checks exp
+        jwt.verify(token, app.get('jwtSecret'), function (err, decoded) {
+            if (err) {
+                return res.json({success: false, message: 'Failed to authenticate token.'});
+            } else {
+                // if everything is good, save to request for use in other routes
+                req.decoded = decoded;
+                next();
+            }
+        });
 
-    })(req, res, next);
+    } else {
+
+        // if there is no token
+        // return an error
+        return res.status(403).send({
+            success: false,
+            message: 'No token provided.'
+        });
+
+    }
 });
 
+
+
+
 var router = express.Router();
+
+
+//router.
 
 // Register all our routes with /api
 app.use('/api', oauth, api, router);
