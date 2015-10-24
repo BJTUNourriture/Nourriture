@@ -4,11 +4,11 @@
 * @apiDefine RecipeObjectPostParam
 *
 * @apiParam {String} title Name of the recipe
-* @apiParam {String} author_id Id of the author of the recipe
+* @apiParam {ObjectId} author_id Id of the author of the recipe
 * @apiParam {String} author_name Name of the author of the recipe
 * @apiParam {String} [description] Description of the recipe
 * @apiParam {Object[]} [type] Type of the recipe
-* @apiParam {String} type.id_type Id of the type
+* @apiParam {ObjectId} type.id_type Id of the type
 * @apiParam {String} type.name Name of the type
 * @apiParam {Date} [date_posted] [default : Date.now] Date when the recipe was posted
 * @apiParam {Date} [date_edited] Date when the recipe was edited
@@ -17,11 +17,11 @@
 * @apiParam {Number} [time_preparation] [default : 0, min : 0, max : 90000] Time it takes to make the recipe (in min)
 * @apiParam {Number} [average_price] [default : 0, min : 0, max : 3] Average cost of the recipe
 * @apiParam {Object[]} ingredients List of the ingredients needed for the recipe
-* @apiParam {String} ingredients.id_ingredient Id of the ingredient
+* @apiParam {ObjectId} ingredients.id_ingredient Id of the ingredient
 * @apiParam {String} ingredients.name_ingredient Name of the ingredient
 * @apiParam {Number} [ingredients.amount_ingredient] [default : 0, min : 0, max : 1000000] Grams of the ingredient needed
 * @apiParam {Object[]} [comments] List of the comments posted for the recipe
-* @apiParam {String} comments.id_author Id of the author of the comment
+* @apiParam {ObjectId} comments.id_author Id of the author of the comment
 * @apiParam {String} comments.name_author Name of the author of the comment
 * @apiParam {Date} comments.date_posted [default : Date.now] Date when the comment was posted
 * @apiParam {Date} [comments.date_edited] Date when the comment was edited
@@ -37,11 +37,11 @@
 * @apiDefine RecipeObjectPutParam
 *
 * @apiParam {String} [title] Name of the recipe
-* @apiParam {String} [author_id] Id of the author of the recipe
+* @apiParam {ObjectId} [author_id] Id of the author of the recipe
 * @apiParam {String} [author_name] Name of the author of the recipe
 * @apiParam {String} [description] Description of the recipe
 * @apiParam {Object[]} [type] Type of the recipe
-* @apiParam {String} type.id_type Id of the type
+* @apiParam {ObjectId} type.id_type Id of the type
 * @apiParam {String} type.name Name of the type
 * @apiParam {Date} [date_posted] [default : Date.now] Date when the recipe was posted
 * @apiParam {Date} [date_edited] Date when the recipe was edited
@@ -50,11 +50,11 @@
 * @apiParam {Number} [time_preparation] [default : 0, min : 0, max : 90000] Time it takes to make the recipe (in min)
 * @apiParam {Number} [average_price] [default : 0, min : 0, max : 3] Average cost of the recipe
 * @apiParam {Object[]} [ingredients] List of the ingredients needed for the recipe
-* @apiParam {String} [ingredients.id_ingredient] Id of the ingredient
+* @apiParam {ObjectId} [ingredients.id_ingredient] Id of the ingredient
 * @apiParam {String} [ingredients.name_ingredient] Name of the ingredient
 * @apiParam {Number} [ingredients.amount_ingredient] [default : 0, min : 0, max : 1000000] Grams of the ingredient needed
 * @apiParam {Object[]} [comments] List of the comments posted for the recipe
-* @apiParam {String} [comments.id_author] Id of the author of the comment
+* @apiParam {ObjectId} [comments.id_author] Id of the author of the comment
 * @apiParam {String} [comments.name_author] Name of the author of the comment
 * @apiParam {Date} [comments.date_posted] [default : Date.now] Date when the comment was posted
 * @apiParam {Date} [comments.date_edited] Date when the comment was edited
@@ -71,11 +71,11 @@
 *
 * @apiSuccess {String} _id Id of the recipe
 * @apiSuccess {String} title Name of the recipe
-* @apiSuccess {String} author_id Id of the author of the recipe
+* @apiSuccess {ObjectId} author_id Id of the author of the recipe
 * @apiSuccess {String} author_name Name of the author of the recipe
 * @apiSuccess {String} [description] Description of the recipe
 * @apiSuccess {Object[]} [type] Type of the recipe
-* @apiSuccess {String} type.id_type Id of the type
+* @apiSuccess {ObjectId} type.id_type Id of the type
 * @apiSuccess {String} type.name Name of the type
 * @apiSuccess {Date} [date_posted] [default : Date.now] Date when the recipe was posted
 * @apiSuccess {Date} [date_edited] Date when the recipe was edited
@@ -84,11 +84,11 @@
 * @apiSuccess {Number} [time_preparation] [default : 0, min : 0, max : 90000] Time it takes to make the recipe (in min)
 * @apiSuccess {Number} [average_price] [default : 0, min : 0, max : 3] Average cost of the recipe
 * @apiSuccess {Object[]} ingredients List of the ingredients needed for the recipe
-* @apiSuccess {String} ingredients.id_ingredient Id of the ingredient
+* @apiSuccess {ObjectId} ingredients.id_ingredient Id of the ingredient
 * @apiSuccess {String} ingredients.name_ingredient Name of the ingredient
 * @apiSuccess {Number} [ingredients.amount_ingredient] [default : 0, min : 0, max : 1000000] Grams of the ingredient needed
 * @apiSuccess {Object[]} [comments] List of the comments posted for the recipe
-* @apiSuccess {String} comments.id_author Id of the author of the comment
+* @apiSuccess {ObjectId} comments.id_author Id of the author of the comment
 * @apiSuccess {String} comments.name_author Name of the author of the comment
 * @apiSuccess {Date} comments.date_posted [default : Date.now] Date when the comment was posted
 * @apiSuccess {Date} [comments.date_edited] Date when the comment was edited
@@ -178,12 +178,14 @@ exports.postRecipe = function(req, res) {
 	var default_fields = ["difficulty", "date_edited", "date_posted", "average_score", "time_preparation", "average_price"];
 	var recipe = new Recipes({
 		title : req.body.title,
+		type : req.body.type,
 		author_id : req.body.author_id,
 		author_name : req.body.author_name,
 		description : req.body.description,
 		recipes : req.body.recipes,
 		comments : req.body.comments,
-		pictures : req.body.pictures
+		pictures : req.body.pictures,
+		ingredients  : req.body.ingredients
 	});
 
 	for (i = 0; i < default_fields.length; i++)
