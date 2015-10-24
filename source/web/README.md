@@ -19,7 +19,7 @@ npm install
 ### Start your local HTTP Webserver: `live-server` or `http-server`.
 
 ```console
-live-server
+cd ./app ; live-server
 ```
 
 > Note: since `live-server` is working on port 8080, we configure the `protractor.conf.js` to use
