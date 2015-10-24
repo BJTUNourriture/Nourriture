@@ -117,7 +117,10 @@ exports.postSearchIngredients = function (req, res, flag) {
 						return (res.send(err));
 					else if (docs.length <= 0)
 						return (res.status(404).send({message : 'Nothing find for this search'}))
-					return (res.json(docs));
+					else{
+						var newjson = {metadata: {total_pages: total_page, current_page: items_page, order: order, tags: tag_list, name: name} ,ingredients: docs}
+						return (res.json(newjson));
+					}
 				} 
 		).skip((items_page - 1) * items_number).limit(items_number);
 		}
@@ -137,8 +140,10 @@ exports.postSearchIngredients = function (req, res, flag) {
 						return (res.send(err));
 					else if (docs.length <= 0)
 						return (res.status(404).send({message : 'Nothing find for this search'}))
-					else
-						return (res.json(docs));
+					else{
+						var newjson = {metadata: {total_pages: total_page, current_page: items_page, order: order, tags: tag_list, name: name} ,ingredients: docs}
+						return (res.json(newjson));
+					}
 				}
 		).skip((items_page - 1) * items_number).sort(query).limit(items_number);
 	    }
@@ -154,7 +159,9 @@ exports.postSearchIngredients = function (req, res, flag) {
 			"name": { "$regex": name, "$options": "i" }
 			},
 			function (err, docs) {
-					total_page = Math.round(docs.length / items_number);				
+					total_page = Math.round(docs.length / items_number);
+					if (total_page == '0')
+						total_page = 1	
 				}
 			)
 
@@ -168,7 +175,10 @@ exports.postSearchIngredients = function (req, res, flag) {
 						return (res.send(err));
 					else if (docs.length <= 0)
 						return (res.status(404).send({message : 'Nothing find for this search'}))
-					return (res.json(docs));
+					else{
+						var newjson = {metadata: {total_pages: total_page, current_page: items_page, order: order, name: name} ,ingredients: docs}
+						return (res.json(newjson));
+					}
 				} 
 		).skip((items_page - 1) * items_number).limit(items_number);
 		}
@@ -189,8 +199,7 @@ exports.postSearchIngredients = function (req, res, flag) {
 					else if (docs.length <= 0)
 						return (res.status(404).send({message : 'Nothing find for this search'}))
 					else{
-						var newjson = ""
-						newjson = {metadata: total_page ,ingredients: docs}
+						var newjson = {metadata: {total_pages: total_page, current_page: items_page, order: order, name: name} ,ingredients: docs}
 						return (res.json(newjson));
 					}
 				}
@@ -209,7 +218,9 @@ exports.postSearchIngredients = function (req, res, flag) {
 			"tags.name": { $all: tag_list}
 			},
 			function (err, docs) {
-					total_page = docs.length;				
+					total_page = Math.round(docs.length / items_number);
+					if (total_page == '0')
+						total_page = 1	
 				}
 			)
 
@@ -222,7 +233,10 @@ exports.postSearchIngredients = function (req, res, flag) {
 						return (res.send(err));
 					else if (docs.length <= 0)
 						return (res.status(404).send({message : 'Nothing find for this search'}))
-					return (res.json(docs));
+					else{
+						var newjson = {metadata: {total_pages: total_page, current_page: items_page, order: order, tags: tag_list} ,ingredients: docs}
+						return (res.json(newjson));
+					}
 				} 
 		).skip((items_page - 1) * items_number).limit(items_number);
 		}
@@ -241,8 +255,10 @@ exports.postSearchIngredients = function (req, res, flag) {
 						return (res.send(err));
 					else if (docs.length <= 0)
 						return (res.status(404).send({message : 'Nothing find for this search'}))
-					else
-						return (res.json(docs));
+					else{
+						var newjson = {metadata: {total_pages: total_page, current_page: items_page, order: order, tags: tag_list} ,ingredients: docs}
+						return (res.json(newjson));
+					}
 				}
 		).skip((items_page - 1) * items_number).sort(query).limit(items_number);
 	    }
