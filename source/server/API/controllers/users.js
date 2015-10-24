@@ -1,10 +1,3 @@
-/**
-* Created by sylflo on 9/28/15.
-*/
-
-var jwt = require('jsonwebtoken');
-var passport = require('passport');
-
 // API/controllers/users.js
 
 /**
@@ -62,6 +55,12 @@ var passport = require('passport');
 *     }
 *  ]
 */
+
+
+
+var jwt = require('jsonwebtoken');
+var passport = require('passport');
+
 var User = require('../models/users');
 //var Create_token = require('../../oauth/misc/create_token_at_init_user');
 
@@ -116,7 +115,7 @@ exports.signinUser = function (req, res, next) {
 * @apiName postUser
 * @apiGroup Users
 * @apiVersion 0.1.0
-**
+*
 * @apiUse UserRequestJSON
 *
 * @apiSuccess message User succesfully created!
@@ -178,11 +177,7 @@ exports.getUsers = function (req, res) {
 * @apiGroup User
 * @apiVersion 0.1.0
 *
-* @apiUse UserObjectPutParam
-*
 * @apiUse UserRequestJSON
-*
-* @apiUse UserServerAnswersPut
 *
 */
 exports.putUserById = function (req, res) {
@@ -200,13 +195,10 @@ exports.putUserById = function (req, res) {
   * @apiGroup User
   * @apiVersion 0.1.0
   *
-  * @apiUse UserObjectPutParam
-  *
   * @apiUse UserRequestJSON
   *
   * @apiSuccess message User successfully updated!
   *
-  * @apiUse UserServerAnswersPut
   *
   */
   exports.putUserByUsername = function (req, res) {
@@ -225,13 +217,13 @@ exports.putUserById = function (req, res) {
     var sent_fields = Object.keys(req.body);
 
     if (err)
-    return (res.send(err));
+      return (res.send(err));
     else if (user === null)
-    return (res.status(404).json({ message: 'User not found.' }))
+      return (res.status(404).json({ message: 'User not found.' }))
 
     for (i = 0; i < sent_fields.length; i++) {
       if (!(fields.indexOf(sent_fields[i]) > -1))
-      return (res.status(400).json({ message: 'The key <' + sent_fields[i] + '> does not exist for User.' }));
+        return (res.status(400).json({ message: 'The key <' + sent_fields[i] + '> does not exist for User.' }));
       user[sent_fields[i]] = req.body[sent_fields[i]];
     }
 
