@@ -22,38 +22,37 @@
 *
 * @apiParamExample {json} Request-Example:
 *
-*  [
-*     {
-*       "username": "Julien",
-*       "password": "$2a$05$9.Imko7xVyvWwPcWGf57TOKNTj/JvW9UeByERRPMbvNbCHwXgb5pu",
-*       "email": "julien@usa.gov",
-*       "alergy" : "["Gluten","Egs"]",
-*       "religion": "",
-*		     "pictures" : [{
-*						"thumbnail_url" : "/thumbnails/1.jpg",
-*						"medium_sized_url" : "/medium_sized/1.jpg",
-*						"big_sized_url" : "/big_sized/1.jpg"
-*				   	}],
-*       "joined_groups" : ["561fc840d6c25173533e267f", "561fc840d6c25173533e267f"],
-*       "calories" : "",
-*		    "like" : [{
-*			            "id_ingredient" : "548ed30d6c2257336f5675",
-*					        "name_ingredient" : "Carotte"
-*				  },
-*                {
-*                       "id_ingredient" : "246kf584a9g784312408a442",
-*                       "name_ingredient" : "Potato"
-*                }],
-*		   "dislike" : [{
-*				        "id_ingredient" : "302fvd338d2c30185535g805",
-*					      "name_ingredient" : "Bean"
-*				   	 }],
-*		   "follow" : [{
-*				        "id_person" : "689ed300d6c22573533g895",
-*			    	    "username" : "bananaman"
-*			        }]
-*     }
-*  ]
+*	[
+*		{
+*			"username": "Julien",
+*			"password": "$2a$05$9.Imko7xVyvWwPcWGf57TOKNTj/JvW9UeByERRPMbvNbCHwXgb5pu",
+*			"email": "julien@usa.gov",
+*			"alergy" : "["Gluten","Egs"]",
+*			"religion": "["boudism","Islam"]",
+*			"pictures" : [{
+*					"thumbnail_url" : "/thumbnails/1.jpg",
+*					"medium_sized_url" : "/medium_sized/1.jpg",
+*					"big_sized_url" : "/big_sized/1.jpg"
+*			}],
+*			"joined_groups" : ["561fc840d6c25173533e267f", "561fc840d6c25173533e267f"],
+*			"like" : [{
+*					"id_ingredient" : "548ed30d6c2257336f5675",
+*					"name_ingredient" : "Carotte"
+*			},
+*			{
+*					"id_ingredient" : "246kf584a9g784312408a442",
+*					"name_ingredient" : "Potato"
+*			}],
+*			"dislike" : [{
+*					"id_ingredient" : "302fvd338d2c30185535g805",
+*					"name_ingredient" : "Bean"
+*			}],
+*			"follow" :  [{
+*					"id_person" : "689ed300d6c22573533g895",
+*					"username" : "bananaman"
+*			}]
+*		}
+*	]
 */
 
 
