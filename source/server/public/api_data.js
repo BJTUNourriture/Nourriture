@@ -4214,6 +4214,25 @@ define({ "api": [
         }
       ]
     },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Nothing find for this search</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"You must at least set a name or a tag to search\"\n}",
+          "type": "json"
+        }
+      ]
+    },
     "filename": "API/controllers/search.js",
     "groupTitle": "Search",
     "parameter": {
@@ -4222,9 +4241,16 @@ define({ "api": [
           {
             "group": "Parameter",
             "type": "<p>String</p> ",
-            "optional": false,
+            "optional": true,
             "field": "name",
             "description": "<p>Name of the ingredient (Regex)</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String[]</p> ",
+            "optional": true,
+            "field": "tags",
+            "description": "<p>Name of the tags that your ingredient must have.</p> "
           },
           {
             "group": "Parameter",
@@ -4235,17 +4261,45 @@ define({ "api": [
           },
           {
             "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "order.order",
+            "description": "<p>Order (can be asc or desc)</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "order.field",
+            "description": "<p>Field which is order (ex: fat)</p> "
+          },
+          {
+            "group": "Parameter",
             "type": "<p>Object[]</p> ",
             "optional": false,
             "field": "metadata",
             "description": "<p>Number of items to return, page of the items</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "metadata.items",
+            "description": "<p>number of items that are return for the current page</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "metadata.page",
+            "description": "<p>Number of the page that you want to ask</p> "
           }
         ]
       },
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n   \"name\": \"fu\",\n   \"order\": {\"order\": \"desc\",\n             \"field\": \"fat\"\n   },\n   \"metadata\": {\"items\": 1,\n                 \"page\": 1\n   }\n}",
+          "content": "{\n   \"name\": \"fu\",\n   \"order\": {\"order\": \"desc\",\n             \"field\": \"fat\"\n   },\n   \"tags\": ['fruit'],\n   \"metadata\": {\"items\": 1,\n                 \"page\": 1\n   }\n}",
           "type": "json"
         }
       ]

@@ -68,6 +68,13 @@ var Ingredients = require('../models/ingredients');
 *							 }
 *				   }]
 *	  }
+*
+* @apiError message Nothing find for this search
+* @apiErrorExample Invalid Parameter Value
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "You must at least set a name or a tag to search"
+*     }
 */
 
 exports.postSearchIngredients = function (req, res, flag) {
@@ -99,11 +106,12 @@ exports.postSearchIngredients = function (req, res, flag) {
 	//Get nbr_page_max
 		var total_page
 			Ingredients.find({
-			"name": { "$regex": name, "$options": "i" },
-			"tags.name": { $all: tag_list}
+			"name": { "$regex": name, "$options": "i" }
 			},
 			function (err, docs) {
-					total_page = docs.length;				
+					total_page = Math.round(docs.length / items_number);
+					if (total_page == '0')
+						total_page = 1	
 				}
 			)
 
