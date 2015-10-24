@@ -17,6 +17,10 @@ var UserSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
+    email_verified : {
+        type : Boolean,
+        default : false
+    },
     gender: String,
     facebook: {
         id: String,
