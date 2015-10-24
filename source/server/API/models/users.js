@@ -53,7 +53,7 @@ var UserSchema = new mongoose.Schema({
   		},
   		big_sized_url : String
   	}],
-    groups: {
+    joined_groups: {
         type: Array,
     },
     like: {

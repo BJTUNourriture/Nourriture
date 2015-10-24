@@ -19,7 +19,7 @@ var passport = require('passport');
 * @apiParam {String} pictures.thumbnail_url Url of the thumbnail version of the picture
 * @apiParam {String} pictures.medium_sized_url Url of the medium size version of the picture
 * @apiParam {String} [pictures.big_sized_url] Url of the big size version of the picture
-* @apiParam {Object[]} [groups]
+* @apiParam {String[]} [joined_groups]
 * @apiParam {Object[]} [like] List of the ingredients a person like
 * @apiParam {Object[]} [dislike] List of the ingredients a person dislike
 * @apiParam {Object[]} [follow] List of people followed by a person
@@ -41,19 +41,7 @@ var passport = require('passport');
 *						"medium_sized_url" : "/medium_sized/1.jpg",
 *						"big_sized_url" : "/big_sized/1.jpg"
 *				   	}],
-*       "groups" : [{
-*       "name": "Le gang du gras",
-*       "description": "Fat for life"
-*       "admin_id": "561fc840d6c25173533e267f"
-*		 "tags" : [{
-*					"name" : "fruit",
-*					"description" : "Don't event try",
-*					"flag" : {
-*								"name" : "FORBIDDEN",
-*								"level" : 0
-*							 }
-*				   }]
-*     }],
+*       "joined_groups" : ["561fc840d6c25173533e267f", "561fc840d6c25173533e267f"],
 *       "calories" : "",
 *		    "like" : [{
 *			            "id_ingredient" : "548ed30d6c2257336f5675",
@@ -233,7 +221,7 @@ exports.putUserById = function (req, res) {
   }
 
   exports.updateUser = function (req, res, err, user) {
-    var fields = ["username", "password", "email", "token", "gender", "facebook", "twitter", "google", "alergy", "religion", "photos", "groups", "calories", "like", "dislike", "follow"];
+    var fields = ["username", "password", "email", "token", "gender", "facebook", "twitter", "google", "alergy", "religion", "pictures", "joined_groups", "calories", "like", "dislike", "follow"];
     var sent_fields = Object.keys(req.body);
 
     if (err)
