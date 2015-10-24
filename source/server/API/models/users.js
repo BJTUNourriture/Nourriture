@@ -42,9 +42,17 @@ var UserSchema = new mongoose.Schema({
     religion: {
         type: String,
     },
-    photos: {
-        type: Array,
-    },
+    pictures : [{
+  		thumbnail_url : {
+  			type : String,
+  			required : true
+  		},
+  		medium_sized_url : {
+  			type : String,
+  			required : true
+  		},
+  		big_sized_url : String
+  	}],
     groups: {
         type: Array,
     },

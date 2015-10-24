@@ -15,7 +15,10 @@ var passport = require('passport');
 * @apiParam {String} email Email of the user
 * @apiParam {String[]} [alergy] List of allergy
 * @apiParam {String} [religion] Religion of the user
-* @apiParam {String[]} [photos] List of user photos
+* @apiParam {Object[]} [pictures] List of user pictures
+* @apiParam {String} pictures.thumbnail_url Url of the thumbnail version of the picture
+* @apiParam {String} pictures.medium_sized_url Url of the medium size version of the picture
+* @apiParam {String} [pictures.big_sized_url] Url of the big size version of the picture
 * @apiParam {Object[]} [groups]
 * @apiParam {Object[]} [like] List of the ingredients a person like
 * @apiParam {Object[]} [dislike] List of the ingredients a person dislike
@@ -33,11 +36,15 @@ var passport = require('passport');
 *       "email": "julien@usa.gov",
 *       "alergy" : "["Gluten","Egs"]",
 *       "religion": "",
-*       "photos" : "[]",
+*		     "pictures" : [{
+*						"thumbnail_url" : "/thumbnails/1.jpg",
+*						"medium_sized_url" : "/medium_sized/1.jpg",
+*						"big_sized_url" : "/big_sized/1.jpg"
+*				   	}],
 *       "groups" : [{
 *       "name": "Le gang du gras",
 *       "description": "Fat for life"
-"admin_id": "561fc840d6c25173533e267f"
+*       "admin_id": "561fc840d6c25173533e267f"
 *		 "tags" : [{
 *					"name" : "fruit",
 *					"description" : "Don't event try",
@@ -48,19 +55,19 @@ var passport = require('passport');
 *				   }]
 *     }],
 *       "calories" : "",
-*		 "like" : [{
+*		    "like" : [{
 *			            "id_ingredient" : "548ed30d6c2257336f5675",
-*					    "name_ingredient" : "Carotte"
+*					        "name_ingredient" : "Carotte"
 *				  },
 *                {
 *                       "id_ingredient" : "246kf584a9g784312408a442",
 *                       "name_ingredient" : "Potato"
 *                }],
-*		"dislike" : [{
+*		   "dislike" : [{
 *				        "id_ingredient" : "302fvd338d2c30185535g805",
-*					    "name_ingredient" : "Bean"
+*					      "name_ingredient" : "Bean"
 *				   	 }],
-*		"follow" : [{
+*		   "follow" : [{
 *				        "id_person" : "689ed300d6c22573533g895",
 *			    	    "username" : "bananaman"
 *			        }]
