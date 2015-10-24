@@ -87,10 +87,10 @@ exports.postSearchIngredients = function (req, res, flag) {
 	//If name and tags are not set
 
 	if (!name && !tag_list)
-		return flag === true ? -1 : res.json(400, {message : 'You must at least set a name or a tag to search'})
+		return flag === true ? -1 : res.status(400).send({message : 'You must at least set a name or a tag to search'})
 
 	if (!items_number || !items_page)
-		return flag === true ? -1 : res.json(400, {message : 'You must set the metadata'})
+		return flag === true ? -1 : res.status(400).send({message : 'You must set the metadata'})
 
 	//If name and tags are set
 
@@ -104,7 +104,7 @@ exports.postSearchIngredients = function (req, res, flag) {
 					if (err)
 						return (res.send(err));
 					else if (docs.length <= 0)
-						return (res.json(404, {message : 'Nothing find for this search'}))
+						return (res.status(404).send({message : 'Nothing find for this search'}))
 					return (res.json(docs));
 				} 
 		).skip((items_page - 1) * items_number).limit(items_number);
@@ -115,7 +115,7 @@ exports.postSearchIngredients = function (req, res, flag) {
 			else
 				order_order = 1
 			if (!order_field)
-				return flag === true ? -1 : res.json(400, {message : 'The order field must be set'})
+				return flag === true ? -1 : res.status(404).send({message : 'The order.field must be set'})
 			Ingredients.find({
 				"name": { "$regex": name, "$options": "i" },
 				"tags.name": { $all: tag_list}
@@ -124,7 +124,7 @@ exports.postSearchIngredients = function (req, res, flag) {
 					if (err)
 						return (res.send(err));
 					else if (docs.length <= 0)
-						return (res.json(404, {message : 'Nothing find for this search'}))
+						return (res.status(404).send({message : 'Nothing find for this search'}))
 					else
 						return (res.json(docs));
 				}
@@ -143,7 +143,7 @@ exports.postSearchIngredients = function (req, res, flag) {
 					if (err)
 						return (res.send(err));
 					else if (docs.length <= 0)
-						return (res.json(404, {message : 'Nothing find for this search'}))
+						return (res.status(404).send({message : 'Nothing find for this search'}))
 					return (res.json(docs));
 				} 
 		).skip((items_page - 1) * items_number).limit(items_number);
@@ -154,7 +154,7 @@ exports.postSearchIngredients = function (req, res, flag) {
 			else
 				order_order = 1
 			if (!order_field)
-				return flag === true ? -1 : res.json(400, {message : 'The order field must be set'})
+				return flag === true ? -1 : res.status(404).send({message : 'The order.field must be set'})
 			Ingredients.find({
 				"name": { "$regex": name, "$options": "i" }
 				},
@@ -162,7 +162,7 @@ exports.postSearchIngredients = function (req, res, flag) {
 					if (err)
 						return (res.send(err));
 					else if (docs.length <= 0)
-						return (res.json(404, {message : 'Nothing find for this search'}))
+						return (res.status(404).send({message : 'Nothing find for this search'}))
 					else{
 						var toto = res.json(docs);
 						toto['metadata'] = "lel"
@@ -184,7 +184,7 @@ exports.postSearchIngredients = function (req, res, flag) {
 					if (err)
 						return (res.send(err));
 					else if (docs.length <= 0)
-						return (res.json(404, {message : 'Nothing find for this search'}))
+						return (res.status(404).send({message : 'Nothing find for this search'}))
 					return (res.json(docs));
 				} 
 		).skip((items_page - 1) * items_number).limit(items_number);
@@ -195,7 +195,7 @@ exports.postSearchIngredients = function (req, res, flag) {
 			else
 				order_order = 1
 			if (!order_field)
-				return flag === true ? -1 : res.json(400, {message : 'The order field must be set'})
+				return flag === true ? -1 : res.status(404).send({message : 'The order.field must be set'})
 			Ingredients.find({
 				"tags.name": { $all: tag_list}
 				},
@@ -203,7 +203,7 @@ exports.postSearchIngredients = function (req, res, flag) {
 					if (err)
 						return (res.send(err));
 					else if (docs.length <= 0)
-						return (res.json(404, {message : 'Nothing find for this search'}))
+						return (res.status(404).send({message : 'Nothing find for this search'}))
 					else
 						return (res.json(docs));
 				}
