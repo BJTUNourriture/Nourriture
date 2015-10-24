@@ -152,8 +152,8 @@ router.route('/recipes/title/:title')
  */
 
 
-//router.route('/suggestions')
-//   .get(suggestionsController.getSuggestions);
+router.route('/search/ingredients/')
+   .post(searchController.postSearchIngredients);
 
 
 /*
