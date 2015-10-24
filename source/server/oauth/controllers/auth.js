@@ -44,50 +44,35 @@ passport.use(new BasicStrategy(
 passport.use('client-basic', new BasicStrategy(
     function (username, password, callback) {
 
-        console.log("IN client BASIC!!");
 
         Client.findOne({id: username}, function (err, client) {
             if (err) {
                 return callback(err);
             }
 
-            // No client found with that id or bad password
-            if (!client || client.secret !== password) {
+            if (!client) {
                 return callback(null, false);
             }
 
-            // Success
-            return callback(null, client);
+            client.verifySecret(password, function(err, isMatch) {
+                if (err) {
+                    return callback(err);
+                }
+                // Password did not match
+                if (!isMatch) {
+                    return callback(null, isMatch);
+                }
+
+                console.log("This is working !!!!!!!!!!!!1");
+                // Success
+                return callback(null, client);
+            });
+
+
         });
     }
 ));
 
-/*
-passport.use(new BearerStrategy(
-    function (accessToken, callback) {
-
-
-        var decoded = jwt.verify(accessToken, 'jwtSecret');
-
-        User.findOne({_id: decoded.client.userId}, function (err, user) {
-            if (err) {
-
-                return callback(err);
-            }
-
-            // No user found
-            if (!user) {
-                return callback(null, false);
-            }
-
-            console.log("User == ", user);
-
-           callback(null, user, {scope: '*'})
-        });
-
-    }
-));
-*/
 
 passport.use(new GoogleStrategy({
         clientID: '229011235874-iimjsj4ch55a5n67itije3pfq12ueuh2.apps.googleusercontent.com',

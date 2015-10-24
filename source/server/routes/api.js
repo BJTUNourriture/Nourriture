@@ -25,28 +25,6 @@ var verifyJwt = expressJwt({
         console.log("getToken!!!!", req.headers.authorization.split(' ')[1]);
         if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Topkek')
             return req.headers.authorization.split(' ')[1];
-        if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Toplel') {
-            console.log("TESTTTTTTT", req.headers.authorization.split(' ')[1]);
-            var decoded = jwt.verify(req.headers.authorization.split(' ')[1], 'jwtSecret');
-            User.findOne({_id: decoded.client.userId}, function (err, user) {
-                if (err) {
-
-                    return callback(err);
-                }
-
-                // No user found
-                if (!user) {
-                    //return callback(null, false);
-                    return false;
-                }
-
-                console.log("User == ", user);
-
-                //callback(null, user, {scope: '*'})
-            });
-            //console.log("test = ", req.headers.authorization.split(' ')[1]);
-            //return true;
-        }
         return null;
     }
 });
@@ -58,7 +36,7 @@ router.route('/users/sign-in')
     .post(userController.signinUser);
 
 router.route('/users')
-    .get(/*authController.isAuthenticated,*/ verifyJwt, userController.getUsers);
+    .get(verifyJwt, userController.getUsers);
 
 router.route('/users/id/:id')
     .put(authController.isAuthenticated, userController.putUserById);

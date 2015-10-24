@@ -16,7 +16,7 @@ var routes = require('./routes/index');
 
 var app = express();
 
-
+// http://localhost:8101/api/oauth2/authorize?client_id=this_is_my_id&response_type=code&redirect_uri=http://localhost:8101
 /* Init const var */
 PORT = "8101";
 HOSTNAME = "127.0.0.1";
