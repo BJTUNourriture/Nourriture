@@ -42,9 +42,6 @@ var UserSchema = new mongoose.Schema({
     religion: {
         type: String,
     },
-    likedreceip: {
-        type: Array,
-    },
     photos: {
         type: Array,
     },
@@ -53,6 +50,36 @@ var UserSchema = new mongoose.Schema({
     },
     calories: {
         type: String,
+    },
+    like: {
+        type: [{
+            id_ingredient: {
+                type: String
+            },
+            name_ingredient: {
+                type: String
+            }
+        }]
+    },
+    dislike: {
+        type: [{
+            id_ingredient: {
+                type: String
+            },
+            name_ingredient: {
+                type: String
+            }
+        }]
+    },
+    follow: {
+        type: [{
+            id_person: {
+                type: String
+            },
+            username: {
+                type: String
+            }
+        }]
     }
 });
 

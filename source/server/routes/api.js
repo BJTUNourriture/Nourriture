@@ -29,6 +29,12 @@ var verifyJwt = expressJwt({
 router.route('/users')
     .get(authController.isAuthenticated, userController.getUsers);
 
+router.route('/users/id/:id')
+    .put(authController.isAuthenticated, userController.putUserById);
+
+router.route('/users/username/:username')
+    .put(authController.isAuthenticated, userController.putUserByUsername);
+
 router.route('/users/register')
     .post(userController.postUser);
 
@@ -122,25 +128,24 @@ router.route('/recipes/title/:title')
 /*
 ** Endpoints for Allergies
 */
-/*
+
 // full JSON endpoints
 router.route('/allergies')
     .post(allergiesController.postAllergy)
     .delete(allergiesController.deleteAllergies)
-    .get(allergiesController.getAllAllergies)
+    .get(allergiesController.getAllAllergies);
 
 // endpoints by id
 router.route('/allergies/id/:id')
     .put(allergiesController.putAllergyById)
     .delete(allergiesController.deleteAllergyById)
-    .get(allergiesController.getAllergyById)
+    .get(allergiesController.getAllergyById);
 
 // endpoints by name
 router.rout('/allergies/name/:name')
     .put(allergiesController.putAllergyByName)
     .delete(allergiesController.deleteAllergyByName)
-    .get(allergiesController.getAllergyByName)
-*/
+    .get(allergiesController.getAllergyByName);
 
 /*
 ** Endpoints for Search
