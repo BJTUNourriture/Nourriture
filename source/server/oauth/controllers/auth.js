@@ -10,10 +10,9 @@ var Client = require('../models/client');
 var Token = require('../models/token');
 
 
-/*passport.use(new BasicStrategy(
+passport.use(new BasicStrategy(
     function (username, password, callback) {
-        console.log(req);
-        User.findOne({username: req.body.username}, function (err, user) {
+        User.findOne({username: username}, function (err, user) {
             if (err) {
                 return callback(err);
             }
@@ -23,7 +22,7 @@ var Token = require('../models/token');
                 return callback(null, false);
             }
             // Make sure the password is correct
-            user.verifyPassword(req.body.password, function (err, isMatch) {
+            user.verifyPassword(password, function (err, isMatch) {
                 if (err) {
                     return callback(err);
                 }
@@ -38,7 +37,7 @@ var Token = require('../models/token');
             });
         });
     }
-));*/
+));
 
 
 passport.use('client-basic', new BasicStrategy(
