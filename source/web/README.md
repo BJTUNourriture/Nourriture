@@ -1,6 +1,6 @@
 # Nourriture Web
 
-## Getting Started
+This app is a web client for Nourriture api.
 
 ### Install Dependencies
 
@@ -42,4 +42,4 @@ e2e-tests/            --> end-to-end tests
 ### Full DOC
 
 [AngularJS Material](http://material.angularjs.org/)
-[Github Repo](https://github.com/angular/material-start) 
+[Github Repo](https://github.com/angular/material-start)
