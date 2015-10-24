@@ -105,6 +105,15 @@ router.route('/groups/name/:name')
     .put(groupsController.putGroupByName)
     .get(groupsController.getGroupByName);
 
+router.route('/groups/:group_id/add/:user_id')
+    .put(groupsController.addUserToGroup);
+
+router.route('/groups/:group_id/remove/:user_id')
+    .put(groupsController.removeUserToGroup);
+
+router.route('/groups/access/:id')
+    .put(groupsController.putAccessRight);
+
 
 /*
 ** Endpoints for Recipes
