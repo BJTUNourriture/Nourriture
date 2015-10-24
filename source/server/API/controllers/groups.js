@@ -19,6 +19,13 @@
 */
 
 /**
+* @apiDefine GroupAccessPutParam
+*
+* @apiParam {String} user_id User ID to update
+* @apiParam {Number} access Access right to give to user
+*/
+
+/**
 * @apiDefine GroupObjectSuccess
 *
 * @apiSuccess {String} _id Id of the group
@@ -35,7 +42,7 @@
 *     {
 *       "name": "Le gang du gras",
 *       "description": "Fat for life"
-		"admin_id": "561fc840d6c25173533e267f"
+*		"admin_id": "561fc840d6c25173533e267f"
 *		 "tags" : [{
 *					"name" : "fruit",
 *					"description" : "Don't event try",
@@ -45,6 +52,16 @@
 *							 }
 *				   }]
 *     }
+*/
+
+/**
+* @apiDefine GroupRequestAccessJSON
+*
+* @apiParamExample {json} Request-Example:
+*     {
+*		"user_id": "561fc840d6c25173533e267f",
+*		"access": "2"
+*		}
 */
 
 var Groups = require('../models/groups');
@@ -85,7 +102,7 @@ exports.postGroup = function (req, res) {
 	var group = new Groups({
 		name : req.body.name,
 		description : req.body.description,
-		admin_id : req.body.admin_id,
+		users_id : [{user_id: req.body.admin_id, access: {name : "Admin", level: 0} }],
 		tags : req.body.tags
 	});
 
@@ -185,7 +202,7 @@ exports.putGroupByName = function (req, res) {
 }
 
 exports.updateGroup = function(req, res, err, group) {
-	var fields = ["name", "description", "admin_id", "tags"];
+	var fields = ["name", "description", "tags"];
 	var sent_fields = Object.keys(req.body);
 
 	if (err)
@@ -207,6 +224,149 @@ exports.updateGroup = function(req, res, err, group) {
 	});
 	return (1);
 };
+
+
+
+/**
+* @api {put} /groups/access/:id Update access right for user in group
+* @apiName putAccessRight
+* @apiGroup Groups
+* @apiVersion 0.1.0
+*
+* @apiUse GroupAccessPutParam
+*
+* @apiUse GroupRequestAccessJSON
+*
+* @apiSuccess message Group successfully updated!
+*
+* @apiUse GroupServerAnswersPut
+*
+*/
+exports.putAccessRight = function(req, res) {
+	if (!req.params.id || Object.keys(req.body).length === 0)
+		return (res.status(400).json({message : 'The id musn\'t be null and the request must not be empty.'}));
+	Groups.findById(req.params.id,
+		function (err, group) {
+			return (module.exports.updateAccessRight(req, res, err, group));
+		});
+}
+
+exports.updateAccessRight = function (req, res, err, group) {
+	var name = ["Admin", "Moderateur", "User"];
+
+	if (err)
+		return (res.send(err));
+	else if (group === null)
+		return (res.status(404).json({message: "Group not found"}));
+
+	for (i=0; i < group['users_id'].length; i++) {
+		if (group['users_id'][i].user_id == req.body['user_id']) {
+			group['users_id'][i].access = {name: name[req.body['access']], level: req.body['access']}
+			group.save(function(err) {
+				if (err)
+					return (res.send(err));
+				return (res.json({message : "Access Right successfully updated!"}))
+			})
+			return (1);
+		}
+	}
+	return (res.status(404).json({message: "User not found"}));	
+}
+
+/**
+* @api {put} /groups/:group_id/add/:user_id Add User to a group
+* @apiName addUserToGroup
+* @apiGroup Groups
+* @apiVersion 0.1.0
+*
+* @apiParam {String} group_id Group id
+* @apiParam {String} user_id User id
+*
+* @apiUse GroupObjectSuccess
+*
+* @apiError message The id of the group was not found
+* @apiError message The id of the group was not found
+* @apiErrorExample Invalid Parameter Value
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "The name was not found."
+*     }
+*/
+exports.addUserToGroup = function(req, res, flag) {
+	if (!req.params.user_id || !req.params.group_id)
+		return (res.status(400).json({message : 'The id musn\'t be null.'}));
+
+	Groups.findById(req.params.group_id,
+		function (err, doc) {
+			if (err)
+				return (res.send(err));
+			else if (doc === null)
+				return (res.status(404).json({message : 'The id was not found.'}));
+
+			for (i=0; i < doc['users_id'].length;i++) {
+				if (doc['users_id'][i].user_id === req.params.user_id)
+					return (res.status(400).json({message:'User is already in the group.'}));
+			}
+			doc['users_id'].push({user_id: req.params.user_id, access: {name : "User", level: 3} });
+			doc.save(function(err) {
+				if (err)
+					return (res.send(err));
+				return (res.status(200).json({message:'User has been added to group.'}));
+			})
+		}
+	);
+	return (1);
+}
+
+/**
+* @api {put} /groups/:group_id/remove/:user_id remove User to a group
+* @apiName removeUserToGroup
+* @apiGroup Groups
+* @apiVersion 0.1.0
+*
+* @apiParam {String} group_id Group id
+* @apiParam {String} user_id User id
+*
+* @apiUse GroupObjectSuccess
+*
+* @apiError message The id of the group was not found
+* @apiError message The id of the group was not found
+* @apiErrorExample Invalid Parameter Value
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "The name was not found."
+*     }
+*/
+exports.removeUserToGroup = function (req, res, flag) {
+	if (!req.params.user_id || !req.params.group_id)
+		return (res.status(400).json({message : 'The id musn\'t be null.'}));
+
+	Groups.findById(req.params.group_id,
+		function (err, doc) {
+			if (err)
+				return (res.send(err));
+			else if (doc === null)
+				return (res.status(400).json({message:'The id was not found.'}));
+
+			for (i=0; i < doc['users_id'].length;i++) {
+				console.log(doc['users_id'][i].user_id + '-' + req.params.user_id);
+				if (doc['users_id'][i].user_id === req.params.user_id) {
+					console.log(doc['users_id'][i]);
+//					doc['users_id'].splice(i, 1);
+					doc.save(function(err) {
+						if (err)
+							return (res.send(err));
+						return (res.status(200).json({message:'User has been removed to group.'}));
+					});
+				}
+			}
+			return (res.status(400).json({message:'User is not in the group.'}));
+		}
+	);
+	return (1);
+}
+
+
 
 /*
 ** GETS
@@ -335,7 +495,6 @@ exports.getGroupByName = function (req, res, flag) {
 	);
 	return (1);
 };
-
 
 /*
 ** DELETES
