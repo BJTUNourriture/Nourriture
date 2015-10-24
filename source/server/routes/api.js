@@ -9,23 +9,32 @@ var typesController = require('../API/controllers/types');
 var groupsController = require('../API/controllers/groups');
 var recipesController = require('../API/controllers/recipes');
 var allergiesController = require('../API/controllers/allergies');
+var jwt = require('jsonwebtoken')
 var passport = require('passport');
 var searchController = require('../API/controllers/search');
 var express = require('express');
 var expressJwt = require('express-jwt');
 var router = express.Router();
+var User = require('../API/models/users');
+
 
 //verify the jwt
 var verifyJwt = expressJwt({
-  secret: '18B63D7DDDD8C614227C8F31D8A25DEB92F249C391267DF9A28A5ACC00458837',
-  getToken: function fromHeaderOrQuerystring (req) {
-    if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Topkek')
-        return req.headers.authorization.split(' ')[1];
-    return null;
-  }
+    secret: '18B63D7DDDD8C614227C8F31D8A25DEB92F249C391267DF9A28A5ACC00458837',
+    getToken: function fromHeaderOrQuerystring(req) {
+        console.log("getToken!!!!", req.headers.authorization.split(' ')[1]);
+        if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Topkek')
+            return req.headers.authorization.split(' ')[1];
+        return null;
+    }
 });
 
+
 /* Endpoints for User */
+
+router.route('/users/sign-in')
+    .post(userController.signinUser);
+
 router.route('/users')
     .get(userController.getUsers);
 
@@ -38,8 +47,6 @@ router.route('/users/username/:username')
 router.route('/users/register')
     .post(userController.postUser);
 
-router.route('/users/sign-in')
-    .post(userController.signinUser);
 
 // add for oAuth
 //   .get(authController.isAuthenticated, userController.getUsers);
@@ -116,8 +123,8 @@ router.route('/groups/access/:id')
 
 
 /*
-** Endpoints for Recipes
-*/
+ ** Endpoints for Recipes
+ */
 
 router.route('/recipes')
     .post(recipesController.postRecipe)
@@ -157,17 +164,17 @@ router.route('/allergies/name/:name')
     .get(allergiesController.getAllergyByName);
 
 /*
-** Endpoints for Search
-*/
+ ** Endpoints for Search
+ */
 
 
 router.route('/search/ingredients/')
-   .post(searchController.postSearchIngredients);
+    .post(searchController.postSearchIngredients);
 
 
 /*
-** Endpoints for Suggestions
-*/
+ ** Endpoints for Suggestions
+ */
 
 //router.route('/suggestions')
 //   .get(suggestionsController.getSuggestions);

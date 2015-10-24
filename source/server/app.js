@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var session = require('express-session');
 var expressJwt = require('express-jwt');
+
 var jwt = require('jsonwebtoken');
 
 var oauth = require('./routes/oauth');
@@ -15,15 +16,7 @@ var routes = require('./routes/index');
 
 var app = express();
 
-var verifyJwt = expressJwt({
-  secret: '18B63D7DDDD8C614227C8F31D8A25DEB92F249C391267DF9A28A5ACC00458837',
-  getToken: function fromHeaderOrQuerystring (req) {
-    if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Topkek')
-        return req.headers.authorization.split(' ')[1];
-    return null;
-  }
-});
-
+// http://localhost:8101/api/oauth2/authorize?client_id=this_is_my_id&response_type=code&redirect_uri=http://localhost:8101
 /* Init const var */
 PORT = "8101";
 HOSTNAME = "127.0.0.1";
@@ -57,53 +50,12 @@ mongoose.connect('mongodb://127.0.0.1:27017/nourriture');
 app.use(passport.initialize());
 
 
-//var db = require('mongoskin').db('mongodb://localhost:27017/nourriture');
-// Make our db accessible to our router
-/*app.use(function (req, res, next) {
- req.db = db;
- next();
- });*/
-
-
 app.use('/', routes);
-/*app.use('/users', users);*/
-
-
-
-/*app.get('/auth/google',
-    passport.authenticate('google', {
-            scope: ['https://www.googleapis.com/auth/plus.login',
-                , 'https://www.googleapis.com/auth/plus.profile.emails.read']
-        }
-    ));*/
-/*
-
-app.get('/auth/google/callback',
-    passport.authenticate('google', {
-        successRedirect: 'http://127.0.0.1:8101/',
-        failureRedirect: '/auth/google/failure'
-    }));
-*/
-
-app.post('/login', function(req, res, next) {
-    passport.authenticate('basic', function(err, user, info) {
-        if (err) { return next(err) }
-        if (!user) {
-            return res.status(401).json("error");
-        }
-        else {
-            console.log(user);
-            return res.json("success");
-        }
-
-        /*//user has authenticated correctly thus we create a JWT token
-        var token = jwt.encode({ username: 'somedata'}, tokenSecret);
-        res.json({ token : token });*/
-
-    })(req, res, next);
-});
 
 var router = express.Router();
+
+
+//router.
 
 // Register all our routes with /api
 app.use('/api', oauth, api, router);
