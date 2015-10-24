@@ -9,10 +9,19 @@ var groupsSchema = new mongoose.Schema({
 		required : true
 	},
 	description : String,
-	admin_id : {
-		type : String,
-		required : true
-	},
+	users_id : [{
+		user_id : {
+			type : String,
+			required : true
+		},
+		access : {
+			name : {
+				type : String,
+				required : true
+			},
+			level : Number
+		}
+	}],
 	tags : [{
 		name : {
 			type : String,
