@@ -142,7 +142,7 @@ router.route('/allergies/id/:id')
     .get(allergiesController.getAllergyById);
 
 // endpoints by name
-router.rout('/allergies/name/:name')
+router.route('/allergies/name/:name')
     .put(allergiesController.putAllergyByName)
     .delete(allergiesController.deleteAllergyByName)
     .get(allergiesController.getAllergyByName);
