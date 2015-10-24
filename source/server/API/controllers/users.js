@@ -59,6 +59,7 @@
 
 var jwt = require('jsonwebtoken');
 var passport = require('passport');
+var mail = require('../../tools/nodemailer');
 
 var User = require('../models/users');
 //var Create_token = require('../../oauth/misc/create_token_at_init_user');
@@ -79,6 +80,12 @@ exports.postUser = function (req, res) {
       console.log("user save function", err);
       return res.send(err);
     }
+    mail.mailOptions["to"] = user.email;
+    mail.transporter.sendMail(mail.mailOptions, function(error, info){
+        if (error)
+            console.log(error);
+        console.log("Message sent" + info.response);
+    });
     return (res.json({message: 'User succesfully created!'}));
   });
 };
@@ -126,8 +133,7 @@ exports.getUsers = function (req, res) {
 
   User.find(function (err, users) {
     if (err)
-    res.send(err);
-
+        res.send(err);
     res.json(users);
   });
 };

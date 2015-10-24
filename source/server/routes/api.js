@@ -27,7 +27,7 @@ var verifyJwt = expressJwt({
 
 /* Endpoints for User */
 router.route('/users')
-    .get(authController.isAuthenticated, userController.getUsers);
+    .get(userController.getUsers);
 
 router.route('/users/id/:id')
     .put(authController.isAuthenticated, userController.putUserById);
