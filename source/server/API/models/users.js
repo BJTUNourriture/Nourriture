@@ -48,9 +48,6 @@ var UserSchema = new mongoose.Schema({
     groups: {
         type: Array,
     },
-    calories: {
-        type: String,
-    },
     like: {
         type: [{
             id_ingredient: {

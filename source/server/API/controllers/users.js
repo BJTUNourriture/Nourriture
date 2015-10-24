@@ -1,6 +1,6 @@
 /**
- * Created by sylflo on 9/28/15.
- */
+* Created by sylflo on 9/28/15.
+*/
 
 var jwt = require('jsonwebtoken');
 var passport = require('passport');
@@ -8,126 +8,135 @@ var passport = require('passport');
 // API/controllers/users.js
 
 /**
- * @apiDefine UserObjectPostParam
- *
- * @apiParam {String} username Name of the user
- * @apiParam {String} password Passworld of the user
- * @apiParam {String} email Email of the user
- * @apiParam {String[]} [alergy] List of allergy
- * @apiParam {String} [religion] Religion of the user
- * @apiParam {String[]} [photos] List of user photos
- * @apiParam {String[]} [group]
- * @apiParam {String} [calories]
- * @apiParam {Object[]} [like] List of the ingredients a person like
- * @apiParam {Object[]} [dislike] List of the ingredients a person dislike
- * @apiParam {Object[]} [follow] List of people followed by a person
- */
+* @apiDefine UserObjectPostParam
+*
+* @apiParam {String} username Name of the user
+* @apiParam {String} password Passworld of the user
+* @apiParam {String} email Email of the user
+* @apiParam {String[]} [alergy] List of allergy
+* @apiParam {String} [religion] Religion of the user
+* @apiParam {String[]} [photos] List of user photos
+* @apiParam {Object[]} [groups]
+* @apiParam {Object[]} [like] List of the ingredients a person like
+* @apiParam {Object[]} [dislike] List of the ingredients a person dislike
+* @apiParam {Object[]} [follow] List of people followed by a person
+*/
 /**
- * @apiDefine UserRequestJSON
- *
- * @apiParamExample {json} Request-Example:
- *
- *  [
- *     {
- *       "username": "Julien",
- *       "password": "$2a$05$9.Imko7xVyvWwPcWGf57TOKNTj/JvW9UeByERRPMbvNbCHwXgb5pu",
- *       "email": "julien@usa.gov",
- *       "alergy" : "["Gluten","Egs"]",
- *       "religion": "",
- *       "photos" : "[]",
- *       "groups" : "["J aime le Chocolat Noir", "Aidez moi à Grossir", "Objectif 8000 calories par jour"]",
- *       "calories" : "",
- *		 "like" : [{
- *			            "id_ingredient" : "548ed30d6c2257336f5675",
- *					    "name_ingredient" : "Carotte"
- *				  },
- *                {
- *                       "id_ingredient" : "246kf584a9g784312408a442",
- *                       "name_ingredient" : "Potato"
- *                }],
- *		"dislike" : [{
- *				        "id_ingredient" : "302fvd338d2c30185535g805",
- *					    "name_ingredient" : "Bean"
- *				   	 }],
- *		"follow" : [{
- *				        "id_person" : "689ed300d6c22573533g895",
- *			    	    "username" : "bananaman"
- *			        }]
- *     }
- *  ]
- */
+* @apiDefine UserRequestJSON
+*
+* @apiParamExample {json} Request-Example:
+*
+*  [
+*     {
+*       "username": "Julien",
+*       "password": "$2a$05$9.Imko7xVyvWwPcWGf57TOKNTj/JvW9UeByERRPMbvNbCHwXgb5pu",
+*       "email": "julien@usa.gov",
+*       "alergy" : "["Gluten","Egs"]",
+*       "religion": "",
+*       "photos" : "[]",
+*       "groups" : [{
+*       "name": "Le gang du gras",
+*       "description": "Fat for life"
+"admin_id": "561fc840d6c25173533e267f"
+*		 "tags" : [{
+*					"name" : "fruit",
+*					"description" : "Don't event try",
+*					"flag" : {
+*								"name" : "FORBIDDEN",
+*								"level" : 0
+*							 }
+*				   }]
+*     }],
+*       "calories" : "",
+*		 "like" : [{
+*			            "id_ingredient" : "548ed30d6c2257336f5675",
+*					    "name_ingredient" : "Carotte"
+*				  },
+*                {
+*                       "id_ingredient" : "246kf584a9g784312408a442",
+*                       "name_ingredient" : "Potato"
+*                }],
+*		"dislike" : [{
+*				        "id_ingredient" : "302fvd338d2c30185535g805",
+*					    "name_ingredient" : "Bean"
+*				   	 }],
+*		"follow" : [{
+*				        "id_person" : "689ed300d6c22573533g895",
+*			    	    "username" : "bananaman"
+*			        }]
+*     }
+*  ]
+*/
 var User = require('../models/users');
 //var Create_token = require('../../oauth/misc/create_token_at_init_user');
 
 exports.postUser = function (req, res) {
 
-    var user = new User({
-        email: req.body.email,
-        username: req.body.username,
-        password: req.body.password,
-        alergy: req.body.alergy,
-        religion: req.body.religion
-    });
+  var user = new User({
+    email: req.body.email,
+    username: req.body.username,
+    password: req.body.password,
+    alergy: req.body.alergy,
+    religion: req.body.religion
+  });
 
 
-    user.save(function (err) {
-        if (err) {
-            console.log("user save function", err);
-            return res.send(err);
-        }
-        return (res.json({message: 'User succesfully created!'}));
-    });
+  user.save(function (err) {
+    if (err) {
+      console.log("user save function", err);
+      return res.send(err);
+    }
+    return (res.json({message: 'User succesfully created!'}));
+  });
 };
 
 exports.signinUser = function (req, res, next) {
-    if (!req.body.username)
-        return (res.status(401).json({message: "Username field must not be empty"}));
-    if (!req.body.password)
-        return (res.status(401).json({message: "Password field must not be empty"}));
-    User.findOne({username: req.body.username}, function (err, user) {
-        if (err)
-            return (res.status(400).send(err));
-        if (!user)
-            return (res.status(401).json({message: "Please verify the username provided."}));
-        user.verifyPassword(req.body.password, function (err, isMatch) {
-            if (err)
-                return (res.status(400).send(err));
-            if (!isMatch)
-                return (res.status(401).json({message: "Please verify the password provided."}));
-            var token = jwt.sign(user, req.app.get("jwtSecret"), {expiresIn: 3600 * 5});
-            return (res.json({key: token}));
-        });
+  if (!req.body.username)
+  return (res.status(401).json({message: "Username field must not be empty"}));
+  if (!req.body.password)
+  return (res.status(401).json({message: "Password field must not be empty"}));
+  User.findOne({username: req.body.username}, function (err, user) {
+    if (err)
+    return (res.status(400).send(err));
+    if (!user)
+    return (res.status(401).json({message: "Please verify the username provided."}));
+    user.verifyPassword(req.body.password, function (err, isMatch) {
+      if (err)
+      return (res.status(400).send(err));
+      if (!isMatch)
+      return (res.status(401).json({message: "Please verify the password provided."}));
+      var token = jwt.sign(user, req.app.get("jwtSecret"), {expiresIn: 3600 * 5});
+      return (res.json({key: token}));
     });
+  });
 };
 
 
 /*
- ** GET
- */
+** GET
+*/
 
 /**
- * @api {get} /users/ Retrive all Users
- * @apiName postUser
- * @apiGroup Users
- * @apiVersion 0.1.0
- *
- * @apiUse UserObjectPostParam
- *
- * @apiUse UserRequestJSON
- *
- * @apiSuccess message Recipe succesfully created!
- *
- *
- */
+* @api {get} /users/ Retrive all Users
+* @apiName postUser
+* @apiGroup Users
+* @apiVersion 0.1.0
+**
+* @apiUse UserRequestJSON
+*
+* @apiSuccess message User succesfully created!
+*
+*
+*/
 
 exports.getUsers = function (req, res) {
 
-    User.find(function (err, users) {
-        if (err)
-            res.send(err);
+  User.find(function (err, users) {
+    if (err)
+    res.send(err);
 
-        res.json(users);
-    });
+    res.json(users);
+  });
 };
 
 /*
@@ -182,59 +191,59 @@ exports.getUsers = function (req, res) {
 *
 */
 exports.putUserById = function (req, res) {
-    if (!req.params.id || Object.keys(req.body).length === 0)
-        return (res.status(400).json({ message: 'The id musn\'t be null and the request must not be empty.' }));
-    User.findById(req.params.id,
-		function (err, user) {
-		    return (module.exports.updateUser(req, res, err, user));
-		});
-}
+  if (!req.params.id || Object.keys(req.body).length === 0)
+  return (res.status(400).json({ message: 'The id musn\'t be null and the request must not be empty.' }));
+  User.findById(req.params.id,
+    function (err, user) {
+      return (module.exports.updateUser(req, res, err, user));
+    });
+  }
 
-/**
-* @api {put} /users/username/:username Update a User by username
-* @apiName putUserByName
-* @apiGroup User
-* @apiVersion 0.1.0
-*
-* @apiUse UserObjectPutParam
-*
-* @apiUse UserRequestJSON
-*
-* @apiSuccess message User successfully updated!
-*
-* @apiUse UserServerAnswersPut
-*
-*/
-exports.putUserByUsername = function (req, res) {
+  /**
+  * @api {put} /users/username/:username Update a User by username
+  * @apiName putUserByName
+  * @apiGroup User
+  * @apiVersion 0.1.0
+  *
+  * @apiUse UserObjectPutParam
+  *
+  * @apiUse UserRequestJSON
+  *
+  * @apiSuccess message User successfully updated!
+  *
+  * @apiUse UserServerAnswersPut
+  *
+  */
+  exports.putUserByUsername = function (req, res) {
     if (!req.params.name || Object.keys(req.body).length === 0)
-        return (res.status(400).json({ message: 'The name musn\'t be null and the request must not be empty.' }));
+    return (res.status(400).json({ message: 'The name musn\'t be null and the request must not be empty.' }));
     User.findOne({
-        "username": req.params.name
+      "username": req.params.name
     },
-		function (err, user) {
-		    return (module.exports.updateUser(req, res, err, user));
-		});
-}
+    function (err, user) {
+      return (module.exports.updateUser(req, res, err, user));
+    });
+  }
 
-exports.updateUser = function (req, res, err, user) {
+  exports.updateUser = function (req, res, err, user) {
     var fields = ["username", "password", "email", "token", "gender", "facebook", "twitter", "google", "alergy", "religion", "photos", "groups", "calories", "like", "dislike", "follow"];
     var sent_fields = Object.keys(req.body);
 
     if (err)
-        return (res.send(err));
+    return (res.send(err));
     else if (user === null)
-        return (res.status(404).json({ message: 'User not found.' }))
+    return (res.status(404).json({ message: 'User not found.' }))
 
     for (i = 0; i < sent_fields.length; i++) {
-        if (!(fields.indexOf(sent_fields[i]) > -1))
-            return (res.status(400).json({ message: 'The key <' + sent_fields[i] + '> does not exist for User.' }));
-        user[sent_fields[i]] = req.body[sent_fields[i]];
+      if (!(fields.indexOf(sent_fields[i]) > -1))
+      return (res.status(400).json({ message: 'The key <' + sent_fields[i] + '> does not exist for User.' }));
+      user[sent_fields[i]] = req.body[sent_fields[i]];
     }
 
     user.save(function (err) {
-        if (err)
-            return (res.send(err));
-        return (res.json({ message: "User successfully updated!" }));
+      if (err)
+      return (res.send(err));
+      return (res.json({ message: "User successfully updated!" }));
     });
     return (1);
-}
+  }
