@@ -5,6 +5,7 @@ var passport = require('passport');
 var BasicStrategy = require('passport-http').BasicStrategy;
 var BearerStrategy = require('passport-http-bearer').Strategy;
 var GoogleStrategy = require('passport-google-oauth2').Strategy;
+var jwt    = require('jsonwebtoken')
 var User = require('../../API/models/users');
 var Client = require('../models/client');
 var Token = require('../models/token');
@@ -42,6 +43,9 @@ passport.use(new BasicStrategy(
 
 passport.use('client-basic', new BasicStrategy(
     function (username, password, callback) {
+
+        console.log("IN client BASIC!!");
+
         Client.findOne({id: username}, function (err, client) {
             if (err) {
                 return callback(err);
@@ -58,34 +62,32 @@ passport.use('client-basic', new BasicStrategy(
     }
 ));
 
+/*
 passport.use(new BearerStrategy(
     function (accessToken, callback) {
-        Token.findOne({value: accessToken}, function (err, token) {
+
+
+        var decoded = jwt.verify(accessToken, 'jwtSecret');
+
+        User.findOne({_id: decoded.client.userId}, function (err, user) {
             if (err) {
+
                 return callback(err);
             }
 
-            // No token found
-            if (!token) {
+            // No user found
+            if (!user) {
                 return callback(null, false);
             }
 
-            User.findOne({_id: token.userId}, function (err, user) {
-                if (err) {
-                    return callback(err);
-                }
+            console.log("User == ", user);
 
-                // No user found
-                if (!user) {
-                    return callback(null, false);
-                }
-
-                // Simple example with no scope
-                callback(null, user, {scope: '*'});
-            });
+           callback(null, user, {scope: '*'})
         });
+
     }
 ));
+*/
 
 passport.use(new GoogleStrategy({
         clientID: '229011235874-iimjsj4ch55a5n67itije3pfq12ueuh2.apps.googleusercontent.com',
@@ -114,5 +116,5 @@ passport.deserializeUser(function (user, done) {
 });
 
 exports.isClientAuthenticated = passport.authenticate('client-basic', {session: false});
-exports.isAuthenticated = passport.authenticate(['basic', 'bearer'], {session: false});
+exports.isAuthenticated = passport.authenticate(['basic'], {session: false});
 //exports.isAuthenticated = [];

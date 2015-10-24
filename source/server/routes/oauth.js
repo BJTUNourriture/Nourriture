@@ -17,6 +17,7 @@ var verifyJwt = expressJwt({
     getToken: function fromHeaderOrQuerystring(req) {
         if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Topkek')
             return req.headers.authorization.split(' ')[1];
+
         return null;
     }
 });
