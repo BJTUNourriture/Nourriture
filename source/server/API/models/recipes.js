@@ -8,8 +8,9 @@ var recipesSchema = new mongoose.Schema({
 		required : true
 	},
 	author_id : {
-		type : String,
-		required : true
+		type : mongoose.Schema.ObjectId,
+		required : true,
+		ref : 'User'
 	},
 	author_name : {
 		type : String,
@@ -18,12 +19,13 @@ var recipesSchema = new mongoose.Schema({
 	description : String,
 	type : {
 		id_type : {
-			type : String,
-			required : true
+			type : mongoose.Schema.ObjectId,
+			required : true,
+			ref : 'Types'
 		},
 		name : {
 			type : String,
-			required : true,
+			required : true
 		}
 	},
 	date_posted : {
@@ -58,8 +60,9 @@ var recipesSchema = new mongoose.Schema({
 	},
 	comments : [{
 		id_author : {
-			type : String,
-			required : true
+			type : mongoose.Schema.ObjectId,
+			required : true,
+			ref : 'User'
 		},
 		name_author : {
 			type : String,
@@ -93,8 +96,9 @@ var recipesSchema = new mongoose.Schema({
 	ingredients : {
 		type : [{
 			id_ingredient : {
-				type : String,
-				required : true
+				type : mongoose.Schema.ObjectId,
+				required : true,
+				ref : 'Ingredients'
 			},
 			name_ingredient : {
 				type : String,

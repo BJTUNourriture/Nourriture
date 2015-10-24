@@ -60,6 +60,12 @@ router.route('/users/sign-in')
 router.route('/users')
     .get(/*authController.isAuthenticated,*/ verifyJwt, userController.getUsers);
 
+router.route('/users/id/:id')
+    .put(authController.isAuthenticated, userController.putUserById);
+
+router.route('/users/username/:username')
+    .put(authController.isAuthenticated, userController.putUserByUsername);
+
 router.route('/users/register')
     .post(userController.postUser);
 
@@ -128,6 +134,15 @@ router.route('/groups/name/:name')
     .put(groupsController.putGroupByName)
     .get(groupsController.getGroupByName);
 
+router.route('/groups/:group_id/add/:user_id')
+    .put(groupsController.addUserToGroup);
+
+router.route('/groups/:group_id/remove/:user_id')
+    .put(groupsController.removeUserToGroup);
+
+router.route('/groups/access/:id')
+    .put(groupsController.putAccessRight);
+
 
 /*
  ** Endpoints for Recipes
@@ -149,27 +164,26 @@ router.route('/recipes/title/:title')
     .get(recipesController.getRecipeByTitle);
 
 /*
- ** Endpoints for Allergies
- */
-/*
- // full JSON endpoints
- router.route('/allergies')
- .post(allergiesController.postAllergy)
- .delete(allergiesController.deleteAllergies)
- .get(allergiesController.getAllAllergies)
+** Endpoints for Allergies
+*/
 
- // endpoints by id
- router.route('/allergies/id/:id')
- .put(allergiesController.putAllergyById)
- .delete(allergiesController.deleteAllergyById)
- .get(allergiesController.getAllergyById)
+// full JSON endpoints
+router.route('/allergies')
+    .post(allergiesController.postAllergy)
+    .delete(allergiesController.deleteAllergies)
+    .get(allergiesController.getAllAllergies);
 
- // endpoints by name
- router.rout('/allergies/name/:name')
- .put(allergiesController.putAllergyByName)
- .delete(allergiesController.deleteAllergyByName)
- .get(allergiesController.getAllergyByName)
- */
+// endpoints by id
+router.route('/allergies/id/:id')
+    .put(allergiesController.putAllergyById)
+    .delete(allergiesController.deleteAllergyById)
+    .get(allergiesController.getAllergyById);
+
+// endpoints by name
+router.route('/allergies/name/:name')
+    .put(allergiesController.putAllergyByName)
+    .delete(allergiesController.deleteAllergyByName)
+    .get(allergiesController.getAllergyByName);
 
 /*
  ** Endpoints for Search

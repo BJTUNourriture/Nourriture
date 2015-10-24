@@ -679,6 +679,96 @@
     }
   },
   {
+    "type": "put",
+    "url": "/groups/:group_id/add/:user_id",
+    "title": "Add User to a group",
+    "name": "addUserToGroup",
+    "group": "Groups",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "group_id",
+            "description": "<p>Group id</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>User id</p> "
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The id of the group was not found</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"The name was not found.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/groups.js",
+    "groupTitle": "Groups",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>Id of the group</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Name of the group</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Description of the group</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "admin_id",
+            "description": "<p>ID of the group's owner</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "tags",
+            "description": "<p>List of the tags of the group</p> "
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "delete",
     "url": "/groups/id/:id",
     "title": "Delete Group by id",
@@ -1213,6 +1303,91 @@
   },
   {
     "type": "put",
+    "url": "/groups/access/:id",
+    "title": "Update access right for user in group",
+    "name": "putAccessRight",
+    "group": "Groups",
+    "version": "0.1.0",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Group successfully updated!</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response",
+          "content": "    HTTP/1.1 200 OK\n\t  {\n\t\t\"message\" : \"Group successfully updated!\"\n\t  }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/groups.js",
+    "groupTitle": "Groups",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>User ID to update</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "access",
+            "description": "<p>Access right to give to user</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "    {\n\t\t\"user_id\": \"561fc840d6c25173533e267f\",\n\t\t\"access\": \"2\"\n\t\t}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Group not found.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "  HTTP/1.1 404 Bad Request\n  {\n\t\"message\" : \"Group not found.\"\n  }",
+          "type": "json"
+        },
+        {
+          "title": "Bad key sent",
+          "content": "  HTTP/1.1 400 Bad Request\n  {\n\t\"message\" : \"The key <key> does not exist for Groups.\"\n  }",
+          "type": "json"
+        },
+        {
+          "title": "Bad Value Definition",
+          "content": "  HTTP/1.1 200 OK\n  {\n\t...\n\tmongoose custom error\n\t...\n  }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "put",
     "url": "/groups/id/:id",
     "title": "Update a group by Id",
     "name": "putGroupById",
@@ -1397,6 +1572,96 @@
           "type": "json"
         }
       ]
+    }
+  },
+  {
+    "type": "put",
+    "url": "/groups/:group_id/remove/:user_id",
+    "title": "remove User to a group",
+    "name": "removeUserToGroup",
+    "group": "Groups",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "group_id",
+            "description": "<p>Group id</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>User id</p> "
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The id of the group was not found</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"The name was not found.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/groups.js",
+    "groupTitle": "Groups",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>Id of the group</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Name of the group</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Description of the group</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "admin_id",
+            "description": "<p>ID of the group's owner</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "tags",
+            "description": "<p>List of the tags of the group</p> "
+          }
+        ]
+      }
     }
   },
   {
@@ -2448,7 +2713,7 @@
           },
           {
             "group": "Success 200",
-            "type": "<p>String</p> ",
+            "type": "<p>ObjectId</p> ",
             "optional": false,
             "field": "author_id",
             "description": "<p>Id of the author of the recipe</p> "
@@ -2476,7 +2741,7 @@
           },
           {
             "group": "Success 200",
-            "type": "<p>String</p> ",
+            "type": "<p>ObjectId</p> ",
             "optional": false,
             "field": "type.id_type",
             "description": "<p>Id of the type</p> "
@@ -2539,7 +2804,7 @@
           },
           {
             "group": "Success 200",
-            "type": "<p>String</p> ",
+            "type": "<p>ObjectId</p> ",
             "optional": false,
             "field": "ingredients.id_ingredient",
             "description": "<p>Id of the ingredient</p> "
@@ -2567,7 +2832,7 @@
           },
           {
             "group": "Success 200",
-            "type": "<p>String</p> ",
+            "type": "<p>ObjectId</p> ",
             "optional": false,
             "field": "comments.id_author",
             "description": "<p>Id of the author of the comment</p> "
@@ -2706,7 +2971,7 @@
           },
           {
             "group": "Success 200",
-            "type": "<p>String</p> ",
+            "type": "<p>ObjectId</p> ",
             "optional": false,
             "field": "author_id",
             "description": "<p>Id of the author of the recipe</p> "
@@ -2734,7 +2999,7 @@
           },
           {
             "group": "Success 200",
-            "type": "<p>String</p> ",
+            "type": "<p>ObjectId</p> ",
             "optional": false,
             "field": "type.id_type",
             "description": "<p>Id of the type</p> "
@@ -2797,7 +3062,7 @@
           },
           {
             "group": "Success 200",
-            "type": "<p>String</p> ",
+            "type": "<p>ObjectId</p> ",
             "optional": false,
             "field": "ingredients.id_ingredient",
             "description": "<p>Id of the ingredient</p> "
@@ -2825,7 +3090,7 @@
           },
           {
             "group": "Success 200",
-            "type": "<p>String</p> ",
+            "type": "<p>ObjectId</p> ",
             "optional": false,
             "field": "comments.id_author",
             "description": "<p>Id of the author of the comment</p> "
@@ -2964,7 +3229,7 @@
           },
           {
             "group": "Success 200",
-            "type": "<p>String</p> ",
+            "type": "<p>ObjectId</p> ",
             "optional": false,
             "field": "author_id",
             "description": "<p>Id of the author of the recipe</p> "
@@ -2992,7 +3257,7 @@
           },
           {
             "group": "Success 200",
-            "type": "<p>String</p> ",
+            "type": "<p>ObjectId</p> ",
             "optional": false,
             "field": "type.id_type",
             "description": "<p>Id of the type</p> "
@@ -3055,7 +3320,7 @@
           },
           {
             "group": "Success 200",
-            "type": "<p>String</p> ",
+            "type": "<p>ObjectId</p> ",
             "optional": false,
             "field": "ingredients.id_ingredient",
             "description": "<p>Id of the ingredient</p> "
@@ -3083,7 +3348,7 @@
           },
           {
             "group": "Success 200",
-            "type": "<p>String</p> ",
+            "type": "<p>ObjectId</p> ",
             "optional": false,
             "field": "comments.id_author",
             "description": "<p>Id of the author of the comment</p> "
@@ -3211,7 +3476,7 @@
           },
           {
             "group": "Parameter",
-            "type": "<p>String</p> ",
+            "type": "<p>ObjectId</p> ",
             "optional": false,
             "field": "author_id",
             "description": "<p>Id of the author of the recipe</p> "
@@ -3239,7 +3504,7 @@
           },
           {
             "group": "Parameter",
-            "type": "<p>String</p> ",
+            "type": "<p>ObjectId</p> ",
             "optional": false,
             "field": "type.id_type",
             "description": "<p>Id of the type</p> "
@@ -3302,7 +3567,7 @@
           },
           {
             "group": "Parameter",
-            "type": "<p>String</p> ",
+            "type": "<p>ObjectId</p> ",
             "optional": false,
             "field": "ingredients.id_ingredient",
             "description": "<p>Id of the ingredient</p> "
@@ -3330,7 +3595,7 @@
           },
           {
             "group": "Parameter",
-            "type": "<p>String</p> ",
+            "type": "<p>ObjectId</p> ",
             "optional": false,
             "field": "comments.id_author",
             "description": "<p>Id of the author of the comment</p> "
@@ -3430,7 +3695,7 @@
           },
           {
             "group": "Parameter",
-            "type": "<p>String</p> ",
+            "type": "<p>ObjectId</p> ",
             "optional": true,
             "field": "author_id",
             "description": "<p>Id of the author of the recipe</p> "
@@ -3458,7 +3723,7 @@
           },
           {
             "group": "Parameter",
-            "type": "<p>String</p> ",
+            "type": "<p>ObjectId</p> ",
             "optional": false,
             "field": "type.id_type",
             "description": "<p>Id of the type</p> "
@@ -3521,7 +3786,7 @@
           },
           {
             "group": "Parameter",
-            "type": "<p>String</p> ",
+            "type": "<p>ObjectId</p> ",
             "optional": true,
             "field": "ingredients.id_ingredient",
             "description": "<p>Id of the ingredient</p> "
@@ -3549,7 +3814,7 @@
           },
           {
             "group": "Parameter",
-            "type": "<p>String</p> ",
+            "type": "<p>ObjectId</p> ",
             "optional": true,
             "field": "comments.id_author",
             "description": "<p>Id of the author of the comment</p> "
@@ -3706,7 +3971,7 @@
           },
           {
             "group": "Parameter",
-            "type": "<p>String</p> ",
+            "type": "<p>ObjectId</p> ",
             "optional": true,
             "field": "author_id",
             "description": "<p>Id of the author of the recipe</p> "
@@ -3734,7 +3999,7 @@
           },
           {
             "group": "Parameter",
-            "type": "<p>String</p> ",
+            "type": "<p>ObjectId</p> ",
             "optional": false,
             "field": "type.id_type",
             "description": "<p>Id of the type</p> "
@@ -3797,7 +4062,7 @@
           },
           {
             "group": "Parameter",
-            "type": "<p>String</p> ",
+            "type": "<p>ObjectId</p> ",
             "optional": true,
             "field": "ingredients.id_ingredient",
             "description": "<p>Id of the ingredient</p> "
@@ -3825,7 +4090,7 @@
           },
           {
             "group": "Parameter",
-            "type": "<p>String</p> ",
+            "type": "<p>ObjectId</p> ",
             "optional": true,
             "field": "comments.id_author",
             "description": "<p>Id of the author of the comment</p> "
@@ -4464,6 +4729,56 @@
     }
   },
   {
+    "type": "put",
+    "url": "/users/id/:id",
+    "title": "Update a User by Id",
+    "name": "putUserById",
+    "group": "User",
+    "version": "0.1.0",
+    "filename": "API/controllers/users.js",
+    "groupTitle": "User",
+    "parameter": {
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "\n[\n\t{\n\t\t\"username\": \"Julien\",\n\t\t\"password\": \"$2a$05$9.Imko7xVyvWwPcWGf57TOKNTj/JvW9UeByERRPMbvNbCHwXgb5pu\",\n\t\t\"email\": \"julien@usa.gov\",\n\t\t\"alergy\" : \"[\"Gluten\",\"Egs\"]\",\n\t\t\"religion\": \"[\"boudism\",\"Islam\"]\",\n\t\t\"pictures\" : [{\n\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t}],\n\t\t\"joined_groups\" : [\"561fc840d6c25173533e267f\", \"561fc840d6c25173533e267f\"],\n\t\t\"like\" : [{\n\t\t\t\t\"id_ingredient\" : \"548ed30d6c2257336f5675\",\n\t\t\t\t\"name_ingredient\" : \"Carotte\"\n\t\t},\n\t\t{\n\t\t\t\t\"id_ingredient\" : \"246kf584a9g784312408a442\",\n\t\t\t\t\"name_ingredient\" : \"Potato\"\n\t\t}],\n\t\t\"dislike\" : [{\n\t\t\t\t\"id_ingredient\" : \"302fvd338d2c30185535g805\",\n\t\t\t\t\"name_ingredient\" : \"Bean\"\n\t\t}],\n\t\t\"follow\" :  [{\n\t\t\t\t\"id_person\" : \"689ed300d6c22573533g895\",\n\t\t\t\t\"username\" : \"bananaman\"\n\t\t}]\n\t}\n]",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "put",
+    "url": "/users/username/:username",
+    "title": "Update a User by username",
+    "name": "putUserByName",
+    "group": "User",
+    "version": "0.1.0",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "message",
+            "description": "<p>User successfully updated!</p> "
+          }
+        ]
+      }
+    },
+    "filename": "API/controllers/users.js",
+    "groupTitle": "User",
+    "parameter": {
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "\n[\n\t{\n\t\t\"username\": \"Julien\",\n\t\t\"password\": \"$2a$05$9.Imko7xVyvWwPcWGf57TOKNTj/JvW9UeByERRPMbvNbCHwXgb5pu\",\n\t\t\"email\": \"julien@usa.gov\",\n\t\t\"alergy\" : \"[\"Gluten\",\"Egs\"]\",\n\t\t\"religion\": \"[\"boudism\",\"Islam\"]\",\n\t\t\"pictures\" : [{\n\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t}],\n\t\t\"joined_groups\" : [\"561fc840d6c25173533e267f\", \"561fc840d6c25173533e267f\"],\n\t\t\"like\" : [{\n\t\t\t\t\"id_ingredient\" : \"548ed30d6c2257336f5675\",\n\t\t\t\t\"name_ingredient\" : \"Carotte\"\n\t\t},\n\t\t{\n\t\t\t\t\"id_ingredient\" : \"246kf584a9g784312408a442\",\n\t\t\t\t\"name_ingredient\" : \"Potato\"\n\t\t}],\n\t\t\"dislike\" : [{\n\t\t\t\t\"id_ingredient\" : \"302fvd338d2c30185535g805\",\n\t\t\t\t\"name_ingredient\" : \"Bean\"\n\t\t}],\n\t\t\"follow\" :  [{\n\t\t\t\t\"id_person\" : \"689ed300d6c22573533g895\",\n\t\t\t\t\"username\" : \"bananaman\"\n\t\t}]\n\t}\n]",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
     "type": "get",
     "url": "/users/",
     "title": "Retrive all Users",
@@ -4477,7 +4792,7 @@
             "group": "Success 200",
             "optional": false,
             "field": "message",
-            "description": "<p>Recipe succesfully created!</p> "
+            "description": "<p>User succesfully created!</p> "
           }
         ]
       }
@@ -4485,77 +4800,10 @@
     "filename": "API/controllers/users.js",
     "groupTitle": "Users",
     "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "<p>String</p> ",
-            "optional": false,
-            "field": "username",
-            "description": "<p>Name of the user</p> "
-          },
-          {
-            "group": "Parameter",
-            "type": "<p>String</p> ",
-            "optional": false,
-            "field": "password",
-            "description": "<p>Passworld of the user</p> "
-          },
-          {
-            "group": "Parameter",
-            "type": "<p>String</p> ",
-            "optional": false,
-            "field": "email",
-            "description": "<p>Email of the user</p> "
-          },
-          {
-            "group": "Parameter",
-            "type": "<p>String[]</p> ",
-            "optional": true,
-            "field": "alergy",
-            "description": "<p>List of allergy</p> "
-          },
-          {
-            "group": "Parameter",
-            "type": "<p>String</p> ",
-            "optional": true,
-            "field": "religion",
-            "description": "<p>Religion of the user</p> "
-          },
-          {
-            "group": "Parameter",
-            "type": "<p>String[]</p> ",
-            "optional": true,
-            "field": "likedreceip",
-            "description": ""
-          },
-          {
-            "group": "Parameter",
-            "type": "<p>String[]</p> ",
-            "optional": true,
-            "field": "photos",
-            "description": "<p>List of user photos</p> "
-          },
-          {
-            "group": "Parameter",
-            "type": "<p>String[]</p> ",
-            "optional": true,
-            "field": "group",
-            "description": ""
-          },
-          {
-            "group": "Parameter",
-            "type": "<p>String</p> ",
-            "optional": true,
-            "field": "calories",
-            "description": ""
-          }
-        ]
-      },
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "\n[\n   {\n     \"username\": \"Julien\",\n     \"password\": \"$2a$05$9.Imko7xVyvWwPcWGf57TOKNTj/JvW9UeByERRPMbvNbCHwXgb5pu\",\n     \"email\": \"julien@usa.gov\",\n     \"alergy\" : \"[\"Gluten\",\"Egs\"]\",\n     \"religion\": \"\",\n     \"likedreceip\" : \"[\"Tripes à la mode de Caen\", \"Tarte marinée à la grenadine\", \"Farci poitevin\", \" Roubignolles de porc à la bechamel\"]\",\n     \"photos\" : \"[]\",\n     \"groups\" : \"[\"J aime le Chocolat Noir\", \"Aidez moi à Grossir\", \"Objectif 8000 calories par jour\"]\",\n     \"calories\" : \"\"\n   }\n]",
+          "content": "\n[\n\t{\n\t\t\"username\": \"Julien\",\n\t\t\"password\": \"$2a$05$9.Imko7xVyvWwPcWGf57TOKNTj/JvW9UeByERRPMbvNbCHwXgb5pu\",\n\t\t\"email\": \"julien@usa.gov\",\n\t\t\"alergy\" : \"[\"Gluten\",\"Egs\"]\",\n\t\t\"religion\": \"[\"boudism\",\"Islam\"]\",\n\t\t\"pictures\" : [{\n\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t}],\n\t\t\"joined_groups\" : [\"561fc840d6c25173533e267f\", \"561fc840d6c25173533e267f\"],\n\t\t\"like\" : [{\n\t\t\t\t\"id_ingredient\" : \"548ed30d6c2257336f5675\",\n\t\t\t\t\"name_ingredient\" : \"Carotte\"\n\t\t},\n\t\t{\n\t\t\t\t\"id_ingredient\" : \"246kf584a9g784312408a442\",\n\t\t\t\t\"name_ingredient\" : \"Potato\"\n\t\t}],\n\t\t\"dislike\" : [{\n\t\t\t\t\"id_ingredient\" : \"302fvd338d2c30185535g805\",\n\t\t\t\t\"name_ingredient\" : \"Bean\"\n\t\t}],\n\t\t\"follow\" :  [{\n\t\t\t\t\"id_person\" : \"689ed300d6c22573533g895\",\n\t\t\t\t\"username\" : \"bananaman\"\n\t\t}]\n\t}\n]",
           "type": "json"
         }
       ]
