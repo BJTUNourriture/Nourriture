@@ -164,9 +164,7 @@ exports.postSearchIngredients = function (req, res, flag) {
 					else if (docs.length <= 0)
 						return (res.status(404).send({message : 'Nothing find for this search'}))
 					else{
-						var toto = res.json(docs);
-						toto['metadata'] = "lel"
-						return (toto);
+						return (res.json(docs));
 					}
 				}
 		).skip((items_page - 1) * items_number).sort(query).limit(items_number);
