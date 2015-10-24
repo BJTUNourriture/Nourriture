@@ -68,6 +68,13 @@ var Ingredients = require('../models/ingredients');
 *							 }
 *				   }]
 *	  }
+*
+* @apiError message Nothing find for this search
+* @apiErrorExample Invalid Parameter Value
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "You must at least set a name or a tag to search"
+*     }
 */
 
 exports.postSearchIngredients = function (req, res, flag) {
