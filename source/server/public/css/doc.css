@@ -81,3 +81,7 @@ body > .container {
 code {
     font-size: 80%;
 }
+
+.img-responsive {
+    margin: 0 auto;
+}
