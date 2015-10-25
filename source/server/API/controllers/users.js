@@ -296,6 +296,31 @@ exports.putUserById = function (req, res) {
       return (1);
   }
 
+/**
+* @api {get} /users/verify-email/:token Verify a user email
+* @apiName verifyEmail
+* @apiGroup Users
+* @apiVersion 0.1.0
+*
+* @apiParam {String} token Token to verify
+*
+* @apiSuccess message Email confirmed successfully.
+* @apiSuccessExample Success-Response:
+*     HTTP/1.1 200 OK
+*   {
+*   "message" : "Email confirmed successfully."
+*   }
+*
+* @apiError message Email already confirmed or bad token.
+*
+* @apiErrorExample Invalid Parameter Value
+*   HTTP/1.1 404 Bad Request
+*   {
+*   "message" : "Email already confirmed or bad token."
+*   }
+*
+*/
+
 exports.verifyEmail = function (req, res, err) {
     emailToken.findOne({token : req.params.token}, function(err, doc) {
         if (err)
