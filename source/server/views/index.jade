@@ -9,7 +9,7 @@ html
     body
         div.container
             div.col-md-12.t-center
-                img(src="media/logo/nourriture.svg" style="width:350px; height:auto;")
+                img(src="media/logo/nourriture.svg" class="img-responsive" style="width:350px; height:auto;")
 
 
             div.col-md-12
@@ -34,7 +34,7 @@ html
                         li First create a new clients
                             a(href="doc-auth/#api-OAuth")   Api doc auth
                         li.
-                            Enter this URL in a web browser http://localhost:3000/api/oauth2/authorize?client_id=this_is_my_id&response_type=code&redirect_uri=http://localhost:3000<br>
+                            Enter this URL in a web browser<span class="wb"> http://localhost:3000/api/oauth2/authorize?client_id=this_is_my_id&response_type=code&redirect_uri=http://localhost:3000</span><br>
                             client_id is the id of the user's client<br>
                             The url will give you back an authorization code. It will give you back an authorization code
 
