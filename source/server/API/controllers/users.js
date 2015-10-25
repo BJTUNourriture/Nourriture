@@ -12,7 +12,7 @@
 * @apiParam {String} pictures.thumbnail_url Url of the thumbnail version of the picture
 * @apiParam {String} pictures.medium_sized_url Url of the medium size version of the picture
 * @apiParam {String} [pictures.big_sized_url] Url of the big size version of the picture
-* @apiParam {String[]} [joined_groups]
+* @apiParam {Object[]} [joined_groups]
 * @apiParam {Object[]} [like] List of the ingredients a person like
 * @apiParam {ObjectId} like.id_ingredient Id of the ingredient liked
 * @apiParam {String} like.name_ingredient Name of the ingredient liked
@@ -23,6 +23,7 @@
 * @apiParam {ObjectId} follow.id_person Id of the person followed
 * @apiParam {String} follow.username Username of the person followed
 */
+
 /**
 * @apiDefine UserRequestJSON
 *
@@ -31,8 +32,8 @@
 *	[
 *		{
 *			"username": "Julien",
-*			"password": "$2a$05$9.Imko7xVyvWwPcWGf57TOKNTj/JvW9UeByERRPMbvNbCHwXgb5pu",
 *			"email": "julien@usa.gov",
+*
 *			"alergy" : "["Gluten","Egs"]",
 *			"religion": "["boudism","Islam"]",
 *			"pictures" : [{
@@ -40,7 +41,6 @@
 *					"medium_sized_url" : "/medium_sized/1.jpg",
 *					"big_sized_url" : "/big_sized/1.jpg"
 *			}],
-*			"joined_groups" : ["561fc840d6c25173533e267f", "561fc840d6c25173533e267f"],
 *			"like" : [{
 *					"id_ingredient" : "548ed30d6c2257336f5675",
 *					"name_ingredient" : "Carotte"
@@ -71,6 +71,32 @@ var emailToken = require('../models/email-token-verification');
 var User = require('../models/users');
 //var Create_token = require('../../oauth/misc/create_token_at_init_user');
 
+/**
+* @api {post} /users/ Create a new User
+* @apiName postUser
+* @apiGroup Users
+* @apiVersion 0.1.0
+*
+* @apiUse UserObjectPostParam
+*
+* @apiUse UserRequestJSON
+*
+* @apiSuccess message User succesfully created!
+*
+* @apiSuccessExample Success-Response
+*     HTTP/1.1 200 OK
+*   {
+*   "message" : "User succesfully created!"
+*   }
+*
+* @apiErrorExample Bad Value Definition
+*   HTTP/1.1 400 BAD REQUEST
+*   {
+*   ...
+*   mongoose custom error
+*   ...
+*   }
+*/
 exports.postUser = function (req, res) {
 
 
