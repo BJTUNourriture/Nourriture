@@ -1,39 +1,46 @@
 doctype html
 html
     head
+        meta(name="viewport" content="width=device-width, initial-scale=1")
         title Nourriture Documentation
         style
+            include ../public/css/bootstrap.min.css
             include ../public/css/doc.css
-    body.container
-        h1.t-center Nourriture
-        p.
-            Nourriture is a project developped in ExpressJs for Backend. And in AngularJS and Android for the front end.
-            This project permit to connect people with ingredients. With Nourriture, innovative food suppliers and
-            app developers have the most comprehensive platform
-            from which they can quickly and accurately create relevant
-            tools for consumers to make informed decisions about food.
+    body
+        div.container
+            div.col-md-12.t-center
+                img(src="media/logo/nourriture.svg" style="width:350px; height:auto;")
 
-        ul
-            li
-                a(href="/doc-models") Api doc models
-            li
+
+            div.col-md-12
                 p.
-                    OAuth is a system to double authenticate. It permit to share our API to other developers.
-                    To use OAuth in our website you need to do this steps.
-                ol
-                    li First create a new clients
-                        a(href="doc-auth/#api-OAuth")   Api doc auth
-                    li.
-                        Enter this URL in a web browser http://localhost:3000/api/oauth2/authorize?client_id=this_is_my_id&response_type=code&redirect_uri=http://localhost:3000<br>
-                        client_id is the id of the user's client<br>
-                        The url will give you back an authorization code. It will give you back an authorization code
+                    Nourriture is a project developped in ExpressJs for Backend. And in AngularJS and Android for the front end.
+                    This project permit to connect people with ingredients. With Nourriture, innovative food suppliers and
+                    app developers have the most comprehensive platform
+                    from which they can quickly and accurately create relevant
+                    tools for consumers to make informed decisions about food.
 
-                    li.
-                        Use this POST endpoint to have a token <a href="doc-auth/#api-OAuthToken-createToken">api/oauth2/token</a>. <br>
-                        You need to pass <strong>name of client</strong> and <strong>secret of the client</strong> with <strong>Basic</strong>
+                ul
+                    li
+                        a(href="/doc-models") Api doc models
+                    li
+                        p.
+                            OAuth is a system to double authenticate. It permit to share our API to other developers.
+                            To use OAuth in our website you need to do this steps.
+                        ol
+                            li First create a new clients
+                                a(href="doc-auth/#api-OAuth")   Api doc auth
+                            li.
+                                Enter this URL in a web browser http://localhost:3000/api/oauth2/authorize?client_id=this_is_my_id&response_type=code&redirect_uri=http://localhost:3000<br>
+                                client_id is the id of the user's client<br>
+                                The url will give you back an authorization code. It will give you back an authorization code
+
+                            li.
+                                Use this POST endpoint to have a token <a href="doc-auth/#api-OAuthToken-createToken">api/oauth2/token</a>. <br>
+                                You need to pass <strong>name of client</strong> and <strong>secret of the client</strong> with <strong>Basic</strong>
 
 
-                    li After just pass the token to the header Topkek access_token
+                            li After just pass the token to the header Topkek access_token
 
 
 
