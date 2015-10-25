@@ -264,6 +264,26 @@
           "type": "json"
         }
       ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>ObjectId</p> ",
+            "optional": false,
+            "field": "ingredients.id_ingredient",
+            "description": "<p>Id of the ingredient of the allergy</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "ingredients.name_ingredient",
+            "description": "<p>Name of the ingredient of the allergy</p> "
+          }
+        ]
+      }
     }
   },
   {
@@ -282,6 +302,20 @@
             "optional": false,
             "field": "id",
             "description": "<p>Allergies unique ID</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>ObjectId</p> ",
+            "optional": false,
+            "field": "ingredients.id_ingredient",
+            "description": "<p>Id of the ingredient of the allergy</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "ingredients.name_ingredient",
+            "description": "<p>Name of the ingredient of the allergy</p> "
           }
         ]
       }
@@ -365,6 +399,20 @@
             "optional": false,
             "field": "name",
             "description": "<p>Allergy partial or full name</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>ObjectId</p> ",
+            "optional": false,
+            "field": "ingredients.id_ingredient",
+            "description": "<p>Id of the ingredient of the allergy</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "ingredients.name_ingredient",
+            "description": "<p>Name of the ingredient of the allergy</p> "
           }
         ]
       }
@@ -475,7 +523,7 @@
           {
             "group": "Parameter",
             "type": "<p>String</p> ",
-            "optional": true,
+            "optional": false,
             "field": "name",
             "description": "<p>Name of the allergy</p> "
           },
@@ -492,6 +540,20 @@
             "optional": true,
             "field": "ingredients",
             "description": "<p>List of the ingredients the allergy is based on</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>ObjectId</p> ",
+            "optional": false,
+            "field": "ingredients.id_ingredient",
+            "description": "<p>Id of the ingredient of the allergy</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "ingredients.name_ingredient",
+            "description": "<p>Name of the ingredient of the allergy</p> "
           }
         ]
       },
@@ -536,6 +598,20 @@
             "optional": true,
             "field": "ingredients",
             "description": "<p>List of the ingredients the allergy is based on</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>ObjectId</p> ",
+            "optional": false,
+            "field": "ingredients.id_ingredient",
+            "description": "<p>Id of the ingredient of the allergy</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "ingredients.name_ingredient",
+            "description": "<p>Name of the ingredient of the allergy</p> "
           }
         ]
       },
@@ -637,6 +713,20 @@
             "optional": true,
             "field": "ingredients",
             "description": "<p>List of the ingredients the allergy is based on</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>ObjectId</p> ",
+            "optional": false,
+            "field": "ingredients.id_ingredient",
+            "description": "<p>Id of the ingredient of the allergy</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "ingredients.name_ingredient",
+            "description": "<p>Name of the ingredient of the allergy</p> "
           }
         ]
       },
@@ -4783,14 +4873,45 @@
     }
   },
   {
+    "type": "get",
+    "url": "/users/",
+    "title": "Retrive all Users",
+    "name": "postUser",
+    "group": "Users",
+    "version": "0.1.0",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "message",
+            "description": "<p>User succesfully created!</p> "
+          }
+        ]
+      }
+    },
+    "filename": "API/controllers/users.js",
+    "groupTitle": "Users",
+    "parameter": {
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "\n[\n\t{\n\t\t\"username\": \"Julien\",\n\t\t\"password\": \"$2a$05$9.Imko7xVyvWwPcWGf57TOKNTj/JvW9UeByERRPMbvNbCHwXgb5pu\",\n\t\t\"email\": \"julien@usa.gov\",\n\t\t\"alergy\" : \"[\"Gluten\",\"Egs\"]\",\n\t\t\"religion\": \"[\"boudism\",\"Islam\"]\",\n\t\t\"pictures\" : [{\n\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t}],\n\t\t\"joined_groups\" : [\"561fc840d6c25173533e267f\", \"561fc840d6c25173533e267f\"],\n\t\t\"like\" : [{\n\t\t\t\t\"id_ingredient\" : \"548ed30d6c2257336f5675\",\n\t\t\t\t\"name_ingredient\" : \"Carotte\"\n\t\t},\n\t\t{\n\t\t\t\t\"id_ingredient\" : \"246kf584a9g784312408a442\",\n\t\t\t\t\"name_ingredient\" : \"Potato\"\n\t\t}],\n\t\t\"dislike\" : [{\n\t\t\t\t\"id_ingredient\" : \"302fvd338d2c30185535g805\",\n\t\t\t\t\"name_ingredient\" : \"Bean\"\n\t\t}],\n\t\t\"follow\" :  [{\n\t\t\t\t\"id_person\" : \"689ed300d6c22573533g895\",\n\t\t\t\t\"username\" : \"bananaman\"\n\t\t}]\n\t}\n]",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
     "type": "put",
     "url": "/users/id/:id",
     "title": "Update a User by Id",
     "name": "putUserById",
-    "group": "User",
+    "group": "Users",
     "version": "0.1.0",
     "filename": "API/controllers/users.js",
-    "groupTitle": "User",
+    "groupTitle": "Users",
     "parameter": {
       "examples": [
         {
@@ -4806,37 +4927,6 @@
     "url": "/users/username/:username",
     "title": "Update a User by username",
     "name": "putUserByName",
-    "group": "User",
-    "version": "0.1.0",
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "optional": false,
-            "field": "message",
-            "description": "<p>User successfully updated!</p> "
-          }
-        ]
-      }
-    },
-    "filename": "API/controllers/users.js",
-    "groupTitle": "User",
-    "parameter": {
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "\n[\n\t{\n\t\t\"username\": \"Julien\",\n\t\t\"password\": \"$2a$05$9.Imko7xVyvWwPcWGf57TOKNTj/JvW9UeByERRPMbvNbCHwXgb5pu\",\n\t\t\"email\": \"julien@usa.gov\",\n\t\t\"alergy\" : \"[\"Gluten\",\"Egs\"]\",\n\t\t\"religion\": \"[\"boudism\",\"Islam\"]\",\n\t\t\"pictures\" : [{\n\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t}],\n\t\t\"joined_groups\" : [\"561fc840d6c25173533e267f\", \"561fc840d6c25173533e267f\"],\n\t\t\"like\" : [{\n\t\t\t\t\"id_ingredient\" : \"548ed30d6c2257336f5675\",\n\t\t\t\t\"name_ingredient\" : \"Carotte\"\n\t\t},\n\t\t{\n\t\t\t\t\"id_ingredient\" : \"246kf584a9g784312408a442\",\n\t\t\t\t\"name_ingredient\" : \"Potato\"\n\t\t}],\n\t\t\"dislike\" : [{\n\t\t\t\t\"id_ingredient\" : \"302fvd338d2c30185535g805\",\n\t\t\t\t\"name_ingredient\" : \"Bean\"\n\t\t}],\n\t\t\"follow\" :  [{\n\t\t\t\t\"id_person\" : \"689ed300d6c22573533g895\",\n\t\t\t\t\"username\" : \"bananaman\"\n\t\t}]\n\t}\n]",
-          "type": "json"
-        }
-      ]
-    }
-  },
-  {
-    "type": "get",
-    "url": "/users/",
-    "title": "Retrive all Users",
-    "name": "postUser",
     "group": "Users",
     "version": "0.1.0",
     "success": {
@@ -4846,7 +4936,7 @@
             "group": "Success 200",
             "optional": false,
             "field": "message",
-            "description": "<p>User succesfully created!</p> "
+            "description": "<p>User successfully updated!</p> "
           }
         ]
       }

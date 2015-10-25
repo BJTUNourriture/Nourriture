@@ -3,9 +3,11 @@
 /**
 * @apiDefine AllergyObjectPostParam
 *
-* @apiParam {String} [name] Name of the allergy
+* @apiParam {String} name Name of the allergy
 * @apiParam {String} [description] Description of the allergy
 * @apiParam {Object[]} [ingredients] List of the ingredients the allergy is based on
+* @apiParam {ObjectId} ingredients.id_ingredient Id of the ingredient of the allergy
+* @apiParam {String} ingredients.name_ingredient Name of the ingredient of the allergy
 */
 
 /**
@@ -14,6 +16,8 @@
 * @apiParam {String} [name] Name of the allergy
 * @apiParam {String} [description] Description of the allergy
 * @apiParam {Object[]} [ingredients] List of the ingredients the allergy is based on
+* @apiParam {ObjectId} ingredients.id_ingredient Id of the ingredient of the allergy
+* @apiParam {String} ingredients.name_ingredient Name of the ingredient of the allergy
 */
 
 /**
@@ -23,6 +27,8 @@
 * @apiSuccess {String} name Name of the allergy
 * @apiSuccess {String} [description] Description of the allergy
 * @apiSuccess {Object[]} [ingredients] List of the ingredients the allergy is based on
+* @apiParam {ObjectId} ingredients.id_ingredient Id of the ingredient of the allergy
+* @apiParam {String} ingredients.name_ingredient Name of the ingredient of the allergy
 */
 
 /**

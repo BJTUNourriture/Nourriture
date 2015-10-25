@@ -9,10 +9,12 @@ var allergiesSchema = new mongoose.Schema({
         required : true
     },
     description : String,
-    ingredients: [{
+    ingredients:
+        [{
             id_ingredient: {
-                type: String,
-                required: true
+                type: mongoose.Schema.Types.ObjectId,
+                required: true,
+                ref: 'Ingredients'
             },
             name_ingredient: {
                 type: String,

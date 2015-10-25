@@ -14,8 +14,14 @@
 * @apiParam {String} [pictures.big_sized_url] Url of the big size version of the picture
 * @apiParam {String[]} [joined_groups]
 * @apiParam {Object[]} [like] List of the ingredients a person like
+* @apiParam {ObjectId} like.id_ingredient Id of the ingredient liked
+* @apiParam {String} like.name_ingredient Name of the ingredient liked
 * @apiParam {Object[]} [dislike] List of the ingredients a person dislike
+* @apiParam {ObjectId} dislike.id_ingredient Id of the ingredient disliked
+* @apiParam {String} dislike.name_ingredient Name of the ingredient disliked
 * @apiParam {Object[]} [follow] List of people followed by a person
+* @apiParam {ObjectId} follow.id_person Id of the person followed
+* @apiParam {String} follow.username Username of the person followed
 */
 /**
 * @apiDefine UserRequestJSON
@@ -196,7 +202,7 @@ exports.getUsers = function (req, res) {
 /**
 * @api {put} /users/id/:id Update a User by Id
 * @apiName putUserById
-* @apiGroup User
+* @apiGroup Users
 * @apiVersion 0.1.0
 *
 * @apiUse UserRequestJSON
@@ -207,14 +213,19 @@ exports.putUserById = function (req, res) {
   return (res.status(400).json({ message: 'The id musn\'t be null and the request must not be empty.' }));
   User.findById(req.params.id,
     function (err, user) {
-      return (module.exports.updateUser(req, res, err, user));
+        if (!req.body.like && !req.body.dislike && !req.body.follow) {
+            return (module.exports.updateUser(req, res, err, user));
+        }
+        else {
+            return (module.exports.updateUserLDF(req, res, err, user));
+        }
     });
   }
 
   /**
   * @api {put} /users/username/:username Update a User by username
   * @apiName putUserByName
-  * @apiGroup User
+  * @apiGroup Users
   * @apiVersion 0.1.0
   *
   * @apiUse UserRequestJSON
@@ -230,12 +241,17 @@ exports.putUserById = function (req, res) {
       "username": req.params.name
     },
     function (err, user) {
-      return (module.exports.updateUser(req, res, err, user));
+        if (!req.body.like && !req.body.dislike && !req.body.follow) {
+            return (module.exports.updateUser(req, res, err, user));
+        }
+        else {
+            return (module.exports.updateUserLDF(req, res, err, user));
+        }
     });
   }
 
   exports.updateUser = function (req, res, err, user) {
-    var fields = ["username", "password", "email", "token", "gender", "facebook", "twitter", "google", "alergy", "religion", "pictures", "joined_groups", "calories", "like", "dislike", "follow"];
+    var fields = ["password", "email", "token", "gender", "facebook", "twitter", "google", "alergy", "religion", "pictures", "joined_groups", "calories"];
     var sent_fields = Object.keys(req.body);
 
     if (err)
@@ -245,7 +261,7 @@ exports.putUserById = function (req, res) {
 
     for (i = 0; i < sent_fields.length; i++) {
       if (!(fields.indexOf(sent_fields[i]) > -1))
-        return (res.status(400).json({ message: 'The key <' + sent_fields[i] + '> does not exist for User.' }));
+        return (res.status(400).json({ message: 'The key <' + sent_fields[i] + '> is not accessible for User.' }));
       user[sent_fields[i]] = req.body[sent_fields[i]];
     }
 
@@ -255,6 +271,29 @@ exports.putUserById = function (req, res) {
       return (res.json({ message: "User successfully updated!" }));
     });
     return (1);
+  }
+
+  exports.updateUserLDF = function (req, res, err, user) {
+      var fields = ["like", "dislike", "follow"];
+      var sent_fields = Object.keys(req.body);
+
+      if (err)
+          return (res.send(err));
+      else if (user === null)
+          return (res.status(404).json({ message: 'User not found.' }))
+
+      for (i = 0; i < sent_fields.length; i++) {
+          if (!(fields.indexOf(sent_fields[i]) > -1))
+              return (res.status(400).json({ message: 'The key <' + sent_fields[i] + '> is not accessible for UserLDF.' }));
+          user[sent_fields[i]] = req.body[sent_fields[i]];
+      }
+
+      user.save(function (err) {
+          if (err)
+              return (res.send(err));
+          return (res.json({ message: "User successfully updated!" }));
+      });
+      return (1);
   }
 
 exports.verifyEmail = function (req, res, err) {
