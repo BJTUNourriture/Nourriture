@@ -75,6 +75,18 @@ var Ingredients = require('../models/ingredients');
 *     {
 *       "message": "You must at least set a name or a tag to search"
 *     }
+*
+* @apiErrorExample  No metadata find
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "You must set the metadata"
+*     }
+*
+* @apiErrorExample  No order field find
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "The order.field must be set"
+*     }
 */
 
 exports.postSearchIngredients = function (req, res, flag) {
@@ -87,8 +99,12 @@ exports.postSearchIngredients = function (req, res, flag) {
 		var query = {};
 		query[order_field] = order_order;
 	}
-	var items_number = req.body.metadata.items;
-	var items_page = req.body.metadata.page;
+	var metadata = ""
+	if (req.body.metadata){
+		metadata = req.body.metadata
+		var items_number = req.body.metadata.items;
+		var items_page = req.body.metadata.page;
+	}
 	var tag_list = req.body.tags;
 
 	//If name and tags are not set
@@ -96,7 +112,7 @@ exports.postSearchIngredients = function (req, res, flag) {
 	if (!name && !tag_list)
 		return flag === true ? -1 : res.status(400).send({message : 'You must at least set a name or a tag to search'})
 
-	if (!items_number || !items_page)
+	if (metadata == "")
 		return flag === true ? -1 : res.status(400).send({message : 'You must set the metadata'})
 
 	//If name and tags are set
@@ -110,7 +126,7 @@ exports.postSearchIngredients = function (req, res, flag) {
 			},
 			function (err, docs) {
 					total_page = Math.round(docs.length / items_number);
-					if (total_page == '0')
+					if (total_page <= 0)
 						total_page = 1	
 				}
 			)
@@ -168,7 +184,7 @@ exports.postSearchIngredients = function (req, res, flag) {
 			},
 			function (err, docs) {
 					total_page = Math.round(docs.length / items_number);
-					if (total_page == '0')
+					if (total_page <= 0)
 						total_page = 1	
 				}
 			)
@@ -227,7 +243,7 @@ exports.postSearchIngredients = function (req, res, flag) {
 			},
 			function (err, docs) {
 					total_page = Math.round(docs.length / items_number);
-					if (total_page == '0')
+					if (total_page <= 0)
 						total_page = 1	
 				}
 			)

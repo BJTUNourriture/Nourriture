@@ -51,10 +51,10 @@ var Client = require('../models/client');
 ** POSTS
 */
 
-/**
+/**p
 * @api {post} /clients/ Create a new Client
 * @apiName postClient
-* @apiGroup OAuth
+* @apiGroup OAuthClient
 * @apiVersion 0.1.0
 *
 * @apiUse ClientObjectPostParam
@@ -89,9 +89,9 @@ exports.postClients = function (req, res) {
 
     client.save(function (err) {
         if (err)
-            res.send(err);
+            return res.send(err);
 
-        res.json({message: 'Client successfully created', data: client});
+        return res.json({message: 'Client successfully created', data: client});
     });
 };
 
@@ -114,7 +114,7 @@ exports.postClients = function (req, res) {
 /**
 * @api {get} /clients/ Request all the Clients of the connected user
 * @apiName getAllUserClients
-* @apiGroup OAuth
+* @apiGroup OAuthClient
 * @apiVersion 0.1.0
 *
 * @apiUse ClientObjectSuccess
@@ -133,8 +133,8 @@ exports.getClients = function (req, res) {
     // Use the Client model to find all clients
     Client.find({userId: req.user._id}, function (err, clients) {
         if (err)
-            res.send(err);
+            return res.send(err);
 
-        res.json(clients);
+        return res.json(clients);
     });
 };
