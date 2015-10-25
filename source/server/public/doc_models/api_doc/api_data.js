@@ -4964,6 +4964,96 @@ define({ "api": [
     }
   },
   {
+    "type": "post",
+    "url": "/users/sign-in/",
+    "title": "Sign a user in",
+    "name": "signinUser",
+    "group": "Users",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "username",
+            "description": "<p>Name of the user</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "password",
+            "description": "<p>Password of the user</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "\n{\n  \"username\" : \"toto\",\n  \"password\" : \"topkek\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "key",
+            "description": "<p><token>.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "  HTTP/1.1 200 OK\n{\n\"key\" : \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.ey\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Username field must not be empty</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Username empty",
+          "content": "HTTP/1.1 401 Bad Request\n{\n\"message\" : \"Username field must not be empty\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Password empty",
+          "content": "HTTP/1.1 401 Bad Request\n{\n\"message\" : \"Password field must not be empty\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Bad Username",
+          "content": "HTTP/1.1 401 Bad Request\n{\n\"message\" : \"Please verify the username provided.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Bad Password",
+          "content": "HTTP/1.1 401 Bad Request\n{\n\"message\" : \"Please verify the password provided.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/users.js",
+    "groupTitle": "Users"
+  },
+  {
     "type": "get",
     "url": "/users/verify-email/:token",
     "title": "Verify a user email",
