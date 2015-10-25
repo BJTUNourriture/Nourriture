@@ -11,39 +11,46 @@ html
             div.col-md-12.t-center
                 img(src="media/logo/nourriture.svg" class="img-responsive" style="width:350px; height:auto;")
 
-
             div.col-md-12
-                p.box
-                    Nourriture is a project developped in ExpressJs for Backend. And in AngularJS and Android for the front end.
-                    This project permit to connect people with ingredients. With Nourriture, innovative food suppliers and
+                p.box.
+                    Nourriture is a community web-app based on recipe sharing and permits to connect people with ingredients. With Nourriture, innovative food suppliers and
                     app developers have the most comprehensive platform
                     from which they can quickly and accurately create relevant
-                    tools for consumers to make informed decisions about food.
+                    tools for consumers to make informed decisions about food.The backend is forged in ExpressJS and data are stored in a MongoDB database.
+                    The front end is forged in AngularJS, Bootstrap and Jade.
 
-                h2.t-center Documentation
+                h1.t-center Documentation
 
-                p.box
-                    a(href="/doc-models") Api doc models
+                h3 Api Documentation
 
+                p.box.
+                    For a complete documentation on how to use our API, you can click on the link below :<br>
+                    <a href="/doc-models" class="t-center">Nourriture API 0.1.0</a>
+                h3 OAuth 2.0 Documentation
 
                 div.box
                     p.
-                        OAuth is a system to double authenticate. It permit to share our API to other developers.
-                        To use OAuth in our website you need to do this steps.
+                        OAuth allows an end user's account information to be used by third-party services. It will permit to share our API to other developers.
+                        <br><br>
+                        The documentation to use it with our API is available here : <a href="doc-auth/#api-OAuth">Nourriture OAuth2.0 API 0.1.0</a><br><br>
+                        Here is a little summary of the steps to follow in order to use OAuth2.0 with our website :
+
                     ol
-                        li First create a new clients
-                            a(href="doc-auth/#api-OAuth")   Api doc auth
+                        li First create a new client
+                            
                         li.
-                            Enter this URL in a web browser<span class="wb"> http://localhost:3000/api/oauth2/authorize?client_id=this_is_my_id&response_type=code&redirect_uri=http://localhost:3000</span><br>
-                            client_id is the id of the user's client<br>
-                            The url will give you back an authorization code. It will give you back an authorization code
+                            Enter this URL in a web browser<span class="wb"> http://localhost:3000/api/oauth2/authorize?client_id=<strong>id_client</strong>&response_type=code&redirect_uri=http://localhost:3000</span><br>
+                            Where <strong>id_client</strong> is the id of the user's client<br>
+                            The url will give you back an authorization code.
 
                         li.
                             Use this POST endpoint to have a token <a href="doc-auth/#api-OAuthToken-createToken">api/oauth2/token</a>. <br>
                             You need to pass <strong>name of client</strong> and <strong>secret of the client</strong> with <strong>Basic</strong>
 
 
-                        li After just pass the token to the header Topkek access_token
+                        li. 
+                            After retrieving the token just create an authorization header with our custom token authorization :<br>
+                            <code>Authorization : Topkek eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjJhMmJhMzEzOTRhMjdiMWI1YTl</code>
 
         footer.footer
             .container
