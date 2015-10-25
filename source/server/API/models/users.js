@@ -43,7 +43,17 @@ var UserSchema = new mongoose.Schema({
         displayName: String
     },
     alergy: {
-        type: Array,
+			type : [{
+				id_alergie : {
+					type : mongoose.Schema.ObjectId,
+					required : true,
+					ref : 'Allergies'
+				},
+				name : {
+					type : String,
+					required : true
+				}
+			}]
     },
     religion: {
         type: String,
