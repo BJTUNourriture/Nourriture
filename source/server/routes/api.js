@@ -30,13 +30,17 @@ var verifyJwt = expressJwt({
 });
 
 
+/* Enpoint for verification */
+router.route('/verify-email/:token')
+    .get(userController.verifyEmail);
+
 /* Endpoints for User */
 
 router.route('/users/sign-in')
     .post(userController.signinUser);
 
 router.route('/users')
-    .get(verifyJwt, userController.getUsers);
+    .get(userController.getUsers);
 
 router.route('/users/id/:id')
     .put(authController.isAuthenticated, userController.putUserById);

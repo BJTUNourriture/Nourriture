@@ -59,6 +59,8 @@
 
 var jwt = require('jsonwebtoken');
 var passport = require('passport');
+var mail = require('../../tools/nodemailer');
+var emailToken = require('../models/email-token-verification');
 
 var User = require('../models/users');
 //var Create_token = require('../../oauth/misc/create_token_at_init_user');
@@ -66,22 +68,43 @@ var User = require('../models/users');
 exports.postUser = function (req, res) {
 
 
-  var user = new User({
-    email: req.body.email,
-    username: req.body.username,
-    password: req.body.password,
-    alergy: req.body.alergy,
-    religion: req.body.religion
-  });
+    var user = new User({
+        email: req.body.email,
+        username: req.body.username,
+        password: req.body.password,
+        alergy: req.body.alergy,
+        religion: req.body.religion
+    });
 
 
-  user.save(function (err) {
-    if (err) {
-      console.log("user save function", err);
-      return res.send(err);
-    }
-    return (res.json({message: 'User succesfully created!'}));
-  });
+    user.save(function (err) {
+        if (err) {
+          console.log("user save function", err);
+          return res.send(err);
+        }
+
+        var verificationToken = new emailToken({
+            user_id : user._id
+        });
+
+        verificationToken.createVerificationToken(function(err, token){
+            if (err)
+                return (res.send(err));
+            console.log(user.email);
+            mail.transporter.sendMail(mail.mailOptionsEmailConfirm(token, user.email), function(error, info){
+                if (error)
+                    console.log(error);
+                console.log("Message sent" + info.response);
+            });
+        });
+        mail.mailOptionsGreeting["to"] = user.email;
+        mail.transporter.sendMail(mail.mailOptionsGreeting, function(error, info){
+            if (error)
+                console.log(error);
+            console.log("Message sent" + info.response);
+        });
+        return (res.json({message: 'User succesfully created!'}));
+    });
 };
 
 exports.signinUser = function (req, res, next) {
@@ -127,8 +150,7 @@ exports.getUsers = function (req, res) {
 
   User.find(function (err, users) {
     if (err)
-    res.send(err);
-
+        res.send(err);
     res.json(users);
   });
 };
@@ -234,3 +256,28 @@ exports.putUserById = function (req, res) {
     });
     return (1);
   }
+
+exports.verifyEmail = function (req, res, err) {
+    emailToken.findOne({token : req.params.token}, function(err, doc) {
+        if (err)
+            return (res.send(err));
+        else if (doc === null)
+            return (res.status(404).json({ message: 'Email already confirmed or bad token.' }))
+        User.findOne({_id : doc.user_id}, function(err, user) {
+        if (err)
+            return (res.send(err));
+        else if (doc === null)
+            return (res.status(400).json({ message: 'Email already confirmed.' }))
+        user["email_verified"] = true;
+        user.save(function(err) {
+            if (err)
+                return (res.send(err));
+            emailToken.remove({_id : doc._id}, function(err, removed) {
+                if (err)
+                    return (res.send(err));
+                });
+            return (res.json({message : "Email confirmed successfully."}));
+            })
+        })
+    })
+};
