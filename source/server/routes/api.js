@@ -2,7 +2,6 @@
  * Created by sylflo on 10/11/15.
  */
 
-var path = require('path');
 var authController = require('../oauth/controllers/auth');
 var userController = require('../API/controllers/users');
 var ingredientsController = require('../API/controllers/ingredients');
@@ -19,7 +18,7 @@ var router = express.Router();
 var User = require('../API/models/users');
 
 
-//verify the jwt
+//Function for JWT token verification
 var verifyJwt = expressJwt({
     secret: '18B63D7DDDD8C614227C8F31D8A25DEB92F249C391267DF9A28A5ACC00458837',
     getToken: function fromHeaderOrQuerystring(req) {
@@ -32,7 +31,7 @@ var verifyJwt = expressJwt({
 
 
 /* Enpoint for verification */
-router.route('/verify-email/:token')
+router.route('/users/verify-email/:token')
     .get(userController.verifyEmail);
 
 /* Endpoints for User */
@@ -126,7 +125,6 @@ router.route('/groups/:group_id/remove/:user_id')
 router.route('/groups/access/:id')
     .put(groupsController.putAccessRight);
 
-
 /*
  ** Endpoints for Recipes
  */
@@ -175,7 +173,6 @@ router.route('/allergies/name/:name')
 
 router.route('/search/ingredients/')
     .post(searchController.postSearchIngredients);
-
 
 /*
  ** Endpoints for Suggestions

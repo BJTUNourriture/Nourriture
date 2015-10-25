@@ -113,6 +113,61 @@ exports.postUser = function (req, res) {
     });
 };
 
+/**
+* @api {post} /users/sign-in/ Sign a user in
+* @apiName signinUser
+* @apiGroup Users
+* @apiVersion 0.1.0
+*
+* @apiParam {String} username Name of the user
+* @apiParam {String} password Password of the user
+*
+* @apiParamExample {json} Request-Example:
+*
+* {
+*   "username" : "toto",
+*   "password" : "topkek"
+* }
+*
+* @apiSuccess key <token>.
+* @apiSuccessExample Success-Response:
+*     HTTP/1.1 200 OK
+*   {
+*   "key" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.ey"
+*   }
+*
+* @apiError message Username field must not be empty
+*
+* @apiErrorExample Username empty
+*   HTTP/1.1 401 Bad Request
+*   {
+*   "message" : "Username field must not be empty"
+*   }
+*
+* @apiError message Password field must not be empty
+*
+* @apiErrorExample Password empty
+*   HTTP/1.1 401 Bad Request
+*   {
+*   "message" : "Password field must not be empty"
+*   }
+*
+* @apiError message Please verify the username provided.
+*
+* @apiErrorExample Bad Username
+*   HTTP/1.1 401 Bad Request
+*   {
+*   "message" : "Please verify the username provided."
+*   }
+*
+* @apiError message Please verify the password provided.
+*
+* @apiErrorExample Bad Password
+*   HTTP/1.1 401 Bad Request
+*   {
+*   "message" : "Please verify the password provided."
+*   }
+*/
 exports.signinUser = function (req, res, next) {
   if (!req.body.username)
   return (res.status(401).json({message: "Username field must not be empty"}));
@@ -296,6 +351,30 @@ exports.putUserById = function (req, res) {
       return (1);
   }
 
+/**
+* @api {get} /users/verify-email/:token Verify a user email
+* @apiName verifyEmail
+* @apiGroup Users
+* @apiVersion 0.1.0
+*
+* @apiParam {String} token Token to verify
+*
+* @apiSuccess message Email confirmed successfully.
+* @apiSuccessExample Success-Response:
+*     HTTP/1.1 200 OK
+*   {
+*   "message" : "Email confirmed successfully."
+*   }
+*
+* @apiError message Email already confirmed or bad token.
+*
+* @apiErrorExample Invalid Parameter Value
+*   HTTP/1.1 404 Bad Request
+*   {
+*   "message" : "Email already confirmed or bad token."
+*   }
+*
+*/
 exports.verifyEmail = function (req, res, err) {
     emailToken.findOne({token : req.params.token}, function(err, doc) {
         if (err)

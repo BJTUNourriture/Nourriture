@@ -7,20 +7,16 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var session = require('express-session');
 var expressJwt = require('express-jwt');
-
 var jwt = require('jsonwebtoken');
-
 var oauth = require('./routes/oauth');
 var api = require('./routes/api');
 var routes = require('./routes/index');
-
 var app = express();
 
 // http://localhost:8101/api/oauth2/authorize?client_id=this_is_my_id&response_type=code&redirect_uri=http://localhost:8101
 /* Init const var */
 PORT = "8101";
 HOSTNAME = "127.0.0.1";
-
 //jwt secret key set
 app.set('jwtSecret', '18B63D7DDDD8C614227C8F31D8A25DEB92F249C391267DF9A28A5ACC00458837');
 
@@ -52,31 +48,26 @@ mongoose.connect('mongodb://127.0.0.1:27017/nourriture');
 app.use(passport.initialize());
 
 
-app.use('/', routes);
-
+/*
+** ROUTE HANDLING
+*/
+//router
 var router = express.Router();
 
-
-//router.
-
+app.use('/', routes);
 // Register all our routes with /api
 app.use('/api', oauth, api, router);
 
-// catch 404 and forward to error handler
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
+/*
+** END ROUTE HANDLING
+*/
 
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-
-//app.use('/', routes);
-//app.use('/users', users);
 
 // Make our db accessible to our router
 app.use(function (req, res, next) {
