@@ -72,36 +72,42 @@ var UserSchema = new mongoose.Schema({
     joined_groups: {
         type: Array,
     },
-    like: {
-        type: [{
+    like:
+        [{
             id_ingredient: {
-                type: String
+                type: mongoose.Schema.Types.ObjectId,
+                required: true,
+                ref: 'Ingredients'
             },
             name_ingredient: {
-                type: String
+                type: String,
+                required: true
             }
-        }]
-    },
-    dislike: {
-        type: [{
+        }],
+    dislike:
+        [{
             id_ingredient: {
-                type: String
+                type: mongoose.Schema.Types.ObjectId,
+                required: true,
+                ref: 'Ingredients'
             },
             name_ingredient: {
-                type: String
+                type: String,
+                required: true
             }
-        }]
-    },
-    follow: {
-        type: [{
+        }],
+    follow:
+        [{
             id_person: {
-                type: String
+                type: mongoose.Schema.Types.ObjectId,
+                required: true,
+                ref: 'User'
             },
             username: {
-                type: String
+                type: String,
+                required: true
             }
         }]
-    }
 });
 
 UserSchema.pre('save', function (callback) {

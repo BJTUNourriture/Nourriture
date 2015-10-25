@@ -1,0 +1,42 @@
+body {
+    background-color: #ECECEC;
+}
+
+.t-center {
+    text-align: center;
+}
+
+img {
+    background-color: transparent;
+}
+
+.box {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    background: white;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    border-color: seagreen;
+    padding: 10px;
+}
+
+.wb {
+    word-break: break-all;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #f5f5f5;
+}
+
+.img-responsive,
+.thumbnail > img,
+.thumbnail a > img,
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}

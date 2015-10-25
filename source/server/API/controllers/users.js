@@ -12,11 +12,18 @@
 * @apiParam {String} pictures.thumbnail_url Url of the thumbnail version of the picture
 * @apiParam {String} pictures.medium_sized_url Url of the medium size version of the picture
 * @apiParam {String} [pictures.big_sized_url] Url of the big size version of the picture
-* @apiParam {String[]} [joined_groups]
+* @apiParam {Object[]} [joined_groups]
 * @apiParam {Object[]} [like] List of the ingredients a person like
+* @apiParam {ObjectId} like.id_ingredient Id of the ingredient liked
+* @apiParam {String} like.name_ingredient Name of the ingredient liked
 * @apiParam {Object[]} [dislike] List of the ingredients a person dislike
+* @apiParam {ObjectId} dislike.id_ingredient Id of the ingredient disliked
+* @apiParam {String} dislike.name_ingredient Name of the ingredient disliked
 * @apiParam {Object[]} [follow] List of people followed by a person
+* @apiParam {ObjectId} follow.id_person Id of the person followed
+* @apiParam {String} follow.username Username of the person followed
 */
+
 /**
 * @apiDefine UserRequestJSON
 *
@@ -25,8 +32,8 @@
 *	[
 *		{
 *			"username": "Julien",
-*			"password": "$2a$05$9.Imko7xVyvWwPcWGf57TOKNTj/JvW9UeByERRPMbvNbCHwXgb5pu",
 *			"email": "julien@usa.gov",
+*
 *			"alergy" : "["Gluten","Egs"]",
 *			"religion": "["boudism","Islam"]",
 *			"pictures" : [{
@@ -34,7 +41,6 @@
 *					"medium_sized_url" : "/medium_sized/1.jpg",
 *					"big_sized_url" : "/big_sized/1.jpg"
 *			}],
-*			"joined_groups" : ["561fc840d6c25173533e267f", "561fc840d6c25173533e267f"],
 *			"like" : [{
 *					"id_ingredient" : "548ed30d6c2257336f5675",
 *					"name_ingredient" : "Carotte"
@@ -65,6 +71,32 @@ var emailToken = require('../models/email-token-verification');
 var User = require('../models/users');
 //var Create_token = require('../../oauth/misc/create_token_at_init_user');
 
+/**
+* @api {post} /users/ Create a new User
+* @apiName postUser
+* @apiGroup Users
+* @apiVersion 0.1.0
+*
+* @apiUse UserObjectPostParam
+*
+* @apiUse UserRequestJSON
+*
+* @apiSuccess message User succesfully created!
+*
+* @apiSuccessExample Success-Response
+*     HTTP/1.1 200 OK
+*   {
+*   "message" : "User succesfully created!"
+*   }
+*
+* @apiErrorExample Bad Value Definition
+*   HTTP/1.1 400 BAD REQUEST
+*   {
+*   ...
+*   mongoose custom error
+*   ...
+*   }
+*/
 exports.postUser = function (req, res) {
 
 
@@ -107,6 +139,61 @@ exports.postUser = function (req, res) {
     });
 };
 
+/**
+* @api {post} /users/sign-in/ Sign a user in
+* @apiName signinUser
+* @apiGroup Users
+* @apiVersion 0.1.0
+*
+* @apiParam {String} username Name of the user
+* @apiParam {String} password Password of the user
+*
+* @apiParamExample {json} Request-Example:
+*
+* {
+*   "username" : "toto",
+*   "password" : "topkek"
+* }
+*
+* @apiSuccess key <token>.
+* @apiSuccessExample Success-Response:
+*     HTTP/1.1 200 OK
+*   {
+*   "key" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.ey"
+*   }
+*
+* @apiError message Username field must not be empty
+*
+* @apiErrorExample Username empty
+*   HTTP/1.1 401 Bad Request
+*   {
+*   "message" : "Username field must not be empty"
+*   }
+*
+* @apiError message Password field must not be empty
+*
+* @apiErrorExample Password empty
+*   HTTP/1.1 401 Bad Request
+*   {
+*   "message" : "Password field must not be empty"
+*   }
+*
+* @apiError message Please verify the username provided.
+*
+* @apiErrorExample Bad Username
+*   HTTP/1.1 401 Bad Request
+*   {
+*   "message" : "Please verify the username provided."
+*   }
+*
+* @apiError message Please verify the password provided.
+*
+* @apiErrorExample Bad Password
+*   HTTP/1.1 401 Bad Request
+*   {
+*   "message" : "Please verify the password provided."
+*   }
+*/
 exports.signinUser = function (req, res, next) {
   if (!req.body.username)
   return (res.status(401).json({message: "Username field must not be empty"}));
@@ -196,7 +283,7 @@ exports.getUsers = function (req, res) {
 /**
 * @api {put} /users/id/:id Update a User by Id
 * @apiName putUserById
-* @apiGroup User
+* @apiGroup Users
 * @apiVersion 0.1.0
 *
 * @apiUse UserRequestJSON
@@ -207,14 +294,19 @@ exports.putUserById = function (req, res) {
   return (res.status(400).json({ message: 'The id musn\'t be null and the request must not be empty.' }));
   User.findById(req.params.id,
     function (err, user) {
-      return (module.exports.updateUser(req, res, err, user));
+        if (!req.body.like && !req.body.dislike && !req.body.follow) {
+            return (module.exports.updateUser(req, res, err, user));
+        }
+        else {
+            return (module.exports.updateUserLDF(req, res, err, user));
+        }
     });
   }
 
   /**
   * @api {put} /users/username/:username Update a User by username
   * @apiName putUserByName
-  * @apiGroup User
+  * @apiGroup Users
   * @apiVersion 0.1.0
   *
   * @apiUse UserRequestJSON
@@ -230,12 +322,17 @@ exports.putUserById = function (req, res) {
       "username": req.params.name
     },
     function (err, user) {
-      return (module.exports.updateUser(req, res, err, user));
+        if (!req.body.like && !req.body.dislike && !req.body.follow) {
+            return (module.exports.updateUser(req, res, err, user));
+        }
+        else {
+            return (module.exports.updateUserLDF(req, res, err, user));
+        }
     });
   }
 
   exports.updateUser = function (req, res, err, user) {
-    var fields = ["username", "password", "email", "token", "gender", "facebook", "twitter", "google", "alergy", "religion", "pictures", "joined_groups", "calories", "like", "dislike", "follow"];
+    var fields = ["password", "email", "token", "gender", "facebook", "twitter", "google", "alergy", "religion", "pictures", "joined_groups", "calories"];
     var sent_fields = Object.keys(req.body);
 
     if (err)
@@ -245,7 +342,7 @@ exports.putUserById = function (req, res) {
 
     for (i = 0; i < sent_fields.length; i++) {
       if (!(fields.indexOf(sent_fields[i]) > -1))
-        return (res.status(400).json({ message: 'The key <' + sent_fields[i] + '> does not exist for User.' }));
+        return (res.status(400).json({ message: 'The key <' + sent_fields[i] + '> is not accessible for User.' }));
       user[sent_fields[i]] = req.body[sent_fields[i]];
     }
 
@@ -257,6 +354,53 @@ exports.putUserById = function (req, res) {
     return (1);
   }
 
+  exports.updateUserLDF = function (req, res, err, user) {
+      var fields = ["like", "dislike", "follow"];
+      var sent_fields = Object.keys(req.body);
+
+      if (err)
+          return (res.send(err));
+      else if (user === null)
+          return (res.status(404).json({ message: 'User not found.' }))
+
+      for (i = 0; i < sent_fields.length; i++) {
+          if (!(fields.indexOf(sent_fields[i]) > -1))
+              return (res.status(400).json({ message: 'The key <' + sent_fields[i] + '> is not accessible for UserLDF.' }));
+          user[sent_fields[i]] = req.body[sent_fields[i]];
+      }
+
+      user.save(function (err) {
+          if (err)
+              return (res.send(err));
+          return (res.json({ message: "User successfully updated!" }));
+      });
+      return (1);
+  }
+
+/**
+* @api {get} /users/verify-email/:token Verify a user email
+* @apiName verifyEmail
+* @apiGroup Users
+* @apiVersion 0.1.0
+*
+* @apiParam {String} token Token to verify
+*
+* @apiSuccess message Email confirmed successfully.
+* @apiSuccessExample Success-Response:
+*     HTTP/1.1 200 OK
+*   {
+*   "message" : "Email confirmed successfully."
+*   }
+*
+* @apiError message Email already confirmed or bad token.
+*
+* @apiErrorExample Invalid Parameter Value
+*   HTTP/1.1 404 Bad Request
+*   {
+*   "message" : "Email already confirmed or bad token."
+*   }
+*
+*/
 exports.verifyEmail = function (req, res, err) {
     emailToken.findOne({token : req.params.token}, function(err, doc) {
         if (err)
