@@ -101,6 +101,6 @@ passport.deserializeUser(function (user, done) {
 });
 
 exports.isClientAuthenticated = passport.authenticate('client-basic', {session: false});
-exports.isAuthenticated = passport.authenticate(['bearer'], { session : false });
+exports.isAuthenticated = passport.authenticate(['basic'], { session : false });
 
 //exports.isAuthenticated = [];
