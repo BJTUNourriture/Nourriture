@@ -4320,6 +4320,16 @@
           "title": "Invalid Parameter Value",
           "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"You must at least set a name or a tag to search\"\n}",
           "type": "json"
+        },
+        {
+          "title": "No metadata find",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"You must set the metadata\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "No order field find",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"The order.field must be set\"\n}",
+          "type": "json"
         }
       ]
     },
