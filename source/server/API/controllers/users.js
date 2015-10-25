@@ -390,12 +390,17 @@ exports.putUserById = function (req, res) {
 	/**
 	* @api {delete} /user/id/:id Delete User by id
 	* @apiName deleteUserById
-	* @apiGroup Ingredients
-	* @apiVersion 0.1.0
+  * @apiGroup Users
+  * @apiVersion 0.1.0
 	*
 	* @apiParam {Number} id User unique ID
 	*
-	* @apiUse deleteUserSuccess
+	* @apiSuccess message User succesfully deleted!
+	* @apiSuccessExample Success-Response:
+	*     HTTP/1.1 200 OK
+	*	  {
+	*		"message" : "User succesfully deleted!"
+	*	  }
 	*
 	* @apiError message The id was not found.
 	* @apiErrorExample Invalid Parameter Value

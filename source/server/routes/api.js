@@ -43,7 +43,7 @@ router.route('/users')
     .get(userController.getUsers);
 
 router.route('/users/id/:id')
-    .put(authController.isAuthenticated, userController.putUserById);
+    .put(authController.isAuthenticated, userController.putUserById)
 		.delete(authController.isAuthenticated, userController.deleteUserById);
 
 router.route('/users/username/:username')

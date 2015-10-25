@@ -194,7 +194,7 @@ exports.putGroupByName = function (req, res) {
 	if (!req.params.name || Object.keys(req.body).length === 0)
 		return (res.status(400).json({message : 'The name musn\'t be null and the request must not be empty.'}));
 	Groups.findOne({
-		"name" : req.params.name 
+		"name" : req.params.name
 		},
 		function (err, group) {
 			return (module.exports.updateGroup(req, res, err, group));
@@ -270,7 +270,7 @@ exports.updateAccessRight = function (req, res, err, group) {
 			return (1);
 		}
 	}
-	return (res.status(404).json({message: "User not found"}));	
+	return (res.status(404).json({message: "User not found"}));
 }
 
 /**
@@ -483,7 +483,7 @@ exports.getGroupByName = function (req, res, flag) {
 	if (!name)
 		return flag === true ? -1 : res.json(400, {message : 'The name musn\'t be null'});
 	Groups.find({
-		"name": { "$regex": name, "$options": "i" } 
+		"name": { "$regex": name, "$options": "i" }
 		},
 		function (err, docs) {
 			if (err)
@@ -502,12 +502,12 @@ exports.getGroupByName = function (req, res, flag) {
 
 /**
 * @apiDefine deleteGroupSuccess
-* @apiSuccess message Group succesfully created!
+* @apiSuccess message Group succesfully deleted!
 * @apiSuccessExample Success-Response:
 *     HTTP/1.1 200 OK
-*	  {
-*		"message" : "Group succesfully deleted!"
-*	  }
+*     {
+*       ""message" : "Group succesfully deleted!"
+*     }
 */
 
 /**
