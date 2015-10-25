@@ -2,6 +2,7 @@
  * Created by sylflo on 10/11/15.
  */
 
+var path = require('path');
 var authController = require('../oauth/controllers/auth');
 var userController = require('../API/controllers/users');
 var ingredientsController = require('../API/controllers/ingredients');
@@ -62,7 +63,7 @@ router.route('/users/register')
 router.route('/ingredients')
     .post(ingredientsController.postIngredient)
     .delete(ingredientsController.deleteIngredients)
-    .get(verifyJwt, ingredientsController.getAllIngredients);
+    .get(ingredientsController.getAllIngredients);
 
 //endpoints by id
 router.route('/ingredients/id/:id')

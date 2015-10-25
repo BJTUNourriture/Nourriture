@@ -1,0 +1,9 @@
+{
+  "name": "Nourriture API",
+  "version": "0.1.0",
+  "description": "API for the project Nourriture (all endpoints are preceded by /api)",
+  "apidoc": {
+    "title": "Nourriture API",
+    "url" : "https://github.com/BJTUNourriture/Nourriture"
+  }
+}

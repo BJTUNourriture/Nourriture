@@ -9,8 +9,7 @@ var allergiesSchema = new mongoose.Schema({
         required : true
     },
     description : String,
-    ingredients: {
-        type: [{
+    ingredients: [{
             id_ingredient: {
                 type: String,
                 required: true
@@ -19,9 +18,7 @@ var allergiesSchema = new mongoose.Schema({
                 type: String,
                 required: true
             }
-        }],
-        required: true
-    }
+        }]
 });
 
 module.exports = mongoose.model('Allergies', allergiesSchema);

@@ -34,7 +34,9 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/', express.static(path.join(__dirname, 'public/')));
+app.use('/doc-models', express.static(path.join(__dirname, 'public/doc_models/api_doc')));
+app.use('/doc-auth', express.static(path.join(__dirname, 'public/doc_auth/api_doc')));
 
 // Use express session support since OAuth2orize requires it
 app.use(session({

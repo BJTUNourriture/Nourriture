@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var app = express();
-
+var path = require('path');
 
 
 
@@ -14,10 +14,21 @@ router.use(function timeLog(req, res, next) {
   console.log('Time: ', Date.now());
   next();
 });
+
 // define the home page route
 router.get('/', function(req, res) {
 	res.render('index.jade');
 });
+
+router.get('/doc-models', function(req, res) {
+	res.render('doc_models.jade', {root : "./public/doc_models/api_doc"});
+});
+
+router.get('/doc-auth', function(req, res) {
+	res.render('doc_auth.jade', {root : "./public/doc_auth/api_doc"});
+});
+
+
 
 // /* GET Userlist page. */
 // router.get('/userlist', function(req, res) {
