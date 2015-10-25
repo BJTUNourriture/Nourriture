@@ -4883,6 +4883,190 @@
     }
   },
   {
+    "type": "post",
+    "url": "/users/",
+    "title": "Create a new User",
+    "name": "postUser",
+    "group": "Users",
+    "version": "0.1.0",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "message",
+            "description": "<p>User succesfully created!</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response",
+          "content": "  HTTP/1.1 200 OK\n{\n\"message\" : \"User succesfully created!\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Bad Value Definition",
+          "content": "HTTP/1.1 400 BAD REQUEST\n{\n...\nmongoose custom error\n...\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/users.js",
+    "groupTitle": "Users",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "username",
+            "description": "<p>Name of the user</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "password",
+            "description": "<p>Passworld of the user</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Email of the user</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String[]</p> ",
+            "optional": true,
+            "field": "alergy",
+            "description": "<p>List of allergy</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "religion",
+            "description": "<p>Religion of the user</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "pictures",
+            "description": "<p>List of user pictures</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "pictures.thumbnail_url",
+            "description": "<p>Url of the thumbnail version of the picture</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "pictures.medium_sized_url",
+            "description": "<p>Url of the medium size version of the picture</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "pictures.big_sized_url",
+            "description": "<p>Url of the big size version of the picture</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "joined_groups",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "like",
+            "description": "<p>List of the ingredients a person like</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>ObjectId</p> ",
+            "optional": false,
+            "field": "like.id_ingredient",
+            "description": "<p>Id of the ingredient liked</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "like.name_ingredient",
+            "description": "<p>Name of the ingredient liked</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "dislike",
+            "description": "<p>List of the ingredients a person dislike</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>ObjectId</p> ",
+            "optional": false,
+            "field": "dislike.id_ingredient",
+            "description": "<p>Id of the ingredient disliked</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "dislike.name_ingredient",
+            "description": "<p>Name of the ingredient disliked</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "follow",
+            "description": "<p>List of people followed by a person</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>ObjectId</p> ",
+            "optional": false,
+            "field": "follow.id_person",
+            "description": "<p>Id of the person followed</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "follow.username",
+            "description": "<p>Username of the person followed</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "\n[\n\t{\n\t\t\"username\": \"Julien\",\n\t\t\"email\": \"julien@usa.gov\",\n\n\t\t\"alergy\" : \"[\"Gluten\",\"Egs\"]\",\n\t\t\"religion\": \"[\"boudism\",\"Islam\"]\",\n\t\t\"pictures\" : [{\n\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t}],\n\t\t\"like\" : [{\n\t\t\t\t\"id_ingredient\" : \"548ed30d6c2257336f5675\",\n\t\t\t\t\"name_ingredient\" : \"Carotte\"\n\t\t},\n\t\t{\n\t\t\t\t\"id_ingredient\" : \"246kf584a9g784312408a442\",\n\t\t\t\t\"name_ingredient\" : \"Potato\"\n\t\t}],\n\t\t\"dislike\" : [{\n\t\t\t\t\"id_ingredient\" : \"302fvd338d2c30185535g805\",\n\t\t\t\t\"name_ingredient\" : \"Bean\"\n\t\t}],\n\t\t\"follow\" :  [{\n\t\t\t\t\"id_person\" : \"689ed300d6c22573533g895\",\n\t\t\t\t\"username\" : \"bananaman\"\n\t\t}]\n\t}\n]",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
     "type": "get",
     "url": "/users/",
     "title": "Retrive all Users",
@@ -4907,7 +5091,7 @@
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "\n[\n\t{\n\t\t\"username\": \"Julien\",\n\t\t\"password\": \"$2a$05$9.Imko7xVyvWwPcWGf57TOKNTj/JvW9UeByERRPMbvNbCHwXgb5pu\",\n\t\t\"email\": \"julien@usa.gov\",\n\t\t\"alergy\" : \"[\"Gluten\",\"Egs\"]\",\n\t\t\"religion\": \"[\"boudism\",\"Islam\"]\",\n\t\t\"pictures\" : [{\n\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t}],\n\t\t\"joined_groups\" : [\"561fc840d6c25173533e267f\", \"561fc840d6c25173533e267f\"],\n\t\t\"like\" : [{\n\t\t\t\t\"id_ingredient\" : \"548ed30d6c2257336f5675\",\n\t\t\t\t\"name_ingredient\" : \"Carotte\"\n\t\t},\n\t\t{\n\t\t\t\t\"id_ingredient\" : \"246kf584a9g784312408a442\",\n\t\t\t\t\"name_ingredient\" : \"Potato\"\n\t\t}],\n\t\t\"dislike\" : [{\n\t\t\t\t\"id_ingredient\" : \"302fvd338d2c30185535g805\",\n\t\t\t\t\"name_ingredient\" : \"Bean\"\n\t\t}],\n\t\t\"follow\" :  [{\n\t\t\t\t\"id_person\" : \"689ed300d6c22573533g895\",\n\t\t\t\t\"username\" : \"bananaman\"\n\t\t}]\n\t}\n]",
+          "content": "\n[\n\t{\n\t\t\"username\": \"Julien\",\n\t\t\"email\": \"julien@usa.gov\",\n\n\t\t\"alergy\" : \"[\"Gluten\",\"Egs\"]\",\n\t\t\"religion\": \"[\"boudism\",\"Islam\"]\",\n\t\t\"pictures\" : [{\n\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t}],\n\t\t\"like\" : [{\n\t\t\t\t\"id_ingredient\" : \"548ed30d6c2257336f5675\",\n\t\t\t\t\"name_ingredient\" : \"Carotte\"\n\t\t},\n\t\t{\n\t\t\t\t\"id_ingredient\" : \"246kf584a9g784312408a442\",\n\t\t\t\t\"name_ingredient\" : \"Potato\"\n\t\t}],\n\t\t\"dislike\" : [{\n\t\t\t\t\"id_ingredient\" : \"302fvd338d2c30185535g805\",\n\t\t\t\t\"name_ingredient\" : \"Bean\"\n\t\t}],\n\t\t\"follow\" :  [{\n\t\t\t\t\"id_person\" : \"689ed300d6c22573533g895\",\n\t\t\t\t\"username\" : \"bananaman\"\n\t\t}]\n\t}\n]",
           "type": "json"
         }
       ]
@@ -4926,7 +5110,7 @@
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "\n[\n\t{\n\t\t\"username\": \"Julien\",\n\t\t\"password\": \"$2a$05$9.Imko7xVyvWwPcWGf57TOKNTj/JvW9UeByERRPMbvNbCHwXgb5pu\",\n\t\t\"email\": \"julien@usa.gov\",\n\t\t\"alergy\" : \"[\"Gluten\",\"Egs\"]\",\n\t\t\"religion\": \"[\"boudism\",\"Islam\"]\",\n\t\t\"pictures\" : [{\n\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t}],\n\t\t\"joined_groups\" : [\"561fc840d6c25173533e267f\", \"561fc840d6c25173533e267f\"],\n\t\t\"like\" : [{\n\t\t\t\t\"id_ingredient\" : \"548ed30d6c2257336f5675\",\n\t\t\t\t\"name_ingredient\" : \"Carotte\"\n\t\t},\n\t\t{\n\t\t\t\t\"id_ingredient\" : \"246kf584a9g784312408a442\",\n\t\t\t\t\"name_ingredient\" : \"Potato\"\n\t\t}],\n\t\t\"dislike\" : [{\n\t\t\t\t\"id_ingredient\" : \"302fvd338d2c30185535g805\",\n\t\t\t\t\"name_ingredient\" : \"Bean\"\n\t\t}],\n\t\t\"follow\" :  [{\n\t\t\t\t\"id_person\" : \"689ed300d6c22573533g895\",\n\t\t\t\t\"username\" : \"bananaman\"\n\t\t}]\n\t}\n]",
+          "content": "\n[\n\t{\n\t\t\"username\": \"Julien\",\n\t\t\"email\": \"julien@usa.gov\",\n\n\t\t\"alergy\" : \"[\"Gluten\",\"Egs\"]\",\n\t\t\"religion\": \"[\"boudism\",\"Islam\"]\",\n\t\t\"pictures\" : [{\n\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t}],\n\t\t\"like\" : [{\n\t\t\t\t\"id_ingredient\" : \"548ed30d6c2257336f5675\",\n\t\t\t\t\"name_ingredient\" : \"Carotte\"\n\t\t},\n\t\t{\n\t\t\t\t\"id_ingredient\" : \"246kf584a9g784312408a442\",\n\t\t\t\t\"name_ingredient\" : \"Potato\"\n\t\t}],\n\t\t\"dislike\" : [{\n\t\t\t\t\"id_ingredient\" : \"302fvd338d2c30185535g805\",\n\t\t\t\t\"name_ingredient\" : \"Bean\"\n\t\t}],\n\t\t\"follow\" :  [{\n\t\t\t\t\"id_person\" : \"689ed300d6c22573533g895\",\n\t\t\t\t\"username\" : \"bananaman\"\n\t\t}]\n\t}\n]",
           "type": "json"
         }
       ]
@@ -4957,7 +5141,7 @@
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "\n[\n\t{\n\t\t\"username\": \"Julien\",\n\t\t\"password\": \"$2a$05$9.Imko7xVyvWwPcWGf57TOKNTj/JvW9UeByERRPMbvNbCHwXgb5pu\",\n\t\t\"email\": \"julien@usa.gov\",\n\t\t\"alergy\" : \"[\"Gluten\",\"Egs\"]\",\n\t\t\"religion\": \"[\"boudism\",\"Islam\"]\",\n\t\t\"pictures\" : [{\n\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t}],\n\t\t\"joined_groups\" : [\"561fc840d6c25173533e267f\", \"561fc840d6c25173533e267f\"],\n\t\t\"like\" : [{\n\t\t\t\t\"id_ingredient\" : \"548ed30d6c2257336f5675\",\n\t\t\t\t\"name_ingredient\" : \"Carotte\"\n\t\t},\n\t\t{\n\t\t\t\t\"id_ingredient\" : \"246kf584a9g784312408a442\",\n\t\t\t\t\"name_ingredient\" : \"Potato\"\n\t\t}],\n\t\t\"dislike\" : [{\n\t\t\t\t\"id_ingredient\" : \"302fvd338d2c30185535g805\",\n\t\t\t\t\"name_ingredient\" : \"Bean\"\n\t\t}],\n\t\t\"follow\" :  [{\n\t\t\t\t\"id_person\" : \"689ed300d6c22573533g895\",\n\t\t\t\t\"username\" : \"bananaman\"\n\t\t}]\n\t}\n]",
+          "content": "\n[\n\t{\n\t\t\"username\": \"Julien\",\n\t\t\"email\": \"julien@usa.gov\",\n\n\t\t\"alergy\" : \"[\"Gluten\",\"Egs\"]\",\n\t\t\"religion\": \"[\"boudism\",\"Islam\"]\",\n\t\t\"pictures\" : [{\n\t\t\t\t\"thumbnail_url\" : \"/thumbnails/1.jpg\",\n\t\t\t\t\"medium_sized_url\" : \"/medium_sized/1.jpg\",\n\t\t\t\t\"big_sized_url\" : \"/big_sized/1.jpg\"\n\t\t}],\n\t\t\"like\" : [{\n\t\t\t\t\"id_ingredient\" : \"548ed30d6c2257336f5675\",\n\t\t\t\t\"name_ingredient\" : \"Carotte\"\n\t\t},\n\t\t{\n\t\t\t\t\"id_ingredient\" : \"246kf584a9g784312408a442\",\n\t\t\t\t\"name_ingredient\" : \"Potato\"\n\t\t}],\n\t\t\"dislike\" : [{\n\t\t\t\t\"id_ingredient\" : \"302fvd338d2c30185535g805\",\n\t\t\t\t\"name_ingredient\" : \"Bean\"\n\t\t}],\n\t\t\"follow\" :  [{\n\t\t\t\t\"id_person\" : \"689ed300d6c22573533g895\",\n\t\t\t\t\"username\" : \"bananaman\"\n\t\t}]\n\t}\n]",
           "type": "json"
         }
       ]
