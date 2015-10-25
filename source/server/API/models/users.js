@@ -44,7 +44,7 @@ var UserSchema = new mongoose.Schema({
     },
     alergy: {
 			type : [{
-				id_alergie : {
+				id_ingredient : {
 					type : mongoose.Schema.ObjectId,
 					required : true,
 					ref : 'Allergies'
@@ -56,7 +56,17 @@ var UserSchema = new mongoose.Schema({
 			}]
     },
     religion: {
-        type: String,
+			type : [{
+				id_religion : {
+					type : mongoose.Schema.ObjectId,
+					required : true,
+					ref : 'Religion'
+				},
+				name : {
+					type : String,
+					required : true
+				}
+			}]
     },
     pictures : [{
   		thumbnail_url : {
@@ -70,7 +80,17 @@ var UserSchema = new mongoose.Schema({
   		big_sized_url : String
   	}],
     joined_groups: {
-        type: Array,
+			type : [{
+				id_group : {
+					type : mongoose.Schema.ObjectId,
+					required : true,
+					ref : 'Groups'
+				},
+				name : {
+					type : String,
+					required : true
+				}
+			}]
     },
     like:
         [{

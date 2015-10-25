@@ -34,8 +34,14 @@
 *			"username": "Julien",
 *			"email": "julien@usa.gov",
 *
-*			"alergy" : "["Gluten","Egs"]",
-*			"religion": "["boudism","Islam"]",
+*			"religion" : [{
+*					"id_religion" : "548ed30d6c2257336f5675",
+*					"name" : "Boudism"
+*			}],
+*			"alergy" : [{
+*					"id_ingredient" : "548ed30d6c2257336f5675",
+*					"name" : "Bettrave Rouge"
+*			}],
 *			"pictures" : [{
 *					"thumbnail_url" : "/thumbnails/1.jpg",
 *					"medium_sized_url" : "/medium_sized/1.jpg",
