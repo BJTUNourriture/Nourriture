@@ -34,6 +34,10 @@
 *			"username": "Julien",
 *			"email": "julien@usa.gov",
 *
+*			"joined_groups" : [{
+*					"id_group" : "548ed30d6c2257336f5675",
+*					"name" : "Saucisson Choux Fleurs"
+*			}],
 *			"religion" : [{
 *					"id_religion" : "548ed30d6c2257336f5675",
 *					"name" : "Boudism"
@@ -382,6 +386,42 @@ exports.putUserById = function (req, res) {
       });
       return (1);
   }
+
+	/**
+	* @api {delete} /user/id/:id Delete User by id
+	* @apiName deleteUserById
+	* @apiGroup Ingredients
+	* @apiVersion 0.1.0
+	*
+	* @apiParam {Number} id User unique ID
+	*
+	* @apiUse deleteUserSuccess
+	*
+	* @apiError message The id was not found.
+	* @apiErrorExample Invalid Parameter Value
+	*     HTTP/1.1 404 Not Found
+	*     {
+	*       "message": "The id was not found."
+	*     }
+	*/
+	exports.deleteUserById = function (req, res, flag) {
+		var id = flag === true ? req.body.id : req.params.id;
+		if (!id)
+			return flag === true ? -1 : res.json(400, {message : 'The id musn\'t be null'});
+		User.remove({
+			_id : id
+			},
+			function (err, removed) {
+				if (err)
+					return (res.send(err));
+				else if (removed.result.n === 0)
+					return (res.json(404, {message : 'The id was not found.'}))
+				return (res.json({message : 'Ingredient succesfully deleted!'}));
+			}
+		);
+		return (1);
+	};
+
 
 /**
 * @api {get} /users/verify-email/:token Verify a user email
