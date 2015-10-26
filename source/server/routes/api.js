@@ -43,11 +43,11 @@ router.route('/users')
     .get(userController.getUsers);
 
 router.route('/users/id/:id')
-    .put(authController.isAuthenticated, userController.putUserById)
-		.delete(authController.isAuthenticated, userController.deleteUserById);
+    .put(userController.putUserById)
+		.delete(userController.deleteUserById);
 
 router.route('/users/username/:username')
-    .put(authController.isAuthenticated, userController.putUserByUsername);
+    .put(userController.putUserByUsername);
 
 router.route('/users/register')
     .post(userController.postUser);
