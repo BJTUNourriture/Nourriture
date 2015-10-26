@@ -115,179 +115,92 @@ exports.postSearchIngredients = function (req, res, flag) {
 	if (metadata == "")
 		return flag === true ? -1 : res.status(400).send({message : 'You must set the metadata'})
 
+	
+
 	//If name and tags are set
 
 	if (name && tag_list){
-
-	//Get nbr_page_max
-		var total_page
-			Ingredients.find({
-			"name": { "$regex": name, "$options": "i" }
-			},
-			function (err, docs) {
-					total_page = Math.round(docs.length / items_number);
-					if (total_page <= 0)
-						total_page = 1	
-				}
-			)
-
-		if (order === ""){
-			Ingredients.find({
+	
+	var Json_search = {
 				"name": { "$regex": name, "$options": "i" },
 				"tags.name": { $all: tag_list}
-				},
-				function (err, docs) {
-					if (err)
-						return (res.send(err));
-					else if (docs.length <= 0)
-						return (res.status(404).send({message : 'Nothing find for this search'}))
-					else{
-						var newjson = {metadata: {total_pages: total_page, current_page: items_page, order: order, tags: tag_list, name: name} ,ingredients: docs}
-						return (res.json(newjson));
-					}
-				} 
-		).skip((items_page - 1) * items_number).limit(items_number);
-		}
-		else if (order != ""){
-			if (order_order == 'desc')
-				order_order = -1
-			else
-				order_order = 1
-			if (!order_field)
-				return flag === true ? -1 : res.status(404).send({message : 'The order.field must be set'})
-			Ingredients.find({
-				"name": { "$regex": name, "$options": "i" },
-				"tags.name": { $all: tag_list}
-				},
-				function (err, docs) {
-					if (err)
-						return (res.send(err));
-					else if (docs.length <= 0)
-						return (res.status(404).send({message : 'Nothing find for this search'}))
-					else{
-						var newjson = {metadata: {total_pages: total_page, current_page: items_page, order: order, tags: tag_list, name: name} ,ingredients: docs}
-						return (res.json(newjson));
-					}
-				}
-		).skip((items_page - 1) * items_number).sort(query).limit(items_number);
-	    }
+			  };
+	var newjson = {metadata: {current_page: items_page, order: order, tags: tag_list, name: name}}
+
 	}
 	
 	//If only name is set
 
 	else if (name && !tag_list){
 
-	//Get nbr_page_max
-		var total_page
-			Ingredients.find({
-			"name": { "$regex": name, "$options": "i" }
-			},
-			function (err, docs) {
-					total_page = Math.round(docs.length / items_number);
-					if (total_page <= 0)
-						total_page = 1	
-				}
-			)
-
-
-		if (order === ""){
-			Ingredients.find({
+	var Json_search = {
 				"name": { "$regex": name, "$options": "i" }
-				},
-				function (err, docs) {
-					if (err)
-						return (res.send(err));
-					else if (docs.length <= 0)
-						return (res.status(404).send({message : 'Nothing find for this search'}))
-					else{
-						var newjson = {metadata: {total_pages: total_page, current_page: items_page, order: order, name: name} ,ingredients: docs}
-						return (res.json(newjson));
-					}
-				} 
-		).skip((items_page - 1) * items_number).limit(items_number);
-		}
-		else if (order != ""){
-			if (order_order == 'desc')
-				order_order = -1
-			else
-				order_order = 1
-			if (!order_field)
-				return flag === true ? -1 : res.status(404).send({message : 'The order.field must be set'})	
-	
-			Ingredients.find({
-				"name": { "$regex": name, "$options": "i" }
-				},
-				function (err, docs) {
-					if (err)
-						return (res.send(err));
-					else if (docs.length <= 0)
-						return (res.status(404).send({message : 'Nothing find for this search'}))
-					else{
-						var newjson = {metadata: {total_pages: total_page, current_page: items_page, order: order, name: name} ,ingredients: docs}
-						return (res.json(newjson));
-					}
-				}
-		).skip((items_page - 1) * items_number).sort(query).limit(items_number);
-	    }
+			  };
+	var newjson = {metadata: {current_page: items_page, order: order, name: name}}
+
 	}
 
 	//If only tags is set
 
 	else if (!name && tag_list){
 
+	var Json_search = {
+				"tags.name": { $all: tag_list}
+			  };
+	var newjson = {metadata: {current_page: items_page, order: order, tags: tag_list}}
 
-	//Get nbr_page_max
-		var total_page
-			Ingredients.find({
-			"tags.name": { $all: tag_list}
-			},
-			function (err, docs) {
-					total_page = Math.round(docs.length / items_number);
-					if (total_page <= 0)
-						total_page = 1	
-				}
-			)
+	}
+
+	var total_page
+	Ingredients.find(Json_search,
+		function (err, docs) {
+			total_page = Math.round(docs.length / items_number);
+		if (total_page <= 0)
+			total_page = 1	
+		}
+	)
 
 		if (order === ""){
-			Ingredients.find({
-				"tags.name": { $all: tag_list}
-				},
+			Ingredients.find(
+				Json_search
+				,
 				function (err, docs) {
 					if (err)
 						return (res.send(err));
 					else if (docs.length <= 0)
 						return (res.status(404).send({message : 'Nothing find for this search'}))
 					else{
-						var newjson = {metadata: {total_pages: total_page, current_page: items_page, order: order, tags: tag_list} ,ingredients: docs}
+						newjson.metadata.total_page = total_page
+						newjson.ingredients = docs
 						return (res.json(newjson));
 					}
 				} 
 		).skip((items_page - 1) * items_number).limit(items_number);
 		}
 		else if (order != ""){
-			if (order_order == 'desc')
+			
+			if (order_order == "desc")
 				order_order = -1
 			else
 				order_order = 1
 			if (!order_field)
 				return flag === true ? -1 : res.status(404).send({message : 'The order.field must be set'})
-			Ingredients.find({
-				"tags.name": { $all: tag_list}
-				},
+			Ingredients.find(
+				Json_search,
 				function (err, docs) {
-					if (err)
+					if (err){
 						return (res.send(err));
-					else if (docs.length <= 0)
-						return (res.status(404).send({message : 'Nothing find for this search'}))
+						}
+					else if (docs.length <= 0){
+						return (res.status(404).send({message : 'Nothing find for this search'}))}
 					else{
-						var newjson = {metadata: {total_pages: total_page, current_page: items_page, order: order, tags: tag_list} ,ingredients: docs}
+						newjson.metadata.total_page = total_page
+						newjson.ingredients = docs
 						return (res.json(newjson));
 					}
 				}
 		).skip((items_page - 1) * items_number).sort(query).limit(items_number);
 	    }
-	}
-
 	return (1);
 	
 };
