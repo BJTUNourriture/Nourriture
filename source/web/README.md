@@ -57,3 +57,7 @@ The project structure is based on `generator-gulp-angular`
 ├──  package.json
 └──  protractor.conf.js
 ```
+
+## Run the development server and live-reload
+
+Just launch `gulp serve` in the root directory where `gulpfile.js` is located
