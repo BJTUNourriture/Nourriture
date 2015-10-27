@@ -45,16 +45,10 @@
         'logo': 'protractor.png'
       },
       {
-        'title': 'Bootstrap',
-        'url': 'http://getbootstrap.com/',
-        'description': 'Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.',
-        'logo': 'bootstrap.png'
-      },
-      {
-        'title': 'Angular UI Bootstrap',
-        'url': 'http://angular-ui.github.io/bootstrap/',
-        'description': 'Bootstrap components written in pure AngularJS by the AngularUI Team.',
-        'logo': 'ui-bootstrap.png'
+        'title': 'Angular Material Design',
+        'url': 'https://material.angularjs.org/#/',
+        'description': 'The Angular reference implementation of the Google\'s Material Design specification.',
+        'logo': 'angular-material.png'
       },
       {
         'title': 'Sass (Node)',
