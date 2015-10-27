@@ -175,6 +175,9 @@ router.route('/allergies/name/:name')
 router.route('/search/ingredients/')
     .post(searchController.postSearchIngredients);
 
+router.route('/search/recipes/')
+    .post(searchController.postSearchRecipes);
+
 /*
  ** Endpoints for Suggestions
  */
