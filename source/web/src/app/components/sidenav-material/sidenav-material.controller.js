@@ -11,7 +11,8 @@ function SidenavController($scope, $http, $timeout, $mdSidenav, $log)
 	var vm = this;
 
 	//Menu icon initialization
-	vm.menuIcon = "menu";
+	vm.menuIconOut = "menu";
+	vm.menuIconIn = "menu";
 
 	//Sinenav Item Informations
 	$http.get("configs/sidenavConfig.json")
@@ -23,7 +24,7 @@ function SidenavController($scope, $http, $timeout, $mdSidenav, $log)
 			vm.sidenavItems = [{"name" : "CONFIG NOT FOUND", "icon" : "error"}];
 		})
 
-	vm.openLeftMenu = function() {
+	vm.leftMenuToggle = function() {
 		$mdSidenav('left').toggle();
 	};
 }

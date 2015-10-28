@@ -1,6 +1,11 @@
 div(ng-controller="SidenavController as sidenav")
 	section(layout='row', flex)
 		md-sidenav.menu-sidenav.md-sidenav-left(md-component-id='left')
+			div.md-button-style
+				ng-md-icon.md-button-element-style(icon="{{ sidenav.menuIconIn }}",
+						ng-mouseover='sidenav.menuIconIn = "arrow_forward"',
+						ng-mouseleave='sidenav.menuIconIn = "menu"',
+						ng-click='sidenav.leftMenuToggle()')
 			md-content.logo-sidenav
 				img(src="assets/images/logo/nourriture.svg")
 			md-card
@@ -13,7 +18,7 @@ div(ng-controller="SidenavController as sidenav")
 					md-button. 
 								<span class="item_text">{{ item.name }}</span>
 								<span class="item_icon"><ng-md-icon icon="{{ item.icon }}"></ng-md-icon></span>
-		ng-md-icon(icon="{{ sidenav.menuIcon }}",
-					ng-mouseover='sidenav.menuIcon = "arrow_forward"',
-					ng-mouseleave='sidenav.menuIcon = "menu"',
-					ng-click='sidenav.openLeftMenu()')
+		ng-md-icon(icon="{{ sidenav.menuIconOut }}",
+					ng-mouseover='sidenav.menuIconOut = "arrow_back"',
+					ng-mouseleave='sidenav.menuIconOut = "menu"',
+					ng-click='sidenav.leftMenuToggle()')

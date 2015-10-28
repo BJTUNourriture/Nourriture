@@ -110,6 +110,24 @@ background on a md-content in a sidenav */
 
   }
 
+  .md-button-style {
+    width : 98%;
+    line-height: 36px;
+    white-space: nowrap;
+    text-align: right;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 14px;
+    font-style: inherit;
+    font-variant: inherit;
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  .md-button-element-style {
+
+  }
+
   .md-button {
     clear:both;
     margin: 0px;
