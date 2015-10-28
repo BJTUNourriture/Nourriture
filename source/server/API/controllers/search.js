@@ -239,7 +239,7 @@ exports.postSearchRecipes = function (req, res, flag) {
 	
 	var Json_search = {
 				"title": { "$regex": title, "$options": "i" },
-				"tags.name": { $all: tag_list}
+				"tags.id_type": { $all: tag_list}
 			  };
 	var newjson = {metadata: {current_page: items_page, order: order, tags: tag_list, title: title}}
 
@@ -261,7 +261,7 @@ exports.postSearchRecipes = function (req, res, flag) {
 	else if (!title && tag_list){
 
 	var Json_search = {
-				"tags.name": { $all: tag_list}
+				"tags.id_type": { $all: tag_list}
 			  };
 	var newjson = {metadata: {current_page: items_page, order: order, tags: tag_list}}
 
