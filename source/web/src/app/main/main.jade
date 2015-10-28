@@ -3,7 +3,7 @@ div(ng-controller="SidenavController as sidenav")
 		md-sidenav.menu-sidenav.md-sidenav-left(md-component-id='left')
 			div.md-button-style
 				ng-md-icon.md-button-element-style(icon="{{ sidenav.menuIconIn }}",
-						ng-mouseover='sidenav.menuIconIn = "arrow_forward"',
+						ng-mouseover='sidenav.menuIconIn = "arrow_back"',
 						ng-mouseleave='sidenav.menuIconIn = "menu"',
 						ng-click='sidenav.leftMenuToggle()')
 			md-content.logo-sidenav
@@ -18,7 +18,12 @@ div(ng-controller="SidenavController as sidenav")
 					md-button. 
 								<span class="item_text">{{ item.name }}</span>
 								<span class="item_icon"><ng-md-icon icon="{{ item.icon }}"></ng-md-icon></span>
-		ng-md-icon(icon="{{ sidenav.menuIconOut }}",
-					ng-mouseover='sidenav.menuIconOut = "arrow_back"',
-					ng-mouseleave='sidenav.menuIconOut = "menu"',
-					ng-click='sidenav.leftMenuToggle()')
+		div.toolbar-menu
+			ng-md-icon.icon-menu(icon="{{ sidenav.menuIconOut }}",
+						size="48",
+						ng-mouseover='sidenav.menuIconOut = "arrow_forward"',
+						ng-mouseleave='sidenav.menuIconOut = "menu"',
+						ng-click='sidenav.leftMenuToggle()')
+			div(ng-repeat="icon in sidenav.sidenavItems")
+				ng-md-icon.icon-menu(icon="{{ icon.icon }}",
+							size="48")		
