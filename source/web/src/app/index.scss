@@ -111,6 +111,7 @@ background on a md-content in a sidenav */
   }
 
   .md-button {
+    clear:both;
     margin: 0px;
     width: 100%;
     background-color: #2e8b57;
@@ -125,11 +126,8 @@ background on a md-content in a sidenav */
     }
 
     .item_text {
+      width : 90%;
       float: left;
-    }
-
-    .item_icon {
-      float : right;
     }
 
   }
