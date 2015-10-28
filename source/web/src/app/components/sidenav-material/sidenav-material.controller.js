@@ -10,6 +10,9 @@ function SidenavController($scope, $timeout, $mdSidenav, $log)
 {
 	var vm = this;
 
+	//Menu icon initialization
+	vm.menuIcon = "menu";
+
 	vm.openLeftMenu = function() {
 		$mdSidenav('left').toggle();
 	};
