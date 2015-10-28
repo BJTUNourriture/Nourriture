@@ -4406,6 +4406,123 @@ define({ "api": [
     }
   },
   {
+    "type": "post",
+    "url": "/search/recipes/",
+    "title": "Search some recipes",
+    "name": "postSearchRecipes",
+    "group": "Search",
+    "version": "0.1.0",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response",
+          "content": "    HTTP/1.1 200 OK\n\t  {\n \"metadata\": {\n   \"current_page\": 1,\n   \"order\": {\n     \"order\": \"desc\",\n     \"field\": \"fat\"\n   },\n   \"tags\": [\n     \"563091df113604b7959a6327\"\n   ],\n   \"total_page\": 1\n },\n \"recipes\": [\n   {\n     \"_id\": \"56309253113604b7959a632c\",\n     \"date_edited\": \"2015-04-01T18:34:23.000Z\",\n     \"title\": \"Pumpkin pie\",\n     \"author_id\": \"561fc840d6c25173533e267f\",\n     \"author_name\": \"Kek man\",\n     \"description\": \"It's Halloween time!\",\n     \"__v\": 0,\n     \"ingredients\": [\n       {\n         \"id_ingredient\": \"562a36ec4f0547a42755bf90\",\n         \"name_ingredient\": \"Fuck\",\n         \"_id\": \"56309253113604b7959a632d\",\n         \"amount_ingredient\": 100\n       }\n     ],\n     \"pictures\": [\n       {\n         \"thumbnail_url\": \"/thumbnails/1.jpg\",\n         \"medium_sized_url\": \"/medium_sized/1.jpg\",\n         \"big_sized_url\": \"/big_sized/1.jpg\",\n         \"_id\": \"56309253113604b7959a632e\"\n       }\n     ],\n     \"comments\": [\n       {\n         \"id_author\": \"386fc840d6c25173533e5406\",\n         \"name_author\": \"Pacza\",\n         \"date_posted\": \"2015-03-31T22:00:00.000Z\",\n         \"date_edited\": \"2015-04-01T18:34:23.000Z\",\n         \"content\": \"Thank you! Very nice recipe!\",\n         \"_id\": \"56309253113604b7959a632f\",\n         \"visible\": true\n       }\n     ],\n     \"average_price\": 1,\n     \"time_preparation\": 60,\n     \"average_score\": 0,\n     \"difficulty\": 1,\n     \"date_posted\": \"2015-03-31T22:00:00.000Z\",\n     \"type\": {\n       \"id_type\": \"563091df113604b7959a6327\",\n       \"name\": \"TopKek\"\n     }\n   }\n ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Nothing find for this search</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"You must at least set a name or a tag to search\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "No metadata find",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"You must set the metadata\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "No order field find",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"The order.field must be set\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/search.js",
+    "groupTitle": "Search",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "title",
+            "description": "<p>Name of the recipes (Regex)</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String[]</p> ",
+            "optional": true,
+            "field": "type",
+            "description": "<p>Id of the types that your recipes must have.</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "order",
+            "description": "<p>Order of the return of the search</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "order.order",
+            "description": "<p>Order (can be asc or desc)</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "order.field",
+            "description": "<p>Field which is order (ex: fat)</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": false,
+            "field": "metadata",
+            "description": "<p>Number of items to return, page of the items</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "metadata.items",
+            "description": "<p>number of items that are return for the current page</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "metadata.page",
+            "description": "<p>Number of the page that you want to ask</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n   \"title\": \"pie\",\n   \"order\": {\"order\": \"desc\",\n             \"field\": \"fat\"\n   },\n   \"tags\": ['563091df113604b7959a6327'],\n   \"metadata\": {\"items\": 1,\n                 \"page\": 1\n   }\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
     "type": "delete",
     "url": "/types/id/:id",
     "title": "Delete Type by id",
