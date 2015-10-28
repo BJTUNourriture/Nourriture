@@ -60,4 +60,8 @@ The project structure is based on `generator-gulp-angular`
 
 ## Run the development server and live-reload
 
+Install the different packages :
+- with `npm install`
+- and `bower install`
+
 Just launch `gulp serve` in the root directory where `gulpfile.js` is located
