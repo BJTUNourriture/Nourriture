@@ -1,13 +1,18 @@
 div(ng-controller="SidenavController as sidenav")
-    section(layout='row', flex)
-        md-sidenav.menu-sidenav.md-sidenav-left(md-component-id='left')
-            md-content.logo-sidenav
-                img(src="assets/images/logo/nourriture.svg")
-            md-content.item-sidenav
-                md-button.first-item One
-                md-button One
+	section(layout='row', flex)
+		md-sidenav.menu-sidenav.md-sidenav-left(md-component-id='left')
+			md-content.logo-sidenav
+				img(src="assets/images/logo/nourriture.svg")
+			md-card
+				img(src="assets/images/user_dummy/random-user-1.jpg")
+				md-card-content
+					h2.md-title Profile
+					p Random Text
+			md-content.item-sidenav
+				md-button.first-item One
+				md-button One
 
-        ng-md-icon(icon="{{ sidenav.menuIcon }}",
-                    ng-mouseover='sidenav.menuIcon = "arrow_forward"',
-                    ng-mouseleave='sidenav.menuIcon = "menu"',
-                    ng-click='sidenav.openLeftMenu()')
+		ng-md-icon(icon="{{ sidenav.menuIcon }}",
+					ng-mouseover='sidenav.menuIcon = "arrow_forward"',
+					ng-mouseleave='sidenav.menuIcon = "menu"',
+					ng-click='sidenav.openLeftMenu()')
