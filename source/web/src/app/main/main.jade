@@ -2,7 +2,7 @@ div(ng-controller="SidenavController as sidenav")
 	section(layout='row', flex)
 		md-sidenav.menu-sidenav.md-sidenav-left(md-component-id='left')
 			div.md-button-style
-				ng-md-icon.md-button-element-style(icon="{{ sidenav.menuIconIn }}",
+				ng-md-icon(icon="{{ sidenav.menuIconIn }}",
 						ng-mouseover='sidenav.menuIconIn = "arrow_back"',
 						ng-mouseleave='sidenav.menuIconIn = "menu"',
 						ng-click='sidenav.leftMenuToggle()')
