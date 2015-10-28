@@ -1,10 +1,10 @@
 div(ng-controller="SidenavController as sidenav")
 	section(layout='row', flex)
-		md-sidenav.md-sidenav-left(md-component-id='left')
-			md-content
+		md-sidenav.menu-sidenav.md-sidenav-left(md-component-id='left')
+			md-content.logo-sidenav
 				img(src="assets/images/logo/nourriture.svg")
-			md-content One
-			md-content Two
+			md-content.item-sidenav One
+			md-content.item-sidenav Two
 		ng-md-icon(icon="{{ sidenav.menuIcon }}",
 					ng-mouseover='sidenav.menuIcon = "arrow_forward"',
 					ng-mouseleave='sidenav.menuIcon = "menu"',

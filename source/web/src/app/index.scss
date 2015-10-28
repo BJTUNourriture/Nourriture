@@ -90,6 +90,25 @@ section.jumbotron {
   }
 }
 
+/* Start code Nourriture */
+
+.menu-sidenav {
+  background-color: #24BCFF;
+
+  md-content.item-sidenav {
+    background-color: #24BCFF;
+  }
+
+  /* Use this class if you need to have a white
+background on a md-content in a sidenav */
+  .logo-sidenav {
+    background-color: white;
+  }
+}
+
+
+/* End code Nourriture */
+
 /**
  *  Do not remove the comment below. It's the markers used by gulp-inject to inject
  *  all your sass files automatically
