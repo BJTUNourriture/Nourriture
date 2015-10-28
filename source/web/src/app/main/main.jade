@@ -3,4 +3,4 @@ div(ng-controller="SidenavController as sidenav")
 		md-sidenav.md-sidenav-left(md-component-id='left') Left Nav!
 			md-content One
 			md-content Two
-		md-button(ng-click='sidenav.openLeftMenu()') Open Left Menu
+		ng-md-icon(icon="menu", ng-click='sidenav.openLeftMenu()')
