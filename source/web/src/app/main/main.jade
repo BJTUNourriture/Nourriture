@@ -9,11 +9,10 @@ div(ng-controller="SidenavController as sidenav")
 					h2.md-title Profile
 					p Random Text
 			md-content.item-sidenav
-				md-button. 
-							<span class="item_text">Article List AKbar</span>
-							<span class="item_icon"><ng-md-icon icon="github-box"></ng-md-icon></span>
-				md-button One
-
+				div(ng-repeat="item in sidenav.sidenavItems")
+					md-button. 
+								<span class="item_text">{{ item.name }}</span>
+								<span class="item_icon"><ng-md-icon icon="{{ item.icon }}"></ng-md-icon></span>
 		ng-md-icon(icon="{{ sidenav.menuIcon }}",
 					ng-mouseover='sidenav.menuIcon = "arrow_forward"',
 					ng-mouseleave='sidenav.menuIcon = "menu"',
