@@ -8,7 +8,9 @@ SidenavController.$inject = ["$scope", "$timeout", "$mdSidenav", "$log"];
 
 function SidenavController($scope, $timeout, $mdSidenav, $log)
 {
-	$scope.openLeftMenu = function() {
+	var vm = this;
+
+	vm.openLeftMenu = function() {
 		$mdSidenav('left').toggle();
 	};
 }

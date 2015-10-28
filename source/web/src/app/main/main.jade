@@ -1,6 +1,6 @@
-div(ng-controller="SidenavController")
+div(ng-controller="SidenavController as sidenav")
 	section(layout='row', flex)
 		md-sidenav.md-sidenav-left(md-component-id='left') Left Nav!
 			md-content One
 			md-content Two
-		md-button(ng-click='openLeftMenu()') Open Left Menu
+		md-button(ng-click='sidenav.openLeftMenu()') Open Left Menu
