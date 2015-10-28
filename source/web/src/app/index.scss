@@ -4,7 +4,6 @@
  */
 // bower:scss
 // endbower
-
 @import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,700,700italic,400italic);
 
 @font-face {
@@ -13,17 +12,17 @@
   font-weight: 400;
   src: url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.eot); /* For IE6-8 */
   src: local('Material Icons'),
-       local('MaterialIcons-Regular'),
-       url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.woff2) format('woff2'),
-       url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.woff) format('woff'),
-       url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.ttf) format('truetype');
+  local('MaterialIcons-Regular'),
+  url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.woff2) format('woff2'),
+  url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.woff) format('woff'),
+  url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.ttf) format('truetype');
 }
 
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
+  font-size: 24px; /* Preferred icon size */
   display: inline-block;
   width: 1em;
   height: 1em;
@@ -94,6 +93,9 @@ section.jumbotron {
 
 .menu-sidenav {
   background-color: #24BCFF;
+  -moz-box-shadow: inset -10px 0px 5px -5px #888;
+  -webkit-box-shadow: iinset -10px 0px 5px -5px #888;
+  box-shadow: inset -10px 0px 5px -5px #888;
 
   md-content.item-sidenav {
     background-color: #24BCFF;
@@ -105,9 +107,32 @@ background on a md-content in a sidenav */
     background-color: white;
     padding: 10px 0px 5px 0px;
     text-align: center;
+
+  }
+
+  .md-button {
+    margin: 0px;
+    width: 100%;
+    background-color: #2e8b57;
+    color: black;
+    border-radius: 0px;
+    -moz-box-shadow: inset -10px 0px 5px -5px #888;
+    -webkit-box-shadow: inset -10px 0px 5px -5px #888;
+    box-shadow: inset -10px 0px 5px -5px #888;
+
+    &:not([disabled]):hover {
+      background-color: #0ee853;
+    }
+
+  }
+
+  .first-item {
+    @extend .md-button;
+    -moz-box-shadow: inset -10px 8px 5px -5px #888;
+    -webkit-box-shadow: inset -10px 8px 5px -5px #888;
+    box-shadow: inset -10px 8px 5px -5px #888;
   }
 }
-
 
 /* End code Nourriture */
 
