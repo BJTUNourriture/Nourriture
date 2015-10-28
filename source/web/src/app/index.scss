@@ -126,17 +126,10 @@ background on a md-content in a sidenav */
 
   }
 
-  .first-item {
-    @extend .md-button;
-    -moz-box-shadow: inset -10px 7.5px 5px -5px #888;
-    -webkit-box-shadow: inset -10px 7.5px 5px -5px #888;
-    box-shadow: inset -10px 7.5px 5px -5px #888;
-  }
-
   md-card {
 
     width: 75%;
-    margin: 0 auto;
+    margin: 10px auto;
 
   }
 }
