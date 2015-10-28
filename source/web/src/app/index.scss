@@ -94,6 +94,9 @@ section.jumbotron {
 
 .menu-sidenav {
   background-color: #24BCFF;
+  -moz-box-shadow: inset 0 0 5px 5px #888;
+  -webkit-box-shadow: inset 0 0 5px 5px#888;
+  box-shadow: inset -10px 0px 5px -5px #888;
 
   md-content.item-sidenav {
     background-color: #24BCFF;
@@ -105,6 +108,29 @@ background on a md-content in a sidenav */
     background-color: white;
     padding: 10px 0px 5px 0px;
     text-align: center;
+
+  }
+
+  .md-button {
+    margin: 0px;
+    width: 100%;
+    background-color: #2e8b57;
+    color: black;
+    border-radius: 0px;
+   /* -moz-box-shadow: inset 0 0 5px 5px #888;
+    -webkit-box-shadow: inset 5px 5px 5px 5px#888;*/
+    box-shadow: inset -10px 0px 5px -5px #888;
+
+
+    &:not([disabled]):hover {
+      background-color: #0ee853;
+    }
+
+  }
+
+  .first-item {
+    @extend .md-button;
+    box-shadow: inset -10px 8px 5px -5px #888;
   }
 }
 
