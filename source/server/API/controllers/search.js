@@ -225,6 +225,8 @@ exports.postSearchRecipes = function (req, res, flag) {
 
 	var type_list = req.body.type;
 
+	console.log(type_list)
+
 	//If title and types are not set
 
 	if (!title && !type_list)
@@ -239,7 +241,7 @@ exports.postSearchRecipes = function (req, res, flag) {
 	
 	var Json_search = {
 				"title": { "$regex": title, "$options": "i" },
-				"tags.id_type": { $all: tag_list}
+				"type.id_type": { $all: type_list}
 			  };
 	var newjson = {metadata: {current_page: items_page, order: order, tags: tag_list, title: title}}
 
@@ -258,12 +260,12 @@ exports.postSearchRecipes = function (req, res, flag) {
 
 	//If only tags is set
 
-	else if (!title && tag_list){
+	else if (!title && type_list){
 
 	var Json_search = {
-				"tags.id_type": { $all: tag_list}
+				"type.id_type": { $all: type_list}
 			  };
-	var newjson = {metadata: {current_page: items_page, order: order, tags: tag_list}}
+	var newjson = {metadata: {current_page: items_page, order: order, tags: type_list}}
 
 	}
 	
@@ -287,7 +289,7 @@ exports.postSearchRecipes = function (req, res, flag) {
 						return (res.status(404).send({message : 'Nothing find for this search'}))
 					else{
 						newjson.metadata.total_page = total_page
-						newjson.ingredients = docs
+						newjson.recipes = docs
 						return (res.json(newjson));
 					}
 				} 
@@ -311,7 +313,7 @@ exports.postSearchRecipes = function (req, res, flag) {
 						return (res.status(404).send({message : 'Nothing find for this search'}))}
 					else{
 						newjson.metadata.total_page = total_page
-						newjson.ingredients = docs
+						newjson.recipes = docs
 						return (res.json(newjson));
 					}
 				}
