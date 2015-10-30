@@ -19,7 +19,7 @@ div(ng-controller="SidenavController as sidenav")
 						md-button. 
 									<span class="item_text">{{ item.name }}</span>
 									<span class="item_icon"><ng-md-icon icon="{{ item.icon }}"></ng-md-icon></span>
-	section(layout="row")
+	section(layout="row").layout-fill
 		div(flex="9").show-sm.hide-gt-sm
 			ng-md-icon.icon-menu-sm(icon="{{ sidenav.menuIconOut }}",
 						size="24",
@@ -36,6 +36,7 @@ div(ng-controller="SidenavController as sidenav")
 				div(ng-repeat="icon in sidenav.sidenavItems")
 					ng-md-icon.icon-menu(icon="{{ icon.icon }}",
 								size="48")
-		div.flex
-			h1.title-homepage Welcome to Nourriture!
+		div(flex layout="column")
+			md-content.flex
+				h1.title-homepage Welcome to Nourriture!
 
