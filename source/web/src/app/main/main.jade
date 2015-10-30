@@ -20,13 +20,13 @@ div(ng-controller="SidenavController as sidenav")
 									<span class="item_text">{{ item.name }}</span>
 									<span class="item_icon"><ng-md-icon icon="{{ item.icon }}"></ng-md-icon></span>
 	section(layout="row")
-		div.flex.show-sm.hide-gt-sm
+		div(flex="9").show-sm.hide-gt-sm
 			ng-md-icon.icon-menu-sm(icon="{{ sidenav.menuIconOut }}",
 						size="24",
 						ng-mouseover='sidenav.menuIconOut = "arrow_forward"',
 						ng-mouseleave='sidenav.menuIconOut = "menu"',
 						ng-click='sidenav.leftMenuToggle()')
-		div.flex.hide-sm
+		div(flex="9").hide-sm
 			div.toolbar-menu
 				ng-md-icon.icon-menu(icon="{{ sidenav.menuIconOut }}",
 							size="48",
@@ -37,4 +37,5 @@ div(ng-controller="SidenavController as sidenav")
 					ng-md-icon.icon-menu(icon="{{ icon.icon }}",
 								size="48")
 		div.flex
+			h1.title-homepage Welcome to Nourriture!
 
