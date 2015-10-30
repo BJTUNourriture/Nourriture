@@ -108,6 +108,14 @@ section.jumbotron {
   }
 }
 
+.icon-menu-sm {
+  @extend .icon-menu;
+
+  height : 24px;
+  width : 24px;
+  background-color : #2e8b57;
+}
+
 .menu-sidenav {
   background-color: #24BCFF;
   -moz-box-shadow: inset -10px 0px 5px -5px #888;
