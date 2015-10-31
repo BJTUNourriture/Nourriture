@@ -131,7 +131,8 @@ server.exchange(oauth2orize.exchange.code(function (client, code, redirectUri, c
                 return callback(err);
             }
             /* Create a JSON Web Toke instead */
-            var token = jwt.sign({client: client}, '18B63D7DDDD8C614227C8F31D8A25DEB92F249C391267DF9A28A5ACC00458837', {expiresIn: 3600 * 5});
+
+
             if (token) {
                 callback(null, token)
             }
