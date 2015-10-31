@@ -1,43 +1,10 @@
 div(ng-controller="SidenavController as sidenav")
 	section(layout='row', flex)
-		div.flex
-			md-sidenav.menu-sidenav.md-sidenav-left(md-component-id='left')
-				div.md-button-style
-					ng-md-icon(icon="{{ sidenav.menuIconIn }}",
-							ng-mouseover='sidenav.menuIconIn = "arrow_back"',
-							ng-mouseleave='sidenav.menuIconIn = "menu"',
-							ng-click='sidenav.leftMenuToggle()')
-				md-content.logo-sidenav
-					img(src="assets/images/logo/nourriture.svg")
-				md-card
-					img(src="assets/images/user_dummy/random-user-1.jpg")
-					md-card-content
-						h2.md-title Profile
-						p Random Text
-				md-content.item-sidenav
-					div(ng-repeat="item in sidenav.sidenavItems")
-						md-button. 
-									<span class="item_text">{{ item.name }}</span>
-									<span class="item_icon"><ng-md-icon icon="{{ item.icon }}"></ng-md-icon></span>
+		include ../menu/menu.jade
 	section(layout="row").layout-fill
-		div(flex="9").show-sm.hide-gt-sm
-			ng-md-icon.icon-menu-sm(icon="{{ sidenav.menuIconOut }}",
-						size="24",
-						ng-mouseover='sidenav.menuIconOut = "arrow_forward"',
-						ng-mouseleave='sidenav.menuIconOut = "menu"',
-						ng-click='sidenav.leftMenuToggle()')
-		div(flex="9").hide-sm
-			div.toolbar-menu
-				ng-md-icon.icon-menu(icon="{{ sidenav.menuIconOut }}",
-							size="48",
-							ng-mouseover='sidenav.menuIconOut = "arrow_forward"',
-							ng-mouseleave='sidenav.menuIconOut = "menu"',
-							ng-click='sidenav.leftMenuToggle()')
-				div(ng-repeat="icon in sidenav.sidenavItems")
-					ng-md-icon.icon-menu(icon="{{ icon.icon }}",
-								size="48")
+		include ../menu/toolbar.jade
 		div(flex layout="column")
-			md-content(style="background-image : url('assets/images/homepage_bg/bg.png');")#bacgkround-homepage.flex
+			md-content(style="background-image : url('assets/images/homepage_bg/bg.png');")#backround-homepage.flex
 				div.homepage
 					h1 Share you taste for food
 					h2 Welcome to Nourriture !
