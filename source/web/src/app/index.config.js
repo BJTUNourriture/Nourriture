@@ -5,8 +5,10 @@
     .module('web')
     .config(config);
 
+    config.$inject = ["$logProvider", "toastrConfig", "$locationProvider"];
+
   /** @ngInject */
-  function config($logProvider, toastrConfig) {
+  function config($logProvider, toastrConfig, $locationProvider) {
     // Enable log
     $logProvider.debugEnabled(true);
 
@@ -16,6 +18,10 @@
     toastrConfig.positionClass = 'toast-top-right';
     toastrConfig.preventDuplicates = true;
     toastrConfig.progressBar = true;
+
+    //Configuring of html5 routes
+    $locationProvider.html5Mode(true);
+    $locationProvider.hashPrefix('!');
   }
 
 })();
