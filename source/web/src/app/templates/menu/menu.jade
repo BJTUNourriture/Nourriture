@@ -7,11 +7,7 @@ div.flex
 					ng-click='sidenav.leftMenuToggle()')
 		md-content.logo-sidenav
 			img(src="assets/images/logo/nourriture.svg")
-		md-card
-			img(src="assets/images/user_dummy/random-user-1.jpg")
-			md-card-content
-				h2.md-title Profile
-				p Random Text
+		include ./mini-profile.jade
 		md-content.item-sidenav
 			div(ng-repeat="item in sidenav.sidenavItems")
 				md-button. 
