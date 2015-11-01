@@ -795,6 +795,18 @@ define({ "api": [
         ]
       }
     },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "message",
+            "description": "<p>User has been added to group.</p> "
+          }
+        ]
+      }
+    },
     "error": {
       "fields": {
         "Error 4xx": [
@@ -809,54 +821,13 @@ define({ "api": [
       "examples": [
         {
           "title": "Invalid Parameter Value",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"The name was not found.\"\n}",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"The ID was not found.\"\n}",
           "type": "json"
         }
       ]
     },
     "filename": "API/controllers/groups.js",
-    "groupTitle": "Groups",
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "<p>String</p> ",
-            "optional": false,
-            "field": "_id",
-            "description": "<p>Id of the group</p> "
-          },
-          {
-            "group": "Success 200",
-            "type": "<p>String</p> ",
-            "optional": false,
-            "field": "name",
-            "description": "<p>Name of the group</p> "
-          },
-          {
-            "group": "Success 200",
-            "type": "<p>String</p> ",
-            "optional": true,
-            "field": "description",
-            "description": "<p>Description of the group</p> "
-          },
-          {
-            "group": "Success 200",
-            "type": "<p>String</p> ",
-            "optional": false,
-            "field": "admin_id",
-            "description": "<p>ID of the group's owner</p> "
-          },
-          {
-            "group": "Success 200",
-            "type": "<p>Object[]</p> ",
-            "optional": true,
-            "field": "tags",
-            "description": "<p>List of the tags of the group</p> "
-          }
-        ]
-      }
-    }
+    "groupTitle": "Groups"
   },
   {
     "type": "delete",
@@ -913,7 +884,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"\"message\" : \"Group succesfully deleted!\"\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  \"message\" : \"Group succesfully deleted!\"\n}",
           "type": "json"
         }
       ]
@@ -974,7 +945,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"\"message\" : \"Group succesfully deleted!\"\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  \"message\" : \"Group succesfully deleted!\"\n}",
           "type": "json"
         }
       ]
@@ -1049,7 +1020,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"\"message\" : \"Group succesfully deleted!\"\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  \"message\" : \"Group succesfully deleted!\"\n}",
           "type": "json"
         }
       ]
@@ -1126,10 +1097,100 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\"_id\" : \"561830c5fecdba4f72668fe8\",\n      \"name\": \"Le gang du gras\",\n      \"description\": \"Fat for life\"\n\t\t\"admin_id\": \"561fc840d6c25173533e267f\"\n\t\t \"tags\" : [{\n\t\t\t\t\t\"name\" : \"fruit\",\n\t\t\t\t\t\"description\" : \"Don't event try\",\n\t\t\t\t\t\"flag\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"FORBIDDEN\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }]\n    }",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\"_id\" : \"561830c5fecdba4f72668fe8\",\n      \"name\": \"Le gang du gras\",\n      \"description\": \"Fat for life\"\n\t\t\"admin_id\": \"561fc840d6c25173533e267f\"\n\t\t \"tags\" : [{\n\t\t\t\t\t\"name\" : \"fruit\",\n\t\t\t\t\t\"description\" : \"Don't event try\",\n\t\t\t\t\t\"flag\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"FORBIDDEN\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }]\n\t\t \"users\" : [{\n\t\t\t\t\t\"user_id\" : \"456ah145d9c31569845e354a\",\n\t\t\t\t\t\"access\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"ADMIN\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }]\n    }",
           "type": "json"
         }
       ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "tags",
+            "description": "<p>List of the tags of the group</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.name",
+            "description": "<p>Name of the tags</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.description",
+            "description": "<p>Description of the tags</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.flag",
+            "description": "<p>Flag of the tags</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.flag.name",
+            "description": "<p>Name of the flag</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.flag.level",
+            "description": "<p>Indicator of the flag</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "users",
+            "description": "<p>List of users of the group</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "users.user_id",
+            "description": "<p>Id of the user</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "users.description",
+            "description": "<p>Description of the users</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "users.access",
+            "description": "<p>Access right of the user</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "users.access.name",
+            "description": "<p>Name of the access</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "users.access.level",
+            "description": "<p>Indicator of the access</p> "
+          }
+        ]
+      }
     }
   },
   {
@@ -1148,6 +1209,90 @@ define({ "api": [
             "optional": false,
             "field": "id",
             "description": "<p>Groups unique ID</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "tags",
+            "description": "<p>List of the tags of the group</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.name",
+            "description": "<p>Name of the tags</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.description",
+            "description": "<p>Description of the tags</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.flag",
+            "description": "<p>Flag of the tags</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.flag.name",
+            "description": "<p>Name of the flag</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.flag.level",
+            "description": "<p>Indicator of the flag</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "users",
+            "description": "<p>List of users of the group</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "users.user_id",
+            "description": "<p>Id of the user</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "users.description",
+            "description": "<p>Description of the users</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "users.access",
+            "description": "<p>Access right of the user</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "users.access.name",
+            "description": "<p>Name of the access</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "users.access.level",
+            "description": "<p>Indicator of the access</p> "
           }
         ]
       }
@@ -1216,7 +1361,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\"_id\" : \"561830c5fecdba4f72668fe8\",\n      \"name\": \"Le gang du gras\",\n      \"description\": \"Fat for life\"\n\t\t\"admin_id\": \"561fc840d6c25173533e267f\"\n\t\t \"tags\" : [{\n\t\t\t\t\t\"name\" : \"fruit\",\n\t\t\t\t\t\"description\" : \"Don't event try\",\n\t\t\t\t\t\"flag\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"FORBIDDEN\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }]\n    }",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\"_id\" : \"561830c5fecdba4f72668fe8\",\n      \"name\": \"Le gang du gras\",\n      \"description\": \"Fat for life\"\n\t\t\"admin_id\": \"561fc840d6c25173533e267f\"\n\t\t \"tags\" : [{\n\t\t\t\t\t\"name\" : \"fruit\",\n\t\t\t\t\t\"description\" : \"Don't event try\",\n\t\t\t\t\t\"flag\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"FORBIDDEN\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }]\n\t\t \"users\" : [{\n\t\t\t\t\t\"user_id\" : \"456ah145d9c31569845e354a\",\n\t\t\t\t\t\"access\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"ADMIN\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }]\n    }",
           "type": "json"
         }
       ]
@@ -1238,6 +1383,90 @@ define({ "api": [
             "optional": false,
             "field": "name",
             "description": "<p>Group partial or full name</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "tags",
+            "description": "<p>List of the tags of the group</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.name",
+            "description": "<p>Name of the tags</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.description",
+            "description": "<p>Description of the tags</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.flag",
+            "description": "<p>Flag of the tags</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.flag.name",
+            "description": "<p>Name of the flag</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.flag.level",
+            "description": "<p>Indicator of the flag</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": true,
+            "field": "users",
+            "description": "<p>List of users of the group</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "users.user_id",
+            "description": "<p>Id of the user</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "users.description",
+            "description": "<p>Description of the users</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "users.access",
+            "description": "<p>Access right of the user</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "users.access.name",
+            "description": "<p>Name of the access</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "users.access.level",
+            "description": "<p>Indicator of the access</p> "
           }
         ]
       }
@@ -1306,7 +1535,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\"_id\" : \"561830c5fecdba4f72668fe8\",\n      \"name\": \"Le gang du gras\",\n      \"description\": \"Fat for life\"\n\t\t\"admin_id\": \"561fc840d6c25173533e267f\"\n\t\t \"tags\" : [{\n\t\t\t\t\t\"name\" : \"fruit\",\n\t\t\t\t\t\"description\" : \"Don't event try\",\n\t\t\t\t\t\"flag\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"FORBIDDEN\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }]\n    }",
+          "content": "    HTTP/1.1 200 OK\n    {\n\t\t\"_id\" : \"561830c5fecdba4f72668fe8\",\n      \"name\": \"Le gang du gras\",\n      \"description\": \"Fat for life\"\n\t\t\"admin_id\": \"561fc840d6c25173533e267f\"\n\t\t \"tags\" : [{\n\t\t\t\t\t\"name\" : \"fruit\",\n\t\t\t\t\t\"description\" : \"Don't event try\",\n\t\t\t\t\t\"flag\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"FORBIDDEN\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }]\n\t\t \"users\" : [{\n\t\t\t\t\t\"user_id\" : \"456ah145d9c31569845e354a\",\n\t\t\t\t\t\"access\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"ADMIN\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }]\n    }",
           "type": "json"
         }
       ]
@@ -1379,13 +1608,48 @@ define({ "api": [
             "optional": true,
             "field": "tags",
             "description": "<p>List of the tags of the group</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.name",
+            "description": "<p>Name of the tags</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.description",
+            "description": "<p>Description of the tags</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.flag",
+            "description": "<p>Flag of the tags</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.flag.name",
+            "description": "<p>Name of the flag</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.flag.level",
+            "description": "<p>Indicator of the flag</p> "
           }
         ]
       },
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "    {\n      \"name\": \"Le gang du gras\",\n      \"description\": \"Fat for life\"\n\t\t\"admin_id\": \"561fc840d6c25173533e267f\"\n\t\t \"tags\" : [{\n\t\t\t\t\t\"name\" : \"fruit\",\n\t\t\t\t\t\"description\" : \"Don't event try\",\n\t\t\t\t\t\"flag\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"FORBIDDEN\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }]\n    }",
+          "content": "    {\n      \"name\": \"Le gang du gras\",\n      \"description\": \"Fat for life\"\n\t\t\"admin_id\": \"561fc840d6c25173533e267f\"\n\t\t \"tags\" : [{\n\t\t\t\t\t\"name\" : \"fruit\",\n\t\t\t\t\t\"description\" : \"Don't event try\",\n\t\t\t\t\t\"flag\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"FORBIDDEN\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }],\n\t\t \"users\" : [{\n\t\t\t\t\t\"user_id\" : \"456ah145d9c31569845e354a\",\n\t\t\t\t\t\"access\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"ADMIN\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }]\n    }",
           "type": "json"
         }
       ]
@@ -1515,13 +1779,48 @@ define({ "api": [
             "optional": true,
             "field": "tags",
             "description": "<p>List of the tags of the group</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.name",
+            "description": "<p>Name of the tags</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.description",
+            "description": "<p>Description of the tags</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.flag",
+            "description": "<p>Flag of the tags</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.flag.name",
+            "description": "<p>Name of the flag</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.flag.level",
+            "description": "<p>Indicator of the flag</p> "
           }
         ]
       },
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "    {\n      \"name\": \"Le gang du gras\",\n      \"description\": \"Fat for life\"\n\t\t\"admin_id\": \"561fc840d6c25173533e267f\"\n\t\t \"tags\" : [{\n\t\t\t\t\t\"name\" : \"fruit\",\n\t\t\t\t\t\"description\" : \"Don't event try\",\n\t\t\t\t\t\"flag\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"FORBIDDEN\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }]\n    }",
+          "content": "    {\n      \"name\": \"Le gang du gras\",\n      \"description\": \"Fat for life\"\n\t\t\"admin_id\": \"561fc840d6c25173533e267f\"\n\t\t \"tags\" : [{\n\t\t\t\t\t\"name\" : \"fruit\",\n\t\t\t\t\t\"description\" : \"Don't event try\",\n\t\t\t\t\t\"flag\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"FORBIDDEN\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }],\n\t\t \"users\" : [{\n\t\t\t\t\t\"user_id\" : \"456ah145d9c31569845e354a\",\n\t\t\t\t\t\"access\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"ADMIN\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }]\n    }",
           "type": "json"
         }
       ]
@@ -1623,13 +1922,48 @@ define({ "api": [
             "optional": true,
             "field": "tags",
             "description": "<p>List of the tags of the group</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.name",
+            "description": "<p>Name of the tags</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.description",
+            "description": "<p>Description of the tags</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.flag",
+            "description": "<p>Flag of the tags</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.flag.name",
+            "description": "<p>Name of the flag</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "tags.flag.level",
+            "description": "<p>Indicator of the flag</p> "
           }
         ]
       },
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "    {\n      \"name\": \"Le gang du gras\",\n      \"description\": \"Fat for life\"\n\t\t\"admin_id\": \"561fc840d6c25173533e267f\"\n\t\t \"tags\" : [{\n\t\t\t\t\t\"name\" : \"fruit\",\n\t\t\t\t\t\"description\" : \"Don't event try\",\n\t\t\t\t\t\"flag\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"FORBIDDEN\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }]\n    }",
+          "content": "    {\n      \"name\": \"Le gang du gras\",\n      \"description\": \"Fat for life\"\n\t\t\"admin_id\": \"561fc840d6c25173533e267f\"\n\t\t \"tags\" : [{\n\t\t\t\t\t\"name\" : \"fruit\",\n\t\t\t\t\t\"description\" : \"Don't event try\",\n\t\t\t\t\t\"flag\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"FORBIDDEN\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }],\n\t\t \"users\" : [{\n\t\t\t\t\t\"user_id\" : \"456ah145d9c31569845e354a\",\n\t\t\t\t\t\"access\" : {\n\t\t\t\t\t\t\t\t\"name\" : \"ADMIN\",\n\t\t\t\t\t\t\t\t\"level\" : 0\n\t\t\t\t\t\t\t }\n\t\t\t\t   }]\n    }",
           "type": "json"
         }
       ]
@@ -1667,7 +2001,7 @@ define({ "api": [
   {
     "type": "put",
     "url": "/groups/:group_id/remove/:user_id",
-    "title": "remove User to a group",
+    "title": "Remove User to a group",
     "name": "removeUserToGroup",
     "group": "Groups",
     "version": "0.1.0",
@@ -1691,6 +2025,18 @@ define({ "api": [
         ]
       }
     },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "message",
+            "description": "<p>User has been removed to group.</p> "
+          }
+        ]
+      }
+    },
     "error": {
       "fields": {
         "Error 4xx": [
@@ -1705,54 +2051,13 @@ define({ "api": [
       "examples": [
         {
           "title": "Invalid Parameter Value",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"The name was not found.\"\n}",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"The ID was not found.\"\n}",
           "type": "json"
         }
       ]
     },
     "filename": "API/controllers/groups.js",
-    "groupTitle": "Groups",
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "<p>String</p> ",
-            "optional": false,
-            "field": "_id",
-            "description": "<p>Id of the group</p> "
-          },
-          {
-            "group": "Success 200",
-            "type": "<p>String</p> ",
-            "optional": false,
-            "field": "name",
-            "description": "<p>Name of the group</p> "
-          },
-          {
-            "group": "Success 200",
-            "type": "<p>String</p> ",
-            "optional": true,
-            "field": "description",
-            "description": "<p>Description of the group</p> "
-          },
-          {
-            "group": "Success 200",
-            "type": "<p>String</p> ",
-            "optional": false,
-            "field": "admin_id",
-            "description": "<p>ID of the group's owner</p> "
-          },
-          {
-            "group": "Success 200",
-            "type": "<p>Object[]</p> ",
-            "optional": true,
-            "field": "tags",
-            "description": "<p>List of the tags of the group</p> "
-          }
-        ]
-      }
-    }
+    "groupTitle": "Groups"
   },
   {
     "type": "delete",
