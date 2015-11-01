@@ -289,7 +289,7 @@ exports.updateAccessRight = function (req, res, err, group) {
 		return (res.status(404).json({message: "Group not found"}));
 
 	for (i=0; i < group['users'].length; i++) {
-		if (group['users'][i].user_id == req.body['user_id']) {
+		if (group['users'][i].user_id.toString() == req.body['user_id']) {
 			group['users'][i].access = {name: name[req.body['access']], level: req.body['access']}
 			group.save(function(err) {
 				if (err)
@@ -333,7 +333,7 @@ exports.addUserToGroup = function(req, res, flag) {
 				return (res.status(404).json({message : 'The id was not found.'}));
 
 			for (i=0; i < doc['users'].length;i++) {
-				if (doc['users'][i].user_id === req.params.user_id)
+				if (doc['users'][i].user_id.toString() === req.params.user_id)
 					return (res.status(400).json({message:'User is already in the group.'}));
 			}
 			doc['users'].push({user_id: req.params.user_id, access: {name : "User", level: 3} });
@@ -359,7 +359,7 @@ exports.addUserToGroup = function(req, res, flag) {
 * @apiSuccess message User has been removed to group.
 *
 * @apiError message The id of the group was not found
-* @apiError message The id of the group was not found
+* @apiError message The id of the User was not found
 * @apiErrorExample Invalid Parameter Value
 *     HTTP/1.1 404 Not Found
 *     {
@@ -378,13 +378,15 @@ exports.removeUserToGroup = function (req, res, flag) {
 				return (res.status(400).json({message:'The id was not found.'}));
 
 			for (i=0; i < doc['users'].length;i++) {
-				console.log(doc['users'][i].user_id + '-' + req.params.user_id);
-				if (doc['users'][i].user_id === req.params.user_id) {
+				if (doc['users'][i].user_id.toString() === req.params.user_id) {
 					console.log(doc['users'][i]);
-//					doc['users'].splice(i, 1);
+					console.log(i);
+					console.log(typeof(doc['users']));
+					console.log(typeof(['toto', 'tata']));
+					doc['users'] = doc['users'].splice(i, 1);
 					doc.save(function(err) {
-						if (err)
-							return (res.send(err));
+//						if (err)
+//							return (res.send(err));
 						return (res.status(200).json({message:'User has been removed to group.'}));
 					});
 				}
