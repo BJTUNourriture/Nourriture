@@ -6,8 +6,32 @@
 * @apiParam {String} username Name of the user
 * @apiParam {String} password Passworld of the user
 * @apiParam {String} email Email of the user
-* @apiParam {String[]} [alergy] List of allergy
-* @apiParam {String} [religion] Religion of the user
+* @apiParam {Object[]} [alergy] List of allergy
+* @apiParam {Object[]} [religion] Religion of the user
+* @apiParam {Object[]} [pictures] List of user pictures
+* @apiParam {String} pictures.thumbnail_url Url of the thumbnail version of the picture
+* @apiParam {String} pictures.medium_sized_url Url of the medium size version of the picture
+* @apiParam {String} [pictures.big_sized_url] Url of the big size version of the picture
+* @apiParam {Object[]} [joined_groups]
+* @apiParam {Object[]} [like] List of the ingredients a person like
+* @apiParam {ObjectId} like.id_ingredient Id of the ingredient liked
+* @apiParam {String} like.name_ingredient Name of the ingredient liked
+* @apiParam {Object[]} [dislike] List of the ingredients a person dislike
+* @apiParam {ObjectId} dislike.id_ingredient Id of the ingredient disliked
+* @apiParam {String} dislike.name_ingredient Name of the ingredient disliked
+* @apiParam {Object[]} [follow] List of people followed by a person
+* @apiParam {ObjectId} follow.id_person Id of the person followed
+* @apiParam {String} follow.username Username of the person followed
+*/
+
+/**
+* @apiDefine UsersObjectSuccess
+*
+* @apiParam {String} username Name of the user
+* @apiParam {String} password Passworld of the user
+* @apiParam {String} email Email of the user
+* @apiParam {Object[]} [alergy] List of allergy
+* @apiParam {Object[]} [religion] Religion of the user
 * @apiParam {Object[]} [pictures] List of user pictures
 * @apiParam {String} pictures.thumbnail_url Url of the thumbnail version of the picture
 * @apiParam {String} pictures.medium_sized_url Url of the medium size version of the picture
@@ -231,6 +255,106 @@ exports.signinUser = function (req, res, next) {
 */
 
 /**
+* @apiDefine getGroupAnswer
+*
+* @apiSuccessExample Success-Response:
+*     HTTP/1.1 200 OK
+*     {
+*		"_id" : "561830c5fecdba4f72668fe8",
+*       "name": "Le gang du gras",
+*       "description": "Fat for life"
+		"admin_id": "561fc840d6c25173533e267f"
+*		 "tags" : [{
+*					"name" : "fruit",
+*					"description" : "Don't event try",
+*					"flag" : {
+*								"name" : "FORBIDDEN",
+*								"level" : 0
+*							 }
+*				   }]
+*		 "users" : [{
+*					"user_id" : "456ah145d9c31569845e354a",
+*					"access" : {
+*								"name" : "ADMIN",
+*								"level" : 0
+*							 }
+*				   }]
+*     }
+*/
+
+/**
+* @api {get} /users/id/:id Request Users informations by id
+* @apiName getUsersById
+* @apiGroup Users
+* @apiVersion 0.1.0
+*
+* @apiParam {Number} id Users unique ID
+*
+* @apiUse UsersObjectSuccess
+*
+* @apiUse UserRequestJSON
+*
+* @apiError message The id of the group was not found
+* @apiErrorExample Invalid Parameter Value
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "The id was not found."
+*     }
+*/
+exports.getUserById = function (req, res, flag) {
+	var id = flag === true ? req.body.id : req.params.id;
+	if (!id)
+		return flag === true ? -1 : res.json(400, {message : 'The id musn\'t be null'});
+	Users.findById(id,
+		function (err, doc) {
+			if (err)
+				return (res.send(err));
+			else if (doc === null)
+				return (res.json(404, {message : 'The id was not found.'}))
+			return (res.json(doc));
+		}
+	);
+	return (1);
+};
+
+/**
+* @api {get} /users/name/:name Request Group informations by name
+* @apiName getUserByName
+* @apiGroup Users
+* @apiVersion 0.1.0
+*
+* @apiParam {String} name Users ser partial or full name
+*
+* @apiUse UsersObjectSuccess
+*
+* @apiUse UserRequestJSON
+*
+* @apiError message The name of the group was not found
+* @apiErrorExample Invalid Parameter Value
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "The name was not found."
+*     }
+*/
+exports.getUserByName = function (req, res, flag) {
+	var name = flag === true ? req.body.name : req.params.name;
+	if (!name)
+		return flag === true ? -1 : res.json(400, {message : 'The name musn\'t be null'});
+	Users.find({
+		"name": { "$regex": name, "$options": "i" }
+		},
+		function (err, docs) {
+			if (err)
+				return (res.send(err));
+			else if (docs.length <= 0)
+				return (res.json(404, {message : 'The name was not found.'}))
+			return (res.json(docs));
+		}
+	);
+	return (1);
+};
+
+/**
 * @api {get} /users/ Retrive all Users
 * @apiName postUser
 * @apiGroup Users
@@ -387,13 +511,28 @@ exports.putUserById = function (req, res) {
       return (1);
   }
 
+
+/**
+*** DELETES
+**/
+
+/**
+* @apiDefine deleteUsersSuccess
+* @apiSuccess message Users succesfully deleted!
+* @apiSuccessExample Success-Response:
+*     HTTP/1.1 200 OK
+*     {
+*       "message" : "Group succesfully deleted!"
+*     }
+*/
+
 	/**
-	* @api {delete} /user/id/:id Delete User by id
-	* @apiName deleteUserById
-  * @apiGroup Users
-  * @apiVersion 0.1.0
+	* @api {delete} /users/ Delete Users (JSON)
+	* @apiName deleteUsers
+	* @apiGroup Users
+	* @apiVersion 0.1.0
 	*
-	* @apiParam {Number} id User unique ID
+	*
 	*
 	* @apiSuccess message User succesfully deleted!
 	* @apiSuccessExample Success-Response:
@@ -409,11 +548,47 @@ exports.putUserById = function (req, res) {
 	*       "message": "The id was not found."
 	*     }
 	*/
+	exports.deleteUsers = function (req, res) {
+		var i = -1;
+		var callbackReturn = -1;
+		var functionPointer = [module.exports.deleteUserById(req, res, true),
+								module.exports.deleteUserByName(req, res, true)];
+		var usage = "No correct argument given. Specify an id or a name";
+
+		while ((callbackReturn = functionPointer[++i]) == -1
+			&& i < functionPointer.length - 1);
+		return callbackReturn == -1 ? res.json({message : usage}) : callbackReturn;
+
+	};
+
+	/**
+	* @api {delete} /users/id/:id Delete User by id
+	* @apiName deleteUserById
+	* @apiGroup Users
+	* @apiVersion 0.1.0
+	*
+	* @apiParam {Number} [id] user unique ID
+	*
+	* @apiParamExample {json} Request-Example:
+	*	  {
+	*		"id" : "56183b64753d867e016c80d2"
+	*	  }
+	*
+	* @apiUse deleteUsersSuccess
+	*
+	* @apiError message The id was not found.
+	* @apiErrorExample Invalid Parameter Value
+	*     HTTP/1.1 404 Not Found
+	*     {
+	*       "message": "The id was not found."
+	*     }
+	*/
+
 	exports.deleteUserById = function (req, res, flag) {
 		var id = flag === true ? req.body.id : req.params.id;
 		if (!id)
 			return flag === true ? -1 : res.json(400, {message : 'The id musn\'t be null'});
-		User.remove({
+		Users.remove({
 			_id : id
 			},
 			function (err, removed) {
@@ -421,11 +596,55 @@ exports.putUserById = function (req, res) {
 					return (res.send(err));
 				else if (removed.result.n === 0)
 					return (res.json(404, {message : 'The id was not found.'}))
-				return (res.json({message : 'User succesfully deleted!'}));
+				return (res.json({message : 'Group succesfully deleted!'}));
 			}
 		);
 		return (1);
 	};
+
+	/**
+	* @api {delete} /users/name/:username Delete User by name
+	* @apiName deleteUserByName
+	* @apiGroup Users
+	* @apiVersion 0.1.0
+	*
+	* @apiParam {Sting} name user full name
+	*
+	* @apiParamExample {json} Request-Example:
+	*	  {
+	*		"name" : "Julien"
+	*	  }
+	*
+	* @apiUse deleteUsersSuccess
+	*
+	* @apiError message The name was not found.
+	* @apiErrorExample Invalid Parameter Value
+	*     HTTP/1.1 404 Not Found
+	*     {
+	*       "message": "The name was not found."
+	*     }
+	*/
+	exports.deleteUserByName = function (req, res, flag) {
+		var name = flag === true ? req.body.name : req.params.name;
+		if (!name)
+			return flag === true ? -1 : res.json(400, {message : 'The name musn\'t be null'});
+		Groups.remove({
+			name : name
+			},
+			function (err, removed) {
+				if (err)
+					return (res.send(err));
+				else if (removed.result.n === 0)
+					return (res.json(404, {message : 'The name was not found.'}))
+				return (res.json({message : 'Group succesfully deleted!'}));
+			}
+		);
+		return (1);
+	};
+
+
+
+
 
 
 /**

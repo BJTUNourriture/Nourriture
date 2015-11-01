@@ -40,13 +40,17 @@ router.route('/users/sign-in')
     .post(userController.signinUser);
 
 router.route('/users')
-    .get(userController.getUsers);
+    .get(userController.getUsers)
+		.delete(userController.deleteUsers);
 
 router.route('/users/id/:id')
     .put(userController.putUserById)
-		.delete(userController.deleteUserById);
+		.delete(userController.deleteUserById)
+		.get(userController.getUserById);
+
 
 router.route('/users/username/:username')
+		.delete(userController.deleteUserByName)
     .put(userController.putUserByUsername);
 
 router.route('/users/register')
