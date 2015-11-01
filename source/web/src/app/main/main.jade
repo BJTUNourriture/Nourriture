@@ -4,13 +4,4 @@ div(ng-controller="SidenavController as sidenav")
 	section(layout="row").layout-fill
 		include ../templates/menu/toolbar.jade
 		div(flex layout="column")
-			md-content(style="background-image : url('assets/images/homepage_bg/bg.png');")#backround-homepage.flex
-				div.homepage
-					h1 Share you taste for food
-					h2 Welcome to Nourriture !
-					p.
-						Free. Open Source. Powerful. Nourriture is a community social network sharing with
-						osmosis your favorite ingredients to bring you the tastiest recipes.
-					h2 Begin your journey now !
-					md-button.begin-journey-button.md-fab.md-primary
-						ng-md-icon.icon-menu(icon="keyboard_alt", size="48")
+			div.ui-view
