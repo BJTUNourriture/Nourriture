@@ -7,6 +7,11 @@
 * @apiParam {String} [description] Description of the group
 * @apiParam {String} admin_id ID of the group's owner
 * @apiParam {Object[]} [tags] List of the tags of the group
+* @apiParam {String} tags.name Name of the tags
+* @apiParam {String} tags.description Description of the tags
+* @apiParam {String} tags.flag Flag of the tags
+* @apiParam {String} tags.flag.name Name of the flag
+* @apiParam {String} tags.flag.level Indicator of the flag
 */
 
 /**
@@ -16,6 +21,11 @@
 * @apiParam {String} [description] Description of the group
 * @apiParam {String} [admin_id] ID of the group's owner
 * @apiParam {Object[]} [tags] List of the tags of the group
+* @apiParam {String} tags.name Name of the tags
+* @apiParam {String} tags.description Description of the tags
+* @apiParam {String} tags.flag Flag of the tags
+* @apiParam {String} tags.flag.name Name of the flag
+* @apiParam {String} tags.flag.level Indicator of the flag
 */
 
 /**
@@ -33,6 +43,18 @@
 * @apiSuccess {String} [description] Description of the group
 * @apiSuccess {String} admin_id ID of the group's owner
 * @apiSuccess {Object[]} [tags] List of the tags of the group
+* @apiParam {Object[]} [tags] List of the tags of the group
+* @apiParam {String} tags.name Name of the tags
+* @apiParam {String} tags.description Description of the tags
+* @apiParam {String} tags.flag Flag of the tags
+* @apiParam {String} tags.flag.name Name of the flag
+* @apiParam {String} tags.flag.level Indicator of the flag
+* @apiParam {Object[]} [users] List of users of the group
+* @apiParam {String} users.user_id Id of the user
+* @apiParam {String} users.description Description of the users
+* @apiParam {String} users.access Access right of the user
+* @apiParam {String} users.access.name Name of the access
+* @apiParam {String} users.access.level Indicator of the access
 */
 
 /**
@@ -48,6 +70,13 @@
 *					"description" : "Don't event try",
 *					"flag" : {
 *								"name" : "FORBIDDEN",
+*								"level" : 0
+*							 }
+*				   }],
+*		 "users" : [{
+*					"user_id" : "456ah145d9c31569845e354a",
+*					"access" : {
+*								"name" : "ADMIN",
 *								"level" : 0
 *							 }
 *				   }]
@@ -102,7 +131,7 @@ exports.postGroup = function (req, res) {
 	var group = new Groups({
 		name : req.body.name,
 		description : req.body.description,
-		users_id : [{user_id: req.body.admin_id, access: {name : "Admin", level: 0} }],
+		users : [{user_id: req.body.admin_id, access: {name : "Admin", level: 0} }],
 		tags : req.body.tags
 	});
 
@@ -259,9 +288,9 @@ exports.updateAccessRight = function (req, res, err, group) {
 	else if (group === null)
 		return (res.status(404).json({message: "Group not found"}));
 
-	for (i=0; i < group['users_id'].length; i++) {
-		if (group['users_id'][i].user_id == req.body['user_id']) {
-			group['users_id'][i].access = {name: name[req.body['access']], level: req.body['access']}
+	for (i=0; i < group['users'].length; i++) {
+		if (group['users'][i].user_id == req.body['user_id']) {
+			group['users'][i].access = {name: name[req.body['access']], level: req.body['access']}
 			group.save(function(err) {
 				if (err)
 					return (res.send(err));
@@ -282,14 +311,14 @@ exports.updateAccessRight = function (req, res, err, group) {
 * @apiParam {String} group_id Group id
 * @apiParam {String} user_id User id
 *
-* @apiUse GroupObjectSuccess
+* @apiSuccess message User has been added to group.
 *
 * @apiError message The id of the group was not found
 * @apiError message The id of the group was not found
 * @apiErrorExample Invalid Parameter Value
 *     HTTP/1.1 404 Not Found
 *     {
-*       "message": "The name was not found."
+*       "message": "The ID was not found."
 *     }
 */
 exports.addUserToGroup = function(req, res, flag) {
@@ -303,11 +332,11 @@ exports.addUserToGroup = function(req, res, flag) {
 			else if (doc === null)
 				return (res.status(404).json({message : 'The id was not found.'}));
 
-			for (i=0; i < doc['users_id'].length;i++) {
-				if (doc['users_id'][i].user_id === req.params.user_id)
+			for (i=0; i < doc['users'].length;i++) {
+				if (doc['users'][i].user_id === req.params.user_id)
 					return (res.status(400).json({message:'User is already in the group.'}));
 			}
-			doc['users_id'].push({user_id: req.params.user_id, access: {name : "User", level: 3} });
+			doc['users'].push({user_id: req.params.user_id, access: {name : "User", level: 3} });
 			doc.save(function(err) {
 				if (err)
 					return (res.send(err));
@@ -319,7 +348,7 @@ exports.addUserToGroup = function(req, res, flag) {
 }
 
 /**
-* @api {put} /groups/:group_id/remove/:user_id remove User to a group
+* @api {put} /groups/:group_id/remove/:user_id Remove User to a group
 * @apiName removeUserToGroup
 * @apiGroup Groups
 * @apiVersion 0.1.0
@@ -327,14 +356,14 @@ exports.addUserToGroup = function(req, res, flag) {
 * @apiParam {String} group_id Group id
 * @apiParam {String} user_id User id
 *
-* @apiUse GroupObjectSuccess
+* @apiSuccess message User has been removed to group.
 *
 * @apiError message The id of the group was not found
 * @apiError message The id of the group was not found
 * @apiErrorExample Invalid Parameter Value
 *     HTTP/1.1 404 Not Found
 *     {
-*       "message": "The name was not found."
+*       "message": "The ID was not found."
 *     }
 */
 exports.removeUserToGroup = function (req, res, flag) {
@@ -348,11 +377,11 @@ exports.removeUserToGroup = function (req, res, flag) {
 			else if (doc === null)
 				return (res.status(400).json({message:'The id was not found.'}));
 
-			for (i=0; i < doc['users_id'].length;i++) {
-				console.log(doc['users_id'][i].user_id + '-' + req.params.user_id);
-				if (doc['users_id'][i].user_id === req.params.user_id) {
-					console.log(doc['users_id'][i]);
-//					doc['users_id'].splice(i, 1);
+			for (i=0; i < doc['users'].length;i++) {
+				console.log(doc['users'][i].user_id + '-' + req.params.user_id);
+				if (doc['users'][i].user_id === req.params.user_id) {
+					console.log(doc['users'][i]);
+//					doc['users'].splice(i, 1);
 					doc.save(function(err) {
 						if (err)
 							return (res.send(err));
@@ -387,6 +416,13 @@ exports.removeUserToGroup = function (req, res, flag) {
 *					"description" : "Don't event try",
 *					"flag" : {
 *								"name" : "FORBIDDEN",
+*								"level" : 0
+*							 }
+*				   }]
+*		 "users" : [{
+*					"user_id" : "456ah145d9c31569845e354a",
+*					"access" : {
+*								"name" : "ADMIN",
 *								"level" : 0
 *							 }
 *				   }]
@@ -506,7 +542,7 @@ exports.getGroupByName = function (req, res, flag) {
 * @apiSuccessExample Success-Response:
 *     HTTP/1.1 200 OK
 *     {
-*       ""message" : "Group succesfully deleted!"
+*       "message" : "Group succesfully deleted!"
 *     }
 */
 

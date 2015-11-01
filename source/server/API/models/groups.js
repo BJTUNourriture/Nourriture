@@ -9,10 +9,11 @@ var groupsSchema = new mongoose.Schema({
 		required : true
 	},
 	description : String,
-	users_id : [{
+	users : [{
 		user_id : {
-			type : String,
-			required : true
+			type : mongoose.Schema.ObjectId,
+			required : true,
+			ref : 'User'
 		},
 		access : {
 			name : {
