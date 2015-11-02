@@ -628,7 +628,7 @@ exports.putUserById = function (req, res) {
 		var name = flag === true ? req.body.name : req.params.name;
 		if (!name)
 			return flag === true ? -1 : res.json(400, {message : 'The name musn\'t be null'});
-		Groups.remove({
+		Users.remove({
 			name : name
 			},
 			function (err, removed) {
