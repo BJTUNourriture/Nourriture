@@ -596,7 +596,7 @@ exports.putUserById = function (req, res) {
 					return (res.send(err));
 				else if (removed.result.n === 0)
 					return (res.json(404, {message : 'The id was not found.'}))
-				return (res.json({message : 'Group succesfully deleted!'}));
+				return (res.json({message : 'User succesfully deleted!'}));
 			}
 		);
 		return (1);
@@ -636,7 +636,7 @@ exports.putUserById = function (req, res) {
 					return (res.send(err));
 				else if (removed.result.n === 0)
 					return (res.json(404, {message : 'The name was not found.'}))
-				return (res.json({message : 'Group succesfully deleted!'}));
+				return (res.json({message : 'User succesfully deleted!'}));
 			}
 		);
 		return (1);
