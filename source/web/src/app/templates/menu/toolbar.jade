@@ -13,4 +13,5 @@ div(flex="9").hide-sm
 					ng-click='sidenav.leftMenuToggle()')
 		div(ng-repeat="icon in sidenav.sidenavItems")
 			ng-md-icon.icon-menu(icon="{{ icon.icon }}",
-						size="48")
+						size="48",
+						ui-sref="{{ icon.reference }}")

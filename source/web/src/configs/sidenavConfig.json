@@ -1,10 +1,20 @@
 [
-{
-	"name" : "Users",
-	"icon" : "account_circle"
-},
-{
-	"name" : "Search",
-	"icon" : "search"
-}
+	{
+		"name" : "Home",
+		"icon" : "home",
+		"reference" : "main.homepage"
+	},
+	{
+		"name" : "Profile",
+		"icon" : "account_box",
+		"reference" : "main.profile"
+	},
+	{
+		"name" : "Users",
+		"icon" : "account_circle"
+	},
+	{
+		"name" : "Search",
+		"icon" : "search"
+	}
 ]

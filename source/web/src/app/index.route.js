@@ -20,9 +20,10 @@
                 parent: 'main',
                 templateUrl: 'app/templates/homepage.html'
             })
-            .state('profile', {
+            .state('main.profile', {
                 url: '/profile',
-                templateUrl: 'app/profile/profile.html'
+                parent: 'main',
+                templateUrl: 'app/templates/userProfile/indexUserProfile.html'
             });
 
         $urlRouterProvider.otherwise('/');
