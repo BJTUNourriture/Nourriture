@@ -17,3 +17,7 @@
 .user-profile-body {
 	@extend .index-user-profile;
 }
+
+.user-profile-body-tabs md-tabs-wrapper {
+	background :  #000000;
+}
