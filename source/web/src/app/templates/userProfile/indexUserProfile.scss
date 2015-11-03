@@ -9,3 +9,7 @@
 	height: 300px; 
 	margin: 0 auto;
 }
+
+.user-profile-body {
+	@extend .index-user-profile;
+}
