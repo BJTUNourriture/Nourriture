@@ -11,10 +11,12 @@
 	},
 	{
 		"name" : "Users",
-		"icon" : "account_circle"
+		"icon" : "account_circle",
+		"reference" : "main.homepage"
 	},
 	{
 		"name" : "Search",
-		"icon" : "search"
+		"icon" : "search",
+		"reference" : "main.homepage"
 	}
 ]
