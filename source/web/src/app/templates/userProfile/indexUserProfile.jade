@@ -1,5 +1,8 @@
 md-content.index-user-profile
-	md-card
-		img(src="assets/images/user_dummy/random-user-1.jpg")
-		md-card-content
-			h2.md-title Profile
+	div(layout="column" flex)
+		md-card(flex="none").user-profile-head
+			img(src="assets/images/user_dummy/random-user-1.jpg")
+			md-card-content
+				h2.md-title Username
+		md-content(flex="50")
+			h2 Content
