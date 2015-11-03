@@ -1,0 +1,88 @@
+@import "../../theme";
+
+.menu-sidenav {
+  background-color: #24BCFF;
+  -moz-box-shadow: inset -10px 0px 5px -5px #888;
+  -webkit-box-shadow: iinset -10px 0px 5px -5px #888;
+  box-shadow: inset -10px 0px 5px -5px #888;
+
+  md-content.item-sidenav {
+    background-color: $wildcardColor;
+  }
+
+  /* Use this class if you need to have a white
+background on a md-content in a sidenav */
+  .logo-sidenav {
+    background-color: white;
+    padding: 10px 0px 5px 0px;
+    text-align: center;
+
+  }
+
+  .md-button-style {
+    width: 98%;
+    line-height: 36px;
+    white-space: nowrap;
+    text-align: right;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 14px;
+    font-style: inherit;
+    font-variant: inherit;
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  .md-button {
+    clear: both;
+    margin: 0px;
+    width: 100%;
+    background-color: $borderBlock;
+    color: black;
+    border-radius: 0px;
+    -moz-box-shadow: inset -10px 0px 5px -5px $boxShadowButton;
+    -webkit-box-shadow: inset -10px 0px 5px -5px $boxShadowButton;
+    box-shadow: inset -10px 0px 5px -5px $boxShadowButton;
+
+    &:not([disabled]):hover {
+      background-color: $headings;
+    }
+
+    .item_text {
+      width: 90%;
+      float: left;
+    }
+
+  }
+
+  md-card {
+
+    width: 75%;
+    margin: 10px auto;
+
+  }
+}
+
+.toolbar-menu {
+  width: 48px;
+  background-color: $borderBlock;
+}
+
+.icon-menu {
+  cursor: pointer;
+  height: 48px;
+  width: 48px;
+  margin: 0px;
+
+  &:not([disabled]):hover {
+    background-color: $headings;
+  }
+}
+
+.icon-menu-sm {
+  @extend .icon-menu;
+
+  height: 24px;
+  width: 24px;
+  background-color: $borderBlock;
+}
