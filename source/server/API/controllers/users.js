@@ -4,8 +4,30 @@
 * @apiDefine UserObjectPostParam
 *
 * @apiParam {String} username Name of the user
-* @apiParam {String} password Passworld of the user
 * @apiParam {String} email Email of the user
+* @apiParam {Object[]} [alergy] List of allergy
+* @apiParam {Object[]} [religion] Religion of the user
+* @apiParam {Object[]} [pictures] List of user pictures
+* @apiParam {String} pictures.thumbnail_url Url of the thumbnail version of the picture
+* @apiParam {String} pictures.medium_sized_url Url of the medium size version of the picture
+* @apiParam {String} [pictures.big_sized_url] Url of the big size version of the picture
+* @apiParam {Object[]} [joined_groups]
+* @apiParam {Object[]} [like] List of the ingredients a person like
+* @apiParam {ObjectId} like.id_ingredient Id of the ingredient liked
+* @apiParam {String} like.name_ingredient Name of the ingredient liked
+* @apiParam {Object[]} [dislike] List of the ingredients a person dislike
+* @apiParam {ObjectId} dislike.id_ingredient Id of the ingredient disliked
+* @apiParam {String} dislike.name_ingredient Name of the ingredient disliked
+* @apiParam {Object[]} [follow] List of people followed by a person
+* @apiParam {ObjectId} follow.id_person Id of the person followed
+* @apiParam {String} follow.username Username of the person followed
+*/
+
+/**
+* @apiDefine UserObjectPutParam
+*
+* @apiParam {String} [username] Name of the user
+* @apiParam {String} [email] Email of the user
 * @apiParam {Object[]} [alergy] List of allergy
 * @apiParam {Object[]} [religion] Religion of the user
 * @apiParam {Object[]} [pictures] List of user pictures
@@ -28,7 +50,6 @@
 * @apiDefine UsersObjectSuccess
 *
 * @apiParam {String} username Name of the user
-* @apiParam {String} password Passworld of the user
 * @apiParam {String} email Email of the user
 * @apiParam {Object[]} [alergy] List of allergy
 * @apiParam {Object[]} [religion] Religion of the user
@@ -46,6 +67,30 @@
 * @apiParam {Object[]} [follow] List of people followed by a person
 * @apiParam {ObjectId} follow.id_person Id of the person followed
 * @apiParam {String} follow.username Username of the person followed
+*/
+
+
+/**
+* @apiDefine UserObjectSuccess
+*
+* @apiSuccess {String} username Name of the user
+* @apiSuccess {String} email Email of the user
+* @apiSuccess {Object[]} [alergy] List of allergy
+* @apiSuccess {Object[]} [religion] Religion of the user
+* @apiSuccess {Object[]} [pictures] List of user pictures
+* @apiSuccess {String} pictures.thumbnail_url Url of the thumbnail version of the picture
+* @apiSuccess {String} pictures.medium_sized_url Url of the medium size version of the picture
+* @apiSuccess {String} [pictures.big_sized_url] Url of the big size version of the picture
+* @apiSuccess {Object[]} [joined_groups]
+* @apiSuccess {Object[]} [like] List of the ingredients a person like
+* @apiSuccess {ObjectId} like.id_ingredient Id of the ingredient liked
+* @apiSuccess {String} like.name_ingredient Name of the ingredient liked
+* @apiSuccess {Object[]} [dislike] List of the ingredients a person dislike
+* @apiSuccess {ObjectId} dislike.id_ingredient Id of the ingredient disliked
+* @apiSuccess {String} dislike.name_ingredient Name of the ingredient disliked
+* @apiSuccess {Object[]} [follow] List of people followed by a person
+* @apiSuccess {ObjectId} follow.id_person Id of the person followed
+* @apiSuccess {String} follow.username Username of the person followed
 */
 
 /**
@@ -255,44 +300,62 @@ exports.signinUser = function (req, res, next) {
 */
 
 /**
-* @apiDefine getGroupAnswer
+* @apiDefine getUserAnswer
 *
 * @apiSuccessExample Success-Response:
 *     HTTP/1.1 200 OK
-*     {
-*		"_id" : "561830c5fecdba4f72668fe8",
-*       "name": "Le gang du gras",
-*       "description": "Fat for life"
-		"admin_id": "561fc840d6c25173533e267f"
-*		 "tags" : [{
-*					"name" : "fruit",
-*					"description" : "Don't event try",
-*					"flag" : {
-*								"name" : "FORBIDDEN",
-*								"level" : 0
-*							 }
-*				   }]
-*		 "users" : [{
-*					"user_id" : "456ah145d9c31569845e354a",
-*					"access" : {
-*								"name" : "ADMIN",
-*								"level" : 0
-*							 }
-*				   }]
-*     }
+*	[
+*		{
+*			"username": "Julien",
+*			"email": "julien@usa.gov",
+*			"joined_groups" : [{
+*					"id_group" : "548ed30d6c2257336f5675",
+*					"name" : "Saucisson Choux Fleurs"
+*			}],
+*			"religion" : [{
+*					"id_religion" : "548ed30d6c2257336f5675",
+*					"name" : "Boudism"
+*			}],
+*			"alergy" : [{
+*					"id_ingredient" : "548ed30d6c2257336f5675",
+*					"name" : "Bettrave Rouge"
+*			}],
+*			"pictures" : [{
+*					"thumbnail_url" : "/thumbnails/1.jpg",
+*					"medium_sized_url" : "/medium_sized/1.jpg",
+*					"big_sized_url" : "/big_sized/1.jpg"
+*			}],
+*			"like" : [{
+*					"id_ingredient" : "548ed30d6c2257336f5675",
+*					"name_ingredient" : "Carotte"
+*			},
+*			{
+*					"id_ingredient" : "246kf584a9g784312408a442",
+*					"name_ingredient" : "Potato"
+*			}],
+*			"dislike" : [{
+*					"id_ingredient" : "302fvd338d2c30185535g805",
+*					"name_ingredient" : "Bean"
+*			}],
+*			"follow" :  [{
+*					"id_person" : "689ed300d6c22573533g895",
+*					"username" : "bananaman"
+*			}]
+*		}
+*	]
 */
 
 /**
-* @api {get} /users/id/:id Request Users informations by id
+* @api {get} /users/id/:id Request User informations by id
 * @apiName getUsersById
 * @apiGroup Users
 * @apiVersion 0.1.0
 *
-* @apiParam {Number} id Users unique ID
+* @apiParam {Number} id User unique ID
 *
-* @apiUse UsersObjectSuccess
+* @apiUse UserObjectSuccess
 *
-* @apiUse UserRequestJSON
+* @apiUse getUserAnswer
 *
 * @apiError message The id of the group was not found
 * @apiErrorExample Invalid Parameter Value
@@ -318,16 +381,16 @@ exports.getUserById = function (req, res, flag) {
 };
 
 /**
-* @api {get} /users/name/:name Request Group informations by name
+* @api {get} /users/name/:name Request User informations by name
 * @apiName getUserByName
 * @apiGroup Users
 * @apiVersion 0.1.0
 *
-* @apiParam {String} name Users ser partial or full name
+* @apiParam {String} username User name
 *
-* @apiUse UsersObjectSuccess
+* @apiUse UserObjectSuccess
 *
-* @apiUse UserRequestJSON
+* @apiUse getUserAnswer
 *
 * @apiError message The name of the group was not found
 * @apiErrorExample Invalid Parameter Value
@@ -341,7 +404,7 @@ exports.getUserByName = function (req, res, flag) {
 	if (!name)
 		return flag === true ? -1 : res.json(400, {message : 'The name musn\'t be null'});
 	Users.find({
-		"name": { "$regex": name, "$options": "i" }
+		"username": { "$regex": name, "$options": "i" }
 		},
 		function (err, docs) {
 			if (err)
@@ -360,7 +423,6 @@ exports.getUserByName = function (req, res, flag) {
 * @apiGroup Users
 * @apiVersion 0.1.0
 *
-* @apiUse UserRequestJSON
 *
 * @apiSuccess message User succesfully created!
 *
@@ -420,9 +482,14 @@ exports.getUsers = function (req, res) {
 * @apiGroup Users
 * @apiVersion 0.1.0
 *
+* @apiUse UserObjectPutParam
+*
 * @apiUse UserRequestJSON
 *
+* @apiSuccess message User successfully updated!
+*
 */
+
 exports.putUserById = function (req, res) {
   if (!req.params.id || Object.keys(req.body).length === 0)
   return (res.status(400).json({ message: 'The id musn\'t be null and the request must not be empty.' }));
@@ -443,6 +510,8 @@ exports.putUserById = function (req, res) {
   * @apiGroup Users
   * @apiVersion 0.1.0
   *
+	* @apiUse UserObjectPutParam
+  *
   * @apiUse UserRequestJSON
   *
   * @apiSuccess message User successfully updated!
@@ -451,7 +520,7 @@ exports.putUserById = function (req, res) {
   */
   exports.putUserByUsername = function (req, res) {
     if (!req.params.name || Object.keys(req.body).length === 0)
-    return (res.status(400).json({ message: 'The name musn\'t be null and the request must not be empty.' }));
+    	return (res.status(400).json({ message: 'The username musn\'t be null and the request must not be empty.' }));
     User.findOne({
       "username": req.params.name
     },
@@ -527,27 +596,13 @@ exports.putUserById = function (req, res) {
 */
 
 	/**
-	* @api {delete} /users/ Delete Users (JSON)
+	* @api {delete} /users/ Delete all Users
 	* @apiName deleteUsers
 	* @apiGroup Users
 	* @apiVersion 0.1.0
 	*
-	*
-	*
-	* @apiSuccess message User succesfully deleted!
-	* @apiSuccessExample Success-Response:
-	*     HTTP/1.1 200 OK
-	*	  {
-	*		"message" : "User succesfully deleted!"
-	*	  }
-	*
-	* @apiError message The id was not found.
-	* @apiErrorExample Invalid Parameter Value
-	*     HTTP/1.1 404 Not Found
-	*     {
-	*       "message": "The id was not found."
-	*     }
 	*/
+
 	exports.deleteUsers = function (req, res) {
 		var i = -1;
 		var callbackReturn = -1;
@@ -608,11 +663,11 @@ exports.putUserById = function (req, res) {
 	* @apiGroup Users
 	* @apiVersion 0.1.0
 	*
-	* @apiParam {Sting} name user full name
+	* @apiParam {Sting} username user full name
 	*
 	* @apiParamExample {json} Request-Example:
 	*	  {
-	*		"name" : "Julien"
+	*		"username" : "Julien"
 	*	  }
 	*
 	* @apiUse deleteUsersSuccess
@@ -625,11 +680,11 @@ exports.putUserById = function (req, res) {
 	*     }
 	*/
 	exports.deleteUserByName = function (req, res, flag) {
-		var name = flag === true ? req.body.name : req.params.name;
+		var name = flag === true ? req.body.username : req.params.username;
 		if (!name)
 			return flag === true ? -1 : res.json(400, {message : 'The name musn\'t be null'});
 		Users.remove({
-			name : name
+			username : name
 			},
 			function (err, removed) {
 				if (err)
@@ -641,10 +696,6 @@ exports.putUserById = function (req, res) {
 		);
 		return (1);
 	};
-
-
-
-
 
 
 /**
