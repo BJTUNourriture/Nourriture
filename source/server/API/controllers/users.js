@@ -519,10 +519,10 @@ exports.putUserById = function (req, res) {
   *
   */
   exports.putUserByUsername = function (req, res) {
-    if (!req.params.name || Object.keys(req.body).length === 0)
+    if (!req.params.username || Object.keys(req.body).length === 0)
     	return (res.status(400).json({ message: 'The username musn\'t be null and the request must not be empty.' }));
     User.findOne({
-      "username": req.params.name
+      "username": req.params.username
     },
     function (err, user) {
         if (!req.body.like && !req.body.dislike && !req.body.follow) {
