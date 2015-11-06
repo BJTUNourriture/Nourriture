@@ -24,6 +24,11 @@
                 url: 'my-profile',
                 parent: 'main',
                 templateUrl: 'app/templates/userProfile/indexUserProfile.html'
+            })
+            .state('main.register', {
+                url: 'register',
+                parent: 'main',
+                templateUrl: 'app/templates/register/register.html'
             });
 
         $urlRouterProvider.otherwise('/');

@@ -18,7 +18,6 @@ function SidenavController($scope, $http, $timeout, $mdSidenav, $log)
 	$http.get("configs/sidenavConfig.json")
 		.success(function(res) {
 			vm.sidenavItems = res;
-			console.log(res);
 		})
 		.error(function(res) {
 			$log.log("no config/sidenavConfig.json found! Res data : " + res.data);

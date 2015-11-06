@@ -15,7 +15,7 @@
 		{
 			"name" : "Register",
 			"icon" : "person_add",
-			"reference" : "main.homepage"
+			"reference" : "main.register"
 		}
 	],
 	"restricted" : [
