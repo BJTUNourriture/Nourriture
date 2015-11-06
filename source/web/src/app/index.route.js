@@ -29,7 +29,8 @@
                 url: 'register',
                 parent: 'main',
                 templateUrl: 'app/templates/register/register.html',
-                controller: 'RegisterController'
+                controller: 'RegisterController',
+                controllerAs: 'register'
             });
 
         $urlRouterProvider.otherwise('/');
