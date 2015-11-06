@@ -1,18 +1,22 @@
 md-content
-	div(layout="column" flex layout-align="start center")
-		div(flex="none").title-register-container 
-			span.title-register-md Join the Nourriture community today !
-		div.flex.body-register-md
-			md-input-container.md-no-float.md-block
-				ng-md-icon(icon="mood").body-register-container-md
-				input(placeholder="Username").body-register-container-md
-			md-input-container
-				ng-md-icon(icon="email").body-register-container-md
-				input(placeholder="Email").body-register-container-md
-			md-input-container
-				ng-md-icon(icon="repeat").body-register-container-md
-				input(placeholder="Repeat Email").body-register-container-md
-			md-input-container
-				ng-md-icon(icon="vpn_key").body-register-container-md
-				input(placeholder="Password").body-register-container-md
+	div(layout="column", layout-fill).flex
+		div.flex
+			div(layout="column" flex layout-align="start center")
+				div(flex="none").title-register-container 
+					span.title-register-md Join the Nourriture community today !
+				div(flex="none").body-register-md
+					section(layout="column", layout-align="start center", layout-margin)
+						md-input-container.md-no-float.md-block
+							ng-md-icon(icon="mood").body-register-container-md
+							input(placeholder="Username").body-register-container-md
+						md-input-container
+							ng-md-icon(icon="email").body-register-container-md
+							input(placeholder="Email").body-register-container-md
+						md-input-container
+							ng-md-icon(icon="repeat").body-register-container-md
+							input(placeholder="Repeat Email").body-register-container-md
+						md-input-container
+							ng-md-icon(icon="vpn_key").body-register-container-md
+							input(placeholder="Password").body-register-container-md
+						md-button.md-raised Register
 		include ../footer/footer.jade

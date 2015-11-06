@@ -13,8 +13,15 @@
 .body-register-md {
 	margin : 20px auto;
 	background : $background;
+	height : 400px;
 }
 
 .body-register-container-md {
 	display : inline-block;
+}
+
+.footer-register-md {
+  background-color : $footerColor;
+  padding-left : 30px;
+  width : 100%;
 }
