@@ -14,18 +14,19 @@ The project structure is based on `generator-gulp-angular`
 │
 ├──  src/
 │   ├──  app/
+│   │   ├──  templates/
+│   │   │   └── homepage.jade
+│   │   │   ├── homepage.scss
+│   │   │   ├── footer/
+│   │   │   │   ├──  footer.jade
+│   │   │   │   └──  footer.scss
+│   │   │   └──  ...
 │   │   ├──  components/
-│   │   │   └──  githubContributor/
-│   │   │   │   └──  githubContributor.service.js
+│   │   │   └──  Users/
+│   │   │   │   └──  Users.service.js
 │   │   │   │
-│   │   │   └──  malarkey/
-│   │   │   │   ├──  malarkey.directive.js
-│   │   │   │   └──  malarkey.(scss|styl|less|css)
-│   │   │   │
-│   │   │   └──  navbar/
-│   │   │   │   ├──  navbar.directive.(js|ts|coffee)
-│   │   │   │   ├──  navbar.html
-│   │   │   │   └──  navbar.(scss|styl|less|css)
+│   │   │   └──  userProfile/
+│   │   │   │   └──  userProfile.controller.js
 │   │   │   │
 │   │   │   └──  webDevTec/
 │   │   │       └──  webDevTec.service.js
@@ -44,6 +45,8 @@ The project structure is based on `generator-gulp-angular`
 |   |
 │   ├──  assets/
 │   │   └──  images/
+│   ├──  configs/
+│   │   └──  sidenavConfig.json
 │   ├──  favico.ico
 │   └──  index.html
 │
