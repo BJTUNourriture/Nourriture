@@ -4,11 +4,11 @@
 angular.module('NourritureControllers')
 	.controller('RegisterController', RegisterController);
 
-//UserProfileController.$inject = ["$scope", "$http","$timeout", "$log"];
+RegisterController.$inject = ["$scope", "UserService"];
 
-function RegisterController()
+function RegisterController($scope, UserService)
 {
-	//var vm = this;
+	var vm = this;
 
 }
 

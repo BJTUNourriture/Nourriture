@@ -28,7 +28,8 @@
             .state('main.register', {
                 url: 'register',
                 parent: 'main',
-                templateUrl: 'app/templates/register/register.html'
+                templateUrl: 'app/templates/register/register.html',
+                controller: 'RegisterController'
             });
 
         $urlRouterProvider.otherwise('/');
