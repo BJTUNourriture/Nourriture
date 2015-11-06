@@ -11,7 +11,11 @@ div(flex="9").hide-sm
 					ng-mouseover='sidenav.menuIconOut = "arrow_forward"',
 					ng-mouseleave='sidenav.menuIconOut = "menu"',
 					ng-click='sidenav.leftMenuToggle()')
-		div(ng-repeat="icon in sidenav.sidenavItems")
+		div(ng-repeat="icon in sidenav.sidenavItems.unrestricted")
+			ng-md-icon.icon-menu(icon="{{ icon.icon }}",
+						size="48",
+						ui-sref="{{ icon.reference }}")
+		div(ng-repeat="icon in sidenav.sidenavItems.anonymous")
 			ng-md-icon.icon-menu(icon="{{ icon.icon }}",
 						size="48",
 						ui-sref="{{ icon.reference }}")

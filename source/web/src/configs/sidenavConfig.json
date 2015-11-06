@@ -1,22 +1,38 @@
-[
-	{
-		"name" : "Home",
-		"icon" : "home",
-		"reference" : "main.homepage"
-	},
-	{
-		"name" : "Profile",
-		"icon" : "account_box",
-		"reference" : "main.profile"
-	},
-	{
-		"name" : "Users",
-		"icon" : "account_circle",
-		"reference" : "main.homepage"
-	},
-	{
-		"name" : "Search",
-		"icon" : "search",
-		"reference" : "main.homepage"
-	}
-]
+{
+	"unrestricted" : [
+		{
+			"name" : "Home",
+			"icon" : "home",
+			"reference" : "main.homepage"
+		}
+	],
+	"anonymous" : [
+		{
+			"name" : "Login",
+			"icon" : "login",
+			"reference" : "main.homepage"
+		},
+		{
+			"name" : "Register",
+			"icon" : "person_add",
+			"reference" : "main.homepage"
+		}
+	],
+	"restricted" : [
+		{
+			"name" : "Profile",
+			"icon" : "account_box",
+			"reference" : "main.profile"
+		},
+		{
+			"name" : "Users",
+			"icon" : "account_circle",
+			"reference" : "main.homepage"
+		},
+		{
+			"name" : "Search",
+			"icon" : "search",
+			"reference" : "main.homepage"
+		}
+	]
+}
