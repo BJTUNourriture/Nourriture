@@ -21,7 +21,7 @@
                 templateUrl: 'app/templates/homepage.html'
             })
             .state('main.profile', {
-                url: '/profile',
+                url: 'profile',
                 parent: 'main',
                 templateUrl: 'app/templates/userProfile/indexUserProfile.html'
             });
