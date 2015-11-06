@@ -1,17 +1,18 @@
 md-content
-	div(layout="column" flex layout-align="start center").show-gt-sm
+	div(layout="column" flex layout-align="start center")
 		div(flex="none").title-register-container 
 			span.title-register-md Join the Nourriture community today !
-		div.flex
+		div.flex.body-register-md
+			md-input-container.md-no-float.md-block
+				ng-md-icon(icon="mood").body-register-container-md
+				input(placeholder="Username").body-register-container-md
 			md-input-container
-				label Username
-				input
+				ng-md-icon(icon="email").body-register-container-md
+				input(placeholder="Email").body-register-container-md
 			md-input-container
-				label Email
-				input
+				ng-md-icon(icon="repeat").body-register-container-md
+				input(placeholder="Repeat Email").body-register-container-md
 			md-input-container
-				label Repeat the Email
-				input
-			md-input-container
-				label Password
-				input
+				ng-md-icon(icon="vpn_key").body-register-container-md
+				input(placeholder="Password").body-register-container-md
+		include ../footer/footer.jade
