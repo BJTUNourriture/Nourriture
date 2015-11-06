@@ -10,6 +10,6 @@ div.flex
 		include ./mini-profile.jade
 		md-content.item-sidenav
 			div(ng-repeat="item in sidenav.sidenavItems")
-				md-button. 
+				md-button(ui-sref="{{ item.reference }}" style="overflow: initial;"). 
 							<span class="item_text">{{ item.name }}</span>
 							<span class="item_icon"><ng-md-icon icon="{{ item.icon }}"></ng-md-icon></span>
