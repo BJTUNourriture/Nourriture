@@ -6,16 +6,22 @@ var UserSchema = new mongoose.Schema({
     username: {
         type: String,
         unique: true,
-        required : true
+        required : true,
+        minlength : 3,
+        maxlength : 20
     },
     password: {
         type: String,
-        required : true
+        required : true,
+        minlength : 3,
+        maxlength : 30
     },
     email: {
         type: String,
         unique: true,
-        required: true
+        required: true,
+        minlength : 8,
+        maxlength : 100
     },
     email_verified : {
         type : Boolean,
