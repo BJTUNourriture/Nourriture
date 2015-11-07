@@ -202,13 +202,6 @@ var User = require('../models/users');
 *   }
 */
 exports.postUser = function (req, res) {
-    console.log(req.body)
-    req.body.username == undefined ? res.status(401).json({message: "Username field is required"}) : req.body.username = req.body.username;
-    req.body.password == undefined ? res.status(401).json({message: "Password field is required"}) : req.body.password = req.body.password;
-    if (req.body.username.length < 3 || req.body.username.length > 30)
-      return (res.status(401).json({message: "Username length must be superior to 3 and inferior to 20"}));
-    if (req.body.password.length < 3 || req.body.password.length > 30)
-      return (res.status(401).json({message: "Password length must be superior to 3 and inferior to 20"}));
 
     var user = new User({
         email: req.body.email,

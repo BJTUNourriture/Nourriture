@@ -19,11 +19,11 @@ function RegisterController($scope, UserService, $log)
 	};
 
 	vm.userRegisteredSuccess = function (data) {
-		$log.log(data);
+		$log.log(data.message);
 	};
 
-	vm.userRegisteredFailure = function (error) {
-		$log.log(error);
+	vm.userRegisteredFailure = function (data) {
+		$log.log(data);
 	};
 }
 
