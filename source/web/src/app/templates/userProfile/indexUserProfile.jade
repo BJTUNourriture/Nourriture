@@ -1,32 +1,32 @@
 md-content.index-user-profile
-	div(layout="column" flex)
-		md-card(flex="none").user-profile-head
-			img(src="assets/images/user_dummy/random-user-1.jpg")
-			md-card-content
-				h2.md-title.user-profile-head-title Username
-				div.user-profile-head-title
-					span 0
-					ng-md-icon(icon="star")
-					span 0
-					ng-md-icon(icon="cake")
-					span 0
-					ng-md-icon(icon="face")
-		md-content(flex="50").user-profile-body
-			md-tabs.md-dynamic-height.md-border-bottom.user-profile-body-tabs
-				md-tab(label="Informations")
-					md-content
-						include tabs/information
-				md-tab(label="Recipes")
-					md-content
-						include tabs/recipes
-				md-tab(label="Groups")
-					md-content
-						include tabs/groups
-				md-tab(label="Followers")
-					md-content
-						include tabs/followers
-				md-tab(label="Parameters")
-					md-content
-						include tabs/parameters
+    div(layout="column" flex)
+        md-card(flex="none").user-profile-head
+            img(src="assets/images/user_dummy/random-user-1.jpg")
+            md-card-content
+                h2.md-title.user-profile-head-title Username
+                div.user-profile-head-title
+                    span 0
+                    ng-md-icon(icon="star")
+                    span 0
+                    ng-md-icon(icon="cake")
+                    span 0
+                    ng-md-icon(icon="face")
+        md-content(flex="50").user-profile-body
+            md-tabs.md-dynamic-height.md-border-bottom.user-profile-body-tabs
+                md-tab(label="Informations")
+                    md-content
+                        include tabs/information
+                md-tab(label="Recipes")
+                    md-content
+                        include tabs/recipes
+                md-tab(label="Groups")
+                    md-content
+                        include tabs/groups
+                md-tab(label="Followers")
+                    md-content
+                        include tabs/followers
+                md-tab(label="Parameters")
+                    md-content
+                        include tabs/parameters
 
 
