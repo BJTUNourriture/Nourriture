@@ -10,6 +10,7 @@ function RegisterController($scope, UserService)
 {
 	var vm = this;
 
+
 }
 
 })();
