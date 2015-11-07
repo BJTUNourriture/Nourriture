@@ -11,15 +11,9 @@ md-content.index-user-profile
                     ng-md-icon(icon="cake")
                     span 0
                     ng-md-icon(icon="face")
-<<<<<<< HEAD
-        md-content(flex).user-profile-body
+
             //md-tabs.md-dynamic-height.md-border-bottom.user-profile-body-tabs
-                //md-tab(label="Informations")
-=======
-        md-content.flex.user-profile-body
-            md-tabs.md-dynamic-height.md-border-bottom.user-profile-body-tabs
                 md-tab(label="Informations")
->>>>>>> 5dd54973d02ab242d32b6e4f6dc1edfd9146af81
                     md-content
                         .vertical-scroll
                             include tabs/information
@@ -39,13 +33,15 @@ md-content.index-user-profile
                     md-content
                         .vertical-scroll
                             include tabs/parameters
-            md-card()
-                md-tabs()
-                    md-tab(label='Recipes')
-                        include tabs/recipes
-                    md-tab(label="Groups")
-                        include tabs/groups
-                    md-tab(label="Followers")
-                        include tabs/followers
-                    md-tab(label="Parameters")
-                        include tabs/parameters
+        md-card(flex)
+            md-tabs(flex).user-profile-body-tabs
+                md-tab(label="Informations")
+                    include tabs/information
+                md-tab(label='Recipes').flex
+                    include tabs/recipes
+                md-tab(label="Groups")
+                    include tabs/groups
+                md-tab(label="Followers")
+                    include tabs/followers
+                md-tab(label="Parameters")
+                    include tabs/parameters

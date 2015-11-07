@@ -2,10 +2,10 @@
    Created by sylflo on 11/6/15.
 
 div(layout="column" layout-align="center center" layout-fill)
-    h1 Recipes
-    div(ng-controller='RecipesUserProfileController')
-        md-content
-            md-list
+    div(ng-controller='RecipesUserProfileController').user-profile-body-tabs-components
+        md-content(flex)
+            h1 Recipes
+            md-list(flex)
                 md-subheader.md-no-sticky 3 line item
                 md-list-item.md-3-line(ng-repeat='item in todos')
                     img.md-avatar(ng-src='{{item.face}}?{{$index}}', alt='{{item.who}}')
