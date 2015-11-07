@@ -5814,7 +5814,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/users/",
+    "url": "/users/register",
     "title": "Create a new User",
     "name": "postUser",
     "group": "Users",

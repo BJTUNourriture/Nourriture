@@ -5,9 +5,9 @@
     .module("NourritureControllers", []);
 
   angular
-    .module("NourritureServices", []);
+    .module("NourritureServices", ['ngResource']);
 
   angular
-    .module('web', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'ngResource', 'ui.router', 'ngMaterial', 'toastr', 'ngMdIcons','NourritureControllers', 'NourritureServices']);
+    .module('web', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'ngResource', 'ui.router', 'ngMaterial', 'validation.match', 'ngResource','toastr', 'ngMdIcons','NourritureControllers', 'NourritureServices']);
 
 })();

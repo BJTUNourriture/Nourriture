@@ -4,12 +4,27 @@
 angular.module('NourritureControllers')
 	.controller('RegisterController', RegisterController);
 
-RegisterController.$inject = ["$scope", "UserService"];
+RegisterController.$inject = ["$scope", "UserService", "$log"];
 
-function RegisterController($scope, UserService)
+function RegisterController($scope, UserService, $log)
 {
 	var vm = this;
 
+	vm.submit = function() {
+		UserService
+			.Users
+			.save({"username" : $scope.username, "password" : $scope.password, "email" : $scope.email})
+			.$promise
+			.then(vm.userRegisteredSuccess, vm.userRegisteredFailure);
+	};
+
+	vm.userRegisteredSuccess = function (data) {
+		$log.log(data);
+	};
+
+	vm.userRegisteredFailure = function (error) {
+		$log.log(error);
+	};
 }
 
 })();

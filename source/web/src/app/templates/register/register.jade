@@ -5,18 +5,38 @@ md-content
 				div(flex="none").title-register-container 
 					span.title-register-md Join the Nourriture community today !
 				div(flex="none").body-register-md
-					section(layout="column", layout-align="start center", layout-margin)
-						md-input-container.md-no-float.md-block
-							ng-md-icon(icon="mood").body-register-container-md
-							input(placeholder="Username" required ng-model="username" md-maxlength="20" minlength="3").body-register-container-md
-						md-input-container
-							ng-md-icon(icon="email").body-register-container-md
-							input(placeholder="Email" required).body-register-container-md
-						md-input-container
-							ng-md-icon(icon="repeat").body-register-container-md
-							input(placeholder="Repeat Email" required).body-register-container-md
-						md-input-container
-							ng-md-icon(icon="vpn_key").body-register-container-md
-							input(placeholder="Password" type="password" required ng-model="password" md-maxlength="30" minlength="3").body-register-container-md
-						md-button.md-raised Register
+					form(name="registerForm" novalidate ng-submit="registerForm.$valid && register.submit()")
+						section(layout="column", layout-align="start center", layout-margin)
+							md-input-container
+								ng-md-icon(icon="mood").body-register-container-md
+								input(placeholder="Username" required name="username" ng-model="username" md-maxlength="20" minlength="3").body-register-container-md
+								div(ng-messages="registerForm.username.$error" ng-if='!registerForm.username.$pristine')
+									div(ng-message="required") This is required.
+									div(ng-message="minlength") The username must be longer than 3 characters.
+									div(ng-message="md-maxlength") The username must be shorter than 20 characters.
+							md-input-container
+								ng-md-icon(icon="email").body-register-container-md
+								input(placeholder="Email" type="email" minlength="8" maxlength="100" required name="email" ng-model="email" ng-pattern="/^.+@.+\..+$/").body-register-container-md
+								div(ng-messages="registerForm.email.$error" ng-if='!registerForm.email.$pristine')
+									div(ng-message="required") This is required.
+									div(ng-message="minlength") The email must be longer than 8 characters.
+									div(ng-message="maxlength") The email must be shorter than 100 characters.
+									div(ng-message="pattern") The field must be an email.
+							md-input-container
+								ng-md-icon(icon="repeat").body-register-container-md
+								input(placeholder="Repeat Email" type="email" minlength="8" maxlength="100" required name="email_repeat" ng-model="email_repeat" ng-pattern="/^.+@.+\..+$/" match="email").body-register-container-md
+								div(ng-messages="registerForm.email_repeat.$error" ng-if='!registerForm.email_repeat.$pristine')
+									div(ng-message="required") This is required.
+									div(ng-message="minlength") The email must be longer than 8 characters.
+									div(ng-message="maxlength") The email must be shorter than 100 characters.
+									div(ng-message="pattern") The field must be an email.
+									div(ng-message="match") Emails must match.
+							md-input-container
+								ng-md-icon(icon="vpn_key").body-register-container-md
+								input(placeholder="Password" type="password" name="password" required ng-model="password" maxlength="30" minlength="3").body-register-container-md
+								div(ng-messages="registerForm.password.$error" ng-if="registerForm.password.$dirty")
+									div(ng-message="required") This is required.
+									div(ng-message="minlength") The username must be longer than 3 characters.
+									div(ng-message="maxlength") The username must be shorter than 20 characters.
+							md-button.md-raised Register
 		include ../footer/footer.jade
