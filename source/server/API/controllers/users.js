@@ -215,7 +215,7 @@ exports.postUser = function (req, res) {
     user.save(function (err) {
         if (err) {
           console.log("user save function", err);
-          return res.send(err);
+          return res.status(401).send(err);
         }
 
         var verificationToken = new emailToken({
@@ -224,7 +224,7 @@ exports.postUser = function (req, res) {
 
         verificationToken.createVerificationToken(function(err, token){
             if (err)
-                return (res.send(err));
+                return (res.status(401).send(err));
             console.log(user.email);
             mail.transporter.sendMail(mail.mailOptionsEmailConfirm(token, user.email), function(error, info){
                 if (error)
