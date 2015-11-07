@@ -5,7 +5,7 @@ md-content
 				div(flex="none").title-register-container 
 					span.title-register-md Join the Nourriture community today !
 				div(flex="none").body-register-md
-					form(name="registerForm")
+					form(name="registerForm" novalidate ng-submit="registerForm.$valid && register.submit()")
 						section(layout="column", layout-align="start center", layout-margin)
 							md-input-container
 								ng-md-icon(icon="mood").body-register-container-md
