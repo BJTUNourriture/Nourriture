@@ -18,3 +18,23 @@ $boxShadowButton: #888;
     @return 'h#{$from},' + headings($from+1, $to);
   }
 }
+
+
+
+/*
+md-tabs {
+  display: flex;
+  flex-direction: column;
+}
+.md-tabs-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.md-tab-content {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+*/
+
