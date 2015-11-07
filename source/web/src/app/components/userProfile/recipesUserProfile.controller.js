@@ -13,7 +13,7 @@
     RecipesUserProfileController.$inject = ['$scope'];
 
     function RecipesUserProfileController($scope) {
-        var imagePath = 'http://blog.ninja-squad.com/assets/images/ng2-ebook/ng2-logo.png';
+        var imagePath = 'http://p1.storage.canalblog.com/19/26/115062/29135532.jpg';
 
         $scope.phones = [
             {type: 'Home', number: '(555) 251-1234'},
@@ -22,11 +22,15 @@
         ];
         $scope.todos = [
             {
-                face: imagePath,
-                what: 'Brunch this weekend?',
-                who: 'Min Li Chan',
-                when: '3:08PM',
-                notes: " I'll be in your neighborhood doing errands"
+                image: imagePath,
+                title: 'Brunch this weekend?',
+                mark: 'Min Li Chan',
+                nb_vote: '3:08PM',
+                notes: " I'll be in your neighborhood doing errands",
+                preparation_time: "45",
+                cooking_time: "10",
+                ingredients: "pommes, sucre, orange",
+                desc: "Faire la pate, mettez au four"
             },
             {
                 face: imagePath,
