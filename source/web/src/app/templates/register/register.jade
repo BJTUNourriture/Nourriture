@@ -8,7 +8,7 @@ md-content
 					section(layout="column", layout-align="start center", layout-margin)
 						md-input-container.md-no-float.md-block
 							ng-md-icon(icon="mood").body-register-container-md
-							input(placeholder="Username" required).body-register-container-md
+							input(placeholder="Username" required ng-model="username" md-maxlength="20" minlength="3").body-register-container-md
 						md-input-container
 							ng-md-icon(icon="email").body-register-container-md
 							input(placeholder="Email" required).body-register-container-md
@@ -17,6 +17,6 @@ md-content
 							input(placeholder="Repeat Email" required).body-register-container-md
 						md-input-container
 							ng-md-icon(icon="vpn_key").body-register-container-md
-							input(placeholder="Password" required).body-register-container-md
+							input(placeholder="Password" type="password" required ng-model="password" md-maxlength="30" minlength="3").body-register-container-md
 						md-button.md-raised Register
 		include ../footer/footer.jade
