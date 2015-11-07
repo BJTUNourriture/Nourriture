@@ -1,17 +1,18 @@
 //
    Created by sylflo on 11/6/15.
 
-div(layout="row" layout-align="center")
+div(layout="column" layout-align="center center")
     h1 Recipes
-div(ng-controller='RecipesUserProfileController')
-    md-content
-        md-list
-            md-subheader.md-no-sticky 3 line item
-            md-list-item.md-3-line(ng-repeat='item in todos')
-                img.md-avatar(ng-src='{{item.face}}?{{$index}}', alt='{{item.who}}')
-                .md-list-item-text(layout='column')
-                    h3 {{ item.who }}
-                    h4 {{ item.what }}
-                    p {{ item.notes }}
-            md-divider
+    div(ng-controller='RecipesUserProfileController')
+        md-content
+            md-list
+                md-subheader.md-no-sticky 3 line item
+                md-list-item.md-3-line(ng-repeat='item in todos')
+                    img.md-avatar(ng-src='{{item.face}}?{{$index}}', alt='{{item.who}}')
+                    .md-list-item-text()
+                        h3 {{ item.who }}
+                        h4 {{ item.what }}
+                        p {{ item.notes }}
+                    md-divider
+
 
