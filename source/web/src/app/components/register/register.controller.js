@@ -11,8 +11,11 @@ function RegisterController($scope, UserService, $log)
 	var vm = this;
 
 	vm.submit = function() {
-		UserService.rootEndpointUsers.save({"usename" : $scope.username, "password" : $scope.password, "email" : $scope.email}, vm.userRegisteredSuccess, vm.userRegisteredFailure);
-		$log.log("kek");
+		UserService
+			.Users
+			.save({"username" : $scope.username, "password" : $scope.password, "email" : $scope.email})
+			.$promise
+			.then(vm.userRegisteredSuccess, vm.userRegisteredFailure);
 	};
 
 	vm.userRegisteredSuccess = function (data) {

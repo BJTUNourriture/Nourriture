@@ -11,12 +11,8 @@ angular
   function UserService($log, $resource, URL_API) {
 
     var service = {
-      Users : rootEndpointUsers
+      Users : $resource(URL_API + '/api/users/register/')
     };
-
-    function rootEndpointUsers() {
-      return $resource(URL_API + '/api/users/');
-    }
 
     return service;
 
