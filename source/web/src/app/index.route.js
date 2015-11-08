@@ -62,10 +62,19 @@
                 parent: 'main',
                 templateUrl: 'app/templates/login-logout/login.html',
                 controller: 'LoginController',
-                controllerAs: 'login'
+                controllerAs: 'login',
+                data: {
+                    permissions: {
+                      only: ['guest'],
+                      redirectTo: 'main.homepage'
+                    }
+                }
             });
 
-        $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise( function($injector) {
+          var $state = $injector.get("$state");
+          $state.go('main.homepage');
+        });
     }
 
 })();
