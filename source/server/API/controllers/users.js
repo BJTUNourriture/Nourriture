@@ -29,22 +29,7 @@
 * @apiParam {String} username Name of the user
 * @apiParam {String} email Email of the user
 * @apiParam {String} password Password of the user
-* @apiParam {Object[]} [alergy] List of allergy
-* @apiParam {Object[]} [religion] Religion of the user
-* @apiParam {Object[]} [pictures] List of user pictures
-* @apiParam {String} pictures.thumbnail_url Url of the thumbnail version of the picture
-* @apiParam {String} pictures.medium_sized_url Url of the medium size version of the picture
-* @apiParam {String} [pictures.big_sized_url] Url of the big size version of the picture
-* @apiParam {Object[]} [joined_groups]
-* @apiParam {Object[]} [like] List of the ingredients a person like
-* @apiParam {ObjectId} like.id_ingredient Id of the ingredient liked
-* @apiParam {String} like.name_ingredient Name of the ingredient liked
-* @apiParam {Object[]} [dislike] List of the ingredients a person dislike
-* @apiParam {ObjectId} dislike.id_ingredient Id of the ingredient disliked
-* @apiParam {String} dislike.name_ingredient Name of the ingredient disliked
-* @apiParam {Object[]} [follow] List of people followed by a person
-* @apiParam {ObjectId} follow.id_person Id of the person followed
-* @apiParam {String} follow.username Username of the person followed
+*
 */
 
 /**
@@ -71,10 +56,11 @@
 */
 
 /**
-* @apiDefine UsersObjectSuccess
+* @apiDefine UserObjectPutParamID
 *
-* @apiParam {String} username Name of the user
-* @apiParam {String} email Email of the user
+* @apiParam {String} id of the user
+* @apiParam {String} [username] Name of the user
+* @apiParam {String} [email] Email of the user
 * @apiParam {Object[]} [alergy] List of allergy
 * @apiParam {Object[]} [religion] Religion of the user
 * @apiParam {Object[]} [pictures] List of user pictures
@@ -93,10 +79,10 @@
 * @apiParam {String} follow.username Username of the person followed
 */
 
-
 /**
 * @apiDefine UserObjectSuccess
 *
+* @apiSuccess {String} id of the user
 * @apiSuccess {String} username Name of the user
 * @apiSuccess {String} email Email of the user
 * @apiSuccess {Object[]} [alergy] List of allergy
@@ -121,12 +107,10 @@
 * @apiDefine UserRequestJSON
 *
 * @apiParamExample {json} Request-Example:
-*
-*	[
 *		{
-*			"username": "Julien",
+*			"_id": "563f294f464d96113dbef811",
 *			"email": "julien@usa.gov",
-*
+*			"username": "Julien",
 *			"joined_groups" : [{
 *					"id_group" : "548ed30d6c2257336f5675",
 *					"name" : "Saucisson Choux Fleurs"
@@ -161,7 +145,49 @@
 *					"username" : "bananaman"
 *			}]
 *		}
-*	]
+*/
+
+/**
+* @apiDefine UserRequestJSONPut
+*
+* @apiParamExample {json} Request-Example:
+*		{
+*			"email": "julien@usa.gov",
+*			"username": "Julien",
+*			"joined_groups" : [{
+*					"id_group" : "548ed30d6c2257336f5675",
+*					"name" : "Saucisson Choux Fleurs"
+*			}],
+*			"religion" : [{
+*					"id_religion" : "548ed30d6c2257336f5675",
+*					"name" : "Boudism"
+*			}],
+*			"alergy" : [{
+*					"id_ingredient" : "548ed30d6c2257336f5675",
+*					"name" : "Bettrave Rouge"
+*			}],
+*			"pictures" : [{
+*					"thumbnail_url" : "/thumbnails/1.jpg",
+*					"medium_sized_url" : "/medium_sized/1.jpg",
+*					"big_sized_url" : "/big_sized/1.jpg"
+*			}],
+*			"like" : [{
+*					"id_ingredient" : "548ed30d6c2257336f5675",
+*					"name_ingredient" : "Carotte"
+*			},
+*			{
+*					"id_ingredient" : "246kf584a9g784312408a442",
+*					"name_ingredient" : "Potato"
+*			}],
+*			"dislike" : [{
+*					"id_ingredient" : "302fvd338d2c30185535g805",
+*					"name_ingredient" : "Bean"
+*			}],
+*			"follow" :  [{
+*					"id_person" : "689ed300d6c22573533g895",
+*					"username" : "bananaman"
+*			}]
+*		}
 */
 
 
@@ -206,9 +232,7 @@ exports.postUser = function (req, res) {
     var user = new User({
         email: req.body.email,
         username: req.body.username,
-        password: req.body.password,
-        alergy: req.body.alergy,
-        religion: req.body.religion
+        password: req.body.password
     });
 
 
@@ -339,6 +363,7 @@ exports.signinUser = function (req, res, next) {
 *     HTTP/1.1 200 OK
 *	[
 *		{
+*			"_id": "563f294f464d96113dbef811",
 *			"username": "Julien",
 *			"email": "julien@usa.gov",
 *			"joined_groups" : [{
@@ -452,14 +477,9 @@ exports.getUserByName = function (req, res, flag) {
 
 /**
 * @api {get} /users/ Retrive all Users
-* @apiName postUser
+* @apiName getUsers
 * @apiGroup Users
 * @apiVersion 0.1.0
-*
-*
-* @apiSuccess message User succesfully created!
-*
-*
 */
 
 exports.getUsers = function (req, res) {
@@ -515,7 +535,7 @@ exports.getUsers = function (req, res) {
 * @apiGroup Users
 * @apiVersion 0.1.0
 *
-* @apiUse UserObjectPutParam
+* @apiUse UserObjectPutParamID
 *
 * @apiUse UserRequestJSON
 *
@@ -545,7 +565,7 @@ exports.putUserById = function (req, res) {
   *
 	* @apiUse UserObjectPutParam
   *
-  * @apiUse UserRequestJSON
+  * @apiUse UserRequestJSONPut
   *
   * @apiSuccess message User successfully updated!
   *
@@ -624,7 +644,7 @@ exports.putUserById = function (req, res) {
 * @apiSuccessExample Success-Response:
 *     HTTP/1.1 200 OK
 *     {
-*       "message" : "Group succesfully deleted!"
+*       "message" : "User succesfully deleted!"
 *     }
 */
 

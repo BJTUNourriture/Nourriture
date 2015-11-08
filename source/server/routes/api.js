@@ -45,7 +45,7 @@ router.route('/users')
 router.route('/users/id/:id')
     .put(userController.putUserById)
     .delete(userController.deleteUserById)
-    .get(verifyJwt, userController.getUserById);
+    .get(userController.getUserById);
 
 
 router.route('/users/username/:username')
