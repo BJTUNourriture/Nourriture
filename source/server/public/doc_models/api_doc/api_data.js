@@ -5452,7 +5452,7 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/users/name/:name",
+    "url": "/users/username/:name",
     "title": "Request User informations by name",
     "name": "getUserByName",
     "group": "Users",
