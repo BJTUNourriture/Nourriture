@@ -10,7 +10,6 @@
   /** @ngInject */
   function runBlock($log, Permission, UserService, $q) {
 
-	$log.debug('runBlock end');
 	Permission.defineRole("guest", function(stateParams) {
 		var deferred = $q.defer();
 
