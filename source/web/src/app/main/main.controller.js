@@ -5,13 +5,13 @@ angular
 	.module('NourritureControllers')
 	.controller('MainController', MainController);
 
-	MainController.$inject = ['$sessionStorage', '$localStorage', "$log"];
+	MainController.$inject = ['$sessionStorage', '$localStorage', "$log", 'UserService'];
 
-	function MainController($sessionStorage, $localStorage, $log)
+	function MainController($sessionStorage, $localStorage, $log, UserService)
 	{
 		var vm = this;
 
-		vm.authenticated = ($sessionStorage.key || $localStorage.key) ? true : false;
+		vm.authenticated = UserService.is_authenticated;
 		$log.log(vm.authenticated);
 	}
 
