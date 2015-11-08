@@ -605,7 +605,7 @@ exports.putUserById = function (req, res) {
   }
 
   exports.updateUser = function (req, res, err, user) {
-    var fields = ["password", "email", "description", "token", "gender", "facebook", "twitter", "google", "alergy", "religion", "pictures", "joined_groups", "calories"];
+    var fields = ["password", "email", "description", "token", "gender", "facebook", "twitter", "google", "alergy", "religion", "pictures", "joined_groups"];
     var sent_fields = Object.keys(req.body);
 
     if (err)

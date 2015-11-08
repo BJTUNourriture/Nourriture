@@ -25,6 +25,7 @@ var UserSchema = new mongoose.Schema({
     },
 		description: {
 				type: String,
+				unique: true,
 				maxlength : 10000
 		},
     email_verified : {
