@@ -296,6 +296,12 @@ exports.postUser = function (req, res) {
 *   {
 *   "message" : "Please verify the password provided."
 *   }
+*
+* @apiErrorExample Email not verified
+*   HTTP/1.1 401 Bad Request
+*   {
+*   "message" : "Please verify your email."
+*   }
 */
 exports.signinUser = function (req, res, next) {
   if (!req.body.username)
@@ -312,6 +318,8 @@ exports.signinUser = function (req, res, next) {
       return (res.status(400).send(err));
       if (!isMatch)
       return (res.status(401).json({message: "Please verify the password provided."}));
+      if (!user.email_verified)
+        return (res.status(401).json({message: "Please verify your email."}));
       var token = jwt.sign(user, req.app.get("jwtSecret"), {expiresIn: 3600 * 5});
       return (res.json({key: token}));
     });
