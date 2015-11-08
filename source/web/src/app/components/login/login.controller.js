@@ -21,9 +21,9 @@ function LoginController($scope, UserService, toastr, $state, $sessionStorage, $
 	vm.userLoginSuccess = function (data) {
 		$log.log(data);
 		if ($scope.remember_me == true)
-			$log.log("Remember");
+			$localStorage.key = data["key"];
 		else
-			$log.log("Forgetti");
+			$sessionStorage.key = data["key"];
 		$state.go("main.homepage");
 	};
 
