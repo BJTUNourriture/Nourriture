@@ -1,10 +1,12 @@
 // API/controllers/users.js
 
+
 /**
 * @apiDefine UserObjectPostParam
 *
 * @apiParam {String} username Name of the user
 * @apiParam {String} email Email of the user
+* @apiParam {String} [description] Description of the user
 * @apiParam {Object[]} [alergy] List of allergy
 * @apiParam {Object[]} [religion] Religion of the user
 * @apiParam {Object[]} [pictures] List of user pictures
@@ -37,6 +39,7 @@
 *
 * @apiParam {String} [username] Name of the user
 * @apiParam {String} [email] Email of the user
+* @apiParam {String} [description] Description of the user
 * @apiParam {Object[]} [alergy] List of allergy
 * @apiParam {Object[]} [religion] Religion of the user
 * @apiParam {Object[]} [pictures] List of user pictures
@@ -58,9 +61,10 @@
 /**
 * @apiDefine UserObjectPutParamID
 *
-* @apiParam {String} id of the user
+* @apiParam {String} [id] of the user
 * @apiParam {String} [username] Name of the user
 * @apiParam {String} [email] Email of the user
+* @apiParam {String} [description] Description of the user
 * @apiParam {Object[]} [alergy] List of allergy
 * @apiParam {Object[]} [religion] Religion of the user
 * @apiParam {Object[]} [pictures] List of user pictures
@@ -85,6 +89,7 @@
 * @apiSuccess {String} id of the user
 * @apiSuccess {String} username Name of the user
 * @apiSuccess {String} email Email of the user
+* @apiSuccess {String} [description] Description of the user
 * @apiSuccess {Object[]} [alergy] List of allergy
 * @apiSuccess {Object[]} [religion] Religion of the user
 * @apiSuccess {Object[]} [pictures] List of user pictures
@@ -103,91 +108,105 @@
 * @apiSuccess {String} follow.username Username of the person followed
 */
 
+
+/**
+* @apiDefine UserRequestRegister
+*
+* @apiParamExample {json} Request-Example:
+* {
+*  "username": "Julien",
+*  "email": "julien@usa.gov",
+*  "password": "MonMotDePasse",
+*}
+*/
+
 /**
 * @apiDefine UserRequestJSON
 *
 * @apiParamExample {json} Request-Example:
-*		{
-*			"_id": "563f294f464d96113dbef811",
-*			"email": "julien@usa.gov",
-*			"username": "Julien",
-*			"joined_groups" : [{
-*					"id_group" : "548ed30d6c2257336f5675",
-*					"name" : "Saucisson Choux Fleurs"
-*			}],
-*			"religion" : [{
-*					"id_religion" : "548ed30d6c2257336f5675",
-*					"name" : "Boudism"
-*			}],
-*			"alergy" : [{
-*					"id_ingredient" : "548ed30d6c2257336f5675",
-*					"name" : "Bettrave Rouge"
-*			}],
-*			"pictures" : [{
-*					"thumbnail_url" : "/thumbnails/1.jpg",
-*					"medium_sized_url" : "/medium_sized/1.jpg",
-*					"big_sized_url" : "/big_sized/1.jpg"
-*			}],
-*			"like" : [{
-*					"id_ingredient" : "548ed30d6c2257336f5675",
-*					"name_ingredient" : "Carotte"
-*			},
-*			{
-*					"id_ingredient" : "246kf584a9g784312408a442",
-*					"name_ingredient" : "Potato"
-*			}],
-*			"dislike" : [{
-*					"id_ingredient" : "302fvd338d2c30185535g805",
-*					"name_ingredient" : "Bean"
-*			}],
-*			"follow" :  [{
-*					"id_person" : "689ed300d6c22573533g895",
-*					"username" : "bananaman"
-*			}]
-*		}
+*  {
+*   "_id": "563f294f464d96113dbef811",
+*   "email": "julien@usa.gov",
+*   "username": "Julien",
+*   "description": "Ma bio",
+*   "joined_groups" : [{
+*     "id_group" : "548ed30d6c2257336f5675",
+*     "name" : "Saucisson Choux Fleurs"
+*   }],
+*   "religion" : [{
+*     "id_religion" : "548ed30d6c2257336f5675",
+*     "name" : "Boudism"
+*   }],
+*   "alergy" : [{
+*     "id_ingredient" : "548ed30d6c2257336f5675",
+*     "name" : "Bettrave Rouge"
+*   }],
+*   "pictures" : [{
+*     "thumbnail_url" : "/thumbnails/1.jpg",
+*     "medium_sized_url" : "/medium_sized/1.jpg",
+*     "big_sized_url" : "/big_sized/1.jpg"
+*   }],
+*   "like" : [{
+*     "id_ingredient" : "548ed30d6c2257336f5675",
+*     "name_ingredient" : "Carotte"
+*   },
+*   {
+*     "id_ingredient" : "246kf584a9g784312408a442",
+*     "name_ingredient" : "Potato"
+*   }],
+*   "dislike" : [{
+*     "id_ingredient" : "302fvd338d2c30185535g805",
+*     "name_ingredient" : "Bean"
+*   }],
+*   "follow" :  [{
+*     "id_person" : "689ed300d6c22573533g895",
+*     "username" : "bananaman"
+*   }]
+*  }
 */
 
 /**
 * @apiDefine UserRequestJSONPut
 *
 * @apiParamExample {json} Request-Example:
-*		{
-*			"email": "julien@usa.gov",
-*			"username": "Julien",
-*			"joined_groups" : [{
-*					"id_group" : "548ed30d6c2257336f5675",
-*					"name" : "Saucisson Choux Fleurs"
-*			}],
-*			"religion" : [{
-*					"id_religion" : "548ed30d6c2257336f5675",
-*					"name" : "Boudism"
-*			}],
-*			"alergy" : [{
-*					"id_ingredient" : "548ed30d6c2257336f5675",
-*					"name" : "Bettrave Rouge"
-*			}],
-*			"pictures" : [{
-*					"thumbnail_url" : "/thumbnails/1.jpg",
-*					"medium_sized_url" : "/medium_sized/1.jpg",
-*					"big_sized_url" : "/big_sized/1.jpg"
-*			}],
-*			"like" : [{
-*					"id_ingredient" : "548ed30d6c2257336f5675",
-*					"name_ingredient" : "Carotte"
-*			},
-*			{
-*					"id_ingredient" : "246kf584a9g784312408a442",
-*					"name_ingredient" : "Potato"
-*			}],
-*			"dislike" : [{
-*					"id_ingredient" : "302fvd338d2c30185535g805",
-*					"name_ingredient" : "Bean"
-*			}],
-*			"follow" :  [{
-*					"id_person" : "689ed300d6c22573533g895",
-*					"username" : "bananaman"
-*			}]
-*		}
+*  {
+*   "email": "julien@usa.gov",
+*   "username": "Julien",
+*   "description": "Ma bio",
+*   "joined_groups" : [{
+*     "id_group" : "548ed30d6c2257336f5675",
+*     "name" : "Saucisson Choux Fleurs"
+*   }],
+*   "religion" : [{
+*     "id_religion" : "548ed30d6c2257336f5675",
+*     "name" : "Boudism"
+*   }],
+*   "alergy" : [{
+*     "id_ingredient" : "548ed30d6c2257336f5675",
+*     "name" : "Bettrave Rouge"
+*   }],
+*   "pictures" : [{
+*     "thumbnail_url" : "/thumbnails/1.jpg",
+*     "medium_sized_url" : "/medium_sized/1.jpg",
+*     "big_sized_url" : "/big_sized/1.jpg"
+*   }],
+*   "like" : [{
+*     "id_ingredient" : "548ed30d6c2257336f5675",
+*     "name_ingredient" : "Carotte"
+*   },
+*   {
+*     "id_ingredient" : "246kf584a9g784312408a442",
+*     "name_ingredient" : "Potato"
+*   }],
+*   "dislike" : [{
+*     "id_ingredient" : "302fvd338d2c30185535g805",
+*     "name_ingredient" : "Bean"
+*   }],
+*   "follow" :  [{
+*     "id_person" : "689ed300d6c22573533g895",
+*     "username" : "bananaman"
+*   }]
+*  }
 */
 
 
@@ -209,15 +228,9 @@ var User = require('../models/users');
 * @apiUse UserObjectPostRegisterParam
 *
 *
-* @apiUse UserRequestJSON
+* @apiUse UserRequestRegister
 *
 * @apiSuccess message User succesfully created!
-*
-* @apiSuccessExample Success-Response
-*     HTTP/1.1 200 OK
-*   {
-*   "message" : "User succesfully created!"
-*   }
 *
 * @apiErrorExample Bad Value Definition
 *   HTTP/1.1 400 BAD REQUEST
@@ -284,7 +297,7 @@ exports.postUser = function (req, res) {
 *
 * @apiSuccess key <token>.
 * @apiSuccessExample Success-Response:
-*     HTTP/1.1 200 OK
+*   HTTP/1.1 200 OK
 *   {
 *   "key" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.ey",
 *   "user_id" : "302fvd338d2c30185535g805"
@@ -360,47 +373,45 @@ exports.signinUser = function (req, res, next) {
 * @apiDefine getUserAnswer
 *
 * @apiSuccessExample Success-Response:
-*     HTTP/1.1 200 OK
-*	[
-*		{
-*			"_id": "563f294f464d96113dbef811",
-*			"username": "Julien",
-*			"email": "julien@usa.gov",
-*			"joined_groups" : [{
-*					"id_group" : "548ed30d6c2257336f5675",
-*					"name" : "Saucisson Choux Fleurs"
-*			}],
-*			"religion" : [{
-*					"id_religion" : "548ed30d6c2257336f5675",
-*					"name" : "Boudism"
-*			}],
-*			"alergy" : [{
-*					"id_ingredient" : "548ed30d6c2257336f5675",
-*					"name" : "Bettrave Rouge"
-*			}],
-*			"pictures" : [{
-*					"thumbnail_url" : "/thumbnails/1.jpg",
-*					"medium_sized_url" : "/medium_sized/1.jpg",
-*					"big_sized_url" : "/big_sized/1.jpg"
-*			}],
-*			"like" : [{
-*					"id_ingredient" : "548ed30d6c2257336f5675",
-*					"name_ingredient" : "Carotte"
-*			},
-*			{
-*					"id_ingredient" : "246kf584a9g784312408a442",
-*					"name_ingredient" : "Potato"
-*			}],
-*			"dislike" : [{
-*					"id_ingredient" : "302fvd338d2c30185535g805",
-*					"name_ingredient" : "Bean"
-*			}],
-*			"follow" :  [{
-*					"id_person" : "689ed300d6c22573533g895",
-*					"username" : "bananaman"
-*			}]
-*		}
-*	]
+*  HTTP/1.1 200 OK
+*  {
+*   "_id": "563f294f464d96113dbef811",
+*   "username": "Julien",
+*   "email": "julien@usa.gov",
+*   "joined_groups" : [{
+*     "id_group" : "548ed30d6c2257336f5675",
+*     "name" : "Saucisson Choux Fleurs"
+*   }],
+*   "religion" : [{
+*     "id_religion" : "548ed30d6c2257336f5675",
+*     "name" : "Boudism"
+*   }],
+*   "alergy" : [{
+*     "id_ingredient" : "548ed30d6c2257336f5675",
+*     "name" : "Bettrave Rouge"
+*   }],
+*   "pictures" : [{
+*     "thumbnail_url" : "/thumbnails/1.jpg",
+*     "medium_sized_url" : "/medium_sized/1.jpg",
+*     "big_sized_url" : "/big_sized/1.jpg"
+*   }],
+*   "like" : [{
+*     "id_ingredient" : "548ed30d6c2257336f5675",
+*     "name_ingredient" : "Carotte"
+*   },
+*   {
+*     "id_ingredient" : "246kf584a9g784312408a442",
+*     "name_ingredient" : "Potato"
+*   }],
+*   "dislike" : [{
+*     "id_ingredient" : "302fvd338d2c30185535g805",
+*     "name_ingredient" : "Bean"
+*   }],
+*   "follow" :  [{
+*     "id_person" : "689ed300d6c22573533g895",
+*     "username" : "bananaman"
+*   }]
+*  }
 */
 
 /**
@@ -423,19 +434,19 @@ exports.signinUser = function (req, res, next) {
 *     }
 */
 exports.getUserById = function (req, res, flag) {
-	var id = flag === true ? req.body.id : req.params.id;
-	if (!id)
-		return flag === true ? -1 : res.json(400, {message : 'The id musn\'t be null'});
-	User.findById(id,
-		function (err, doc) {
-			if (err)
-				return (res.send(err));
-			else if (doc === null)
-				return (res.json(404, {message : 'The id was not found.'}))
-			return (res.json(doc));
-		}
-	);
-	return (1);
+ var id = flag === true ? req.body.id : req.params.id;
+ if (!id)
+  return flag === true ? -1 : res.json(400, {message : 'The id musn\'t be null'});
+ User.findById(id,
+  function (err, doc) {
+   if (err)
+    return (res.send(err));
+   else if (doc === null)
+    return (res.json(404, {message : 'The id was not found.'}))
+   return (res.json(doc));
+  }
+ );
+ return (1);
 };
 
 /**
@@ -450,7 +461,7 @@ exports.getUserById = function (req, res, flag) {
 *
 * @apiUse getUserAnswer
 *
-* @apiError message The name of the group was not found
+* @apiError message The name of the user was not found
 * @apiErrorExample Invalid Parameter Value
 *     HTTP/1.1 404 Not Found
 *     {
@@ -458,21 +469,21 @@ exports.getUserById = function (req, res, flag) {
 *     }
 */
 exports.getUserByName = function (req, res, flag) {
-	var name = flag === true ? req.body.username : req.params.username;
-	if (!name)
-		return flag === true ? -1 : res.json(400, {message : 'The name musn\'t be null'});
-	User.find({
-		"username": { "$regex": name, "$options": "i" }
-		},
-		function (err, docs) {
-			if (err)
-				return (res.send(err));
-			else if (docs.length <= 0)
-				return (res.json(404, {message : 'The name was not found.'}));
-			return (res.json(docs));
-		}
-	);
-	return (1);
+ var name = flag === true ? req.body.username : req.params.username;
+ if (!name)
+  return flag === true ? -1 : res.json(400, {message : 'The name musn\'t be null'});
+ User.find({
+  "username": { "$regex": name, "$options": "i" }
+  },
+  function (err, docs) {
+   if (err)
+    return (res.send(err));
+   else if (docs.length <= 0)
+    return (res.json(404, {message : 'The name was not found.'}));
+   return (res.json(docs));
+  }
+ );
+ return (1);
 };
 
 /**
@@ -480,6 +491,12 @@ exports.getUserByName = function (req, res, flag) {
 * @apiName getUsers
 * @apiGroup Users
 * @apiVersion 0.1.0
+*
+* @apiUse UserObjectSuccess
+*
+* @apiUse getUserAnswer
+*
+*
 */
 
 exports.getUsers = function (req, res) {
@@ -500,33 +517,33 @@ exports.getUsers = function (req, res) {
 *
 * @apiSuccessExample Success-Response
 *     HTTP/1.1 200 OK
-*	  {
-*		"message" : "User successfully updated!"
-*	  }
+*   {
+*  "message" : "User successfully updated!"
+*   }
 *
 * @apiError message User not found.
 *
 * @apiErrorExample Invalid Parameter Value
-*	  HTTP/1.1 404 Bad Request
-*	  {
-*		"message" : "User not found."
-*	  }
+*   HTTP/1.1 404 Bad Request
+*   {
+*  "message" : "User not found."
+*   }
 *
 * @apiError message The key <key> does not exist for User.
 *
 * @apiErrorExample Bad key sent
-*	  HTTP/1.1 400 Bad Request
-*	  {
-*		"message" : "The key <key> does not exist for User."
-*	  }
+*   HTTP/1.1 400 Bad Request
+*   {
+*  "message" : "The key <key> does not exist for User."
+*   }
 *
 * @apiErrorExample Bad Value Definition
-*	  HTTP/1.1 200 OK
-*	  {
-*		...
-*		mongoose custom error
-*		...
-*	  }
+*   HTTP/1.1 200 OK
+*   {
+*  ...
+*  mongoose custom error
+*  ...
+*   }
 */
 
 /**
@@ -563,7 +580,7 @@ exports.putUserById = function (req, res) {
   * @apiGroup Users
   * @apiVersion 0.1.0
   *
-	* @apiUse UserObjectPutParam
+ * @apiUse UserObjectPutParam
   *
   * @apiUse UserRequestJSONPut
   *
@@ -573,7 +590,7 @@ exports.putUserById = function (req, res) {
   */
   exports.putUserByUsername = function (req, res) {
     if (!req.params.username || Object.keys(req.body).length === 0)
-    	return (res.status(400).json({ message: 'The username musn\'t be null and the request must not be empty.' }));
+     return (res.status(400).json({ message: 'The username musn\'t be null and the request must not be empty.' }));
     User.findOne({
       "username": req.params.username
     },
@@ -588,7 +605,7 @@ exports.putUserById = function (req, res) {
   }
 
   exports.updateUser = function (req, res, err, user) {
-    var fields = ["password", "email", "token", "gender", "facebook", "twitter", "google", "alergy", "religion", "pictures", "joined_groups", "calories"];
+    var fields = ["password", "email", "description", "token", "gender", "facebook", "twitter", "google", "alergy", "religion", "pictures", "joined_groups"];
     var sent_fields = Object.keys(req.body);
 
     if (err)
@@ -648,107 +665,107 @@ exports.putUserById = function (req, res) {
 *     }
 */
 
-	/**
-	* @api {delete} /users/ Delete all Users
-	* @apiName deleteUsers
-	* @apiGroup Users
-	* @apiVersion 0.1.0
-	*
-	*/
+ /**
+ * @api {delete} /users/ Delete all Users
+ * @apiName deleteUsers
+ * @apiGroup Users
+ * @apiVersion 0.1.0
+ *
+ */
 
-	exports.deleteUsers = function (req, res) {
-		var i = -1;
-		var callbackReturn = -1;
-		var functionPointer = [module.exports.deleteUserById(req, res, true),
-								module.exports.deleteUserByName(req, res, true)];
-		var usage = "No correct argument given. Specify an id or a name";
+ exports.deleteUsers = function (req, res) {
+  var i = -1;
+  var callbackReturn = -1;
+  var functionPointer = [module.exports.deleteUserById(req, res, true),
+        module.exports.deleteUserByName(req, res, true)];
+  var usage = "No correct argument given. Specify an id or a name";
 
-		while ((callbackReturn = functionPointer[++i]) == -1
-			&& i < functionPointer.length - 1);
-		return callbackReturn == -1 ? res.json({message : usage}) : callbackReturn;
+  while ((callbackReturn = functionPointer[++i]) == -1
+   && i < functionPointer.length - 1);
+  return callbackReturn == -1 ? res.json({message : usage}) : callbackReturn;
 
-	};
+ };
 
-	/**
-	* @api {delete} /users/id/:id Delete User by id
-	* @apiName deleteUserById
-	* @apiGroup Users
-	* @apiVersion 0.1.0
-	*
-	* @apiParam {Number} [id] user unique ID
-	*
-	* @apiParamExample {json} Request-Example:
-	*	  {
-	*		"id" : "56183b64753d867e016c80d2"
-	*	  }
-	*
-	* @apiUse deleteUsersSuccess
-	*
-	* @apiError message The id was not found.
-	* @apiErrorExample Invalid Parameter Value
-	*     HTTP/1.1 404 Not Found
-	*     {
-	*       "message": "The id was not found."
-	*     }
-	*/
+ /**
+ * @api {delete} /users/id/:id Delete User by id
+ * @apiName deleteUserById
+ * @apiGroup Users
+ * @apiVersion 0.1.0
+ *
+ * @apiParam {Number} [id] user unique ID
+ *
+ * @apiParamExample {json} Request-Example:
+ *   {
+ *    "id" : "56183b64753d867e016c80d2"
+ *   }
+ *
+ * @apiUse deleteUsersSuccess
+ *
+ * @apiError message The id was not found.
+ * @apiErrorExample Invalid Parameter Value
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "message": "The id was not found."
+ *     }
+ */
 
-	exports.deleteUserById = function (req, res, flag) {
-		var id = flag === true ? req.body.id : req.params.id;
-		if (!id)
-			return flag === true ? -1 : res.json(400, {message : 'The id musn\'t be null'});
-		Users.remove({
-			_id : id
-			},
-			function (err, removed) {
-				if (err)
-					return (res.send(err));
-				else if (removed.result.n === 0)
-					return (res.json(404, {message : 'The id was not found.'}))
-				return (res.json({message : 'User succesfully deleted!'}));
-			}
-		);
-		return (1);
-	};
+ exports.deleteUserById = function (req, res, flag) {
+  var id = flag === true ? req.body.id : req.params.id;
+  if (!id)
+   return flag === true ? -1 : res.json(400, {message : 'The id musn\'t be null'});
+  Users.remove({
+   _id : id
+   },
+   function (err, removed) {
+    if (err)
+     return (res.send(err));
+    else if (removed.result.n === 0)
+     return (res.json(404, {message : 'The id was not found.'}))
+    return (res.json({message : 'User succesfully deleted!'}));
+   }
+  );
+  return (1);
+ };
 
-	/**
-	* @api {delete} /users/name/:username Delete User by name
-	* @apiName deleteUserByName
-	* @apiGroup Users
-	* @apiVersion 0.1.0
-	*
-	* @apiParam {Sting} username user full name
-	*
-	* @apiParamExample {json} Request-Example:
-	*	  {
-	*		"username" : "Julien"
-	*	  }
-	*
-	* @apiUse deleteUsersSuccess
-	*
-	* @apiError message The name was not found.
-	* @apiErrorExample Invalid Parameter Value
-	*     HTTP/1.1 404 Not Found
-	*     {
-	*       "message": "The name was not found."
-	*     }
-	*/
-	exports.deleteUserByName = function (req, res, flag) {
-		var name = flag === true ? req.body.username : req.params.username;
-		if (!name)
-			return flag === true ? -1 : res.json(400, {message : 'The name musn\'t be null'});
-		Users.remove({
-			username : name
-			},
-			function (err, removed) {
-				if (err)
-					return (res.send(err));
-				else if (removed.result.n === 0)
-					return (res.json(404, {message : 'The name was not found.'}))
-				return (res.json({message : 'User succesfully deleted!'}));
-			}
-		);
-		return (1);
-	};
+ /**
+ * @api {delete} /users/name/:username Delete User by name
+ * @apiName deleteUserByName
+ * @apiGroup Users
+ * @apiVersion 0.1.0
+ *
+ * @apiParam {Sting} username user full name
+ *
+ * @apiParamExample {json} Request-Example:
+ *   {
+ *    "username" : "Julien"
+ *   }
+ *
+ * @apiUse deleteUsersSuccess
+ *
+ * @apiError message The name was not found.
+ * @apiErrorExample Invalid Parameter Value
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "message": "The name was not found."
+ *     }
+ */
+ exports.deleteUserByName = function (req, res, flag) {
+  var name = flag === true ? req.body.username : req.params.username;
+  if (!name)
+   return flag === true ? -1 : res.json(400, {message : 'The name musn\'t be null'});
+  Users.remove({
+   username : name
+   },
+   function (err, removed) {
+    if (err)
+     return (res.send(err));
+    else if (removed.result.n === 0)
+     return (res.json(404, {message : 'The name was not found.'}))
+    return (res.json({message : 'User succesfully deleted!'}));
+   }
+  );
+  return (1);
+ };
 
 
 /**
