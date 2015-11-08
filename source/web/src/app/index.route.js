@@ -50,6 +50,7 @@
                 url: 'logout',
                 parent: 'main',
                 controller: 'LogoutController',
+                controllerAs: 'logout',
                 data: {
                     permissions: {
                       except: ['guest'],

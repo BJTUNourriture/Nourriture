@@ -10,7 +10,7 @@
   /** @ngInject */
   function runBlock($log, Permission, UserService, $q, $sessionStorage, $localStorage) {
 
-	Permission.defineRole("guest", function(stateParams) {
+	Permission.defineRole("guest", function() {
 		var deferred = $q.defer();
 
 		UserService
@@ -19,12 +19,12 @@
 			.$promise
 			.then(profileSuccess, profileError);
 
-		function profileSuccess(data, status, headers, config) {
+		function profileSuccess() {
 			$log.log("in");
 			deferred.reject();
 		}
 
-		function profileError(data, status, headers, config) {
+		function profileError() {
 			$log.log("out");
 			deferred.resolve();
 		}
