@@ -1,52 +1,41 @@
 (function () {
-    'use strict';
+  'use strict';
 
-    angular.module('NourritureControllers')
-        .controller('UserProfileController', UserProfileController);
+  angular.module('NourritureControllers')
+    .controller('UserProfileController', UserProfileController);
 
-    UserProfileController.$inject = ["$scope", "$log", "UserService"];
+  UserProfileController.$inject = ["$scope", "$log", "UserService", "$localStorage", "$sessionStorage"];
 
-    function UserProfileController($sope, $log, UserService) {
-        var vm = this;
-
-        var username = "spkd";
-
-      /*  vm.test = function () {
-            //console.log("Bonjour", username);
-            UserService
-                .user_get
-                .query({username: username})
-                .$promise
-                .then(vm.getUserSuccess, vm.getUserFailure);
-
-        };*/
-
-        vm.user =  UserService.user_get.query({username: username});
-        vm.user.$promise.then(vm.getUserSuccess, vm.getUserFailure);
-
-     /*   vm.user.$promise.then(function(data) {
-            console.log(data);
-        });*/
+  /** @ngInject */
+  function UserProfileController($scope, $log, UserService, $localStorage, $sessionStorage) {
+    var vm = this;
 
 
-     /*   vm.user = UserService
-            .user_get
-            .query({username: username});
+    vm.profileSuccess = function (data) {
+      $log.log(data._id);
+    };
 
-        vm.user.$promise
-            .then(vm.getUserSuccess, vm.getUserFailure);*/
+    vm.profileError = function (data) {
+      $log.error("Error when getting user", data);
+    };
 
-        vm.getUserSuccess = function (data) {
-            console.log("it works", data);
-            console.log(data[0])
-        };
+    vm.getUser = function () {
 
-        vm.getUserFailure = function (data) {
-            console.log('Failure when getting user');
-        };
+      UserService.user_get_id
+        .get({id: $localStorage.user_id || $sessionStorage.user_id})
+        .$promise
+        .then(vm.profileSuccess, vm.profileError);
 
 
-    }
+    };
+
+    vm.getUser();
+
+
+
+
+
+  }
 
 })();
 

@@ -22,7 +22,7 @@
 
         function is_authenticated () {
           return ($sessionStorage.key || $localStorage.key) ? true : false;
-        };
+        }
 
     }
 })();
