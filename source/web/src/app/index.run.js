@@ -26,7 +26,6 @@
 
 		function profileError(data, status, headers, config) {
 			$log.log("out");
-			$state.go("main.homepage");
 			deferred.resolve();
 		}
 		return (deferred.promise);

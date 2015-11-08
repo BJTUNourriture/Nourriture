@@ -28,21 +28,34 @@
                 controllerAs: 'userProfile',
                 data: {
                     permissions: {
-                      except: ['guest']
+                      except: ['guest'],
+                      redirectTo: 'main.homepage'
                     }
-                  }
+                }
             })
             .state('main.register', {
                 url: 'register',
                 parent: 'main',
                 templateUrl: 'app/templates/register/register.html',
                 controller: 'RegisterController',
-                controllerAs: 'register'
+                controllerAs: 'register',
+                data: {
+                    permissions: {
+                      only: ['guest'],
+                      redirectTo: 'main.homepage'
+                    }
+                }
             })
             .state('main.logout', {
                 url: 'logout',
                 parent: 'main',
-                controller: 'LogoutController'              
+                controller: 'LogoutController',
+                data: {
+                    permissions: {
+                      except: ['guest'],
+                      redirectTo: 'main.homepage'
+                    }
+                }
             })
             .state('main.login', {
                 url: 'login',
