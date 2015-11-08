@@ -6424,6 +6424,11 @@ define({ "api": [
           "title": "Bad Password",
           "content": "HTTP/1.1 401 Bad Request\n{\n\"message\" : \"Please verify the password provided.\"\n}",
           "type": "json"
+        },
+        {
+          "title": "Email not verified",
+          "content": "HTTP/1.1 401 Bad Request\n{\n\"message\" : \"Please verify your email.\"\n}",
+          "type": "json"
         }
       ]
     },
