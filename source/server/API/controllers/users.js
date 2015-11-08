@@ -413,7 +413,7 @@ exports.getUserById = function (req, res, flag) {
 };
 
 /**
-* @api {get} /users/name/:name Request User informations by name
+* @api {get} /users/username/:name Request User informations by name
 * @apiName getUserByName
 * @apiGroup Users
 * @apiVersion 0.1.0
