@@ -9,6 +9,7 @@
     function UserProfileController($sope, $log) {
         var vm = this;
 
+        var username = "toto";
 
 
     }

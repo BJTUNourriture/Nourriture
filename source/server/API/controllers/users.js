@@ -435,14 +435,14 @@ exports.getUserByName = function (req, res, flag) {
 	var name = flag === true ? req.body.name : req.params.name;
 	if (!name)
 		return flag === true ? -1 : res.json(400, {message : 'The name musn\'t be null'});
-	Users.find({
+	User.find({
 		"username": { "$regex": name, "$options": "i" }
 		},
 		function (err, docs) {
 			if (err)
 				return (res.send(err));
 			else if (docs.length <= 0)
-				return (res.json(404, {message : 'The name was not found.'}))
+				return (res.json(404, {message : 'The name was not found.'}));
 			return (res.json(docs));
 		}
 	);
