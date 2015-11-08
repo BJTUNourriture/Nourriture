@@ -1,5 +1,11 @@
+@import "../../theme.scss";
+
 .body-login-md {
 	margin : 20px auto;
 	background : $background;
 	height : 250px;
+}
+
+md-checkbox.md-checked.remember-me-login .md-icon {
+ background-color:  $borderBlock;
 }

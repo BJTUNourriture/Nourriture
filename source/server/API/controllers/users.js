@@ -400,7 +400,7 @@ exports.getUserById = function (req, res, flag) {
 	var id = flag === true ? req.body.id : req.params.id;
 	if (!id)
 		return flag === true ? -1 : res.json(400, {message : 'The id musn\'t be null'});
-	Users.findById(id,
+	User.findById(id,
 		function (err, doc) {
 			if (err)
 				return (res.send(err));
