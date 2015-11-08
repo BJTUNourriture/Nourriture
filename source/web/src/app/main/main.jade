@@ -4,4 +4,4 @@ div(ng-controller="SidenavController as sidenav")
 	section(layout="row").layout-fill
 		include ../templates/menu/toolbar.jade
 		div(flex layout="column")
-			div.ui-view.scope-child
+			div.ui-view(class="anim-in-out anim-slide-below-fade" data-anim-speed="300").scope-child

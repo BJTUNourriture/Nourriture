@@ -20,7 +20,8 @@
     "angular-material-icons": "~0.6.0",
     "svg-morpheus": "~0.1.8",
     "angular-ui-validate": "~1.2.1",
-    "angular-validation-match": "~1.6.0"
+    "angular-validation-match": "~1.6.0",
+    "angular-ui-router-anim-in-out": "~1.0.2"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.2"
