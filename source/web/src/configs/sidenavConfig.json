@@ -20,6 +20,11 @@
 	],
 	"restricted" : [
 		{
+			"name" : "Logout",
+			"icon" : "logout",
+			"reference" : "main.logout"
+		},	
+		{
 			"name" : "Profile",
 			"icon" : "account_box",
 			"reference" : "main.profile"

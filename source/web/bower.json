@@ -22,7 +22,8 @@
     "angular-ui-validate": "~1.2.1",
     "angular-validation-match": "~1.6.0",
     "angular-ui-router-anim-in-out": "~1.0.2",
-    "ngstorage": "~0.3.9"
+    "ngstorage": "~0.3.9",
+    "angular-permission": "~1.1.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.2"
