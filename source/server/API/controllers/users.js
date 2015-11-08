@@ -39,6 +39,7 @@
 *
 * @apiParam {String} [username] Name of the user
 * @apiParam {String} [email] Email of the user
+* @apiParam {String} [description] Description of the user
 * @apiParam {Object[]} [alergy] List of allergy
 * @apiParam {Object[]} [religion] Religion of the user
 * @apiParam {Object[]} [pictures] List of user pictures
@@ -63,6 +64,7 @@
 * @apiParam {String} id of the user
 * @apiParam {String} [username] Name of the user
 * @apiParam {String} [email] Email of the user
+* @apiParam {String} [description] Description of the user
 * @apiParam {Object[]} [alergy] List of allergy
 * @apiParam {Object[]} [religion] Religion of the user
 * @apiParam {Object[]} [pictures] List of user pictures
@@ -87,6 +89,7 @@
 * @apiSuccess {String} id of the user
 * @apiSuccess {String} username Name of the user
 * @apiSuccess {String} email Email of the user
+* @apiParam {String} [description] Description of the user
 * @apiSuccess {Object[]} [alergy] List of allergy
 * @apiSuccess {Object[]} [religion] Religion of the user
 * @apiSuccess {Object[]} [pictures] List of user pictures
@@ -125,6 +128,7 @@
 *			"_id": "563f294f464d96113dbef811",
 *			"email": "julien@usa.gov",
 *			"username": "Julien",
+*			"description": "Ma bio",
 *			"joined_groups" : [{
 *					"id_group" : "548ed30d6c2257336f5675",
 *					"name" : "Saucisson Choux Fleurs"
@@ -168,6 +172,7 @@
 *		{
 *			"email": "julien@usa.gov",
 *			"username": "Julien",
+*			"description": "Ma bio",
 *			"joined_groups" : [{
 *					"id_group" : "548ed30d6c2257336f5675",
 *					"name" : "Saucisson Choux Fleurs"
@@ -602,7 +607,7 @@ exports.putUserById = function (req, res) {
   }
 
   exports.updateUser = function (req, res, err, user) {
-    var fields = ["password", "email", "token", "gender", "facebook", "twitter", "google", "alergy", "religion", "pictures", "joined_groups", "calories"];
+    var fields = ["password", "email", "description", "token", "gender", "facebook", "twitter", "google", "alergy", "religion", "pictures", "joined_groups", "calories"];
     var sent_fields = Object.keys(req.body);
 
     if (err)

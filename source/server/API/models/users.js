@@ -23,6 +23,10 @@ var UserSchema = new mongoose.Schema({
         minlength : 8,
         maxlength : 100
     },
+		description: {
+				type: String,
+				maxlength : 10000
+		},
     email_verified : {
         type : Boolean,
         default : false
