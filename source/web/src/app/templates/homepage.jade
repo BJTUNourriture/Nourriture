@@ -1,11 +1,16 @@
 md-content(style="background-image : url('assets/images/homepage_bg/bg.png'); height: 100%;")#backround-homepage.flex
 	div(layout="column" flex layout-align="center center").show-gt-sm
-		div.homepage
-			h1 Share your taste for food
-			h2 Welcome to Nourriture !
-			p.
-				Free. Open Source. Powerful. Nourriture is a community social network sharing with
-				osmosis your favorite ingredients to bring you the tastiest recipes.
-			h2 Begin your journey now !
-			md-button(ui-sref="main.register").begin-journey-button.md-fab.md-primary
-				ng-md-icon.icon-menu-journey(icon="keyboard_alt", size="48")
+		div(ng-if="!main.authenticated()")
+			div.homepage
+				h1 Share your taste for food
+				h2 Welcome to Nourriture !
+				p.
+					Free. Open Source. Powerful. Nourriture is a community social network sharing with
+					osmosis your favorite ingredients to bring you the tastiest recipes.
+				h2 Begin your journey now !
+				md-button(ui-sref="main.register").begin-journey-button.md-fab.md-primary
+					ng-md-icon.icon-menu-journey(icon="keyboard_alt", size="48")
+		div(ng-if="main.authenticated()")
+			div.homepage
+				h1 You are now connected !
+				h2 This is currently under construction
