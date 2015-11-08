@@ -12,7 +12,7 @@ function RegisterController($scope, UserService, toastr, $log)
 
 	vm.submit = function() {
 		UserService
-			.Users
+			.user_register
 			.save({"username" : $scope.username, "password" : $scope.password, "email" : $scope.email})
 			.$promise
 			.then(vm.userRegisteredSuccess, vm.userRegisteredFailure);

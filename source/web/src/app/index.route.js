@@ -31,6 +31,13 @@
                 templateUrl: 'app/templates/register/register.html',
                 controller: 'RegisterController',
                 controllerAs: 'register'
+            })
+            .state('main.login', {
+                url: 'login',
+                parent: 'main',
+                templateUrl: 'app/templates/login-logout/login.html',
+                controller: 'LoginController',
+                controllerAs: 'login'
             });
 
         $urlRouterProvider.otherwise('/');

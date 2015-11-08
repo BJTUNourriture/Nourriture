@@ -1,0 +1,26 @@
+md-content
+	div(layout="column", layout-fill).flex
+		div.flex
+			div(layout="column" flex layout-align="start center")
+				div(flex="none").title-register-container 
+					span.title-register-md Sign-in
+				div(flex="none").body-login-md
+					form(name="loginForm" novalidate ng-submit="loginForm.$valid && login.submit()")
+						section(layout="column", layout-align="start center", layout-margin)
+							md-input-container
+								ng-md-icon(icon="mood").body-register-container-md
+								input(placeholder="Username" required name="username" ng-model="username" maxlength="20" minlength="3").body-register-container-md
+								div(ng-messages="loginForm.username.$error" ng-if='!loginForm.username.$pristine')
+									div(ng-message="required") This is required.
+									div(ng-message="minlength") The username must be longer than 3 characters.
+									div(ng-message="md-maxlength") The username must be shorter than 20 characters.
+							md-input-container
+								ng-md-icon(icon="vpn_key").body-register-container-md
+								input(placeholder="Password" type="password" name="password" required ng-model="password" maxlength="30" minlength="3").body-register-container-md
+								div(ng-messages="loginForm.password.$error" ng-if="loginForm.password.$dirty")
+									div(ng-message="required") This is required.
+									div(ng-message="minlength") The username must be longer than 3 characters.
+									div(ng-message="maxlength") The username must be shorter than 20 characters.
+							md-checkbox(ng-model="remember_me") Remember me
+							md-button.md-raised Login
+		include ../footer/footer.jade
