@@ -5,10 +5,10 @@
 	.module('web')
 	.run(runBlock);
 
-	runBlock.$inject = ["$log", "Permission", 'UserService', '$q', '$sessionStorage', '$localStorage', '$state'];
+	runBlock.$inject = ["$log", "Permission", 'UserService', '$q', '$sessionStorage', '$localStorage'];
 
   /** @ngInject */
-  function runBlock($log, Permission, UserService, $q, $sessionStorage, $localStorage, $state) {
+  function runBlock($log, Permission, UserService, $q, $sessionStorage, $localStorage) {
 
 	Permission.defineRole("guest", function(stateParams) {
 		var deferred = $q.defer();
