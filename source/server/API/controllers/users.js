@@ -1,10 +1,12 @@
 // API/controllers/users.js
 
+
 /**
 * @apiDefine UserObjectPostParam
 *
 * @apiParam {String} username Name of the user
 * @apiParam {String} email Email of the user
+* @apiParam {String} [description] Description of the user
 * @apiParam {Object[]} [alergy] List of allergy
 * @apiParam {Object[]} [religion] Religion of the user
 * @apiParam {Object[]} [pictures] List of user pictures
@@ -101,6 +103,18 @@
 * @apiSuccess {Object[]} [follow] List of people followed by a person
 * @apiSuccess {ObjectId} follow.id_person Id of the person followed
 * @apiSuccess {String} follow.username Username of the person followed
+*/
+
+
+/**
+* @apiDefine UserRequestJSON
+*
+* @apiParamExample {json} Request-Example:
+*		{
+*			"username": "Julien",
+*			"email": "julien@usa.gov",
+*			"password": "MonMotDePasse",
+*  }
 */
 
 /**
