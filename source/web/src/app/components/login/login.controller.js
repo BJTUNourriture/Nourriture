@@ -4,9 +4,9 @@
 angular.module('NourritureControllers')
 	.controller('LoginController', LoginController);
 
-LoginController.$inject = ["$scope", "UserService", 'toastr', '$state', "$log"];
+LoginController.$inject = ["$scope", "UserService", 'toastr', '$state', '$sessionStorage', '$localStorage', "$log"];
 
-function LoginController($scope, UserService, toastr, $state, $log)
+function LoginController($scope, UserService, toastr, $state, $sessionStorage, $localStorage, $log)
 {
 	var vm = this;
 
@@ -19,7 +19,11 @@ function LoginController($scope, UserService, toastr, $state, $log)
 	};
 
 	vm.userLoginSuccess = function (data) {
-		$log.log(data.message);
+		$log.log(data);
+		if ($scope.remember_me == true)
+			$log.log("Remember");
+		else
+			$log.log("Forgetti");
 		$state.go("main.homepage");
 	};
 
