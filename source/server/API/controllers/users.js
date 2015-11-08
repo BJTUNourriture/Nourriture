@@ -110,7 +110,7 @@
 
 
 /**
-* @apiDefine UserRequestJSON
+* @apiDefine UserRequestRegister
 *
 * @apiParamExample {json} Request-Example:
 *		{
@@ -228,7 +228,7 @@ var User = require('../models/users');
 * @apiUse UserObjectPostRegisterParam
 *
 *
-* @apiUse UserRequestJSON
+* @apiUse UserRequestRegister
 *
 * @apiSuccess message User succesfully created!
 *
