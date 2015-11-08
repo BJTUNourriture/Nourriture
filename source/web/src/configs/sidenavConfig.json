@@ -10,7 +10,7 @@
 		{
 			"name" : "Login",
 			"icon" : "login",
-			"reference" : "main.homepage"
+			"reference" : "main.login"
 		},
 		{
 			"name" : "Register",
