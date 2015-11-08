@@ -1,16 +1,18 @@
-(function() {
-'use strict';
+(function () {
+    'use strict';
 
-angular.module('NourritureControllers')
-	.controller('UserProfileController', UserProfileController);
+    angular.module('NourritureControllers')
+        .controller('UserProfileController', UserProfileController);
 
-//UserProfileController.$inject = ["$scope", "$http","$timeout", "$log"];
+    UserProfileController.$inject = ["$scope", "$log"];
 
-function UserProfileController()
-{
-	//var vm = this;
+    function UserProfileController($sope, $log) {
+        var vm = this;
 
-}
+        var username = "toto";
+
+
+    }
 
 })();
 

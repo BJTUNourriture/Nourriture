@@ -40,17 +40,18 @@ router.route('/users/sign-in')
 
 router.route('/users')
     .get(userController.getUsers)
-		.delete(userController.deleteUsers);
+    .delete(userController.deleteUsers);
 
 router.route('/users/id/:id')
     .put(userController.putUserById)
-		.delete(userController.deleteUserById)
-		.get(verifyJwt, userController.getUserById);
+    .delete(userController.deleteUserById)
+    .get(verifyJwt, userController.getUserById);
 
 
 router.route('/users/username/:username')
-		.delete(userController.deleteUserByName)
-        .put(userController.putUserByUsername);
+    .put(userController.putUserByUsername)
+    .delete(userController.deleteUserByName)
+    .get(userController.getUserByName);
 
 router.route('/users/register')
     .post(userController.postUser);
@@ -149,8 +150,8 @@ router.route('/recipes/title/:title')
     .get(recipesController.getRecipeByTitle);
 
 /*
-** Endpoints for Allergies
-*/
+ ** Endpoints for Allergies
+ */
 
 // full JSON endpoints
 router.route('/allergies')
