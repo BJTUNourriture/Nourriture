@@ -25,7 +25,12 @@
                 parent: 'main',
                 templateUrl: 'app/templates/userProfile/indexUserProfile.html',
                 controller: 'UserProfileController',
-                controllerAs: 'userProfile'
+                controllerAs: 'userProfile',
+                data: {
+                    permissions: {
+                      except: ['guest']
+                    }
+                  }
             })
             .state('main.register', {
                 url: 'register',
