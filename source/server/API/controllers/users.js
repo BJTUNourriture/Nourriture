@@ -413,7 +413,7 @@ exports.getUserById = function (req, res, flag) {
 };
 
 /**
-* @api {get} /users/username/:name Request User informations by name
+* @api {get} /users/username/:username Request User informations by name
 * @apiName getUserByName
 * @apiGroup Users
 * @apiVersion 0.1.0
@@ -432,7 +432,7 @@ exports.getUserById = function (req, res, flag) {
 *     }
 */
 exports.getUserByName = function (req, res, flag) {
-	var name = flag === true ? req.body.name : req.params.name;
+	var name = flag === true ? req.body.username : req.params.username;
 	if (!name)
 		return flag === true ? -1 : res.json(400, {message : 'The name musn\'t be null'});
 	User.find({
