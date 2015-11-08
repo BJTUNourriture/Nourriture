@@ -22,7 +22,6 @@ var User = require('../API/models/users');
 var verifyJwt = expressJwt({
     secret: '18B63D7DDDD8C614227C8F31D8A25DEB92F249C391267DF9A28A5ACC00458837',
     getToken: function fromHeaderOrQuerystring(req) {
-        console.log("getToken!!!!", req.headers.authorization.split(' ')[1]);
         if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Topkek')
             return req.headers.authorization.split(' ')[1];
         return null;
@@ -46,12 +45,12 @@ router.route('/users')
 router.route('/users/id/:id')
     .put(userController.putUserById)
 		.delete(userController.deleteUserById)
-		.get(userController.getUserById);
+		.get(verifyJwt, userController.getUserById);
 
 
 router.route('/users/username/:username')
 		.delete(userController.deleteUserByName)
-    .put(userController.putUserByUsername);
+        .put(userController.putUserByUsername);
 
 router.route('/users/register')
     .post(userController.postUser);
