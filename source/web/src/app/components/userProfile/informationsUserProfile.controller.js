@@ -4,16 +4,18 @@
 
 (function () {
 
-    'use strict';
+  'use strict';
 
-    angular
-        .module('NourritureControllers')
-        .controller('informationsUserProfileController', informationsUserProfileController);
+  angular
+    .module('NourritureControllers')
+    .controller('informationsUserProfileController', informationsUserProfileController);
 
-    informationsUserProfileController.$inject = [];
+  informationsUserProfileController.$inject = ["$scope", '$log'];
 
-    function informationsUserProfileController() {
-
-    }
+  function informationsUserProfileController($scope, $log) {
+    //  console.log("Bonjour");
+    $log.debug("test");
+    //  $log.debug($scope.informationsProfile);
+  }
 
 })();
