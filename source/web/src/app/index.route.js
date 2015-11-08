@@ -34,6 +34,11 @@
                 controller: 'RegisterController',
                 controllerAs: 'register'
             })
+            .state('main.logout', {
+                url: 'logout',
+                parent: 'main',
+                controller: 'LogoutController'              
+            })
             .state('main.login', {
                 url: 'login',
                 parent: 'main',

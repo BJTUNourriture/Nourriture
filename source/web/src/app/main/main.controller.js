@@ -11,7 +11,7 @@ angular
 	{
 		var vm = this;
 
-		vm.authenticated = ($sessionStorage.key || $localStorage) ? true : false;
+		vm.authenticated = ($sessionStorage.key || $localStorage.key) ? true : false;
 		$log.log(vm.authenticated);
 	}
 
