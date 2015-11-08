@@ -10,9 +10,10 @@
         .module('NourritureControllers')
         .controller('RecipesUserProfileController', RecipesUserProfileController);
 
-    RecipesUserProfileController.$inject = ['$scope'];
+    RecipesUserProfileController.$inject = [];
 
-    function RecipesUserProfileController($scope) {
+    function RecipesUserProfileController() {
+    /*  var vm = this;
         var imagePath = 'http://p1.storage.canalblog.com/19/26/115062/29135532.jpg';
 
         $scope.phones = [
@@ -60,7 +61,7 @@
                 when: '3:08PM',
                 notes: " I'll be in your neighborhood doing errands"
             }
-        ];
+        ];*/
     }
 
 })();

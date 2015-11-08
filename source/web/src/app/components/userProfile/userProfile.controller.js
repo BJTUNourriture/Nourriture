@@ -4,9 +4,10 @@
     angular.module('NourritureControllers')
         .controller('UserProfileController', UserProfileController);
 
-    UserProfileController.$inject = ["$scope", "$log", "UserService"];
+    UserProfileController.$inject = ["$log", "UserService"];
 
-    function UserProfileController($sope, $log, UserService) {
+    /** @ngInject */
+    function UserProfileController($log, UserService) {
         var vm = this;
 
         var username = "spkd";
@@ -22,12 +23,12 @@
         };*/
 
         vm.user =  UserService.user_get.query({username: username});
-        vm.user.$promise.then(vm.getUserSuccess, vm.getUserFailure);
+       // vm.user.$promise.then(vm.getUserSuccess, vm.getUserFailure);
 
-     /*   vm.user.$promise.then(function(data) {
+      /* vm.user.$promise.then(function(data) {
             console.log(data);
-        });*/
-
+        });
+*/
 
      /*   vm.user = UserService
             .user_get
@@ -35,7 +36,7 @@
 
         vm.user.$promise
             .then(vm.getUserSuccess, vm.getUserFailure);*/
-
+/*
         vm.getUserSuccess = function (data) {
             console.log("it works", data);
             console.log(data[0])
@@ -43,7 +44,7 @@
 
         vm.getUserFailure = function (data) {
             console.log('Failure when getting user');
-        };
+        };*/
 
 
     }

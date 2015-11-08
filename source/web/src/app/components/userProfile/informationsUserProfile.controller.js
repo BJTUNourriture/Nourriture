@@ -10,9 +10,9 @@
         .module('NourritureControllers')
         .controller('informationsUserProfileController', informationsUserProfileController);
 
-    informationsUserProfileController.$inject = ['$scope'];
+    informationsUserProfileController.$inject = [];
 
-    function informationsUserProfileController($scope) {
+    function informationsUserProfileController() {
 
     }
 

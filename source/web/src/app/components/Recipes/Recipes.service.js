@@ -9,9 +9,9 @@
         .module('NourritureServices', ['ngResource'])
         .factory('RecipeService', RecipeService);
 
-    RecipeService.$inject = ["$log", "$resource", "URL_API"];
+    RecipeService.$inject = [];
 
-    function RecipeService($log, $resource, URL_API) {
+    function RecipeService() {
 
         var recipe = {
 
