@@ -19,19 +19,30 @@ $boxShadowButton: #888;
   }
 }
 
+.t-center {
+  text-align: center;
+}
 
 
-md-tabs {
-  display: flex;
-  flex-direction: column;
+.bold {
+  font-weight: bold;
 }
-.md-tabs-content {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
+
+.index-user-profile {
+  md-tabs {
+    display: flex;
+    flex-direction: column;
+  }
+  .md-tabs-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+  .md-tab-content {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+  }
 }
-.md-tab-content {
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-}
+
+
