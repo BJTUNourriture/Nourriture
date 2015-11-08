@@ -19,8 +19,8 @@ md-content
 								input(placeholder="Password" type="password" name="password" required ng-model="password" maxlength="30" minlength="3").body-register-container-md
 								div(ng-messages="loginForm.password.$error" ng-if="loginForm.password.$dirty")
 									div(ng-message="required") This is required.
-									div(ng-message="minlength") The username must be longer than 3 characters.
-									div(ng-message="maxlength") The username must be shorter than 20 characters.
+									div(ng-message="minlength") The password must be longer than 3 characters.
+									div(ng-message="maxlength") The password must be shorter than 20 characters.
 							md-checkbox(ng-model="remember_me").remember-me-login Remember me
 							md-button.md-raised Login
 		include ../footer/footer.jade
