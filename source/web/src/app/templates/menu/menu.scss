@@ -86,3 +86,9 @@ background on a md-content in a sidenav */
   width: 24px;
   background-color: $borderBlock;
 }
+
+.toolbar-menu-sm {
+  @extend .toolbar-menu;
+
+  width: 24px;
+}

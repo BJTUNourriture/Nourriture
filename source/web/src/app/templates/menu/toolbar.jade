@@ -1,9 +1,24 @@
 div(flex="9").show-sm.hide-gt-sm
-	ng-md-icon.icon-menu-sm(icon="{{ sidenav.menuIconOut }}",
-				size="24",
-				ng-mouseover='sidenav.menuIconOut = "arrow_forward"',
-				ng-mouseleave='sidenav.menuIconOut = "menu"',
-				ng-click='sidenav.leftMenuToggle()')
+	div.toolbar-menu-sm
+		ng-md-icon.icon-menu-sm(icon="{{ sidenav.menuIconOut }}",
+					size="24",
+					ng-mouseover='sidenav.menuIconOut = "arrow_forward"',
+					ng-mouseleave='sidenav.menuIconOut = "menu"',
+					ng-click='sidenav.leftMenuToggle()')
+		div(ng-repeat="icon in sidenav.sidenavItems.unrestricted")
+			ng-md-icon.icon-menu-sm(icon="{{ icon.icon }}",
+						size="24",
+						ui-sref="{{ icon.reference }}")
+		div(ng-if="!main.authenticated()")
+			div(ng-repeat="icon in sidenav.sidenavItems.anonymous")
+				ng-md-icon.icon-menu-sm(icon="{{ icon.icon }}",
+							size="24",
+							ui-sref="{{ icon.reference }}")
+		div(ng-if="main.authenticated()")
+			div(ng-repeat="icon in sidenav.sidenavItems.restricted")
+				ng-md-icon.icon-menu-sm(icon="{{ icon.icon }}",
+							size="24",
+							ui-sref="{{ icon.reference }}")
 div(flex="9").hide-sm
 	div.toolbar-menu
 		ng-md-icon.icon-menu(icon="{{ sidenav.menuIconOut }}",
