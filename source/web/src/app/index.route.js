@@ -25,7 +25,12 @@
                 parent: 'main',
                 templateUrl: 'app/templates/userProfile/indexUserProfile.html',
                 controller: 'UserProfileController',
-                controllerAs: 'userProfile'
+                controllerAs: 'userProfile',
+                data: {
+                    permissions: {
+                      except: ['guest']
+                    }
+                  }
             })
             .state('main.register', {
                 url: 'register',
@@ -33,6 +38,11 @@
                 templateUrl: 'app/templates/register/register.html',
                 controller: 'RegisterController',
                 controllerAs: 'register'
+            })
+            .state('main.logout', {
+                url: 'logout',
+                parent: 'main',
+                controller: 'LogoutController'              
             })
             .state('main.login', {
                 url: 'login',

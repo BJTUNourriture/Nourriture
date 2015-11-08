@@ -13,7 +13,13 @@ div.flex
 				md-button(ui-sref="{{ item.reference }}" style="overflow: initial;"). 
 							<span class="item_text">{{ item.name }}</span>
 							<span class="item_icon"><ng-md-icon icon="{{ item.icon }}"></ng-md-icon></span>
-			div(ng-repeat="item in sidenav.sidenavItems.anonymous")
-				md-button(ui-sref="{{ item.reference }}" style="overflow: initial;"). 
-							<span class="item_text">{{ item.name }}</span>
-							<span class="item_icon"><ng-md-icon icon="{{ item.icon }}"></ng-md-icon></span>
+			div(ng-if="!main.authenticated()")
+				div(ng-repeat="item in sidenav.sidenavItems.anonymous")
+					md-button(ui-sref="{{ item.reference }}" style="overflow: initial;"). 
+								<span class="item_text">{{ item.name }}</span>
+								<span class="item_icon"><ng-md-icon icon="{{ item.icon }}"></ng-md-icon></span>
+			div(ng-if="main.authenticated()")
+				div(ng-repeat="item in sidenav.sidenavItems.restricted")
+					md-button(ui-sref="{{ item.reference }}" style="overflow: initial;"). 
+								<span class="item_text">{{ item.name }}</span>
+								<span class="item_icon"><ng-md-icon icon="{{ item.icon }}"></ng-md-icon></span>

@@ -5452,7 +5452,7 @@
   },
   {
     "type": "get",
-    "url": "/users/username/:name",
+    "url": "/users/username/:username",
     "title": "Request User informations by name",
     "name": "getUserByName",
     "group": "Users",
@@ -6388,7 +6388,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "  HTTP/1.1 200 OK\n{\n\"key\" : \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.ey\"\n}",
+          "content": "  HTTP/1.1 200 OK\n{\n\"key\" : \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.ey\",\n\"user_id\" : \"302fvd338d2c30185535g805\"\n}",
           "type": "json"
         }
       ]
