@@ -23,7 +23,9 @@
             .state('main.profile', {
                 url: 'my-profile',
                 parent: 'main',
-                templateUrl: 'app/templates/userProfile/indexUserProfile.html'
+                templateUrl: 'app/templates/userProfile/indexUserProfile.html',
+                controller: 'UserProfileController',
+                controllerAs: 'userProfile'
             })
             .state('main.register', {
                 url: 'register',

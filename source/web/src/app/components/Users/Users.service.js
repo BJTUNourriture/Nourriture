@@ -13,7 +13,7 @@
         var service = {
             user_register: $resource(URL_API + '/api/users/register/'),
             user_signin: $resource(URL_API + '/api/users/sign-in/'),
-            user_get: $resource(URL_API + '/api/user/', {user: "@user"})
+            user_get: $resource(URL_API + '/api/users/username/:username', {username: "@username"})
         };
 
         return service;
