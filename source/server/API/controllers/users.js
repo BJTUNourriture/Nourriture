@@ -143,7 +143,6 @@
 *
 * @apiParamExample {json} Request-Example:
 *  {
-*   "email": "julien@usa.gov",
 *   "description": "Ma bio",
 *   "joined_groups" : [{
 *     "id_group" : "548ed30d6c2257336f5675",
@@ -519,7 +518,7 @@ exports.getUsers = function (req, res) {
 *
 * @apiUse UserObjectPutParam
 *
-* @apiUse UserRequestJSON
+* @apiUse UserRequestJSONPut
 *
 * @apiSuccess message User successfully updated!
 *
@@ -677,7 +676,7 @@ exports.putUserById = function (req, res) {
  * @apiGroup Users
  * @apiVersion 0.1.0
  *
- * @apiParam {Sting} username user full name
+ * @apiParam {Sting} [username] user full name
  *
  * @apiParamExample {json} Request-Example:
  *   {
