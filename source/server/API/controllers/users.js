@@ -89,7 +89,7 @@
 * {
 *  "username": "Julien",
 *  "email": "julien@usa.gov",
-*  "password": "MonMotDePasse",
+*  "password": "MonMotDePasse"
 *}
 */
 
@@ -204,13 +204,6 @@ var User = require('../models/users');
 *
 * @apiSuccess message User succesfully created!
 *
-* @apiErrorExample Bad Value Definition
-*   HTTP/1.1 400 BAD REQUEST
-*   {
-*   ...
-*   mongoose custom error
-*   ...
-*   }
 */
 exports.postUser = function (req, res) {
 
@@ -685,7 +678,7 @@ exports.putUserById = function (req, res) {
   var id = flag === true ? req.body.id : req.params.id;
   if (!id)
    return flag === true ? -1 : res.json(400, {message : 'The id musn\'t be null'});
-  Users.remove({
+  User.remove({
    _id : id
    },
    function (err, removed) {
@@ -725,7 +718,7 @@ exports.putUserById = function (req, res) {
   var name = flag === true ? req.body.username : req.params.username;
   if (!name)
    return flag === true ? -1 : res.json(400, {message : 'The name musn\'t be null'});
-  Users.remove({
+  User.remove({
    username : name
    },
    function (err, removed) {
