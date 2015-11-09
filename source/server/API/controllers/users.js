@@ -37,33 +37,6 @@
 /**
 * @apiDefine UserObjectPutParam
 *
-* @apiParam {String} [username] Name of the user
-* @apiParam {String} [email] Email of the user
-* @apiParam {String} [description] Description of the user
-* @apiParam {Object[]} [alergy] List of allergy
-* @apiParam {Object[]} [religion] Religion of the user
-* @apiParam {Object[]} [pictures] List of user pictures
-* @apiParam {String} pictures.thumbnail_url Url of the thumbnail version of the picture
-* @apiParam {String} pictures.medium_sized_url Url of the medium size version of the picture
-* @apiParam {String} [pictures.big_sized_url] Url of the big size version of the picture
-* @apiParam {Object[]} [joined_groups]
-* @apiParam {Object[]} [like] List of the ingredients a person like
-* @apiParam {ObjectId} like.id_ingredient Id of the ingredient liked
-* @apiParam {String} like.name_ingredient Name of the ingredient liked
-* @apiParam {Object[]} [dislike] List of the ingredients a person dislike
-* @apiParam {ObjectId} dislike.id_ingredient Id of the ingredient disliked
-* @apiParam {String} dislike.name_ingredient Name of the ingredient disliked
-* @apiParam {Object[]} [follow] List of people followed by a person
-* @apiParam {ObjectId} follow.id_person Id of the person followed
-* @apiParam {String} follow.username Username of the person followed
-*/
-
-/**
-* @apiDefine UserObjectPutParamID
-*
-* @apiParam {String} [id] of the user
-* @apiParam {String} [username] Name of the user
-* @apiParam {String} [email] Email of the user
 * @apiParam {String} [description] Description of the user
 * @apiParam {Object[]} [alergy] List of allergy
 * @apiParam {Object[]} [religion] Religion of the user
@@ -86,7 +59,7 @@
 /**
 * @apiDefine UserObjectSuccess
 *
-* @apiSuccess {String} id of the user
+* @apiSuccess {String} _id id of the user
 * @apiSuccess {String} username Name of the user
 * @apiSuccess {String} email Email of the user
 * @apiSuccess {String} [description] Description of the user
@@ -171,7 +144,6 @@
 * @apiParamExample {json} Request-Example:
 *  {
 *   "email": "julien@usa.gov",
-*   "username": "Julien",
 *   "description": "Ma bio",
 *   "joined_groups" : [{
 *     "id_group" : "548ed30d6c2257336f5675",
@@ -552,7 +524,7 @@ exports.getUsers = function (req, res) {
 * @apiGroup Users
 * @apiVersion 0.1.0
 *
-* @apiUse UserObjectPutParamID
+* @apiUse UserObjectPutParam
 *
 * @apiUse UserRequestJSON
 *
@@ -728,7 +700,7 @@ exports.putUserById = function (req, res) {
  };
 
  /**
- * @api {delete} /users/name/:username Delete User by name
+ * @api {delete} /users/username/:username Delete User by name
  * @apiName deleteUserByName
  * @apiGroup Users
  * @apiVersion 0.1.0
