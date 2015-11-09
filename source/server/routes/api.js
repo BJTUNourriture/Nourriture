@@ -40,7 +40,6 @@ router.route('/users/sign-in')
 
 router.route('/users')
     .get(userController.getUsers)
-    .delete(userController.deleteUsers);
 
 router.route('/users/id/:id')
     .put(userController.putUserById)
