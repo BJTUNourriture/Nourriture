@@ -631,27 +631,6 @@ exports.putUserById = function (req, res) {
 */
 
  /**
- * @api {delete} /users/ Delete all Users
- * @apiName deleteUsers
- * @apiGroup Users
- * @apiVersion 0.1.0
- *
- */
-
- exports.deleteUsers = function (req, res) {
-  var i = -1;
-  var callbackReturn = -1;
-  var functionPointer = [module.exports.deleteUserById(req, res, true),
-        module.exports.deleteUserByName(req, res, true)];
-  var usage = "No correct argument given. Specify an id or a name";
-
-  while ((callbackReturn = functionPointer[++i]) == -1
-   && i < functionPointer.length - 1);
-  return callbackReturn == -1 ? res.json({message : usage}) : callbackReturn;
-
- };
-
- /**
  * @api {delete} /users/id/:id Delete User by id
  * @apiName deleteUserById
  * @apiGroup Users
