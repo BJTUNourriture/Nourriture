@@ -23,10 +23,10 @@ var UserSchema = new mongoose.Schema({
         minlength : 8,
         maxlength : 100
     },
-		description: {
-				type: String,
-				maxlength : 10000
-		},
+	description: {
+		type: String,
+		maxlength : 10000
+	},
     email_verified : {
         type : Boolean,
         default : false
@@ -52,32 +52,28 @@ var UserSchema = new mongoose.Schema({
         token: String,
         displayName: String
     },
-    alergy: {
-			type : [{
-				id_ingredient : {
-					type : mongoose.Schema.ObjectId,
-					required : true,
-					ref : 'Allergies'
-				},
-				name : {
-					type : String,
-					required : true
-				}
-			}]
-    },
-    religion: {
-			type : [{
-				id_religion : {
-					type : mongoose.Schema.ObjectId,
-					required : true,
-					ref : 'Religion'
-				},
-				name : {
-					type : String,
-					required : true
-				}
-			}]
-    },
+    alergy: [{
+		id_ingredient : {
+			type : mongoose.Schema.ObjectId,
+			required : true,
+			ref : 'Allergies'
+		},
+		name : {
+			type : String,
+			required : true
+		}
+	}],
+    religion: [{
+		id_religion : {
+			type : mongoose.Schema.ObjectId,
+			required : true,
+			ref : 'Religion'
+		},
+		name : {
+			type : String,
+			required : true
+		}
+	}],
     pictures : [{
   		thumbnail_url : {
   			type : String,
@@ -89,55 +85,61 @@ var UserSchema = new mongoose.Schema({
   		},
   		big_sized_url : String
   	}],
-    joined_groups: {
-			type : [{
-				id_group : {
-					type : mongoose.Schema.ObjectId,
-					required : true,
-					ref : 'Groups'
-				},
-				name : {
-					type : String,
-					required : true
-				}
-			}]
-    },
-    like:
-        [{
-            id_ingredient: {
-                type: mongoose.Schema.Types.ObjectId,
-                required: true,
-                ref: 'Ingredients'
-            },
-            name_ingredient: {
-                type: String,
-                required: true
-            }
-        }],
-    dislike:
-        [{
-            id_ingredient: {
-                type: mongoose.Schema.Types.ObjectId,
-                required: true,
-                ref: 'Ingredients'
-            },
-            name_ingredient: {
-                type: String,
-                required: true
-            }
-        }],
-    follow:
-        [{
-            id_person: {
-                type: mongoose.Schema.Types.ObjectId,
-                required: true,
-                ref: 'User'
-            },
-            username: {
-                type: String,
-                required: true
-            }
-        }]
+    joined_groups: [{
+		id_group : {
+			type : mongoose.Schema.ObjectId,
+			required : true,
+			ref : 'Groups'
+		},
+		name : {
+			type : String,
+			required : true
+		}
+	}],
+    like: [{
+        id_ingredient: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'Ingredients'
+        },
+        name_ingredient: {
+            type: String,
+            required: true
+        }
+    }],
+    dislike: [{
+        id_ingredient: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'Ingredients'
+        },
+        name_ingredient: {
+            type: String,
+            required: true
+        }
+    }],
+    follow: [{
+        id_person: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'User'
+        },
+        username: {
+            type: String,
+            required: true
+        }
+    }],
+    followed_by: [{
+        id_person: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'User'
+        },
+        username: {
+            type: String,
+            required: true
+        }
+    }]
 });
 
 UserSchema.pre('save', function (callback) {
