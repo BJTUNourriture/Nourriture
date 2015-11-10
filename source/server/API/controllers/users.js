@@ -37,33 +37,6 @@
 /**
 * @apiDefine UserObjectPutParam
 *
-* @apiParam {String} [username] Name of the user
-* @apiParam {String} [email] Email of the user
-* @apiParam {String} [description] Description of the user
-* @apiParam {Object[]} [alergy] List of allergy
-* @apiParam {Object[]} [religion] Religion of the user
-* @apiParam {Object[]} [pictures] List of user pictures
-* @apiParam {String} pictures.thumbnail_url Url of the thumbnail version of the picture
-* @apiParam {String} pictures.medium_sized_url Url of the medium size version of the picture
-* @apiParam {String} [pictures.big_sized_url] Url of the big size version of the picture
-* @apiParam {Object[]} [joined_groups]
-* @apiParam {Object[]} [like] List of the ingredients a person like
-* @apiParam {ObjectId} like.id_ingredient Id of the ingredient liked
-* @apiParam {String} like.name_ingredient Name of the ingredient liked
-* @apiParam {Object[]} [dislike] List of the ingredients a person dislike
-* @apiParam {ObjectId} dislike.id_ingredient Id of the ingredient disliked
-* @apiParam {String} dislike.name_ingredient Name of the ingredient disliked
-* @apiParam {Object[]} [follow] List of people followed by a person
-* @apiParam {ObjectId} follow.id_person Id of the person followed
-* @apiParam {String} follow.username Username of the person followed
-*/
-
-/**
-* @apiDefine UserObjectPutParamID
-*
-* @apiParam {String} [id] of the user
-* @apiParam {String} [username] Name of the user
-* @apiParam {String} [email] Email of the user
 * @apiParam {String} [description] Description of the user
 * @apiParam {Object[]} [alergy] List of allergy
 * @apiParam {Object[]} [religion] Religion of the user
@@ -86,7 +59,7 @@
 /**
 * @apiDefine UserObjectSuccess
 *
-* @apiSuccess {String} id of the user
+* @apiSuccess {String} _id id of the user
 * @apiSuccess {String} username Name of the user
 * @apiSuccess {String} email Email of the user
 * @apiSuccess {String} [description] Description of the user
@@ -116,7 +89,7 @@
 * {
 *  "username": "Julien",
 *  "email": "julien@usa.gov",
-*  "password": "MonMotDePasse",
+*  "password": "MonMotDePasse"
 *}
 */
 
@@ -170,8 +143,6 @@
 *
 * @apiParamExample {json} Request-Example:
 *  {
-*   "email": "julien@usa.gov",
-*   "username": "Julien",
 *   "description": "Ma bio",
 *   "joined_groups" : [{
 *     "id_group" : "548ed30d6c2257336f5675",
@@ -232,13 +203,6 @@ var User = require('../models/users');
 *
 * @apiSuccess message User succesfully created!
 *
-* @apiErrorExample Bad Value Definition
-*   HTTP/1.1 400 BAD REQUEST
-*   {
-*   ...
-*   mongoose custom error
-*   ...
-*   }
 */
 exports.postUser = function (req, res) {
 
@@ -552,9 +516,9 @@ exports.getUsers = function (req, res) {
 * @apiGroup Users
 * @apiVersion 0.1.0
 *
-* @apiUse UserObjectPutParamID
+* @apiUse UserObjectPutParam
 *
-* @apiUse UserRequestJSON
+* @apiUse UserRequestJSONPut
 *
 * @apiSuccess message User successfully updated!
 *
@@ -666,27 +630,6 @@ exports.putUserById = function (req, res) {
 */
 
  /**
- * @api {delete} /users/ Delete all Users
- * @apiName deleteUsers
- * @apiGroup Users
- * @apiVersion 0.1.0
- *
- */
-
- exports.deleteUsers = function (req, res) {
-  var i = -1;
-  var callbackReturn = -1;
-  var functionPointer = [module.exports.deleteUserById(req, res, true),
-        module.exports.deleteUserByName(req, res, true)];
-  var usage = "No correct argument given. Specify an id or a name";
-
-  while ((callbackReturn = functionPointer[++i]) == -1
-   && i < functionPointer.length - 1);
-  return callbackReturn == -1 ? res.json({message : usage}) : callbackReturn;
-
- };
-
- /**
  * @api {delete} /users/id/:id Delete User by id
  * @apiName deleteUserById
  * @apiGroup Users
@@ -713,7 +656,7 @@ exports.putUserById = function (req, res) {
   var id = flag === true ? req.body.id : req.params.id;
   if (!id)
    return flag === true ? -1 : res.json(400, {message : 'The id musn\'t be null'});
-  Users.remove({
+  User.remove({
    _id : id
    },
    function (err, removed) {
@@ -728,12 +671,12 @@ exports.putUserById = function (req, res) {
  };
 
  /**
- * @api {delete} /users/name/:username Delete User by name
+ * @api {delete} /users/username/:username Delete User by name
  * @apiName deleteUserByName
  * @apiGroup Users
  * @apiVersion 0.1.0
  *
- * @apiParam {Sting} username user full name
+ * @apiParam {Sting} [username] user full name
  *
  * @apiParamExample {json} Request-Example:
  *   {
@@ -753,7 +696,7 @@ exports.putUserById = function (req, res) {
   var name = flag === true ? req.body.username : req.params.username;
   if (!name)
    return flag === true ? -1 : res.json(400, {message : 'The name musn\'t be null'});
-  Users.remove({
+  User.remove({
    username : name
    },
    function (err, removed) {
