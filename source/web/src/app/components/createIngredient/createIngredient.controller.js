@@ -29,12 +29,8 @@ function CreateIngredientController($scope, IngredientService, toastr, $log)
 	vm.IngredientCreateFailure = function (data) {
 		$log.log(data.data);
 		var errorMsg = "This is odd...";
-		if (data.data.message.indexOf("username") > -1)
-			errorMsg = "Seems like you typed a  wrong username :(";
-		if (data.data.message.indexOf("password") > -1)
-			errorMsg = "Seems like you typed a  wrong password :(";
-		if (data.data.message.indexOf("email") > -1)
-			errorMsg = "Your email hasn't been verified yet, please verify it ;)";
+		if (data.data.errmsg.indexOf("name") > -1)
+			errorMsg = "Seems like the ingredient already exists";
 		toastr.error(errorMsg, 'Woops...');
 	};
 
