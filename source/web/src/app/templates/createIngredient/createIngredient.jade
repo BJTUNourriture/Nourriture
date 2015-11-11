@@ -29,18 +29,21 @@ md-content
 										div(ng-messages="createIngredientForm.fat.$error" ng-if='!createIngredientForm.fat.$pristine')
 											div(ng-message="required") This is required.
 											div(ng-message="number") It must be a valid number.
+											div(ng-message="min") Value must be superior to 0.
 									md-input-container.body-create-ingredient-properties
 										ng-md-icon(icon="storm").body-register-container-md
 										input(placeholder="Proteins" required type="number" name="proteins" ng-model="proteins" min='0').body-register-container-md
 										div(ng-messages="createIngredientForm.proteins.$error" ng-if='!createIngredientForm.proteins.$pristine')
 											div(ng-message="required") This is required.
 											div(ng-message="number") It must be a valid number.
+											div(ng-message="min") Value must be superior to 0.
 									md-input-container.body-create-ingredient-properties
 										ng-md-icon(icon="carbohydrates").body-register-container-md
 										input(placeholder="Carbs" required type="number" name="carbohydrates" ng-model="carbohydrates" min='0').body-register-container-md
 										div(ng-messages="createIngredientForm.carbohydrates.$error" ng-if='!createIngredientForm.carbohydrates.$pristine')
 											div(ng-message="required") This is required.
 											div(ng-message="number") It must be a valid number.
+											div(ng-message="min") Value must be superior to 0.
 								section(layout="column", layout-align="center center", layout-margin)
 									md-button.md-raised Create Ingredient
 		include ../footer/footer.jade
