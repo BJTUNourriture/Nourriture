@@ -10,9 +10,10 @@
         .module('NourritureControllers')
         .controller('RecipesUserProfileController', RecipesUserProfileController);
 
-    RecipesUserProfileController.$inject = [];
+    RecipesUserProfileController.$inject = ["$rootScope", '$log', 'ScopesService'];
 
-    function RecipesUserProfileController() {
+    function RecipesUserProfileController($rootScope, $log, ScopesService) {
+
     /*  var vm = this;
         var imagePath = 'http://p1.storage.canalblog.com/19/26/115062/29135532.jpg';
 
