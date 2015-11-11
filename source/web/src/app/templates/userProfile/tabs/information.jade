@@ -1,5 +1,4 @@
-//
-   Created by sylflo on 11/6/15.
+//Created by sylflo on 11/6/15.
 
 // Username Done
 // Role Badge possessed Done
@@ -27,45 +26,71 @@ div(layout="column" layout-align="center center" layout-fill ng-controller="info
                 md-divider
             md-list-item.md-3-line.md-no-proxy
                 .md-list-item-text
+                    p <span class='bold'>Gender:</span> {{informationsUserProfile.data.gender}}
+                md-divider
+            md-list-item.md-3-line.md-no-proxy
+                .md-list-item-text
                     p.
                         <span class='bold'>Description: </span> {{informationsUserProfile.data.description}}
                 md-divider
             md-list-item.md-3-line.md-no-proxy
                 .md-list-item-text
                     p <span class='bold'>Badges:</span>
-                      ul(ng-repeat='badge in informationsUserProfile.data.badges')
+                      ul(ng-repeat='badge in informationsUserProfile.data.badge | limitTo: 10')
                         li {{badge}}
                 md-divider
             md-list-item.md-3-line.md-no-proxy
                 .md-list-item-text
-                    p <span class='bold'>Ingredients liked:</span>  potatoes, mushrooms, tomatoes, <a href='#'>and 42 more...</a>
+                    p <span class='bold'>Ingredients liked:</span>
+                      ul(ng-repeat='ingredient in informationsUserProfile.data.like | limitTo: 10')
+                        li {{ingredient.name_ingredient}}
                 md-divider
             md-list-item.md-3-line.md-no-proxy
                 .md-list-item-text
-                    p <span class='bold'>Ingredients disliked:</span>  potatoes, mushrooms, tomatoes, <a href='#'>more...</a>
+                    p <span class='bold'>Ingredients disliked:</span>
+                      ul(ng-repeat='ingredient in informationsUserProfile.data.dislike | limitTo: 10')
+                        li {{ingredient.name_ingredient}}
                 md-divider
             md-list-item.md-3-line.md-no-proxy
                 .md-list-item-text
-                    p <span class='bold'>Allergies:</span>  potatoes, mushrooms, tomatoes, <a href='#'>more...</a>
+                    p <span class='bold'>Religion:</span>
+                      ul(ng-repeat='religion in informationsUserProfile.data.religion | limitTo: 10')
+                        li {{religion.name}}
                 md-divider
             md-list-item.md-3-line.md-no-proxy
                 .md-list-item-text
-                    p <span class='bold'>Followers:</span> 40,  Antoine, Eric, Jean, Gertrude <a href='#'>more...</a>
+                    p <span class='bold'>Allergies:</span>
+                      ul(ng-repeat='alergy in informationsUserProfile.data.alergy | limitTo: 10')
+                        li {{alergy.name}}
                 md-divider
             md-list-item.md-3-line.md-no-proxy
                 .md-list-item-text
-                    p <span class='bold'>Following:</span> 40,  Antoine, Eric, Jean, Gertrude <a href='#'>more...</a>
+                    p <span class='bold'>Followers:</span>
+                      ul(ng-repeat='follower in informationsUserProfile.data.followed_by | limitTo: 10')
+                        li {{follower.username}}
                 md-divider
             md-list-item.md-3-line.md-no-proxy
                 .md-list-item-text
-                    p <span class='bold'>Groups:</span> Vegan, Carnivore, Musulman <a href='#'>more...</a>
+                    p <span class='bold'>Following:</span>
+                      ul(ng-repeat='following in informationsUserProfile.data.follow | limitTo: 10')
+                        li {{following.username}}
                 md-divider
             md-list-item.md-3-line.md-no-proxy
                 .md-list-item-text
-                    p <span class='bold'>Recipes posted:</span> Vegan, Carnivore, Musulman <a href='#'>more...</a>
+                    p <span class='bold'>Groups:</span>
+                      ul(ng-repeat='group in informationsUserProfile.data.joined_groups | limitTo: 10')
+                        li {{group.name}}
                 md-divider
             md-list-item.md-3-line.md-no-proxy
                 .md-list-item-text
-                    p <span class='bold'>Recipes liked:</span> Vegan, Carnivore, Musulman <a href='#'>more...</a>
+                    p <span class='bold'>Recipes posted:</span>
+                      ul(ng-repeat='recipePost in informationsUserProfile.data.recipe_post | limitTo: 10')
+                        li {{recipePost.name}}
+                md-divider
+            md-list-item.md-3-line.md-no-proxy
+                .md-list-item-text
+                    p <span class='bold'>Recipes liked:</span>
+                      ul(ng-repeat='recipeLike in informationsUserProfile.data.recipe_like | limitTo: 10')
+                        li {{recipeLike.name}}
                 md-divider
 
