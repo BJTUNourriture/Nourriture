@@ -20,30 +20,27 @@ md-content
 									textarea(columns="1" required name="Description" ng-model="description" maxlength="200" minlength="3")
 									div(ng-messages="createIngredientForm.description.$error" ng-if='!createIngredientForm.description.$pristine')
 										div(ng-message="required") This is required.
-										div(ng-message="minlength") The name must be longer than 3 characters.
-										div(ng-message="md-maxlength") The name must be shorter than 20 characters.
+										div(ng-message="minlength") The description must be longer than 3 characters.
+										div(ng-message="md-maxlength") The description must be shorter than 200 characters.
 								section(layout="row", layout-align="start center", layout-margin)
 									md-input-container.body-create-ingredient-properties
 										ng-md-icon(icon="fat").body-register-container-md
-										input(placeholder="Fat" required name="fat" ng-model="fat" maxlength="20" minlength="3").body-register-container-md
+										input(placeholder="Fat" required type="number" name="fat" ng-model="fat" min='0').body-register-container-md
 										div(ng-messages="createIngredientForm.fat.$error" ng-if='!createIngredientForm.fat.$pristine')
 											div(ng-message="required") This is required.
-											div(ng-message="minlength") The name must be longer than 3 characters.
-											div(ng-message="md-maxlength") The name must be shorter than 20 characters.
+											div(ng-message="number") It must be a valid number.
 									md-input-container.body-create-ingredient-properties
 										ng-md-icon(icon="storm").body-register-container-md
-										input(placeholder="Proteins" required name="proteins" ng-model="proteins" maxlength="20" minlength="3").body-register-container-md
+										input(placeholder="Proteins" required type="number" name="proteins" ng-model="proteins" min='0').body-register-container-md
 										div(ng-messages="createIngredientForm.proteins.$error" ng-if='!createIngredientForm.proteins.$pristine')
 											div(ng-message="required") This is required.
-											div(ng-message="minlength") The name must be longer than 3 characters.
-											div(ng-message="md-maxlength") The name must be shorter than 20 characters.
+											div(ng-message="number") It must be a valid number.
 									md-input-container.body-create-ingredient-properties
 										ng-md-icon(icon="carbohydrates").body-register-container-md
-										input(placeholder="Carbohydrates" required name="carbohydrates" ng-model="carbohydrates" maxlength="20" minlength="3").body-register-container-md
+										input(placeholder="Carbs" required type="number" name="carbohydrates" ng-model="carbohydrates" min='0').body-register-container-md
 										div(ng-messages="createIngredientForm.carbohydrates.$error" ng-if='!createIngredientForm.carbohydrates.$pristine')
 											div(ng-message="required") This is required.
-											div(ng-message="minlength") The name must be longer than 3 characters.
-											div(ng-message="md-maxlength") The name must be shorter than 20 characters.
+											div(ng-message="number") It must be a valid number.
 								section(layout="column", layout-align="center center", layout-margin)
 									md-button.md-raised Create Ingredient
 		include ../footer/footer.jade
