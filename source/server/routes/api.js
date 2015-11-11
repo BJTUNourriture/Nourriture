@@ -9,6 +9,7 @@ var typesController = require('../API/controllers/types');
 var groupsController = require('../API/controllers/groups');
 var recipesController = require('../API/controllers/recipes');
 var allergiesController = require('../API/controllers/allergies');
+var tagsController = require('../API/controllers/tags');
 var jwt = require('jsonwebtoken')
 var passport = require('passport');
 var searchController = require('../API/controllers/search');
@@ -180,6 +181,15 @@ router.route('/search/ingredients/')
 
 router.route('/search/recipes/')
     .post(searchController.postSearchRecipes);
+
+/*
+ ** Endpoints for Tags
+ */
+
+// full JSON endpoints
+ router.route('/tags')
+    .post(tagsController.postTags)
+    .get(tagsController.getAllTags);
 
 /*
  ** Endpoints for Suggestions

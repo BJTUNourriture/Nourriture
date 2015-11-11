@@ -50,9 +50,8 @@
                 url: 'create-ingredient',
                 parent: 'main',
                 templateUrl: 'app/templates/createIngredient/createIngredient.html',
-                controller: 'LoginController',
-                controllerAs: 'login',
-                resolve: true,
+                controller: 'CreateIngredientController',
+                controllerAs: 'createIngredient',
                 data: {
                     permissions: {
                       except: ['guest'],

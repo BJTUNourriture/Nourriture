@@ -80,7 +80,7 @@ var Ingredients = require('../models/ingredients');
 *	  }
 *
 * @apiErrorExample Bad Value Definition
-*	  HTTP/1.1 400 BAD REQUEST
+*	  HTTP/1.1 401 BAD REQUEST
 *	  {
 *		...
 *		mongoose custom error
