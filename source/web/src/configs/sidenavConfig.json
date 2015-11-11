@@ -30,13 +30,8 @@
 			"reference" : "main.profile"
 		},
 		{
-			"name" : "Users",
-			"icon" : "account_circle",
-			"reference" : "main.homepage"
-		},
-		{
-			"name" : "Search",
-			"icon" : "search",
+			"name" : "Add Ingredient",
+			"icon" : "wheat",
 			"reference" : "main.homepage"
 		}
 	]

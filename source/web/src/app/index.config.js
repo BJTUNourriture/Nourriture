@@ -46,6 +46,7 @@
 	$locationProvider.html5Mode(true);
 	$locationProvider.hashPrefix('!');
 
+	//Call of TopkekAuthInterceptor for Authorization header sending automation
 	$httpProvider.interceptors.push('TopkekAuthInterceptor');
   }
 
