@@ -1,0 +1,23 @@
+@import "../../theme.scss";
+
+.body-create-ingredient-md {
+	margin : 20px auto;
+	background : $background;
+	width : 100%;
+}
+
+.body-create-ingredient {
+	background : $background;
+}
+
+.body-create-ingredient-name {
+	max-width : 200px;
+}
+
+.body-create-ingredient-properties {
+	max-width : 150px;
+}
+
+md-checkbox.md-checked.remember-me-login .md-icon {
+ background-color:  $borderBlock;
+}
