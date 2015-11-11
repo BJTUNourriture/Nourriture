@@ -7,13 +7,20 @@
 * @apiParam {String} username Name of the user
 * @apiParam {String} email Email of the user
 * @apiParam {String} [description] Description of the user
+* @apiParam {String} [gender] Gender of the person
 * @apiParam {Object[]} [alergy] List of allergy
+* @apiParam {ObjectId} alergy.id_ingredient Id of the ingredient
+* @apiParam {String} alergy.name Name of the ingredient
 * @apiParam {Object[]} [religion] Religion of the user
+* @apiParam {ObjectId} religion.id_religion Id of the religion
+* @apiParam {String} religion.name Name of the religion
 * @apiParam {Object[]} [pictures] List of user pictures
 * @apiParam {String} pictures.thumbnail_url Url of the thumbnail version of the picture
 * @apiParam {String} pictures.medium_sized_url Url of the medium size version of the picture
 * @apiParam {String} [pictures.big_sized_url] Url of the big size version of the picture
 * @apiParam {Object[]} [joined_groups]
+* @apiParam {ObjectId} joined_groups.id_group Group Id
+* @apiParam {String} joined_groups.name Name of the group
 * @apiParam {Object[]} [like] List of the ingredients a person like
 * @apiParam {ObjectId} like.id_ingredient Id of the ingredient liked
 * @apiParam {String} like.name_ingredient Name of the ingredient liked
@@ -37,14 +44,22 @@
 /**
 * @apiDefine UserObjectPutParam
 *
+* @apiParam {String} [password] Password of the user
 * @apiParam {String} [description] Description of the user
+* @apiParam {String} [gender] Gender of the person
 * @apiParam {Object[]} [alergy] List of allergy
+* @apiParam {ObjectId} alergy.id_ingredient Id of the ingredient
+* @apiParam {String} alergy.name Name of the ingredient
 * @apiParam {Object[]} [religion] Religion of the user
+* @apiParam {ObjectId} religion.id_religion Id of the religion
+* @apiParam {String} religion.name Name of the religion
 * @apiParam {Object[]} [pictures] List of user pictures
 * @apiParam {String} pictures.thumbnail_url Url of the thumbnail version of the picture
 * @apiParam {String} pictures.medium_sized_url Url of the medium size version of the picture
 * @apiParam {String} [pictures.big_sized_url] Url of the big size version of the picture
 * @apiParam {Object[]} [joined_groups]
+* @apiParam {ObjectId} joined_groups.id_group Group Id
+* @apiParam {String} joined_groups.name Name of the group
 * @apiParam {Object[]} [like] List of the ingredients a person like
 * @apiParam {ObjectId} like.id_ingredient Id of the ingredient liked
 * @apiParam {String} like.name_ingredient Name of the ingredient liked
@@ -63,13 +78,20 @@
 * @apiSuccess {String} username Name of the user
 * @apiSuccess {String} email Email of the user
 * @apiSuccess {String} [description] Description of the user
+* @apiSuccess {String} [gender] Gender of the person
 * @apiSuccess {Object[]} [alergy] List of allergy
+* @apiSuccess {ObjectId} alergy.id_ingredient Id of the ingredient
+* @apiSuccess {String} alergy.name Name of the ingredient
 * @apiSuccess {Object[]} [religion] Religion of the user
+* @apiSuccess {ObjectId} religion.id_religion Id of the religion
+* @apiSuccess {String} religion.name Name of the religion
 * @apiSuccess {Object[]} [pictures] List of user pictures
 * @apiSuccess {String} pictures.thumbnail_url Url of the thumbnail version of the picture
 * @apiSuccess {String} pictures.medium_sized_url Url of the medium size version of the picture
 * @apiSuccess {String} [pictures.big_sized_url] Url of the big size version of the picture
 * @apiSuccess {Object[]} [joined_groups]
+* @apiSuccess {ObjectId} joined_groups.id_group Group Id
+* @apiSuccess {String} joined_groups.name Name of the group
 * @apiSuccess {Object[]} [like] List of the ingredients a person like
 * @apiSuccess {ObjectId} like.id_ingredient Id of the ingredient liked
 * @apiSuccess {String} like.name_ingredient Name of the ingredient liked
@@ -79,6 +101,9 @@
 * @apiSuccess {Object[]} [follow] List of people followed by a person
 * @apiSuccess {ObjectId} follow.id_person Id of the person followed
 * @apiSuccess {String} follow.username Username of the person followed
+* @apiSuccess {Object[]} [followed_by] List of the people following the person
+* @apiSuccess {ObjectId} followed_by.id_person Id of the person following the person
+* @apiSuccess {String} followed_by.username Username of the person following the person
 */
 
 
@@ -101,7 +126,9 @@
 *   "_id": "563f294f464d96113dbef811",
 *   "email": "julien@usa.gov",
 *   "username": "Julien",
+*   "password": "$5ajepzdmqehf28",
 *   "description": "Ma bio",
+*   "gender": "male",
 *   "joined_groups" : [{
 *     "id_group" : "548ed30d6c2257336f5675",
 *     "name" : "Saucisson Choux Fleurs"
@@ -143,7 +170,9 @@
 *
 * @apiParamExample {json} Request-Example:
 *  {
+*   "password": "$qevcom548674fqcq"
 *   "description": "Ma bio",
+*   "gender": "female",
 *   "joined_groups" : [{
 *     "id_group" : "548ed30d6c2257336f5675",
 *     "name" : "Saucisson Choux Fleurs"
@@ -342,6 +371,8 @@ exports.signinUser = function (req, res, next) {
 *   "_id": "563f294f464d96113dbef811",
 *   "username": "Julien",
 *   "email": "julien@usa.gov",
+*   "description": "Hello, my name is julien. I'm from France",
+*   "gender": "male",
 *   "joined_groups" : [{
 *     "id_group" : "548ed30d6c2257336f5675",
 *     "name" : "Saucisson Choux Fleurs"
@@ -374,6 +405,10 @@ exports.signinUser = function (req, res, next) {
 *   "follow" :  [{
 *     "id_person" : "689ed300d6c22573533g895",
 *     "username" : "bananaman"
+*   }],
+*   "followed_by" :  [{
+*     "id_person" : "342ed352d6c12853546g759",
+*     "username" : "titi"
 *   }]
 *  }
 */
@@ -569,7 +604,7 @@ exports.putUserById = function (req, res) {
   }
 
   exports.updateUser = function (req, res, err, user) {
-    var fields = ["password", "email", "description", "token", "gender", "facebook", "twitter", "google", "alergy", "religion", "pictures", "joined_groups"];
+    var fields = ["description", "alergy", "religion", "pictures", "joined_groups", "password", "gender"];
     var sent_fields = Object.keys(req.body);
 
     if (err)
@@ -591,6 +626,10 @@ exports.putUserById = function (req, res) {
     return (1);
   }
 
+  exports.findUser = function (id) {
+      return (User.findById(id));
+  }
+
   exports.updateUserLDF = function (req, res, err, user) {
       var fields = ["like", "dislike", "follow"];
       var sent_fields = Object.keys(req.body);
@@ -604,6 +643,20 @@ exports.putUserById = function (req, res) {
           if (!(fields.indexOf(sent_fields[i]) > -1))
               return (res.status(400).json({ message: 'The key <' + sent_fields[i] + '> is not accessible for UserLDF.' }));
           user[sent_fields[i]] = req.body[sent_fields[i]];
+      }
+
+      if (user["follow"] != null) {
+          for (i = 0; i < user["follow"].length; i++) {
+
+              var query = module.exports.findUser(user["follow"][i].id_person);
+              query.exec(function (err, user_follow) {
+                  if (err)
+                      return (res.send(err));
+                  user_follow.followed_by = [{ id_person: user._id, username: user.username }];
+
+                  user_follow.save()
+              })
+          }
       }
 
       user.save(function (err) {
