@@ -32,7 +32,7 @@
 		{
 			"name" : "Add Ingredient",
 			"icon" : "wheat",
-			"reference" : "main.homepage"
+			"reference" : "main.create_ingredient"
 		}
 	]
 }
