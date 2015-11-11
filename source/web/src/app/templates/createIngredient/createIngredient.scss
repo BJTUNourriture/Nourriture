@@ -10,6 +10,14 @@
 	background : $background;
 }
 
+.body-create-ingredient-name {
+	max-width : 200px;
+}
+
+.body-create-ingredient-properties {
+	max-width : 150px;
+}
+
 md-checkbox.md-checked.remember-me-login .md-icon {
  background-color:  $borderBlock;
 }
