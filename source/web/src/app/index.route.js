@@ -52,6 +52,7 @@
                 templateUrl: 'app/templates/createIngredient/createIngredient.html',
                 controller: 'LoginController',
                 controllerAs: 'login',
+                resolve: true,
                 data: {
                     permissions: {
                       except: ['guest'],

@@ -4,14 +4,15 @@
 	angular.module('NourritureControllers')
 		.controller('UserProfileController', UserProfileController);
 
-	UserProfileController.$inject = ["$rootScope", "$log", "UserService", "$localStorage", "$sessionStorage", 'ScopesService'];
+	UserProfileController.$inject = ["$rootScope", "$log", "UserService", "$localStorage", "$sessionStorage"];
 
 	/** @ngInject */
-	function UserProfileController($rootScope, $log, UserService, $localStorage, $sessionStorage, ScopesService) {
+	function UserProfileController($rootScope, $log, UserService, $localStorage, $sessionStorage) {
 		var vm = this;
 
 		vm.profileSuccess = function (data) {
 			$log.log(data._id);
+      $rootScope.UserProfile = data;
 		};
 
 		vm.profileError = function (data) {
