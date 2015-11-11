@@ -4,11 +4,11 @@
 
     angular
         .module('NourritureServices')
-        .factory('ScopesService', RecipeService);
+        .factory('ScopesService', ScopesService);
 
     ScopesService.$inject = [];
 
-    function RecipeService() {
+    function ScopesService() {
 
         var scopes = {};
 
