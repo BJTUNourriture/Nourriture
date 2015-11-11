@@ -5,13 +5,10 @@
 	.module('web')
 	.run(runBlock);
 
-	runBlock.$inject = ["$log", "Permission", 'UserService', '$q', '$sessionStorage', '$localStorage', 'ngMdIconService', 'ScopesService'];
+	runBlock.$inject = ["$log", "Permission", 'UserService', '$q', '$sessionStorage', '$localStorage', 'ngMdIconService'];
 
   /** @ngInject */
-  function runBlock($log, Permission, UserService, $q, $sessionStorage, $localStorage, ngMdIconService, ScopesService) {
-
-  	//Scope creation
-  	ScopesService.injectScope("UserProfileScope", {});
+  function runBlock($log, Permission, UserService, $q, $sessionStorage, $localStorage, ngMdIconService) {
 
 	//Adding of shapes for Angular material icons
 	ngMdIconService

@@ -3,10 +3,10 @@ md-content
 		div.flex
 			div(layout="column" flex layout-align="start center")
 				div(flex="none").title-register-container 
-					span.title-register-md Sign-in
-				div(flex).body-login-md
+					span.title-register-md Add an ingredient
+				div(flex).body-create-ingredient-md
 					form(name="createIngredientForm" novalidate ng-submit="createIngredientForm.$valid && login.submit()")
-						section(layout="column", layout-align="start center", layout-margin)
+						section(layout="column", layout-align="center center", layout-margin)
 							md-content.body-create-ingredient
 								md-input-container.body-create-ingredient-name
 									ng-md-icon(icon="name").body-register-container-md
@@ -44,5 +44,6 @@ md-content
 											div(ng-message="required") This is required.
 											div(ng-message="minlength") The name must be longer than 3 characters.
 											div(ng-message="md-maxlength") The name must be shorter than 20 characters.
-								md-button.md-raised Create Ingredient
+								section(layout="column", layout-align="center center", layout-margin)
+									md-button.md-raised Create Ingredient
 		include ../footer/footer.jade
