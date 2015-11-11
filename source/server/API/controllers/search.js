@@ -351,8 +351,6 @@ exports.postSearchRecipes = function (req, res, flag) {
 
 	var type_list = req.body.type;
 
-	console.log(type_list)
-
 	//If title and types are not set
 
 	if (!title && !type_list)
@@ -445,5 +443,164 @@ exports.postSearchRecipes = function (req, res, flag) {
 				}
 		).skip((items_page - 1) * items_number).sort(query).limit(items_number);
 	    }
+	return (1);
+}
+
+/**
+* @apiDefine SearchRecipesObjectPostParam
+*
+* @apiParam {String} [title] Name of the recipes (Regex)
+* @apiParam {String[]} [type] Id of the types that your recipes must have.
+* @apiParam {Object[]} [order] Order of the return of the search
+* @apiParam {String} [order.order] Order (can be asc or desc)
+* @apiParam {String} [order.field] Field which is order (ex: fat)
+* @apiParam {Object[]} metadata Number of items to return, page of the items
+* @apiParam {String} metadata.items number of items that are return for the current page
+* @apiParam {String} metadata.page Number of the page that you want to ask
+*/
+
+/**
+* @apiDefine SearchRecipesRequestJSON
+*
+* @apiParamExample {json} Request-Example:
+*{
+*    "title": "pie",
+*    "order": {"order": "desc",
+*              "field": "fat"
+*    },
+*    "tags": ['563091df113604b7959a6327'],
+*    "metadata": {"items": 1,
+*                  "page": 1
+*    }
+*}
+*/
+
+/*
+** POSTS
+*/
+
+/**
+* @api {post} /search/recipes/ Search some recipes
+* @apiName postSearchRecipes
+* @apiGroup Search
+* @apiVersion 0.1.0
+*
+* @apiUse SearchRecipesObjectPostParam
+* 
+* @apiUse SearchRecipesRequestJSON
+*
+* @apiSuccessExample Success-Response
+*     HTTP/1.1 200 OK
+*	  {
+*  "metadata": {
+*    "current_page": 1,
+*    "order": {
+*      "order": "desc",
+*      "field": "fat"
+*    },
+*    "tags": [
+*      "563091df113604b7959a6327"
+*    ],
+*    "total_page": 1
+*  },
+*  "recipes": [
+*    {
+*      "_id": "56309253113604b7959a632c",
+*      "date_edited": "2015-04-01T18:34:23.000Z",
+*      "title": "Pumpkin pie",
+*      "author_id": "561fc840d6c25173533e267f",
+*      "author_name": "Kek man",
+*      "description": "It's Halloween time!",
+*      "__v": 0,
+*      "ingredients": [
+*        {
+*          "id_ingredient": "562a36ec4f0547a42755bf90",
+*          "name_ingredient": "Fuck",
+*          "_id": "56309253113604b7959a632d",
+*          "amount_ingredient": 100
+*        }
+*      ],
+*      "pictures": [
+*        {
+*          "thumbnail_url": "/thumbnails/1.jpg",
+*          "medium_sized_url": "/medium_sized/1.jpg",
+*          "big_sized_url": "/big_sized/1.jpg",
+*          "_id": "56309253113604b7959a632e"
+*        }
+*      ],
+*      "comments": [
+*        {
+*          "id_author": "386fc840d6c25173533e5406",
+*          "name_author": "Pacza",
+*          "date_posted": "2015-03-31T22:00:00.000Z",
+*          "date_edited": "2015-04-01T18:34:23.000Z",
+*          "content": "Thank you! Very nice recipe!",
+*          "_id": "56309253113604b7959a632f",
+*          "visible": true
+*        }
+*      ],
+*      "average_price": 1,
+*      "time_preparation": 60,
+*      "average_score": 0,
+*      "difficulty": 1,
+*      "date_posted": "2015-03-31T22:00:00.000Z",
+*      "type": {
+*        "id_type": "563091df113604b7959a6327",
+*        "name": "TopKek"
+*      }
+*    }
+*  ]
+*}
+*
+* @apiError message Nothing find for this search
+* @apiErrorExample Invalid Parameter Value
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "You must at least set a name or a tag to search"
+*     }
+*
+* @apiErrorExample  No metadata find
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "You must set the metadata"
+*     }
+*
+* @apiErrorExample  No order field find
+*     HTTP/1.1 404 Not Found
+*     {
+*       "message": "The order.field must be set"
+*     }
+*/
+
+exports.postSearchUsers = function (req, res, flag) {
+	
+	var username =  req.body.username;
+	var order = ""
+	if (req.body.order) {
+		var order = req.body.order
+		var order_order = req.body.order.order;
+		var order_field = req.body.order.field;
+		var query = {};
+		query[order_field] = order_order;
+	}
+	var metadata = ""
+	if (req.body.metadata){
+		metadata = req.body.metadata
+		var items_number = req.body.metadata.items;
+		var items_page = req.body.metadata.page;
+	}
+
+	console.log(username)
+
+	//If username is not set
+
+	if (!username)
+		return flag === true ? -1 : res.status(400).send({message : 'You must at least set a username to search'})
+
+	if (metadata == "")
+		return flag === true ? -1 : res.status(400).send({message : 'You must set the metadata'})
+
+	//If title and tags are set
+
 	return (1);
 }
