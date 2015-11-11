@@ -102,7 +102,7 @@ exports.postIngredient = function (req, res) {
 	//saves the ingredient to the db
 	 ingredient.save(function (err) {
         if (err)
-        	return (res.status(400).send(err));
+        	return (res.status(401).send(err));
 
         return (res.json({message: 'Ingredient succesfully created!'}));
     });
