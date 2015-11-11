@@ -82,6 +82,7 @@ var Allergies = require('../models/allergies');
 *	  }
 *
 */
+
 exports.postAllergy = function (req, res) {
 	//binds the new allergy
 	var allergy = new Allergies({
