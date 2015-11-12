@@ -23,7 +23,7 @@ md-content
 								md-list-item(ng-repeat="ingredient in ingredientDashboard.ingredients")
 									span {{ ingredient.name }}
 									span
-										ng-md-icon(icon="highlight_remove" ng-click="ingredientDashboard.deleteIngredient(ingredient)").md-secondary.body-dashboard-ingredient-delete-icon-list
+										ng-md-icon(icon="highlight_remove" ng-click="ingredientDashboard.deleteIngredientDialog($event, ingredient)").md-secondary.body-dashboard-ingredient-delete-icon-list
 									span(ng-if="!$last")
 										md-divider
 						span(flex="5")

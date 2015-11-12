@@ -4,9 +4,9 @@
 angular.module('NourritureControllers')
 	.controller('IngredientsDashboardController', IngredientsDashboardController);
 
-IngredientsDashboardController.$inject = ["$scope", "IngredientService", 'toastr',"$log"];
+IngredientsDashboardController.$inject = ["$scope", "IngredientService", 'toastr',"$log", "$mdDialog"];
 
-function IngredientsDashboardController($scope, IngredientService, toastr, $log)
+function IngredientsDashboardController($scope, IngredientService, toastr, $log, $mdDialog)
 {
 	var vm = this;
 
@@ -30,7 +30,7 @@ function IngredientsDashboardController($scope, IngredientService, toastr, $log)
 
 	vm.IngredientsDeleteSuccess = function (data) {
 		$log.log(data);
-		toastr.error("Ingredient Deleted Successfully", "Success", {timeOut : 300});
+		toastr.success("Ingredient Deleted Successfully", "Success", {timeOut : 300});
 		vm.searchIngredientsByName();
 	};
 
@@ -73,6 +73,17 @@ function IngredientsDashboardController($scope, IngredientService, toastr, $log)
 				.query({name : $scope.search})
 				.$promise
 				.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);
+	};
+
+	//Dialogs
+	vm.deleteIngredientDialog = function(event, ingredient) {
+		var confirm = $mdDialog.confirm()
+					.title('Are you sure you want to delete this ingredient ?')
+					.ok('Delete ingredient')
+					.cancel('Not really actually')
+					.targetEvent(event);
+
+		$mdDialog.show(confirm).then(function() {vm.deleteIngredient(ingredient)}, function(){});
 	};
 
 }
