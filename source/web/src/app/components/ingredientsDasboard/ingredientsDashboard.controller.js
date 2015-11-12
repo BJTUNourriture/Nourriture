@@ -28,12 +28,37 @@ function IngredientsDashboardController($scope, IngredientService, toastr, $log)
 		toastr.error(errorMsg, 'Woops...', {timeOut : 300});
 	};
 
+	vm.IngredientsDeleteSuccess = function (data) {
+		$log.log(data);
+		toastr.error("Ingredient Deleted Successfully", "Success", {timeOut : 300});
+		vm.searchIngredientsByName();
+	};
+
+	vm.IngredientsDeleteFailure = function (data) {
+		$log.log(data.data);
+		var errorMsg = "This is odd...";
+		if(data.data.errmsg)
+			if (data.data.errmsg.indexOf("name") > -1)
+				errorMsg = "Seems like the ingredient already exists";
+		if (data.data.message)
+			errorMsg = "This ingredient doesn't exist";
+		toastr.error(errorMsg, 'Woops...', {timeOut : 300});
+	};
+
 	//Init data
 	IngredientService
 		.ingredients
 		.query()
 		.$promise
 		.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);
+
+	vm.deleteIngredient = function(ingredient) {
+		IngredientService
+		.ingredient_id
+		.delete({id : ingredient._id})
+		.$promise
+		.then(vm.IngredientsDeleteSuccess, vm.IngredientsDeleteFailure);
+	}
 
 	vm.searchIngredientsByName = function() {
 		if (!$scope.search)
