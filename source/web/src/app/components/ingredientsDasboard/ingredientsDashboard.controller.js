@@ -12,15 +12,9 @@ function IngredientsDashboardController($scope, IngredientService, toastr, $log)
 
 	$log.log("innit");
 
-	IngredientService
-		.ingredients
-		.get()
-		.$promise
-		.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);
-
 	vm.IngredientsGetSuccess = function (data) {
-		$log.log(data.message);
-		toastr.success('You can now access your new ingredient.', 'Ingredient Created!');
+		$log.log(data);
+		vm.ingredients = data;
 	};
 
 	vm.IngredientsGetFailure = function (data) {
@@ -30,6 +24,12 @@ function IngredientsDashboardController($scope, IngredientService, toastr, $log)
 			errorMsg = "Seems like the ingredient already exists";
 		toastr.error(errorMsg, 'Woops...');
 	};
+
+	IngredientService
+		.ingredients
+		.query()
+		.$promise
+		.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);
 
 }
 

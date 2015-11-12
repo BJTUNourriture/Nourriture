@@ -17,4 +17,8 @@ md-content
 										label Search an Ingredient
 										input(ng-model="search")
 									ng-md-icon(icon="search" style="cursor: pointer;")
-							md-list.ng-cloak
+							md-list.ng-cloak.body-dashboard-ingredient-list
+								md-list-item(ng-repeat="ingredient in ingredientDashboard.ingredients")
+									p {{ ingredient.name }}
+									span(ng-if="!$last")
+										md-divider

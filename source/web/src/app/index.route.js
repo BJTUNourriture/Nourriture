@@ -50,8 +50,8 @@
                 url: 'ingredients-dashboard',
                 parent: 'main',
                 templateUrl: 'app/templates/ingredientsDashboard/ingredientsDashboard.html',
-                controller: 'CreateIngredientController',
-                controllerAs: 'createIngredient',
+                controller: 'IngredientsDashboardController',
+                controllerAs: 'ingredientDashboard',
                 data: {
                     permissions: {
                       except: ['guest'],
