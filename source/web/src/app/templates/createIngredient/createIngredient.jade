@@ -5,7 +5,11 @@ md-content
 				div(flex="none").title-register-container 
 					span.title-register-md Add an ingredient
 				div(flex).body-create-ingredient-md
-						section(layout="column", layout-align="center center", layout-margin)
+						section(layout="row", layout-align="start end", layout-margin)
+							span.flex
+							span(flex="none")
+								md-button.flat Go back
+						section(layout="column", layout-align="start center", layout-margin)
 							md-content.body-create-ingredient
 								form(name="createIngredientForm" novalidate ng-submit="createIngredientForm.$valid && createIngredient.submit()")
 									md-input-container.body-create-ingredient-name
