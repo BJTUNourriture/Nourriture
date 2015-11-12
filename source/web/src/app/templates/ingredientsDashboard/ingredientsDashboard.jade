@@ -10,12 +10,14 @@ md-content
 							md-toolbar.md-hue-1
 								section(layout="row", layout-align="start start", layout-margin)
 									div(style="max-width:200px;").hide-gt-sm
+										form(ng-submit="ingredientDashboard.searchIngredientsByName()")
+											md-input-container.flex
+												label Search an Ingredient
+												input(ng-model="search" name="search")
+									form(ng-submit="ingredientDashboard.searchIngredientsByName()").flex.hide-sm
 										md-input-container.flex
 											label Search an Ingredient
-											input(ng-model="search" name="search" ng-enter="ingredientDashboard.searchIngredientsByName()")
-									md-input-container.flex.hide-sm
-										label Search an Ingredient
-										input(ng-model="search" name="search" ng-enter="ingredientDashboard.searchIngredientsByName()")
+											input(ng-model="search" name="search")
 									ng-md-icon(type="submit" icon="search" style="cursor: pointer;" ng-click="ingredientDashboard.searchIngredientsByName()")
 							md-list.ng-cloak.body-dashboard-ingredient-list
 								md-list-item(ng-repeat="ingredient in ingredientDashboard.ingredients")

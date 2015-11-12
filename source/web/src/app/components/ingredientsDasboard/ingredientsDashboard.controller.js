@@ -20,9 +20,12 @@ function IngredientsDashboardController($scope, IngredientService, toastr, $log)
 	vm.IngredientsGetFailure = function (data) {
 		$log.log(data.data);
 		var errorMsg = "This is odd...";
-		if (data.data.errmsg.indexOf("name") > -1)
-			errorMsg = "Seems like the ingredient already exists";
-		toastr.error(errorMsg, 'Woops...');
+		if(data.data.errmsg)
+			if (data.data.errmsg.indexOf("name") > -1)
+				errorMsg = "Seems like the ingredient already exists";
+		if (data.data.message)
+			errorMsg = "This ingredient doesn't exist";
+		toastr.error(errorMsg, 'Woops...', {timeOut : 300});
 	};
 
 	IngredientService
