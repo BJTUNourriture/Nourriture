@@ -21,7 +21,9 @@ md-content
 									ng-md-icon(type="submit" icon="search" style="cursor: pointer;" ng-click="ingredientDashboard.searchIngredientsByName()")
 							md-list.ng-cloak.body-dashboard-ingredient-list
 								md-list-item(ng-repeat="ingredient in ingredientDashboard.ingredients")
-									p {{ ingredient.name }}
+									span {{ ingredient.name }}
+									span
+										ng-md-icon(icon="highlight_remove").md-secondary.body-dashboard-ingredient-delete-icon-list
 									span(ng-if="!$last")
 										md-divider
 						span(flex="5")
