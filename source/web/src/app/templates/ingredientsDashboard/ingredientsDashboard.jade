@@ -7,6 +7,13 @@ md-content
 				div(flex).body-dashboard-ingredient-md
 					section(layout="column", layout-align="start center", layout-margin)
 						md-content.body-dashboard-ingredient
-							md-toolbar.flex
-								h3 Search Ingredients
-		include ../footer/footer.jade
+							md-toolbar.md-hue-1
+								section(layout="row", layout-align="start start", layout-margin)
+									div(style="max-width:200px;").hide-gt-sm
+										md-input-container(md-theme="input").flex
+											label Search an Ingredient
+											input(ng-model="search")
+									md-input-container(md-theme="input").flex.hide-sm
+										label Search an Ingredient
+										input(ng-model="search")
+									ng-md-icon(icon="search")

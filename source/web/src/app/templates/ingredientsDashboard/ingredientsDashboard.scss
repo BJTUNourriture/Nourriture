@@ -1,0 +1,14 @@
+@import "../../theme.scss";
+
+.body-dashboard-ingredient-md {
+	@extend .body-create-ingredient-md;
+}
+
+.body-dashboard-ingredient {
+	@extend .body-create-ingredient;
+	width:100%;
+}
+
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
+		background-color: $dark-headings;
+}
