@@ -8,7 +8,9 @@ md-content
 						section(layout="row", layout-align="start end", layout-margin)
 							span.flex
 							span(flex="none")
-								md-button.flat Go back
+								md-button.flat
+									ng-md-icon(icon="navigate_before")
+									span Go back
 						section(layout="column", layout-align="start center", layout-margin)
 							md-content.body-create-ingredient
 								form(name="createIngredientForm" novalidate ng-submit="createIngredientForm.$valid && createIngredient.submit()")
