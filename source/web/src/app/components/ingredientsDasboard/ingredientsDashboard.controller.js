@@ -31,6 +31,21 @@ function IngredientsDashboardController($scope, IngredientService, toastr, $log)
 		.$promise
 		.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);
 
+	vm.searchIngredientsByName = function() {
+		if (!$scope.search)
+			IngredientService
+			.ingredients
+			.query()
+			.$promise
+			.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);
+		else
+			IngredientService
+				.ingredient_name
+				.query({name : $scope.search})
+				.$promise
+				.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);
+	};
+
 }
 
 })();
