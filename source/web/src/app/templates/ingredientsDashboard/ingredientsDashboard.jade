@@ -24,4 +24,7 @@ md-content
 									p {{ ingredient.name }}
 									span(ng-if="!$last")
 										md-divider
+						span(flex="5")
+						div.flex
+							md-button(ui-sref="main.create-ingredient").md-raised Add a new Ingredient
 		include ../footer/footer.jade
