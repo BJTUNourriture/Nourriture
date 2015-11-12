@@ -28,6 +28,7 @@ function IngredientsDashboardController($scope, IngredientService, toastr, $log)
 		toastr.error(errorMsg, 'Woops...', {timeOut : 300});
 	};
 
+	//Init data
 	IngredientService
 		.ingredients
 		.query()
