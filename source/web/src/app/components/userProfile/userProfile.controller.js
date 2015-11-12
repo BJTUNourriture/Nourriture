@@ -1,40 +1,39 @@
 (function () {
-	'use strict';
+  'use strict';
 
-	angular.module('NourritureControllers')
-		.controller('UserProfileController', UserProfileController);
+  angular.module('NourritureControllers')
+    .controller('UserProfileController', UserProfileController);
 
-	UserProfileController.$inject = ["$log", "UserService", "$localStorage", "$sessionStorage"];
+  UserProfileController.$inject = ["$rootScope", "$log", "UserService", "$localStorage", "$sessionStorage"];
 
-	/** @ngInject */
-	function UserProfileController($log, UserService, $localStorage, $sessionStorage) {
-		var vm = this;
+  /** @ngInject */
+  function UserProfileController($rootScope, $log, UserService, $localStorage, $sessionStorage) {
 
-		vm.profileSuccess = function (data) {
-			$log.log(data._id);
-		};
+    var vm = this;
 
-		vm.profileError = function (data) {
-			$log.error("Error when getting user", data);
-		};
+    vm.profileSuccess = function (data) {
+      $log.log(data._id);
+      $rootScope.UserProfile = data;
+    };
 
-		vm.getUser = function () {
+    vm.profileError = function (data) {
+      $log.error("Error when getting user", data);
+    };
 
-			UserService.user_get_id
-				.get({id: $localStorage.user_id || $sessionStorage.user_id})
-				.$promise
-				.then(vm.profileSuccess, vm.profileError);
+    vm.getUser = function () {
 
-
-		};
-
-		vm.getUser();
+      UserService.user_get_id
+        .get({id: $localStorage.user_id || $sessionStorage.user_id})
+        .$promise
+        .then(vm.profileSuccess, vm.profileError);
 
 
+    };
+
+    vm.getUser();
 
 
-
-	}
+  }
 
 })();
 

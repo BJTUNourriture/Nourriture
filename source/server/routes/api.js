@@ -189,7 +189,20 @@ router.route('/search/recipes/')
 // full JSON endpoints
  router.route('/tags')
     .post(tagsController.postTags)
+    .delete(tagsController.deleteTags)
     .get(tagsController.getAllTags);
+
+// endpoints by id
+router.route('/tags/id/:id')
+    .put(tagsController.putTagsById)
+    .delete(tagsController.deleteTagsById)
+    //.get(tagsController.getTagsById)
+
+// endpoints by name
+router.route('/tags/name/:name')
+    .put(tagsController.putTagsByName)
+    .delete(tagsController.deleteTagsByName)
+    //.get(tagsController.getTagsByName);
 
 /*
  ** Endpoints for Suggestions
