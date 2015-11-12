@@ -20,7 +20,7 @@ md-content
 											input(ng-model="search" name="search")
 									ng-md-icon(type="submit" icon="search" style="cursor: pointer;" ng-click="ingredientDashboard.searchIngredientsByName()")
 							md-list.ng-cloak.body-dashboard-ingredient-list
-								md-list-item(ng-repeat="ingredient in ingredientDashboard.ingredients")
+								md-list-item(ng-repeat="ingredient in ingredientDashboard.ingredients" ng-click='ingredientDashboard.infosIngredientDialog($event, ingredient)')
 									span {{ ingredient.name }}
 									span
 										ng-md-icon(icon="highlight_remove" ng-click="ingredientDashboard.deleteIngredientDialog($event, ingredient)").md-secondary.body-dashboard-ingredient-delete-icon-list

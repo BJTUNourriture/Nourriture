@@ -76,6 +76,18 @@ function IngredientsDashboardController($scope, IngredientService, toastr, $log,
 	};
 
 	//Dialogs
+	vm.infosIngredientDialog = function(event, ingredient) {
+		var confirm = $mdDialog.confirm()
+			.title(ingredient.name)
+			.content("Proteins : "+ ingredient.proteins+" Carbohydrates : "+ingredient.carbohydrates+" Fats : "+ingredient.fat)
+			.ok("Go to the Ingredient's page")
+			.clickOutsideToClose(true)
+			.targetEvent(event);
+
+
+		$mdDialog.show(confirm);
+	};
+
 	vm.deleteIngredientDialog = function(event, ingredient) {
 		var confirm = $mdDialog.confirm()
 					.title('Are you sure you want to delete this ingredient ?')
