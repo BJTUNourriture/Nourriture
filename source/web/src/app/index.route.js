@@ -46,7 +46,20 @@
                     }
                 }
             })
-            .state('main.create_ingredient', {
+            .state('main.ingredients-dashboard', {
+                url: 'ingredients-dashboard',
+                parent: 'main',
+                templateUrl: 'app/templates/ingredientsDashboard/ingredientsDashboard.html',
+                controller: 'CreateIngredientController',
+                controllerAs: 'createIngredient',
+                data: {
+                    permissions: {
+                      except: ['guest'],
+                      redirectTo: 'main.homepage'
+                    }
+                }
+            })
+            .state('main.create-ingredient', {
                 url: 'create-ingredient',
                 parent: 'main',
                 templateUrl: 'app/templates/createIngredient/createIngredient.html',
