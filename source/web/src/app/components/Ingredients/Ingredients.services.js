@@ -11,7 +11,8 @@
     function IngredientService($log, $resource, URL_API) {
 
         var service = {
-            ingredients: $resource(URL_API + '/api/ingredients/')
+            ingredients: $resource(URL_API + '/api/ingredients/'),
+            ingredient_name : $resource(URL_API + '/api/ingredients/name/:name', {name: "@name"})
         };
 
         return service;
