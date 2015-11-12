@@ -8,16 +8,15 @@ md-content
 					section(layout="column", layout-align="start center", layout-margin)
 						md-content.body-dashboard-ingredient
 							md-toolbar.md-hue-1
-								form(name="searchIngredientForm" novalidate ng-submit="ingredientDashboard.searchIngredientsByName()")
-									section(layout="row", layout-align="start start", layout-margin)
-										div(style="max-width:200px;").hide-gt-sm
-											md-input-container.flex
-												label Search an Ingredient
-												input(ng-model="search" name="search")
-										md-input-container.flex.hide-sm
+								section(layout="row", layout-align="start start", layout-margin)
+									div(style="max-width:200px;").hide-gt-sm
+										md-input-container.flex
 											label Search an Ingredient
-											input(ng-model="search" name="search")
-										ng-md-icon(type="submit" icon="search" style="cursor: pointer;" ng-click="ingredientDashboard.searchIngredientsByName()")
+											input(ng-model="search" name="search" ng-enter="ingredientDashboard.searchIngredientsByName()")
+									md-input-container.flex.hide-sm
+										label Search an Ingredient
+										input(ng-model="search" name="search" ng-enter="ingredientDashboard.searchIngredientsByName()")
+									ng-md-icon(type="submit" icon="search" style="cursor: pointer;" ng-click="ingredientDashboard.searchIngredientsByName()")
 							md-list.ng-cloak.body-dashboard-ingredient-list
 								md-list-item(ng-repeat="ingredient in ingredientDashboard.ingredients")
 									p {{ ingredient.name }}
