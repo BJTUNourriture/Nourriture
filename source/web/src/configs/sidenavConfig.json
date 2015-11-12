@@ -30,7 +30,7 @@
 			"reference" : "main.profile"
 		},
 		{
-			"name" : "Add Ingredient",
+			"name" : "Ingredients Dashboard",
 			"icon" : "wheat",
 			"reference" : "main.ingredients-dashboard"
 		}
