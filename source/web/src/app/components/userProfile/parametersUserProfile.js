@@ -10,13 +10,14 @@
     .module('NourritureControllers')
     .controller('parametersUserProfileController', parametersUserProfileController);
 
-  parametersUserProfileController.$inject = ['$scope', '$rootScope', '$timeout', '$log'];
+  parametersUserProfileController.$inject = ['$scope', '$rootScope', '$timeout', '$log', 'UserService', '$localStorage'];
 
-  function parametersUserProfileController($scope, $rootScope, $timeout, $log) {
+  function parametersUserProfileController($scope, $rootScope, $timeout, $log, UserService, $localStorage) {
 
     var vm = this;
 
     var getUserProfile = function () {
+
       vm.data = $rootScope.UserProfile;
       //Init variable for test
       vm.data.gender = "male";
@@ -36,15 +37,38 @@
       vm.data.joined_groups = [{name: "freedom to opressed vegetables"}, {name: "Faites du Fruuuiiiitt!!"}];
       vm.data.recipe_post = [{name: "Grilled duck"}, {name: "baguette"}];
       vm.data.recipe_like = [{name: "marmelade"}, {name: "cantonese rice"}];
+
+      $scope.$watch(angular.bind(vm.data, function () {
+        return vm.data;
+      }), function (newVal) {
+        $rootScope.UserProfile = newVal;
+      }, true);
+
     };
 
     //Timeout in ms for the moment
     $timeout(getUserProfile, 300);
 
-    $scope.$watch(vm.data, function () {
-      $log.log("IN parametersUserProfile");
-        $rootScope.UserProfile = vm.data;
-    });
+
+    vm.updateProfile = function () {
+      $log.log("Updating Profile", $localStorage.user_id);
+
+
+      /*UserService
+        .update_user({id: $localStorage.user_id}, vm.data)
+        .$promise
+        .then(vm.updateUserSuccess, vm.updateUserError);*/
+    };
+
+    vm.updateUserSuccess = function (data) {
+      $log.log("Updated user", data._id);
+      $rootScope.UserProfile = data;
+    };
+
+    vm.updateUserError = function (data) {
+      $log.error("Error when updating user", data);
+    };
+
 
   }
 

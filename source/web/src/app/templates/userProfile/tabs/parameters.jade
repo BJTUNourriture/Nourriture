@@ -4,12 +4,19 @@
 div(layout="column" layout-align="center center" layout-fill ng-controller="parametersUserProfileController as parametersUserProfile")
   md-content
     h1 Parameters
-    md-list
-      md-list-item.md-3-line.md-no-proxy
-        .md-list-item-text
-          p <input type='text' ng-model='parametersUserProfile.data.username'> <span class='bold'>Username:</span> {{parametersUserProfile.data.username}}
-        md-divider
-      md-list-item.md-3-line.md-no-proxy
-        .md-list-item-text
-          p <span class='bold'>Gender:</span> {{parametersUserProfile.data.gender}}
-        md-divider
+    md-content.md-padding
+      div()
+        form(name='contactForm', ng-submit='parametersUserProfile.updateProfile()')
+          md-input-container
+            label Description:
+            textarea(ng-model='parametersUserProfile.data.description')
+
+          //md-input-container(flex='')
+            label Email:
+            input(type='email', ng-model='contactEmail', required='')
+          //md-input-container
+            label Message:
+            textarea(ng-model='contactMsg', columns='1', md-maxlength='150', required='')
+          md-button.md-primary(type='submit') Send
+
+

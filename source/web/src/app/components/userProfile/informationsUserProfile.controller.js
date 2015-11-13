@@ -16,6 +16,7 @@
 
     var vm = this;
 
+
     var getUserProfile = function () {
       vm.data = $rootScope.UserProfile;
       //Init variable for test
@@ -36,12 +37,15 @@
       vm.data.joined_groups = [{name: "freedom to opressed vegetables"}, {name: "Faites du Fruuuiiiitt!!"}];
       vm.data.recipe_post = [{name: "Grilled duck"}, {name: "baguette"}];
       vm.data.recipe_like = [{name: "marmelade"}, {name: "cantonese rice"}];
+
+      $scope.$watch(angular.bind($rootScope.UserProfile, function () {
+        return $rootScope.UserProfile;
+      }), function (newVal) {
+        vm.data = $rootScope.UserProfile;
+      }, true);
     };
 
 
-    /*$scope.$watch($rootScope.UserProfile, function () {
-      $log.log("Value changed");
-    });*/
 
     //Timeout in ms for the moment
     $timeout(getUserProfile, 300);
