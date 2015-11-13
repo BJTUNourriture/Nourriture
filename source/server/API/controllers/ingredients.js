@@ -5,6 +5,7 @@
 *
 * @apiParam {String} name Name of the ingredient
 * @apiParam {String} [description] Description of the ingredient
+* @apiParam {Number} [calories] Calories (in kcal) contained in the ingredient
 * @apiParam {Number} [fat] Fat (in grams) contained in the ingredient
 * @apiParam {Number} [carbohydrates] Carbohydrates (in grams) contained in the ingredient
 * @apiParam {Number} [proteins] Proteins (in grams) contained in the ingredient
@@ -16,6 +17,7 @@
 *
 * @apiParam {String} [name] Name of the ingredient
 * @apiParam {String} [description] Description of the ingredient
+* @apiParam {Number} [calories] Calories (in kcal) contained in the ingredient
 * @apiParam {Number} [fat] Fat (in grams) contained in the ingredient
 * @apiParam {Number} [carbohydrates] Carbohydrates (in grams) contained in the ingredient
 * @apiParam {Number} [proteins] Proteins (in grams) contained in the ingredient
@@ -28,6 +30,7 @@
 * @apiSuccess {String} _id Id of the ingredient
 * @apiSuccess {String} name Name of the ingredient
 * @apiSuccess {String} [description] Description of the ingredient
+* @apiSuccess{Number} [calories] Calories (in kcal) contained in the ingredient
 * @apiSuccess {Number} [fat] Fat (in grams) contained in the ingredient
 * @apiSuccess {Number} [carbohydrates] Carbohydrates (in grams) contained in the ingredient
 * @apiSuccess {Number} [proteins] Proteins (in grams) contained in the ingredient
@@ -41,6 +44,7 @@
 *     {
 *       "name": "Tomato",
 *       "description": "Very yummy fruit."
+*		 "calories" : 48,
 *		 "fat" : 0.3,
 *		 "carbohydrates" : 5.8,
 *		 "protein" : 1.3,
@@ -89,10 +93,12 @@ var Ingredients = require('../models/ingredients');
 *
 */
 exports.postIngredient = function (req, res) {
+	console.log(req.body);
 	//binds the new ingredient
 	var ingredient = new Ingredients({
 		name : req.body.name,
 		description : req.body.description,
+		calories : req.body.calories,
 		fat : req.body.fat,
 		carbohydrates : req.body.carbohydrates,
 		proteins : req.body.proteins,
@@ -231,6 +237,7 @@ exports.updateIngredient = function(req, res, err, ingredient) {
 *		"_id" : "561830c5fecdba4f72668fe8",
 *       "name": "Tomato",
 *       "description": "Very yummy fruit."
+*		"calories" : 48,
 *		"fat" : 0.3,
 *		"carbohydrates" : 5.8,
 *		"protein" : 1.3,

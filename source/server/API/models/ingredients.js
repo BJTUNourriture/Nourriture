@@ -9,6 +9,10 @@ var ingredientsSchema = new mongoose.Schema({
 		required : true
 	},
 	description : String,
+	calories : {
+		type: Number,
+		min : 0
+	},
 	fat : {
 		type : Number,
 		min : 0

@@ -16,7 +16,7 @@ function CreateIngredientController($scope, IngredientService, toastr, $log)
 		$log.log("innit");
 		IngredientService
 			.ingredients
-			.save({"name" : $scope.name, "description" : $scope.description, "fat" : $scope.fat, "carbohydrates" : $scope.carbohydrates, "proteins" : $scope.proteins})
+			.save({"name" : $scope.name, "description" : $scope.description, "calories":$scope.calories, "fat" : $scope.fat, "carbohydrates" : $scope.carbohydrates, "proteins" : $scope.proteins})
 			.$promise
 			.then(vm.IngredientCreateSuccess, vm.IngredientCreateFailure);
 	};
@@ -33,6 +33,8 @@ function CreateIngredientController($scope, IngredientService, toastr, $log)
 			errorMsg = "Seems like the ingredient already exists";
 		toastr.error(errorMsg, 'Woops...');
 	};
+
+	vm.tags_ingredient = [];
 
 }
 
