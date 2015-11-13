@@ -4,9 +4,9 @@
 angular.module('NourritureControllers')
 	.controller('IngredientsDashboardController', IngredientsDashboardController);
 
-IngredientsDashboardController.$inject = ["$scope", "IngredientService", 'toastr',"$log", "$mdDialog", "$document", "$state"];
+IngredientsDashboardController.$inject = ["$scope", "IngredientService", 'SearchService', 'toastr',"$log", "$mdDialog", "$document", "$state"];
 
-function IngredientsDashboardController($scope, IngredientService, toastr, $log, $mdDialog, $document, $state)
+function IngredientsDashboardController($scope, IngredientService, SearchService, toastr, $log, $mdDialog, $document, $state)
 {
 	var vm = this;
 
@@ -28,7 +28,7 @@ function IngredientsDashboardController($scope, IngredientService, toastr, $log,
 
 	vm.IngredientsGetSuccess = function (data) {
 		$log.log(data);
-		vm.ingredients = data;
+		vm.ingredients = data.Ingredients;
 	};
 
 	vm.IngredientsGetFailure = function (data) {
@@ -60,9 +60,9 @@ function IngredientsDashboardController($scope, IngredientService, toastr, $log,
 	};
 
 	//Init data
-	IngredientService
+	SearchService
 		.ingredients
-		.query()
+		.save(vm.table)
 		.$promise
 		.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);
 
