@@ -16,7 +16,7 @@ function CreateIngredientController($scope, IngredientService, toastr, $log)
 		$log.log("innit");
 		IngredientService
 			.ingredients
-			.save({"name" : $scope.name, "description" : $scope.description, "fat" : $scope.fat, "carbohydrates" : $scope.carbohydrates, "proteins" : $scope.proteins})
+			.save({"name" : $scope.name, "description" : $scope.description, "calories":$scope.calories, "fat" : $scope.fat, "carbohydrates" : $scope.carbohydrates, "proteins" : $scope.proteins})
 			.$promise
 			.then(vm.IngredientCreateSuccess, vm.IngredientCreateFailure);
 	};

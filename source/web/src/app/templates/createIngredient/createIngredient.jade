@@ -30,6 +30,13 @@ md-content
 											div(ng-message="md-maxlength") The description must be shorter than 200 characters.
 									div(layout="row", layout-align="start center", layout-margin)
 										md-input-container.body-create-ingredient-properties
+											ng-md-icon(icon="calories").body-register-container-md
+											input(placeholder="Calories" required type="number" name="calories" ng-model="calories" min='0' maxlength="5").body-register-container-md
+											div(ng-messages="createIngredientForm.calories.$error" ng-if='!createIngredientForm.calories.$pristine')
+												div(ng-message="required") This is required.
+												div(ng-message="number") It must be a valid number.
+												div(ng-message="min") Value must be superior to 0.
+										md-input-container.body-create-ingredient-properties
 											ng-md-icon(icon="fat").body-register-container-md
 											input(placeholder="Fat" required type="number" name="fat" ng-model="fat" min='0' maxlength="5").body-register-container-md
 											div(ng-messages="createIngredientForm.fat.$error" ng-if='!createIngredientForm.fat.$pristine')
