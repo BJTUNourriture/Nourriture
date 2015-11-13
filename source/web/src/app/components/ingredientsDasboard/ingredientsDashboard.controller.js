@@ -71,12 +71,13 @@ function IngredientsDashboardController($scope, IngredientService, SearchService
 	
 	vm.deferred.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);
 
-	vm.deleteIngredient = function(ingredient) {
-		IngredientService
-		.ingredient_id
-		.delete({id : ingredient._id})
-		.$promise
-		.then(vm.IngredientsDeleteSuccess, vm.IngredientsDeleteFailure);
+	vm.deleteIngredient = function(ingredients) {
+		for(var i=0; i < ingredients.length(); i++)
+			IngredientService
+			.ingredient_id
+			.delete({id : ingredients[i]._id})
+			.$promise
+			.then(vm.IngredientsDeleteSuccess, vm.IngredientsDeleteFailure);
 	}
 
 	vm.searchIngredientsByName = function() {
@@ -129,14 +130,16 @@ function IngredientsDashboardController($scope, IngredientService, SearchService
 		})
 	};
 
-	vm.deleteIngredientDialog = function(event, ingredient) {
+	vm.deleteIngredientDialog = function(event, selected_ingredients) {
 		var confirm = $mdDialog.confirm()
-					.title('Are you sure you want to delete this ingredient ?')
-					.ok('Delete ingredient')
+					.title('Are you sure you want to delete the selected ingredient(s) ?')
+					.ok('Delete ingredient(s)')
 					.cancel('Not really actually')
 					.targetEvent(event);
-
-		$mdDialog.show(confirm).then(function() {vm.deleteIngredient(ingredient)}, function(){});
+		if (vm.selected_ingredients.length > 0)
+			$mdDialog.show(confirm).then(function() {vm.deleteIngredient(selected_ingredients)}, function(){});
+		else
+			toastr.error("You have to selected items to delete", 'Woops...', {timeOut : 300});
 	};
 
 	//Controller for infosIngredientDialog

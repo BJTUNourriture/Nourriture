@@ -14,6 +14,7 @@ md-content
 											label Search an Ingredient
 											input(ng-model="search" name="search")
 									ng-md-icon(type="submit" icon="search" style="cursor: pointer;" ng-click="ingredientDashboard.searchIngredientsByName()")
+									ng-md-icon(icon="delete" style="cursor: pointer;" ng-click="ingredientDashboard.deleteIngredientDialog($event, ingredient.selected_ingredients)")
 							md-data-table-container
 								table(md-data-table md-row-select="ingredientDashboard.selected_ingredients" md-progress="ingredientDashboard.deferred")
 									thead(md-order="ingredientDashboard.table.order.field" md-trigger="ingredientDashboard.tableOnOrderChange")
