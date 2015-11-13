@@ -109,17 +109,18 @@ exports.postSearchIngredients = function (req, res, flag) {
 	}
 	var tag_list = req.body.tags;
 
-	//If name and tags are not set
-
-	if (!name && !tag_list)
-		return flag === true ? -1 : res.status(400).send({message : 'You must at least set a name or a tag to search'})
-
 	if (metadata == "")
 		return flag === true ? -1 : res.status(400).send({message : 'You must set the metadata'})
 
 	
 
 	//If name and tags are set
+
+	if (!name && !tag_list){
+
+		var Json_search = {}
+		var newjson = {metadata: {current_page: items_page, order: order}}
+	}
 
 	if (name && tag_list){
 	
@@ -359,13 +360,16 @@ exports.postSearchRecipes = function (req, res, flag) {
 
 	//If title and types are not set
 
-	if (!title && !type_list)
-		return flag === true ? -1 : res.status(400).send({message : 'You must at least set a title or a type to search'})
-
 	if (metadata == "")
 		return flag === true ? -1 : res.status(400).send({message : 'You must set the metadata'})
 
 		//If title and tags are set
+
+	if (!title && !tag_list){
+
+		var Json_search = {}
+		var newjson = {metadata: {current_page: items_page, order: order}}
+	}
 
 	if (title && type_list){
 	
