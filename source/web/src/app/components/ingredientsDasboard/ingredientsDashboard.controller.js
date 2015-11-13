@@ -26,6 +26,10 @@ function IngredientsDashboardController($scope, IngredientService, SearchService
 		$log.log(data);
 		vm.table.total = data.metadata.total;
 		vm.ingredients = data.ingredients;
+		if (vm.table.order)
+			if (vm.table.order.order == "desc")
+				if (vm.table.order.field[0] != "-")
+					vm.table.order.field = "-" + vm.table.order.field;
 	};
 
 	vm.IngredientsGetFailure = function (data) {
@@ -96,8 +100,11 @@ function IngredientsDashboardController($scope, IngredientService, SearchService
 		else
 			vm.table.order.order = "asc";
 		$log.log(vm.table);
-		if (vm.table.order.order == "desc")
-			vm.table.order.field = "-" + vm.table.order.field;
+		SearchService
+			.ingredients
+			.save(vm.table)
+			.$promise
+			.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);
 	};
 
 	//Dialogs
