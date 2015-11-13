@@ -21,7 +21,8 @@ function IngredientsDashboardController($scope, IngredientService, toastr, $log,
 		},
 		metadata : {
 			"items": 10,
-			"page" : 1
+			"page" : 1,
+			"total" : 4
 		}
 	};
 
