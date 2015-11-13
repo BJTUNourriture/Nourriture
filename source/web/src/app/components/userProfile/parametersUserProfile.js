@@ -56,8 +56,7 @@
 
       UserService
         .update_user
-        //.update({id: $localStorage.user_id || $sessionStorage.user_id}, {description: vm.data.description})
-        .update({id: $localStorage.user_id || $sessionStorage.user_id})
+        .update({id: $localStorage.user_id || $sessionStorage.user_id}, {description: vm.data.description})
         .$promise
         .then(vm.updateUserSuccess, vm.updateUserError);
     };
@@ -65,16 +64,14 @@
 
     vm.updateUserSuccess = function (data) {
       $log.log("Updated user", data);
-      $rootScope.UserProfileSave = $rootScope.UserProfile;
+      //$rootScope.UserProfileSave = $rootScope.UserProfile;
+      angular.copy($rootScope.UserProfile, $rootScope.UserProfileSave);
     };
 
     vm.updateUserError = function (data) {
       $log.error("Error when updating user", data);
-      $log.log("there is an error", $rootScope.UserProfileSave);
-      $log.log("vm data", vm.data);
-     // vm.data.description = "cououc";
-      vm.data = $rootScope.UserProfileSave;
-      //$rootScope.UserProfile = $rootScope.UserProfileSave;
+      angular.copy($rootScope.UserProfileSave, vm.data);
+
     };
 
 

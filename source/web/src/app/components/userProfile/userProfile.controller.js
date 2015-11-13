@@ -14,7 +14,8 @@
     vm.profileSuccess = function (data) {
       $log.log(data._id);
       $rootScope.UserProfile = data;
-      $rootScope.UserProfileSave = data;
+      $rootScope.UserProfileSave = {};
+      angular.copy($rootScope.UserProfile, $rootScope.UserProfileSave);
     };
 
     vm.profileError = function (data) {
