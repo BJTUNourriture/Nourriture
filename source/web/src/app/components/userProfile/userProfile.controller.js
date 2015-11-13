@@ -14,6 +14,7 @@
     vm.profileSuccess = function (data) {
       $log.log(data._id);
       $rootScope.UserProfile = data;
+      $rootScope.UserProfileSave = data;
     };
 
     vm.profileError = function (data) {
