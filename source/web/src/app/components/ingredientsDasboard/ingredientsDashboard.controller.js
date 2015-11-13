@@ -23,6 +23,8 @@ function IngredientsDashboardController($scope, IngredientService, SearchService
 
 	vm.selected_ingredients = [];
 
+	vm.deferred;
+
 	vm.IngredientsGetSuccess = function (data) {
 		$log.log(data);
 		vm.table.metadata.total = data.metadata.total;
@@ -62,11 +64,12 @@ function IngredientsDashboardController($scope, IngredientService, SearchService
 	};
 
 	//Init data
-	SearchService
+	vm.deferred = SearchService
 		.ingredients
 		.save(vm.table)
-		.$promise
-		.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);
+		.$promise;
+	
+	vm.deferred.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);
 
 	vm.deleteIngredient = function(ingredient) {
 		IngredientService
@@ -101,21 +104,21 @@ function IngredientsDashboardController($scope, IngredientService, SearchService
 		else
 			vm.table.order.order = "asc";
 		$log.log(vm.table);
-		SearchService
+		vm.deferred = SearchService
 			.ingredients
 			.save(vm.table)
-			.$promise
-			.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);
+			.$promise;
+		vm.deferred.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);	
 	};
 
 	vm.tableOnPaginationChange = function(page, limit) {
 		vm.table.metadata.page = page;
 		vm.table.metadata.items = limit;
-		SearchService
+		vm.deferred = SearchService
 			.ingredients
 			.save(vm.table)
-			.$promise
-			.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);		
+			.$promise;
+		vm.deferred.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);		
 	};
 
 	//Dialogs

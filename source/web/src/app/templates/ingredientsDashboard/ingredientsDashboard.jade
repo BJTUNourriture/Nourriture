@@ -10,7 +10,7 @@ md-content
 							md-data-table-toolbar
 								h1.md-title Ingredients
 							md-data-table-container
-								table(md-data-table md-row-select="ingredientDashboard.selected_ingredients" md-progress="deferred")
+								table(md-data-table md-row-select="ingredientDashboard.selected_ingredients" md-progress="ingredientDashboard.deferred")
 									thead(md-order="ingredientDashboard.table.order.field" md-trigger="ingredientDashboard.tableOnOrderChange")
 										tr
 											th(name="Name" order-by="name")
