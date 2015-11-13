@@ -21,11 +21,11 @@
       vm.data = $rootScope.UserProfile;
       //Init variable for test
       vm.data.gender = "male";
-      vm.data.description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore \
+     /* vm.data.description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore \
       et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut \
       aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum \
       dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia \
-      deserunt mollit anim id est laborum";
+      deserunt mollit anim id est laborum";*/
 
       vm.data.badge = ["un", "deux", "trois", "quatre"];
       vm.data.like = [{name_ingredient: "carotte"}, {name_ingredient: "patate"}, {name_ingredient: "riz"}];
@@ -42,6 +42,7 @@
         return vm.data;
       }), function (newVal) {
         $rootScope.UserProfile = newVal;
+        $log.log("IN parematersCOntroler ", $rootScope.UserProfile.description);
       }, true);
 
     };
@@ -55,19 +56,22 @@
 
       UserService
         .update_user
-        .update({id: $localStorage.user_id || $sessionStorage.user_id}, vm.data)
+        .update({id: $localStorage.user_id || $sessionStorage.user_id}, {description: vm.data.description})
         .$promise
         .then(vm.updateUserSuccess, vm.updateUserError);
     };
 
 
     vm.updateUserSuccess = function (data) {
-      $log.log("Updated user", data._id);
-      $rootScope.UserProfile = data;
+      $log.log("Updated user", data);
+      //$rootScope.UserProfileSave = $rootScope.UserProfile;
+      angular.copy($rootScope.UserProfile, $rootScope.UserProfileSave);
     };
 
     vm.updateUserError = function (data) {
       $log.error("Error when updating user", data);
+      angular.copy($rootScope.UserProfileSave, vm.data);
+
     };
 
 
