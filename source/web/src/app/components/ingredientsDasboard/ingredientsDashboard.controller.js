@@ -4,9 +4,9 @@
 angular.module('NourritureControllers')
 	.controller('IngredientsDashboardController', IngredientsDashboardController);
 
-IngredientsDashboardController.$inject = ["$scope", "IngredientService", 'toastr',"$log", "$mdDialog", "$document"];
+IngredientsDashboardController.$inject = ["$scope", "IngredientService", 'toastr',"$log", "$mdDialog", "$document", "$state"];
 
-function IngredientsDashboardController($scope, IngredientService, toastr, $log, $mdDialog, $document)
+function IngredientsDashboardController($scope, IngredientService, toastr, $log, $mdDialog, $document, $state)
 {
 	var vm = this;
 
@@ -101,10 +101,14 @@ function IngredientsDashboardController($scope, IngredientService, toastr, $log,
 
 	//Controller for infosIngredientDialog
 	vm.dialogController = function($mdDialog) {
-		var vmChild = {};
+		var vm = this;
 
-		vmChild.hide = function() {
-			$mdDialog.hide()
+		vm.hide = function () {
+			$mdDialog.hide();
+		}
+
+		vm.goToIngredientPage = function(id_ingredient) {
+			$state.go("main.homepage");
 		}
 	}
 

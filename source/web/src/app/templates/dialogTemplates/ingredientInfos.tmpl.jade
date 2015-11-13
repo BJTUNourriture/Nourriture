@@ -16,3 +16,5 @@ md-dialog
 				md-list-item
 					span Fats
 					span.md-secondary {{ infosIngredient.ingredient.fat }} g
+				md-divider
+			md-button(ng-click="infosIngredient.goToIngredientPage(infosIngredient.ingredient._id); infosIngredient.hide()").md-raised Ingredient's Page
