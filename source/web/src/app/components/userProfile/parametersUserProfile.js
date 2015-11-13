@@ -10,9 +10,9 @@
     .module('NourritureControllers')
     .controller('parametersUserProfileController', parametersUserProfileController);
 
-  parametersUserProfileController.$inject = ['$scope', '$rootScope', '$timeout', '$log', 'UserService', '$localStorage'];
+  parametersUserProfileController.$inject = ['$scope', '$rootScope', '$timeout', '$log', 'UserService', '$localStorage', '$sessionStorage'];
 
-  function parametersUserProfileController($scope, $rootScope, $timeout, $log, UserService, $localStorage) {
+  function parametersUserProfileController($scope, $rootScope, $timeout, $log, UserService, $localStorage, $sessionStorage) {
 
     var vm = this;
 
@@ -51,13 +51,13 @@
 
 
     vm.updateProfile = function () {
-      $log.log("Updating Profile", $localStorage.user_id);
+      $log.log("Updating Profile", $localStorage.user_id, vm.data);
 
 
-      /*UserService
-        .update_user({id: $localStorage.user_id}, vm.data)
+      UserService.update_user
+        .update({id: $localStorage.user_id || $sessionStorage.user_id})
         .$promise
-        .then(vm.updateUserSuccess, vm.updateUserError);*/
+        .then(vm.updateUserSuccess, vm.updateUserError);
     };
 
     vm.updateUserSuccess = function (data) {
