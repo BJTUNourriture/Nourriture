@@ -79,8 +79,11 @@ function IngredientsDashboardController($scope, IngredientService, toastr, $log,
 	vm.infosIngredientDialog = function(event, ingredient) {
 		$mdDialog.show({
 		controller: vm.dialogController,
+		controllerAs : "infosIngredient",
 		templateUrl: 'app/templates/dialogTemplates/ingredientInfos.tmpl.html',
 		parent: angular.element($document.body),
+		locals : {ingredient : ingredient},
+		bindToController : true,
 		targetEvent: event,
 		clickOutsideToClose:true
 		})
