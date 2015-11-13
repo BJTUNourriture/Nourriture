@@ -17,14 +17,13 @@ function IngredientsDashboardController($scope, IngredientService, SearchService
 		name : '',
 		metadata : {
 			"items": 10,
-			"page" : 1,
-			"total" : 4
+			"page" : 1
 		}
 	};
 
 	vm.IngredientsGetSuccess = function (data) {
 		$log.log(data);
-		vm.table.total = data.metadata.total;
+		vm.table.metadata.total = data.metadata.total;
 		vm.ingredients = data.ingredients;
 		if (vm.table.order)
 			if (vm.table.order.order == "desc")
