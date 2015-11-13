@@ -16,7 +16,7 @@
       user_get_username: $resource(URL_API + '/api/users/username/:username', {username: "@username"}),
       user_get_id: $resource(URL_API + '/api/users/id/:id', {id: "@id"}),
       is_authenticated: is_authenticated,
-      update_user: $resource(URL_API + '/api/users/id/:id', {id: "@id"}),
+      update_user: $resource(URL_API + '/api/users/id/:id', {id: "@id"}, {'update': {method: 'PUT'}})
     };
 
     return service;
@@ -24,6 +24,7 @@
     function is_authenticated() {
       return ($sessionStorage.key || $localStorage.key) ? true : false;
     }
+
 
   }
 })();

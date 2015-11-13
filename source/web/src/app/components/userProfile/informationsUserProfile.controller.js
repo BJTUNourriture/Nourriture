@@ -40,7 +40,7 @@
 
       $scope.$watch(angular.bind($rootScope.UserProfile, function () {
         return $rootScope.UserProfile;
-      }), function (newVal) {
+      }), function () {
         vm.data = $rootScope.UserProfile;
       }, true);
     };

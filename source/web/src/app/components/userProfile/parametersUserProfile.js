@@ -53,12 +53,13 @@
     vm.updateProfile = function () {
       $log.log("Updating Profile", $localStorage.user_id, vm.data);
 
-
-      UserService.update_user
-        .update({id: $localStorage.user_id || $sessionStorage.user_id})
+      UserService
+        .update_user
+        .update({id: $localStorage.user_id || $sessionStorage.user_id}, vm.data)
         .$promise
         .then(vm.updateUserSuccess, vm.updateUserError);
     };
+
 
     vm.updateUserSuccess = function (data) {
       $log.log("Updated user", data._id);
@@ -72,4 +73,5 @@
 
   }
 
-})();
+})
+();
