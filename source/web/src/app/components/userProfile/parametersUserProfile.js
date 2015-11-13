@@ -17,7 +17,6 @@
     var vm = this;
 
     var getUserProfile = function () {
-      $log.log("toto", $rootScope.UserProfile);
       vm.data = $rootScope.UserProfile;
       //Init variable for test
       vm.data.gender = "male";

@@ -2,11 +2,15 @@
 
 .index-user-profile {
 	background-color : $background;
+
+  md-tabs md-content {
+    width: 100%;
+  }
 }
 
 .user-profile-head {
-	width : 200px; 
-	height: 300px; 
+	width : 200px;
+	height: 300px;
 	margin: 0 auto;
 }
 
