@@ -1,6 +1,22 @@
 //
    Created by sylflo on 11/6/15.
 
-div(layout="column" layout-align="center center" layout-fill)
-    md-content(flex)
-        h1 Parameters
+div(layout="column" layout-align="center center" layout-fill ng-controller="parametersUserProfileController as parametersUserProfile")
+  md-content
+    h1 Parameters
+    md-content.md-padding
+      div()
+        form(name='contactForm', ng-submit='parametersUserProfile.updateProfile()')
+          md-input-container
+            label Description:
+            textarea(ng-model='parametersUserProfile.data.description')
+
+          //md-input-container(flex='')
+            label Email:
+            input(type='email', ng-model='contactEmail', required='')
+          //md-input-container
+            label Message:
+            textarea(ng-model='contactMsg', columns='1', md-maxlength='150', required='')
+          md-button.md-primary(type='submit') Send
+
+

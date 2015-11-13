@@ -1,5 +1,5 @@
 /**
- * Created by sylflo on 11/8/15.
+ * Created by sylflo on 11/13/15.
  */
 
 (function () {
@@ -8,16 +8,16 @@
 
   angular
     .module('NourritureControllers')
-    .controller('informationsUserProfileController', informationsUserProfileController);
+    .controller('parametersUserProfileController', parametersUserProfileController);
 
-  informationsUserProfileController.$inject = ["$scope", '$log', '$rootScope', '$timeout'];
+  parametersUserProfileController.$inject = ['$scope', '$rootScope', '$timeout', '$log', 'UserService', '$localStorage', '$sessionStorage'];
 
-  function informationsUserProfileController($scope, $log, $rootScope, $timeout) {
+  function parametersUserProfileController($scope, $rootScope, $timeout, $log, UserService, $localStorage, $sessionStorage) {
 
     var vm = this;
 
-
     var getUserProfile = function () {
+
       vm.data = $rootScope.UserProfile;
       //Init variable for test
       vm.data.gender = "male";
@@ -38,17 +38,40 @@
       vm.data.recipe_post = [{name: "Grilled duck"}, {name: "baguette"}];
       vm.data.recipe_like = [{name: "marmelade"}, {name: "cantonese rice"}];
 
-      $scope.$watch(angular.bind($rootScope.UserProfile, function () {
-        return $rootScope.UserProfile;
-      }), function () {
-        vm.data = $rootScope.UserProfile;
+      $scope.$watch(angular.bind(vm.data, function () {
+        return vm.data;
+      }), function (newVal) {
+        $rootScope.UserProfile = newVal;
       }, true);
+
     };
-
-
 
     //Timeout in ms for the moment
     $timeout(getUserProfile, 300);
+
+
+    vm.updateProfile = function () {
+      $log.log("Updating Profile", $localStorage.user_id, vm.data);
+
+      UserService
+        .update_user
+        .update({id: $localStorage.user_id || $sessionStorage.user_id}, vm.data)
+        .$promise
+        .then(vm.updateUserSuccess, vm.updateUserError);
+    };
+
+
+    vm.updateUserSuccess = function (data) {
+      $log.log("Updated user", data._id);
+      $rootScope.UserProfile = data;
+    };
+
+    vm.updateUserError = function (data) {
+      $log.error("Error when updating user", data);
+    };
+
+
   }
 
-})();
+})
+();
