@@ -18,7 +18,7 @@ md-content
 											th(name="Carbohydrates" unit="g" order-by="carbohydrates")
 											th(name="Fats" unit="g" order-by="fat")
 									tbody
-										tr(ng-repeat="ingredient in ingredientDashboard.ingredients")
+										tr(ng-repeat="ingredient in ingredientDashboard.ingredients" style="cursor: pointer;" ng-click='ingredientDashboard.infosIngredientDialog($event, ingredient)')
 											td {{ ingredient.name }}
 											td {{ ingredient.proteins }}
 											td {{ ingredient.carbohydrates }}
