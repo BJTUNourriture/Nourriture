@@ -55,7 +55,7 @@ var Recipes = require('../models/recipes')
 *					 "order": "desc"},
 *				"name": "Tom",
 				 "total": 150}],
-*		"Ingredients": [{"_id" : "561830c5fecdba4f72668fe8",
+*		"ingredients": [{"_id" : "561830c5fecdba4f72668fe8",
 *      				"name": "Tomato",
 *      				"description": "Very yummy fruit."
 *				"fat" : 0.3,
