@@ -18,12 +18,13 @@ md-content
 											th(name="Carbohydrates" unit="g" order-by="carbohydrates")
 											th(name="Fats" unit="g" order-by="fat")
 									tbody
-										tr(md-auto-select ng-repeat="ingredient in ingredientDashboard.ingredients")
+										tr(ng-repeat="ingredient in ingredientDashboard.ingredients")
 											td {{ ingredient.name }}
 											td {{ ingredient.proteins }}
 											td {{ ingredient.carbohydrates }}
 											td {{ ingredient.fat }}
-							md-data-table-pagination(md-limit="ingredientDashboard.table.metadata.items" md-page="ingredientDashboard.table.metadata.page" md-total="{{ ingredientDashboard.table.metadata.total }}")
+							md-toolbar.md-hue-1
+								md-data-table-pagination(md-limit="ingredientDashboard.table.metadata.items" md-page="ingredientDashboard.table.metadata.page" md-total="{{ ingredientDashboard.table.metadata.total }}")
 
 						//md-content.body-dashboard-ingredient
 							md-toolbar.md-hue-1
