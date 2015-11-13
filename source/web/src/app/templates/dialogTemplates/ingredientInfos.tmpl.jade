@@ -1,3 +1,18 @@
 md-dialog
 	md-dialog-content
-		h1 {{ infosIngredient.ingredient.name }}
+		div(layout="column" flex layout-align="start center")
+			h2 {{ infosIngredient.ingredient.name }}
+			md-toolbar(style="text-align: center;").flex
+				p Nutritional Values
+			md-list.ng-cloak(style="width : 100%")
+				md-list-item
+					span Proteins
+					span.md-secondary {{ infosIngredient.ingredient.proteins }} g
+				md-divider
+				md-list-item
+					span Carbohydrates
+					span.md-secondary {{ infosIngredient.ingredient.carbohydrates }} g
+				md-divider
+				md-list-item
+					span Fats
+					span.md-secondary {{ infosIngredient.ingredient.fat }} g
