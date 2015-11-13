@@ -6,13 +6,21 @@ md-dialog
 				p Nutritional Values
 			md-list.ng-cloak(style="width : 100%")
 				md-list-item
+					span
+						ng-md-icon(icon="storm")
 					span Proteins
 					span.md-secondary {{ infosIngredient.ingredient.proteins }} g
 				md-divider
 				md-list-item
+					span
+						ng-md-icon(icon="carbohydrates")
 					span Carbohydrates
 					span.md-secondary {{ infosIngredient.ingredient.carbohydrates }} g
 				md-divider
 				md-list-item
+					span
+						ng-md-icon(icon="fat")
 					span Fats
 					span.md-secondary {{ infosIngredient.ingredient.fat }} g
+				md-divider
+			md-button(ng-click="infosIngredient.goToIngredientPage(infosIngredient.ingredient._id); infosIngredient.hide()").md-raised Ingredient's Page

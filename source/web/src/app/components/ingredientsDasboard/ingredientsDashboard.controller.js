@@ -4,13 +4,27 @@
 angular.module('NourritureControllers')
 	.controller('IngredientsDashboardController', IngredientsDashboardController);
 
-IngredientsDashboardController.$inject = ["$scope", "IngredientService", 'toastr',"$log", "$mdDialog", "$document"];
+IngredientsDashboardController.$inject = ["$scope", "IngredientService", 'toastr',"$log", "$mdDialog", "$document", "$state"];
 
-function IngredientsDashboardController($scope, IngredientService, toastr, $log, $mdDialog, $document)
+function IngredientsDashboardController($scope, IngredientService, toastr, $log, $mdDialog, $document, $state)
 {
 	var vm = this;
 
 	$log.log("innit");
+
+	//Table specs
+	vm.table = {
+		name : '',
+		order : {
+			"order": "",
+			"field": ""
+		},
+		metadata : {
+			"items": 10,
+			"page" : 1,
+			"total" : 4
+		}
+	};
 
 	vm.IngredientsGetSuccess = function (data) {
 		$log.log(data);
@@ -75,6 +89,20 @@ function IngredientsDashboardController($scope, IngredientService, toastr, $log,
 				.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);
 	};
 
+	//Table functions
+	vm.tableOnOrderChange = function(order) {
+		if (order[0] == '-')
+		{
+			vm.table.order.order = "desc";
+			vm.table.order.field = vm.table.order.field.slice(1);
+		}
+		else
+			vm.table.order.order = "asc";
+		$log.log(vm.table);
+		if (vm.table.order.order == "desc")
+			vm.table.order.field = "-" + vm.table.order.field;
+	};
+
 	//Dialogs
 	vm.infosIngredientDialog = function(event, ingredient) {
 		$mdDialog.show({
@@ -101,10 +129,14 @@ function IngredientsDashboardController($scope, IngredientService, toastr, $log,
 
 	//Controller for infosIngredientDialog
 	vm.dialogController = function($mdDialog) {
-		var vmChild = {};
+		var vm = this;
 
-		vmChild.hide = function() {
-			$mdDialog.hide()
+		vm.hide = function () {
+			$mdDialog.hide();
+		}
+
+		vm.goToIngredientPage = function(id_ingredient) {
+			$state.go("main.homepage");
 		}
 	}
 

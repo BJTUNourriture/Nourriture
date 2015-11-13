@@ -7,6 +7,25 @@ md-content
 				div(flex).body-dashboard-ingredient-md
 					section(layout="column", layout-align="start center", layout-margin)
 						md-content.body-dashboard-ingredient
+							md-data-table-toolbar
+								h1.md-title Ingredients
+							md-data-table-container
+								table(md-data-table md-row-select="selected" md-progress="deferred")
+									thead(md-order="ingredientDashboard.table.order.field" md-trigger="ingredientDashboard.tableOnOrderChange")
+										tr
+											th(name="Name" order-by="name")
+											th(name="Proteins" unit="g" order-by="proteins")
+											th(name="Carbohydrates" unit="g" order-by="carbohydrates")
+											th(name="Fats" unit="g" order-by="fat")
+									tbody
+										tr(md-auto-select ng-repeat="ingredient in ingredientDashboard.ingredients")
+											td {{ ingredient.name }}
+											td {{ ingredient.proteins }}
+											td {{ ingredient.carbohydrates }}
+											td {{ ingredient.fat }}
+							md-data-table-pagination(md-limit="ingredientDashboard.table.metadata.items" md-page="ingredientDashboard.table.metadata.page" md-total="{{ ingredientDashboard.table.metadata.total }}")
+
+						//md-content.body-dashboard-ingredient
 							md-toolbar.md-hue-1
 								section(layout="row", layout-align="start start", layout-margin)
 									div(style="max-width:200px;").hide-gt-sm
@@ -26,7 +45,7 @@ md-content
 										ng-md-icon(icon="highlight_remove" ng-click="ingredientDashboard.deleteIngredientDialog($event, ingredient)").md-secondary.body-dashboard-ingredient-delete-icon-list
 									span(ng-if="!$last")
 										md-divider
-						span(flex="5")
+						//span(flex="5")
 						div.flex
 							md-button(ui-sref="main.create-ingredient").md-raised Add a new Ingredient
 		include ../footer/footer.jade

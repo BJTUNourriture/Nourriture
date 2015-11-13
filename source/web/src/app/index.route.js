@@ -72,6 +72,19 @@
                     }
                 }
             })
+            .state('main.ingredient-page', {
+                url: 'ingredient/:id',
+                parent: 'main',
+                templateUrl: 'app/templates/createIngredient/createIngredient.html',
+                controller: 'CreateIngredientController',
+                controllerAs: 'createIngredient',
+                data: {
+                    permissions: {
+                      except: ['guest'],
+                      redirectTo: 'main.homepage'
+                    }
+                }
+            })
             .state('main.logout', {
                 url: 'logout',
                 parent: 'main',

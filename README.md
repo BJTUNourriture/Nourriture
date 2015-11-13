@@ -10,12 +10,12 @@ Xin Xing
 
 - ExpressJS
 - MongoDB
-- ...
 
 ##Front :
 
 - AngularJS
-- Handelbars
+- Jade
+- Sass
 
 ##Android :
 
