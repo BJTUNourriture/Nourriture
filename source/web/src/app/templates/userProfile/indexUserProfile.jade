@@ -12,27 +12,6 @@ md-content.index-user-profile
                     span 0
                     ng-md-icon(icon="face")
 
-            //md-tabs.md-dynamic-height.md-border-bottom.user-profile-body-tabs
-                md-tab(label="Informations")
-                    md-content
-                        .vertical-scroll
-                            include tabs/information
-                md-tab(label="Recipes")
-                    md-content
-                        .vertical-scroll
-                            include tabs/recipes
-                //md-tab(label="Groups")
-                    md-content
-                        .vertical-scroll
-                            include tabs/groups
-                //md-tab(label="Followers")
-                    md-content
-                        .vertical-scroll
-                            include tabs/followers
-                //md-tab(label="Parameters")
-                    md-content
-                        .vertical-scroll
-                            include tabs/parameters
         md-card(flex)
             md-tabs(flex).user-profile-body-tabs
                 md-tab(label="Informations")

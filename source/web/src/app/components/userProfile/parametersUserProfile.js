@@ -1,5 +1,5 @@
 /**
- * Created by sylflo on 11/8/15.
+ * Created by sylflo on 11/13/15.
  */
 
 (function () {
@@ -8,11 +8,11 @@
 
   angular
     .module('NourritureControllers')
-    .controller('informationsUserProfileController', informationsUserProfileController);
+    .controller('parametersUserProfileController', parametersUserProfileController);
 
-  informationsUserProfileController.$inject = ["$scope", '$log', '$rootScope', '$timeout'];
+  parametersUserProfileController.$inject = ['$scope', '$rootScope', '$timeout', '$log'];
 
-  function informationsUserProfileController($scope, $log, $rootScope, $timeout) {
+  function parametersUserProfileController($scope, $rootScope, $timeout, $log) {
 
     var vm = this;
 
@@ -39,13 +39,14 @@
       vm.data.recipe_like = [{name: "marmelade"}, {name: "cantonese rice"}];
     };
 
-
-    /*$scope.$watch($rootScope.UserProfile, function () {
-      $log.log("Value changed");
-    });*/
-
     //Timeout in ms for the moment
     $timeout(getUserProfile, 300);
+
+    $scope.$watch(vm.data, function () {
+      $log.log("IN parametersUserProfile");
+        $rootScope.UserProfile = vm.data;
+    });
+
   }
 
 })();

@@ -1,6 +1,15 @@
 //
    Created by sylflo on 11/6/15.
 
-div(layout="column" layout-align="center center" layout-fill)
-    md-content(flex)
-        h1 Parameters
+div(layout="column" layout-align="center center" layout-fill ng-controller="parametersUserProfileController as parametersUserProfile")
+  md-content
+    h1 Parameters
+    md-list
+      md-list-item.md-3-line.md-no-proxy
+        .md-list-item-text
+          p <span class='bold'>Username:</span> {{parametersUserProfile.data.username}}
+        md-divider
+      md-list-item.md-3-line.md-no-proxy
+        .md-list-item-text
+          p <span class='bold'>Gender:</span> {{parametersUserProfile.data.gender}}
+        md-divider
