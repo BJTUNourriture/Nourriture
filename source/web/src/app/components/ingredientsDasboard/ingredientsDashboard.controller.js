@@ -24,6 +24,7 @@ function IngredientsDashboardController($scope, IngredientService, SearchService
 	vm.selected_ingredients = [];
 
 	vm.deferred;
+	//End table specs
 
 	vm.IngredientsGetSuccess = function (data) {
 		$log.log(data);
@@ -70,6 +71,7 @@ function IngredientsDashboardController($scope, IngredientService, SearchService
 		.$promise;
 	
 	vm.deferred.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);
+	//End init data
 
 	vm.deleteIngredient = function(ingredients) {
 		for(var i=0; i < ingredients.length; i++)
