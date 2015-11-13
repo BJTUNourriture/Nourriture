@@ -15,10 +15,6 @@ function IngredientsDashboardController($scope, IngredientService, SearchService
 	//Table specs
 	vm.table = {
 		name : '',
-		order : {
-			"order": "",
-			"field": ""
-		},
 		metadata : {
 			"items": 10,
 			"page" : 1,
@@ -28,7 +24,8 @@ function IngredientsDashboardController($scope, IngredientService, SearchService
 
 	vm.IngredientsGetSuccess = function (data) {
 		$log.log(data);
-		vm.ingredients = data.Ingredients;
+		vm.table.total = data.metadata.total;
+		vm.ingredients = data.ingredients;
 	};
 
 	vm.IngredientsGetFailure = function (data) {
