@@ -7,6 +7,12 @@ md-dialog
 			md-list.ng-cloak(style="width : 100%")
 				md-list-item
 					span
+						ng-md-icon(icon="calories")
+					span Calories
+					span.md-secondary {{ infosIngredient.ingredient.calories }} Kcal
+				md-divider
+				md-list-item
+					span
 						ng-md-icon(icon="storm")
 					span Proteins
 					span.md-secondary {{ infosIngredient.ingredient.proteins }} g
