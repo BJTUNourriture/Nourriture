@@ -12,6 +12,19 @@ function IngredientsDashboardController($scope, IngredientService, toastr, $log,
 
 	$log.log("innit");
 
+	//Table specs
+	vm.table = {
+		name : '',
+		order : {
+			"order": "",
+			"field": ""
+		},
+		metadata : {
+			"items": 10,
+			"page" : 1
+		}
+	};
+
 	vm.IngredientsGetSuccess = function (data) {
 		$log.log(data);
 		vm.ingredients = data;
@@ -73,6 +86,20 @@ function IngredientsDashboardController($scope, IngredientService, toastr, $log,
 				.query({name : $scope.search})
 				.$promise
 				.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);
+	};
+
+	//Table functions
+	vm.tableOnOrderChange = function(order) {
+		if (order[0] == '-')
+		{
+			vm.table.order.order = "desc";
+			vm.table.order.field = vm.table.order.field.slice(1);
+		}
+		else
+			vm.table.order.order = "asc";
+		$log.log(vm.table);
+		if (vm.table.order.order == "desc")
+			vm.table.order.field = "-" + vm.table.order.field;
 	};
 
 	//Dialogs

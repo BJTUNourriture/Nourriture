@@ -7,6 +7,25 @@ md-content
 				div(flex).body-dashboard-ingredient-md
 					section(layout="column", layout-align="start center", layout-margin)
 						md-content.body-dashboard-ingredient
+							md-data-table-toolbar
+								h1.md-title Ingredients
+							md-data-table-container
+								table(md-data-table md-row-select="selected" md-progress="deferred")
+									thead(md-order="ingredientDashboard.table.order.field" md-trigger="ingredientDashboard.tableOnOrderChange")
+										tr
+											th(name="Name" order-by="name")
+											th(name="Proteins" unit="g" order-by="proteins")
+											th(name="Carbohydrates" unit="g" order-by="carbohydrates")
+											th(name="Fats" unit="g" order-by="fat")
+									tbody
+										tr(md-auto-select ng-repeat="ingredient in ingredientDashboard.ingredients")
+											td {{ ingredient.name }}
+											td {{ ingredient.proteins }}
+											td {{ ingredient.carbohydrates }}
+											td {{ ingredient.fat }}
+
+
+						//md-content.body-dashboard-ingredient
 							md-toolbar.md-hue-1
 								section(layout="row", layout-align="start start", layout-margin)
 									div(style="max-width:200px;").hide-gt-sm
