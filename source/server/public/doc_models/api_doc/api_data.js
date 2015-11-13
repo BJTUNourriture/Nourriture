@@ -2419,7 +2419,7 @@ define({ "api": [
             "type": "<p>Number</p> ",
             "optional": true,
             "field": "calories",
-            "description": "<p>Calories (in kcal) contained in the ingredient</p> "
+            "description": "<p>Calories (in kcal/100g) contained in the ingredient</p> "
           },
           {
             "group": "Success 200",
@@ -2530,7 +2530,7 @@ define({ "api": [
             "type": "<p>Number</p> ",
             "optional": true,
             "field": "calories",
-            "description": "<p>Calories (in kcal) contained in the ingredient</p> "
+            "description": "<p>Calories (in kcal/100g) contained in the ingredient</p> "
           },
           {
             "group": "Success 200",
@@ -2641,7 +2641,7 @@ define({ "api": [
             "type": "<p>Number</p> ",
             "optional": true,
             "field": "calories",
-            "description": "<p>Calories (in kcal) contained in the ingredient</p> "
+            "description": "<p>Calories (in kcal/100g) contained in the ingredient</p> "
           },
           {
             "group": "Success 200",
@@ -2741,7 +2741,7 @@ define({ "api": [
             "type": "<p>Number</p> ",
             "optional": true,
             "field": "calories",
-            "description": "<p>Calories (in kcal) contained in the ingredient</p> "
+            "description": "<p>Calories (in kcal/100g) contained in the ingredient</p> "
           },
           {
             "group": "Parameter",
@@ -2813,7 +2813,7 @@ define({ "api": [
             "type": "<p>Number</p> ",
             "optional": true,
             "field": "calories",
-            "description": "<p>Calories (in kcal) contained in the ingredient</p> "
+            "description": "<p>Calories (in kcal/100g) contained in the ingredient</p> "
           },
           {
             "group": "Parameter",
@@ -2942,7 +2942,7 @@ define({ "api": [
             "type": "<p>Number</p> ",
             "optional": true,
             "field": "calories",
-            "description": "<p>Calories (in kcal) contained in the ingredient</p> "
+            "description": "<p>Calories (in kcal/100g) contained in the ingredient</p> "
           },
           {
             "group": "Parameter",
