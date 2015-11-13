@@ -12,6 +12,7 @@ function IngredientPageController($scope, IngredientService, toastr, $state, $lo
 
 	vm.IngredientFetchSuccess = function (data) {
 		$log.log(data);
+		vm.ingredient = data;
 	};
 
 	vm.IngredientFetchFailure = function (data) {
