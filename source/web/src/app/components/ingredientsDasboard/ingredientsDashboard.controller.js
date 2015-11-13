@@ -21,6 +21,8 @@ function IngredientsDashboardController($scope, IngredientService, SearchService
 		}
 	};
 
+	vm.selected_ingredients = [];
+
 	vm.IngredientsGetSuccess = function (data) {
 		$log.log(data);
 		vm.table.metadata.total = data.metadata.total;
@@ -104,6 +106,16 @@ function IngredientsDashboardController($scope, IngredientService, SearchService
 			.save(vm.table)
 			.$promise
 			.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);
+	};
+
+	vm.tableOnPaginationChange = function(page, limit) {
+		vm.table.metadata.page = page;
+		vm.table.metadata.items = limit;
+		SearchService
+			.ingredients
+			.save(vm.table)
+			.$promise
+			.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);		
 	};
 
 	//Dialogs

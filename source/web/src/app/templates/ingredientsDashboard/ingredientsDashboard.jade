@@ -10,7 +10,7 @@ md-content
 							md-data-table-toolbar
 								h1.md-title Ingredients
 							md-data-table-container
-								table(md-data-table md-row-select="selected" md-progress="deferred")
+								table(md-data-table md-row-select="ingredientDashboard.selected_ingredients" md-progress="deferred")
 									thead(md-order="ingredientDashboard.table.order.field" md-trigger="ingredientDashboard.tableOnOrderChange")
 										tr
 											th(name="Name" order-by="name")
@@ -23,8 +23,7 @@ md-content
 											td {{ ingredient.proteins }}
 											td {{ ingredient.carbohydrates }}
 											td {{ ingredient.fat }}
-							md-toolbar.md-hue-1
-								md-data-table-pagination(md-limit="ingredientDashboard.table.metadata.items" md-page="ingredientDashboard.table.metadata.page" md-total="{{ ingredientDashboard.table.metadata.total }}")
+							md-data-table-pagination(md-trigger="ingredientDashboard.tableOnPaginationChange" md-limit="ingredientDashboard.table.metadata.items" md-page="ingredientDashboard.table.metadata.page" md-total="{{ ingredientDashboard.table.metadata.total }}")
 
 						//md-content.body-dashboard-ingredient
 							md-toolbar.md-hue-1
