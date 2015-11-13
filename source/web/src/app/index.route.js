@@ -75,9 +75,9 @@
             .state('main.ingredient-page', {
                 url: 'ingredient/:id',
                 parent: 'main',
-                templateUrl: 'app/templates/createIngredient/createIngredient.html',
-                controller: 'CreateIngredientController',
-                controllerAs: 'createIngredient',
+                templateUrl: 'app/templates/ingredientPage/ingredientPage.html',
+                controller: 'IngredientPageController',
+                controllerAs: 'ingredientPage',
                 data: {
                     permissions: {
                       except: ['guest'],

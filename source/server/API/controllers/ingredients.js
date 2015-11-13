@@ -5,7 +5,7 @@
 *
 * @apiParam {String} name Name of the ingredient
 * @apiParam {String} [description] Description of the ingredient
-* @apiParam {Number} [calories] Calories (in kcal) contained in the ingredient
+* @apiParam {Number} [calories] Calories (in kcal/100g) contained in the ingredient
 * @apiParam {Number} [fat] Fat (in grams) contained in the ingredient
 * @apiParam {Number} [carbohydrates] Carbohydrates (in grams) contained in the ingredient
 * @apiParam {Number} [proteins] Proteins (in grams) contained in the ingredient
@@ -17,7 +17,7 @@
 *
 * @apiParam {String} [name] Name of the ingredient
 * @apiParam {String} [description] Description of the ingredient
-* @apiParam {Number} [calories] Calories (in kcal) contained in the ingredient
+* @apiParam {Number} [calories] Calories (in kcal/100g) contained in the ingredient
 * @apiParam {Number} [fat] Fat (in grams) contained in the ingredient
 * @apiParam {Number} [carbohydrates] Carbohydrates (in grams) contained in the ingredient
 * @apiParam {Number} [proteins] Proteins (in grams) contained in the ingredient
@@ -30,7 +30,7 @@
 * @apiSuccess {String} _id Id of the ingredient
 * @apiSuccess {String} name Name of the ingredient
 * @apiSuccess {String} [description] Description of the ingredient
-* @apiSuccess{Number} [calories] Calories (in kcal) contained in the ingredient
+* @apiSuccess{Number} [calories] Calories (in kcal/100g) contained in the ingredient
 * @apiSuccess {Number} [fat] Fat (in grams) contained in the ingredient
 * @apiSuccess {Number} [carbohydrates] Carbohydrates (in grams) contained in the ingredient
 * @apiSuccess {Number} [proteins] Proteins (in grams) contained in the ingredient

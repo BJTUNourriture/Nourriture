@@ -1,0 +1,13 @@
+md-content
+	div(layout="column", layout-fill).flex
+		div.flex
+			div(layout="column" flex layout-align="start center")
+				div(flex="none").title-register-container 
+					span.title-register-md Ingredient Page
+				div(flex).body-dashboard-ingredient-md
+					section(layout="column", layout-align="start center", layout-margin)
+						div.body-ingredient-page.hide-sm
+							include ./ingredientPageBody.jade
+						div.hide-gt-sm
+							include ./ingredientPageBody.jade
+		include ../footer/footer.jade
