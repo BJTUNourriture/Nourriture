@@ -72,7 +72,7 @@ function IngredientsDashboardController($scope, IngredientService, SearchService
 	vm.deferred.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);
 
 	vm.deleteIngredient = function(ingredients) {
-		for(var i=0; i < ingredients.length(); i++)
+		for(var i=0; i < ingredients.length; i++)
 			IngredientService
 			.ingredient_id
 			.delete({id : ingredients[i]._id})
@@ -137,7 +137,7 @@ function IngredientsDashboardController($scope, IngredientService, SearchService
 					.cancel('Not really actually')
 					.targetEvent(event);
 		if (vm.selected_ingredients.length > 0)
-			$mdDialog.show(confirm).then(function() {vm.deleteIngredient(selected_ingredients)}, function(){});
+			$mdDialog.show(confirm).then(function() {vm.deleteIngredient(vm.selected_ingredients)}, function(){});
 		else
 			toastr.error("You have to selected items to delete", 'Woops...', {timeOut : 300});
 	};
