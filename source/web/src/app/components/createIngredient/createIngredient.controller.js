@@ -34,6 +34,8 @@ function CreateIngredientController($scope, IngredientService, toastr, $log)
 		toastr.error(errorMsg, 'Woops...');
 	};
 
+	vm.tags_ingredient = [];
+
 }
 
 })();

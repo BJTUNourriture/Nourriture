@@ -18,6 +18,11 @@
 	max-width : 150px;
 }
 
+.body-tags {
+	max-height : 100px;
+	position : relative;
+}
+
 md-checkbox.md-checked.remember-me-login .md-icon {
  background-color:  $borderBlock;
 }
