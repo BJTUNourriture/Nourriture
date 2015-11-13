@@ -8,7 +8,12 @@ md-content
 					section(layout="column", layout-align="start center", layout-margin)
 						md-content.body-dashboard-ingredient
 							md-data-table-toolbar.body-dashboard-ingredient-table-toolbars
-								h1.md-title Ingredients
+								section(layout="row", layout-align="start start", layout-margin)
+									form(ng-submit="ingredientDashboard.searchIngredientsByName()")
+										md-input-container
+											label Search an Ingredient
+											input(ng-model="search" name="search")
+									ng-md-icon(type="submit" icon="search" style="cursor: pointer;" ng-click="ingredientDashboard.searchIngredientsByName()")
 							md-data-table-container
 								table(md-data-table md-row-select="ingredientDashboard.selected_ingredients" md-progress="ingredientDashboard.deferred")
 									thead(md-order="ingredientDashboard.table.order.field" md-trigger="ingredientDashboard.tableOnOrderChange")

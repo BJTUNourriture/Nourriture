@@ -80,18 +80,12 @@ function IngredientsDashboardController($scope, IngredientService, SearchService
 	}
 
 	vm.searchIngredientsByName = function() {
-		if (!$scope.search)
-			IngredientService
+		vm.table.name = $scope.search;
+		vm.deferred = SearchService
 			.ingredients
-			.query()
-			.$promise
-			.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);
-		else
-			IngredientService
-				.ingredient_name
-				.query({name : $scope.search})
-				.$promise
-				.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);
+			.save(vm.table)
+			.$promise;
+		vm.deferred.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);			
 	};
 
 	//Table functions
