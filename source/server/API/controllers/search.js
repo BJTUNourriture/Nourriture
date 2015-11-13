@@ -53,7 +53,8 @@ var Recipes = require('../models/recipes')
 *			      "total_page": "24",
 *			       "order": {"field": "fat",
 *					 "order": "desc"},
-*				"name": "Tom"}],
+*				"name": "Tom",
+				 "total": 150}],
 *		"Ingredients": [{"_id" : "561830c5fecdba4f72668fe8",
 *      				"name": "Tomato",
 *      				"description": "Very yummy fruit."
@@ -153,8 +154,10 @@ exports.postSearchIngredients = function (req, res, flag) {
 	}
 
 	var total_page
+	var total_items
 	Ingredients.find(Json_search,
 		function (err, docs) {
+			total_items = docs.length;
 			total_page = Math.round(docs.length / items_number);
 		if (total_page <= 0)
 			total_page = 1	
@@ -171,6 +174,7 @@ exports.postSearchIngredients = function (req, res, flag) {
 					else if (docs.length <= 0)
 						return (res.status(404).send({message : 'Nothing find for this search'}))
 					else{
+						newjson.metadata.total = total_items
 						newjson.metadata.total_page = total_page
 						newjson.ingredients = docs
 						return (res.json(newjson));
@@ -195,6 +199,7 @@ exports.postSearchIngredients = function (req, res, flag) {
 					else if (docs.length <= 0){
 						return (res.status(404).send({message : 'Nothing find for this search'}))}
 					else{
+						newjson.metadata.total = total_items
 						newjson.metadata.total_page = total_page
 						newjson.ingredients = docs
 						return (res.json(newjson));
@@ -260,7 +265,8 @@ exports.postSearchIngredients = function (req, res, flag) {
 *    "tags": [
 *      "563091df113604b7959a6327"
 *    ],
-*    "total_page": 1
+*    "total_page": 1,
+	"total": 150
 *  },
 *  "recipes": [
 *    {
@@ -394,8 +400,10 @@ exports.postSearchRecipes = function (req, res, flag) {
 	}
 	
 	var total_page
+	var total_items
 	Recipes.find(Json_search,
 		function (err, docs) {
+			total_items = docs.length;
 			total_page = Math.round(docs.length / items_number);
 		if (total_page <= 0)
 			total_page = 1	
@@ -412,6 +420,7 @@ exports.postSearchRecipes = function (req, res, flag) {
 					else if (docs.length <= 0)
 						return (res.status(404).send({message : 'Nothing find for this search'}))
 					else{
+						newjson.metadata.total = total_items
 						newjson.metadata.total_page = total_page
 						newjson.recipes = docs
 						return (res.json(newjson));
@@ -436,6 +445,7 @@ exports.postSearchRecipes = function (req, res, flag) {
 					else if (docs.length <= 0){
 						return (res.status(404).send({message : 'Nothing find for this search'}))}
 					else{
+						newjson.metadata.total = total_items
 						newjson.metadata.total_page = total_page
 						newjson.recipes = docs
 						return (res.json(newjson));
@@ -572,7 +582,7 @@ exports.postSearchRecipes = function (req, res, flag) {
 *     }
 */
 
-exports.postSearchUsers = function (req, res, flag) {
+/*exports.postSearchUsers = function (req, res, flag) {
 	
 	var username =  req.body.username;
 	var order = ""
@@ -603,4 +613,4 @@ exports.postSearchUsers = function (req, res, flag) {
 	//If title and tags are set
 
 	return (1);
-}
+}*/
