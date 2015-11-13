@@ -153,7 +153,7 @@ function IngredientsDashboardController($scope, IngredientService, SearchService
 		}
 
 		vm.goToIngredientPage = function(id_ingredient) {
-			$state.go("main.homepage");
+			$state.go("main.ingredient-page", {id : id_ingredient});
 		}
 	}
 

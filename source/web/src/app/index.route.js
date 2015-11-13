@@ -75,7 +75,7 @@
             .state('main.ingredient-page', {
                 url: 'ingredient/:id',
                 parent: 'main',
-                templateUrl: 'app/templates/createIngredient/createIngredient.html',
+                templateUrl: 'app/templates/ingredientPage/ingredientPage.html',
                 controller: 'CreateIngredientController',
                 controllerAs: 'createIngredient',
                 data: {
