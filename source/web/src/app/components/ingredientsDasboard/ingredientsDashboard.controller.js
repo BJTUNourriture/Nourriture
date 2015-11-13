@@ -4,9 +4,9 @@
 angular.module('NourritureControllers')
 	.controller('IngredientsDashboardController', IngredientsDashboardController);
 
-IngredientsDashboardController.$inject = ["$scope", "IngredientService", 'toastr',"$log", "$mdDialog"];
+IngredientsDashboardController.$inject = ["$scope", "IngredientService", 'toastr',"$log", "$mdDialog", "$document"];
 
-function IngredientsDashboardController($scope, IngredientService, toastr, $log, $mdDialog)
+function IngredientsDashboardController($scope, IngredientService, toastr, $log, $mdDialog, $document)
 {
 	var vm = this;
 
@@ -77,15 +77,13 @@ function IngredientsDashboardController($scope, IngredientService, toastr, $log,
 
 	//Dialogs
 	vm.infosIngredientDialog = function(event, ingredient) {
-		var confirm = $mdDialog.confirm()
-			.title(ingredient.name)
-			.content("Proteins : "+ ingredient.proteins+" Carbohydrates : "+ingredient.carbohydrates+" Fats : "+ingredient.fat)
-			.ok("Go to the Ingredient's page")
-			.clickOutsideToClose(true)
-			.targetEvent(event);
-
-
-		$mdDialog.show(confirm);
+		$mdDialog.show({
+		controller: vm.dialogController,
+		templateUrl: 'app/templates/dialogTemplates/ingredientInfos.tmpl.html',
+		parent: angular.element($document.body),
+		targetEvent: event,
+		clickOutsideToClose:true
+		})
 	};
 
 	vm.deleteIngredientDialog = function(event, ingredient) {
@@ -97,6 +95,15 @@ function IngredientsDashboardController($scope, IngredientService, toastr, $log,
 
 		$mdDialog.show(confirm).then(function() {vm.deleteIngredient(ingredient)}, function(){});
 	};
+
+	//Controller for infosIngredientDialog
+	vm.dialogController = function($mdDialog) {
+		var vmChild = {};
+
+		vmChild.hide = function() {
+			$mdDialog.hide()
+		}
+	}
 
 }
 
