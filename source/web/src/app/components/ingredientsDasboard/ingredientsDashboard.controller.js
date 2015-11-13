@@ -4,17 +4,35 @@
 angular.module('NourritureControllers')
 	.controller('IngredientsDashboardController', IngredientsDashboardController);
 
-IngredientsDashboardController.$inject = ["$scope", "IngredientService", 'toastr',"$log", "$mdDialog", "$document", "$state"];
+IngredientsDashboardController.$inject = ["$scope", "IngredientService", 'SearchService', 'toastr',"$log", "$mdDialog", "$document", "$state"];
 
-function IngredientsDashboardController($scope, IngredientService, toastr, $log, $mdDialog, $document, $state)
+function IngredientsDashboardController($scope, IngredientService, SearchService, toastr, $log, $mdDialog, $document, $state)
 {
 	var vm = this;
 
 	$log.log("innit");
 
+	//Table specs
+	vm.table = {
+		name : '',
+		metadata : {
+			"items": 10,
+			"page" : 1
+		}
+	};
+
+	vm.selected_ingredients = [];
+
+	vm.deferred;
+
 	vm.IngredientsGetSuccess = function (data) {
 		$log.log(data);
-		vm.ingredients = data;
+		vm.table.metadata.total = data.metadata.total;
+		vm.ingredients = data.ingredients;
+		if (vm.table.order)
+			if (vm.table.order.order == "desc")
+				if (vm.table.order.field[0] != "-")
+					vm.table.order.field = "-" + vm.table.order.field;
 	};
 
 	vm.IngredientsGetFailure = function (data) {
@@ -46,11 +64,12 @@ function IngredientsDashboardController($scope, IngredientService, toastr, $log,
 	};
 
 	//Init data
-	IngredientService
+	vm.deferred = SearchService
 		.ingredients
-		.query()
-		.$promise
-		.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);
+		.save(vm.table)
+		.$promise;
+	
+	vm.deferred.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);
 
 	vm.deleteIngredient = function(ingredient) {
 		IngredientService
@@ -61,18 +80,39 @@ function IngredientsDashboardController($scope, IngredientService, toastr, $log,
 	}
 
 	vm.searchIngredientsByName = function() {
-		if (!$scope.search)
-			IngredientService
+		vm.table.name = $scope.search;
+		vm.deferred = SearchService
 			.ingredients
-			.query()
-			.$promise
-			.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);
+			.save(vm.table)
+			.$promise;
+		vm.deferred.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);			
+	};
+
+	//Table functions
+	vm.tableOnOrderChange = function(order) {
+		if (order[0] == '-')
+		{
+			vm.table.order.order = "desc";
+			vm.table.order.field = vm.table.order.field.slice(1);
+		}
 		else
-			IngredientService
-				.ingredient_name
-				.query({name : $scope.search})
-				.$promise
-				.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);
+			vm.table.order.order = "asc";
+		$log.log(vm.table);
+		vm.deferred = SearchService
+			.ingredients
+			.save(vm.table)
+			.$promise;
+		vm.deferred.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);	
+	};
+
+	vm.tableOnPaginationChange = function(page, limit) {
+		vm.table.metadata.page = page;
+		vm.table.metadata.items = limit;
+		vm.deferred = SearchService
+			.ingredients
+			.save(vm.table)
+			.$promise;
+		vm.deferred.then(vm.IngredientsGetSuccess, vm.IngredientsGetFailure);		
 	};
 
 	//Dialogs

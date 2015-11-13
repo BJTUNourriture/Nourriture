@@ -53,8 +53,9 @@ var Recipes = require('../models/recipes')
 *			      "total_page": "24",
 *			       "order": {"field": "fat",
 *					 "order": "desc"},
-*				"name": "Tom"}],
-*		"Ingredients": [{"_id" : "561830c5fecdba4f72668fe8",
+*				"name": "Tom",
+				 "total": 150}],
+*		"ingredients": [{"_id" : "561830c5fecdba4f72668fe8",
 *      				"name": "Tomato",
 *      				"description": "Very yummy fruit."
 *				"fat" : 0.3,
@@ -108,17 +109,18 @@ exports.postSearchIngredients = function (req, res, flag) {
 	}
 	var tag_list = req.body.tags;
 
-	//If name and tags are not set
-
-	if (!name && !tag_list)
-		return flag === true ? -1 : res.status(400).send({message : 'You must at least set a name or a tag to search'})
-
 	if (metadata == "")
 		return flag === true ? -1 : res.status(400).send({message : 'You must set the metadata'})
 
 	
 
 	//If name and tags are set
+
+	if (!name && !tag_list){
+
+		var Json_search = {}
+		var newjson = {metadata: {current_page: items_page, order: order}}
+	}
 
 	if (name && tag_list){
 	
@@ -153,8 +155,10 @@ exports.postSearchIngredients = function (req, res, flag) {
 	}
 
 	var total_page
+	var total_items
 	Ingredients.find(Json_search,
 		function (err, docs) {
+			total_items = docs.length;
 			total_page = Math.round(docs.length / items_number);
 		if (total_page <= 0)
 			total_page = 1	
@@ -171,6 +175,7 @@ exports.postSearchIngredients = function (req, res, flag) {
 					else if (docs.length <= 0)
 						return (res.status(404).send({message : 'Nothing find for this search'}))
 					else{
+						newjson.metadata.total = total_items
 						newjson.metadata.total_page = total_page
 						newjson.ingredients = docs
 						return (res.json(newjson));
@@ -195,6 +200,7 @@ exports.postSearchIngredients = function (req, res, flag) {
 					else if (docs.length <= 0){
 						return (res.status(404).send({message : 'Nothing find for this search'}))}
 					else{
+						newjson.metadata.total = total_items
 						newjson.metadata.total_page = total_page
 						newjson.ingredients = docs
 						return (res.json(newjson));
@@ -260,7 +266,8 @@ exports.postSearchIngredients = function (req, res, flag) {
 *    "tags": [
 *      "563091df113604b7959a6327"
 *    ],
-*    "total_page": 1
+*    "total_page": 1,
+	"total": 150
 *  },
 *  "recipes": [
 *    {
@@ -353,13 +360,16 @@ exports.postSearchRecipes = function (req, res, flag) {
 
 	//If title and types are not set
 
-	if (!title && !type_list)
-		return flag === true ? -1 : res.status(400).send({message : 'You must at least set a title or a type to search'})
-
 	if (metadata == "")
 		return flag === true ? -1 : res.status(400).send({message : 'You must set the metadata'})
 
 		//If title and tags are set
+
+	if (!title && !tag_list){
+
+		var Json_search = {}
+		var newjson = {metadata: {current_page: items_page, order: order}}
+	}
 
 	if (title && type_list){
 	
@@ -394,8 +404,10 @@ exports.postSearchRecipes = function (req, res, flag) {
 	}
 	
 	var total_page
+	var total_items
 	Recipes.find(Json_search,
 		function (err, docs) {
+			total_items = docs.length;
 			total_page = Math.round(docs.length / items_number);
 		if (total_page <= 0)
 			total_page = 1	
@@ -412,6 +424,7 @@ exports.postSearchRecipes = function (req, res, flag) {
 					else if (docs.length <= 0)
 						return (res.status(404).send({message : 'Nothing find for this search'}))
 					else{
+						newjson.metadata.total = total_items
 						newjson.metadata.total_page = total_page
 						newjson.recipes = docs
 						return (res.json(newjson));
@@ -436,6 +449,7 @@ exports.postSearchRecipes = function (req, res, flag) {
 					else if (docs.length <= 0){
 						return (res.status(404).send({message : 'Nothing find for this search'}))}
 					else{
+						newjson.metadata.total = total_items
 						newjson.metadata.total_page = total_page
 						newjson.recipes = docs
 						return (res.json(newjson));
@@ -572,7 +586,7 @@ exports.postSearchRecipes = function (req, res, flag) {
 *     }
 */
 
-exports.postSearchUsers = function (req, res, flag) {
+/*exports.postSearchUsers = function (req, res, flag) {
 	
 	var username =  req.body.username;
 	var order = ""
@@ -603,4 +617,4 @@ exports.postSearchUsers = function (req, res, flag) {
 	//If title and tags are set
 
 	return (1);
-}
+}*/
