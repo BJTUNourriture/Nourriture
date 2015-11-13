@@ -76,8 +76,8 @@
                 url: 'ingredient/:id',
                 parent: 'main',
                 templateUrl: 'app/templates/ingredientPage/ingredientPage.html',
-                controller: 'CreateIngredientController',
-                controllerAs: 'createIngredient',
+                controller: 'IngredientPageController',
+                controllerAs: 'ingredientPage',
                 data: {
                     permissions: {
                       except: ['guest'],

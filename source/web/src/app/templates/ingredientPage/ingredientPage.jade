@@ -3,8 +3,15 @@ md-content
 		div.flex
 			div(layout="column" flex layout-align="start center")
 				div(flex="none").title-register-container 
-					span.title-register-md Ingredients Page
+					span.title-register-md Ingredient Page
 				div(flex).body-dashboard-ingredient-md
 					section(layout="column", layout-align="start center", layout-margin)
-						md-content.body-dashboard-ingredient
+						md-content.body-ingredient-page
+							md-toolbar.md-hue-1
+								h3(style="text-align: center;") Potatoe
+							md-list.ng-cloak.body-dashboard-ingredient-list
+								md-list-item
+									span Name
+									span.md-secondary Potatoe
+
 		include ../footer/footer.jade
