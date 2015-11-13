@@ -1,0 +1,35 @@
+md-content
+	md-toolbar.md-hue-1
+		h3(style="text-align: center;") {{ ingredientPage.ingredient.name }}
+	md-list.ng-cloak.body-dashboard-ingredient-list
+		section(layout="column", layout-align="center center", layout-margin)
+			md-list-item
+				h3 Description
+			md-list-item
+				span(style="text-align: center;") {{ ingredientPage.ingredient.description }}
+			md-divider
+	md-list.ng-cloak.body-dashboard-ingredient-list
+		md-divider
+		md-list-item
+			span
+				ng-md-icon(icon="calories")
+			h4 Calories
+			span.md-secondary {{ ingredientPage.ingredient.calories }} Kcal/100g
+		md-divider
+		md-list-item
+			span
+				ng-md-icon(icon="storm")
+			h4 Proteins
+			span.md-secondary {{ ingredientPage.ingredient.proteins }} g
+		md-divider
+		md-list-item
+			span
+				ng-md-icon(icon="carbohydrates")
+			h4 carbohydrates
+			span.md-secondary {{ ingredientPage.ingredient.carbohydrates }} g
+		md-divider
+		md-list-item
+			span
+				ng-md-icon(icon="fat")
+			h4 Fat
+			span.md-secondary {{ ingredientPage.ingredient.fat }} g
