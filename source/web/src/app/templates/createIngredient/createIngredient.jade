@@ -63,7 +63,7 @@ md-content
 											md-autocomplete(md-selected-item-change="createIngredient.selectedItemChangeChip" md-selected-item="createIngredient.selectedItemChip", md-search-text="createIngredient.searchTextChip", md-items="tag in createIngredient.getNameTags(createIngredient.searchTextChip)", md-item-text="tag.name", placeholder="Search for a tag")
 												span(md-highlight-text="createIngredient.searchTextChip") {{ tag.name }}
 											md-chip-template
-												span
+												span(ng-click="createIngredient.infosTagDialog($event, $chip)")
 													strong {{ $chip.name }}
 										span.flex
 										md-button.md-raised Create Ingredient

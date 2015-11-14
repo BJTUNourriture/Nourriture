@@ -1,0 +1,31 @@
+md-dialog
+	md-dialog-content
+		div(layout="column" flex layout-align="start center")
+			h2 {{ infosTag.tag.name }}
+			md-toolbar(style="text-align: center;").flex
+				p Informations
+			md-list.ng-cloak(style="width : 100%")
+				md-list-item
+					span
+						ng-md-icon(icon="calories")
+					span Calories
+					span.md-secondary {{ infosTag.tag.calories }} Kcal
+				md-divider
+				md-list-item
+					span
+						ng-md-icon(icon="storm")
+					span Proteins
+					span.md-secondary {{ infosTag.tag.proteins }} g
+				md-divider
+				md-list-item
+					span
+						ng-md-icon(icon="carbohydrates")
+					span Carbohydrates
+					span.md-secondary {{ infosTag.tag.carbohydrates }} g
+				md-divider
+				md-list-item
+					span
+						ng-md-icon(icon="fat")
+					span Fats
+					span.md-secondary {{ infosTag.tag.fat }} g
+				md-divider

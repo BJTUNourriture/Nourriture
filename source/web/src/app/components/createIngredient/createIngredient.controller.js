@@ -4,9 +4,9 @@
 angular.module('NourritureControllers')
 	.controller('CreateIngredientController', CreateIngredientController);
 
-CreateIngredientController.$inject = ["$scope", "IngredientService", 'TagsService', 'toastr',"$log"];
+CreateIngredientController.$inject = ["$scope", "IngredientService", 'TagsService', 'toastr',"$log", "$mdDialog", "$document"];
 
-function CreateIngredientController($scope, IngredientService, TagsService, toastr, $log)
+function CreateIngredientController($scope, IngredientService, TagsService, toastr, $log, $mdDialog, $document)
 {
 	var vm = this;
 
@@ -89,6 +89,31 @@ function CreateIngredientController($scope, IngredientService, TagsService, toas
 			.$promise
 			.then(vm.TagsGetNameSuccess, vm.TagsGetNameFailure));
 	}
+
+	//Dialog functions
+	vm.infosTagDialog = function(event, tag) {
+		$log.log(tag);
+		$mdDialog.show({
+		controller : vm.dialogController,
+		controllerAs : 'infosTag',
+		templateUrl: 'app/templates/dialogTemplates/tagsInfos.tmpl.html',
+		parent: angular.element($document.body),
+		locals : {tag : tag},
+		bindToController : true,
+		targetEvent: event,
+		clickOutsideToClose:true
+		})
+	};
+
+	//Controller for infosTagDialog
+	vm.dialogController = function($mdDialog) {
+		var vm = this;
+
+		vm.hide = function () {
+			$mdDialog.hide();
+		}
+	}
+
 
 }
 
