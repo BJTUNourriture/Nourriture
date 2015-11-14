@@ -22,7 +22,7 @@ function CreateIngredientController($scope, IngredientService, TagsService, toas
 		$log.log("innit");
 		IngredientService
 			.ingredients
-			.save({"name" : $scope.name, "description" : $scope.description, "calories":$scope.calories, "fat" : $scope.fat, "carbohydrates" : $scope.carbohydrates, "proteins" : $scope.proteins})
+			.save({"name" : $scope.name, "description" : $scope.description, "calories":$scope.calories, "fat" : $scope.fat, "carbohydrates" : $scope.carbohydrates, "proteins" : $scope.proteins, "tags" : vm.tags_ingredient})
 			.$promise
 			.then(vm.IngredientCreateSuccess, vm.IngredientCreateFailure);
 	};
@@ -76,19 +76,9 @@ function CreateIngredientController($scope, IngredientService, TagsService, toas
 				name : chip
 			}
 		else
-		{
-			$log.log(vm.tags_ingredient);
-			for(var i=0; i < vm.tags_ingredient.length; i++)
-				if (vm.tags_ingredient[i].name == chip.name)
-					return ;
 			return {
 				name : chip.name
-			}
 		}
-	}
-
-	vm.selectedItemChangeChip = function () {
-
 	}
 
 	vm.getNameTags = function(name) {
