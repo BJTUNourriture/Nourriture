@@ -442,7 +442,9 @@ exports.getUserById = function (req, res, flag) {
     return (res.send(err));
    else if (doc === null)
     return (res.json(404, {message : 'The id was not found.'}))
-   return (res.json(doc));
+      user_doc = doc.toObject();
+      delete user_doc['password'];
+      return (res.json(user_doc));
   }
  );
  return (1);
@@ -479,7 +481,11 @@ exports.getUserByName = function (req, res, flag) {
     return (res.send(err));
    else if (docs.length <= 0)
     return (res.json(404, {message : 'The name was not found.'}));
-   return (res.json(docs));
+
+    user_doc = docs[0].toObject();
+    delete user_doc['password'];
+
+   return (res.json(user_doc));
   }
  );
  return (1);
