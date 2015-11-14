@@ -1,5 +1,6 @@
 //
    Created by sylflo on 11/6/15.
+//Picture Password Email
 
 div(layout="column" layout-align="center center" layout-fill ng-controller="parametersUserProfileController as parametersUserProfile")
   md-content
@@ -10,6 +11,11 @@ div(layout="column" layout-align="center center" layout-fill ng-controller="para
           md-input-container
             label Description:
             textarea(ng-model='parametersUserProfile.data.description')
+
+           md-radio-group
+            md-radio-button(value='man') Man
+            md-radio-button(value='woman') Woman
+            md-radio-button(value='other') Other
 
           //md-input-container(flex='')
             label Email:
