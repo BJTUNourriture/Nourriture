@@ -4,9 +4,9 @@
 angular.module('NourritureControllers')
 	.controller('CreateIngredientController', CreateIngredientController);
 
-CreateIngredientController.$inject = ["$scope", "IngredientService", 'TagsService', 'toastr',"$log", "$timeout"];
+CreateIngredientController.$inject = ["$scope", "IngredientService", 'TagsService', 'toastr',"$log"];
 
-function CreateIngredientController($scope, IngredientService, TagsService, toastr, $log, $timeout)
+function CreateIngredientController($scope, IngredientService, TagsService, toastr, $log)
 {
 	var vm = this;
 
@@ -67,22 +67,28 @@ function CreateIngredientController($scope, IngredientService, TagsService, toas
 		return (vm.itemsAutocomplete);
 	};
 
-	TagsService
-	.tags
-	.query()
-	.$promise
-	.then(vm.TagsGetSuccess, vm.TagsGetFailure);
-
 	//Chips functions
 	vm.transformChip = function(chip) {
+		if (angular.isObject(chip))
+			return chip;
 		if (chip._id === undefined)
 			return {
 				name : chip
 			}
 		else
+		{
+			$log.log(vm.tags_ingredient);
+			for(var i=0; i < vm.tags_ingredient.length; i++)
+				if (vm.tags_ingredient[i].name == chip.name)
+					return ;
 			return {
 				name : chip.name
 			}
+		}
+	}
+
+	vm.selectedItemChangeChip = function () {
+
 	}
 
 	vm.getNameTags = function(name) {

@@ -59,8 +59,9 @@ md-content
 												div(ng-message="min") Value must be superior to 0.
 									div(layout="column", layout-align="center center", layout-margin)
 										h3.flex Add some tags
-										md-chips(ng-model="createIngredient.tags_ingredient", secondary-placeholder="+Tag", md-readonly="createIngredient.readonly", md-on-append="createIngredient.transformChip($chip)").flex
-											md-autocomplete(md-selected-item="createIngredient.selectedItemChip", md-search-text="createIngredient.searchTextChip", md-items="tag.name in createIngredient.getNameTags(createIngredient.searchTextChip)", md-item-text="tag.name", placeholder="Search for a tag")
+										md-chips(ng-model="createIngredient.tags_ingredient", md-autocomplete-snap="", md-require-match="true", secondary-placeholder="+Tag", md-on-append="createIngredient.transformChip($chip)").flex
+											md-autocomplete(md-selected-item-change="createIngredient.selectedItemChangeChip" md-selected-item="createIngredient.selectedItemChip", md-search-text="createIngredient.searchTextChip", md-items="tag in createIngredient.getNameTags(createIngredient.searchTextChip)", md-item-text="tag.name", placeholder="Search for a tag")
+												span(md-highlight-text="createIngredient.searchTextChip") {{ tag.name }}
 											md-chip-template
 												span
 													strong {{ $chip.name }}
