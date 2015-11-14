@@ -23,7 +23,7 @@
 			"name" : "Logout",
 			"icon" : "logout",
 			"reference" : "main.logout"
-		},	
+		},
 		{
 			"name" : "Profile",
 			"icon" : "account_box",
@@ -33,6 +33,11 @@
 			"name" : "Ingredients Dashboard",
 			"icon" : "wheat",
 			"reference" : "main.ingredients-dashboard"
+		},
+		{
+			"name" : "Receipes Dashboard",
+			"icon" : "recipes",
+			"reference" : "main.receipes-dashboard"
 		}
 	]
 }

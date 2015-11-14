@@ -85,6 +85,19 @@
                     }
                 }
             })
+            .state('main.receipes-dashboard', {
+                url: 'receipes-dashboard',
+                parent: 'main',
+                templateUrl: 'app/templates/receipesDashboard/receipesDashboard.html',
+                controller: 'ReceipesDashboardController',
+                controllerAs: 'receipesDashboard',
+                data: {
+                    permissions: {
+                      except: ['guest'],
+                      redirectTo: 'main.homepage'
+                    }
+                }
+            })
             .state('main.logout', {
                 url: 'logout',
                 parent: 'main',
