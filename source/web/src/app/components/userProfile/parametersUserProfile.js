@@ -57,10 +57,36 @@
 
     vm.updateProfile = function () {
       $log.log("Updating Profile", $localStorage.user_id, vm.data);
-      var updateProfile = true;
 
-      if (vm.data.email != vm.data.confirmEmail)
-        updateProfile = false;
+      var email = $rootScope.UserProfileSave.email;
+
+      if (email != vm.data.email) {
+        email = vm.data.email;
+        //Think to do the backend for revalid the email
+      }
+
+      if (vm.data.password != null) {
+        UserService
+          .update_user
+          .update({id: $localStorage.user_id || $sessionStorage.user_id}, {
+            email: vm.data.email,
+            description: vm.data.description,
+            gender: vm.data.gender,
+            password: vm.data.password
+          })
+          .$promise
+          .then(vm.updateUserSuccess, vm.updateUserError);
+      } else {
+        UserService
+          .update_user
+          .update({id: $localStorage.user_id || $sessionStorage.user_id}, {
+            email: vm.data.email,
+            description: vm.data.description,
+            gender: vm.data.gender,
+          })
+          .$promise
+          .then(vm.updateUserSuccess, vm.updateUserError);
+      }
 
 
       //Email est un nouveau
@@ -69,15 +95,15 @@
       //Updsta desc directement
 
       //if updateProfile
-/*
-      UserService
-        .update_user
-        .update({id: $localStorage.user_id || $sessionStorage.user_id}, {
-          description: vm.data.description,
-          gender: vm.data.gender
-        })
-        .$promise
-        .then(vm.updateUserSuccess, vm.updateUserError);*/
+      /*
+       UserService
+       .update_user
+       .update({id: $localStorage.user_id || $sessionStorage.user_id}, {
+       description: vm.data.description,
+       gender: vm.data.gender
+       })
+       .$promise
+       .then(vm.updateUserSuccess, vm.updateUserError);*/
     };
 
 
