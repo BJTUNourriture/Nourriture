@@ -28,7 +28,7 @@ div(layout="column" layout-align="center center" layout-fill ng-controller="para
               div(ng-message="minlength") The password must be longer than 3 characters.
               div(ng-message="md-maxlength") The password must be shorter than 100 characters.
 
-          //md-input-container
+          md-input-container
             label Confirm Password
             input(type='password' ng-model='parametersUserProfile.data.confirmPassword' minlength="3" md-maxlength="100")
             div(ng-messages="updateUserForm.username.$error")
