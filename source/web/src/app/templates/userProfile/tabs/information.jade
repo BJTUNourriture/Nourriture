@@ -28,7 +28,7 @@ div(layout="column" layout-align="center center" layout-fill ng-controller="info
                 .md-list-item-text
                     p <span class='bold'>Gender:</span> {{informationsUserProfile.data.gender}}
                 md-divider
-            //md-list-item.md-3-line.md-no-proxy
+            md-list-item.md-3-line.md-no-proxy
                 .md-list-item-text
                     p.
                         <span class='bold'>Description: </span> {{informationsUserProfile.data.description}}
@@ -46,7 +46,7 @@ div(layout="column" layout-align="center center" layout-fill ng-controller="info
                       span(ng-repeat='ingredient in informationsUserProfile.data.like | limitTo:10') {{ingredient.name_ingredient}},
                       span(ng-click="informationsUserProfile.ingredientLiked = !informationsUserProfile.ingredientLiked" ng-hide="informationsUserProfile.ingredientLiked" ng-if="informationsUserProfile.data.like.length > 10") more...
                       span(class="show-more" ng-show="informationsUserProfile.ingredientLiked" ng-repeat='ingredient in informationsUserProfile.data.like | limitTo:informationsUserProfile.data.like.length - 10:10' ng-animate="{show: 'fadeIn', hide:'fadeOut'}") {{ingredient.name_ingredient}},
-                        span(ng-click="informationsUserProfile.ingredientLiked = !informationsUserProfile.ingredientLiked") less
+                      span(ng-show="informationsUserProfile.ingredientLiked" ng-click="informationsUserProfile.ingredientLiked = !informationsUserProfile.ingredientLiked") less
 
                 md-divider
             //md-list-item.md-3-line.md-no-proxy
