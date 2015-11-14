@@ -258,14 +258,20 @@ exports.postUser = function (req, res) {
             console.log(user.email);
             mail.transporter.sendMail(mail.mailOptionsEmailConfirm(token, user.email), function (error, info) {
                 if (error)
+                {
                     console.log(error);
+                    return (res.status(500).send(err))
+                }
                 console.log("Message sent" + info.response);
             });
         });
         mail.mailOptionsGreeting["to"] = user.email;
         mail.transporter.sendMail(mail.mailOptionsGreeting, function (error, info) {
             if (error)
+            {
                 console.log(error);
+                return (res.status(500).send(err))
+            }
             console.log("Message sent" + info.response);
         });
         return (res.json({message: 'User succesfully created!'}));
