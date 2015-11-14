@@ -4,16 +4,20 @@
 angular.module('NourritureControllers')
 	.controller('CreateIngredientController', CreateIngredientController);
 
-CreateIngredientController.$inject = ["$scope", "IngredientService", 'TagsService', 'toastr',"$log"];
+CreateIngredientController.$inject = ["$scope", "IngredientService", 'TagsService', 'toastr',"$log", "$timeout"];
 
-function CreateIngredientController($scope, IngredientService, TagsService, toastr, $log)
+function CreateIngredientController($scope, IngredientService, TagsService, toastr, $log, $timeout)
 {
 	var vm = this;
 
 	$log.log("innit");
 
+	//Vars for Chips
 	vm.tags_ingredient = [];
-	
+	vm.selectedItemChip = null;
+	vm.searchTextChip = null;
+	vm.itemsAutocomplete = [];
+
 	vm.submit = function() {
 		$log.log("innit");
 		IngredientService
@@ -49,6 +53,20 @@ function CreateIngredientController($scope, IngredientService, TagsService, toas
 		vm.tags_ingredient = data;
 	};
 
+	vm.TagsGetNameFailure = function (data) {
+		$log.log(data.data);
+		var errorMsg = "Tag not found...";
+		toastr.error(errorMsg, 'Woops...');
+		vm.itemsAutocomplete = [];
+		return (vm.itemsAutocomplete);
+	};
+
+	vm.TagsGetNameSuccess = function (data) {
+		$log.log(data);
+		vm.itemsAutocomplete = data;
+		return (vm.itemsAutocomplete);
+	};
+
 	TagsService
 	.tags
 	.query()
@@ -57,9 +75,23 @@ function CreateIngredientController($scope, IngredientService, TagsService, toas
 
 	//Chips functions
 	vm.transformChip = function(chip) {
-		return {
-			name : chip
-		}
+		if (chip._id === undefined)
+			return {
+				name : chip
+			}
+		else
+			return {
+				name : chip.name
+			}
+	}
+
+	vm.getNameTags = function(name) {
+		$log.log("innit");
+		return (TagsService
+			.tags_name
+			.query({name : name})
+			.$promise
+			.then(vm.TagsGetNameSuccess, vm.TagsGetNameFailure));
 	}
 
 }
