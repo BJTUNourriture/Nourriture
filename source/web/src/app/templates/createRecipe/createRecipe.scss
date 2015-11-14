@@ -1,0 +1,27 @@
+@import "../../theme.scss";
+
+.body-create-Recipe-md {
+	margin : 20px auto;
+	background : $background;
+	width : 100%;
+}
+
+.body-create-Recipe {
+	background : $background;
+}
+
+.body-create-Recipe-name {
+	max-width : 200px;
+}
+
+.body-create-Recipe-properties {
+	max-width : 150px;
+}
+
+.body-create-Recipe-chips-body {
+	height : auto;
+}
+
+md-checkbox.md-checked.remember-me-login .md-icon {
+ background-color:  $borderBlock;
+}

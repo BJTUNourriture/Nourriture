@@ -85,6 +85,32 @@
                     }
                 }
             })
+            .state('main.recipes-dashboard', {
+                url: 'recipes-dashboard',
+                parent: 'main',
+                templateUrl: 'app/templates/recipesDashboard/recipesDashboard.html',
+                controller: 'RecipesDashboardController',
+                controllerAs: 'RecipesDashboard',
+                data: {
+                    permissions: {
+                      except: ['guest'],
+                      redirectTo: 'main.homepage'
+                    }
+                }
+            })
+            .state('main.create-recipe', {
+                url: 'create-recipe',
+                parent: 'main',
+                templateUrl: 'app/templates/createrecipe/createrecipe.html',
+                controller: 'CreateRecipeController',
+                controllerAs: 'createRecipe',
+                data: {
+                    permissions: {
+                      except: ['guest'],
+                      redirectTo: 'main.homepage'
+                    }
+                }
+            })
             .state('main.logout', {
                 url: 'logout',
                 parent: 'main',

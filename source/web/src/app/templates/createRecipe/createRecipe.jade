@@ -1,0 +1,33 @@
+md-content
+	div(layout="column", layout-fill).flex
+		div.flex
+			div(layout="column" flex layout-align="start center")
+				div(flex="none").title-register-container 
+					span.title-register-md Add an Recipe
+				div(flex).body-create-Recipe-md
+						section(layout="row", layout-align="start end", layout-margin)
+							span.flex
+							span(flex="none")
+								md-button(ui-sref="main.recipes-dashboard").flat
+									ng-md-icon(icon="navigate_before")
+									span Go back
+						section(layout="column", layout-align="start center", layout-margin)
+							md-content.body-create-Recipe
+								form(name="createRecipeForm" novalidate ng-submit="createRecipeForm.$valid && createRecipe.submit()")
+									md-input-container.body-create-Recipe-name
+										ng-md-icon(icon="name").body-register-container-md
+										input(placeholder="Title" required name="title" ng-model="title" maxlength="20" minlength="3").body-register-container-md
+										div(ng-messages="createRecipeForm.name.$error" ng-if='!createRecipeForm.name.$pristine')
+											div(ng-message="required") This is required.
+											div(ng-message="minlength") The name must be longer than 3 characters.
+											div(ng-message="md-maxlength") The name must be shorter than 20 characters.
+									md-input-container
+										label Description
+										textarea(columns="1" required name="description" ng-model="description" maxlength="200" minlength="3")
+										div(ng-messages="createRecipeForm.description.$error" ng-if='!createRecipeForm.description.$pristine')
+											div(ng-message="required") This is required.
+											div(ng-message="minlength") The description must be longer than 3 characters.
+											div(ng-message="md-maxlength") The description must be shorter than 200 characters.
+									span list of required ingredients
+									div(layout="column", layout-align="center center", layout-margin)
+											md-button.md-raised Create Recipe

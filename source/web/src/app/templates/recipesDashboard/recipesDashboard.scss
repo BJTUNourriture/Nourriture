@@ -1,0 +1,27 @@
+@import "../../theme.scss";
+
+.body-dashboard-Recipe-md {
+	@extend .body-create-ingredient-md;
+}
+
+.body-dashboard-Recipe {
+	@extend .body-create-ingredient;
+	width:100%;
+}
+
+.body-dashboard-Recipe-list {
+	background : white;
+}
+
+.body-dashboard-Recipe-delete-icon-list {
+	color : red;
+	cursor : pointer;
+}
+
+.body-dashboard-Recipe-table-toolbars {
+	background : #66bb6a;
+}
+
+
+.carddemoBasicUsage md-card {
+	min-height: 150px; }
