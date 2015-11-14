@@ -275,13 +275,13 @@ exports.getAllTags = function(req, res) {
 exports.getTagById = function (req, res, flag) {
 	var id = flag === true ? req.body.id : req.params.id;
 	if (!id)
-		return flag === true ? -1 : res.json(400, {message : 'The id musn\'t be null'});
+		return flag === true ? -1 : res.status(400).json({message : 'The id musn\'t be null'});
 	Tags.findById(id,
 		function (err, doc) {
 			if (err)
 				return (res.send(err));
 			else if (doc === null)
-				return (res.json(404, {message : 'The id was not found.'}))
+				return (res.status(404).json({message : 'The id was not found.'}))
 			return (res.json(doc));
 		}
 	);
@@ -310,7 +310,7 @@ exports.getTagById = function (req, res, flag) {
 exports.getTagByName = function (req, res, flag) {
 	var name = flag === true ? req.body.name : req.params.name;
 	if (!name)
-		return flag === true ? -1 : res.json(400, {message : 'The name musn\'t be null'});
+		return flag === true ? -1 : res.status(400).json({message : 'The name musn\'t be null'});
 	Tags.find({
 		"name": { "$regex": name, "$options": "i" } 
 		},
@@ -318,7 +318,7 @@ exports.getTagByName = function (req, res, flag) {
 			if (err)
 				return (res.send(err));
 			else if (docs.length <= 0)
-				return (res.json(404, {message : 'The name was not found.'}))
+				return (res.status(404).json({message : 'The name was not found.'}))
 			return (res.json(docs));
 		}
 	);
