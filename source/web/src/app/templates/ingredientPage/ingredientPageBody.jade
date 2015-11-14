@@ -41,5 +41,5 @@ md-content
 			span(ng-if="!ingredientPage.ingredient.tags[0]")
 				span(style="color:grey;").md-secondary No tags
 			md-chips(ng-if="ingredientPage.ingredient.tags[0]" ng-repeat="tag in ingredientPage.ingredient.tags")
-				md-chip {{ tag.name }}
+				md-chip(style="cursor: pointer;" ng-click="ingredientPage.infosTagDialog($event, tag)") {{ tag.name }}
 		
