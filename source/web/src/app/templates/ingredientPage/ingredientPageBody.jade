@@ -33,3 +33,13 @@ md-content
 				ng-md-icon(icon="fat")
 			h4 Fat
 			span.md-secondary {{ ingredientPage.ingredient.fat }} g
+		md-divider
+		md-list-item
+			span
+				ng-md-icon(icon="label")
+			span Tags
+			span(ng-if="!ingredientPage.ingredient.tags[0]")
+				span(style="color:grey;").md-secondary No tags
+			md-chips(ng-if="ingredientPage.ingredient.tags[0]" ng-repeat="tag in ingredientPage.ingredient.tags")
+				md-chip {{ tag.name }}
+		
