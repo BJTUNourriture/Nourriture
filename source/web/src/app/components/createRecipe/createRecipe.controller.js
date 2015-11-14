@@ -4,9 +4,9 @@
 angular.module('NourritureControllers')
 	.controller('CreateRecipeController', CreateRecipeController);
 
-CreateRecipeController.$inject = ["$scope", "RecipeService", 'TagsService', 'toastr',"$log", "$mdDialog"];
+CreateRecipeController.$inject = ["$scope", "RecipeService", 'TagsService', 'toastr',"$log"];
 
-function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log, $mdDialog)
+function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log)
 {
 	var vm = this;
 
