@@ -98,6 +98,19 @@
                     }
                 }
             })
+            .state('main.create-receipe', {
+                url: 'create-receipe',
+                parent: 'main',
+                templateUrl: 'app/templates/createReceipe/createReceipe.html',
+                controller: 'CreateReceipeController',
+                controllerAs: 'createReceipe',
+                data: {
+                    permissions: {
+                      except: ['guest'],
+                      redirectTo: 'main.homepage'
+                    }
+                }
+            })
             .state('main.logout', {
                 url: 'logout',
                 parent: 'main',

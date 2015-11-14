@@ -1,1 +1,23 @@
 @import "../../theme.scss";
+
+.body-dashboard-receipe-md {
+	@extend .body-create-ingredient-md;
+}
+
+.body-dashboard-receipe {
+	@extend .body-create-ingredient;
+	width:100%;
+}
+
+.body-dashboard-receipe-list {
+	background : white;
+}
+
+.body-dashboard-receipe-delete-icon-list {
+	color : red;
+	cursor : pointer;
+}
+
+.body-dashboard-receipe-table-toolbars {
+	background : #66bb6a;
+}
