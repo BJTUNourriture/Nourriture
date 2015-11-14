@@ -45,7 +45,7 @@ div(layout="column" layout-align="center center" layout-fill ng-controller="info
                       span.bold Ingredients liked with numbers:
                       span(ng-repeat='ingredient in informationsUserProfile.data.like | limitTo:10') {{ingredient.name_ingredient}},
                       span(ng-click="informationsUserProfile.ingredientLiked = !informationsUserProfile.ingredientLiked" ng-hide="informationsUserProfile.ingredientLiked" ng-if="informationsUserProfile.data.like.length > 10") more...
-                      span(class="show-more" ng-show="informationsUserProfile.ingredientLiked" ng-repeat='ingredient in informationsUserProfile.data.like | limitTo:informationsUserProfile.data.like.length - 10:10' ng-animate="{show: 'fadeIn', hide:'fadeOut'}") {{ingredient.name_ingredient}},
+                      span(ng-show="informationsUserProfile.ingredientLiked" ng-repeat='ingredient in informationsUserProfile.data.like | limitTo:informationsUserProfile.data.like.length - 10:10').show-more {{ingredient.name_ingredient}},
                       span(ng-show="informationsUserProfile.ingredientLiked" ng-click="informationsUserProfile.ingredientLiked = !informationsUserProfile.ingredientLiked") less
 
                 md-divider
