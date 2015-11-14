@@ -12,7 +12,7 @@ div(layout="column" layout-align="center center" layout-fill ng-controller="para
             label Description:
             textarea(ng-model='parametersUserProfile.data.description')
 
-           md-radio-group
+           md-radio-group(ng-model='parametersUserProfile.data.gender')
             md-radio-button(value='man') Man
             md-radio-button(value='woman') Woman
             md-radio-button(value='other') Other

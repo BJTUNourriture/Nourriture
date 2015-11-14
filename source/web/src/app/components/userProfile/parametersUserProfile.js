@@ -58,7 +58,10 @@
 
       UserService
         .update_user
-        .update({id: $localStorage.user_id || $sessionStorage.user_id}, {description: vm.data.description})
+        .update({id: $localStorage.user_id || $sessionStorage.user_id}, {
+          description: vm.data.description,
+          gender: vm.data.gender
+        })
         .$promise
         .then(vm.updateUserSuccess, vm.updateUserError);
     };
