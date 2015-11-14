@@ -4,28 +4,24 @@ md-dialog
 			h2 {{ infosTag.tag.name }}
 			md-toolbar(style="text-align: center;").flex
 				p Informations
-			md-list.ng-cloak(style="width : 100%")
-				md-list-item
-					span
-						ng-md-icon(icon="calories")
-					span Calories
-					span.md-secondary {{ infosTag.tag.calories }} Kcal
+			md-list.ng-cloak(style="width:100%;")
+				section(layout="column", layout-align="center center", layout-margin)
+					md-list-item
+						h3 Description
+					md-list-item
+						span(style="text-align: center;") {{ infosTag.tag.description }}
+					md-divider
+			md-list.ng-cloak(style="width:100%;")
 				md-divider
 				md-list-item
 					span
-						ng-md-icon(icon="storm")
-					span Proteins
-					span.md-secondary {{ infosTag.tag.proteins }} g
+						ng-md-icon(icon="flag")
+					h4 Flag
+					span.md-secondary {{ infosTag.tag.flag.name }}
 				md-divider
 				md-list-item
 					span
-						ng-md-icon(icon="carbohydrates")
-					span Carbohydrates
-					span.md-secondary {{ infosTag.tag.carbohydrates }} g
-				md-divider
-				md-list-item
-					span
-						ng-md-icon(icon="fat")
-					span Fats
-					span.md-secondary {{ infosTag.tag.fat }} g
+						ng-md-icon(icon="numeric")
+					h4 Level
+					span.md-secondary {{ infosTag.tag.flag.level }}
 				md-divider

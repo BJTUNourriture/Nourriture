@@ -7,39 +7,44 @@ div(layout="column" layout-align="center center" layout-fill ng-controller="para
     h1 Parameters
     md-content.md-padding
       div()
-        form(name='contactForm', ng-submit='parametersUserProfile.updateProfile()')
+        form(name='updateUserForm', ng-submit='parametersUserProfile.updateProfile()')
 
-          md-input-container
+          md-input-container.md-block
             label Email
-            input(type='email' ng-model='parametersUserProfile.data.email' required)
+            input(type='email' name='email' ng-model='parametersUserProfile.data.email' ng-pattern="/^.+@.+\..+$/")
+            div(ng-messages="updateUserForm.email.$error")
+              div(ng-message='pattern') You must enter a valid email address
 
-          md-input-container
+          md-input-container.md-block
             label Confirm Email
-            input(type='email' ng-model='parametersUserProfile.data.confirmEmail' required)
+            input(type='email' name='confirmEmail' ng-model='parametersUserProfile.data.confirmEmail' ng-pattern="/^.+@.+\..+$/")
+            div(ng-messages="updateUserForm.confirmEmail.$error")
+              div(ng-message='pattern') You must enter a valid email address
 
-          md-input-container
+          md-input-container.md-block
             label Password
-            input(type='password' ng-model='parametersUserProfile.data.password' required)
+            input(type='password' name='password' ng-model='parametersUserProfile.data.password' minlength="3" md-maxlength="100")
+            div(ng-messages="updateUserForm.password.$error")
+              div(ng-message="minlength") The password must be longer than 3 characters.
+              div(ng-message="md-maxlength") The password must be shorter than 100 characters.
 
-          md-input-container
+          //md-input-container
             label Confirm Password
-            input(type='password' ng-model='parametersUserProfile.data.confirmPassword' required)
+            input(type='password' ng-model='parametersUserProfile.data.confirmPassword' minlength="3" md-maxlength="100")
+            div(ng-messages="updateUserForm.username.$error")
+              div(ng-message="minlength") The password must be longer than 3 characters.
+              div(ng-message="md-maxlength") The password must be shorter than 100 characters.
 
-          md-input-container
-            label Description:
-            textarea(ng-model='parametersUserProfile.data.description')
+          md-input-container.md-block
+            label Description
+            input(name="description" ng-model='parametersUserProfile.data.description' md-maxlength="10000")
+            div(ng-messages="updateUserForm.description.$error")
+              div(ng-message="md-maxlength") The description must be shorter than 10000 characters.
 
-           md-radio-group(ng-model='parametersUserProfile.data.gender' required)
+          md-radio-group(ng-model='parametersUserProfile.data.gender' required)
             md-radio-button(value='man') Man
             md-radio-button(value='woman') Woman
             md-radio-button(value='other') Other
-
-          //md-input-container(flex='')
-            label Email:
-            input(type='email', ng-model='contactEmail', required='')
-          //md-input-container
-            label Message:
-            textarea(ng-model='contactMsg', columns='1', md-maxlength='150', required='')
           md-button.md-primary(type='submit') Send
 
 
