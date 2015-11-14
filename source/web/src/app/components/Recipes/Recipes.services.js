@@ -11,9 +11,9 @@
     function RecipeService($log, $resource, URL_API) {
 
         var service = {
-            Recipes: $resource(URL_API + '/api/Recipes/'),
-            Recipe_name : $resource(URL_API + '/api/recipes/name/:name', {name: "@name"}),
-            Recipe_id : $resource(URL_API + '/api/recipes/id/:id', {id: "@id"})
+            recipes: $resource(URL_API + '/api/recipes/'),
+            recipe_name : $resource(URL_API + '/api/recipes/name/:name', {name: "@name"}),
+            recipe_id : $resource(URL_API + '/api/recipes/id/:id', {id: "@id"})
         };
 
         return service;

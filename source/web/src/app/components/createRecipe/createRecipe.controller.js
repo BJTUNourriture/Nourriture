@@ -4,19 +4,19 @@
 angular.module('NourritureControllers')
 	.controller('CreateRecipeController', CreateRecipeController);
 
-CreateRecipeController.$inject = ["$scope", "RecipeService", 'TagsService', 'toastr',"$log", "$mdDialog", "$document"];
+CreateRecipeController.$inject = ["$scope", "RecipeService", 'TagsService', 'toastr',"$log", "$mdDialog"];
 
-function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log, $mdDialog, $document)
+function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log, $mdDialog)
 {
 	var vm = this;
 
 	$log.log("innit");
 
+
 	vm.submit = function() {
-		$log.log("submit");
 		RecipeService
-			.Recipes
-			.save({"title" : $scope.title, "description" : $scope.description,  "author_id" : "561fc840d6c25173533e267f",  "author_name" : "kek man"})
+			.recipes
+			.save({"title" : $scope.title, "description" : $scope.description,  "author_id" : "561fc840d6c25173533e267f",  "author_name" : "kek man", "ingredients" : {"id_ingredient" : "689ed840d6c25173533g895","name_ingredient" : "Pumpkin","amount_ingredient" : 100}})
 			.$promise
 			.then(vm.RecipeCreateSuccess, vm.RecipeCreateFailure);
 	};

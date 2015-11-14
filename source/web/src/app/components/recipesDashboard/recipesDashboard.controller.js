@@ -6,12 +6,10 @@ angular.module('NourritureControllers')
 
 RecipesDashboardController.$inject = ["$scope", 'SearchService', 'toastr',"$log", "$mdDialog", "$document", "$state"];
 
-function RecipesDashboardController($scope, IngredientService, SearchService, toastr, $log, $mdDialog, $document, $state)
+function RecipesDashboardController($scope, RecipeService, SearchService, toastr, $log, $mdDialog, $document, $state)
 {
-	var vm = this;
+	//var vm = this;
 
+}
 
-
-  }
-
-  })();
+})();

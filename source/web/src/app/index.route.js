@@ -85,10 +85,10 @@
                     }
                 }
             })
-            .state('main.Recipes-dashboard', {
-                url: 'Recipes-dashboard',
+            .state('main.recipes-dashboard', {
+                url: 'recipes-dashboard',
                 parent: 'main',
-                templateUrl: 'app/templates/RecipesDashboard/RecipesDashboard.html',
+                templateUrl: 'app/templates/recipesDashboard/recipesDashboard.html',
                 controller: 'RecipesDashboardController',
                 controllerAs: 'RecipesDashboard',
                 data: {
@@ -98,10 +98,10 @@
                     }
                 }
             })
-            .state('main.create-Recipe', {
-                url: 'create-Recipe',
+            .state('main.create-recipe', {
+                url: 'create-recipe',
                 parent: 'main',
-                templateUrl: 'app/templates/createRecipe/createRecipe.html',
+                templateUrl: 'app/templates/createrecipe/createrecipe.html',
                 controller: 'CreateRecipeController',
                 controllerAs: 'createRecipe',
                 data: {
