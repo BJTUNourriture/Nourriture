@@ -115,6 +115,50 @@ function CreateIngredientController($scope, IngredientService, TagsService, toas
 	}
 
 
+	vm.TagCreateSuccess = function (data) {
+		$log.log(data.message);
+		toastr.success('You can now access your new Tag.', 'Tag Created!');
+	};
+
+	vm.TagCreateFailure = function (data) {
+		$log.log(data.data);
+		var errorMsg = "This is odd...";
+		if (data.data.errmsg.indexOf("name") > -1)
+			errorMsg = "Seems like the tag already exists";
+		toastr.error(errorMsg, 'Woops...');
+	};
+
+	//Dialog functions
+	vm.createTagDialog = function(event) {
+		$mdDialog.show({
+		controller : vm.CreateTagdialogController,
+		controllerAs : 'createTag',
+		templateUrl: 'app/templates/dialogTemplates/tagsCreate.tmpl.html',
+		parent: angular.element($document.body),
+		bindToController : true,
+		targetEvent: event,
+		clickOutsideToClose:true
+		})
+	};
+
+	//Controller for createTagDialog
+	vm.CreateTagdialogController = function($mdDialog) {
+		var vm = this;
+
+		vm.submit = function() {
+			$log.log("innit");
+			TagsService
+				.tags
+				.save({"name" : vm.name, "description" : vm.description, "flag" : vm.flag})
+				.$promise
+				.then(vm.TagCreateSuccess, vm.TagCreateFailure);
+		}
+
+		vm.hide = function () {
+			$mdDialog.hide();
+		}
+	}
+
 }
 
 })();
