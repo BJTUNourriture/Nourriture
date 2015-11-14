@@ -3,7 +3,7 @@
 	'use strict';
 
 	angular
-		.module('NourritureServices', ['ngResource'])
+		.module('NourritureServices')
 		.factory('TagsService', TagsService);
 
 	TagsService.$inject = ["$log", "$resource", "URL_API"];
