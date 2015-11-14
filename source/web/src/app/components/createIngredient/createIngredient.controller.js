@@ -55,6 +55,7 @@ function CreateIngredientController($scope, IngredientService, TagsService, toas
 
 	vm.TagsGetNameFailure = function (data) {
 		$log.log(data.data);
+		vm.itemsAutocomplete = [];
 		return (vm.itemsAutocomplete);
 	};
 
