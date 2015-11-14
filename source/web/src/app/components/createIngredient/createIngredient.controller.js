@@ -4,16 +4,16 @@
 angular.module('NourritureControllers')
 	.controller('CreateIngredientController', CreateIngredientController);
 
-CreateIngredientController.$inject = ["$scope", "IngredientService", 'toastr',"$log"];
+CreateIngredientController.$inject = ["$scope", "IngredientService", 'TagsService', 'toastr',"$log"];
 
-function CreateIngredientController($scope, IngredientService, toastr, $log)
+function CreateIngredientController($scope, IngredientService, TagsService, toastr, $log)
 {
 	var vm = this;
 
 	$log.log("innit");
 
-	vm.readonly = false;
-
+	vm.tags_ingredient = [];
+	
 	vm.submit = function() {
 		$log.log("innit");
 		IngredientService
@@ -36,7 +36,24 @@ function CreateIngredientController($scope, IngredientService, toastr, $log)
 		toastr.error(errorMsg, 'Woops...');
 	};
 
-	vm.tags_ingredient = [];
+	vm.TagsGetFailure = function (data) {
+		$log.log(data.data);
+		var errorMsg = "This is odd...";
+		if (data.data.errmsg.indexOf("name") > -1)
+			errorMsg = "Seems like the ingredient already exists";
+		toastr.error(errorMsg, 'Woops...');
+	};
+
+	vm.TagsGetSuccess = function (data) {
+		$log.log(data);
+		vm.tags_ingredient = data;
+	};
+
+	TagsService
+	.tags
+	.query()
+	.$promise
+	.then(vm.TagsGetSuccess, vm.TagsGetFailure);
 
 	//Chips functions
 	vm.transformChip = function(chip) {

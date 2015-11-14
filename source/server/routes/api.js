@@ -196,13 +196,13 @@ router.route('/search/recipes/')
 router.route('/tags/id/:id')
     .put(tagsController.putTagsById)
     .delete(tagsController.deleteTagsById)
-    //.get(tagsController.getTagsById)
+    .get(tagsController.getTagById)
 
 // endpoints by name
 router.route('/tags/name/:name')
     .put(tagsController.putTagsByName)
     .delete(tagsController.deleteTagsByName)
-    //.get(tagsController.getTagsByName);
+    .get(tagsController.getTagByName);
 
 /*
  ** Endpoints for Suggestions
