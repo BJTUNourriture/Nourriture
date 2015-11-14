@@ -36,21 +36,12 @@ function CreateIngredientController($scope, IngredientService, toastr, $log)
 		toastr.error(errorMsg, 'Woops...');
 	};
 
-	vm.tags_ingredient = [{
-        'name' : 'Broccoli',
-        'type' : 'Brassica'
-      },
-      {
-        'name' : 'Cabbage',
-        'type' : 'Brassica'
-      },
-      ];
+	vm.tags_ingredient = [];
 
 	//Chips functions
 	vm.transformChip = function(chip) {
 		return {
-			name : chip,
-			type : 'kek'
+			name : chip
 		}
 	}
 
