@@ -57,8 +57,12 @@ md-content
 												div(ng-message="required") This is required.
 												div(ng-message="number") It must be a valid number.
 												div(ng-message="min") Value must be superior to 0.
-									md-input-container.body-tags
-										md-chips(ng-model="createIngredient.tags_ingredient", placeholder="Enter a tag", delete-button-label="Remove Tag", delete-hint="Press delete to remove tag").body-tags
 									div(layout="column", layout-align="center center", layout-margin)
+										h3.flex Add some tags
+										md-chips(ng-model="createIngredient.tags_ingredient", secondary-placeholder="+Tag", md-readonly="createIngredient.readonly", md-on-append="createIngredient.transformChip($chip)").flex
+											md-chip-template
+												span
+													strong {{ $chip.name }}
+										span.flex
 										md-button.md-raised Create Ingredient
 		include ../footer/footer.jade

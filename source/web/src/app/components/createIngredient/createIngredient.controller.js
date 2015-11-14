@@ -12,6 +12,8 @@ function CreateIngredientController($scope, IngredientService, toastr, $log)
 
 	$log.log("innit");
 
+	vm.readonly = false;
+
 	vm.submit = function() {
 		$log.log("innit");
 		IngredientService
@@ -34,7 +36,23 @@ function CreateIngredientController($scope, IngredientService, toastr, $log)
 		toastr.error(errorMsg, 'Woops...');
 	};
 
-	vm.tags_ingredient = [];
+	vm.tags_ingredient = [{
+        'name' : 'Broccoli',
+        'type' : 'Brassica'
+      },
+      {
+        'name' : 'Cabbage',
+        'type' : 'Brassica'
+      },
+      ];
+
+	//Chips functions
+	vm.transformChip = function(chip) {
+		return {
+			name : chip,
+			type : 'kek'
+		}
+	}
 
 }
 
