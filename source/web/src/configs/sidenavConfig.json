@@ -35,9 +35,9 @@
 			"reference" : "main.ingredients-dashboard"
 		},
 		{
-			"name" : "Receipes Dashboard",
+			"name" : "Recipes Dashboard",
 			"icon" : "recipes",
-			"reference" : "main.receipes-dashboard"
+			"reference" : "main.Recipes-dashboard"
 		}
 	]
 }

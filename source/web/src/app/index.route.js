@@ -85,12 +85,12 @@
                     }
                 }
             })
-            .state('main.receipes-dashboard', {
-                url: 'receipes-dashboard',
+            .state('main.Recipes-dashboard', {
+                url: 'Recipes-dashboard',
                 parent: 'main',
-                templateUrl: 'app/templates/receipesDashboard/receipesDashboard.html',
-                controller: 'ReceipesDashboardController',
-                controllerAs: 'receipesDashboard',
+                templateUrl: 'app/templates/RecipesDashboard/RecipesDashboard.html',
+                controller: 'RecipesDashboardController',
+                controllerAs: 'RecipesDashboard',
                 data: {
                     permissions: {
                       except: ['guest'],
@@ -98,12 +98,12 @@
                     }
                 }
             })
-            .state('main.create-receipe', {
-                url: 'create-receipe',
+            .state('main.create-Recipe', {
+                url: 'create-Recipe',
                 parent: 'main',
-                templateUrl: 'app/templates/createReceipe/createReceipe.html',
-                controller: 'CreateReceipeController',
-                controllerAs: 'createReceipe',
+                templateUrl: 'app/templates/createRecipe/createRecipe.html',
+                controller: 'CreateRecipeController',
+                controllerAs: 'createRecipe',
                 data: {
                     permissions: {
                       except: ['guest'],

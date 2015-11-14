@@ -1,23 +1,23 @@
 @import "../../theme.scss";
 
-.body-dashboard-receipe-md {
+.body-dashboard-Recipe-md {
 	@extend .body-create-ingredient-md;
 }
 
-.body-dashboard-receipe {
+.body-dashboard-Recipe {
 	@extend .body-create-ingredient;
 	width:100%;
 }
 
-.body-dashboard-receipe-list {
+.body-dashboard-Recipe-list {
 	background : white;
 }
 
-.body-dashboard-receipe-delete-icon-list {
+.body-dashboard-Recipe-delete-icon-list {
 	color : red;
 	cursor : pointer;
 }
 
-.body-dashboard-receipe-table-toolbars {
+.body-dashboard-Recipe-table-toolbars {
 	background : #66bb6a;
 }
