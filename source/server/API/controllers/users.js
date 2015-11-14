@@ -512,7 +512,7 @@ exports.getUsers = function (req, res) {
         var users_save = {};
         for (var i = 0; i < users.length; i++) {
 
-            users_save[i] = users[i].toObject()
+            users_save[i] = users[i].toObject();
             delete users_save[i].password;
 
         }
