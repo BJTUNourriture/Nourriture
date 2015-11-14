@@ -55,9 +55,6 @@ function CreateIngredientController($scope, IngredientService, TagsService, toas
 
 	vm.TagsGetNameFailure = function (data) {
 		$log.log(data.data);
-		var errorMsg = "Tag not found...";
-		toastr.error(errorMsg, 'Woops...');
-		vm.itemsAutocomplete = [];
 		return (vm.itemsAutocomplete);
 	};
 
@@ -71,7 +68,7 @@ function CreateIngredientController($scope, IngredientService, TagsService, toas
 	vm.transformChip = function(chip) {
 		if (angular.isObject(chip))
 			return chip;
-		if (chip._id === undefined)
+		if (angular.isUndefined(chip._id))
 			return {
 				name : chip
 			}
@@ -92,7 +89,6 @@ function CreateIngredientController($scope, IngredientService, TagsService, toas
 
 	//Dialog functions
 	vm.infosTagDialog = function(event, tag) {
-		$log.log(tag);
 		$mdDialog.show({
 		controller : vm.dialogController,
 		controllerAs : 'infosTag',

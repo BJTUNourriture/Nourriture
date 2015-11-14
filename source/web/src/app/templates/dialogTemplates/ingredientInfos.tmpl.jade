@@ -29,4 +29,13 @@ md-dialog
 					span Fats
 					span.md-secondary {{ infosIngredient.ingredient.fat }} g
 				md-divider
+				md-list-item
+					span
+						ng-md-icon(icon="label")
+					span Tags
+					span(ng-if="!infosIngredient.ingredient.tags[0]")
+						span(style="color:grey;").md-secondary No tags
+					md-chips(ng-if="infosIngredient.ingredient.tags[0]" ng-repeat="tag in infosIngredient.ingredient.tags")
+						md-chip {{ tag.name }}
+				md-divider
 			md-button(ng-click="infosIngredient.goToIngredientPage(infosIngredient.ingredient._id); infosIngredient.hide()").md-raised Ingredient's Page
