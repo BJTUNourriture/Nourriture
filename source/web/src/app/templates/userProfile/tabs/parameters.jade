@@ -8,11 +8,28 @@ div(layout="column" layout-align="center center" layout-fill ng-controller="para
     md-content.md-padding
       div()
         form(name='contactForm', ng-submit='parametersUserProfile.updateProfile()')
+
+          md-input-container
+            label Email
+            input(type='email' ng-model='parametersUserProfile.data.email' required)
+
+          md-input-container
+            label Confirm Email
+            input(type='email' ng-model='parametersUserProfile.data.confirmEmail' required)
+
+          md-input-container
+            label Password
+            input(type='password' ng-model='parametersUserProfile.data.password' required)
+
+          md-input-container
+            label Confirm Password
+            input(type='password' ng-model='parametersUserProfile.data.confirmPassword' required)
+
           md-input-container
             label Description:
             textarea(ng-model='parametersUserProfile.data.description')
 
-           md-radio-group
+           md-radio-group(ng-model='parametersUserProfile.data.gender' required)
             md-radio-button(value='man') Man
             md-radio-button(value='woman') Woman
             md-radio-button(value='other') Other

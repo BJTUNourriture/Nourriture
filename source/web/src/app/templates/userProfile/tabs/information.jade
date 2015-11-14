@@ -22,79 +22,109 @@ div(layout="column" layout-align="center center" layout-fill ng-controller="info
         md-list(flex)
             md-list-item.md-3-line.md-no-proxy
                 .md-list-item-text
-                    p <span class='bold'>Username:</span> {{informationsUserProfile.data.username}}
+                    p
+                     span.bold Username: 
+                     {{informationsUserProfile.data.username}}
                 md-divider
             md-list-item.md-3-line.md-no-proxy
                 .md-list-item-text
-                    p <span class='bold'>Gender:</span> {{informationsUserProfile.data.gender}}
+                    p
+                      span.bold Gender: 
+                      {{informationsUserProfile.data.gender}}
                 md-divider
             md-list-item.md-3-line.md-no-proxy
                 .md-list-item-text
-                    p.
-                        <span class='bold'>Description: </span> {{informationsUserProfile.data.description}}
+                    p
+                     span.bold Description: 
+                     {{informationsUserProfile.data.description}}
                 md-divider
-            //md-list-item.md-3-line.md-no-proxy
+            md-list-item.md-3-line.md-no-proxy
                 .md-list-item-text
-                    p <span class='bold'>Badges:</span>
-                      ul(ng-repeat='badge in informationsUserProfile.data.badge | limitTo: 10')
-                        li {{badge}}
+                    p
+                      span.bold Badges:
+                      span(ng-repeat='badge in informationsUserProfile.data.badge | limitTo:10')  {{badge}},
+                      span(ng-click="informationsUserProfile.badgeList = !informationsUserProfile.badgeList" ng-hide="informationsUserProfile.badgeList" ng-if="informationsUserProfile.data.badge.length > 10")  more...
+                      span(ng-show="informationsUserProfile.badgeList" ng-repeat='badge in informationsUserProfile.data.badge | limitTo:informationsUserProfile.data.badge.length - 10:10').show-more  {{badge}},
+                      span(ng-show="informationsUserProfile.bageList" ng-click="informationsUserProfile.badgeList = !informationsUserProfile.badgeList")  less
                 md-divider
             md-list-item.md-3-line.md-no-proxy
                 .md-list-item-text
                     p
                       span.bold Ingredients liked with numbers:
-                      span(ng-repeat='ingredient in informationsUserProfile.data.like | limitTo:10') {{ingredient.name_ingredient}},
-                      span(ng-click="informationsUserProfile.ingredientLiked = !informationsUserProfile.ingredientLiked" ng-hide="informationsUserProfile.ingredientLiked" ng-if="informationsUserProfile.data.like.length > 10") more...
-                      span(ng-show="informationsUserProfile.ingredientLiked" ng-repeat='ingredient in informationsUserProfile.data.like | limitTo:informationsUserProfile.data.like.length - 10:10').show-more {{ingredient.name_ingredient}},
-                      span(ng-show="informationsUserProfile.ingredientLiked" ng-click="informationsUserProfile.ingredientLiked = !informationsUserProfile.ingredientLiked") less
-
+                      span(ng-repeat='ingredient in informationsUserProfile.data.like | limitTo:10')  {{ingredient.name_ingredient}},
+                      span(ng-click="informationsUserProfile.ingredientLiked = !informationsUserProfile.ingredientLiked" ng-hide="informationsUserProfile.ingredientLiked" ng-if="informationsUserProfile.data.like.length > 10")  more...
+                      span(ng-show="informationsUserProfile.ingredientLiked" ng-repeat='ingredient in informationsUserProfile.data.like | limitTo:informationsUserProfile.data.like.length - 10:10').show-more  {{ingredient.name_ingredient}},
+                      span(ng-show="informationsUserProfile.ingredientLiked" ng-click="informationsUserProfile.ingredientLiked = !informationsUserProfile.ingredientLiked")  less
                 md-divider
-            //md-list-item.md-3-line.md-no-proxy
+            md-list-item.md-3-line.md-no-proxy
                 .md-list-item-text
-                    p <span class='bold'>Ingredients disliked:</span>
-                      ul(ng-repeat='ingredient in informationsUserProfile.data.dislike | limitTo: 10')
-                        li {{ingredient.name_ingredient}}
+                    p
+                      span.bold Ingredients disliked:
+                      span(ng-repeat='ingredient in informationsUserProfile.data.dislike | limitTo:10')  {{ingredient.name_ingredient}},
+                      span(ng-click="informationsUserProfile.ingredientList = !informationsUserProfile.ingredientList" ng-hide="informationsUserProfile.ingredientList" ng-if="informationsUserProfile.data.dislike.length > 10")  more...
+                      span(ng-show="informationsUserProfile.ingredientList" ng-repeat='ingredient in informationsUserProfile.data.dislike | limitTo:informationsUserProfile.data.dislike.length - 10:10').show-more  {{ingredient.name_ingredient}},
+                      span(ng-show="informationsUserProfile.ingredientList" ng-click="informationsUserProfile.ingredientList = !informationsUserProfile.ingredientList")  less
                 md-divider
-            //md-list-item.md-3-line.md-no-proxy
+            md-list-item.md-3-line.md-no-proxy
                 .md-list-item-text
-                    p <span class='bold'>Religion:</span>
-                      ul(ng-repeat='religion in informationsUserProfile.data.religion | limitTo: 10')
-                        li {{religion.name}}
+                    p
+                      span.bold Religion:
+                      span(ng-repeat='religion in informationsUserProfile.data.religion | limitTo:10')  {{religion.name}},
+                      span(ng-click="informationsUserProfile.religionList = !informationsUserProfile.religionList" ng-hide="informationsUserProfile.religionList" ng-if="informationsUserProfile.data.religion.length > 10")  more...
+                      span(ng-show="informationsUserProfile.religionList" ng-repeat='religion in informationsUserProfile.data.religion | limitTo:informationsUserProfile.data.religion.length - 10:10').show-more  {{religion.name}},
+                      span(ng-show="informationsUserProfile.religionList" ng-click="informationsUserProfile.religionList = !informationsUserProfile.religionList")  less
                 md-divider
-            //md-list-item.md-3-line.md-no-proxy
+            md-list-item.md-3-line.md-no-proxy
                 .md-list-item-text
-                    p <span class='bold'>Allergies:</span>
-                      ul(ng-repeat='alergy in informationsUserProfile.data.alergy | limitTo: 10')
-                        li {{alergy.name}}
+                    p
+                      span.bold Allergies:
+                      span(ng-repeat='alergy in informationsUserProfile.data.alergy | limitTo:10')  {{alergy.name}},
+                      span(ng-click="informationsUserProfile.alergyList = !informationsUserProfile.alergyList" ng-hide="informationsUserProfile.alergyList" ng-if="informationsUserProfile.data.alergy.length > 10")  more...
+                      span(ng-show="informationsUserProfile.alergyList" ng-repeat='alergy in informationsUserProfile.data.alergy | limitTo:informationsUserProfile.data.alergy.length - 10:10').show-more  {{alergy.name}},
+                      span(ng-show="informationsUserProfile.alergyList" ng-click="informationsUserProfile.alergyList = !informationsUserProfile.alergyList")  less
                 md-divider
-            //md-list-item.md-3-line.md-no-proxy
+            md-list-item.md-3-line.md-no-proxy
                 .md-list-item-text
-                    p <span class='bold'>Followers:</span>
-                      ul(ng-repeat='follower in informationsUserProfile.data.followed_by | limitTo: 10')
-                        li {{follower.username}}
+                    p
+                      span.bold Followers:
+                      span(ng-repeat='follower in informationsUserProfile.data.followed_by | limitTo:10')  {{follower.username}},
+                      span(ng-click="informationsUserProfile.followerList = !informationsUserProfile.followerList" ng-hide="informationsUserProfile.followerList" ng-if="informationsUserProfile.data.followed_by.length > 10")  more...
+                      span(ng-show="informationsUserProfile.followerList" ng-repeat='follower in informationsUserProfile.data.followed_by | limitTo:informationsUserProfile.data.followed_by.length - 10:10').show-more  {{follower.username}},
+                      span(ng-show="informationsUserProfile.followerList" ng-click="informationsUserProfile.followerList = !informationsUserProfile.followerList")  less
                 md-divider
-            //md-list-item.md-3-line.md-no-proxy
+            md-list-item.md-3-line.md-no-proxy
                 .md-list-item-text
-                    p <span class='bold'>Following:</span>
-                      ul(ng-repeat='following in informationsUserProfile.data.follow | limitTo: 10')
-                        li {{following.username}}
+                    p
+                      span.bold Following:
+                      span(ng-repeat='following in informationsUserProfile.data.follow | limitTo:10')  {{following.username}},
+                      span(ng-click="informationsUserProfile.followList = !informationsUserProfile.followList" ng-hide="informationsUserProfile.followList" ng-if="informationsUserProfile.data.follow.length > 10")  more...
+                      span(ng-show="informationsUserProfile.followList" ng-repeat='following in informationsUserProfile.data.follow | limitTo:informationsUserProfile.data.follow.length - 10:10').show-more  {{following.username}},
+                      span(ng-show="informationsUserProfile.followList" ng-click="informationsUserProfile.followList = !informationsUserProfile.followList")  less
                 md-divider
-            //md-list-item.md-3-line.md-no-proxy
+            md-list-item.md-3-line.md-no-proxy
                 .md-list-item-text
-                    p <span class='bold'>Groups:</span>
-                      ul(ng-repeat='group in informationsUserProfile.data.joined_groups | limitTo: 10')
-                        li {{group.name}}
+                    p
+                      span.bold Groups:
+                      span(ng-repeat='group in informationsUserProfile.data.joined_groups | limitTo:10')  {{group.name}},
+                      span(ng-click="informationsUserProfile.groupList = !informationsUserProfile.groupList" ng-hide="informationsUserProfile.groupList" ng-if="informationsUserProfile.data.joined_groups.length > 10")  more...
+                      span(ng-show="informationsUserProfile.groupList" ng-repeat='group in informationsUserProfile.data.joined_groups | limitTo:informationsUserProfile.data.joined_groups.length - 10:10').show-more  {{group.name}},
+                      span(ng-show="informationsUserProfile.groupList" ng-click="informationsUserProfile.groupList = !informationsUserProfile.groupList")  less
                 md-divider
-            //md-list-item.md-3-line.md-no-proxy
+            md-list-item.md-3-line.md-no-proxy
                 .md-list-item-text
-                    p <span class='bold'>Recipes posted:</span>
-                      ul(ng-repeat='recipePost in informationsUserProfile.data.recipe_post | limitTo: 10')
-                        li {{recipePost.name}}
+                    p
+                      span.bold Recipes posted:
+                      span(ng-repeat='recipePost in informationsUserProfile.data.recipe_post | limitTo:10')  {{recipePost.name}},
+                      span(ng-click="informationsUserProfile.rpList = !informationsUserProfile.rpList" ng-hide="informationsUserProfile.rpList" ng-if="informationsUserProfile.data.recipe_post.length > 10")  more...
+                      span(ng-show="informationsUserProfile.rpList" ng-repeat='recipePost in informationsUserProfile.data.recipe_post | limitTo:informationsUserProfile.data.recipe_post.length - 10:10').show-more  {{recipePost.name}},
+                      span(ng-show="informationsUserProfile.rpList" ng-click="informationsUserProfile.rpList = !informationsUserProfile.rpList")  less
                 md-divider
-            //md-list-item.md-3-line.md-no-proxy
+            md-list-item.md-3-line.md-no-proxy
                 .md-list-item-text
-                    p <span class='bold'>Recipes liked:</span>
-                      ul(ng-repeat='recipeLike in informationsUserProfile.data.recipe_like | limitTo: 10')
-                        li {{recipeLike.name}}
+                    p
+                      span.bold Recipes liked:
+                      span(ng-repeat='recipeLike in informationsUserProfile.data.recipe_like | limitTo:10')  {{recipeLike.name}},
+                      span(ng-click="informationsUserProfile.rlList = !informationsUserProfile.rlList" ng-hide="informationsUserProfile.rlList" ng-if="informationsUserProfile.data.recipe_like.length > 10")  more...
+                      span(ng-show="informationsUserProfile.rlList" ng-repeat='recipeLike in informationsUserProfile.data.recipe_like | limitTo:informationsUserProfile.data.recipe_like.length - 10:10').show-more  {{recipeLike.name}},
+                      span(ng-show="informationsUserProfile.rlist" ng-click="informationsUserProfile.rlList = !informationsUserProfile.rlList")  less
                 md-divider
-
