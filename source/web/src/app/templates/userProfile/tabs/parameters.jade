@@ -7,7 +7,7 @@ div(layout="column" layout-align="center center" layout-fill ng-controller="para
     h1 Parameters
     md-content.md-padding
       div()
-        form(name='updateUserForm', ng-submit='parametersUserProfile.updateProfile()')
+        form(name='updateUserForm' novalidate ng-submit='updateUserForm.$valid && parametersUserProfile.updateProfile()')
 
           md-input-container.md-block
             label Email

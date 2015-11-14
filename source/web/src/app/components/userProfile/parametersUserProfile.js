@@ -41,6 +41,8 @@
       vm.data.recipe_post = [{name: "Grilled duck"}, {name: "baguette"}];
       vm.data.recipe_like = [{name: "marmelade"}, {name: "cantonese rice"}];
 
+      vm.data.confirmEmail = vm.data.email;
+
       $scope.$watch(angular.bind(vm.data, function () {
         return vm.data;
       }), function (newVal) {
@@ -55,6 +57,18 @@
 
     vm.updateProfile = function () {
       $log.log("Updating Profile", $localStorage.user_id, vm.data);
+      var updateProfile = true;
+
+      if (vm.data.email != vm.data.confirmEmail)
+        updateProfile = false;
+
+
+      //Email est un nouveau
+      //Check qu'on remplit le password
+
+      //Updsta desc directement
+
+      //if updateProfile
 /*
       UserService
         .update_user
