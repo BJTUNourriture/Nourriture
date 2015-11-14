@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('NourritureServices', ['ngResource'])
+        .module('NourritureServices')
         .factory('RecipeService', RecipeService);
 
     RecipeService.$inject = [];

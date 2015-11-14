@@ -132,7 +132,7 @@ function IngredientsDashboardController($scope, IngredientService, SearchService
 		})
 	};
 
-	vm.deleteIngredientDialog = function(event, selected_ingredients) {
+	vm.deleteIngredientDialog = function(event) {
 		var confirm = $mdDialog.confirm()
 					.title('Are you sure you want to delete the selected ingredient(s) ?')
 					.ok('Delete ingredient(s)')
