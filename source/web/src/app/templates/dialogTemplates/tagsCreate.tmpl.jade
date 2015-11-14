@@ -20,14 +20,14 @@ md-dialog
 						div(ng-message="md-maxlength") The description must be shorter than 200 characters.
 				md-input-container.body-create-ingredient-name
 					ng-md-icon(icon="name").body-register-container-md
-					input(placeholder="Flag Name" required name="flag.name" ng-model="createTag.flag.name" maxlength="20" minlength="3").body-register-container-md
-					div(ng-messages="createTagForm.flag.name.$error" ng-if='!createTagForm.flag.name.$pristine')
+					input(placeholder="Flag Name" required name="flagname" ng-model="createTag.flag.name" maxlength="20" minlength="3").body-register-container-md
+					div(ng-messages="createTagForm.flagname.$error" ng-if='!createTagForm.flagname.$pristine')
 						div(ng-message="required") This is required.
 						div(ng-message="minlength") The name must be longer than 3 characters.
 						div(ng-message="md-maxlength") The name must be shorter than 20 characters.
 				md-input-container.body-create-ingredient-properties
-					input(placeholder="Flag Level" required type="number" name="flag.level" ng-model="createTag.flag.level" min='0' maxlength="2").body-register-container-md
-					div(ng-messages="createTagForm.flag.level.$error" ng-if='!createTagForm.flag.level.$pristine')
+					input(placeholder="Flag Level" required type="number" name="flaglevel" ng-model="createTag.flag.level" min='0' maxlength="2").body-register-container-md
+					div(ng-messages="createTagForm.flaglevel.$error" ng-if='!createTagForm.flaglevel.$pristine')
 						div(ng-message="required") This is required.
 						div(ng-message="number") It must be a valid number.
 						div(ng-message="min") Value must be superior to 0.

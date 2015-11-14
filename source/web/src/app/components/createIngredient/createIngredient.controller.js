@@ -111,20 +111,6 @@ function CreateIngredientController($scope, IngredientService, TagsService, toas
 		}
 	}
 
-
-	vm.TagCreateSuccess = function (data) {
-		$log.log(data.message);
-		toastr.success('You can now access your new Tag.', 'Tag Created!');
-	};
-
-	vm.TagCreateFailure = function (data) {
-		$log.log(data.data);
-		var errorMsg = "This is odd...";
-		if (data.data.errmsg.indexOf("name") > -1)
-			errorMsg = "Seems like the tag already exists";
-		toastr.error(errorMsg, 'Woops...');
-	};
-
 	//Dialog functions
 	vm.createTagDialog = function(event) {
 		$mdDialog.show({
@@ -141,6 +127,19 @@ function CreateIngredientController($scope, IngredientService, TagsService, toas
 	//Controller for createTagDialog
 	vm.CreateTagdialogController = function($mdDialog) {
 		var vm = this;
+
+		vm.TagCreateSuccess = function (data) {
+			$log.log(data.message);
+			toastr.success('You can now access your new Tag.', 'Tag Created!');
+		};
+
+		vm.TagCreateFailure = function (data) {
+			$log.log(data.data);
+			var errorMsg = "This is odd...";
+			if (data.data.errmsg.indexOf("name") > -1)
+				errorMsg = "Seems like the tag already exists";
+			toastr.error(errorMsg, 'Woops...');
+		};
 
 		vm.submit = function() {
 			$log.log("innit");
