@@ -1,18 +1,17 @@
-//
-   Created by sylflo on 11/6/15.
-
+include 
 div(layout="column" layout-align="center center" layout-fill)
-    div(ng-controller='RecipesUserProfileController').user-profile-body-tabs-components
-        md-content(flex)
-            h1 Recipes
-            md-list(flex)
-                md-subheader.md-no-sticky 3 line item
-                md-list-item.md-3-line(ng-repeat='item in todos')
-                    img.md-avatar(ng-src='{{item.face}}?{{$index}}', alt='{{item.who}}')
-                    .md-list-item-text()
-                        h3 {{ item.who }}
-                        h4 {{ item.what }}
-                        p {{ item.notes }}
-                    md-divider
-
-
+    include recipe.html
+    
+    //- 
+    //- div(ng-controller='RecipesUserProfileController').user-profile-body-tabs-components
+    //-     md-content(flex)
+    //-         h1 Recipes
+    //-         md-list(flex)
+    //-             md-subheader.md-no-sticky 3 line item
+    //-             md-list-item.md-3-line(ng-repeat='item in todos')
+    //-                 img.md-avatar(ng-src='{{item.face}}?{{$index}}', alt='{{item.who}}')
+    //-                 .md-list-item-text()
+    //-                     h3 {{ item.who }}
+    //-                     h4 {{ item.what }}
+    //-                     p {{ item.notes }}
+    //-                 md-divider
