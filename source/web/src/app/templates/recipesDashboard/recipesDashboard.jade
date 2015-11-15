@@ -33,6 +33,6 @@ md-content.body-dashboard-recipe
 												p(style="text-align: center")
 													span {{ recipe.average_score }}
 													ng-md-icon(icon="star")
-													span (0)
+													span ({{ recipe.number_vote }})
 
 		include ../footer/footer.jade
