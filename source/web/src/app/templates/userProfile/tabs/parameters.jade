@@ -9,11 +9,14 @@ div(layout="column" layout-align="center center" layout-fill ng-controller="para
       div()
         form(name='updateUserForm' novalidate ng-submit='updateUserForm.$valid && parametersUserProfile.updateProfile()')
 
-          div(ng-controller='ParametersIngredientsUserProfileController as ParametersIngredientsUserProfile')
-            md-chips(ng-model="ParametersIngredientsUserProfile.tags_ingredient", md-autocomplete-snap="", md-require-match="true", secondary-placeholder="+Tag", md-on-append="ParametersIngredientsUserProfile.transformChip($chip)").flex
-              md-autocomplete(md-selected-item-change="ParametersIngredientsUserProfile.selectedItemChangeChip" md-selected-item="ParametersIngredientsUserProfile.selectedItemChip", md-search-text="ParametersIngredientsUserProfile.searchTextChip", md-items="tag in ParametersIngredientsUserProfile.getNameTags(ParametersIngredientsUserProfile.searchTextChip)", md-item-text="tag.name", placeholder="Search for a tag")
-                span(md-highlight-text="ParametersIngredientsUserProfile.searchTextChip") {{ tag.name }}
-            //span(md-highlight-text="createIngredient.searchTextChip") {{ tag.name }}
+          div(ng-controller='ParametersIngredientsUserProfileController as parametersIngredientsUserProfile')
+            md-chips(ng-model="parametersIngredientsUserProfile.tags_ingredient", md-autocomplete-snap="", md-require-match="true", secondary-placeholder="+Tag", md-on-append="parametersIngredientsUserProfile.transformChip($chip)").flex
+              md-autocomplete(md-selected-item-change="parametersIngredientsUserProfile.selectedItemChangeChip" md-selected-item="parametersIngredientsUserProfile.selectedItemChip", md-search-text="parametersIngredientsUserProfile.searchTextChip", md-items="tag in parametersIngredientsUserProfile.getNameTags(parametersIngredientsUserProfile.searchTextChip)", md-item-text="tag.name", placeholder="Search for a tag")
+                span(md-highlight-text="parametersIngredientsUserProfile.searchTextChip") {{ tag.name }}
+              md-chip-template
+                span(ng-click="parametersIngredientsUserProfile.infosTagDialog($event, $chip)")
+                  strong {{ $chip.name }}
+            //span(md-highlight-text="parametersIngredientsUserProfile.searchTextChip") {{ tag.name }}
 
 
           md-input-container.md-block
