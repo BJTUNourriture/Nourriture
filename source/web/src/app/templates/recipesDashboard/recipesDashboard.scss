@@ -16,6 +16,9 @@
 .body-dashboard-recipe-md-content {
 	height : 100%;
 	background: $background;
+	md-grid-list {
+		height: 600px;
+	}
 }
 
 .body-dashboard-Recipe-table-toolbars {
@@ -24,8 +27,9 @@
 
 .body-dashboard-recipe-grid-tile {
 	cursor: pointer;
-	background : white;;
+	background : white;
 	overflow : hidden;
+	max-height: 300px;
 	&:hover {
 		md-grid-tile-footer {
 			transition: all 500ms ease-out 100ms;
