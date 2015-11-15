@@ -322,6 +322,7 @@ exports.updateAccessRight = function (req, res, err, group) {
 *     }
 */
 exports.addUserToGroup = function(req, res, flag) {
+
 	if (!req.params.user_id || !req.params.group_id)
 		return (res.status(400).json({message : 'The id musn\'t be null.'}));
 
@@ -333,8 +334,10 @@ exports.addUserToGroup = function(req, res, flag) {
 				return (res.status(404).json({message : 'The id was not found.'}));
 
 			for (i=0; i < doc['users'].length;i++) {
-				if (doc['users'][i].user_id.toString() === req.params.user_id)
-					return (res.status(400).json({message:'User is already in the group.'}));
+				if (doc['users'][i].user_id) {
+					if (doc['users'][i].user_id.toString() === req.params.user_id)
+						return (res.status(400).json({message:'User is already in the group.'}));					
+				}
 			}
 			doc['users'].push({user_id: req.params.user_id, access: {name : "User", level: 3} });
 			doc.save(function(err) {
