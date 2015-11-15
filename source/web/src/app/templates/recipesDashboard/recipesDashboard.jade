@@ -28,5 +28,5 @@ md-content.body-dashboard-recipe
 											span(ng-if="!recipesDashboard.mouseOnTile").show-on-enter
 												h2 {{ recipe.title }}
 											span(ng-if="recipesDashboard.mouseOnTile").show-on-enter
-												h2 Kek
+												p Author : {{ recipe.author_name }}
 		include ../footer/footer.jade
