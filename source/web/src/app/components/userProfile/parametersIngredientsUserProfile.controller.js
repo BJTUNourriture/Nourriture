@@ -44,14 +44,21 @@
         .ingredient_name
         .query({name: name})
         .$promise
-        .then(vm.TagsGetNameSuccess, vm.TagsGetNameFailure));
+        .then(vm.IngredientsGetNameSuccess, vm.IngredientsGetNameFailure));
 
-      /* return (TagsService
-       .tags_name
-       .query({name: name})
-       .$promise
-       .then(vm.TagsGetNameSuccess, vm.TagsGetNameFailure));*/
-    }
+    };
+
+    vm.IngredientsGetNameFailure = function (data) {
+      $log.log(data.data);
+      vm.itemsAutocomplete = [];
+      return (vm.itemsAutocomplete);
+    };
+
+    vm.IngredientsGetNameSuccess = function (data) {
+      $log.log(data);
+      vm.itemsAutocomplete = data;
+      return (vm.itemsAutocomplete);
+    };
 
 
   }
