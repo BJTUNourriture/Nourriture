@@ -9,7 +9,7 @@
   angular.module('NourritureControllers')
     .controller('ParametersIngredientsUserProfileController', ParametersIngredientsUserProfileController);
 
-  ParametersIngredientsUserProfileController.$inject = ["$scope", "IngredientService", 'TagsService', 'toastr',"$log", "$mdDialog", "$document"];
+  ParametersIngredientsUserProfileController.$inject = ["$scope", "IngredientService", 'TagsService', 'toastr', "$log", "$mdDialog", "$document"];
 
   function ParametersIngredientsUserProfileController($scope, IngredientService, TagsService, toastr, $log, $mdDialog, $document) {
 
@@ -18,11 +18,10 @@
     $log.log("innit");
 
     //Vars for Chips
-    vm.tags_ingredient = [];
+    vm.names_ingredient = [];
     vm.selectedItemChip = null;
     vm.searchTextChip = null;
     vm.itemsAutocomplete = [];
-
 
 
     //Chips functions
@@ -39,17 +38,20 @@
         }
     };
 
-    vm.getNameTags = function (name) {
+    vm.getNameIngredients = function (name) {
       $log.log("innit");
-      return (TagsService
-        .tags_name
+      return (IngredientService
+        .ingredient_name
         .query({name: name})
         .$promise
         .then(vm.TagsGetNameSuccess, vm.TagsGetNameFailure));
+
+      /* return (TagsService
+       .tags_name
+       .query({name: name})
+       .$promise
+       .then(vm.TagsGetNameSuccess, vm.TagsGetNameFailure));*/
     }
-
-
-
 
 
   }
