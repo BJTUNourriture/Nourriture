@@ -58,6 +58,24 @@ var recipesSchema = new mongoose.Schema({
 		max : 3,
 		default : 0
 	},
+	number_vote : {
+		type : Number,
+		min : 0,
+		default : 0
+	},
+	votes : [{
+		vote : {
+			type : Number,
+			min : 0,
+			max : 5,
+			default : 0
+		},
+		id_author : {
+			type : mongoose.Schema.ObjectId,
+			required : true,
+			ref : 'User'
+		}
+	}],
 	comments : [{
 		id_author : {
 			type : mongoose.Schema.ObjectId,

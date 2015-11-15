@@ -31,6 +31,11 @@
 * @apiParam {String} pictures.thumbnail_url Url of the thumbnail version of the picture
 * @apiParam {String} pictures.medium_sized_url Url of the medium size version of the picture
 * @apiParam {String} [pictures.big_sized_url] Url of the big size version of the picture
+* @apiParam {Number} [number_vote] Number of votes for this recipe.
+* @apiParam {Object[]} [votes] List of all the votes for this recipe. 
+* @apiParam {Number} [votes.vote] Vote for a recipe.
+* @apiParam {ObjectId} [votes.id_author] Id of the author's vote.
+
 */
 
 /**
@@ -64,6 +69,10 @@
 * @apiParam {String} [pictures.thumbnail_url] Url of the thumbnail version of the picture
 * @apiParam {String} [pictures.medium_sized_url] Url of the medium size version of the picture
 * @apiParam {String} [pictures.big_sized_url] Url of the big size version of the picture
+* @apiParam {Number} [number_vote] Number of votes for this recipe.
+* @apiParam {Object[]} [votes] List of all the votes for this recipe. 
+* @apiParam {Number} [votes.vote] Vote for a recipe.
+* @apiParam {ObjectId} [votes.id_author] Id of the author's vote.
 */
 
 /**
@@ -98,6 +107,10 @@
 * @apiSuccess {String} pictures.thumbnail_url Url of the thumbnail version of the picture
 * @apiSuccess {String} pictures.medium_sized_url Url of the medium size version of the picture
 * @apiSuccess {String} [pictures.big_sized_url] Url of the big size version of the picture
+* @apiSuccess {Number} [number_vote] Number of votes for this recipe.
+* @apiSuccess {Object[]} [votes] List of all the votes for this recipe. 
+* @apiSuccess {Number} [votes.vote] Vote for a recipe.
+* @apiSuccess {ObjectId} [votes.id_author] Id of the author's vote.
 */
 
 /**
@@ -119,6 +132,11 @@
 *		"average_score" : 0,
 *		"time_preparation" : 60,
 *		"average_price" : 1,
+*		"number_vote" : 1,
+*		"votes" : [{
+*						"vote": 4,
+*						"id_author" : "386fc840d6c25173533e546h"
+*					}],
 *		"ingredients" : [{
 *						"id_ingredient" : "689ed840d6c25173533g895",
 *						"name_ingredient" : "Pumpkin",
@@ -175,7 +193,7 @@ var Recipes = require('../models/recipes');
 */
 
 exports.postRecipe = function(req, res) {
-	var default_fields = ["difficulty", "date_edited", "date_posted", "average_score", "time_preparation", "average_price"];
+	var default_fields = ["difficulty", "date_edited", "date_posted", "average_score", "time_preparation", "average_price", "votes", "number_vote"];
 	var recipe = new Recipes({
 		title : req.body.title,
 		type : req.body.type,
@@ -287,7 +305,7 @@ exports.putRecipeByTitle = function (req, res) {
 }
 
 exports.updateRecipe = function(req, res, err, recipe) {
-	var fields = ["title", "author_id", "author_name", "description", "type", "date_posted", "date_edited", "difficulty", "average_score", "average_price", "time_preparation", "comments", "pictures", "ingredients"];
+	var fields = ["title", "author_id", "author_name", "description", "type", "date_posted", "date_edited", "difficulty", "average_score", "average_price", "time_preparation", "comments", "pictures", "ingredients", "votes", "number_vote"];
 	var sent_fields = Object.keys(req.body);
 
 	if (err)
@@ -335,6 +353,11 @@ exports.updateRecipe = function(req, res, err, recipe) {
 *		"average_score" : 0,
 *		"time_preparation" : 60,
 *		"average_price" : 1,
+*		"number_vote" : 1,
+*		"votes" : [{
+*						"vote": 4,
+*						"id_author" : "386fc840d6c25173533e546h"
+*					}],
 *		"ingredients" : [{
 *						"id_ingredient" : "689ed840d6c25173533g895",
 *						"name_ingredient" : "Pumpkin",
