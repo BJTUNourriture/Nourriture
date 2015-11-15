@@ -356,7 +356,7 @@ exports.postSearchRecipes = function (req, res, flag) {
 		var items_page = req.body.metadata.page;
 	}
 
-	var type_list = req.body.type;
+	var tag_list = req.body.type;
 
 	//If title and types are not set
 
@@ -371,7 +371,7 @@ exports.postSearchRecipes = function (req, res, flag) {
 		var newjson = {metadata: {current_page: items_page, order: order}}
 	}
 
-	if (title && type_list){
+	if (title && tag_list){
 	
 	var Json_search = {
 				"title": { "$regex": title, "$options": "i" },
@@ -383,7 +383,7 @@ exports.postSearchRecipes = function (req, res, flag) {
 	
 	//If only name is set
 
-	else if (title && !type_list){
+	else if (title && !tag_list){
 
 	var Json_search = {
 				"title": { "$regex": title, "$options": "i" }
@@ -394,12 +394,12 @@ exports.postSearchRecipes = function (req, res, flag) {
 
 	//If only tags is set
 
-	else if (!title && type_list){
+	else if (!title && tag_list){
 
 	var Json_search = {
 				"type.id_type": { $all: type_list}
 			  };
-	var newjson = {metadata: {current_page: items_page, order: order, tags: type_list}}
+	var newjson = {metadata: {current_page: items_page, order: order}}
 
 	}
 	
