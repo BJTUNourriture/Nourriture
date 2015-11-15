@@ -1,4 +1,4 @@
-<div ng-controller="RecipesUserProfileController"  ng-cloak>
+<div ng-controller="RecipesUserProfileController as RecipesUserProfile"  ng-cloak>
   <!-- <div layout="row" layout-wrap>
     <div flex="30">
       [flex="30"]
@@ -26,7 +26,7 @@
     <md-card flex>
       <img ng-src="assets/images/recipesdummy/tarte.jpg" class="md-card-image" alt="Tarte aux pommes">
       <md-card-content>
-        <h2 class="md-title">Tarte aux pommes</h2>
+        <h2 class="md-title">{{RecipesUserProfile.data.recipetitle}}</h2>
         <p>
           The titles of Washed Out's breakthrough song and the first single from Paracosm share the
           two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
