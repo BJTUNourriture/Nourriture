@@ -11,7 +11,8 @@
     function SearchService($log, $resource, URL_API) {
 
         var service = {
-            ingredients: $resource(URL_API + '/api/search/ingredients/')
+            ingredients: $resource(URL_API + '/api/search/ingredients/'),
+            recipes : $resource(URL_API + '/api/search/recipes/')
         };
 
         return service;
