@@ -28,5 +28,11 @@ md-content.body-dashboard-recipe
 											span(ng-if="!recipesDashboard.mouseOnTile").show-on-enter
 												h2 {{ recipe.title  | limitTo: 12 }}
 											span(ng-if="recipesDashboard.mouseOnTile").show-on-enter
-												p Author : {{ recipe.author_name }}
+												h2 {{ recipe.title }}
+												p(style="text-align: center;") Author : {{ recipe.author_name }}
+												p(style="text-align: center")
+													span {{ recipe.average_score }}
+													ng-md-icon(icon="star")
+													span (0)
+
 		include ../footer/footer.jade
