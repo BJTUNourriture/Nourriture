@@ -1,0 +1,13 @@
+md-content.index-user-profile
+    div(layout="column" flex)
+        h1.t-center {{groupPage.group.name}}
+        md-card(flex)
+            md-tabs(flex).user-profile-body-tabs
+                md-tab(label="Informations")
+                    include tabs/information
+                md-tab(label="Recipes")
+                    include tabs/recipes
+                md-tab(label="Followers")
+                    include tabs/followers
+                md-tab(label="Parameters" ng-if='groupPage.userIsOwner == 1')
+                    include tabs/parameters

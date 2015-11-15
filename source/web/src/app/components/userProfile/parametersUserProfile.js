@@ -37,7 +37,7 @@
       vm.data.alergy = [{name: "eggs"}, {name: "milk"}];
       vm.data.followed_by = [{username: "thomas"}, {username: "vincent"}, {username: "top chef"}];
       vm.data.follow = [{username: "fanny"}, {username: "giselle"}, {username: "gertrude"}];
-      vm.data.joined_groups = [{name: "freedom to opressed vegetables"}, {name: "Faites du Fruuuiiiitt!!"}];
+      //vm.data.joined_groups = [{name: "freedom to opressed vegetables"}, {name: "Faites du Fruuuiiiitt!!"}];
       vm.data.recipe_post = [{name: "Grilled duck"}, {name: "baguette"}];
       vm.data.recipe_like = [{name: "marmelade"}, {name: "cantonese rice"}];
 

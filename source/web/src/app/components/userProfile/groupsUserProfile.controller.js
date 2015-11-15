@@ -1,5 +1,5 @@
 /**
- * Created by sylflo on 11/8/15.
+ * Created by Benjamin on 11/14/15.
  */
 
 (function () {
@@ -8,11 +8,11 @@
 
   angular
     .module('NourritureControllers')
-    .controller('informationsUserProfileController', informationsUserProfileController);
+    .controller('groupsUserProfileController', groupsUserProfileController);
 
-  informationsUserProfileController.$inject = ["$scope", '$log', '$rootScope', '$timeout'];
+  groupsUserProfileController.$inject = ["$scope", '$state','$log', '$rootScope', '$timeout'];
 
-  function informationsUserProfileController($scope, $log, $rootScope, $timeout) {
+  function groupsUserProfileController($scope, $state, $log, $rootScope, $timeout) {
 
     var vm = this;
     vm.extend = {};
@@ -52,6 +52,15 @@
 
       vm.extend[key] = true;
     };
+
+    vm.goToGroupPage = function(id_group) {
+      $state.go("main.group-page", {id : id_group});
+    }
+
+    vm.goToCreateGroup = function(id_group) {
+      $state.go("main.create-group");
+    }
+
 
 
     //Timeout in ms for the moment
