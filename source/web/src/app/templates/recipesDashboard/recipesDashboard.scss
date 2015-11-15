@@ -4,7 +4,7 @@
 	@extend .body-create-ingredient-md;
 }
 
-.body-dashboard-Recipe {
+.body-dashboard-recipe {
 	@extend .body-create-ingredient;
 	width:100%;
 }
@@ -24,4 +24,5 @@
 
 
 .carddemoBasicUsage md-card {
-	min-height: 150px; }
+	min-height: 150px; 
+}

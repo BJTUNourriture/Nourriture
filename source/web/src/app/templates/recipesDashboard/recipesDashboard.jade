@@ -4,6 +4,19 @@ md-content
 			div(layout="column" flex layout-align="start center")
 				div(flex="none").title-register-container 
 					span.title-register-md Recipes Dashboard
-				div.flex
-					md-button(ui-sref="main.create-recipe").md-raised Add a new Recipes
-include ../footer/footer.jade
+				div.body-dashboard-recipe.flex
+					md-toolbar.flex
+						section(layout="row", layout-align="start start", layout-margin)
+							div(style="max-width:200px;").hide-gt-sm
+								form(ng-submit="")
+									md-input-container.flex
+										label Search a Recipe
+										input(ng-model="search" name="search")
+							form(ng-submit="").flex.hide-sm
+								md-input-container(flex="50")
+									label Search a Recipe
+									input(ng-model="search" name="search")
+							ng-md-icon(type="submit" icon="search" style="cursor: pointer;" ng-click="")
+					md-gridlist
+						md-gridlist-item
+		include ../footer/footer.jade
