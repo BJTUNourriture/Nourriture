@@ -6,6 +6,7 @@
   md-tabs md-content {
     width: 100%;
   }
+
 }
 
 .user-profile-head {
@@ -39,9 +40,9 @@
 	background : #8e44ad;
 }
 
-.user-profile-body-tabs {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+md-tab-item {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
