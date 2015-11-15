@@ -1,68 +1,84 @@
 /**
- * Created by sylflo on 11/7/15.
- */
+* Created by sylflo on 11/7/15.
+*/
 
 (function () {
 
-    'use strict';
+  'use strict';
 
-    angular
-        .module('NourritureControllers')
-        .controller('RecipesUserProfileController', RecipesUserProfileController);
+  angular
+  .module('NourritureControllers')
+  .controller('RecipesUserProfileController', RecipesUserProfileController);
 
-    RecipesUserProfileController.$inject = [];
+  RecipesUserProfileController.$inject = ["$scope", "$log", "$rootScope", "$timeout", "RecipeService"];
 
-    function RecipesUserProfileController() {
+  function RecipesUserProfileController($scope, $log, $rootScope, $timeout, RecipeService) {
+    var vm = this;
 
-    /*  var vm = this;
-        var imagePath = 'http://p1.storage.canalblog.com/19/26/115062/29135532.jpg';
 
-        $scope.phones = [
-            {type: 'Home', number: '(555) 251-1234'},
-            {type: 'Cell', number: '(555) 786-9841'},
-            {type: 'Office', number: '(555) 314-1592'}
-        ];
-        $scope.todos = [
-            {
-                image: imagePath,
-                title: 'Brunch this weekend?',
-                mark: 'Min Li Chan',
-                nb_vote: '3:08PM',
-                notes: " I'll be in your neighborhood doing errands",
-                preparation_time: "45",
-                cooking_time: "10",
-                ingredients: "pommes, sucre, orange",
-                desc: "Faire la pate, mettez au four"
-            },
-            {
-                face: imagePath,
-                what: 'Brunch this weekend?',
-                who: 'Min Li Chan',
-                when: '3:08PM',
-                notes: " I'll be in your neighborhood doing errands"
-            },
-            {
-                face: imagePath,
-                what: 'Brunch this weekend?',
-                who: 'Min Li Chan',
-                when: '3:08PM',
-                notes: " I'll be in your neighborhood doing errands"
-            },
-            {
-                face: imagePath,
-                what: 'Brunch this weekend?',
-                who: 'Min Li Chan',
-                when: '3:08PM',
-                notes: " I'll be in your neighborhood doing errands"
-            },
-            {
-                face: imagePath,
-                what: 'Brunch this weekend?',
-                who: 'Min Li Chan',
-                when: '3:08PM',
-                notes: " I'll be in your neighborhood doing errands"
-            }
-        ];*/
-    }
+    var updateRecipes = function () {
+      vm.data = $rootScope.UserProfile;
+
+      vm.data.recipetitle = "Tarte aux pommes";
+      vm.data.image = 'assets/images/recipesdummy/tarte.jpg';
+
+      $scope.$watch(angular.bind($rootScope.UserProfile, function () {
+        return $rootScope.UserProfile;
+      }), function (newVal) {
+        vm.data = newVal;
+      }, true);
+    };
+
+
+    // avoid lint
+    RecipeService += 1;
+    // vm.recipeSuccess = function (data) {
+    //   $log.log(data._id);
+    //   vm.data = $rootScope.UserProfile;
+    //
+    //   // bind recipes datas from server
+    //   //        vm.data.recipetitle = data.title;
+    //   //        vm.data.image = data.pictures.thumbnail_url;
+    //   vm.data.recipetitle = "data binding from web sucess";
+    //   //  vm.data.recipetitle = "Tarte aux pommes from controller";
+    //
+    //   $scope.$watch(angular.bind($rootScope.UserProfile, function () {
+    //     return $rootScope.UserProfile;
+    //   }), function (newVal) {
+    //     vm.data = newVal;
+    //   }, true);
+    //
+    // };
+    //
+    // vm.recipeError = function (data) {
+    //   $log.error("Error when getting recipes", data);
+    //   vm.data = $rootScope.UserProfile;
+    //
+    //   vm.data.recipetitle = "data binding from web failed";
+    //   //  vm.data.recipetitle = "Tarte aux pommes from controller";
+    //
+    //   $scope.$watch(angular.bind($rootScope.UserProfile, function () {
+    //     return $rootScope.UserProfile;
+    //   }), function (newVal) {
+    //     vm.data = newVal;
+    //   }, true);
+    // };
+    //
+    //
+    // var getRecipes = function () {
+    //   RecipeService.recipes
+    //   .get()
+    //   .$promise
+    //   .then(vm.recipeSuccess, vm.recipeError);
+    // };
+
+
+
+    $timeout(updateRecipes, 300);
+
+    //      bind with with server after.
+    //      $timeout(getRecipes, 300);
+
+  }
 
 })();

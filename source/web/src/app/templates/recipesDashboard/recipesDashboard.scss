@@ -16,6 +16,9 @@
 .body-dashboard-recipe-md-content {
 	height : 100%;
 	background: $background;
+	md-grid-list {
+		height: auto;
+	}
 }
 
 .body-dashboard-Recipe-table-toolbars {
@@ -23,13 +26,17 @@
 }
 
 .body-dashboard-recipe-grid-tile {
-	background : white;;
+	cursor: pointer;
+	background : white;
 	overflow : hidden;
+	max-height: 300px;
+	height: auto;
+	transition: all 400ms ease-out 50ms;
 	&:hover {
 		md-grid-tile-footer {
 			transition: all 500ms ease-out 100ms;
 			height : 100%;
-			background : rgba(0, 0, 0, 0.66) none repeat scroll 0% 0%
+			background : rgba(0, 0, 0, 0.66) none repeat scroll 0% 0%;
 		}
 	}
 	md-grid-tile-footer {
@@ -41,5 +48,8 @@
 	height : 25%;
 	h2 {
 		text-align: center;
+	}
+	figcaption {
+		margin: 0 auto;
 	}
 }

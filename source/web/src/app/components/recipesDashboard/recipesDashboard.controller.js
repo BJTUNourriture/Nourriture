@@ -37,13 +37,6 @@ function RecipesDashboardController($scope, $log, SearchService, toastr)
 		toastr.error(errorMsg, 'Woops...', {timeOut : 300});
 	};
 
-	//Grid tiles vars
-	vm.mouseOnTile = false;
-
-	vm.mouseOnTileSet = function(state) {
-		vm.mouseOnTile = state;
-	}
-
 	//Init data
 	SearchService
 	.recipes
