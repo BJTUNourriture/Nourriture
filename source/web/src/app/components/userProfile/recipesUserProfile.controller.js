@@ -19,7 +19,8 @@
     var updateRecipes = function () {
       vm.data = $rootScope.UserProfile;
 
-      vm.data.recipetitle = "data binding from static controller";
+      vm.data.recipetitle = "Tarte aux pommes";
+      vm.data.image = 'assets/images/recipesdummy/tarte.jpg';
 
       $scope.$watch(angular.bind($rootScope.UserProfile, function () {
         return $rootScope.UserProfile;
@@ -69,6 +70,7 @@
     //   .$promise
     //   .then(vm.recipeSuccess, vm.recipeError);
     // };
+
 
 
     $timeout(updateRecipes, 300);
