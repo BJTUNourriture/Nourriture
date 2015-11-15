@@ -14,51 +14,122 @@
 
 
 // number liked recipes by other users
-div(layout"column", layout-fill ng-controller="informationsUserProfileController as informationsUserProfile").flex
+
+div(layout"column" layout-fill ng-controller="informationsUserProfileController as informationsUserProfile").flex
     div.flex
-        div(layout="column" flex layout-align="start center")
+        div(layout="column" flex layout-align="center center")
             div(flex="none").title-register-container
                 span.title-register-md Informations
-            div(flex style="width:100%;")
-                section(layout="row" layout-align="start start" layout-fill)
+            div(flex).user-profile-body-width
+                section(layout="row" layout-align="space-around center")
                     div(flex)
-                        md-content(flex).body-user-profile-table-toolbars
-                            md-list(flex)
-                                md-list-item.md-3-line.md-no-proxy.flex
-                                    .md-list-item-text.flex
-                                        p
-                                         span.bold Username:
-                                         span  {{informationsUserProfile.data.username}}
-                                    md-divider
+                        md-content(flex).user-profile-head-title.user-profile-body-half-width
+                            p
+                             span.bold Username:<br>
+                             span  {{informationsUserProfile.data.username}}
+                        md-divider
                     div(flex)
-                        md-content(flex).body-user-profile-table-toolbars2
-                            md-list(flex)
-                                md-list-item.md-3-line.md-no-proxy
-                                    .md-list-item-text
-                                        p
-                                         span.bold Gender:
-                                         span  {{informationsUserProfile.data.gender}}
-                                    md-divider
-                        
-div(layout="row" layout-fill layout-align="top top" ng-controller="informationsUserProfileController as informationsUserProfile")
-    div(flex="50")
-        md-content(flex).body-user-profile-table-toolbars
-            md-list(flex)
-                md-list-item.md-3-line.md-no-proxy
-                    .md-list-item-text
-                        p
-                         span.bold Username:
-                         span  {{informationsUserProfile.data.username}}
-                    md-divider
-    div(flex="50")
-        md-content(flex).body-user-profile-table-toolbars2
-            md-list(flex)
-                md-list-item.md-3-line.md-no-proxy
-                    .md-list-item-text
-                        p
-                          span.bold Gender:
-                          span  {{informationsUserProfile.data.gender}}
-                    md-divider
+                        md-content(flex).user-profile-head-title.user-profile-body-half-width
+                            p
+                             span.bold Gender:<br>
+                             span  {{informationsUserProfile.data.gender}}
+                        md-divider
+             div(flex).user-profile-body-width
+                 md-content(flex).user-profile-head-title
+                    p
+                     span.bold Description:<br>
+                     span  {{informationsUserProfile.data.description}}
+                 md-divider
+             div(flex).user-profile-body-width
+                 md-content(flex).user-profile-head-title
+                    p
+                      span.bold Badges: <br>
+                      span(ng-repeat='badge in informationsUserProfile.data.badge | limitTo:10')  {{badge}},
+                      span(ng-click="informationsUserProfile.badgeList = !informationsUserProfile.badgeList" ng-hide="informationsUserProfile.badgeList" ng-if="informationsUserProfile.data.badge.length > 10")  more...
+                      span(ng-show="informationsUserProfile.badgeList" ng-repeat='badge in informationsUserProfile.data.badge | limitTo:informationsUserProfile.data.badge.length - 10:10').show-more  {{badge}},
+                      span(ng-show="informationsUserProfile.bageList" ng-click="informationsUserProfile.badgeList = !informationsUserProfile.badgeList")  less
+                 md-divider
+            div(flex).user-profile-body-width
+                md-content(flex)
+                    md-list(flex layout="row")
+                        md-list-item.md-2-line.user-profile-head-title.user-profile-body-half-width
+                                p
+                                 span.bold Ingredients liked with numbers: <br>
+                                 span(ng-repeat='ingredient in informationsUserProfile.data.like | limitTo:10')  {{ingredient.name_ingredient}},
+                                 span(ng-click="informationsUserProfile.ingredientLiked = !informationsUserProfile.ingredientLiked" ng-hide="informationsUserProfile.ingredientLiked" ng-if="informationsUserProfile.data.like.length > 10")  more...
+                                 span(ng-show="informationsUserProfile.ingredientLiked" ng-repeat='ingredient in informationsUserProfile.data.like | limitTo:informationsUserProfile.data.like.length - 10:10').show-more  {{ingredient.name_ingredient}},
+                                 span(ng-show="informationsUserProfile.ingredientLiked" ng-click="informationsUserProfile.ingredientLiked = !informationsUserProfile.ingredientLiked")  less
+                        md-list-item.md-2-line.md-no-proxy.user-profile-head-title.user-profile-body-half-width
+                                p
+                                 span.bold Ingredients disliked: <br>
+                                 span(ng-repeat='ingredient in informationsUserProfile.data.dislike | limitTo:10')  {{ingredient.name_ingredient}},
+                                 span(ng-click="informationsUserProfile.ingredientList = !informationsUserProfile.ingredientList" ng-hide="informationsUserProfile.ingredientList" ng-if="informationsUserProfile.data.dislike.length > 10")  more...
+                                 span(ng-show="informationsUserProfile.ingredientList" ng-repeat='ingredient in informationsUserProfile.data.dislike | limitTo:informationsUserProfile.data.dislike.length - 10:10').show-more  {{ingredient.name_ingredient}},
+                                 span(ng-show="informationsUserProfile.ingredientList" ng-click="informationsUserProfile.ingredientList = !informationsUserProfile.ingredientList")  less
+                md-divider
+            div(flex).user-profile-body-width
+                md-content(flex)
+                    md-list(flex layout="row")
+                        md-list-item.md-2-line.user-profile-head-title.user-profile-body-half-width
+                                p
+                                 span.bold Allergies:<br>
+                                 span(ng-repeat='alergy in informationsUserProfile.data.alergy | limitTo:10')  {{alergy.name}},
+                                 span(ng-click="informationsUserProfile.alergyList = !informationsUserProfile.alergyList" ng-hide="informationsUserProfile.alergyList" ng-if="informationsUserProfile.data.alergy.length > 10")  more...
+                                 span(ng-show="informationsUserProfile.alergyList" ng-repeat='alergy in informationsUserProfile.data.alergy | limitTo:informationsUserProfile.data.alergy.length - 10:10').show-more  {{alergy.name}},
+                                 span(ng-show="informationsUserProfile.alergyList" ng-click="informationsUserProfile.alergyList = !informationsUserProfile.alergyList")  less
+                        md-list-item.md-2-line.md-no-proxy.user-profile-head-title.user-profile-body-half-width
+                                p
+                                 span.bold Religion:<br>
+                                 span(ng-repeat='religion in informationsUserProfile.data.religion | limitTo:10')  {{religion.name}},
+                                 span(ng-click="informationsUserProfile.religionList = !informationsUserProfile.religionList" ng-hide="informationsUserProfile.religionList" ng-if="informationsUserProfile.data.religion.length > 10")  more...
+                                 span(ng-show="informationsUserProfile.religionList" ng-repeat='religion in informationsUserProfile.data.religion | limitTo:informationsUserProfile.data.religion.length - 10:10').show-more  {{religion.name}},
+                                 span(ng-show="informationsUserProfile.religionList" ng-click="informationsUserProfile.religionList = !informationsUserProfile.religionList")  less
+                md-divider
+            div(flex).user-profile-body-width
+                md-content(flex)
+                    md-list(flex layout="row")
+                        md-list-item.md-2-line.md-no-proxy.user-profile-head-title.user-profile-body-half-width
+                                p
+                                 span.bold Following:<br>
+                                 span(ng-repeat='following in informationsUserProfile.data.follow | limitTo:10')  {{following.username}},
+                                 span(ng-click="informationsUserProfile.followList = !informationsUserProfile.followList" ng-hide="informationsUserProfile.followList" ng-if="informationsUserProfile.data.follow.length > 10")  more...
+                                 span(ng-show="informationsUserProfile.followList" ng-repeat='following in informationsUserProfile.data.follow | limitTo:informationsUserProfile.data.follow.length - 10:10').show-more  {{following.username}},
+                                 span(ng-show="informationsUserProfile.followList" ng-click="informationsUserProfile.followList = !informationsUserProfile.followList")  less
+                        md-list-item.md-2-line.user-profile-head-title.user-profile-body-half-width
+                                p
+                                 span.bold Followers:<br>
+                                 span(ng-repeat='follower in informationsUserProfile.data.followed_by | limitTo:10')  {{follower.username}},
+                                 span(ng-click="informationsUserProfile.followerList = !informationsUserProfile.followerList" ng-hide="informationsUserProfile.followerList" ng-if="informationsUserProfile.data.followed_by.length > 10")  more...
+                                 span(ng-show="informationsUserProfile.followerList" ng-repeat='follower in informationsUserProfile.data.followed_by | limitTo:informationsUserProfile.data.followed_by.length - 10:10').show-more  {{follower.username}},
+                                 span(ng-show="informationsUserProfile.followerList" ng-click="informationsUserProfile.followerList = !informationsUserProfile.followerList")  less
+                md-divider
+             div(flex).user-profile-body-width
+                 md-content(flex).user-profile-head-title
+                    p
+                      span.bold Groups:<br>
+                      span(ng-repeat='group in informationsUserProfile.data.joined_groups | limitTo:10')  {{group.name}},
+                      span(ng-click="informationsUserProfile.groupList = !informationsUserProfile.groupList" ng-hide="informationsUserProfile.groupList" ng-if="informationsUserProfile.data.joined_groups.length > 10")  more...
+                      span(ng-show="informationsUserProfile.groupList" ng-repeat='group in informationsUserProfile.data.joined_groups | limitTo:informationsUserProfile.data.joined_groups.length - 10:10').show-more  {{group.name}},
+                      span(ng-show="informationsUserProfile.groupList" ng-click="informationsUserProfile.groupList = !informationsUserProfile.groupList")  less
+                 md-divider
+            div(flex).user-profile-body-width
+                md-content(flex)
+                    md-list(flex layout="row")
+                        md-list-item.md-2-line.user-profile-head-title.user-profile-body-half-width
+                                p
+                                 span.bold Recipes liked:<br>
+                                 span(ng-repeat='recipeLike in informationsUserProfile.data.recipe_like | limitTo:10')  {{recipeLike.name}},
+                                 span(ng-click="informationsUserProfile.rlList = !informationsUserProfile.rlList" ng-hide="informationsUserProfile.rlList" ng-if="informationsUserProfile.data.recipe_like.length > 10")  more...
+                                 span(ng-show="informationsUserProfile.rlList" ng-repeat='recipeLike in informationsUserProfile.data.recipe_like | limitTo:informationsUserProfile.data.recipe_like.length - 10:10').show-more  {{recipeLike.name}},
+                                 span(ng-show="informationsUserProfile.rlist" ng-click="informationsUserProfile.rlList = !informationsUserProfile.rlList")  less
+                        md-list-item.md-2-line.md-no-proxy.user-profile-head-title.user-profile-body-half-width
+                                p
+                                 span.bold Recipes posted:<br>
+                                 span(ng-repeat='recipePost in informationsUserProfile.data.recipe_post | limitTo:10')  {{recipePost.name}},
+                                 span(ng-click="informationsUserProfile.rpList = !informationsUserProfile.rpList" ng-hide="informationsUserProfile.rpList" ng-if="informationsUserProfile.data.recipe_post.length > 10")  more...
+                                 span(ng-show="informationsUserProfile.rpList" ng-repeat='recipePost in informationsUserProfile.data.recipe_post | limitTo:informationsUserProfile.data.recipe_post.length - 10:10').show-more  {{recipePost.name}},
+                                 span(ng-show="informationsUserProfile.rpList" ng-click="informationsUserProfile.rpList = !informationsUserProfile.rpList")  less
+                md-divider
 
 //div(layout="column" layout-align="center center" layout-fill ng-controller="informationsUserProfileController as informationsUserProfile")
     md-content(flex)
