@@ -14,9 +14,53 @@
 
 
 // number liked recipes by other users
+div(layout"column", layout-fill ng-controller="informationsUserProfileController as informationsUserProfile").flex
+    div.flex
+        div(layout="column" flex layout-align="start center")
+            div(flex="none").title-register-container
+                span.title-register-md Informations
+            div(flex)
+                section(layout="row" layout-align="start start" layout-fill)
+                    div(flex style="width:100%")
+                        md-content(flex).body-user-profile-table-toolbars
+                            md-list(flex)
+                                md-list-item.md-3-line.md-no-proxy.flex
+                                    .md-list-item-text.flex
+                                        p
+                                         span.bold Username:
+                                         span  {{informationsUserProfile.data.username}}
+                                    md-divider
+                    div(flex)
+                        md-content(flex).body-user-profile-table-toolbars2
+                            md-list(flex)
+                                md-list-item.md-3-line.md-no-proxy
+                                    .md-list-item-text
+                                        p
+                                         span.bold Gender:
+                                         span  {{informationsUserProfile.data.gender}}
+                                    md-divider
+                        
+div(layout="row" layout-fill layout-align="top top" ng-controller="informationsUserProfileController as informationsUserProfile")
+    div(flex="50")
+        md-content(flex).body-user-profile-table-toolbars
+            md-list(flex)
+                md-list-item.md-3-line.md-no-proxy
+                    .md-list-item-text
+                        p
+                         span.bold Username:
+                         span  {{informationsUserProfile.data.username}}
+                    md-divider
+    div(flex="50")
+        md-content(flex).body-user-profile-table-toolbars2
+            md-list(flex)
+                md-list-item.md-3-line.md-no-proxy
+                    .md-list-item-text
+                        p
+                          span.bold Gender:
+                          span  {{informationsUserProfile.data.gender}}
+                    md-divider
 
-
-div(layout="column" layout-align="center center" layout-fill ng-controller="informationsUserProfileController as informationsUserProfile")
+//div(layout="column" layout-align="center center" layout-fill ng-controller="informationsUserProfileController as informationsUserProfile")
     md-content(flex)
         h1.t-center Informations
         md-list(flex)
