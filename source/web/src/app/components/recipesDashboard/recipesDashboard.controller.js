@@ -14,7 +14,7 @@ function RecipesDashboardController($scope, $log, SearchService, toastr)
 
 	//Table specs
 	vm.table = {
-		name : '',
+		title : '',
 		metadata : {
 			"items": 10,
 			"page" : 1
@@ -23,7 +23,7 @@ function RecipesDashboardController($scope, $log, SearchService, toastr)
 
 	vm.RecipesGetSuccess = function(data) {
 		$log.log(data);
-		vm.recipes = data;
+		vm.recipes = data.recipes;
 	}
 
 	vm.RecipesGetFailure = function (data) {
