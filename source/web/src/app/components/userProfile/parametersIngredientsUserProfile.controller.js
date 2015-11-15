@@ -9,23 +9,27 @@
   angular.module('NourritureControllers')
     .controller('ParametersIngredientsUserProfileController', ParametersIngredientsUserProfileController);
 
-  ParametersIngredientsUserProfileController.$inject = ["$scope", "IngredientService", 'TagsService', 'toastr', "$log", "$mdDialog", "$document"];
+  ParametersIngredientsUserProfileController.$inject = ["IngredientService", "$log", '$rootScope', '$timeout'];
 
-  function ParametersIngredientsUserProfileController($scope, IngredientService, TagsService, toastr, $log, $mdDialog, $document) {
-
+  function ParametersIngredientsUserProfileController(IngredientService, $log, $rootScope, $timeout) {
     var vm = this;
 
-    $log.log("innit");
+    function getUserProfile() {
 
-    //Vars for Chips
-    vm.names_ingredient = [];
-    vm.selectedItemChip = null;
-    vm.searchTextChip = null;
-    vm.itemsAutocomplete = [];
+      vm.data = $rootScope.UserProfile;
+      $log.log("INgredient like = ", vm.data);
+      $log.log("innit");
 
+      //Vars for Chips
+      vm.names_ingredient = [{name: 'test'}, {name: 'tutu'}];
+      vm.selectedItemChip = null;
+      vm.searchTextChip = null;
+      vm.itemsAutocomplete = [];
+    }
 
     //Chips functions
     vm.transformChip = function (chip) {
+      $log.log("chip = ", chip);
       if (angular.isObject(chip))
         return chip;
       if (angular.isUndefined(chip._id))
@@ -59,6 +63,10 @@
       vm.itemsAutocomplete = data;
       return (vm.itemsAutocomplete);
     };
+
+
+    //Timeout in ms for the moment
+    $timeout(getUserProfile, 500);
 
 
   }
