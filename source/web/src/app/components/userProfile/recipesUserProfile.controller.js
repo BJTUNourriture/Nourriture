@@ -38,6 +38,7 @@
     //
     //   // bind recipes datas from server
     //   //        vm.data.recipetitle = data.title;
+    //   //        vm.data.image = data.pictures.thumbnail_url;
     //   vm.data.recipetitle = "data binding from web sucess";
     //   //  vm.data.recipetitle = "Tarte aux pommes from controller";
     //
