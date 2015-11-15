@@ -74,7 +74,7 @@
 
 
 
-    $timeout(updateRecipes, 300);
+    $timeout(updateRecipes, 700);
 
     //      bind with with server after.
     //      $timeout(getRecipes, 300);
