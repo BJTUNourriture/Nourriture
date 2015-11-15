@@ -108,6 +108,9 @@
                     permissions: {
                       except: ['guest'],
                       redirectTo: 'main.homepage'
+                    }
+                  }
+                })
             .state('main.create-group', {
                 url: 'group/create',
                 parent: 'main',
