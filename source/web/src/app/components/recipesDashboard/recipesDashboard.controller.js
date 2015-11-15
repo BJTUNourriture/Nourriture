@@ -4,13 +4,18 @@
 angular.module('NourritureControllers')
 	.controller('RecipesDashboardController', RecipesDashboardController);
 
-RecipesDashboardController.$inject = ["$scope", 'SearchService', 'toastr',"$log", "$mdDialog", "$document", "$state"];
+RecipesDashboardController.$inject = ["$scope","$log"];
 
-//function RecipesDashboardController($scope, RecipeService, SearchService, toastr, $log, $mdDialog, $document, $state)
-function RecipesDashboardController()
+function RecipesDashboardController($scope, $log)
 {
-	//var vm = this;
+	var vm = this;
 
+	//Grid tiles vars
+	vm.mouseOnTile = false;
+
+	vm.mouseOnTileSet = function(state) {
+		vm.mouseOnTile = state;
+	}
 }
 
 })();

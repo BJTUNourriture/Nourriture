@@ -22,10 +22,28 @@
 	background : #66bb6a;
 }
 
+.body-dashboard-recipe-grid-tile-footer.ng-enter {
+	transition: 0.5s linear all;
+  	opacity: 1;
+}
+
 .body-dashboard-recipe-grid-tile {
-	background : white;
+	background : white;;
+	overflow : hidden;
+	&:hover {
+		md-grid-tile-footer {
+			transition: all 500ms ease-out 100ms;
+			height : 100%; 
+		}
+	}
+	md-grid-tile-footer {
+		transition: all 500ms ease-out 100ms;
+	}
 }
 
 .body-dashboard-recipe-grid-tile-footer {
-	height : 36px;
+	height : 25%;
+	h2 {
+		text-align: center;
+	}
 }

@@ -90,7 +90,7 @@
                 parent: 'main',
                 templateUrl: 'app/templates/recipesDashboard/recipesDashboard.html',
                 controller: 'RecipesDashboardController',
-                controllerAs: 'RecipesDashboard',
+                controllerAs: 'recipesDashboard',
                 data: {
                     permissions: {
                       except: ['guest'],

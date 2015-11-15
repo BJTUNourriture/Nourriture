@@ -1,3 +1,8 @@
+.show-on-enter.ng-enter {
+  -webkit-animation:0.6s show;
+  animation:0.6s show;
+}
+
 .show-more.ng-hide-add {
   -webkit-animation:0.5s hide;
   animation:0.5s hide;
@@ -20,8 +25,12 @@
     opacity:0;
   }
 }
-
-
+/*
+.show-on-enter.ng-leave {
+  -webkit-animation:0.3s show;
+  animation:0.3s show;
+}
+*/
 .show-more.ng-hide-remove {
   -webkit-animation:0.3s show;
   animation:0.3s show;
