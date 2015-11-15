@@ -8,7 +8,7 @@ div(layout="column" layout-align="center center" layout-fill ng-controller='grou
             md-list-item.md-3-line.md-no-proxy(ng-repeat='group in groupsUserProfile.data.joined_groups' ng-click='groupsUserProfile.goToGroupPage(group.id_group)')
                 div.md-list-item-text
                     ng-md-icon(icon="group_work")
-                    {{group.name}}
+                    div {{group.name}}
                     ng-md-icon(icon="keyboard_arrow_right" class="md-secondary md-hue-3")
                 md-divider
             md-button.md-primary.md-raised(ng-click="groupsUserProfile.goToCreateGroup()") Create group

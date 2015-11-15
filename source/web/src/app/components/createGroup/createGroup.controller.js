@@ -4,9 +4,18 @@
 angular.module('NourritureControllers')
 	.controller('CreateGroupController', CreateGroupController);
 
-CreateGroupController.$inject = ["$scope", "GroupService", 'TagsService', 'toastr',"$log"];
 
-function CreateGroupController($scope, GroupService, TagsService, toastr, $log)
+// comment due to warnings
+// CreateGroupController.$inject = ["$scope", "GroupService", 'TagsService', 'toastr',"$log"];
+//
+// function CreateGroupController($scope, GroupService, TagsService, toastr, $log)
+// {
+//
+// }
+
+CreateGroupController.$inject = [];
+
+function CreateGroupController()
 {
 
 }

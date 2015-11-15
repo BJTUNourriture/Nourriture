@@ -54,10 +54,12 @@
     };
 
     vm.goToGroupPage = function(id_group) {
+      $log.log(id_group);
       $state.go("main.group-page", {id : id_group});
     }
 
     vm.goToCreateGroup = function(id_group) {
+      $log.log(id_group);
       $state.go("main.create-group");
     }
 
