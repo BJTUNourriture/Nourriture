@@ -6,6 +6,7 @@
   md-tabs md-content {
     width: 100%;
   }
+
 }
 
 .user-profile-head {
@@ -44,4 +45,11 @@
 
 .body-user-profile-table-toolbars2 {
 	background : #8e44ad;
+}
+
+md-tab-item {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }

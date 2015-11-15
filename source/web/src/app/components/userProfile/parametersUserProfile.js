@@ -37,9 +37,11 @@
       vm.data.alergy = [{name: "eggs"}, {name: "milk"}];
       vm.data.followed_by = [{username: "thomas"}, {username: "vincent"}, {username: "top chef"}];
       vm.data.follow = [{username: "fanny"}, {username: "giselle"}, {username: "gertrude"}];
-      vm.data.joined_groups = [{name: "freedom to opressed vegetables"}, {name: "Faites du Fruuuiiiitt!!"}];
+      //vm.data.joined_groups = [{name: "freedom to opressed vegetables"}, {name: "Faites du Fruuuiiiitt!!"}];
       vm.data.recipe_post = [{name: "Grilled duck"}, {name: "baguette"}];
       vm.data.recipe_like = [{name: "marmelade"}, {name: "cantonese rice"}];
+
+      vm.data.confirmEmail = vm.data.email;
 
       $scope.$watch(angular.bind(vm.data, function () {
         return vm.data;
@@ -50,20 +52,43 @@
     };
 
     //Timeout in ms for the moment
-    $timeout(getUserProfile, 300);
+    $timeout(getUserProfile, 500);
 
 
     vm.updateProfile = function () {
       $log.log("Updating Profile", $localStorage.user_id, vm.data);
-/*
-      UserService
-        .update_user
-        .update({id: $localStorage.user_id || $sessionStorage.user_id}, {
-          description: vm.data.description,
-          gender: vm.data.gender
-        })
-        .$promise
-        .then(vm.updateUserSuccess, vm.updateUserError);*/
+
+      var email = $rootScope.UserProfileSave.email;
+
+      if (email != vm.data.email) {
+        email = vm.data.email;
+        //Think to do the backend for revalid the email
+      }
+
+      if (vm.data.password != null) {
+        UserService
+          .update_user
+          .update({id: $localStorage.user_id || $sessionStorage.user_id}, {
+            email: vm.data.email,
+            description: vm.data.description,
+            gender: vm.data.gender,
+            password: vm.data.password
+          })
+          .$promise
+          .then(vm.updateUserSuccess, vm.updateUserError);
+      } else {
+        UserService
+          .update_user
+          .update({id: $localStorage.user_id || $sessionStorage.user_id}, {
+            email: vm.data.email,
+            description: vm.data.description,
+            gender: vm.data.gender,
+          })
+          .$promise
+          .then(vm.updateUserSuccess, vm.updateUserError);
+      }
+
+
     };
 
 

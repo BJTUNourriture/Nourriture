@@ -109,6 +109,32 @@
                       except: ['guest'],
                       redirectTo: 'main.homepage'
                     }
+                  }
+                })
+            .state('main.create-group', {
+                url: 'group/create',
+                parent: 'main',
+                templateUrl: 'app/templates/createGroup/createGroup.html',
+                controller: 'CreateGroupController',
+                controllerAs: 'createGroup',
+                data: {
+                    permissions: {
+                        except: ['guest'],
+                        redirectTo: 'main.homepage'
+                    }
+                }
+            })
+            .state('main.group-page', {
+                url: 'group/:id',
+                parent: 'main',
+                templateUrl: 'app/templates/groupPage/groupPage.html',
+                controller: 'GroupPageController',
+                controllerAs: 'groupPage',
+                data: {
+                    permissions: {
+                        except: ['guest'],
+                        redirectTo: 'main.homepage'
+                    }
                 }
             })
             .state('main.logout', {

@@ -1,0 +1,9 @@
+div(layout="column" layout-align="center center" layout-fill )
+    md-content(flex)
+        md-button.md-raised.md-primary(ng-if='groupPage.userIsIn == 0' ng-click='groupPage.registerUser()') Subscribe
+        md-button.md-raised.md-primary(ng-if='groupPage.userIsIn == 1' ng-click='groupPage.unregisterUser()') Unsubscribe
+        md-list(flex)
+            md-list-item.md-3-line.md-no-proxy
+                .md-list-item-text
+                    p <span class='bold'>Description:</span> {{groupPage.group.description}}
+                md-divider
