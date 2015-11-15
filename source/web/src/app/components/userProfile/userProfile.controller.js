@@ -13,6 +13,7 @@
 
     vm.profileSuccess = function (data) {
       $log.log(data._id);
+      vm.data = data;
       $rootScope.UserProfile = data;
       $rootScope.UserProfileSave = {};
       angular.copy($rootScope.UserProfile, $rootScope.UserProfileSave);

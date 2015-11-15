@@ -3,7 +3,7 @@ md-content.index-user-profile
         md-card(flex="none").user-profile-head
             img(src="assets/images/user_dummy/random-user-1.jpg")
             md-card-content
-                h2.md-title.user-profile-head-title Username
+                h2.md-title.user-profile-head-title {{userProfile.data.username}}
                 div.user-profile-head-title
                     span 0
                     ng-md-icon(icon="star")
