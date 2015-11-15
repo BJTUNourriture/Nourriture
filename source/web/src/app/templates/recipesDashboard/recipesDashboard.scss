@@ -13,16 +13,33 @@
 	background : white;
 }
 
-.body-dashboard-Recipe-delete-icon-list {
-	color : red;
-	cursor : pointer;
+.body-dashboard-recipe-md-content {
+	height : 100%;
+	background: $background;
 }
 
 .body-dashboard-Recipe-table-toolbars {
 	background : #66bb6a;
 }
 
+.body-dashboard-recipe-grid-tile {
+	background : white;;
+	overflow : hidden;
+	&:hover {
+		md-grid-tile-footer {
+			transition: all 500ms ease-out 100ms;
+			height : 100%;
+			background : rgba(0, 0, 0, 0.66) none repeat scroll 0% 0%
+		}
+	}
+	md-grid-tile-footer {
+		transition: all 500ms ease-out 100ms;
+	}
+}
 
-.carddemoBasicUsage md-card {
-	min-height: 150px; 
+.body-dashboard-recipe-grid-tile-footer {
+	height : 25%;
+	h2 {
+		text-align: center;
+	}
 }
