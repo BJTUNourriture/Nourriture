@@ -31,6 +31,7 @@
 	overflow : hidden;
 	max-height: 300px;
 	height: auto;
+	transition: all 400ms ease-out 50ms;
 	&:hover {
 		md-grid-tile-footer {
 			transition: all 500ms ease-out 100ms;
