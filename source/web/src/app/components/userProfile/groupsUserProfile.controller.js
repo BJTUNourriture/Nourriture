@@ -66,7 +66,7 @@
 
 
     //Timeout in ms for the moment
-    $timeout(getUserProfile, 300);
+    $timeout(getUserProfile, 1000);
   }
 
 })();
