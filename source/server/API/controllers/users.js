@@ -257,8 +257,7 @@ exports.postUser = function (req, res) {
                 return (res.status(401).send(err));
             console.log(user.email);
             mail.transporter.sendMail(mail.mailOptionsEmailConfirm(token, user.email), function (error, info) {
-                if (error)
-                {
+                if (error) {
                     console.log(error);
                     return (res.status(500).send(err))
                 }
@@ -267,8 +266,7 @@ exports.postUser = function (req, res) {
         });
         mail.mailOptionsGreeting["to"] = user.email;
         mail.transporter.sendMail(mail.mailOptionsGreeting, function (error, info) {
-            if (error)
-            {
+            if (error) {
                 console.log(error);
                 return (res.status(500).send(err))
             }
@@ -583,14 +581,14 @@ exports.putUserById = function (req, res) {
         return (res.status(400).json({message: 'The id musn\'t be null and the request must not be empty.'}));
     User.findById(req.params.id,
         function (err, user) {
-            if (!req.body.like && !req.body.dislike && !req.body.follow) {
-                return (module.exports.updateUser(req, res, err, user));
-            }
-            else {
-                return (module.exports.updateUserLDF(req, res, err, user));
-            }
+            // if (!req.body.like && !req.body.dislike && !req.body.follow) {
+            return module.exports.updateUserAll(req, res, err, user);
+            // }
+            // else if(req.body.like || req.body.dislike || req.body.follow) {
+            //    module.exports.updateUserLDF(req, res, err, user);
+            //  }
         });
-}
+};
 
 /**
  * @api {put} /users/username/:username Update a User by username
@@ -620,47 +618,54 @@ exports.putUserByUsername = function (req, res) {
                 return (module.exports.updateUserLDF(req, res, err, user));
             }
         });
-}
+};
 
-exports.updateUser = function (req, res, err, user) {
-    var fields = ["id", "email", "description", "alergy", "religion", "pictures", "joined_groups", "password", "gender"];
+exports.updateUserAll = function (req, res, err, user) {
+
+    var fields = ["id", "email", "description", "alergy", "religion", "pictures", "joined_groups", "password", "gender", "like", "dislike", "follow"];
     var sent_fields = Object.keys(req.body);
+
 
     if (err)
         return (res.send(err));
     else if (user === null)
-        return (res.status(404).json({message: 'User not found.'}))
+        return (res.status(404).json({message: 'User not found.'}));
 
     for (i = 0; i < sent_fields.length; i++) {
         if (!(fields.indexOf(sent_fields[i]) > -1))
             return (res.status(400).json({message: 'The key <' + sent_fields[i] + '> is not accessible for User.'}));
+    }
+
+
+    module.exports.updateUser(req, res, err, user);
+    return module.exports.updateUserLDF(req, res, err, user);
+};
+
+exports.updateUser = function (req, res, err, user) {
+
+    var sent_fields = Object.keys(req.body);
+
+    for (i = 0; i < sent_fields.length; i++) {
         user[sent_fields[i]] = req.body[sent_fields[i]];
     }
 
     user.save(function (err) {
         if (err)
             return (res.send(err));
-        return (res.json({message: "User successfully updated!"}));
+        return user;
     });
     return (1);
-}
+};
 
 exports.findUser = function (id) {
     return (User.findById(id));
-}
+};
 
 exports.updateUserLDF = function (req, res, err, user) {
-    var fields = ["like", "dislike", "follow"];
     var sent_fields = Object.keys(req.body);
 
-    if (err)
-        return (res.send(err));
-    else if (user === null)
-        return (res.status(404).json({message: 'User not found.'}))
 
     for (i = 0; i < sent_fields.length; i++) {
-        if (!(fields.indexOf(sent_fields[i]) > -1))
-            return (res.status(400).json({message: 'The key <' + sent_fields[i] + '> is not accessible for UserLDF.'}));
         user[sent_fields[i]] = req.body[sent_fields[i]];
     }
 
@@ -684,7 +689,7 @@ exports.updateUserLDF = function (req, res, err, user) {
         return (res.json({message: "User successfully updated!"}));
     });
     return (1);
-}
+};
 
 
 /**
