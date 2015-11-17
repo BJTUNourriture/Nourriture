@@ -52,11 +52,6 @@
       }, true);
     };
 
-    vm.extend = function(key) {
-
-      vm.extend[key] = true;
-    };
-
 
     //Timeout in ms for the moment
     $timeout(getUserProfile, 700);
