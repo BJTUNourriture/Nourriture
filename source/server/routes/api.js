@@ -206,7 +206,7 @@ router.route('/tags/name/:name')
 /*
 ** Endpoints for Uploads
 */
-router.route('/upload/recipes/photo')
+router.route('/upload/recipes/photo/thumbnail')
     .post(uploadsController.postRecipeThumbnailUrl);
 
 /*
