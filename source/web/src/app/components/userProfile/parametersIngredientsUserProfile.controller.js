@@ -21,7 +21,7 @@
       $log.log("innit");
 
       //Vars for Chips
-      vm.names_ingredient = [{name: 'test'}, {name: 'tutu'}];
+      vm.names_ingredient = [{name_ingredient: 'test'}, {name_ingredient: 'tutu'}];
       vm.selectedItemChip = null;
       vm.searchTextChip = null;
       vm.itemsAutocomplete = [];
