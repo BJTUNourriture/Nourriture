@@ -9,9 +9,9 @@
   angular.module('NourritureControllers')
     .controller('ParametersIngredientsUserProfileController', ParametersIngredientsUserProfileController);
 
-  ParametersIngredientsUserProfileController.$inject = ["IngredientService", "$log", '$rootScope', '$timeout'];
+  ParametersIngredientsUserProfileController.$inject = ["IngredientService", "$log", '$rootScope', '$timeout', '$scope'];
 
-  function ParametersIngredientsUserProfileController(IngredientService, $log, $rootScope, $timeout) {
+  function ParametersIngredientsUserProfileController(IngredientService, $log, $rootScope, $timeout, $scope) {
     var vm = this;
 
     function getUserProfile() {
@@ -19,9 +19,9 @@
       vm.data = $rootScope.UserProfile;
 
 
-     for(var i = 0; i < vm.data.like.length; i++){
-       vm.data.like[i].name = vm.data.like[i].name_ingredient;
-       delete vm.data.like[i].name_ingredient;
+      for (var i = 0; i < vm.data.like.length; i++) {
+        vm.data.like[i].name = vm.data.like[i].name_ingredient;
+        delete vm.data.like[i].name_ingredient;
       }
 
       vm.names_ingredient = vm.data.like;
@@ -70,6 +70,12 @@
 
     //Timeout in ms for the moment
     $timeout(getUserProfile, 1000);
+
+    $scope.$watch(angular.bind(vm.data, function () {
+      return vm.data;
+    }), function (newVal) {
+      $rootScope.UserProfile = newVal;
+    }, true);
 
 
   }
