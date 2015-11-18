@@ -24,7 +24,8 @@
     "angular-ui-router-anim-in-out": "~1.0.2",
     "ngstorage": "~0.3.9",
     "angular-permission": "~1.1.0",
-    "angular-material-data-table": "~0.8.14"
+    "angular-material-data-table": "~0.8.14",
+    "ng-file-upload": "~10.0.2"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.2"

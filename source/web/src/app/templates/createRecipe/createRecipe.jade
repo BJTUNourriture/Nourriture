@@ -5,5 +5,10 @@ md-content
 				div(flex="none").title-register-container 
 					span.title-register-md Create a Recipe
 				div(flex).body-create-Recipe-md
+					form(name="uploadRecipePictureForm" novalidate ng-submit="uploadRecipePictureForm.$valid && createRecipe.upload(file)")
+						md-button(div class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+    							accept="image/*" ngf-max-size="20MB" ngf-min-height="100" 
+    							ngf-resize="{width: 100, height: 100}") Select a file
+						md-button(type='submit') Upload
 		include ../footer/footer.jade
 

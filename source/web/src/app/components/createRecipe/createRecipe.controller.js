@@ -4,14 +4,27 @@
 angular.module('NourritureControllers')
 	.controller('CreateRecipeController', CreateRecipeController);
 
-CreateRecipeController.$inject = ["$scope", "RecipeService", 'TagsService', 'toastr',"$log"];
+CreateRecipeController.$inject = ["$scope", "RecipeService", 'TagsService', 'toastr',"$log", 'Upload', 'URL_API'];
 
-function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log)
+function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log, Upload, URL_API)
 {
 	var vm = this;
 
 	$log.log("innit");
 
+	vm.upload = function(file) {
+        Upload.upload({
+            url: URL_API + '/api/upload/recipes/photo',
+            data: {recipe_thumbnail_picture: file}
+        }).then(function (resp) {
+            console.log('Success ' + resp.config.data.recipe_thumbnail_picture.name + 'uploaded. Response: ' + resp.data);
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.recipe_thumbnail_picture.name);
+        });
+	}
 
 	vm.submit = function() {
 		RecipeService
