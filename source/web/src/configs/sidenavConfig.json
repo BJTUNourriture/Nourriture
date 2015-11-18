@@ -37,7 +37,7 @@
 		{
 			"name" : "Add a Recipe",
 			"icon" : "plus-circle-outline",
-			"reference" : "main.homepage"
+			"reference" : "main.create-recipe"
 		},
 		{
 			"name" : "Recipes Dashboard",
