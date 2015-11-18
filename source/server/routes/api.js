@@ -10,14 +10,13 @@ var groupsController = require('../API/controllers/groups');
 var recipesController = require('../API/controllers/recipes');
 var allergiesController = require('../API/controllers/allergies');
 var tagsController = require('../API/controllers/tags');
+var uploadsController = require('../API/controllers/uploads');
 var jwt = require('jsonwebtoken')
 var passport = require('passport');
 var searchController = require('../API/controllers/search');
 var express = require('express');
 var expressJwt = require('express-jwt');
 var router = express.Router();
-var User = require('../API/models/users');
-
 
 //Function for JWT token verification
 var verifyJwt = expressJwt({
@@ -203,6 +202,12 @@ router.route('/tags/name/:name')
     .put(tagsController.putTagsByName)
     .delete(tagsController.deleteTagsByName)
     .get(tagsController.getTagByName);
+
+/*
+** Endpoints for Uploads
+*/
+router.route('/upload/recipes/photo')
+    .post(uploadsController.postRecipeThumbnailUrl);
 
 /*
  ** Endpoints for Suggestions
