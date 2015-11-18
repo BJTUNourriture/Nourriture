@@ -35,6 +35,11 @@
 			"reference" : "main.ingredients-dashboard"
 		},
 		{
+			"name" : "Add a Recipe",
+			"icon" : "plus-circle-outline",
+			"reference" : "main.homepage"
+		},
+		{
 			"name" : "Recipes Dashboard",
 			"icon" : "recipes",
 			"reference" : "main.recipes-dashboard"
