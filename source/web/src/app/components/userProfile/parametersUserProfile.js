@@ -83,7 +83,7 @@
             email: vm.data.email,
             description: vm.data.description,
             gender: vm.data.gender,
-            like: {id_ingredient: "5647143f3de3b9b37610cb0e", name: "patate"}
+            like: {id_ingredient: "5647143f3de3b9b37610cb0e", name_ingredient: "patate"}
           })
           .$promise
           .then(vm.updateUserSuccess, vm.updateUserError);
