@@ -17,11 +17,16 @@
     function getUserProfile() {
 
       vm.data = $rootScope.UserProfile;
-      $log.log("INgredient like = ", vm.data);
-      $log.log("innit");
+      $log.log("name = ", vm.data);
 
-      //Vars for Chips
-      vm.names_ingredient = [{name_ingredient: 'test'}, {name_ingredient: 'tutu'}];
+
+    /*  for(var i = 0; i < vm.data.like.length; i++){
+       vm.data.like[i].name = vm.data.like['name_ingredient'];
+       delete vm.data.like[i].name_ingredient;
+      }*/
+
+      vm.names_ingredient = [{name: 'test'}, {name: 'tutu'}];
+      $log.log(vm.names_ingredient, vm.data.like);
       vm.selectedItemChip = null;
       vm.searchTextChip = null;
       vm.itemsAutocomplete = [];

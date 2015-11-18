@@ -29,9 +29,9 @@
        deserunt mollit anim id est laborum";*/
 
       vm.data.badge = ["un", "deux", "trois", "quatre"];
-      vm.data.like = [{name_ingredient: "one"}, {name_ingredient: "two"}, {name_ingredient: "three"}, {name_ingredient: "four"},
+      /*vm.data.like = [{name_ingredient: "one"}, {name_ingredient: "two"}, {name_ingredient: "three"}, {name_ingredient: "four"},
         {name_ingredient: "five"}, {name_ingredient: "six"}, {name_ingredient: "seven"}, {name_ingredient: "eight"},
-        {name_ingredient: "nine"}, {name_ingredient: "ten"}, {name_ingredient: "eleven"}, {name_ingredient: "twelve"}];
+        {name_ingredient: "nine"}, {name_ingredient: "ten"}, {name_ingredient: "eleven"}, {name_ingredient: "twelve"}];*/
       vm.data.dislike = [{name_ingredient: "one"}, {name_ingredient: "choux fleur"}, {name_ingredient: "choux de brus"}];
       vm.data.religion = [{name: "christian"}];
       vm.data.alergy = [{name: "eggs"}, {name: "milk"}];
