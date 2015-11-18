@@ -27,9 +27,9 @@
 * @apiParam {Date} [comments.date_edited] Date when the comment was edited
 * @apiParam {String} comments.content The comment itself
 * @apiParam {Boolean} [comments.visible] [default : true] Is the comment visible by others
-* @apiParam {Object[]} [pictures] List of the pictures posted by the author for the recipe
+* @apiParam {Object[]} pictures List of the pictures posted by the author for the recipe
 * @apiParam {String} pictures.thumbnail_url Url of the thumbnail version of the picture
-* @apiParam {String} pictures.medium_sized_url Url of the medium size version of the picture
+* @apiParam {String} [pictures.medium_sized_url] Url of the medium size version of the picture
 * @apiParam {String} [pictures.big_sized_url] Url of the big size version of the picture
 * @apiParam {Number} [number_vote] Number of votes for this recipe.
 * @apiParam {Object[]} [votes] List of all the votes for this recipe. 
@@ -103,9 +103,9 @@
 * @apiSuccess {Date} [comments.date_edited] Date when the comment was edited
 * @apiSuccess {String} comments.content The comment itself
 * @apiSuccess {Boolean} [comments.visible] [default : true] Is the comment visible by others
-* @apiSuccess {Object[]} [pictures] List of the pictures posted by the author for the recipe
+* @apiSuccess {Object[]} pictures List of the pictures posted by the author for the recipe
 * @apiSuccess {String} pictures.thumbnail_url Url of the thumbnail version of the picture
-* @apiSuccess {String} pictures.medium_sized_url Url of the medium size version of the picture
+* @apiSuccess {String} [pictures.medium_sized_url] Url of the medium size version of the picture
 * @apiSuccess {String} [pictures.big_sized_url] Url of the big size version of the picture
 * @apiSuccess {Number} [number_vote] Number of votes for this recipe.
 * @apiSuccess {Object[]} [votes] List of all the votes for this recipe. 

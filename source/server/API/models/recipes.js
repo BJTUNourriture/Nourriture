@@ -100,17 +100,19 @@ var recipesSchema = new mongoose.Schema({
 			default : true
 		}
 	}],
-	pictures : [{
+	pictures : {
+		type : [{
 		thumbnail_url : {
 			type : String,
 			required : true
 		},
 		medium_sized_url : {
-			type : String,
-			required : true
+			type : String
 		},
 		big_sized_url : String
-	}],
+		}],
+		required : true
+	},
 	ingredients : {
 		type : [{
 			id_ingredient : {

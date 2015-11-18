@@ -3418,7 +3418,7 @@
           {
             "group": "Success 200",
             "type": "<p>Object[]</p> ",
-            "optional": true,
+            "optional": false,
             "field": "pictures",
             "description": "<p>List of the pictures posted by the author for the recipe</p> "
           },
@@ -3432,7 +3432,7 @@
           {
             "group": "Success 200",
             "type": "<p>String</p> ",
-            "optional": false,
+            "optional": true,
             "field": "pictures.medium_sized_url",
             "description": "<p>Url of the medium size version of the picture</p> "
           },
@@ -3704,7 +3704,7 @@
           {
             "group": "Success 200",
             "type": "<p>Object[]</p> ",
-            "optional": true,
+            "optional": false,
             "field": "pictures",
             "description": "<p>List of the pictures posted by the author for the recipe</p> "
           },
@@ -3718,7 +3718,7 @@
           {
             "group": "Success 200",
             "type": "<p>String</p> ",
-            "optional": false,
+            "optional": true,
             "field": "pictures.medium_sized_url",
             "description": "<p>Url of the medium size version of the picture</p> "
           },
@@ -3990,7 +3990,7 @@
           {
             "group": "Success 200",
             "type": "<p>Object[]</p> ",
-            "optional": true,
+            "optional": false,
             "field": "pictures",
             "description": "<p>List of the pictures posted by the author for the recipe</p> "
           },
@@ -4004,7 +4004,7 @@
           {
             "group": "Success 200",
             "type": "<p>String</p> ",
-            "optional": false,
+            "optional": true,
             "field": "pictures.medium_sized_url",
             "description": "<p>Url of the medium size version of the picture</p> "
           },
@@ -4265,7 +4265,7 @@
           {
             "group": "Parameter",
             "type": "<p>Object[]</p> ",
-            "optional": true,
+            "optional": false,
             "field": "pictures",
             "description": "<p>List of the pictures posted by the author for the recipe</p> "
           },
@@ -4279,7 +4279,7 @@
           {
             "group": "Parameter",
             "type": "<p>String</p> ",
-            "optional": false,
+            "optional": true,
             "field": "pictures.medium_sized_url",
             "description": "<p>Url of the medium size version of the picture</p> "
           },
