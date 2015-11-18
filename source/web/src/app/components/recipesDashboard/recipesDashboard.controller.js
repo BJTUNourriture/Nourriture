@@ -11,6 +11,7 @@ function RecipesDashboardController($scope, $log, SearchService, toastr)
 	var vm = this;
 
 	vm.recipes = []
+	vm.retrievingRecipes = true;
 
 	//Table specs
 	vm.table = {
@@ -24,6 +25,7 @@ function RecipesDashboardController($scope, $log, SearchService, toastr)
 	vm.RecipesGetSuccess = function(data) {
 		$log.log(data);
 		vm.recipes = data.recipes;
+		vm.retrievingRecipes = false;
 	}
 
 	vm.RecipesGetFailure = function (data) {
@@ -47,6 +49,7 @@ function RecipesDashboardController($scope, $log, SearchService, toastr)
 	//Search by name
 	vm.searchRecipes = function ()
 	{
+		vm.retrievingRecipes = true;
 		vm.table.title = $scope.search;
 		vm.recipes = [];
 		SearchService

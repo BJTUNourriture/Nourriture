@@ -20,7 +20,9 @@ md-content.body-dashboard-recipe
 											input(ng-model="search" name="search")
 									ng-md-icon(type="submit" icon="search" style="cursor: pointer;" ng-click="recipesDashboard.searchRecipes();")
 							md-content.body-dashboard-recipe-md-content.flex.ng-cloak
-								md-grid-list(md-cols-gt-md="6", md-cols-md='3', md-cols-sm='2', md-gutter='12px', md-row-height='1:1')
+								section(layout="column" layout-align="start center" flex ng-if="recipesDashboard.retrievingRecipes")
+									md-progress-circular(md-mode="indeterminate")
+								md-grid-list(md-cols-gt-md="6", md-cols-md='3', md-cols-sm='2', md-gutter='12px', md-row-height='1:1' ng-if="!recipesDashboard.retrievingRecipes")
 									md-grid-tile.body-dashboard-recipe-grid-tile(ng-mouseenter="recipe.mouseEnter = true" ng-mouseleave="recipe.mouseEnter = false" ng-repeat="recipe in recipesDashboard.recipes")
 										figure
 											img(ng-src="assets/images/recipesdummy/no_image.png" width="100%" height="100%")
