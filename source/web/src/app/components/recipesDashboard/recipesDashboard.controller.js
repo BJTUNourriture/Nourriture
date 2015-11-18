@@ -43,6 +43,19 @@ function RecipesDashboardController($scope, $log, SearchService, toastr)
 	.save(vm.table)
 	.$promise
 	.then(vm.RecipesGetSuccess, vm.RecipesGetFailure)
+
+	//Search by name
+	vm.searchRecipes = function ()
+	{
+		vm.table.title = $scope.search;
+		vm.recipes = [];
+		SearchService
+		.recipes
+		.save(vm.table)
+		.$promise
+		.then(vm.RecipesGetSuccess, vm.RecipesGetFailure);
+	}
+
 }
 
 })();

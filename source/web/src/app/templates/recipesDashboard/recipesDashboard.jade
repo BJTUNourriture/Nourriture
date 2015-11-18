@@ -10,16 +10,16 @@ md-content.body-dashboard-recipe
 							md-toolbar.flex
 								section(layout="row", layout-align="start start")
 									div(style="max-width:200px;").hide-gt-sm
-										form(ng-submit="")
+										form(ng-submit="recipesDashboard.searchRecipes();")
 											md-input-container.flex
 												label Search a Recipe
 												input(ng-model="search" name="search")
-									form(ng-submit="").flex.hide-sm
+									form(ng-submit="recipesDashboard.searchRecipes();").flex.hide-sm
 										md-input-container(flex="50")
 											label Search a Recipe
 											input(ng-model="search" name="search")
-									ng-md-icon(type="submit" icon="search" style="cursor: pointer;" ng-click="")
-							md-content.body-dashboard-recipe-md-content.flex
+									ng-md-icon(type="submit" icon="search" style="cursor: pointer;" ng-click="recipesDashboard.searchRecipes();")
+							md-content.body-dashboard-recipe-md-content.flex.ng-cloak
 								md-grid-list(md-cols-gt-md="6", md-cols-md='3', md-cols-sm='2', md-gutter='12px', md-row-height='1:1')
 									md-grid-tile.body-dashboard-recipe-grid-tile(ng-mouseenter="recipe.mouseEnter = true" ng-mouseleave="recipe.mouseEnter = false" ng-repeat="recipe in recipesDashboard.recipes")
 										figure
