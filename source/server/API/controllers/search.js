@@ -31,6 +31,7 @@
 
 var Ingredients = require('../models/ingredients');
 var Recipes = require('../models/recipes')
+var Groups = require('../models/groups')
 
 /*
 ** POSTS
@@ -618,3 +619,100 @@ exports.postSearchRecipes = function (req, res, flag) {
 
 	return (1);
 }*/
+
+exports.postSearchGroups = function (req, res, flag) {
+	var name =  req.body.name;
+	var order = ""
+	if (req.body.order) {
+		var order = req.body.order
+		var order_order = req.body.order.order;
+		var order_field = req.body.order.field;
+		var query = {};
+		query[order_field] = order_order;
+	}
+	var metadata = ""
+	if (req.body.metadata){
+		metadata = req.body.metadata
+		var items_number = req.body.metadata.items;
+		var items_page = req.body.metadata.page;
+	}
+
+	if (metadata == "")
+		return flag === true ? -1 : res.status(400).send({message : 'You must set the metadata'})
+
+	
+	//If name is set
+
+	if (!name){
+
+		var Json_search = {}
+		var newjson = {metadata: {current_page: items_page, order: order}}
+	}
+
+	//If only name is set
+
+	else if (name){
+
+	var Json_search = {
+				"name": { "$regex": name, "$options": "i" }
+			  };
+	var newjson = {metadata: {current_page: items_page, order: order, name: name}}
+
+	}
+
+	var total_page
+	var total_items
+	Groups.find(Json_search,
+		function (err, docs) {
+			total_items = docs.length;
+			total_page = Math.round(docs.length / items_number);
+		if (total_page <= 0)
+			total_page = 1	
+		}
+	)
+
+		if (order === ""){
+			Groups.find(
+				Json_search
+				,
+				function (err, docs) {
+					if (err)
+						return (res.send(err));
+					else if (docs.length <= 0)
+						return (res.status(404).send({message : 'Nothing find for this search'}))
+					else{
+						newjson.metadata.total = total_items
+						newjson.metadata.total_page = total_page
+						newjson.ingredients = docs
+						return (res.json(newjson));
+					}
+				} 
+		).skip((items_page - 1) * items_number).limit(items_number);
+		}
+		else if (order != ""){
+			
+			if (order_order == "desc")
+				order_order = -1
+			else
+				order_order = 1
+			if (!order_field)
+				return flag === true ? -1 : res.status(404).send({message : 'The order.field must be set'})
+			Groups.find(
+				Json_search,
+				function (err, docs) {
+					if (err){
+						return (res.send(err));
+						}
+					else if (docs.length <= 0){
+						return (res.status(404).send({message : 'Nothing find for this search'}))}
+					else{
+						newjson.metadata.total = total_items
+						newjson.metadata.total_page = total_page
+						newjson.ingredients = docs
+						return (res.json(newjson));
+					}
+				}
+		).skip((items_page - 1) * items_number).sort(query).limit(items_number);
+	    }
+	return (1);
+};

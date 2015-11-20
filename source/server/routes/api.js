@@ -181,6 +181,9 @@ router.route('/search/ingredients/')
 router.route('/search/recipes/')
     .post(searchController.postSearchRecipes);
 
+router.route('/search/groups/')
+    .post(searchController.postSearchGroups);
+
 /*
  ** Endpoints for Tags
  */
