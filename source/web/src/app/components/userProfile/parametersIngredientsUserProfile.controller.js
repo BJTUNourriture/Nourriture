@@ -9,9 +9,9 @@
   angular.module('NourritureControllers')
     .controller('ParametersIngredientsUserProfileController', ParametersIngredientsUserProfileController);
 
-  ParametersIngredientsUserProfileController.$inject = ["IngredientService", "$log", '$rootScope', '$timeout', '$scope'];
+  ParametersIngredientsUserProfileController.$inject = ["IngredientService", "$log", '$rootScope', '$timeout', '$scope', '$mdDialog', '$document', '$state'];
 
-  function ParametersIngredientsUserProfileController(IngredientService, $log, $rootScope, $timeout, $scope) {
+  function ParametersIngredientsUserProfileController(IngredientService, $log, $rootScope, $timeout, $scope, $mdDialog, $document, $state) {
     var vm = this;
 
     function getUserProfile() {
@@ -33,6 +33,7 @@
       new_chip.id_ingredient = original._id;
       new_chip.name_ingredient = original.name;
       $rootScope.UserProfile.like_chips_id.push(original._id);
+      vm.data.like.push(new_chip)
 
       return (original.name);
     };
@@ -66,6 +67,63 @@
       return (vm.itemsAutocomplete);
     };
 
+
+    vm.infoIngredientSuccess = function (data) {
+      $log.log("Succes", data);
+      var ingredient = data;
+      $mdDialog.show({
+        controller: vm.dialogController,
+        controllerAs: "infosIngredient",
+        templateUrl: 'app/templates/dialogTemplates/ingredientInfos.tmpl.html',
+        parent: angular.element($document.body),
+        locals: {ingredient: ingredient},
+        bindToController: true,
+        targetEvent: event,
+        clickOutsideToClose: true
+      })
+    };
+
+    vm.infoIngredentFailure = function (data) {
+      $log.error("error getting ingredient", data);
+
+    };
+
+
+    vm.infosIngredientDialog = function (event, ingredient_name) {
+
+
+      IngredientService
+        .ingredient_name
+        .query({name: ingredient_name})
+        .$promise
+        .then(vm.infoIngredientSuccess, vm.infoIngredentFailure);
+
+      var ingredient = {};
+      ingredient.name = "patata";
+      ingredient.calories = 1000;
+     /* $mdDialog.show({
+        controller: vm.dialogController,
+        controllerAs: "infosIngredient",
+        templateUrl: 'app/templates/dialogTemplates/ingredientInfos.tmpl.html',
+        parent: angular.element($document.body),
+        locals: {ingredient: ingredient},
+        bindToController: true,
+        targetEvent: event,
+        clickOutsideToClose: true
+      })*/
+    };
+
+    vm.dialogController = function ($mdDialog) {
+      var vm = this;
+
+      vm.hide = function () {
+        $mdDialog.hide();
+      }
+
+      vm.goToIngredientPage = function (id_ingredient) {
+        $state.go("main.ingredient-page", {id: id_ingredient});
+      }
+    }
 
     //Timeout in ms for the moment
     $timeout(getUserProfile, 1000);

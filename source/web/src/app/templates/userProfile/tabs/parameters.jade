@@ -14,7 +14,7 @@ div(layout="column" layout-align="center center" layout-fill ng-controller="para
               md-autocomplete(md-selected-item-change="parametersIngredientsUserProfile.selectedItemChangeChip" md-selected-item="parametersIngredientsUserProfile.selectedItemChip", md-search-text="parametersIngredientsUserProfile.searchTextChip", md-items="name in parametersIngredientsUserProfile.getNameIngredients(parametersIngredientsUserProfile.searchTextChip)", md-item-text="name.name", placeholder="Search for an ingredient")
                 span(md-highlight-text="parametersIngredientsUserProfile.searchTextChip") {{ name.name }}
               md-chip-template
-                span(ng-click="parametersIngredientsUserProfile.infosTagDialog($event, $chip)")
+                span(ng-click="parametersIngredientsUserProfile.infosIngredientDialog($event, $chip)")
                   strong {{ $chip }}
 
 
