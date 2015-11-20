@@ -34,6 +34,19 @@ md-content
 											ng-md-icon(icon="coin", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.price < 1 || !createRecipe.isHoverPrice[1] || !createRecipe.isHoverPrice[2], 'body-create-Recipe-icon-selected' : createRecipe.price >= 1 || createRecipe.isHoverPrice[1] || createRecipe.isHoverPrice[2]}", ng-click="createRecipe.price = 1")
 											ng-md-icon(icon="coin", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.price < 2 || !createRecipe.isHoverPrice[2], 'body-create-Recipe-icon-selected' : createRecipe.price >= 2 || createRecipe.isHoverPrice[2]}", ng-mouseenter="createRecipe.stateIsHoverPrice(1, true);", ng-mouseleave="createRecipe.stateIsHoverPrice(1, false);" , ng-click="createRecipe.price = 2")
 											ng-md-icon(icon="coin", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.price < 3, 'body-create-Recipe-icon-selected' : createRecipe.price == 3}", ng-mouseenter="createRecipe.stateIsHoverPrice(2, true);", ng-mouseleave="createRecipe.stateIsHoverPrice(2, false);" , ng-click="createRecipe.price = 3")
+									div(layout="" layout-sm="column")
+										md-input-container(flex="")
+											label Photo 1
+											img(ngf-src="createRecipe.file[1] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[1]" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
+										md-input-container(flex="")
+											label Photo 2
+											img(ngf-src="createRecipe.file[2] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[2]" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
+										md-input-container(flex="")
+											label Photo 3
+											img(ngf-src="createRecipe.file[3] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[3]" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
+										md-input-container(flex="")
+											label Photo 4
+											img(ngf-src="createRecipe.file[4] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[4]" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100"  ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
 																		
 		include ../footer/footer.jade
 
