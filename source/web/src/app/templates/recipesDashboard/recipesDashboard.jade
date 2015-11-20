@@ -1,7 +1,7 @@
 md-content.body-dashboard-recipe
 	div(layout="column", layout-fill).flex
 		div.flex
-			div(layout="column" flex layout-align="start center")	
+			div(layout="column" flex layout-align="start center")
 				div(flex="none").title-register-container 
 					span.title-register-md Recipes Dashboard
 				div.body-dashboard-recipe.flex
@@ -14,21 +14,21 @@ md-content.body-dashboard-recipe
 											md-input-container.flex
 												label Search a Recipe
 												input(ng-model="search" name="search")
-									ng-md-icon(type="submit" icon="search" style="cursor: pointer;" ng-click="recipesDashboard.searchRecipes();")
 									form(ng-submit="recipesDashboard.searchRecipes();").flex.hide-sm
 										md-input-container(flex="50")
 											label Search a Recipe
 											input(ng-model="search" name="search")
-									section(layout="row", layout-align="start start")
+									ng-md-icon(type="submit" icon="search" style="cursor: pointer;" ng-click="recipesDashboard.searchRecipes();")
+									span
 										ng-md-icon(icon="alphabetic-order", style="cursor: pointer;", ng-click="recipesDashboard.RecipesOrderByName();")
-										ng-md-icon( ng-if="recipesDashboard.ArrowPos == 1", icon="arrow-up")
-										ng-md-icon( ng-if="recipesDashboard.ArrowPos == 2", icon="arrow-down")
-										ng-md-icon(icon="star", style="cursor: pointer;", ng-click="recipesDashboard.RecipesOrderByScore();")
-										ng-md-icon( ng-if="recipesDashboard.ArrowPos == 3", icon="arrow-up")
-										ng-md-icon( ng-if="recipesDashboard.ArrowPos == 4", icon="arrow-down")
-										ng-md-icon(icon="storm", style="cursor: pointer;", ng-click="recipesDashboard.RecipesOrderByDifficulty();")
-										ng-md-icon( ng-if="recipesDashboard.ArrowPos == 5", icon="arrow-up")
-										ng-md-icon( ng-if="recipesDashboard.ArrowPos == 6", icon="arrow-down")
+										ng-md-icon( ng-if="recipesDashboard.ArrowPos == 1", icon="arrow-up", size="12")
+										ng-md-icon( ng-if="recipesDashboard.ArrowPos == 2", icon="arrow-down", size="12")
+									ng-md-icon(icon="star", style="cursor: pointer;", ng-click="recipesDashboard.RecipesOrderByScore();")
+									ng-md-icon( ng-if="recipesDashboard.ArrowPos == 3", icon="arrow-up", size="12")
+									ng-md-icon( ng-if="recipesDashboard.ArrowPos == 4", icon="arrow-down", size="12")
+									ng-md-icon(icon="storm", style="cursor: pointer;", ng-click="recipesDashboard.RecipesOrderByDifficulty();")
+									ng-md-icon( ng-if="recipesDashboard.ArrowPos == 5", icon="arrow-up", size="12")
+									ng-md-icon( ng-if="recipesDashboard.ArrowPos == 6", icon="arrow-down", size="12")
 							md-content.body-dashboard-recipe-md-content.flex.ng-cloak
 								section(layout="column" layout-align="start center" flex ng-if="recipesDashboard.retrievingRecipes")
 									md-progress-circular(md-mode="indeterminate")
