@@ -28,9 +28,9 @@ md-content
 												input(type="number" ng-model="time" name="time")
 									div
 										strong Price :
-										ng-md-icon(icon="coin")
-										ng-md-icon(icon="coin")
-										ng-md-icon(icon="coin")
+											ng-md-icon(icon="coin", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.price < 1 || !createRecipe.isHoverPrice[1] || !createRecipe.isHoverPrice[2], 'body-create-Recipe-icon-selected' : createRecipe.price >= 1 || createRecipe.isHoverPrice[1] || createRecipe.isHoverPrice[2]}", ng-click="createRecipe.price = 1")
+											ng-md-icon(icon="coin", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.price < 2 || !createRecipe.isHoverPrice[2], 'body-create-Recipe-icon-selected' : createRecipe.price >= 2 || createRecipe.isHoverPrice[2]}", ng-mouseenter="createRecipe.stateIsHoverPrice(1, true);", ng-mouseleave="createRecipe.stateIsHoverPrice(1, false);" , ng-click="createRecipe.price = 2")
+											ng-md-icon(icon="coin", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.price < 3, 'body-create-Recipe-icon-selected' : createRecipe.price == 3}", ng-mouseenter="createRecipe.stateIsHoverPrice(2, true);", ng-mouseleave="createRecipe.stateIsHoverPrice(2, false);" , ng-click="createRecipe.price = 3")
 																		
 		include ../footer/footer.jade
 

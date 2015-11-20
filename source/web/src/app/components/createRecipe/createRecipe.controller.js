@@ -10,7 +10,9 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 {
 	var vm = this;
 	vm.difficulty = 0;
-	vm.isHoverDifficulty = [false, false, false]
+	vm.price = 0;
+	vm.isHoverDifficulty = [false, false, false];
+	vm.isHoverPrice = [false, false, false];
 
 	$log.log("innit");
 
@@ -55,7 +57,12 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 
 	vm.stateIsHoverDifficulty = function (difficulty, state) {
 		vm.isHoverDifficulty[difficulty] = state;
-	}
+	};
+
+	vm.stateIsHoverPrice = function (price, state) {
+		vm.isHoverPrice[price] = state;
+	};
+
 }
 
 })();
