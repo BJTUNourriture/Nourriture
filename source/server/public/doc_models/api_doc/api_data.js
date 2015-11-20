@@ -4922,16 +4922,16 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/search/recipes/",
-    "title": "Search some recipes",
-    "name": "postSearchRecipes",
+    "url": "/search/groups/",
+    "title": "Search some groups",
+    "name": "postSearchGroups",
     "group": "Search",
     "version": "0.1.0",
     "success": {
       "examples": [
         {
           "title": "Success-Response",
-          "content": "    HTTP/1.1 200 OK\n\t  {\n \"metadata\": {\n   \"current_page\": 1,\n   \"order\": {\n     \"order\": \"desc\",\n     \"field\": \"fat\"\n   },\n   \"tags\": [\n     \"563091df113604b7959a6327\"\n   ],\n   \"total_page\": 1,\n\t\"total\": 150\n },\n \"recipes\": [\n   {\n     \"_id\": \"56309253113604b7959a632c\",\n     \"date_edited\": \"2015-04-01T18:34:23.000Z\",\n     \"title\": \"Pumpkin pie\",\n     \"author_id\": \"561fc840d6c25173533e267f\",\n     \"author_name\": \"Kek man\",\n     \"description\": \"It's Halloween time!\",\n     \"__v\": 0,\n     \"ingredients\": [\n       {\n         \"id_ingredient\": \"562a36ec4f0547a42755bf90\",\n         \"name_ingredient\": \"Fuck\",\n         \"_id\": \"56309253113604b7959a632d\",\n         \"amount_ingredient\": 100\n       }\n     ],\n     \"pictures\": [\n       {\n         \"thumbnail_url\": \"/thumbnails/1.jpg\",\n         \"medium_sized_url\": \"/medium_sized/1.jpg\",\n         \"big_sized_url\": \"/big_sized/1.jpg\",\n         \"_id\": \"56309253113604b7959a632e\"\n       }\n     ],\n     \"comments\": [\n       {\n         \"id_author\": \"386fc840d6c25173533e5406\",\n         \"name_author\": \"Pacza\",\n         \"date_posted\": \"2015-03-31T22:00:00.000Z\",\n         \"date_edited\": \"2015-04-01T18:34:23.000Z\",\n         \"content\": \"Thank you! Very nice recipe!\",\n         \"_id\": \"56309253113604b7959a632f\",\n         \"visible\": true\n       }\n     ],\n     \"average_price\": 1,\n     \"time_preparation\": 60,\n     \"average_score\": 0,\n     \"difficulty\": 1,\n     \"date_posted\": \"2015-03-31T22:00:00.000Z\",\n     \"type\": {\n       \"id_type\": \"563091df113604b7959a6327\",\n       \"name\": \"TopKek\"\n     }\n   }\n ]\n}",
+          "content": "    HTTP/1.1 200 OK\n\t  {\n {\n \"metadata\": {\n   \"current_page\": 1,\n   \"order\": \"\",\n   \"total\": 1,\n   \"total_page\": null\n },\n \"groups\": [\n   {\n     \"_id\": \"564ee5ca6399549c3a16103f\",\n     \"name\": \"totto\",\n     \"__v\": 0,\n     \"tags\": [],\n     \"users\": [\n       {\n         \"user_id\": \"564eb7358aa4dcbb2e238429\",\n         \"_id\": \"564ee5ca6399549c3a161040\",\n         \"access\": {\n           \"name\": \"Admin\",\n           \"level\": 0\n         }\n       }\n     ]\n   }\n ]\n}\n}",
           "type": "json"
         }
       ]
@@ -4974,15 +4974,8 @@ define({ "api": [
             "group": "Parameter",
             "type": "<p>String</p> ",
             "optional": true,
-            "field": "title",
-            "description": "<p>Name of the recipes (Regex)</p> "
-          },
-          {
-            "group": "Parameter",
-            "type": "<p>String[]</p> ",
-            "optional": true,
-            "field": "type",
-            "description": "<p>Id of the types that your recipes must have.</p> "
+            "field": "name",
+            "description": "<p>Name of the group (Regex)</p> "
           },
           {
             "group": "Parameter",
@@ -5003,7 +4996,7 @@ define({ "api": [
             "type": "<p>String</p> ",
             "optional": true,
             "field": "order.field",
-            "description": "<p>Field which is order (ex: fat)</p> "
+            "description": "<p>Field which is order (ex: number)</p> "
           },
           {
             "group": "Parameter",
@@ -5031,7 +5024,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n   \"title\": \"pie\",\n   \"order\": {\"order\": \"desc\",\n             \"field\": \"fat\"\n   },\n   \"tags\": ['563091df113604b7959a6327'],\n   \"metadata\": {\"items\": 1,\n                 \"page\": 1\n   }\n}",
+          "content": "{\n   \"title\": \"gras\",\n   \"order\": {\"order\": \"desc\",\n             \"field\": \"name\"\n   },\n   \"metadata\": {\"items\": 1,\n                 \"page\": 1\n   }\n}",
           "type": "json"
         }
       ]
@@ -5048,7 +5041,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response",
-          "content": "    HTTP/1.1 200 OK\n\t  {\n \"metadata\": {\n   \"current_page\": 1,\n   \"order\": {\n     \"order\": \"desc\",\n     \"field\": \"fat\"\n   },\n   \"tags\": [\n     \"563091df113604b7959a6327\"\n   ],\n   \"total_page\": 1\n },\n \"recipes\": [\n   {\n     \"_id\": \"56309253113604b7959a632c\",\n     \"date_edited\": \"2015-04-01T18:34:23.000Z\",\n     \"title\": \"Pumpkin pie\",\n     \"author_id\": \"561fc840d6c25173533e267f\",\n     \"author_name\": \"Kek man\",\n     \"description\": \"It's Halloween time!\",\n     \"__v\": 0,\n     \"ingredients\": [\n       {\n         \"id_ingredient\": \"562a36ec4f0547a42755bf90\",\n         \"name_ingredient\": \"Fuck\",\n         \"_id\": \"56309253113604b7959a632d\",\n         \"amount_ingredient\": 100\n       }\n     ],\n     \"pictures\": [\n       {\n         \"thumbnail_url\": \"/thumbnails/1.jpg\",\n         \"medium_sized_url\": \"/medium_sized/1.jpg\",\n         \"big_sized_url\": \"/big_sized/1.jpg\",\n         \"_id\": \"56309253113604b7959a632e\"\n       }\n     ],\n     \"comments\": [\n       {\n         \"id_author\": \"386fc840d6c25173533e5406\",\n         \"name_author\": \"Pacza\",\n         \"date_posted\": \"2015-03-31T22:00:00.000Z\",\n         \"date_edited\": \"2015-04-01T18:34:23.000Z\",\n         \"content\": \"Thank you! Very nice recipe!\",\n         \"_id\": \"56309253113604b7959a632f\",\n         \"visible\": true\n       }\n     ],\n     \"average_price\": 1,\n     \"time_preparation\": 60,\n     \"average_score\": 0,\n     \"difficulty\": 1,\n     \"date_posted\": \"2015-03-31T22:00:00.000Z\",\n     \"type\": {\n       \"id_type\": \"563091df113604b7959a6327\",\n       \"name\": \"TopKek\"\n     }\n   }\n ]\n}",
+          "content": "    HTTP/1.1 200 OK\n\t  {\n \"metadata\": {\n   \"current_page\": 1,\n   \"order\": {\n     \"order\": \"desc\",\n     \"field\": \"fat\"\n   },\n   \"tags\": [\n     \"563091df113604b7959a6327\"\n   ],\n   \"total_page\": 1,\n\t\"total\": 150\n },\n \"recipes\": [\n   {\n     \"_id\": \"56309253113604b7959a632c\",\n     \"date_edited\": \"2015-04-01T18:34:23.000Z\",\n     \"title\": \"Pumpkin pie\",\n     \"author_id\": \"561fc840d6c25173533e267f\",\n     \"author_name\": \"Kek man\",\n     \"description\": \"It's Halloween time!\",\n     \"__v\": 0,\n     \"ingredients\": [\n       {\n         \"id_ingredient\": \"562a36ec4f0547a42755bf90\",\n         \"name_ingredient\": \"Fuck\",\n         \"_id\": \"56309253113604b7959a632d\",\n         \"amount_ingredient\": 100\n       }\n     ],\n     \"pictures\": [\n       {\n         \"thumbnail_url\": \"/thumbnails/1.jpg\",\n         \"medium_sized_url\": \"/medium_sized/1.jpg\",\n         \"big_sized_url\": \"/big_sized/1.jpg\",\n         \"_id\": \"56309253113604b7959a632e\"\n       }\n     ],\n     \"comments\": [\n       {\n         \"id_author\": \"386fc840d6c25173533e5406\",\n         \"name_author\": \"Pacza\",\n         \"date_posted\": \"2015-03-31T22:00:00.000Z\",\n         \"date_edited\": \"2015-04-01T18:34:23.000Z\",\n         \"content\": \"Thank you! Very nice recipe!\",\n         \"_id\": \"56309253113604b7959a632f\",\n         \"visible\": true\n       }\n     ],\n     \"average_price\": 1,\n     \"time_preparation\": 60,\n     \"average_score\": 0,\n     \"difficulty\": 1,\n     \"date_posted\": \"2015-03-31T22:00:00.000Z\",\n     \"type\": {\n       \"id_type\": \"563091df113604b7959a6327\",\n       \"name\": \"TopKek\"\n     }\n   }\n ]\n}",
           "type": "json"
         }
       ]
