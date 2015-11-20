@@ -36,11 +36,8 @@ md-content
 											ng-md-icon(icon="coin", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.price < 3, 'body-create-Recipe-icon-selected' : createRecipe.price == 3}", ng-mouseenter="createRecipe.stateIsHoverPrice(2, true);", ng-mouseleave="createRecipe.stateIsHoverPrice(2, false);" , ng-click="createRecipe.price = 3")
 							div.body-create-Recipe-table
 								md-data-table-toolbar.body-create-Recipe-toolbar-table
-									md-autocomplete(md-selected-item="createRecipe.selectedItem", md-search-text="createRecipe.ingredientSearch.name", md-items="ingredient in createRecipe.getNameIngredients()", md-item-text="ingredient.name", placeholder="Search for an Ingredient")
-										md-item-template
-											span(md-highlight-text="createIngredient.ingredientSearch.name") {{ ingredient.name }}
-										md-not-found No ingredient found.
-									ng-md-icon(icon="delete")
+									ng-md-icon(icon="add_circle_outline", style="cursor: pointer; width: 36px; height: 36px;", size="36", ng-click="createRecipe.AddIngredientDialog(createRecipe.getCurrentBurrito(), $event)")
+									ng-md-icon(icon="delete", style="cursor: pointer; width: 36px; height: 36px;", size="36")
 								md-data-table-container.flex
 									table(md-data-table md-row-select="createRecipe.selected_ingredients")
 										thead(md-order="null" md-trigger="createRecipe.tableOnOrderChange")

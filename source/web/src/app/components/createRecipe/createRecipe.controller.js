@@ -4,9 +4,10 @@
 angular.module('NourritureControllers')
 	.controller('CreateRecipeController', CreateRecipeController);
 
-CreateRecipeController.$inject = ["$scope", "RecipeService", 'TagsService', 'toastr',"$log", 'UploadService', "SearchService"];
+CreateRecipeController.$inject = ["$scope", "RecipeService", 'TagsService', 'toastr',"$log", 'UploadService', "SearchService", 'IngredientService', "$mdDialog", "$document"];
 
-function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log, UploadService, SearchService)
+/**@ngInject*/
+function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log, UploadService, SearchService, IngredientService, $mdDialog, $document)
 {
 	var vm = this;
 	vm.defaultThumbSrc = "../../assets/images/recipesdummy/plus.png";
@@ -19,15 +20,6 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 	//Table vars
 	vm.ingredients = [];
 	vm.selected_ingredients = [];
-
-	//Autocomplete vars
-	vm.ingredientSearch = {
-		name : '',
-		metadata : {
-			"items": 10,
-			"page" : 1
-		}
-	};
 
 	$log.log("innit");
 
@@ -70,18 +62,6 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 		toastr.error(errorMsg, 'Woops...');
 	};
 
-	vm.IngredientsGetNameFailure = function (data) {
-		$log.log(data.data);
-		vm.itemsAutocomplete = [];
-		return (vm.itemsAutocomplete);
-	};
-
-	vm.IngredientsGetNameSuccess = function (data) {
-		$log.log(data);
-		vm.itemsAutocomplete = data;
-		return (vm.itemsAutocomplete.ingredients);
-	};
-
 	vm.stateIsHoverDifficulty = function (difficulty, state) {
 		vm.isHoverDifficulty[difficulty] = state;
 	};
@@ -90,12 +70,84 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 		vm.isHoverPrice[price] = state;
 	};
 
-	vm.getNameIngredients = function () {
+	//Dialog functions
+	vm.AddIngredientDialog = function(event) {
+		$mdDialog.show({
+		controller : vm.AddIngredientdialogController,
+		controllerAs : 'addIngredient',
+		templateUrl: 'app/templates/dialogTemplates/ingredientAddRecipe.tmpl.html',
+		parent: angular.element($document.body),
+		locals : {ingredients : vm.ingredients},
+		bindToController : true,
+		targetEvent: event,
+		clickOutsideToClose:true
+		}).then(function(data) { vm.ingredients.push(data) });
+	};
+
+	//Controller for createTagDialog
+	vm.AddIngredientdialogController = function($mdDialog) {
+		var vm = this;
+
+		//Autocomplete vars
+		vm.ingredientSearch = {
+			name : '',
+			metadata : {
+				"items": 10,
+				"page" : 1
+			}
+		};
+
+		vm.IngredientGetAddSuccess = function (data) {
+			$log.log(data.message);
+			toastr.success('You can now access your new Tag.', 'Tag Created!');
+		};
+
+		vm.IngredientsGetAddFailure = function (data) {
+			$log.log(data.data);
+			var errorMsg = "This is odd...";
+			if (data.data.errmsg.indexOf("name") > -1)
+				errorMsg = "Seems like the tag already exists";
+			toastr.error(errorMsg, 'Woops...');
+		};
+
+		vm.IngredientsGetNameFailure = function (data) {
+			$log.log(data.data);
+			vm.itemsAutocomplete = [];
+			return (vm.itemsAutocomplete);
+		};
+
+		vm.IngredientsGetNameSuccess = function (data) {
+			$log.log(data);
+			vm.itemsAutocomplete = data;
+			return (vm.itemsAutocomplete.ingredients);
+		};
+
+		vm.getNameIngredients = function () {
+
 		return (SearchService
 			.ingredients
 			.save(vm.ingredientSearch)
 			.$promise
 			.then(vm.IngredientsGetNameSuccess, vm.IngredientsGetNameFailure));
+		}
+
+		vm.submit = function() {
+			$log.log("innit");
+			IngredientService
+				.ingredient_name
+				.get({"name" : vm.name})
+				.$promise
+				.then(vm.IngredientGetAddSuccess, vm.IngredientsGetAddFailure);
+		}
+
+		vm.hide = function () {
+			$log.log(vm.selectedItem);
+			if (vm.selectedItem)
+			{
+				vm.selectedItem.amount = vm.amount;
+				$mdDialog.hide(vm.selectedItem);
+			}
+		}
 	}
 
 }
