@@ -9,6 +9,7 @@ CreateRecipeController.$inject = ["$scope", "RecipeService", 'TagsService', 'toa
 function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log, UploadService)
 {
 	var vm = this;
+	vm.defaultThumbSrc = "../../assets/images/recipesdummy/plus.png";
 	vm.difficulty = 0;
 	vm.price = 0;
 	vm.isHoverDifficulty = [false, false, false];

@@ -6,10 +6,12 @@ md-content
 					span.title-register-md Create a Recipe
 				div(flex).body-create-Recipe-md
 					div.body-create-Recipe-md
-						form(name="createRecimeForm" novalidate ng-submit="createRecipeForm.$valid && createRecipeForm.submit()")
+						form(name="createRecipeForm" novalidate ng-submit="createRecipeForm.$valid && createRecipeForm.submit()")
 							section(layout="row", layout-align="start start")
 								div.body-create-Recipe
-									img(ng-src="../../assets/images/recipesdummy/plus.png").body-create-Recipe-thumbnail-picture
+									img(ngf-default-src="{{ createRecipe.defaultThumbSrc }}" ngf-src="!file.$error && file" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+    							accept="image/*" ngf-max-size="20MB" ngf-min-height="100" 
+    							ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
 								section(layout="column", layout-align="start start", layout-fill)
 									div(layout="row", layout-align="space-between center", layout-fill, style="width:100%;")
 										md-input-container(flex="30")
