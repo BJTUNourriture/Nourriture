@@ -9,7 +9,7 @@ md-content
 						form(name="createRecipeForm" novalidate ng-submit="createRecipeForm.$valid && createRecipeForm.submit()")
 							section(layout="row", layout-align="start start")
 								div.body-create-Recipe
-									img(ngf-default-src="{{ createRecipe.defaultThumbSrc }}" ngf-src="!file.$error && file" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+									img(ngf-src="file || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
     							accept="image/*" ngf-max-size="20MB" ngf-min-height="100" 
     							ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
 								section(layout="column", layout-align="start start", layout-fill)
