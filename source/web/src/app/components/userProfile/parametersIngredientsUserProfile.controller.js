@@ -30,11 +30,21 @@
       vm.itemsAutocomplete = [];
     }
 
+    vm.transformFromAPItoChip = function(original) {
+      var new_chip = {};
+
+      new_chip.id_ingredient = original._id;
+      new_chip.name = origal.name;
+
+    }
+
     //Chips functions
     vm.transformChip = function (chip) {
       $log.log("chip = ", chip);
-      if (angular.isObject(chip))
+      if (angular.isObject(vm.transformFromAPItoChip(chip))){
         return chip;
+
+      }
       if (angular.isUndefined(chip._id))
         return {
           name: chip

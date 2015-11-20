@@ -10,9 +10,9 @@
     .module('NourritureControllers')
     .controller('informationsUserProfileController', informationsUserProfileController);
 
-  informationsUserProfileController.$inject = ["$scope", '$log', '$rootScope', '$timeout', '$mdDialog', '$document'];
+  informationsUserProfileController.$inject = ["$scope", '$log', '$rootScope', '$timeout', '$mdDialog', '$document', 'IngredientService'];
 
-  function informationsUserProfileController($scope, $log, $rootScope, $timeout, $mdDialog, $document) {
+  function informationsUserProfileController($scope, $log, $rootScope, $timeout, $mdDialog, $document, IngredientService) {
 
     var vm = this;
     vm.extend = {};
@@ -55,13 +55,10 @@
       }, true);
     };
 
+    vm.getIngredientSuccess = function (data) {
 
-    vm.infosIngredientDialog = function (event, ingredient) {
-
-      /*ingredient.calories = 100;
-      ingredient.fat = 100;*/
-
-
+      console.log("data = ", data);
+      var ingredient = data;
       $mdDialog.show({
         controller: vm.dialogController,
         controllerAs: "infosIngredient",
@@ -71,7 +68,37 @@
         bindToController: true,
         targetEvent: event,
         clickOutsideToClose: true
-      })
+      });
+
+      console.log("end dialog show");
+    };
+
+    vm.getIngredientFailure = function (data) {
+      console.error("error when getting the ingredient");
+    };
+
+    vm.infosIngredientDialog = function (event, ingredient) {
+
+      /*ingredient.calories = 100;
+       ingredient.fat = 100;*/
+     IngredientService
+        .ingredient_id
+        .get({id: ingredient.id_ingredient})
+        .$promise
+        .then(vm.getIngredientSuccess, vm.getIngredientFailure);
+
+    /*  $mdDialog.show({
+        controller: vm.dialogController,
+        controllerAs: "infosIngredient",
+        templateUrl: 'app/templates/dialogTemplates/ingredientInfos.tmpl.html',
+        parent: angular.element($document.body),
+        locals: {ingredient: ingredient},
+        bindToController: true,
+        targetEvent: event,
+        clickOutsideToClose: true
+      });*/
+
+
     };
     vm.dialogController = function ($mdDialog) {
       var vm = this;

@@ -16,6 +16,9 @@
       vm.data = data;
       $rootScope.UserProfile = data;
       $rootScope.UserProfileSave = {};
+      $rootScope.UserProfile.data.like_chips = $rootScope.UserProfile.data.like;
+      for(var i = 0; i < $rootScope.UserProfile.data.like.length; i++)
+        delete $rootScope.UserProfile.data.like_chips._id;
       angular.copy($rootScope.UserProfile, $rootScope.UserProfileSave);
     };
 
