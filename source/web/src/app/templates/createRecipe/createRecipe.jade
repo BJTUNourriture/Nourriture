@@ -34,6 +34,36 @@ md-content
 											ng-md-icon(icon="coin", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.price < 1 || !createRecipe.isHoverPrice[1] || !createRecipe.isHoverPrice[2], 'body-create-Recipe-icon-selected' : createRecipe.price >= 1 || createRecipe.isHoverPrice[1] || createRecipe.isHoverPrice[2]}", ng-click="createRecipe.price = 1")
 											ng-md-icon(icon="coin", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.price < 2 || !createRecipe.isHoverPrice[2], 'body-create-Recipe-icon-selected' : createRecipe.price >= 2 || createRecipe.isHoverPrice[2]}", ng-mouseenter="createRecipe.stateIsHoverPrice(1, true);", ng-mouseleave="createRecipe.stateIsHoverPrice(1, false);" , ng-click="createRecipe.price = 2")
 											ng-md-icon(icon="coin", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.price < 3, 'body-create-Recipe-icon-selected' : createRecipe.price == 3}", ng-mouseenter="createRecipe.stateIsHoverPrice(2, true);", ng-mouseleave="createRecipe.stateIsHoverPrice(2, false);" , ng-click="createRecipe.price = 3")
+							div.body-create-Recipe-table
+								md-data-table-toolbar.body-create-Recipe-toolbar-table
+									md-autocomplete(md-selected-item="createRecipe.selectedItem", md-search-text="createRecipe.ingredientSearch.name", md-items="ingredient in createRecipe.getNameIngredients()", md-item-text="ingredient.name", placeholder="Search for an Ingredient")
+										md-item-template
+											span(md-highlight-text="createIngredient.ingredientSearch.name") {{ ingredient.name }}
+										md-not-found No ingredient found.
+									ng-md-icon(icon="delete")
+								md-data-table-container.flex
+									table(md-data-table md-row-select="createRecipe.selected_ingredients")
+										thead(md-order="null" md-trigger="createRecipe.tableOnOrderChange")
+											tr
+												th(name="Name" order-by="name")
+												th(name="Amount", order-by="amount")
+												th(name="Calories" unit="Kcal/100g" order-by="calories" numeric)
+												th(name="Proteins" unit="g" order-by="proteins" numeric)
+												th(name="Carbs" unit="g" order-by="carbohydrates" numeric)
+												th(name="Fats" unit="g" order-by="fat")
+										tbody
+											tr(ng-repeat="ingredient in createRecipe.ingredients" style="cursor: pointer;" ng-click='ingredientDashboard.infosIngredientDialog($event, ingredient)')
+												td {{ ingredient.name }}
+												td {{ ingredient.amount }}
+												td {{ ingredient.calories }}
+												td {{ ingredient.proteins }}
+												td {{ ingredient.carbohydrates }}
+												td {{ ingredient.fat }}
+										tfoot
+											tr
+												td
+													strong Total :
+												td 9001						
 							div(layout="" layout-sm="column").body-create-Recipe
 								md-input-container(flex="")
 									label Photo 1
@@ -47,6 +77,6 @@ md-content
 								md-input-container(flex="")
 									label Photo 4
 									img(ngf-src="createRecipe.file[4] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[4]" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100"  ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
-																		
+
 		include ../footer/footer.jade
 

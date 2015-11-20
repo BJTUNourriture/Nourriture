@@ -4,9 +4,9 @@
 angular.module('NourritureControllers')
 	.controller('CreateRecipeController', CreateRecipeController);
 
-CreateRecipeController.$inject = ["$scope", "RecipeService", 'TagsService', 'toastr',"$log", 'UploadService'];
+CreateRecipeController.$inject = ["$scope", "RecipeService", 'TagsService', 'toastr',"$log", 'UploadService', "SearchService"];
 
-function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log, UploadService)
+function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log, UploadService, SearchService)
 {
 	var vm = this;
 	vm.defaultThumbSrc = "../../assets/images/recipesdummy/plus.png";
@@ -15,6 +15,19 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 	vm.isHoverDifficulty = [false, false, false];
 	vm.isHoverPrice = [false, false, false];
 	vm.createRecipe = [];
+
+	//Table vars
+	vm.ingredients = [];
+	vm.selected_ingredients = [];
+
+	//Autocomplete vars
+	vm.ingredientSearch = {
+		name : '',
+		metadata : {
+			"items": 10,
+			"page" : 1
+		}
+	};
 
 	$log.log("innit");
 
@@ -57,6 +70,18 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 		toastr.error(errorMsg, 'Woops...');
 	};
 
+	vm.IngredientsGetNameFailure = function (data) {
+		$log.log(data.data);
+		vm.itemsAutocomplete = [];
+		return (vm.itemsAutocomplete);
+	};
+
+	vm.IngredientsGetNameSuccess = function (data) {
+		$log.log(data);
+		vm.itemsAutocomplete = data;
+		return (vm.itemsAutocomplete.ingredients);
+	};
+
 	vm.stateIsHoverDifficulty = function (difficulty, state) {
 		vm.isHoverDifficulty[difficulty] = state;
 	};
@@ -64,6 +89,14 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 	vm.stateIsHoverPrice = function (price, state) {
 		vm.isHoverPrice[price] = state;
 	};
+
+	vm.getNameIngredients = function () {
+		return (SearchService
+			.ingredients
+			.save(vm.ingredientSearch)
+			.$promise
+			.then(vm.IngredientsGetNameSuccess, vm.IngredientsGetNameFailure));
+	}
 
 }
 
