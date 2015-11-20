@@ -18,13 +18,9 @@
 
       vm.data = $rootScope.UserProfile;
 
+      vm.names_ingredient = vm.data.like_chips;
 
-      for (var i = 0; i < vm.data.like.length; i++) {
-        vm.data.like[i].name = vm.data.like[i].name_ingredient;
-        delete vm.data.like[i].name_ingredient;
-      }
-
-      vm.names_ingredient = vm.data.like;
+      $log.log(vm.names_ingredient);
       vm.selectedItemChip = null;
       vm.searchTextChip = null;
       vm.itemsAutocomplete = [];
@@ -34,16 +30,19 @@
       var new_chip = {};
 
       new_chip.id_ingredient = original._id;
-      new_chip.name = origal.name;
-
+      new_chip.name_ingredient = original.name;
+      return (original.name);
     }
 
     //Chips functions
     vm.transformChip = function (chip) {
-      $log.log("chip = ", chip);
-      if (angular.isObject(vm.transformFromAPItoChip(chip))){
+      $log.log(chip);
+      chip = vm.transformFromAPItoChip(chip);
+      $log.log(chip);
+      return chip;
+      /*
+      if (angular.isObject(chip)){
         return chip;
-
       }
       if (angular.isUndefined(chip._id))
         return {
@@ -52,7 +51,7 @@
       else
         return {
           name: chip.name
-        }
+        }*/
     };
 
     vm.getNameIngredients = function (name) {
