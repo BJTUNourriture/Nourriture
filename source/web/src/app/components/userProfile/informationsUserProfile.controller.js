@@ -46,8 +46,6 @@
       vm.data.recipe_post = [{name: "Grilled duck"}, {name: "baguette"}];
       vm.data.recipe_like = [{name: "marmelade"}, {name: "cantonese rice"}];
 
-      $log.log("Information USeProfile = ", vm.data.like);
-
       $scope.$watch(angular.bind($rootScope.UserProfile, function () {
         return $rootScope.UserProfile;
       }), function (newVal) {

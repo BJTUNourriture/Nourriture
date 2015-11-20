@@ -637,8 +637,16 @@ exports.updateUserAll = function (req, res, err, user) {
     }
 
 
-    module.exports.updateUser(req, res, err, user);
-    return module.exports.updateUserLDF(req, res, err, user);
+    if (module.exports.updateUser(req, res, err, user) != 1) {
+        return res.send(err);
+    }
+
+    if (module.exports.updateUserLDF(req, res, err, user) != 1) {
+        return res.send(err);
+    }
+
+    return res.json("user update successfully");
+
 };
 
 exports.updateUser = function (req, res, err, user) {
@@ -651,7 +659,7 @@ exports.updateUser = function (req, res, err, user) {
 
     user.save(function (err) {
         if (err)
-            return (res.send(err));
+            return (err);
         return user;
     });
     return (1);
@@ -685,8 +693,8 @@ exports.updateUserLDF = function (req, res, err, user) {
 
     user.save(function (err) {
         if (err)
-            return (res.send(err));
-        return (res.json({message: "User successfully updated!"}));
+            return err;
+        return 1;
     });
     return (1);
 };

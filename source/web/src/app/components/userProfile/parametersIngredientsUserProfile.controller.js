@@ -20,19 +20,22 @@
 
       vm.names_ingredient = vm.data.like_chips;
 
-      $log.log(vm.names_ingredient);
+
+      $log.log("names_ingreident = ", vm.names_ingredient);
       vm.selectedItemChip = null;
       vm.searchTextChip = null;
       vm.itemsAutocomplete = [];
     }
 
-    vm.transformFromAPItoChip = function(original) {
+    vm.transformFromAPItoChip = function (original) {
       var new_chip = {};
 
       new_chip.id_ingredient = original._id;
       new_chip.name_ingredient = original.name;
+      $rootScope.UserProfile.like_chips_id.push(original._id);
+
       return (original.name);
-    }
+    };
 
     //Chips functions
     vm.transformChip = function (chip) {

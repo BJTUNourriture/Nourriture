@@ -15,13 +15,16 @@
       $log.log(data._id);
       vm.data = data;
       $rootScope.UserProfile = data;
-      $log.log("Begin UserProfilkeController", $rootScope.UserProfile.like);
       $rootScope.UserProfileSave = {};
       $rootScope.UserProfile.like_chips = [];
-      for(var i = 0; i < $rootScope.UserProfile.like.length; i++)
+      $rootScope.UserProfile.like_chips_id = [];
+      for(var i = 0; i < $rootScope.UserProfile.like.length; i++) {
         $rootScope.UserProfile.like_chips[i] = $rootScope.UserProfile.like[i].name_ingredient;
+        $rootScope.UserProfile.like_chips_id[i] = $rootScope.UserProfile.like[i].id_ingredient;
+
+
+      }
       angular.copy($rootScope.UserProfile, $rootScope.UserProfileSave);
-      $log.log("End UserProfilkeController", $rootScope.UserProfile.like);
 
     };
 
