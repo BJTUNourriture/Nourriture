@@ -6,7 +6,13 @@ md-content
 					span.title-register-md Create a Recipe
 				div(flex).body-create-Recipe-md
 					div.body-create-Recipe-md
-						div.body-create-Recipe
-							img(ng-src="../../assets/images/recipesdummy/plus.png").body-create-Recipe-thumbnail-picture
+						form(name="createRecimeForm" novalidate ng-submit="createRecipeForm.$valid && createRecipeForm.submit()")
+							section(layout="row", layout-align="start start")
+								div.body-create-Recipe
+									img(ng-src="../../assets/images/recipesdummy/plus.png").body-create-Recipe-thumbnail-picture
+								div
+									md-input-container
+										label Title
+										input(ng-model="title" name="title")
 		include ../footer/footer.jade
 
