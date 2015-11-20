@@ -69,18 +69,10 @@
 
 
     vm.infoIngredientSuccess = function (data) {
-      $log.log("Succes", data);
-      var ingredient = data;
-      $mdDialog.show({
-        controller: vm.dialogController,
-        controllerAs: "infosIngredient",
-        templateUrl: 'app/templates/dialogTemplates/ingredientInfos.tmpl.html',
-        parent: angular.element($document.body),
-        locals: {ingredient: ingredient},
-        bindToController: true,
-        targetEvent: event,
-        clickOutsideToClose: true
-      })
+      $log.log("Succes", data, data.data);
+      var ingredient = data[0];
+      ingredient.name = "toito";
+      return ingredient;
     };
 
     vm.infoIngredentFailure = function (data) {
@@ -91,26 +83,39 @@
 
     vm.infosIngredientDialog = function (event, ingredient_name) {
 
+      $mdDialog.show({
+          controller: vm.dialogController,
+          controllerAs: "infosIngredient",
+          templateUrl: 'app/templates/dialogTemplates/ingredientInfos.tmpl.html',
+          parent: angular.element($document.body),
+          locals: {
+            ingredient: IngredientService
+              .ingredient_name
+              .query({name: ingredient_name})
+              .$promise
+              .then(vm.infoIngredientSuccess, vm.infoIngredentFailure)
+          },
+          bindToController: true,
+          targetEvent: event,
+          clickOutsideToClose: true
+        }
+      )
+      ;
 
-      IngredientService
-        .ingredient_name
-        .query({name: ingredient_name})
-        .$promise
-        .then(vm.infoIngredientSuccess, vm.infoIngredentFailure);
 
-      var ingredient = {};
-      ingredient.name = "patata";
-      ingredient.calories = 1000;
-     /* $mdDialog.show({
-        controller: vm.dialogController,
-        controllerAs: "infosIngredient",
-        templateUrl: 'app/templates/dialogTemplates/ingredientInfos.tmpl.html',
-        parent: angular.element($document.body),
-        locals: {ingredient: ingredient},
-        bindToController: true,
-        targetEvent: event,
-        clickOutsideToClose: true
-      })*/
+      /* var ingredient = {};
+       ingredient.name = "patata";
+       ingredient.calories = 1000;
+       $mdDialog.show({
+       controller: vm.dialogController,
+       controllerAs: "infosIngredient",
+       templateUrl: 'app/templates/dialogTemplates/ingredientInfos.tmpl.html',
+       parent: angular.element($document.body),
+       locals: {ingredient: ingredient},
+       bindToController: true,
+       targetEvent: event,
+       clickOutsideToClose: true
+       })*/
     };
 
     vm.dialogController = function ($mdDialog) {
@@ -125,7 +130,7 @@
       }
     }
 
-    //Timeout in ms for the moment
+//Timeout in ms for the moment
     $timeout(getUserProfile, 1000);
 
     $scope.$watch(angular.bind(vm.data, function () {
@@ -137,4 +142,5 @@
 
   }
 
-})();
+})
+();
