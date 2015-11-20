@@ -10,9 +10,27 @@ md-content
 							section(layout="row", layout-align="start start")
 								div.body-create-Recipe
 									img(ng-src="../../assets/images/recipesdummy/plus.png").body-create-Recipe-thumbnail-picture
-								div
-									md-input-container
-										label Title
-										input(ng-model="title" name="title")
+								section(layout="column", layout-align="start start", layout-fill)
+									div(layout="row", layout-align="space-between center", layout-fill, style="width:100%;")
+										md-input-container(flex="30")
+											label Title
+											input(ng-model="title" name="title")
+										span(flex="40")
+										div.flex
+											strong Difficulty :
+												ng-md-icon(icon="star", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.difficulty < 1 || !createRecipe.isHoverDifficulty[1] || !createRecipe.isHoverDifficulty[2], 'body-create-Recipe-icon-selected' : createRecipe.difficulty >= 1 || createRecipe.isHoverDifficulty[1] || createRecipe.isHoverDifficulty[2]}", ng-click="createRecipe.difficulty = 1")
+												ng-md-icon(icon="star", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.difficulty < 2 || !createRecipe.isHoverDifficulty[2], 'body-create-Recipe-icon-selected' : createRecipe.difficulty >= 2 || createRecipe.isHoverDifficulty[2]}", ng-mouseenter="createRecipe.stateIsHoverDifficulty(1, true);", ng-mouseleave="createRecipe.stateIsHoverDifficulty(1, false);" , ng-click="createRecipe.difficulty = 2")
+												ng-md-icon(icon="star", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.difficulty < 3, 'body-create-Recipe-icon-selected' : createRecipe.difficulty == 3}", ng-mouseenter="createRecipe.stateIsHoverDifficulty(2, true);", ng-mouseleave="createRecipe.stateIsHoverDifficulty(2, false);" , ng-click="createRecipe.difficulty = 3")
+									
+									div(layout="row", layout-align="start start")
+											md-input-container(flex="70")
+												label Time (in mins)
+												input(type="number" ng-model="time" name="time")
+									div
+										strong Price :
+										ng-md-icon(icon="coin")
+										ng-md-icon(icon="coin")
+										ng-md-icon(icon="coin")
+																		
 		include ../footer/footer.jade
 
