@@ -645,7 +645,7 @@ exports.updateUserAll = function (req, res, err, user) {
         return res.send(err);
     }
 
-    return res.json("user update successfully");
+    return res.status(200).json({message: "user update successfully"});
 
 };
 

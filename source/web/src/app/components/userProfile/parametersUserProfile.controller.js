@@ -30,8 +30,8 @@
 
       vm.data.badge = ["un", "deux", "trois", "quatre"];
       /*vm.data.like = [{name_ingredient: "one"}, {name_ingredient: "two"}, {name_ingredient: "three"}, {name_ingredient: "four"},
-        {name_ingredient: "five"}, {name_ingredient: "six"}, {name_ingredient: "seven"}, {name_ingredient: "eight"},
-        {name_ingredient: "nine"}, {name_ingredient: "ten"}, {name_ingredient: "eleven"}, {name_ingredient: "twelve"}];*/
+       {name_ingredient: "five"}, {name_ingredient: "six"}, {name_ingredient: "seven"}, {name_ingredient: "eight"},
+       {name_ingredient: "nine"}, {name_ingredient: "ten"}, {name_ingredient: "eleven"}, {name_ingredient: "twelve"}];*/
       vm.data.dislike = [{name_ingredient: "one"}, {name_ingredient: "choux fleur"}, {name_ingredient: "choux de brus"}];
       vm.data.religion = [{name: "christian"}];
       vm.data.alergy = [{name: "eggs"}, {name: "milk"}];
@@ -60,10 +60,8 @@
       var like_ingredient = [];
 
       for (var i = 0; i < vm.data.like_chips.length; i++) {
-        like_ingredient[i] = {id_ingredient: vm.data.like_chips[i], name_ingredient:  vm.data.like_chips_id[i]};
+        like_ingredient[i] = {id_ingredient: vm.data.like_chips_id[i], name_ingredient: vm.data.like_chips[i]};
       }
-
-      $log.log("ingredient liked = ", like_ingredient);
 
       var email = $rootScope.UserProfileSave.email;
 
@@ -90,8 +88,7 @@
             email: vm.data.email,
             description: vm.data.description,
             gender: vm.data.gender,
-            like: [{id_ingredient: "5647143f3de3b9b37610cb0e", name_ingredient: "patate"}, {id_ingredient: "56471f6c3de3b9b37610cb10", name_ingredient: "Lore;"}]
-            //like: like_ingredient
+            like: like_ingredient
           })
           .$promise
           .then(vm.updateUserSuccess, vm.updateUserError);
