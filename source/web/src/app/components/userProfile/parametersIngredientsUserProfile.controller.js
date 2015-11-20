@@ -36,22 +36,9 @@
 
     //Chips functions
     vm.transformChip = function (chip) {
-      $log.log(chip);
       chip = vm.transformFromAPItoChip(chip);
-      $log.log(chip);
       return chip;
-      /*
-      if (angular.isObject(chip)){
-        return chip;
-      }
-      if (angular.isUndefined(chip._id))
-        return {
-          name: chip
-        };
-      else
-        return {
-          name: chip.name
-        }*/
+
     };
 
     vm.getNameIngredients = function (name) {
