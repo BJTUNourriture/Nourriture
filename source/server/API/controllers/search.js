@@ -342,6 +342,7 @@ exports.postSearchIngredients = function (req, res, flag) {
 exports.postSearchRecipes = function (req, res, flag) {
 
 	var title =  req.body.title;
+	var author_name = req.body.author_name;
 	var order = ""
 	if (req.body.order) {
 		var order = req.body.order
@@ -404,6 +405,13 @@ exports.postSearchRecipes = function (req, res, flag) {
 
 	}
 	
+	if (author_name) {
+		var Json_search = {
+				"author_name": { "$regex": author_name, "$options": "i" }
+			  };
+	var newjson = {metadata: {current_page: items_page, order: order}}
+	}
+
 	var total_page
 	var total_items
 	Recipes.find(Json_search,

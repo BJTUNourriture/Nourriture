@@ -61,5 +61,19 @@ md-content
 												td
 													strong Total :
 												td 9001						
+							div(layout="" layout-sm="column").body-create-Recipe
+								md-input-container(flex="")
+									label Photo 1
+									img(ngf-src="createRecipe.file[1] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[1]" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
+								md-input-container(flex="")
+									label Photo 2
+									img(ngf-src="createRecipe.file[2] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[2]" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
+								md-input-container(flex="")
+									label Photo 3
+									img(ngf-src="createRecipe.file[3] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[3]" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
+								md-input-container(flex="")
+									label Photo 4
+									img(ngf-src="createRecipe.file[4] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[4]" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100"  ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
+
 		include ../footer/footer.jade
 
