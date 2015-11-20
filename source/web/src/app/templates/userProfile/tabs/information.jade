@@ -70,9 +70,9 @@ div(layout"column" layout-fill ng-controller="informationsUserProfileController 
                         md-list-item.md-2-line.user-profile-head-title.user-profile-body-half-width
                                 p
                                  span.bold Ingredients liked with numbers: <br>
-                                 span(ng-repeat='ingredient in informationsUserProfile.data.like | limitTo:10')  {{ingredient.name_ingredient}},
+                                 span(ng-repeat='ingredient in informationsUserProfile.data.like | limitTo:10') <span ng-click='informationsUserProfile.infosIngredientDialog($event, ingredient)'>{{ingredient.name}}</span>,
                                  span(ng-click="informationsUserProfile.ingredientLiked = !informationsUserProfile.ingredientLiked" ng-hide="informationsUserProfile.ingredientLiked" ng-if="informationsUserProfile.data.like.length > 10")  more...
-                                 span(ng-show="informationsUserProfile.ingredientLiked" ng-repeat='ingredient in informationsUserProfile.data.like | limitTo:informationsUserProfile.data.like.length - 10:10').show-more  {{ingredient.name_ingredient}},
+                                 span(ng-show="informationsUserProfile.ingredientLiked" ng-repeat='ingredient in informationsUserProfile.data.like | limitTo:informationsUserProfile.data.like.length - 10:10').show-more  {{ingredient.name}},
                                  span(ng-show="informationsUserProfile.ingredientLiked" ng-click="informationsUserProfile.ingredientLiked = !informationsUserProfile.ingredientLiked")  less
                         md-list-item.md-2-line.md-no-proxy.user-profile-head-title.user-profile-body-half-width
                                 p
