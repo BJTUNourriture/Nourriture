@@ -101,7 +101,7 @@
             .state('main.create-recipe', {
                 url: 'create-recipe',
                 parent: 'main',
-                templateUrl: 'app/templates/createrecipe/createrecipe.html',
+                templateUrl: 'app/templates/createRecipe/createRecipe.html',
                 controller: 'CreateRecipeController',
                 controllerAs: 'createRecipe',
                 data: {

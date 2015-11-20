@@ -8,6 +8,7 @@ var passport = require('passport');
 var session = require('express-session');
 var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
+var multer = require('multer');
 var oauth = require('./routes/oauth');
 var api = require('./routes/api');
 var routes = require('./routes/index');

@@ -157,7 +157,7 @@ exports.putTagsById = function (req, res) {
 /**
 * @api {put} /tags/name/:name Update an Tag by name
 * @apiName putTagsByName
-* @apiGroup ATags
+* @apiGroup Tags
 * @apiVersion 0.1.0
 *
 * @apiUse TagsObjectPutParam

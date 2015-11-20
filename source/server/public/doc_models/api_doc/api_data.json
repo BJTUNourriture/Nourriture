@@ -1,111 +1,5 @@
 [
   {
-    "type": "put",
-    "url": "/tags/name/:name",
-    "title": "Update an Tag by name",
-    "name": "putTagsByName",
-    "group": "ATags",
-    "version": "0.1.0",
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "optional": false,
-            "field": "message",
-            "description": "<p>Tag successfully updated!</p> "
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response",
-          "content": "    HTTP/1.1 200 OK\n\t  {\n\t\t\"message\" : \"Tags successfully updated!\"\n\t  }",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "API/controllers/tags.js",
-    "groupTitle": "ATags",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "<p>String</p> ",
-            "optional": false,
-            "field": "name",
-            "description": "<p>Name of the Tag</p> "
-          },
-          {
-            "group": "Parameter",
-            "type": "<p>String</p> ",
-            "optional": true,
-            "field": "description",
-            "description": "<p>Description of the Tag</p> "
-          },
-          {
-            "group": "Parameter",
-            "type": "<p>Object</p> ",
-            "optional": true,
-            "field": "flag",
-            "description": "<p>[ Flag of the Tag</p> "
-          },
-          {
-            "group": "Parameter",
-            "type": "<p>String</p> ",
-            "optional": true,
-            "field": "flag.name",
-            "description": "<p>Name of the flag of the tag</p> "
-          },
-          {
-            "group": "Parameter",
-            "type": "<p>String</p> ",
-            "optional": true,
-            "field": "ingredients.level",
-            "description": "<p>Level of the flag</p> "
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "    {\n      \"name\": \"Yummy\",\n      \"description\": \"This is yummy\"\n\t\t\"flag\" : {\"name\" : \"Miam\",\n\t\t\t\t  \"level\": 7}\n    }",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "message",
-            "description": "<p>Tags not found.</p> "
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Invalid Parameter Value",
-          "content": "  HTTP/1.1 404 Bad Request\n  {\n\t\"message\" : \"Tags not found.\"\n  }",
-          "type": "json"
-        },
-        {
-          "title": "Bad key sent",
-          "content": "  HTTP/1.1 400 Bad Request\n  {\n\t\"message\" : \"The key <key> does not exist for Tags.\"\n  }",
-          "type": "json"
-        },
-        {
-          "title": "Bad Value Definition",
-          "content": "  HTTP/1.1 200 OK\n  {\n\t...\n\tmongoose custom error\n\t...\n  }",
-          "type": "json"
-        }
-      ]
-    }
-  },
-  {
     "type": "delete",
     "url": "/allergies/",
     "title": "Delete Allergies (JSON)",
@@ -5875,6 +5769,112 @@
     }
   },
   {
+    "type": "put",
+    "url": "/tags/name/:name",
+    "title": "Update an Tag by name",
+    "name": "putTagsByName",
+    "group": "Tags",
+    "version": "0.1.0",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Tag successfully updated!</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response",
+          "content": "    HTTP/1.1 200 OK\n\t  {\n\t\t\"message\" : \"Tags successfully updated!\"\n\t  }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/tags.js",
+    "groupTitle": "Tags",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Name of the Tag</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Description of the Tag</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Object</p> ",
+            "optional": true,
+            "field": "flag",
+            "description": "<p>[ Flag of the Tag</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "flag.name",
+            "description": "<p>Name of the flag of the tag</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "ingredients.level",
+            "description": "<p>Level of the flag</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "    {\n      \"name\": \"Yummy\",\n      \"description\": \"This is yummy\"\n\t\t\"flag\" : {\"name\" : \"Miam\",\n\t\t\t\t  \"level\": 7}\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Tags not found.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Invalid Parameter Value",
+          "content": "  HTTP/1.1 404 Bad Request\n  {\n\t\"message\" : \"Tags not found.\"\n  }",
+          "type": "json"
+        },
+        {
+          "title": "Bad key sent",
+          "content": "  HTTP/1.1 400 Bad Request\n  {\n\t\"message\" : \"The key <key> does not exist for Tags.\"\n  }",
+          "type": "json"
+        },
+        {
+          "title": "Bad Value Definition",
+          "content": "  HTTP/1.1 200 OK\n  {\n\t...\n\tmongoose custom error\n\t...\n  }",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
     "type": "delete",
     "url": "/types/id/:id",
     "title": "Delete Type by id",
@@ -6350,6 +6350,64 @@
         }
       ]
     }
+  },
+  {
+    "type": "post",
+    "url": "/upload/recipes/photo/thumbnail",
+    "title": "Upload a recipe thumbnail picture",
+    "name": "postRecipeThumbnailUrl",
+    "group": "Uploads",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>Object[]</p> ",
+            "optional": false,
+            "field": "recipe_thumbnail_picture",
+            "description": "<p>Chunks of the picture</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"recipe_thumbnail_picture\": Object\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "message",
+            "description": "<p>File Successfully Uploaded!</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response",
+          "content": "    HTTP/1.1 200 OK\n\t  {\n\t\t\"message\" : \"File Successfully Uploaded!\"\n\t  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Bad Value Definition",
+          "content": "  HTTP/1.1 401 BAD REQUEST\n  {\n\t...\n\tcustom error\n\t...\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "API/controllers/uploads.js",
+    "groupTitle": "Uploads"
   },
   {
     "type": "delete",

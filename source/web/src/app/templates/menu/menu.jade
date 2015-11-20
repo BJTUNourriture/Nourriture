@@ -9,8 +9,8 @@ div.flex
 			img(src="assets/images/logo/nourriture.svg")
 		include ./mini-profile.jade
 		md-content.item-sidenav
-			div(ng-repeat="item in sidenav.sidenavItems.unrestricted")
-				md-button(ui-sref="{{ item.reference }}" style="overflow: initial;"). 
+			div(ng-repeat="item in sidenav.sidenavItems.unrestricted" class="menu-button-link")
+				md-button(ui-sref="{{ item.reference }}" style="overflow: initial;" ).
 							<span class="item_text">{{ item.name }}</span>
 							<span class="item_icon"><ng-md-icon icon="{{ item.icon }}"></ng-md-icon></span>
 			div(ng-if="!main.authenticated()")
