@@ -8,6 +8,7 @@
 
 .body-create-Recipe {
 	background : $background;
+	margin : auto 20px;
 }
 
 .body-create-Recipe-name {
@@ -24,4 +25,26 @@
 
 md-checkbox.md-checked.remember-me-login .md-icon {
  background-color:  $borderBlock;
+}
+
+.body-create-Recipe-thumbnail-picture {
+	background: white;
+	height : 300px;
+	width : 300px;
+	border-style: solid;
+	border-width: 1px;
+}
+
+.body-create-Recipe-icon-notselected {
+	fill : black;
+	opacity: 0.1;
+	cursor : pointer;
+	&:hover {
+		opacity : 1;
+	}
+}
+
+.body-create-Recipe-icon-selected {
+	fill : black;
+	opacity : 1;
 }

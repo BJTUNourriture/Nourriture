@@ -9,6 +9,10 @@ CreateRecipeController.$inject = ["$scope", "RecipeService", 'TagsService', 'toa
 function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log, UploadService)
 {
 	var vm = this;
+	vm.difficulty = 0;
+	vm.price = 0;
+	vm.isHoverDifficulty = [false, false, false];
+	vm.isHoverPrice = [false, false, false];
 
 	$log.log("innit");
 
@@ -50,6 +54,15 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 			errorMsg = "Seems like the Recipe already exists";
 		toastr.error(errorMsg, 'Woops...');
 	};
+
+	vm.stateIsHoverDifficulty = function (difficulty, state) {
+		vm.isHoverDifficulty[difficulty] = state;
+	};
+
+	vm.stateIsHoverPrice = function (price, state) {
+		vm.isHoverPrice[price] = state;
+	};
+
 }
 
 })();
