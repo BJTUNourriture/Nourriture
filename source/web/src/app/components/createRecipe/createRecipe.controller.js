@@ -70,16 +70,16 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 		vm.isHoverPrice[price] = state;
 	};
 
-	vm.recapAmount = function() {
+	vm.recapAmount = function(field) {
 		var amount = 0;
 
 		if (vm.ingredients)
 		{
 			for(var i = 0; i < vm.ingredients.length; i++)
-				amount += vm.ingredients[i].amount
+				amount += vm.ingredients[i][field]
 		}
 		return (amount);
-	}
+	};
 
 	//Dialog functions
 	vm.AddIngredientDialog = function(event) {

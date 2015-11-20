@@ -61,7 +61,15 @@ md-content
 												td
 													strong Total :
 												td 
-													strong {{ createRecipe.recapAmount() }}				
+													strong {{ createRecipe.recapAmount("amount") }}
+												td
+													strong {{ createRecipe.recapAmount("calories") }}
+												td
+													strong {{ createRecipe.recapAmount("proteins") }}
+												td
+													strong {{ createRecipe.recapAmount("carbohydrates") }}
+												td
+													strong {{ createRecipe.recapAmount("fat") }}		
 							div(layout="" layout-sm="column").body-create-Recipe
 								md-input-container(flex="")
 									label Photo 1
