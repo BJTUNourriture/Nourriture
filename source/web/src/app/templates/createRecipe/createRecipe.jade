@@ -9,9 +9,10 @@ md-content
 						form(name="createRecipeForm" novalidate ng-submit="createRecipeForm.$valid && createRecipeForm.submit()")
 							section(layout="row", layout-align="start start")
 								div.body-create-Recipe
-									img(ngf-src="file || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
-    							accept="image/*" ngf-max-size="20MB" ngf-min-height="100" 
-    							ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
+									div
+										img(ngf-src="createRecipe.file[0] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[0]" name="file" ngf-pattern="'image/*'"
+	    							accept="image/*" ngf-max-size="20MB" ngf-min-height="100" 
+	    							ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
 								section(layout="column", layout-align="start start", layout-fill)
 									div(layout="row", layout-align="space-between center", layout-fill, style="width:100%;")
 										md-input-container(flex="30")
@@ -20,9 +21,9 @@ md-content
 										span(flex="40")
 										div.flex
 											strong Difficulty :
-												ng-md-icon(icon="star", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.difficulty < 1 || !createRecipe.isHoverDifficulty[1] || !createRecipe.isHoverDifficulty[2], 'body-create-Recipe-icon-selected' : createRecipe.difficulty >= 1 || createRecipe.isHoverDifficulty[1] || createRecipe.isHoverDifficulty[2]}", ng-click="createRecipe.difficulty = 1")
-												ng-md-icon(icon="star", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.difficulty < 2 || !createRecipe.isHoverDifficulty[2], 'body-create-Recipe-icon-selected' : createRecipe.difficulty >= 2 || createRecipe.isHoverDifficulty[2]}", ng-mouseenter="createRecipe.stateIsHoverDifficulty(1, true);", ng-mouseleave="createRecipe.stateIsHoverDifficulty(1, false);" , ng-click="createRecipe.difficulty = 2")
-												ng-md-icon(icon="star", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.difficulty < 3, 'body-create-Recipe-icon-selected' : createRecipe.difficulty == 3}", ng-mouseenter="createRecipe.stateIsHoverDifficulty(2, true);", ng-mouseleave="createRecipe.stateIsHoverDifficulty(2, false);" , ng-click="createRecipe.difficulty = 3")
+												ng-md-icon(icon="storm", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.difficulty < 1 || !createRecipe.isHoverDifficulty[1] || !createRecipe.isHoverDifficulty[2], 'body-create-Recipe-icon-selected' : createRecipe.difficulty >= 1 || createRecipe.isHoverDifficulty[1] || createRecipe.isHoverDifficulty[2]}", ng-click="createRecipe.difficulty = 1")
+												ng-md-icon(icon="storm", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.difficulty < 2 || !createRecipe.isHoverDifficulty[2], 'body-create-Recipe-icon-selected' : createRecipe.difficulty >= 2 || createRecipe.isHoverDifficulty[2]}", ng-mouseenter="createRecipe.stateIsHoverDifficulty(1, true);", ng-mouseleave="createRecipe.stateIsHoverDifficulty(1, false);" , ng-click="createRecipe.difficulty = 2")
+												ng-md-icon(icon="storm", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.difficulty < 3, 'body-create-Recipe-icon-selected' : createRecipe.difficulty == 3}", ng-mouseenter="createRecipe.stateIsHoverDifficulty(2, true);", ng-mouseleave="createRecipe.stateIsHoverDifficulty(2, false);" , ng-click="createRecipe.difficulty = 3")
 									
 									div(layout="row", layout-align="start start")
 											md-input-container(flex="70")
@@ -33,6 +34,57 @@ md-content
 											ng-md-icon(icon="coin", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.price < 1 || !createRecipe.isHoverPrice[1] || !createRecipe.isHoverPrice[2], 'body-create-Recipe-icon-selected' : createRecipe.price >= 1 || createRecipe.isHoverPrice[1] || createRecipe.isHoverPrice[2]}", ng-click="createRecipe.price = 1")
 											ng-md-icon(icon="coin", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.price < 2 || !createRecipe.isHoverPrice[2], 'body-create-Recipe-icon-selected' : createRecipe.price >= 2 || createRecipe.isHoverPrice[2]}", ng-mouseenter="createRecipe.stateIsHoverPrice(1, true);", ng-mouseleave="createRecipe.stateIsHoverPrice(1, false);" , ng-click="createRecipe.price = 2")
 											ng-md-icon(icon="coin", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.price < 3, 'body-create-Recipe-icon-selected' : createRecipe.price == 3}", ng-mouseenter="createRecipe.stateIsHoverPrice(2, true);", ng-mouseleave="createRecipe.stateIsHoverPrice(2, false);" , ng-click="createRecipe.price = 3")
-																		
+							div.body-create-Recipe-table
+								md-data-table-toolbar.body-create-Recipe-toolbar-table
+									ng-md-icon(icon="add_circle_outline", style="cursor: pointer; width: 36px; height: 36px;", size="36", ng-click="createRecipe.AddIngredientDialog(createRecipe.getCurrentBurrito(), $event)")
+									ng-md-icon(icon="delete", style="cursor: pointer; width: 36px; height: 36px;", size="36")
+								md-data-table-container.flex
+									table(md-data-table md-row-select="createRecipe.selected_ingredients")
+										thead(md-order="null" md-trigger="createRecipe.tableOnOrderChange")
+											tr
+												th(name="Name")
+												th(name="Amount" unit="g" numeric)
+												th(name="Calories" unit="Kcal/100g" numeric)
+												th(name="Proteins" unit="g" numeric)
+												th(name="Carbs" unit="g" numeric)
+												th(name="Fats" unit="g" numeric)
+										tbody
+											tr(ng-repeat="ingredient in createRecipe.ingredients" style="cursor: pointer;" ng-click='ingredientDashboard.infosIngredientDialog($event, ingredient)')
+												td {{ ingredient.name }}
+												td {{ ingredient.amount }}
+												td {{ ingredient.calories }}
+												td {{ ingredient.proteins }}
+												td {{ ingredient.carbohydrates }}
+												td {{ ingredient.fat }}
+										tfoot
+											tr
+												td
+													strong Total :	
+												td 
+													strong {{ createRecipe.recapAmount("amount") }}
+												td
+													strong {{ createRecipe.recapAmount("calories") }}
+												td
+													strong {{ createRecipe.recapAmount("proteins") }}
+												td
+													strong {{ createRecipe.recapAmount("carbohydrates") }}
+												td
+													strong {{ createRecipe.recapAmount("fat") }}		
+							div(layout="row" layout-sm="row", layout-fill, flex).body-create-Recipe
+								md-container(flex="25", style="min-width: 300px")
+									label Photo 1
+									img(ngf-src="createRecipe.file[1] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[1]" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
+								md-container(flex="25", style="min-width: 300px")
+									label Photo 2
+									img(ngf-src="createRecipe.file[2] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[2]" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
+								md-container(flex="25", style="min-width: 300px")
+									label Photo 3
+									img(ngf-src="createRecipe.file[3] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[3]" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
+								md-container(flex="25", style="min-width: 300px")
+									label Photo 4
+									img(ngf-src="createRecipe.file[4] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[4]" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100"  ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
+							//div.body-create-Recipe-textangular
+								text-angular(ng-model="createRecipe.htmlVariable")
+
 		include ../footer/footer.jade
 

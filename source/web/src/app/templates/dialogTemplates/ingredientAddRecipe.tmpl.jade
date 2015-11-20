@@ -1,0 +1,20 @@
+section(layout="column" flex layout-align="center center")
+	h2(style="background-color: lightGreen;") Add an Ingredient
+	form(name="addIngredientRecipeForm" novalidate ng-submit="addIngredientRecipeForm.$valid && addIngredient.hide()")
+		md-autocomplete(required, name="autocomplete", md-selected-item="addIngredient.selectedItem", md-search-text="addIngredient.ingredientSearch.name", md-items="ingredient in addIngredient.getNameIngredients()", md-item-text="ingredient.name", placeholder="Search for an Ingredient")
+			md-item-template
+				span(md-highlight-text="createIngredient.ingredientSearch.name") {{ ingredient.name }}
+			md-not-found No ingredient found.
+			div(ng-messages="addIngredientRecipeForm.autocomplete.$error")
+				div(ng-message="required") You must select an ingredient
+
+		md-input-container
+			label Amount (in g)
+			input(ng-model="addIngredient.amount" name="amount" type="number" required min='0' maxlength="10")
+			div(ng-messages="addIngredientRecipeForm.amount.$error" ng-if='!addIngredientRecipeForm.amount.$pristine')
+				div(ng-message="required") This is required.
+				div(ng-message="number") It must be a valid number.
+				div(ng-message="min") Value must be superior to 0.
+				div(ng-message="md-maxlength") Value must be below 10 numbers.
+		section(layout="row" flex layout-align="center center")
+			md-button(type="submit").flex Add Ingredient

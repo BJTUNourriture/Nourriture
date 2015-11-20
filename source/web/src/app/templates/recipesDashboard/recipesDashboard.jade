@@ -19,6 +19,16 @@ md-content.body-dashboard-recipe
 											label Search a Recipe
 											input(ng-model="search" name="search")
 									ng-md-icon(type="submit" icon="search" style="cursor: pointer;" ng-click="recipesDashboard.searchRecipes();")
+									span
+										ng-md-icon(icon="alphabetic-order", style="cursor: pointer;", ng-click="recipesDashboard.RecipesOrderByName();")
+										ng-md-icon( ng-if="recipesDashboard.ArrowPos == 1", icon="arrow-up", size="12")
+										ng-md-icon( ng-if="recipesDashboard.ArrowPos == 2", icon="arrow-down", size="12")
+									ng-md-icon(icon="star", style="cursor: pointer;", ng-click="recipesDashboard.RecipesOrderByScore();")
+									ng-md-icon( ng-if="recipesDashboard.ArrowPos == 3", icon="arrow-up", size="12")
+									ng-md-icon( ng-if="recipesDashboard.ArrowPos == 4", icon="arrow-down", size="12")
+									ng-md-icon(icon="storm", style="cursor: pointer;", ng-click="recipesDashboard.RecipesOrderByDifficulty();")
+									ng-md-icon( ng-if="recipesDashboard.ArrowPos == 5", icon="arrow-up", size="12")
+									ng-md-icon( ng-if="recipesDashboard.ArrowPos == 6", icon="arrow-down", size="12")
 							md-content.body-dashboard-recipe-md-content.flex.ng-cloak
 								section(layout="column" layout-align="start center" flex ng-if="recipesDashboard.retrievingRecipes")
 									md-progress-circular(md-mode="indeterminate")

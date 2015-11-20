@@ -31,6 +31,7 @@
 
 var Ingredients = require('../models/ingredients');
 var Recipes = require('../models/recipes')
+var Groups = require('../models/groups')
 
 /*
 ** POSTS
@@ -341,6 +342,7 @@ exports.postSearchIngredients = function (req, res, flag) {
 exports.postSearchRecipes = function (req, res, flag) {
 
 	var title =  req.body.title;
+	var author_name = req.body.author_name;
 	var order = ""
 	if (req.body.order) {
 		var order = req.body.order
@@ -403,6 +405,13 @@ exports.postSearchRecipes = function (req, res, flag) {
 
 	}
 	
+	if (author_name) {
+		var Json_search = {
+				"author_name": { "$regex": author_name, "$options": "i" }
+			  };
+	var newjson = {metadata: {current_page: items_page, order: order}}
+	}
+
 	var total_page
 	var total_items
 	Recipes.find(Json_search,
@@ -461,28 +470,26 @@ exports.postSearchRecipes = function (req, res, flag) {
 }
 
 /**
-* @apiDefine SearchRecipesObjectPostParam
+* @apiDefine SearchGroupsObjectPostParam
 *
-* @apiParam {String} [title] Name of the recipes (Regex)
-* @apiParam {String[]} [type] Id of the types that your recipes must have.
+* @apiParam {String} [name] Name of the group (Regex)
 * @apiParam {Object[]} [order] Order of the return of the search
 * @apiParam {String} [order.order] Order (can be asc or desc)
-* @apiParam {String} [order.field] Field which is order (ex: fat)
+* @apiParam {String} [order.field] Field which is order (ex: number)
 * @apiParam {Object[]} metadata Number of items to return, page of the items
 * @apiParam {String} metadata.items number of items that are return for the current page
 * @apiParam {String} metadata.page Number of the page that you want to ask
 */
 
 /**
-* @apiDefine SearchRecipesRequestJSON
+* @apiDefine SearchGroupsRequestJSON
 *
 * @apiParamExample {json} Request-Example:
 *{
-*    "title": "pie",
+*    "title": "gras",
 *    "order": {"order": "desc",
-*              "field": "fat"
+*              "field": "name"
 *    },
-*    "tags": ['563091df113604b7959a6327'],
 *    "metadata": {"items": 1,
 *                  "page": 1
 *    }
@@ -494,76 +501,45 @@ exports.postSearchRecipes = function (req, res, flag) {
 */
 
 /**
-* @api {post} /search/recipes/ Search some recipes
-* @apiName postSearchRecipes
+* @api {post} /search/groups/ Search some groups
+* @apiName postSearchGroups
 * @apiGroup Search
 * @apiVersion 0.1.0
 *
-* @apiUse SearchRecipesObjectPostParam
+* @apiUse SearchGroupsObjectPostParam
 * 
-* @apiUse SearchRecipesRequestJSON
+* @apiUse SearchGroupsRequestJSON
 *
 * @apiSuccessExample Success-Response
 *     HTTP/1.1 200 OK
 *	  {
+*  {
 *  "metadata": {
 *    "current_page": 1,
-*    "order": {
-*      "order": "desc",
-*      "field": "fat"
-*    },
-*    "tags": [
-*      "563091df113604b7959a6327"
-*    ],
-*    "total_page": 1
+*    "order": "",
+*    "total": 1,
+*    "total_page": null
 *  },
-*  "recipes": [
+*  "groups": [
 *    {
-*      "_id": "56309253113604b7959a632c",
-*      "date_edited": "2015-04-01T18:34:23.000Z",
-*      "title": "Pumpkin pie",
-*      "author_id": "561fc840d6c25173533e267f",
-*      "author_name": "Kek man",
-*      "description": "It's Halloween time!",
+*      "_id": "564ee5ca6399549c3a16103f",
+*      "name": "totto",
 *      "__v": 0,
-*      "ingredients": [
+*      "tags": [],
+*      "users": [
 *        {
-*          "id_ingredient": "562a36ec4f0547a42755bf90",
-*          "name_ingredient": "Fuck",
-*          "_id": "56309253113604b7959a632d",
-*          "amount_ingredient": 100
+*          "user_id": "564eb7358aa4dcbb2e238429",
+*          "_id": "564ee5ca6399549c3a161040",
+*          "access": {
+*            "name": "Admin",
+*            "level": 0
+*          }
 *        }
-*      ],
-*      "pictures": [
-*        {
-*          "thumbnail_url": "/thumbnails/1.jpg",
-*          "medium_sized_url": "/medium_sized/1.jpg",
-*          "big_sized_url": "/big_sized/1.jpg",
-*          "_id": "56309253113604b7959a632e"
-*        }
-*      ],
-*      "comments": [
-*        {
-*          "id_author": "386fc840d6c25173533e5406",
-*          "name_author": "Pacza",
-*          "date_posted": "2015-03-31T22:00:00.000Z",
-*          "date_edited": "2015-04-01T18:34:23.000Z",
-*          "content": "Thank you! Very nice recipe!",
-*          "_id": "56309253113604b7959a632f",
-*          "visible": true
-*        }
-*      ],
-*      "average_price": 1,
-*      "time_preparation": 60,
-*      "average_score": 0,
-*      "difficulty": 1,
-*      "date_posted": "2015-03-31T22:00:00.000Z",
-*      "type": {
-*        "id_type": "563091df113604b7959a6327",
-*        "name": "TopKek"
-*      }
+*      ]
 *    }
 *  ]
+*}
+
 *}
 *
 * @apiError message Nothing find for this search
@@ -618,3 +594,100 @@ exports.postSearchRecipes = function (req, res, flag) {
 
 	return (1);
 }*/
+
+exports.postSearchGroups = function (req, res, flag) {
+	var name =  req.body.name;
+	var order = ""
+	if (req.body.order) {
+		var order = req.body.order
+		var order_order = req.body.order.order;
+		var order_field = req.body.order.field;
+		var query = {};
+		query[order_field] = order_order;
+	}
+	var metadata = ""
+	if (req.body.metadata){
+		metadata = req.body.metadata
+		var items_number = req.body.metadata.items;
+		var items_page = req.body.metadata.page;
+	}
+
+	if (metadata == "")
+		return flag === true ? -1 : res.status(400).send({message : 'You must set the metadata'})
+
+	
+	//If name is set
+
+	if (!name){
+
+		var Json_search = {}
+		var newjson = {metadata: {current_page: items_page, order: order}}
+	}
+
+	//If only name is set
+
+	else if (name){
+
+	var Json_search = {
+				"name": { "$regex": name, "$options": "i" }
+			  };
+	var newjson = {metadata: {current_page: items_page, order: order, name: name}}
+
+	}
+
+	var total_page
+	var total_items
+	Groups.find(Json_search,
+		function (err, docs) {
+			total_items = docs.length;
+			total_page = Math.round(docs.length / items_number);
+		if (total_page <= 0)
+			total_page = 1	
+		}
+	)
+
+		if (order === ""){
+			Groups.find(
+				Json_search
+				,
+				function (err, docs) {
+					if (err)
+						return (res.send(err));
+					else if (docs.length <= 0)
+						return (res.status(404).send({message : 'Nothing find for this search'}))
+					else{
+						newjson.metadata.total = total_items
+						newjson.metadata.total_page = total_page
+						newjson.groups = docs
+						return (res.json(newjson));
+					}
+				} 
+		).skip((items_page - 1) * items_number).limit(items_number);
+		}
+		else if (order != ""){
+			
+			if (order_order == "desc")
+				order_order = -1
+			else
+				order_order = 1
+			if (!order_field)
+				return flag === true ? -1 : res.status(404).send({message : 'The order.field must be set'})
+			Groups.find(
+				Json_search,
+				function (err, docs) {
+					if (err){
+						return (res.send(err));
+						}
+					else if (docs.length <= 0){
+						return (res.status(404).send({message : 'Nothing find for this search'}))}
+					else{
+						newjson.metadata.total = total_items
+						newjson.metadata.total_page = total_page
+						newjson.groups = docs
+						return (res.json(newjson));
+					}
+				}
+		).skip((items_page - 1) * items_number).sort(query).limit(items_number);
+	    }
+	return (1);
+};
