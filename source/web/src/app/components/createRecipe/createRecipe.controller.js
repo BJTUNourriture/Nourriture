@@ -14,6 +14,7 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 	vm.price = 0;
 	vm.isHoverDifficulty = [false, false, false];
 	vm.isHoverPrice = [false, false, false];
+	vm.createRecipe = [];
 
 	$log.log("innit");
 
