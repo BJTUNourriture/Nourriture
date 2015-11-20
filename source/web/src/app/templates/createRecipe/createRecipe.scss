@@ -33,4 +33,19 @@ md-checkbox.md-checked.remember-me-login .md-icon {
 	width : 300px;
 	border-style: solid;
 	border-width: 1px;
+	cursor: pointer;
+}
+
+.body-create-Recipe-icon-notselected {
+	fill : black;
+	opacity: 0.1;
+	cursor : pointer;
+	&:hover {
+		opacity : 1;
+	}
+}
+
+.body-create-Recipe-icon-selected {
+	fill : black;
+	opacity : 1;
 }

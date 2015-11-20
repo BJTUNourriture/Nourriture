@@ -6,7 +6,33 @@ md-content
 					span.title-register-md Create a Recipe
 				div(flex).body-create-Recipe-md
 					div.body-create-Recipe-md
-						div.body-create-Recipe
-							img(ng-src="../../assets/images/recipesdummy/plus.png").body-create-Recipe-thumbnail-picture
+						form(name="createRecipeForm" novalidate ng-submit="createRecipeForm.$valid && createRecipeForm.submit()")
+							section(layout="row", layout-align="start start")
+								div.body-create-Recipe
+									img(ngf-src="file || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+    							accept="image/*" ngf-max-size="20MB" ngf-min-height="100" 
+    							ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
+								section(layout="column", layout-align="start start", layout-fill)
+									div(layout="row", layout-align="space-between center", layout-fill, style="width:100%;")
+										md-input-container(flex="30")
+											label Title
+											input(ng-model="title" name="title")
+										span(flex="40")
+										div.flex
+											strong Difficulty :
+												ng-md-icon(icon="star", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.difficulty < 1 || !createRecipe.isHoverDifficulty[1] || !createRecipe.isHoverDifficulty[2], 'body-create-Recipe-icon-selected' : createRecipe.difficulty >= 1 || createRecipe.isHoverDifficulty[1] || createRecipe.isHoverDifficulty[2]}", ng-click="createRecipe.difficulty = 1")
+												ng-md-icon(icon="star", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.difficulty < 2 || !createRecipe.isHoverDifficulty[2], 'body-create-Recipe-icon-selected' : createRecipe.difficulty >= 2 || createRecipe.isHoverDifficulty[2]}", ng-mouseenter="createRecipe.stateIsHoverDifficulty(1, true);", ng-mouseleave="createRecipe.stateIsHoverDifficulty(1, false);" , ng-click="createRecipe.difficulty = 2")
+												ng-md-icon(icon="star", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.difficulty < 3, 'body-create-Recipe-icon-selected' : createRecipe.difficulty == 3}", ng-mouseenter="createRecipe.stateIsHoverDifficulty(2, true);", ng-mouseleave="createRecipe.stateIsHoverDifficulty(2, false);" , ng-click="createRecipe.difficulty = 3")
+									
+									div(layout="row", layout-align="start start")
+											md-input-container(flex="70")
+												label Time (in mins)
+												input(type="number" ng-model="time" name="time")
+									div
+										strong Price :
+											ng-md-icon(icon="coin", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.price < 1 || !createRecipe.isHoverPrice[1] || !createRecipe.isHoverPrice[2], 'body-create-Recipe-icon-selected' : createRecipe.price >= 1 || createRecipe.isHoverPrice[1] || createRecipe.isHoverPrice[2]}", ng-click="createRecipe.price = 1")
+											ng-md-icon(icon="coin", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.price < 2 || !createRecipe.isHoverPrice[2], 'body-create-Recipe-icon-selected' : createRecipe.price >= 2 || createRecipe.isHoverPrice[2]}", ng-mouseenter="createRecipe.stateIsHoverPrice(1, true);", ng-mouseleave="createRecipe.stateIsHoverPrice(1, false);" , ng-click="createRecipe.price = 2")
+											ng-md-icon(icon="coin", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.price < 3, 'body-create-Recipe-icon-selected' : createRecipe.price == 3}", ng-mouseenter="createRecipe.stateIsHoverPrice(2, true);", ng-mouseleave="createRecipe.stateIsHoverPrice(2, false);" , ng-click="createRecipe.price = 3")
+																		
 		include ../footer/footer.jade
 
