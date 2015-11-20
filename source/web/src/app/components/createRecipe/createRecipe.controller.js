@@ -20,6 +20,8 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 	vm.ingredients = [];
 	vm.selected_ingredients = [];
 
+	vm.htmlVariable = "";
+
 	//Autocomplete vars
 	vm.ingredientSearch = {
 		name : '',
