@@ -26,6 +26,8 @@
       // DATA SET 2
       vm.recipes = [{recipetitle:"Tarte aux pommes", image:"assets/images/recipesdummy/tarte.jpg"},
         {recipetitle:"Tripes à la mode de Caen", image:"assets/images/recipesdummy/tripe.jpg"},
+        {recipetitle:"Coquilles saint jacques marinées au citron", image:"assets/images/recipesdummy/jacques.jpg"},
+        {recipetitle:"Coquilles saint jacques marinées au citron", image:"assets/images/recipesdummy/jacques.jpg"},
         {recipetitle:"Coquilles saint jacques marinées au citron", image:"assets/images/recipesdummy/jacques.jpg"}
       ];
 
@@ -85,7 +87,7 @@
 
 
 
-    $timeout(updateRecipes, 700);
+    $timeout(updateRecipes, 1500);
 
 
     // SearchService

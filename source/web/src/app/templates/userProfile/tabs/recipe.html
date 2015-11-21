@@ -4,41 +4,20 @@
           <img ng-src="{{recipe.image}}" class="md-card-image" alt="Tarte aux pommes">
           <md-card-content>
             <h2 class="md-title">{{recipe.recipetitle}}</h2>
+            {{$index}}
           </md-card-content>
           <md-card-actions layout="row" layout-align="end center">
             <md-button>view more</md-button>
           </md-card-actions>
+          <!-- <div data-ng-show="$index > 2 && ($index % 3) == 0">
+              </md-card>
+              </md-content>
+              <md-content layout="row" layout-wrap>
+              <md-card
+          </div> -->
         </md-card>
+
         <br>
   </md-content>
-  </div>
-    <!-- <br/>
-    <md-card flex>
-      <img ng-src="assets/images/recipesdummy/tripe.jpg" class="md-card-image" alt="Tripes à la mode de Caen">
-      <md-card-content>
-        <h2 class="md-title">Tripes à la mode de Caen</h2>
-      </md-card-content>
-      <md-card-actions layout="row" layout-align="end center">
-        <md-button>view more</md-button>
-      </md-card-actions>
-    </md-card>
-    <br/>
-    <md-card flex>
-      <img ng-src="assets/images/recipesdummy/jacques.jpg" class="md-card-image" alt="Coquilles saint jacques marinées au citron">
-      <md-card-content>
-        <h2 class="md-title">Coquilles saint jacques marinées au citron</h2>
-      </md-card-content>
-      <md-card-actions layout="row" layout-align="end center">
-        <md-button>view more</md-button>
-      </md-card-actions>
-    </md-card>
 
-    <md-card flex>
-      <img ng-src="assets/images/recipesdummy/jacques.jpg" class="md-card-image" alt="Coquilles saint jacques marinées au citron">
-      <md-card-content>
-        <h2 class="md-title">Coquilles saint jacques marinées au citron</h2>
-      </md-card-content>
-      <md-card-actions layout="row" layout-align="end center">
-        <md-button>view more</md-button>
-      </md-card-actions>
-    </md-card> -->
+</div>
