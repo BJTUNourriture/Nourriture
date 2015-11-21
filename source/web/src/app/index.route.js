@@ -85,6 +85,19 @@
                     }
                 }
             })
+            .state('main.recipe-page', {
+                  url: 'recipe/:id',
+                  parent: 'main',
+                  templateUrl: 'app/templates/recipePage/recipePage.html',
+                  controller: 'RecipePageController',
+                  controllerAs: 'recipePage',
+                  data: {
+                      permissions: {
+                        except: ['guest'],
+                        redirectTo: 'main.homepage'
+                      }
+                  }
+              })
             .state('main.recipes-dashboard', {
                 url: 'recipes-dashboard',
                 parent: 'main',
