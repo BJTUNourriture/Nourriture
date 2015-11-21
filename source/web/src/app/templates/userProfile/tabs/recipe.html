@@ -1,38 +1,18 @@
 <div ng-controller="RecipesUserProfileController as RecipesUserProfile"  ng-cloak>
-  <!-- <div layout="row" layout-wrap>
-    <div flex="30">
-      [flex="30"]
-    </div>
-    <div flex="45">
-      [flex="45"]
-    </div>
-    <div flex="25">
-      [flex="25"]
-    </div>
-    <div flex="33">
-      [flex="33"]
-    </div>
-    <div flex="66">
-      [flex="66"]
-    </div>
-    <div flex="50">
-      [flex="50"]
-    </div>
-    <div flex>
-      [flex]
-    </div>
-  </div> -->
   <md-content layout="row" layout-wrap>
-    <md-card flex>
-      <img ng-src="{{RecipesUserProfile.data.image}}" class="md-card-image" alt="Tarte aux pommes">
-      <md-card-content>
-        <h2 class="md-title">{{RecipesUserProfile.data.recipetitle}}</h2>
-      </md-card-content>
-      <md-card-actions layout="row" layout-align="end center">
-        <md-button>view more</md-button>
-      </md-card-actions>
-    </md-card>
-    <br/>
+        <md-card flex data-ng-repeat="recipe in RecipesUserProfile.recipes">
+          <img ng-src="{{recipe.image}}" class="md-card-image" alt="Tarte aux pommes">
+          <md-card-content>
+            <h2 class="md-title">{{recipe.recipetitle}}</h2>
+          </md-card-content>
+          <md-card-actions layout="row" layout-align="end center">
+            <md-button>view more</md-button>
+          </md-card-actions>
+        </md-card>
+        <br>
+  </md-content>
+  </div>
+    <!-- <br/>
     <md-card flex>
       <img ng-src="assets/images/recipesdummy/tripe.jpg" class="md-card-image" alt="Tripes à la mode de Caen">
       <md-card-content>
@@ -61,5 +41,4 @@
       <md-card-actions layout="row" layout-align="end center">
         <md-button>view more</md-button>
       </md-card-actions>
-    </md-card>
-</div>
+    </md-card> -->
