@@ -37,7 +37,7 @@ var recipe_thumbnail_photo_upload = multer({ storage : recipe_thumbnail_photo_st
 * @apiSuccessExample Success-Response
 *     HTTP/1.1 200 OK
 *	  {
-*		"message" : "File Successfully Uploaded!"
+*		"message" : path_to_file
 *	  }
 *
 * @apiErrorExample Bad Value Definition

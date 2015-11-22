@@ -6385,7 +6385,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response",
-          "content": "    HTTP/1.1 200 OK\n\t  {\n\t\t\"message\" : \"File Successfully Uploaded!\"\n\t  }",
+          "content": "    HTTP/1.1 200 OK\n\t  {\n\t\t\"message\" : path_to_file\n\t  }",
           "type": "json"
         }
       ]
