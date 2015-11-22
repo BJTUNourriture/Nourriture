@@ -1,139 +1,107 @@
-
-
 <div layout="column" ng-controller="RecipePageController as RecipePage"  ng-cloak>
-  <md-content>
-    <md-toolbar>
+   <md-content>
+      <md-toolbar>
+
+        <!-- vm.recipe = [];
+        vm.recipe.title = "test";
+        vm.recipe.average_score = "0";
+        vm.recipe.date_posted = "2015-03-31T22:00:00.000Z";
+        vm.recipe.time_preparation = "60";
+        vm.recipe.average_price = "1";
+        vm.recipe.number_vote = "1";
+        vm.recipe.ingredients = [];
+
+
+        vm.recipe.pictures[0].thumbnail_url = "assets/images/recipesdummy/tarte.jpg";
+        vm.recipe.pictures[1].thumbnail_url = "assets/images/recipesdummy/tarte.jpg";
+        vm.recipe.pictures[2].thumbnail_url = "assets/images/recipesdummy/tarte.jpg";
+
+        vm.recipe.ingredients[0].name = "Eggs";
+        vm.recipe.ingredients[0].quantity = "6";
+
+        vm.recipe.ingredients[1].name = "Butter";
+        vm.recipe.ingredients[1].quantity = "2 x 160g";
+
+        vm.recipe.ingredients[2].name = "packets strawberry-flavoured sour straps";
+        vm.recipe.ingredients[2].quantity = "60g";
+        vm.recipe.description = "test html"; -->
+
+
          <div class="md-toolbar-tools">
-           <!-- <md-button aria-label="Go Back">
-             Go Back
-           </md-button> -->
-           <h2>
-             <span class="recipetitle">{{RecipePage.recipe.title}}</span>
-           </h2>
-           <span flex></span>
-
-           <span>Difficulty</span>
-           <ng-md-icon icon="storm"></ng-md-icon>
-           <ng-md-icon icon="storm"></ng-md-icon>
-           <ng-md-icon icon="storm"></ng-md-icon>
+            <h2>
+               <span class="recipetitle">{{RecipePage.recipe.title}}</span>
+            </h2>
+            <span flex></span>
+            <span>Difficulty</span>
+            <ng-md-icon icon="storm"></ng-md-icon>
+            <ng-md-icon icon="storm"></ng-md-icon>
+            <ng-md-icon icon="storm"></ng-md-icon>
          </div>
-       </md-toolbar>
-  </md-content>
-  <md-content class="md-padding" layout="column">
-    <!-- <md-chips>
-      <md-chip>3 x 370g packets moist chocolate cake</md-chip>
-      <md-chip>6 eggs</md-chip>
-      <md-chip>60g butter</md-chip>
-      <md-chip>60g butter</md-chip>
-      <md-chip>2 x 160g packets strawberry-flavoured sour straps</md-chip>
-      <md-chip>2 x 250g packets Jaffas</md-chip>
-      <md-chip>Decorative flag</md-chip>
-    </md-chips> -->
-
-
-        <md-grid-list md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
-
-    <md-grid-tile class="gray" md-colspan-md="1"  md-colspan-md="1" md-rowspan="2" md-colspan="2" md-rowspan-sm="1" md-colspan-sm="1">
-        <h3>#1: (2r x 2c)</h3>
-    </md-grid-tile>
-
-    <md-grid-tile class="green">
-        img2
-    </md-grid-tile>
-
-    <md-grid-tile class="green">
-      <md-grid-tile-footer>
-
-        img3
-      </md-grid-tile-footer>
-
-    </md-grid-tile>
-
-    <md-grid-tile class="green">
-      <md-grid-tile-footer>
-
-        "average_score" : 0, (dans la selection)
-      </md-grid-tile-footer>
-
-    </md-grid-tile>
-
-    <md-grid-tile class="green">
-      <md-grid-tile-footer>
-
-        "date_posted" : "2015-03-31T22:00:00.000Z"
-      </md-grid-tile-footer>
-
-    </md-grid-tile>
-
-        <md-grid-tile class="green">
-          <md-grid-tile-footer>
-
-      "time_preparation" : 60,
-    </md-grid-tile-footer>
-
-    </md-grid-tile>
-
-        <md-grid-tile class="green">
-          <md-grid-tile-footer>
-
-          "average_price" : 1,
-        </md-grid-tile-footer>
-
-    </md-grid-tile>
-
-
-          <md-grid-tile class="green" md-rowspan="1" md-colspan="2">
-            <md-grid-tile-footer>
-
-              "number_vote" : 1
+      </md-toolbar>
+   </md-content>
+   <md-content class="md-padding" layout="column">
+      <md-grid-list md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
+         <md-grid-tile class="gray" md-colspan-md="1"  md-colspan-md="1"
+         md-rowspan="2" md-colspan="2" md-rowspan-sm="1" md-colspan-sm="1" ng-if="RecipePage.recipe.pictures[0].thumbnail_url != null">
+            <img ng-src="{{RecipePage.recipe.pictures[0].thumbnail_url}}" alt="{{RecipePage.recipe.pictures[0].title}}">
+         </md-grid-tile>
+         <md-grid-tile class="green">
+            img2
+         </md-grid-tile>
+         <md-grid-tile class="green">
+            <md-grid-tile-footer class="body-dashboard-group-grid-tile-footer">
+               img3
             </md-grid-tile-footer>
+         </md-grid-tile>
+         <md-grid-tile class="green">
+            <md-grid-tile-footer class="body-dashboard-group-grid-tile-footer">
+               "average_score" : {{RecipePage.recipe.average_score}}, (dans la selection)
+            </md-grid-tile-footer>
+         </md-grid-tile>
+         <md-grid-tile class="green">
+            <md-grid-tile-footer class="body-dashboard-group-grid-tile-footer">
+               "date_posted" : {{RecipePage.recipe.date_posted}}
+            </md-grid-tile-footer>
+         </md-grid-tile>
+         <md-grid-tile class="green">
+            <md-grid-tile-footer class="body-dashboard-group-grid-tile-footer">
+               "time_preparation" : {{RecipePage.recipe.time_preparation}},
+            </md-grid-tile-footer>
+         </md-grid-tile>
+         <md-grid-tile class="green">
+            <md-grid-tile-footer class="body-dashboard-group-grid-tile-footer">
+               "average_price" : {{RecipePage.recipe.average_price}},
+            </md-grid-tile-footer>
+         </md-grid-tile>
+         <md-grid-tile class="green" md-rowspan="1" md-colspan="2">
+            <md-grid-tile-footer class="body-dashboard-group-grid-tile-footer">
+               "number_vote" : {{RecipePage.recipe.number_vote}}
+            </md-grid-tile-footer>
+         </md-grid-tile>
+      </md-grid-list>
+      <h2 class="md-title">Ingredients</h2>
+      <md-list>
+         <!-- <md-list-item class="md-2-line recipe-option"
+            layout-wrap>
+            <div class="md-item-text md-whiteframe-z1" flex>
+            <h3>Packets moist chocolate cake</h3>
+            <p>2 x 160g</p>
+            <md-button ui-sref="main.recipe-page">+</md-button>
+            </div>
+            </md-list-item> -->
 
-    </md-grid-tile>
-
-  </md-grid-list>
-    <h2 class="md-title">Ingredients</h2>
-    <md-list>
-     <!-- <md-list-item class="md-2-line recipe-option"
-         layout-wrap>
-       <div class="md-item-text md-whiteframe-z1" flex>
-         <h3>Packets moist chocolate cake</h3>
-         <p>2 x 160g</p>
-         <md-button ui-sref="main.recipe-page">+</md-button>
-       </div>
-     </md-list-item> -->
-     <md-list-item class="md-2-line recipe-option"
-         layout-wrap>
-       <div class="md-item-text md-whiteframe-z1" flex>
-         <h3>Eggs</h3>
-         <p>6</p>
-       </div>
-     </md-list-item>
-     <md-list-item class="md-2-line recipe-option"
-         layout-wrap>
-       <div class="md-item-text md-whiteframe-z1" flex>
-         <h3>Butter</h3>
-         <p>2 x 160g</p>
-       </div>
-     </md-list-item>
-     <md-list-item class="md-2-line recipe-option"
-         layout-wrap>
-       <div class="md-item-text md-whiteframe-z1" flex>
-         <h3>packets strawberry-flavoured sour straps</h3>
-         <p>60g</p>
-       </div>
-     </md-list-item>
-     <md-list-item class="md-2-line recipe-option" layout="row"
-         layout-wrap>
-       <div class="md-item-text md-whiteframe-z1" flex>
-         <h3>packets Jaffas</h3>
-         <p>2 x 250g</p>
-       </div>
-     </md-list-item>
-   </md-list>
-    <h2 class="md-title">Description</h2>
-    <h2 class="md-title">detais</h2>
-  </md-content>
-  <md-button class="md-primary md-fab md-fab-bottom-right">
+         <md-list-item class="md-2-line recipe-option" ng-repeat="ing in RecipePage.recipe.ingredients"
+            layout-wrap>
+            <div class="md-item-text md-whiteframe-z1" flex>
+               <h3>{{ing.name}}</h3>
+               <p>{{ing.quantity}}</p>
+            </div>
+         </md-list-item>
+      </md-list>
+      <h2 class="md-title">Description</h2>
+      <h2 class="md-title">Comments</h2>
+   </md-content>
+   <md-button class="md-primary md-fab md-fab-bottom-right">
       +
-  </md-button>
+   </md-button>
 </div>
