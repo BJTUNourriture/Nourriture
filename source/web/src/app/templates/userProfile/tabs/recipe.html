@@ -2,27 +2,27 @@
   <md-content layout-wrap>
     <div layout="row" layout-wrap data-ng-repeat="recipe in RecipesUser.recipes" ng-if="$index % 3 == 0">
       <md-card flex ng-if="RecipesUser.recipes[$index] != null" >
-        <img ng-src="{{RecipesUser.recipes[$index].image}}" class="md-card-image img-user-profile" alt="{{RecipesUser.recipes[$index].recipetitle}}">
+        <img ng-src="{{RecipesUser.recipes[$index].pictures[0].thumbnail_url}}" class="md-card-image img-user-profile" alt="{{RecipesUser.recipes[$index].title}}">
         <md-card-content>
-          <h2 class="md-title">{{RecipesUser.recipes[$index].recipetitle}}</h2>
+          <h2 class="md-title">{{RecipesUser.recipes[$index].title}}</h2>
         </md-card-content>
         <md-card-actions layout="row" layout-align="end center">
           <md-button ui-sref="main.recipe-page">view more</md-button>
         </md-card-actions>
       </md-card>
       <md-card flex ng-if="RecipesUser.recipes[$index+1] != null" >
-        <img ng-src="{{RecipesUser.recipes[$index+1].image}}" class="md-card-image img-user-profile" alt="{{RecipesUser.recipes[$index+1].recipetitle}}">
+        <img ng-src="{{RecipesUser.recipes[$index+1].pictures[0].thumbnail_url}}" class="md-card-image img-user-profile" alt="{{RecipesUser.recipes[$index+1].title}}">
         <md-card-content>
-          <h2 class="md-title">{{RecipesUser.recipes[$index+1].recipetitle}}</h2>
+          <h2 class="md-title">{{RecipesUser.recipes[$index+1].title}}</h2>
         </md-card-content>
         <md-card-actions layout="row" layout-align="end center">
           <md-button ui-sref="main.recipe-page">view more</md-button>
         </md-card-actions>
       </md-card>
       <md-card flex ng-if="RecipesUser.recipes[$index+2] != null" >
-        <img ng-src="{{RecipesUser.recipes[$index+2].image}}" class="md-card-image img-user-profile" alt="{{RecipesUser.recipes[$index+2].recipetitle}}">
+        <img ng-src="{{RecipesUser.recipes[$index+2].pictures[0].thumbnail_url}}" class="md-card-image img-user-profile" alt="{{RecipesUser.recipes[$index+2].title}}">
         <md-card-content>
-          <h2 class="md-title">{{RecipesUser.recipes[$index+2].recipetitle}}</h2>
+          <h2 class="md-title">{{RecipesUser.recipes[$index+2].title}}</h2>
         </md-card-content>
         <md-card-actions layout="row" layout-align="end center">
           <md-button ui-sref="main.recipe-page">view more</md-button>
