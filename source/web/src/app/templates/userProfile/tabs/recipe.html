@@ -7,7 +7,7 @@
           <h2 class="md-title">{{RecipesUser.recipes[$index].title}}</h2>
         </md-card-content>
         <md-card-actions layout="row" layout-align="end center">
-          <md-button ui-sref="main.recipe-page">view more</md-button>
+          <md-button ng-click="RecipesUser.goToRecipePage(RecipesUser.recipes[$index]);">view more</md-button>
         </md-card-actions>
       </md-card>
       <md-card flex ng-if="RecipesUser.recipes[$index+1] != null" >
@@ -16,7 +16,7 @@
           <h2 class="md-title">{{RecipesUser.recipes[$index+1].title}}</h2>
         </md-card-content>
         <md-card-actions layout="row" layout-align="end center">
-          <md-button ui-sref="main.recipe-page">view more</md-button>
+          <md-button ng-click="RecipesUser.goToRecipePage(RecipesUser.recipes[$index+1]);">view more</md-button>
         </md-card-actions>
       </md-card>
       <md-card flex ng-if="RecipesUser.recipes[$index+2] != null" >
@@ -25,7 +25,7 @@
           <h2 class="md-title">{{RecipesUser.recipes[$index+2].title}}</h2>
         </md-card-content>
         <md-card-actions layout="row" layout-align="end center">
-          <md-button ui-sref="main.recipe-page">view more</md-button>
+          <md-button ng-click="RecipesUser.goToRecipePage(RecipesUser.recipes[$index+2]);">view more</md-button>
         </md-card-actions>
       </md-card>
     </div>
