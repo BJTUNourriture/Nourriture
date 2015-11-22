@@ -32,7 +32,11 @@ md-content
 									div(layout="row", layout-align="start start")
 											md-input-container(flex="70")
 												label Time (in mins)
-												input(type="number" ng-model="time" name="time")
+												input(type="number" ng-model="time" name="time" min="0")
+												div(ng-messages="createRecipeForm.time.$error" ng-if='!createRecipeForm.time.$pristine')
+													div(ng-message="required") This is required.
+													div(ng-message="number") It must be a valid number.
+													div(ng-message="min") Value must be superior to 0.
 									div
 										strong Price :
 											ng-md-icon(icon="coin", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.price < 1 || !createRecipe.isHoverPrice[1] || !createRecipe.isHoverPrice[2], 'body-create-Recipe-icon-selected' : createRecipe.price >= 1 || createRecipe.isHoverPrice[1] || createRecipe.isHoverPrice[2]}", ng-click="createRecipe.price = 1")
