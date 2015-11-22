@@ -16,6 +16,8 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 	vm.isHoverDifficulty = [false, false, false];
 	vm.isHoverPrice = [false, false, false];
 	vm.createRecipe = [];
+	vm.pictures = [];
+	vm.file = [];
 
 	//Table vars
 	vm.ingredients = [];
@@ -35,28 +37,50 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 	$log.log("innit");
 
 	vm.upload = function(file) {
+		$log.log("in upload");
 		UploadService.recipe_thumbnail_url(file)
 		.then(vm.RecipeThumbnailUploadSuccess, vm.RecipeThumbnailUploadFailure)
 	}
 
+	vm.sendToBack = function() {
+		if (vm.pictures.length >= vm.file.length)
+		{
+			var data = {"title" : $scope.title, "description" : vm.description, "time_preparation" : vm.time , "difficulty" : vm.difficulty, "average_price" : vm.price, "author_id" : $localStorage.user_id || $sessionStorage.user_id,  "author_name" : $localStorage.name || $sessionStorage.name, "ingredients" : vm.ingredients, "pictures" : vm.pictures};
+			$log.log(data);
+			RecipeService
+				.recipes
+				.save(data)
+				.$promise
+				.then(vm.RecipeCreateSuccess, vm.RecipeCreateFailure);
+		}
+	}
+
 	vm.submit = function() {
-		RecipeService
-			.recipes
-			.save({"title" : $scope.title, "description" : $scope.description,  "author_id" : $localStorage.user_id || $sessionStorage.user_id,  "author_name" : $localStorage.name || $sessionStorage.name, "ingredients" : {"id_ingredient" : "689ed840d6c25173533g895","name_ingredient" : "Pumpkin","amount_ingredient" : 100}})
-			.$promise
-			.then(vm.RecipeCreateSuccess, vm.RecipeCreateFailure);
+		vm.pictures = [];
+		if (vm.ingredients.length <= 0)
+		{
+			toastr.error("Please add some ingredients", "Woops...");
+			return;
+		}
+		if (vm.file.length == 0)
+		{
+			vm.pictures.push({"thumbnail_url" : "assets/images/recipesdummy/no_image.png"});
+			vm.sendToBack();
+		}
+		for (var i = 0; i < vm.file.length; i++)
+			vm.upload(vm.file[i]);
 	};
 
 	vm.RecipeThumbnailUploadSuccess = function (data) {
-		$log.log(data.message);
-		toastr.success('Look how beautiful it is!', 'Picture Uploaded!');
+		vm.pictures.push({"thumbnail_url" : data.data.message});
+		vm.sendToBack();
 	};
 
 	vm.RecipeThumbnailUploadFailure = function (data) {
 		$log.log(data.data);
 		var errorMsg = "This is odd...";
 		if (data.data.errmsg.indexOf("name") > -1)
-			errorMsg = "Seems like the Recipe already exists";
+			errorMsg = "Seems like we had an issue uploading your picture...";
 		toastr.error(errorMsg, 'Woops...');
 	};
 
