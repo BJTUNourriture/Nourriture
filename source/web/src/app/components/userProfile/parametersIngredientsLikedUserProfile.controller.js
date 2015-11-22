@@ -7,11 +7,11 @@
   'use strict';
 
   angular.module('NourritureControllers')
-    .controller('ParametersIngredientsUserProfileController', ParametersIngredientsUserProfileController);
+    .controller('ParametersIngredientsLikedUserProfileController', ParametersIngredientsLikedUserProfileController);
 
-  ParametersIngredientsUserProfileController.$inject = ["IngredientService", "$log", '$rootScope', '$timeout', '$scope', '$mdDialog', '$document', '$state'];
+  ParametersIngredientsLikedUserProfileController.$inject = ["IngredientService", "$log", '$rootScope', '$timeout', '$scope', '$mdDialog', '$document', '$state'];
 
-  function ParametersIngredientsUserProfileController(IngredientService, $log, $rootScope, $timeout, $scope, $mdDialog, $document, $state) {
+  function ParametersIngredientsLikedUserProfileController(IngredientService, $log, $rootScope, $timeout, $scope, $mdDialog, $document, $state) {
     var vm = this;
 
     function getUserProfile() {
