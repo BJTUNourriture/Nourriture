@@ -21,7 +21,7 @@
 
       vm.data = $rootScope.UserProfile;
 
-      vm.names_ingredient = vm.data.like_chips;
+      vm.names_ingredient = vm.data.dislike_chips;
 
 
       vm.selectedItemChip = null;
@@ -34,11 +34,10 @@
 
       new_chip.id_ingredient = original._id;
       new_chip.name_ingredient = original.name;
-      $rootScope.UserProfile.like_chips_id.push(original._id);
+      $rootScope.UserProfile.dislike_chips_id.push(original._id);
       if (vm.names_ingredient.indexOf(original.name) == -1) {
-        vm.data.like.push(new_chip);
+        vm.data.dislike.push(new_chip);
       }
-
       return (original.name);
     };
 
