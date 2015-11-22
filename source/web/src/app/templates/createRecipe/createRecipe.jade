@@ -83,8 +83,10 @@ md-content
 								md-container(flex="25", style="min-width: 300px")
 									label Photo 4
 									img(ngf-src="createRecipe.file[4] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[4]" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100"  ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
-							//div.body-create-Recipe-textangular
-								text-angular(ng-model="createRecipe.htmlVariable")
+							section(layout="column", layout-align="start center")
+								strong.body-create-Recipe-textangular Description
+							div.body-create-Recipe-textangular-body
+								text-angular(name="description" ng-model="createRecipe.description" ta-toolbar-class="body-create-Recipe-textangular-header" ta-toolbar-group-class="body-create-Recipe-textangular-button-group").flex
 
 		include ../footer/footer.jade
 
