@@ -45,7 +45,7 @@ md-content
 										md-input-container(flex="70")
 												label Type
 												input(type="string" name="types")
-										md-button.md-raised Create a type
+										md-button(ng-click="createRecipe.createTypeDialog($event)").md-raised Create a type
 							div.body-create-Recipe-table
 								section(layout="column", layout-align="start center")
 									strong.body-create-Recipe-textangular Ingredients

@@ -102,6 +102,51 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 		}
 	}
 
+	vm.createTypeDialog = function(event) {
+			$log.log("TopKEKEKEKEEK")
+			$mdDialog.show({
+			controller : vm.CreateTypedialogController,
+			controllerAs : 'createType',
+			templateUrl: 'app/templates/dialogTemplates/typesCreate.tmpl.html',
+			parent: angular.element($document.body),
+			bindToController : true,
+			targetEvent: event,
+			clickOutsideToClose:true
+			})
+		};
+
+		//Controller for createTagDialog
+		vm.CreateTypedialogController = function($mdDialog) {
+			var vm = this;
+
+
+			vm.TypeCreateSuccess = function (data) {
+				$log.log(data.message);
+				toastr.success('You can now access your new Type.', 'Type Created!');
+			};
+
+			vm.TypeCreateFailure = function (data) {
+				$log.log(data.data);
+				var errorMsg = "This is odd...";
+				if (data.data.errmsg.indexOf("name") > -1)
+					errorMsg = "Seems like the type already exists";
+				toastr.error(errorMsg, 'Woops...');
+			};
+
+			vm.submit = function() {
+				$log.log("innit");
+				/*TypeService
+					.tags
+					.save({"name" : vm.name, "category" : vm.category})
+					.$promise
+					.then(vm.TagCreateSuccess, vm.TagCreateFailure);*/
+			}
+
+			vm.hide = function () {
+				$mdDialog.hide();
+			}
+		}
+
 	//Dialog functions
 	vm.AddIngredientDialog = function(event) {
 		$mdDialog.show({
