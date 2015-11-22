@@ -114,7 +114,6 @@
 
 
     vm.updateUserSuccess = function (data) {
-      $log.log("Updated user", data);
       //$rootScope.UserProfileSave = $rootScope.UserProfile;
       angular.copy($rootScope.UserProfile, $rootScope.UserProfileSave);
       toastr.success('Your profile is updated', 'Nourriture');

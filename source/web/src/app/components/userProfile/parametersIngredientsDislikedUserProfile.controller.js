@@ -63,7 +63,6 @@
     vm.IngredientsGetNameSuccess = function (data) {
       vm.itemsAutocomplete = data;
       //Verifier que data il n y a pas d ingredient de uderproile like
-      $log.log("begin", $rootScope.UserProfile, vm.itemsAutocomplete);
 
 
       /*for (var i = 0; i < $rootScope.UserProfile.like.length; i++) {
@@ -76,7 +75,6 @@
         }
       }*/
 
-      $log.log("end", $rootScope.UserProfile, vm.itemsAutocomplete);
 
 
       return (vm.itemsAutocomplete);
