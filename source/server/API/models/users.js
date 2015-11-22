@@ -58,7 +58,7 @@ var UserSchema = new mongoose.Schema({
 			required : true,
 			ref : 'Allergies'
 		},
-		name : {
+		name_ingredient : {
 			type : String,
 			required : true
 		}

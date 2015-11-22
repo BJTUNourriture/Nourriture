@@ -19,7 +19,7 @@ function RecipesDashboardController($scope, $log, SearchService, toastr)
 	vm.table = {
 		title : '',
 		metadata : {
-			"items": 10,
+			"items": 36,
 			"page" : 1 
 
 		}
@@ -48,6 +48,10 @@ function RecipesDashboardController($scope, $log, SearchService, toastr)
 	.save(vm.table)
 	.$promise
 	.then(vm.RecipesGetSuccess, vm.RecipesGetFailure)
+
+	vm.range = function (number) {
+		return new Array(number);
+	}
 
 	//Search by name
 	vm.searchRecipes = function ()

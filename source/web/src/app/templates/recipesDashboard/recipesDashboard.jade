@@ -46,5 +46,8 @@ md-content.body-dashboard-recipe
 													span {{ recipe.average_score }}
 													ng-md-icon(icon="star")
 													span ({{ recipe.number_vote }})
+												p(style="text-align: center")
+													span(ng-repeat="storm in recipesDashboard.range(recipe.difficulty) track by $index")
+														ng-md-icon(icon="storm")
 
 		include ../footer/footer.jade

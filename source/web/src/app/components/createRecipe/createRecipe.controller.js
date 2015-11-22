@@ -4,10 +4,10 @@
 angular.module('NourritureControllers')
 	.controller('CreateRecipeController', CreateRecipeController);
 
-CreateRecipeController.$inject = ["$scope", "RecipeService", 'TagsService', 'toastr',"$log", 'UploadService', "SearchService", 'IngredientService', "$mdDialog", "$document", "$sessionStorage", "$localStorage"];
+CreateRecipeController.$inject = ["$scope", "RecipeService", 'TagsService', 'toastr',"$log", 'UploadService', "SearchService", "TypesService", 'IngredientService', "$mdDialog", "$document", "$sessionStorage", "$localStorage"];
 
 /**@ngInject*/
-function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log, UploadService, SearchService, IngredientService, $mdDialog, $document, $localStorage, $sessionStorage)
+function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log, UploadService, SearchService, TypesService, IngredientService, $mdDialog, $document, $localStorage, $sessionStorage)
 {
 	var vm = this;
 	vm.defaultThumbSrc = "../../assets/images/recipesdummy/plus.png";
@@ -125,6 +125,49 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 			vm.ingredients.splice(i2, 1);
 		}
 	}
+
+	vm.createTypeDialog = function(event) {
+			$mdDialog.show({
+			controller : vm.CreateTypedialogController,
+			controllerAs : 'createType',
+			templateUrl: 'app/templates/dialogTemplates/typesCreate.tmpl.html',
+			parent: angular.element($document.body),
+			bindToController : true,
+			targetEvent: event,
+			clickOutsideToClose:true
+			})
+		};
+
+		//Controller for createTypeDialog
+		vm.CreateTypedialogController = function($mdDialog) {
+			var vm = this;
+
+			vm.TypeCreateSuccess = function (data) {
+				$log.log(data.message);
+				toastr.success('You can now access your new Type.', 'Type Created!');
+			};
+
+			vm.TypeCreateFailure = function (data) {
+				$log.log(data.data);
+				var errorMsg = "This is odd...";
+				if (data.data.errmsg.indexOf("name") > -1)
+					errorMsg = "Seems like the type already exists";
+				toastr.error(errorMsg, 'Woops...');
+			};
+
+			vm.submit = function() {
+				$log.log(TypesService)
+				TypesService
+					.types
+					.save({"name" : vm.name, "category" : vm.category})
+					.$promise
+					.then(vm.TypeCreateSuccess, vm.TypeCreateFailure);
+			}
+
+			vm.hide = function () {
+				$mdDialog.hide();
+			}
+		}
 
 	//Dialog functions
 	vm.AddIngredientDialog = function(event) {

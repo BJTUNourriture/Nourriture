@@ -1,0 +1,22 @@
+md-dialog
+	md-dialog-content
+		div(layout="column" flex layout-align="start center")
+			h2 Add new Type
+			md-content.body-create-ingredient
+			form(name="createTypeForm" novalidate ng-submit="createTypeForm.$valid && createType.submit()")
+				md-input-container.body-create-ingredient-name
+					ng-md-icon(icon="name").body-register-container-md
+					input(placeholder="Name" required name="name" ng-model="createType.name" maxlength="20" minlength="3").body-register-container-md
+					div(ng-messages="createTypeForm.name.$error" ng-if='!createTypeForm.name.$pristine')
+						div(ng-message="required") This is required.
+						div(ng-message="minlength") The name must be longer than 3 characters.
+						div(ng-message="md-maxlength") The name must be shorter than 20 characters.
+				md-input-container
+					label Catégorie
+					textarea(columns="1" required name="categorie" ng-model="createType.categorie" maxlength="200" minlength="3")
+					div(ng-messages="createTypeForm.categorie.$error" ng-if='!createTypeForm.categorie.$pristine')
+						div(ng-message="required") This is required.
+						div(ng-message="minlength") The categorie must be longer than 3 characters.
+						div(ng-message="md-maxlength") The categorie must be shorter than 200 characters.
+				div(layout="row" flex layout-align="start center")
+					md-button.md-raised(type="submit").flex Create Type
