@@ -42,10 +42,6 @@ md-content
 											ng-md-icon(icon="coin", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.price < 1 || !createRecipe.isHoverPrice[1] || !createRecipe.isHoverPrice[2], 'body-create-Recipe-icon-selected' : createRecipe.price >= 1 || createRecipe.isHoverPrice[1] || createRecipe.isHoverPrice[2]}", ng-click="createRecipe.price = 1")
 											ng-md-icon(icon="coin", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.price < 2 || !createRecipe.isHoverPrice[2], 'body-create-Recipe-icon-selected' : createRecipe.price >= 2 || createRecipe.isHoverPrice[2]}", ng-mouseenter="createRecipe.stateIsHoverPrice(1, true);", ng-mouseleave="createRecipe.stateIsHoverPrice(1, false);" , ng-click="createRecipe.price = 2")
 											ng-md-icon(icon="coin", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.price < 3, 'body-create-Recipe-icon-selected' : createRecipe.price == 3}", ng-mouseenter="createRecipe.stateIsHoverPrice(2, true);", ng-mouseleave="createRecipe.stateIsHoverPrice(2, false);" , ng-click="createRecipe.price = 3")
-										md-input-container(flex="70")
-												label Type
-												input(type="string" name="types")
-										md-button(ng-click="createRecipe.createTypeDialog($event)").md-raised Create a type
 							div.body-create-Recipe-table
 								section(layout="column", layout-align="start center")
 									strong.body-create-Recipe-textangular Ingredients

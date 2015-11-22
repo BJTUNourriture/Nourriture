@@ -4,10 +4,10 @@
 angular.module('NourritureControllers')
 	.controller('CreateRecipeController', CreateRecipeController);
 
-CreateRecipeController.$inject = ["$scope", "RecipeService", 'TagsService', 'toastr',"$log", 'UploadService', "SearchService", 'IngredientService', "$mdDialog", "$document", "$sessionStorage", "$localStorage"];
+CreateRecipeController.$inject = ["$scope", "RecipeService", 'TagsService', 'toastr',"$log", 'UploadService', "SearchService", "TypesService", 'IngredientService', "$mdDialog", "$document", "$sessionStorage", "$localStorage"];
 
 /**@ngInject*/
-function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log, UploadService, SearchService, IngredientService, $mdDialog, $document, $localStorage, $sessionStorage)
+function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log, UploadService, SearchService, TypesService, IngredientService, $mdDialog, $document, $localStorage, $sessionStorage)
 {
 	var vm = this;
 	vm.defaultThumbSrc = "../../assets/images/recipesdummy/plus.png";
@@ -103,7 +103,6 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 	}
 
 	vm.createTypeDialog = function(event) {
-			$log.log("TopKEKEKEKEEK")
 			$mdDialog.show({
 			controller : vm.CreateTypedialogController,
 			controllerAs : 'createType',
@@ -115,10 +114,9 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 			})
 		};
 
-		//Controller for createTagDialog
+		//Controller for createTypeDialog
 		vm.CreateTypedialogController = function($mdDialog) {
 			var vm = this;
-
 
 			vm.TypeCreateSuccess = function (data) {
 				$log.log(data.message);
@@ -134,12 +132,12 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 			};
 
 			vm.submit = function() {
-				$log.log("innit");
-				/*TypeService
-					.tags
+				$log.log(TypesService)
+				TypesService
+					.types
 					.save({"name" : vm.name, "category" : vm.category})
 					.$promise
-					.then(vm.TagCreateSuccess, vm.TagCreateFailure);*/
+					.then(vm.TypeCreateSuccess, vm.TypeCreateFailure);
 			}
 
 			vm.hide = function () {
