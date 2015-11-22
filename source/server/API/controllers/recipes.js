@@ -360,8 +360,8 @@ exports.updateRecipe = function(req, res, err, recipe) {
 *					}],
 *		"ingredients" : [{
 *						"id_ingredient" : "689ed840d6c25173533g895",
-*						"name_ingredient" : "Pumpkin",
-*						"amount_ingredient" : 100
+*						"name" : "Pumpkin",
+*						"amount" : 100
 *				   	}],
 *		"comments" : [{
 *						"id_author" : "386fc840d6c25173533e546h",
