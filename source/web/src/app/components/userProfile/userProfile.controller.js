@@ -32,6 +32,14 @@
         $rootScope.UserProfile.dislike_chips_id[i] = $rootScope.UserProfile.dislike[i].id_ingredient;
       }
 
+      $rootScope.UserProfile.alergy = [];
+      $rootScope.UserProfile.alergy = [];
+      for(i = 0; i < $rootScope.UserProfile.alergy.length; i++) {
+        $rootScope.UserProfile.like_chips[i] = $rootScope.UserProfile.alergy[i].name_ingredient;
+        $rootScope.UserProfile.like_chips_id[i] = $rootScope.UserProfile.alergy[i].id_ingredient;
+      }
+
+
 
 
 

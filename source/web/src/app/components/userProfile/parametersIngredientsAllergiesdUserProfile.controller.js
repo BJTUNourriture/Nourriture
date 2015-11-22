@@ -7,18 +7,17 @@
   'use strict';
 
   angular.module('NourritureControllers')
-    .controller('ParametersIngredientsLikedUserProfileController', ParametersIngredientsLikedUserProfileController);
+    .controller('ParametersIngredientsAllergiesUserProfileController', ParametersIngredientsAllergiesUserProfileController);
 
-  ParametersIngredientsLikedUserProfileController.$inject = ["IngredientService", "$log", '$rootScope', '$timeout', '$scope', '$mdDialog', '$document', '$state'];
+  ParametersIngredientsAllergiesUserProfileController.$inject = ["IngredientService", "$log", '$rootScope', '$timeout', '$scope', '$mdDialog', '$document', '$state'];
 
-  function ParametersIngredientsLikedUserProfileController(IngredientService, $log, $rootScope, $timeout, $scope, $mdDialog, $document, $state) {
+  function ParametersIngredientsAllergiesUserProfileController(IngredientService, $log, $rootScope, $timeout, $scope, $mdDialog, $document, $state) {
     var vm = this;
 
     function getUserProfile() {
 
       vm.data = $rootScope.UserProfile;
-
-      vm.names_ingredient = vm.data.like_chips;
+      vm.names_ingredient = vm.data.alergy;
 
 
       vm.selectedItemChip = null;
@@ -31,9 +30,9 @@
 
       new_chip.id_ingredient = original._id;
       new_chip.name_ingredient = original.name;
-      $rootScope.UserProfile.like_chips_id.push(original._id);
+      $rootScope.UserProfile.dislike_chips_id.push(original._id);
       if (vm.names_ingredient.indexOf(original.name) == -1) {
-        vm.data.like.push(new_chip);
+        vm.data.dislike.push(new_chip);
       }
 
       return (original.name);
@@ -63,16 +62,22 @@
 
     vm.IngredientsGetNameSuccess = function (data) {
       vm.itemsAutocomplete = data;
-/*
-      for (var i = 0; i < $rootScope.UserProfile.dislike.length; i++) {
+      //Verifier que data il n y a pas d ingredient de uderproile like
+      $log.log("begin", $rootScope.UserProfile, vm.itemsAutocomplete);
 
-        for (var j = 0; j < vm.itemsAutocomplete.length; j++) {
-          if ($rootScope.UserProfile.dislike[i].name_ingredient == vm.itemsAutocomplete[j].name) {
-            $log.log("it exist need to delete it", $rootScope.UserProfile.dislike[i].name_ingredient, vm.itemsAutocomplete[j].name);
-            vm.itemsAutocomplete.splice(j, 1);
-          }
-        }
-      }*/
+
+      /*for (var i = 0; i < $rootScope.UserProfile.like.length; i++) {
+
+       for (var j = 0; j < vm.itemsAutocomplete.length; j++) {
+       if ($rootScope.UserProfile.like[i].name_ingredient == vm.itemsAutocomplete[j].name) {
+       $log.log("it exist need to delete it", $rootScope.UserProfile.like[i].name_ingredient, vm.itemsAutocomplete[j].name);
+       vm.itemsAutocomplete.splice(j, 1);
+       }
+       }
+       }*/
+
+      $log.log("end", $rootScope.UserProfile, vm.itemsAutocomplete);
+
 
       return (vm.itemsAutocomplete);
     };
@@ -126,15 +131,15 @@
     vm.deleteChips = function (chip, index) {
 
       var find_ingredient = false;
-      for (var i = 0; i < $rootScope.UserProfile.like.length; i++) {
-        if ($rootScope.UserProfile.like[i].name_ingredient == chip) {
+      for (var i = 0; i < $rootScope.UserProfile.alergy.length; i++) {
+        if ($rootScope.UserProfile.alergy[i].name_ingredient == chip) {
           find_ingredient = true;
           break;
         }
       }
 
       if (find_ingredient) {
-        $rootScope.UserProfile.like.splice(index, 1);
+        $rootScope.UserProfile.alergy.splice(index, 1);
       }
 
     };
