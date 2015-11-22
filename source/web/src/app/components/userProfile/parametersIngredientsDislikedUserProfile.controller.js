@@ -17,9 +17,7 @@
     function getUserProfile() {
 
       vm.data = $rootScope.UserProfile;
-
       vm.names_ingredient = vm.data.dislike_chips;
-      $log.log("dislike = ", vm.names_ingredient);
 
 
       vm.selectedItemChip = null;
