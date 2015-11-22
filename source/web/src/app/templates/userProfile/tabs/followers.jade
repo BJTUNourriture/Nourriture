@@ -1,5 +1,17 @@
-//
-   Created by sylflo on 11/6/15.
+//Created by sylflo on 11/6/15.
 
-md-content
-   h1 Followers
+div(ng-controller="followersUserProfileController as ctrl" class="virtualRepeatdemoInfiniteScroll").flex
+    md-content(layout="column" flex)
+        h1 Followers
+        div(flex)
+            p
+             span.bold Number of followers:
+             span  {{ctrl.followerList.length}}
+        md-virtual-repeat-container(id="vertical-container")
+            div(md-virtual-repeat="item in ctrl.followerList" class="repeated-item" flex)
+                div(layout="horizontal" flex)
+                    img(ng-src="assets/images/user_dummy/random-user-1.jpg" class="md-avatar" alt="{{item.username}}" flex="1").user-profile-head-avatar
+                    div(flex).user-profile-limited-height
+                        p.user-profile-head-title-left
+                         span.bold {{item.username}}<br>
+                         span {{item.description}}

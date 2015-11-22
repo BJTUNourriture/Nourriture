@@ -51,3 +51,30 @@ md-tab-item {
 	user-select: none;
 }
 */
+
+.virtualRepeatdemoInfiniteScroll #vertical-container {
+  height: 100%;
+  width: 100%; }
+.virtualRepeatdemoInfiniteScroll .repeated-item {
+  border-bottom: 1px solid #ddd;
+  box-sizing: border-box;
+  height: 70px;
+  padding-top: 5px;
+  }
+.virtualRepeatdemoInfiniteScroll .md-virtual-repeat-offsetter {
+  padding-left: 16px; }
+
+.user-profile-head-avatar {
+    text-anchor:start;
+    width : 50px;
+    height: 50px;
+}
+
+.user-profile-limited-height {
+    height: 65px;
+    padding-left: 20px;
+}
+
+.user-profile-head-title-left {
+	text-align: start;
+}
