@@ -24,11 +24,13 @@ function LoginController($scope, UserService, toastr, $state, $sessionStorage, $
 		{
 			$localStorage.key = data["key"];
 			$localStorage.user_id = data["user_id"];
+			$localStorage.name = data["user_name"];
 		}
 		else
 		{
 			$sessionStorage.key = data["key"];
-			$localStorage.user_id = data["user_id"];
+			$sessionStorage.user_id = data["user_id"];
+			$sessionStorage.name = data["user_name"];
 		}
 		$state.go("main.homepage");
 	};

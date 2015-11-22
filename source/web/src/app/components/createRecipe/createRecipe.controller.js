@@ -42,7 +42,7 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 	vm.submit = function() {
 		RecipeService
 			.recipes
-			.save({"title" : $scope.title, "description" : $scope.description,  "author_id" : $localStorage.user_id || $sessionStorage.user_id,  "author_name" : "kek man", "ingredients" : {"id_ingredient" : "689ed840d6c25173533g895","name_ingredient" : "Pumpkin","amount_ingredient" : 100}})
+			.save({"title" : $scope.title, "description" : $scope.description,  "author_id" : $localStorage.user_id || $sessionStorage.user_id,  "author_name" : $localStorage.name || $sessionStorage.name, "ingredients" : {"id_ingredient" : "689ed840d6c25173533g895","name_ingredient" : "Pumpkin","amount_ingredient" : 100}})
 			.$promise
 			.then(vm.RecipeCreateSuccess, vm.RecipeCreateFailure);
 	};
