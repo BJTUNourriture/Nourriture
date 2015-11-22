@@ -52,7 +52,7 @@
     };
 
     //Timeout in ms for the moment
-    $timeout(getUserProfile, 500);
+    $timeout(getUserProfile, 2000);
 
 
     vm.updateProfile = function () {

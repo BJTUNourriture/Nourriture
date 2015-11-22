@@ -66,7 +66,7 @@
       .then(vm.recipeSuccess, vm.recipeError);
     };
 
-    $timeout(getRecipes, 1200);
+    $timeout(getRecipes, 2000);
   }
 
 })();

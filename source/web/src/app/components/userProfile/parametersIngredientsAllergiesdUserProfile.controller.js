@@ -142,7 +142,7 @@
 
 
 //Timeout in ms for the moment
-    $timeout(getUserProfile, 1000);
+    $timeout(getUserProfile, 2000);
 
     $scope.$watch(angular.bind(vm.data, function () {
       return vm.data;
