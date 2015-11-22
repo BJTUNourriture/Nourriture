@@ -18,12 +18,12 @@ div(layout="column" layout-align="center center" layout-fill ng-controller="para
                   strong {{ $chip }}
 
 
-          div(ng-controller='ParametersIngredientsDislikedUserProfileController as parametersIngredientsDislikedUserProfile')
-            md-chips(md-allow-repeats="false", ng-model="parametersIngredientsDislikedUserProfile.names_ingredient", md-on-remove='parametersIngredientsDislikedUserProfile.deleteChips($chip, $index)', md-autocomplete-snap="", md-require-match="true", secondary-placeholder="+Tag", md-on-append="parametersIngredientsDislikedUserProfile.transformChip($chip)").flex
-              md-autocomplete(md-selected-item-change="parametersIngredientsDislikedUserProfile.selectedItemChangeChip" md-selected-item="parametersIngredientsDislikedUserProfile.selectedItemChip", md-search-text="parametersIngredientsLikedUserProfile.searchTextChip", md-items="name in parametersIngredientsDislikedUserProfile.getNameIngredients(parametersIngredientsDislikedUserProfile.searchTextChip)", md-item-text="name.name", placeholder="Igredient you disliked")
-                span(md-highlight-text="parametersIngredientsDislikedUserProfile.searchTextChip") {{ name.name }}
+          div(ng-controller='ParametersIngredientsDislikedUserProfileController as parametersIngredientsLikedUserProfile')
+            md-chips(md-allow-repeats="false", ng-model="parametersIngredientsLikedUserProfile.names_ingredient", md-on-remove='parametersIngredientsLikedUserProfile.deleteChips($chip, $index)', md-autocomplete-snap="", md-require-match="true", secondary-placeholder="+Tag", md-on-append="parametersIngredientsLikedUserProfile.transformChip($chip)").flex
+              md-autocomplete(md-selected-item-change="parametersIngredientsLikedUserProfile.selectedItemChangeChip" md-selected-item="parametersIngredientsLikedUserProfile.selectedItemChip", md-search-text="parametersIngredientsLikedUserProfile.searchTextChip", md-items="name in parametersIngredientsLikedUserProfile.getNameIngredients(parametersIngredientsLikedUserProfile.searchTextChip)", md-item-text="name.name", placeholder="Igredient you liked")
+                span(md-highlight-text="parametersIngredientsLikedUserProfile.searchTextChip") {{ name.name }}
               md-chip-template
-                span( ng-click="parametersIngredientsDislikedUserProfile.infosIngredientDialog($event, $chip)")
+                span( ng-click="parametersIngredientsLikedUserProfile.infosIngredientDialog($event, $chip)")
                   strong {{ $chip }}
 
 
