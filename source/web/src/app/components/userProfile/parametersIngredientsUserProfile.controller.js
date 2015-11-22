@@ -69,9 +69,7 @@
 
 
     vm.infoIngredientSuccess = function (data) {
-      $log.log("Succes", data, data.data);
       var ingredient = data[0];
-      ingredient.name = "toito";
       return ingredient;
     };
 
@@ -131,7 +129,7 @@
     };
 
     vm.deleteChips = function (chip, index) {
-      $log.log("COUCOU", chip, index);
+      $log.log(chip, index);
     };
 
 
