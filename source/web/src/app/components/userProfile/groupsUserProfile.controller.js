@@ -34,7 +34,7 @@
         {name_ingredient: "nine"}, {name_ingredient: "ten"}, {name_ingredient: "eleven"}, {name_ingredient: "twelve"}];*/
      /* vm.data.dislike = [{name_ingredient: "one"}, {name_ingredient: "choux fleur"}, {name_ingredient: "choux de brus"}];*/
       vm.data.religion = [{name: "christian"}];
-      vm.data.alergy = [{name: "eggs"}, {name: "milk"}];
+    /*  vm.data.alergy = [{name: "eggs"}, {name: "milk"}];*/
       vm.data.followed_by = [{username: "thomas"}, {username: "vincent"}, {username: "top chef"}];
       vm.data.follow = [{username: "fanny"}, {username: "giselle"}, {username: "gertrude"}];
 //      vm.data.joined_groups = [{name: "freedom to opressed vegetables"}, {name: "Faites du Fruuuiiiitt!!"}];

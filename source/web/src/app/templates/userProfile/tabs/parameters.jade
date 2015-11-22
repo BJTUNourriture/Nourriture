@@ -27,6 +27,14 @@ div(layout="column" layout-align="center center" layout-fill ng-controller="para
                   strong {{ $chip }}
 
 
+          div(ng-controller='ParametersIngredientsAllergiesUserProfileController as parametersIngredientsLikedUserProfile')
+            md-chips(md-allow-repeats="false", ng-model="parametersIngredientsLikedUserProfile.names_ingredient", md-on-remove='parametersIngredientsLikedUserProfile.deleteChips($chip, $index)', md-autocomplete-snap="", md-require-match="true", secondary-placeholder="+Tag", md-on-append="parametersIngredientsLikedUserProfile.transformChip($chip)").flex
+              md-autocomplete(md-selected-item-change="parametersIngredientsLikedUserProfile.selectedItemChangeChip" md-selected-item="parametersIngredientsLikedUserProfile.selectedItemChip", md-search-text="parametersIngredientsLikedUserProfile.searchTextChip", md-items="name in parametersIngredientsLikedUserProfile.getNameIngredients(parametersIngredientsLikedUserProfile.searchTextChip)", md-item-text="name.name", placeholder="Your allergies")
+                span(md-highlight-text="parametersIngredientsLikedUserProfile.searchTextChip") {{ name.name }}
+              md-chip-template
+                span( ng-click="parametersIngredientsLikedUserProfile.infosIngredientDialog($event, $chip)")
+                  strong {{ $chip }}
+
           md-input-container.md-block
             label Email
             input(minlength="8" maxlength="100" type='email' name='email' ng-model='parametersUserProfile.data.email' ng-pattern="/^.+@.+\..+$/")
