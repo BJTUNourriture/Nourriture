@@ -62,6 +62,23 @@
 
     vm.IngredientsGetNameSuccess = function (data) {
       vm.itemsAutocomplete = data;
+      //Verifier que data il n y a pas d ingredient de uderproile like
+      $log.log("begin", $rootScope.UserProfile, vm.itemsAutocomplete);
+
+
+      for (var i = 0; i < $rootScope.UserProfile.like.length; i++) {
+
+        for (var j = 0; j < vm.itemsAutocomplete.length; j++) {
+          if ($rootScope.UserProfile.like[i].name_ingredient == vm.itemsAutocomplete[j].name) {
+            $log.log("it exist need to delete it", $rootScope.UserProfile.like[i].name_ingredient, vm.itemsAutocomplete[j].name);
+            vm.itemsAutocomplete.splice(j, 1);
+          }
+        }
+      }
+
+      $log.log("end", $rootScope.UserProfile, vm.itemsAutocomplete);
+
+
       return (vm.itemsAutocomplete);
     };
 

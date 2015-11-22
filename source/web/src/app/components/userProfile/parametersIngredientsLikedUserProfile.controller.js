@@ -63,6 +63,16 @@
 
     vm.IngredientsGetNameSuccess = function (data) {
       vm.itemsAutocomplete = data;
+
+      /*for (var i = 0; i < $rootScope.UserProfile.dislike.length; i++) {
+        for (var j = 0; j < vm.itemsAutocomplete.length; j++) {
+          if ($rootScope.UserProfile.dislike[i].name_ingredient == vm.itemsAutocomplete[j].name) {
+            $log.log("it exist need to delete it", $rootScope.UserProfile.dislike[i].name_ingredient, vm.itemsAutocomplete[j].name);
+            vm.itemsAutocomplete.splice(j, 1);
+          }
+        }
+      }*/
+
       return (vm.itemsAutocomplete);
     };
 
