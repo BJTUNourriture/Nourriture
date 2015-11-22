@@ -7,18 +7,17 @@
   'use strict';
 
   angular.module('NourritureControllers')
-    .controller('ParametersIngredientsUserProfileController', ParametersIngredientsUserProfileController);
+    .controller('ParametersIngredientsDislikedUserProfileController', ParametersIngredientsDislikedUserProfileController);
 
-  ParametersIngredientsUserProfileController.$inject = ["IngredientService", "$log", '$rootScope', '$timeout', '$scope', '$mdDialog', '$document', '$state'];
+  ParametersIngredientsDislikedUserProfileController.$inject = ["IngredientService", "$log", '$rootScope', '$timeout', '$scope', '$mdDialog', '$document', '$state'];
 
-  function ParametersIngredientsUserProfileController(IngredientService, $log, $rootScope, $timeout, $scope, $mdDialog, $document, $state) {
+  function ParametersIngredientsDislikedUserProfileController(IngredientService, $log, $rootScope, $timeout, $scope, $mdDialog, $document, $state) {
     var vm = this;
 
     function getUserProfile() {
 
       vm.data = $rootScope.UserProfile;
-
-      vm.names_ingredient = vm.data.like_chips;
+      vm.names_ingredient = vm.data.dislike_chips;
 
 
       vm.selectedItemChip = null;
@@ -31,8 +30,10 @@
 
       new_chip.id_ingredient = original._id;
       new_chip.name_ingredient = original.name;
-      $rootScope.UserProfile.like_chips_id.push(original._id);
-      vm.data.like.push(new_chip);
+      $rootScope.UserProfile.dislike_chips_id.push(original._id);
+      if (vm.names_ingredient.indexOf(original.name) == -1) {
+        vm.data.dislike.push(new_chip);
+      }
 
       return (original.name);
     };
@@ -113,15 +114,15 @@
     vm.deleteChips = function (chip, index) {
 
       var find_ingredient = false;
-      for (var i = 0; i < $rootScope.UserProfile.like.length; i++) {
-        if ($rootScope.UserProfile.like[i].name_ingredient == chip) {
+      for (var i = 0; i < $rootScope.UserProfile.dislike.length; i++) {
+        if ($rootScope.UserProfile.dislike[i].name_ingredient == chip) {
           find_ingredient = true;
           break;
         }
       }
 
       if (find_ingredient) {
-        $rootScope.UserProfile.like.splice(index, 1);
+        $rootScope.UserProfile.dislike.splice(index, 1);
       }
 
     };

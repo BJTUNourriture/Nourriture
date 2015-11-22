@@ -16,14 +16,25 @@
       vm.data = data;
       $rootScope.UserProfile = data;
       $rootScope.UserProfileSave = {};
+      var i = 0;
+
       $rootScope.UserProfile.like_chips = [];
       $rootScope.UserProfile.like_chips_id = [];
-      for(var i = 0; i < $rootScope.UserProfile.like.length; i++) {
+      for(i = 0; i < $rootScope.UserProfile.like.length; i++) {
         $rootScope.UserProfile.like_chips[i] = $rootScope.UserProfile.like[i].name_ingredient;
         $rootScope.UserProfile.like_chips_id[i] = $rootScope.UserProfile.like[i].id_ingredient;
-
-
       }
+
+      $rootScope.UserProfile.dislike_chips = [];
+      $rootScope.UserProfile.dislike_chips_id = [];
+      for(i = 0; i < $rootScope.UserProfile.dislike.length; i++) {
+        $rootScope.UserProfile.dislike_chips[i] = $rootScope.UserProfile.dislike[i].name_ingredient;
+        $rootScope.UserProfile.dislike_chips_id[i] = $rootScope.UserProfile.dislike[i].id_ingredient;
+      }
+
+
+
+
       angular.copy($rootScope.UserProfile, $rootScope.UserProfileSave);
 
     };

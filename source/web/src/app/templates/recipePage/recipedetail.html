@@ -8,9 +8,10 @@
              Go Back
            </md-button> -->
            <h2>
-             <span>Big Top Cake</span>
+             <span class="recipetitle">Big Top Cake</span>
            </h2>
            <span flex></span>
+
            <span>Difficulty</span>
            <ng-md-icon icon="storm"></ng-md-icon>
            <ng-md-icon icon="storm"></ng-md-icon>
@@ -19,8 +20,7 @@
        </md-toolbar>
   </md-content>
   <md-content class="md-padding" layout="column">
-    <h2 class="md-title">Ingredients</h2>
-    <md-chips>
+    <!-- <md-chips>
       <md-chip>3 x 370g packets moist chocolate cake</md-chip>
       <md-chip>6 eggs</md-chip>
       <md-chip>60g butter</md-chip>
@@ -28,7 +28,101 @@
       <md-chip>2 x 160g packets strawberry-flavoured sour straps</md-chip>
       <md-chip>2 x 250g packets Jaffas</md-chip>
       <md-chip>Decorative flag</md-chip>
-    </md-chips>
+    </md-chips> -->
+
+
+        <md-grid-list md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
+
+    <md-grid-tile class="gray" md-rowspan="2" md-colspan="2" md-rowspan-sm="1" md-colspan-sm="1">
+      <md-grid-tile-footer>
+        <h3>#1: (2r x 2c)</h3>
+      </md-grid-tile-footer>
+    </md-grid-tile>
+
+
+    <md-grid-tile class="green">
+      <md-grid-tile-footer>
+
+        "average_score" : 0, (dans la selection)
+      </md-grid-tile-footer>
+
+    </md-grid-tile>
+
+    <md-grid-tile class="green">
+      <md-grid-tile-footer>
+
+        "date_posted" : "2015-03-31T22:00:00.000Z"
+      </md-grid-tile-footer>
+
+    </md-grid-tile>
+
+        <md-grid-tile class="green">
+          <md-grid-tile-footer>
+
+      "time_preparation" : 60,
+    </md-grid-tile-footer>
+
+    </md-grid-tile>
+
+        <md-grid-tile class="green">
+          <md-grid-tile-footer>
+
+          "average_price" : 1,
+        </md-grid-tile-footer>
+
+    </md-grid-tile>
+
+
+          <md-grid-tile class="green">
+            <md-grid-tile-footer>
+
+              "number_vote" : 1
+            </md-grid-tile-footer>
+
+    </md-grid-tile>
+
+  </md-grid-list>
+    <h2 class="md-title">Ingredients</h2>
+    <md-list>
+     <!-- <md-list-item class="md-2-line recipe-option"
+         layout-wrap>
+       <div class="md-item-text md-whiteframe-z1" flex>
+         <h3>Packets moist chocolate cake</h3>
+         <p>2 x 160g</p>
+         <md-button ui-sref="main.recipe-page">+</md-button>
+       </div>
+     </md-list-item> -->
+     <md-list-item class="md-2-line recipe-option"
+         layout-wrap>
+       <div class="md-item-text md-whiteframe-z1" flex>
+         <h3>Eggs</h3>
+         <p>6</p>
+       </div>
+     </md-list-item>
+     <md-list-item class="md-2-line recipe-option"
+         layout-wrap>
+       <div class="md-item-text md-whiteframe-z1" flex>
+         <h3>Butter</h3>
+         <p>2 x 160g</p>
+       </div>
+     </md-list-item>
+     <md-list-item class="md-2-line recipe-option"
+         layout-wrap>
+       <div class="md-item-text md-whiteframe-z1" flex>
+         <h3>packets strawberry-flavoured sour straps</h3>
+         <p>60g</p>
+       </div>
+     </md-list-item>
+     <md-list-item class="md-2-line recipe-option" layout="row"
+         layout-wrap>
+       <div class="md-item-text md-whiteframe-z1" flex>
+         <h3>packets Jaffas</h3>
+         <p>2 x 250g</p>
+       </div>
+     </md-list-item>
+   </md-list>
+    <h2 class="md-title">Description</h2>
+    <h2 class="md-title">Steps</h2>
   </md-content>
   <md-button class="md-primary md-fab md-fab-bottom-right">
       +
