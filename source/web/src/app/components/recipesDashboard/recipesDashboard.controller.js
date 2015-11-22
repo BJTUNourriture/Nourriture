@@ -49,6 +49,10 @@ function RecipesDashboardController($scope, $log, SearchService, toastr)
 	.$promise
 	.then(vm.RecipesGetSuccess, vm.RecipesGetFailure)
 
+	vm.range = function (number) {
+		return new Array(number);
+	}
+
 	//Search by name
 	vm.searchRecipes = function ()
 	{
