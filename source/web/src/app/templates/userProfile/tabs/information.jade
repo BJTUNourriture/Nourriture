@@ -38,7 +38,7 @@ div(layout"column" layout-fill ng-controller="informationsUserProfileController 
                 md-content(flex).user-profile-head-title
                     p
                      span.bold Description:<br>
-                     span  {{informationsUserProfile.data.description}}
+                     span(ng-bind-html='informationsUserProfile.data.description')
             md-divider.user-profile-body-width
             div(flex hide-gt-sm).user-profile-body-width
                 md-content(flex).user-profile-head-title

@@ -63,6 +63,8 @@
 
     vm.IngredientsGetNameSuccess = function (data) {
       vm.itemsAutocomplete = data;
+
+
 /*
       for (var i = 0; i < $rootScope.UserProfile.dislike.length; i++) {
 

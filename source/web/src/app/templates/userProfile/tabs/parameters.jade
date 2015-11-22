@@ -69,7 +69,7 @@ div(layout="column" layout-align="center center" layout-fill ng-controller="para
 
           md-input-container.md-block
             label Description
-            input(name="description" ng-model='parametersUserProfile.data.description' md-maxlength="10000")
+            text-angular(ng-model="parametersUserProfile.data.description")
             div(ng-messages="updateUserForm.description.$error")
               div(ng-message="md-maxlength") The description must be shorter than 10000 characters.
 
