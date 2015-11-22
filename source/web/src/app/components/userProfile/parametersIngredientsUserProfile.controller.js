@@ -21,7 +21,6 @@
       vm.names_ingredient = vm.data.like_chips;
 
 
-      $log.log("names_ingreident = ", vm.names_ingredient);
       vm.selectedItemChip = null;
       vm.searchTextChip = null;
       vm.itemsAutocomplete = [];
@@ -33,7 +32,7 @@
       new_chip.id_ingredient = original._id;
       new_chip.name_ingredient = original.name;
       $rootScope.UserProfile.like_chips_id.push(original._id);
-      vm.data.like.push(new_chip)
+      vm.data.like.push(new_chip);
 
       return (original.name);
     };
@@ -55,13 +54,12 @@
     };
 
     vm.IngredientsGetNameFailure = function (data) {
-      $log.log(data.data);
+      $log.error(data.data);
       vm.itemsAutocomplete = [];
       return (vm.itemsAutocomplete);
     };
 
     vm.IngredientsGetNameSuccess = function (data) {
-      $log.log(data);
       vm.itemsAutocomplete = data;
       return (vm.itemsAutocomplete);
     };
@@ -96,23 +94,8 @@
           targetEvent: event,
           clickOutsideToClose: true
         }
-      )
-      ;
+      );
 
-
-      /* var ingredient = {};
-       ingredient.name = "patata";
-       ingredient.calories = 1000;
-       $mdDialog.show({
-       controller: vm.dialogController,
-       controllerAs: "infosIngredient",
-       templateUrl: 'app/templates/dialogTemplates/ingredientInfos.tmpl.html',
-       parent: angular.element($document.body),
-       locals: {ingredient: ingredient},
-       bindToController: true,
-       targetEvent: event,
-       clickOutsideToClose: true
-       })*/
     };
 
     vm.dialogController = function ($mdDialog) {
@@ -128,7 +111,19 @@
     };
 
     vm.deleteChips = function (chip, index) {
-      $log.log(chip, index);
+
+      var find_ingredient = false;
+      for (var i = 0; i < $rootScope.UserProfile.like.length; i++) {
+        if ($rootScope.UserProfile.like[i].name_ingredient == chip) {
+          find_ingredient = true;
+          break;
+        }
+      }
+
+      if (find_ingredient) {
+        $rootScope.UserProfile.like.splice(index, 1);
+      }
+
     };
 
 
