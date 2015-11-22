@@ -58,9 +58,14 @@
     vm.updateProfile = function () {
       $log.log("Updating Profile", $localStorage.user_id, vm.data);
       var like_ingredient = [];
+      var dislike_ingredient = [];
 
       for (var i = 0; i < vm.data.like_chips.length; i++) {
         like_ingredient[i] = {id_ingredient: vm.data.like_chips_id[i], name_ingredient: vm.data.like_chips[i]};
+      }
+
+      for (var i = 0; i < vm.data.dislike_chips.length; i++) {
+        dislike_ingredient[i] = {id_ingredient: vm.data.dislike_chips_id[i], name_ingredient: vm.data.dislike_chips[i]};
       }
 
       var email = $rootScope.UserProfileSave.email;
@@ -78,7 +83,8 @@
             description: vm.data.description,
             gender: vm.data.gender,
             password: vm.data.password,
-            like: like_ingredient
+            like: like_ingredient,
+            dislike: dislike_ingredient
           })
           .$promise
           .then(vm.updateUserSuccess, vm.updateUserError);
@@ -89,7 +95,8 @@
             email: vm.data.email,
             description: vm.data.description,
             gender: vm.data.gender,
-            like: like_ingredient
+            like: like_ingredient,
+            dislike: dislike_ingredient
           })
           .$promise
           .then(vm.updateUserSuccess, vm.updateUserError);
