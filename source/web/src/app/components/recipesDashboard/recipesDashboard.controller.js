@@ -19,7 +19,7 @@ function RecipesDashboardController($scope, $log, SearchService, toastr)
 	vm.table = {
 		title : '',
 		metadata : {
-			"items": 10,
+			"items": 36,
 			"page" : 1 
 
 		}
