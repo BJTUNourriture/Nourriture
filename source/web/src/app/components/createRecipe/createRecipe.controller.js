@@ -92,6 +92,16 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 		return (amount);
 	};
 
+	vm.deleteIngredients = function() {
+		for (var i=0; i < vm.selected_ingredients.length; i++)
+		{
+			var i2 = 0;
+			while (vm.ingredients[i2].name != vm.selected_ingredients[i].name)
+				i++;
+			vm.ingredients.splice(i2, 1);
+		}
+	}
+
 	//Dialog functions
 	vm.AddIngredientDialog = function(event) {
 		$mdDialog.show({
@@ -163,6 +173,17 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 		}
 
 		vm.hide = function () {
+			if (vm.ingredients)
+			{
+				for (var i=0; vm.ingredients.length; i++)
+				{
+					if (vm.ingredients[i].name == vm.selectedItem.name)
+					{
+						toastr.error("This ingredient is already present in the table", "Woops...");
+						return ;
+					}
+				}
+			}
 			$log.log(vm.selectedItem);
 			if (vm.selectedItem)
 			{

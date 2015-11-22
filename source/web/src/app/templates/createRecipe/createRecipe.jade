@@ -47,7 +47,7 @@ md-content
 									strong.body-create-Recipe-textangular Ingredients
 								md-data-table-toolbar.body-create-Recipe-toolbar-table
 									ng-md-icon(icon="add_circle_outline", style="cursor: pointer; width: 36px; height: 36px;", size="36", ng-click="createRecipe.AddIngredientDialog(createRecipe.getCurrentBurrito(), $event)")
-									ng-md-icon(icon="delete", style="cursor: pointer; width: 36px; height: 36px;", size="36")
+									ng-md-icon(icon="delete", style="cursor: pointer; width: 36px; height: 36px;", size="36", ng-click="createRecipe.deleteIngredients();")
 								md-data-table-container.flex
 									table(md-data-table md-row-select="createRecipe.selected_ingredients")
 										thead(md-order="null" md-trigger="createRecipe.tableOnOrderChange")
