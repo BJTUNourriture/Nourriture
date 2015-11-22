@@ -699,6 +699,60 @@ exports.updateUserLDF = function (req, res, err, user) {
     return (1);
 };
 
+exports.addGroupToUser = function (req, res) {
+    if (!req.body.id || Object.keys(req.body).length === 0)
+        return (res.status(400).json({message: 'The id musn\'t be null and the request must not be empty.'}));
+    User.findById(req.body.id,
+        function (err, user) {
+            if (err)
+                return (res.send(err));
+            else if (user === null)
+                return (res.status(404).json({message: 'User not found.'}));
+
+            for (i = 0; i < user['joined_groups'].length; i++) {
+                if (user['joined_groups'][i].id_group.toString() === req.body['group_id'])
+                    return (res.status(400).json({message:'User is already in the group.'}));
+            }
+
+            var group = {
+                id_group : req.body['group_id'],
+                name : req.body['group_name']
+            };
+
+            user['joined_groups'].push(group);
+            user.save(function(err) {
+                if (err)
+                    return (res.send(err));
+                return (res.status(200).json({message:'User has been added to group.'}));
+            });
+        });
+}
+
+exports.removeGroupToUser = function (req, res) {
+    if (!req.body.id || Object.keys(req.body).length === 0)
+        return (res.status(400).json({message: 'The id musn\'t be null and the request must not be empty.'}));
+    User.findById(req.body.id,
+        function (err, user) {
+            if (err)
+                return (res.send(err));
+            else if (user === null)
+                return (res.status(404).json({message: 'User not found.'}));
+
+            for (i = 0; i < user['joined_groups'].length; i++) {
+                if (user['joined_groups'][i].id_group.toString() === req.body['group_id']) {
+                    user['joined_groups'].splice(i, 1);
+                    user.save(function(err) {
+                        if (err)
+                            return (res.send(err));
+                        return (res.status(200).json({message:'User has been removed to group.'}));
+                    });
+                }
+            }
+            return (res.status(400).json({message:'User is not in the group.'}));
+
+        });    
+}
+
 
 /**
  *** DELETES
