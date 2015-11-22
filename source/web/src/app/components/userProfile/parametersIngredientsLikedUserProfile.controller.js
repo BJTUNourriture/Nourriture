@@ -63,16 +63,25 @@
 
     vm.IngredientsGetNameSuccess = function (data) {
       vm.itemsAutocomplete = data;
-/*
-      for (var i = 0; i < $rootScope.UserProfile.dislike.length; i++) {
 
-        for (var j = 0; j < vm.itemsAutocomplete.length; j++) {
-          if ($rootScope.UserProfile.dislike[i].name_ingredient == vm.itemsAutocomplete[j].name) {
-            $log.log("it exist need to delete it", $rootScope.UserProfile.dislike[i].name_ingredient, vm.itemsAutocomplete[j].name);
-            vm.itemsAutocomplete.splice(j, 1);
+     /* for (var i = 0; i < vm.itemsAutocomplete.length; i++) {
+        for (var j = 0; j < $rootScope.UserProfile.like.length; j++) {
+          if ($rootScope.UserProfile.like[j].name_ingredient == vm.itemsAutocomplete[i].name) {
+            $log.log("it exist need to delete it", $rootScope.UserProfile.like[j].name_ingredient, vm.itemsAutocomplete[i].name);
+            vm.itemsAutocomplete.splice(i, 1);
           }
         }
       }*/
+      /*
+       for (var i = 0; i < $rootScope.UserProfile.dislike.length; i++) {
+
+       for (var j = 0; j < vm.itemsAutocomplete.length; j++) {
+       if ($rootScope.UserProfile.dislike[i].name_ingredient == vm.itemsAutocomplete[j].name) {
+       $log.log("it exist need to delete it", $rootScope.UserProfile.dislike[i].name_ingredient, vm.itemsAutocomplete[j].name);
+       vm.itemsAutocomplete.splice(j, 1);
+       }
+       }
+       }*/
 
       return (vm.itemsAutocomplete);
     };
@@ -141,7 +150,7 @@
 
 
 //Timeout in ms for the moment
-    $timeout(getUserProfile, 1000);
+    $timeout(getUserProfile, 2000);
 
     $scope.$watch(angular.bind(vm.data, function () {
       return vm.data;

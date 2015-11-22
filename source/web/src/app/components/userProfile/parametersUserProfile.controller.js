@@ -52,7 +52,7 @@
     };
 
     //Timeout in ms for the moment
-    $timeout(getUserProfile, 500);
+    $timeout(getUserProfile, 2000);
 
 
     vm.updateProfile = function () {
@@ -114,7 +114,6 @@
 
 
     vm.updateUserSuccess = function (data) {
-      $log.log("Updated user", data);
       //$rootScope.UserProfileSave = $rootScope.UserProfile;
       angular.copy($rootScope.UserProfile, $rootScope.UserProfileSave);
       toastr.success('Your profile is updated', 'Nourriture');
