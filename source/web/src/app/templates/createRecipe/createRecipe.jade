@@ -17,7 +17,11 @@ md-content
 									div(layout="row", layout-align="space-between center", layout-fill, style="width:100%;")
 										md-input-container(flex="30")
 											label Title
-											input(ng-model="title" name="title")
+											input(ng-model="title" name="title" required maxlength="40" minlength="3")
+											div(ng-messages="createRecipeForm.title.$error" ng-if='!createRecipeForm.title.$pristine')
+												div(ng-message="required") This is required.
+												div(ng-message="minlength") The title must be longer than 3 characters.
+												div(ng-message="md-maxlength") The title must be shorter than 40 characters.
 										span(flex="40")
 										div.flex
 											strong Difficulty :
