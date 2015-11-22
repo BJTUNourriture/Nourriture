@@ -4,10 +4,10 @@
 angular.module('NourritureControllers')
 	.controller('CreateRecipeController', CreateRecipeController);
 
-CreateRecipeController.$inject = ["$scope", "RecipeService", 'TagsService', 'toastr',"$log", 'UploadService', "SearchService", 'IngredientService', "$mdDialog", "$document"];
+CreateRecipeController.$inject = ["$scope", "RecipeService", 'TagsService', 'toastr',"$log", 'UploadService', "SearchService", 'IngredientService', "$mdDialog", "$document", "$sessionStorage", "$localStorage"];
 
 /**@ngInject*/
-function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log, UploadService, SearchService, IngredientService, $mdDialog, $document)
+function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log, UploadService, SearchService, IngredientService, $mdDialog, $document, $localStorage, $sessionStorage)
 {
 	var vm = this;
 	vm.defaultThumbSrc = "../../assets/images/recipesdummy/plus.png";
@@ -42,7 +42,7 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 	vm.submit = function() {
 		RecipeService
 			.recipes
-			.save({"title" : $scope.title, "description" : $scope.description,  "author_id" : "561fc840d6c25173533e267f",  "author_name" : "kek man", "ingredients" : {"id_ingredient" : "689ed840d6c25173533g895","name_ingredient" : "Pumpkin","amount_ingredient" : 100}})
+			.save({"title" : $scope.title, "description" : $scope.description,  "author_id" : $localStorage.user_id || $sessionStorage.user_id,  "author_name" : "kek man", "ingredients" : {"id_ingredient" : "689ed840d6c25173533g895","name_ingredient" : "Pumpkin","amount_ingredient" : 100}})
 			.$promise
 			.then(vm.RecipeCreateSuccess, vm.RecipeCreateFailure);
 	};
@@ -175,7 +175,7 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 		vm.hide = function () {
 			if (vm.ingredients)
 			{
-				for (var i=0; vm.ingredients.length; i++)
+				for (var i=0; i < vm.ingredients.length; i++)
 				{
 					if (vm.ingredients[i].name == vm.selectedItem.name)
 					{
