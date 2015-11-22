@@ -1,0 +1,27 @@
+@import "../../theme.scss";
+
+.body-create-group-md {
+	margin : 20px auto;
+	background : $background;
+	width : 100%;
+}
+
+.body-create-group {
+	background : $background;
+}
+
+.body-create-group-name {
+	max-width : 200px;
+}
+
+.body-create-group-properties {
+	max-width : 150px;
+}
+
+.body-create-group-chips-body {
+	height : auto;
+}
+
+md-checkbox.md-checked.remember-me-login .md-icon {
+ background-color:  $borderBlock;
+}

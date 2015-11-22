@@ -43,6 +43,11 @@
 			"name" : "Recipes Dashboard",
 			"icon" : "recipes",
 			"reference" : "main.recipes-dashboard"
+		},
+		{
+			"name" : "Groups Dashboard",
+			"icon" : "group",
+			"reference" : "main.groups-dashboard"
 		}
 	]
 }

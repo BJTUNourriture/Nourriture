@@ -26,7 +26,8 @@
     "angular-permission": "~1.1.0",
     "angular-material-data-table": "~0.8.14",
     "ng-file-upload": "~10.0.2",
-    "textAngular": "~1.4.6"
+    "textAngular": "~1.4.6",
+    "font-awesome": "fontawesome#~4.4.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.2"

@@ -16,7 +16,9 @@
       user_get_username: $resource(URL_API + '/api/users/username/:username', {username: "@username"}),
       user_get_id: $resource(URL_API + '/api/users/id/:id', {id: "@id"}),
       is_authenticated: is_authenticated,
-      update_user: $resource(URL_API + '/api/users/id/:id', {id: "@id"}, {'update': {method: 'PUT'}})
+      update_user: $resource(URL_API + '/api/users/id/:id', {id: "@id"}, {'update': {method: 'PUT'}}),
+      addGroupToUser : $resource(URL_API + '/api/users/addGroupToUser', {id: "@id"}, {'update': {method: 'PUT'}}),
+      removeGroupToUser : $resource(URL_API + '/api/users/removeGroupToUser', {'update': {method: 'PUT'}})      
     };
 
     return service;

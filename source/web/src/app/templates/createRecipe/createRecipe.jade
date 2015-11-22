@@ -70,21 +70,25 @@ md-content
 													strong {{ createRecipe.recapAmount("carbohydrates") }}
 												td
 													strong {{ createRecipe.recapAmount("fat") }}		
-							div(layout="row" layout-sm="row", layout-fill, flex).body-create-Recipe
-								md-container(flex="25", style="min-width: 300px")
-									label Photo 1
-									img(ngf-src="createRecipe.file[1] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[1]" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
-								md-container(flex="25", style="min-width: 300px")
-									label Photo 2
-									img(ngf-src="createRecipe.file[2] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[2]" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
-								md-container(flex="25", style="min-width: 300px")
-									label Photo 3
-									img(ngf-src="createRecipe.file[3] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[3]" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
-								md-container(flex="25", style="min-width: 300px")
-									label Photo 4
-									img(ngf-src="createRecipe.file[4] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[4]" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100"  ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
-							//div.body-create-Recipe-textangular
-								text-angular(ng-model="createRecipe.htmlVariable")
+							section(layout="column", layout-align="start center")
+								strong.body-create-Recipe-textangular Pictures
+							md-grid-list(md-cols-gt-md="4", md-cols-md='2', md-cols-sm='1', md-gutter='4px', md-row-height='1:1' ng-if="!recipesDashboard.retrievingRecipes")
+								md-grid-tile
+									md-container(style="min-width: 300px")
+										img(ngf-src="createRecipe.file[1] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[1]" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
+								md-grid-tile
+									md-container(style="min-width: 300px")
+										img(ngf-src="createRecipe.file[2] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[2]" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
+								md-grid-tile
+									md-container(style="min-width: 300px")
+										img(ngf-src="createRecipe.file[3] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[3]" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
+								md-grid-tile
+									md-container(style="min-width: 300px")
+										img(ngf-src="createRecipe.file[4] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[4]" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100"  ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
+							section(layout="column", layout-align="start center")
+								strong.body-create-Recipe-textangular Description
+							div.body-create-Recipe-textangular-body
+								text-angular(name="description" ng-model="createRecipe.description" ta-toolbar-class="body-create-Recipe-textangular-header" ta-toolbar-group-class="body-create-Recipe-textangular-button-group").flex
 
 		include ../footer/footer.jade
 
