@@ -17,8 +17,9 @@
     function getUserProfile() {
 
       vm.data = $rootScope.UserProfile;
+      $log.log("vm data = ", vm.data);
 
-      vm.names_ingredient = vm.data.like_chips;
+      vm.names_ingredient = vm.data.alergy_chips;
 
 
       vm.selectedItemChip = null;
@@ -31,9 +32,9 @@
 
       new_chip.id_ingredient = original._id;
       new_chip.name_ingredient = original.name;
-      $rootScope.UserProfile.like_chips_id.push(original._id);
+      $rootScope.UserProfile.alergy_chips_id.push(original._id);
       if (vm.names_ingredient.indexOf(original.name) == -1) {
-        vm.data.like.push(new_chip);
+        vm.data.alergy.push(new_chip);
       }
 
       return (original.name);
@@ -126,15 +127,15 @@
     vm.deleteChips = function (chip, index) {
 
       var find_ingredient = false;
-      for (var i = 0; i < $rootScope.UserProfile.like.length; i++) {
-        if ($rootScope.UserProfile.like[i].name_ingredient == chip) {
+      for (var i = 0; i < $rootScope.UserProfile.alergy.length; i++) {
+        if ($rootScope.UserProfile.alergy[i].name_ingredient == chip) {
           find_ingredient = true;
           break;
         }
       }
 
       if (find_ingredient) {
-        $rootScope.UserProfile.like.splice(index, 1);
+        $rootScope.UserProfile.alergy.splice(index, 1);
       }
 
     };

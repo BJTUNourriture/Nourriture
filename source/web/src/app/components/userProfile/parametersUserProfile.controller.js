@@ -70,8 +70,8 @@
         dislike_ingredient[i] = {id_ingredient: vm.data.dislike_chips_id[i], name_ingredient: vm.data.dislike_chips[i]};
       }
 
-      for (i = 0; i < vm.data.dislike_chips.length; i++) {
-        allergy_ingredient[i] = {id_ingredient: vm.data.alergy_chips_id[i], name: vm.data.alergy_chips[i]};
+      for (i = 0; i < vm.data.alergy_chips.length; i++) {
+        allergy_ingredient[i] = {id_ingredient: vm.data.alergy_chips_id[i], name_ingredient: vm.data.alergy_chips[i]};
       }
       var email = $rootScope.UserProfileSave.email;
 
