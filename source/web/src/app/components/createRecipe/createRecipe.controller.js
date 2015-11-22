@@ -110,8 +110,12 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 
 		if (vm.ingredients)
 		{
-			for(var i = 0; i < vm.ingredients.length; i++)
-				amount += vm.ingredients[i][field]
+			if (field == "amount")
+				for(var i = 0; i < vm.ingredients.length; i++)
+					amount += vm.ingredients[i][field];
+			else
+				for(var i = 0; i < vm.ingredients.length; i++)
+					amount += vm.ingredients[i][field] * (vm.ingredients[i]["amount"] / 100);
 		}
 		return (amount);
 	};
