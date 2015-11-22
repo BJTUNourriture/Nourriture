@@ -39,16 +39,12 @@
     // };
 
     vm.recipeSuccess = function (data) {
-       $log.log(data);
-       $log.log(data.recipes[0].title);
-       $log.log(data.recipes[0].pictures[0]);
        vm.recipes = data.recipes;
     };
 
     vm.recipeError = function (data) {
       $log.error("Error when getting recipes", data);
     };
-
 
     var getRecipes = function () {
       vm.table = {

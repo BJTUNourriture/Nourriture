@@ -1,6 +1,6 @@
 
 
-<div layout="column" ng-cloak>
+<div layout="column" ng-controller="RecipePageController as RecipePage"  ng-cloak>
   <md-content>
     <md-toolbar>
          <div class="md-toolbar-tools">
@@ -8,7 +8,7 @@
              Go Back
            </md-button> -->
            <h2>
-             <span class="recipetitle">Big Top Cake</span>
+             <span class="recipetitle">{{RecipePage.recipe.title}}</span>
            </h2>
            <span flex></span>
 
@@ -131,7 +131,7 @@
      </md-list-item>
    </md-list>
     <h2 class="md-title">Description</h2>
-    <h2 class="md-title">Steps</h2>
+    <h2 class="md-title">detais</h2>
   </md-content>
   <md-button class="md-primary md-fab md-fab-bottom-right">
       +
