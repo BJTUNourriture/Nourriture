@@ -46,7 +46,6 @@
     };
 
     vm.getNameIngredients = function (name) {
-      $log.log("innit");
       return (IngredientService
         .ingredient_name
         .query({name: name})
