@@ -38,6 +38,7 @@
         $rootScope.UserProfile.alergy_chips[i] = $rootScope.UserProfile.alergy[i].name_ingredient;
         $rootScope.UserProfile.alergy_chips_id[i] = $rootScope.UserProfile.alergy[i].id_ingredient;
       }
+      $log.log("Start rootScope = ", $rootScope.UserProfile);
 
 
 

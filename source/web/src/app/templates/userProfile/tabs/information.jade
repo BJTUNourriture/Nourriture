@@ -88,9 +88,9 @@ div(layout"column" layout-fill ng-controller="informationsUserProfileController 
                         md-list-item.md-2-line.user-profile-head-title.user-profile-body-half-width
                                 p
                                  span.bold Allergies:<br>
-                                 span(ng-repeat='alergy in informationsUserProfile.data.alergy | limitTo:10')  {{alergy.name}},
+                                 span(ng-repeat='alergy in informationsUserProfile.data.alergy | limitTo:10') <a href='/ingredient/{{alergy.id_ingredient}}'>{{alergy.name_ingredient}}</a>,
                                  span(ng-click="informationsUserProfile.alergyList = !informationsUserProfile.alergyList" ng-hide="informationsUserProfile.alergyList" ng-if="informationsUserProfile.data.alergy.length > 10")  more...
-                                 span(ng-show="informationsUserProfile.alergyList" ng-repeat='alergy in informationsUserProfile.data.alergy | limitTo:informationsUserProfile.data.alergy.length - 10:10').show-more  {{alergy.name}},
+                                 span(ng-show="informationsUserProfile.alergyList" ng-repeat='alergy in informationsUserProfile.data.alergy | limitTo:informationsUserProfile.data.alergy.length - 10:10').show-more  {{alergy.name_ingredient}},
                                  span(ng-show="informationsUserProfile.alergyList" ng-click="informationsUserProfile.alergyList = !informationsUserProfile.alergyList")  less
                         md-list-item.md-2-line.md-no-proxy.user-profile-head-title.user-profile-body-half-width
                                 p
