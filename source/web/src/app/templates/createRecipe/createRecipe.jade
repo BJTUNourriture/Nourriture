@@ -83,7 +83,7 @@ md-content
 								md-container(flex="25", style="min-width: 300px")
 									label Photo 4
 									img(ngf-src="createRecipe.file[4] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[4]" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100"  ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
-							//div.body-create-Recipe-textangular
+							div.body-create-Recipe-textangular
 								text-angular(ng-model="createRecipe.htmlVariable")
 
 		include ../footer/footer.jade
