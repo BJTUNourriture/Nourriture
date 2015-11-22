@@ -27,8 +27,8 @@
       $rootScope.UserProfile.dislike_chips = [];
       $rootScope.UserProfile.dislike_chips_id = [];
       for(var i = 0; i < $rootScope.UserProfile.dislike.length; i++) {
-        $rootScope.UserProfile.like_chips[i] = $rootScope.UserProfile.dislike[i].name_ingredient;
-        $rootScope.UserProfile.like_chips_id[i] = $rootScope.UserProfile.dislike[i].id_ingredient;
+        $rootScope.UserProfile.dislike_chips[i] = $rootScope.UserProfile.dislike[i].name_ingredient;
+        $rootScope.UserProfile.dislike_chips_id[i] = $rootScope.UserProfile.dislike[i].id_ingredient;
       }
 
 
