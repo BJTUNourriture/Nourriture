@@ -1,28 +1,28 @@
-<div ng-controller="RecipesUserProfileController as RecipesUserProfile"  ng-cloak>
+<div ng-controller="RecipesUserProfileController as RecipesUser"  ng-cloak>
   <md-content layout-wrap>
-    <div layout="row" layout-wrap data-ng-repeat="recipe in RecipesUserProfile.recipes" ng-if="$index % 3 == 0">
-      <md-card flex ng-if="RecipesUserProfile.recipes[$index] != null" >
-        <img ng-src="{{RecipesUserProfile.recipes[$index].image}}" class="md-card-image" alt="{{RecipesUserProfile.recipes[$index].recipetitle}}">
+    <div layout="row" layout-wrap data-ng-repeat="recipe in RecipesUser.recipes" ng-if="$index % 3 == 0">
+      <md-card flex ng-if="RecipesUser.recipes[$index] != null" >
+        <img ng-src="{{RecipesUser.recipes[$index].image}}" class="md-card-image" alt="{{RecipesUser.recipes[$index].recipetitle}}">
         <md-card-content>
-          <h2 class="md-title">{{RecipesUserProfile.recipes[$index].recipetitle}}</h2>
+          <h2 class="md-title">{{RecipesUser.recipes[$index].recipetitle}}</h2>
         </md-card-content>
         <md-card-actions layout="row" layout-align="end center">
           <md-button ui-sref="main.recipe-page">view more</md-button>
         </md-card-actions>
       </md-card>
-      <md-card flex ng-if="RecipesUserProfile.recipes[$index+1] != null" >
-        <img ng-src="{{RecipesUserProfile.recipes[$index+1].image}}" class="md-card-image" alt="{{RecipesUserProfile.recipes[$index+1].recipetitle}}">
+      <md-card flex ng-if="RecipesUser.recipes[$index+1] != null" >
+        <img ng-src="{{RecipesUser.recipes[$index+1].image}}" class="md-card-image" alt="{{RecipesUser.recipes[$index+1].recipetitle}}">
         <md-card-content>
-          <h2 class="md-title">{{RecipesUserProfile.recipes[$index+1].recipetitle}}</h2>
+          <h2 class="md-title">{{RecipesUser.recipes[$index+1].recipetitle}}</h2>
         </md-card-content>
         <md-card-actions layout="row" layout-align="end center">
           <md-button ui-sref="main.recipe-page">view more</md-button>
         </md-card-actions>
       </md-card>
-      <md-card flex ng-if="RecipesUserProfile.recipes[$index+2] != null" >
-        <img ng-src="{{RecipesUserProfile.recipes[$index+2].image}}" class="md-card-image" alt="{{RecipesUserProfile.recipes[$index+2].recipetitle}}">
+      <md-card flex ng-if="RecipesUser.recipes[$index+2] != null" >
+        <img ng-src="{{RecipesUser.recipes[$index+2].image}}" class="md-card-image" alt="{{RecipesUser.recipes[$index+2].recipetitle}}">
         <md-card-content>
-          <h2 class="md-title">{{RecipesUserProfile.recipes[$index+2].recipetitle}}</h2>
+          <h2 class="md-title">{{RecipesUser.recipes[$index+2].recipetitle}}</h2>
         </md-card-content>
         <md-card-actions layout="row" layout-align="end center">
           <md-button ui-sref="main.recipe-page">view more</md-button>
