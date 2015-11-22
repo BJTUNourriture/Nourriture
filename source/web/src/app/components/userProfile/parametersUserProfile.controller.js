@@ -77,7 +77,8 @@
             email: vm.data.email,
             description: vm.data.description,
             gender: vm.data.gender,
-            password: vm.data.password
+            password: vm.data.password,
+            like: like_ingredient
           })
           .$promise
           .then(vm.updateUserSuccess, vm.updateUserError);
