@@ -10,9 +10,9 @@
   .module('NourritureControllers')
   .controller('RecipesUserProfileController', RecipesUserProfileController);
 
-  RecipesUserProfileController.$inject = ["$scope", "$log", "$rootScope", "$timeout", "SearchService", "$state"];
+  RecipesUserProfileController.$inject = ["$scope", "$log", "$rootScope", "$timeout", "SearchService", "$state", "toastr"];
 
-  function RecipesUserProfileController($scope, $log, $rootScope, $timeout, SearchService , $state) {
+  function RecipesUserProfileController($scope, $log, $rootScope, $timeout, SearchService , $state, toastr) {
     var vm = this;
 
     // var updateRecipes = function () {
@@ -44,6 +44,7 @@
 
     vm.recipeError = function (data) {
       $log.error("Error when getting recipes", data);
+      toastr.error(data, 'Woops...');
     };
 
     var getRecipes = function () {
@@ -63,8 +64,8 @@
     };
 
     vm.goToRecipePage = function(recipe) {
-		    $state.go("main.recipe-page", {"id" : recipe._id});
-	  }
+      $state.go("main.recipe-page", {"id" : recipe._id});
+    }
 
     $timeout(getRecipes, 1000);
   }
