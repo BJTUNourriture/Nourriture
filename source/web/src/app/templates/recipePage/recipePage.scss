@@ -1,6 +1,19 @@
+.recipe-container {
+  background: #fefefe;
+}
+
 .recipetitle {
   font-family: RobotoDraft,Roboto,'Helvetica Neue',sans-serif;
+  font-weight: 400;
+  font-size: 25px;
 }
+
+
+.recipe-container h2 {
+  font-family: Roboto, Noto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+
 
 .recipe-option {
  // float: left;
@@ -25,12 +38,13 @@
  background: #f0f0f0;
  border-radius: 3px;
 }
-.recipe-option .md-button {
-  min-width: 30px;
-  display: inline-block;
-  padding: 0;
-  margin: 0;
-}
+// .recipe-text{
+//    box-shadow: $whiteframe-shadow-1dp;
+// }
+//
+// .recipe-text::hover{
+//   box-shadow: $whiteframe-shadow-24dp;
+// }
 
 .recipe-option .md-item-text h3, .chipsdemoCustomInputs .veggie-option .md-item-text p {
    padding: 0;
@@ -47,11 +61,63 @@
    margin: 0;
  }
 
-.grid-recipe > img {
+ // .grid-recipe {
+ //    object-fit: none; /* Do not scale the image */
+ //    object-position: center; /* Center the image within the element */
+ // }
+
+ // .grid-recipe img {
+ //   height: inherit;
+ //   width: 100%;
+ //   left: 50%;
+ //   position: relative;
+ //   transform: translateX(-50%);
+ // }
+
+
+
+.grid-recipe img {
   padding: 0;
   margin: 0;
+  height: inherit;
+  width: inherit;
 }
 
-md-grid-tile .green {
-  background: #b9f6ca;
+.recipe-container .ng-scope  {
+     height: inherit;
+}
+
+.recipe-container .body-dashboard-group-grid-tile-footer {
+  height: 25% ;
+}
+
+.inner {
+    height: initial !important;
+    font-weight: 400;
+    font-size: 48px;
+ }
+
+
+.green {
+  background: rgb(129, 199, 132);
+}
+
+.blue {
+  background: #60b4f9;
+}
+
+.yellow {
+  background: #ffb840;
+}
+
+.lightblue {
+  background: #a4ffeb;
+}
+
+.grey {
+  background: #cfd8dc;
+}
+
+.orange {
+  background: #ffab8e;
 }
