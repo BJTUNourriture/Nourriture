@@ -32,7 +32,9 @@
       new_chip.id_ingredient = original._id;
       new_chip.name_ingredient = original.name;
       $rootScope.UserProfile.like_chips_id.push(original._id);
-      vm.data.like.push(new_chip);
+      if (vm.names_ingredient.indexOf(original.name) == -1) {
+        vm.data.like.push(new_chip);
+      }
 
       return (original.name);
     };
