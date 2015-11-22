@@ -32,7 +32,7 @@
       /*vm.data.like = [{name_ingredient: "one"}, {name_ingredient: "two"}, {name_ingredient: "three"}, {name_ingredient: "four"},
        {name_ingredient: "five"}, {name_ingredient: "six"}, {name_ingredient: "seven"}, {name_ingredient: "eight"},
        {name_ingredient: "nine"}, {name_ingredient: "ten"}, {name_ingredient: "eleven"}, {name_ingredient: "twelve"}];*/
-      vm.data.dislike = [{name_ingredient: "one"}, {name_ingredient: "choux fleur"}, {name_ingredient: "choux de brus"}];
+     /* vm.data.dislike = [{name_ingredient: "one"}, {name_ingredient: "choux fleur"}, {name_ingredient: "choux de brus"}];*/
       vm.data.religion = [{name: "christian"}];
       vm.data.alergy = [{name: "eggs"}, {name: "milk"}];
       vm.data.followed_by = [{username: "thomas"}, {username: "vincent"}, {username: "top chef"}];
@@ -58,9 +58,15 @@
     vm.updateProfile = function () {
       $log.log("Updating Profile", $localStorage.user_id, vm.data);
       var like_ingredient = [];
+      var dislike_ingredient = [];
+      var i = 0;
 
-      for (var i = 0; i < vm.data.like_chips.length; i++) {
+      for (i = 0; i < vm.data.like_chips.length; i++) {
         like_ingredient[i] = {id_ingredient: vm.data.like_chips_id[i], name_ingredient: vm.data.like_chips[i]};
+      }
+
+      for (i = 0; i < vm.data.dislike_chips.length; i++) {
+        dislike_ingredient[i] = {id_ingredient: vm.data.dislike_chips_id[i], name_ingredient: vm.data.dislike_chips[i]};
       }
 
       var email = $rootScope.UserProfileSave.email;
@@ -77,7 +83,9 @@
             email: vm.data.email,
             description: vm.data.description,
             gender: vm.data.gender,
-            password: vm.data.password
+            password: vm.data.password,
+            like: like_ingredient,
+            dislike: dislike_ingredient
           })
           .$promise
           .then(vm.updateUserSuccess, vm.updateUserError);
@@ -88,7 +96,8 @@
             email: vm.data.email,
             description: vm.data.description,
             gender: vm.data.gender,
-            like: like_ingredient
+            like: like_ingredient,
+            dislike: dislike_ingredient
           })
           .$promise
           .then(vm.updateUserSuccess, vm.updateUserError);

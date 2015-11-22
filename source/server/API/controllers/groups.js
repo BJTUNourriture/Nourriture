@@ -139,8 +139,18 @@ exports.postGroup = function (req, res) {
 	 group.save(function (err) {
         if (err)
         	return (res.status(400).send(err));
+        Groups.find({
+        	"name": { "$regex": group.name, "$options": "i" }
+        	},
+        	function (err, docs) {
+        		if (err)
+        			return (res.send(err));
+        		else if (docs.length <= 0)
+        			return (res.json(404, {message : 'The name was not found.'}))
+		        return (res.json({message: 'Group succesfully created!', group_id: docs[0]._id}));
+        	}
+        );
 
-        return (res.json({message: 'Group succesfully created!'}));
     });
 };
 

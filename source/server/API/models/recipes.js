@@ -120,11 +120,11 @@ var recipesSchema = new mongoose.Schema({
 				required : true,
 				ref : 'Ingredients'
 			},
-			name_ingredient : {
+			name : {
 				type : String,
 				required : true
 			},
-			amount_ingredient : {
+			amount : {
 				type : Number,
 				min : 0,
 				max : 1000000,

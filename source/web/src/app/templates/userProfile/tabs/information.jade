@@ -77,7 +77,7 @@ div(layout"column" layout-fill ng-controller="informationsUserProfileController 
                         md-list-item.md-2-line.md-no-proxy.user-profile-head-title.user-profile-body-half-width
                                 p
                                  span.bold Ingredients disliked: <br>
-                                 span(ng-repeat='ingredient in informationsUserProfile.data.dislike | limitTo:10')  {{ingredient.name_ingredient}},
+                                 span(ng-repeat='ingredient in informationsUserProfile.data.dislike | limitTo:10')  <a href='/ingredient/{{ingredient.id_ingredient}}'>{{ingredient.name_ingredient}}</a>,
                                  span(ng-click="informationsUserProfile.ingredientList = !informationsUserProfile.ingredientList" ng-hide="informationsUserProfile.ingredientList" ng-if="informationsUserProfile.data.dislike.length > 10")  more...
                                  span(ng-show="informationsUserProfile.ingredientList" ng-repeat='ingredient in informationsUserProfile.data.dislike | limitTo:informationsUserProfile.data.dislike.length - 10:10').show-more  {{ingredient.name_ingredient}},
                                  span(ng-show="informationsUserProfile.ingredientList" ng-click="informationsUserProfile.ingredientList = !informationsUserProfile.ingredientList")  less
