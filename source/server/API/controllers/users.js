@@ -297,7 +297,8 @@ exports.postUser = function (req, res) {
  *   HTTP/1.1 200 OK
  *   {
 *   "key" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.ey",
-*   "user_id" : "302fvd338d2c30185535g805"
+*   "user_id" : "302fvd338d2c30185535g805",
+*   "user_name" : "Kek"
 *   }
  *
  * @apiError message Username field must not be empty
@@ -356,7 +357,7 @@ exports.signinUser = function (req, res, next) {
             if (!user.email_verified)
                 return (res.status(401).json({message: "Please verify your email."}));
             var token = jwt.sign(user, req.app.get("jwtSecret"), {expiresIn: 3600 * 5});
-            return (res.json({key: token, user_id: user._id}));
+            return (res.json({key: token, user_id: user._id, user_name: user.username}));
         });
     });
 };

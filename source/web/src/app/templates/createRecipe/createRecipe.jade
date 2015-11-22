@@ -32,16 +32,22 @@ md-content
 									div(layout="row", layout-align="start start")
 											md-input-container(flex="70")
 												label Time (in mins)
-												input(type="number" ng-model="time" name="time")
+												input(type="number" ng-model="time" name="time" min="0")
+												div(ng-messages="createRecipeForm.time.$error" ng-if='!createRecipeForm.time.$pristine')
+													div(ng-message="required") This is required.
+													div(ng-message="number") It must be a valid number.
+													div(ng-message="min") Value must be superior to 0.
 									div
 										strong Price :
 											ng-md-icon(icon="coin", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.price < 1 || !createRecipe.isHoverPrice[1] || !createRecipe.isHoverPrice[2], 'body-create-Recipe-icon-selected' : createRecipe.price >= 1 || createRecipe.isHoverPrice[1] || createRecipe.isHoverPrice[2]}", ng-click="createRecipe.price = 1")
 											ng-md-icon(icon="coin", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.price < 2 || !createRecipe.isHoverPrice[2], 'body-create-Recipe-icon-selected' : createRecipe.price >= 2 || createRecipe.isHoverPrice[2]}", ng-mouseenter="createRecipe.stateIsHoverPrice(1, true);", ng-mouseleave="createRecipe.stateIsHoverPrice(1, false);" , ng-click="createRecipe.price = 2")
 											ng-md-icon(icon="coin", ng-class="{'body-create-Recipe-icon-notselected' : createRecipe.price < 3, 'body-create-Recipe-icon-selected' : createRecipe.price == 3}", ng-mouseenter="createRecipe.stateIsHoverPrice(2, true);", ng-mouseleave="createRecipe.stateIsHoverPrice(2, false);" , ng-click="createRecipe.price = 3")
 							div.body-create-Recipe-table
+								section(layout="column", layout-align="start center")
+									strong.body-create-Recipe-textangular Ingredients
 								md-data-table-toolbar.body-create-Recipe-toolbar-table
 									ng-md-icon(icon="add_circle_outline", style="cursor: pointer; width: 36px; height: 36px;", size="36", ng-click="createRecipe.AddIngredientDialog(createRecipe.getCurrentBurrito(), $event)")
-									ng-md-icon(icon="delete", style="cursor: pointer; width: 36px; height: 36px;", size="36")
+									ng-md-icon(icon="delete", style="cursor: pointer; width: 36px; height: 36px;", size="36", ng-click="createRecipe.deleteIngredients();")
 								md-data-table-container.flex
 									table(md-data-table md-row-select="createRecipe.selected_ingredients")
 										thead(md-order="null" md-trigger="createRecipe.tableOnOrderChange")
@@ -76,7 +82,7 @@ md-content
 													strong {{ createRecipe.recapAmount("fat") }}		
 							section(layout="column", layout-align="start center")
 								strong.body-create-Recipe-textangular Pictures
-							md-grid-list(md-cols-gt-md="4", md-cols-md='2', md-cols-sm='1', md-gutter='4px', md-row-height='1:1' ng-if="!recipesDashboard.retrievingRecipes")
+							md-grid-list(md-cols-gt-md="4", md-cols-md='2', md-cols-sm='1', md-gutter='4px', md-row-height='1:1')
 								md-grid-tile
 									md-container(style="min-width: 300px")
 										img(ngf-src="createRecipe.file[1] || '{{ createRecipe.defaultThumbSrc }}'" ngf-select ng-model="createRecipe.file[1]" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 300, height: 300}").body-create-Recipe-thumbnail-picture
@@ -93,6 +99,7 @@ md-content
 								strong.body-create-Recipe-textangular Description
 							div.body-create-Recipe-textangular-body
 								text-angular(name="description" ng-model="createRecipe.description" ta-toolbar-class="body-create-Recipe-textangular-header" ta-toolbar-group-class="body-create-Recipe-textangular-button-group").flex
-
+							section(layout="column", layout-align="start center")
+								md-button(type="submit" style="margin: 20px; auto auto auto").md-raised Create the recipe
 		include ../footer/footer.jade
 
