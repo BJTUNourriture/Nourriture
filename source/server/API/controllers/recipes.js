@@ -18,8 +18,8 @@
 * @apiParam {Number} [average_price] [default : 0, min : 0, max : 3] Average cost of the recipe
 * @apiParam {Object[]} ingredients List of the ingredients needed for the recipe
 * @apiParam {ObjectId} ingredients.id_ingredient Id of the ingredient
-* @apiParam {String} ingredients.name_ingredient Name of the ingredient
-* @apiParam {Number} [ingredients.amount_ingredient] [default : 0, min : 0, max : 1000000] Grams of the ingredient needed
+* @apiParam {String} ingredients.name Name of the ingredient
+* @apiParam {Number} [ingredients.amount] [default : 0, min : 0, max : 1000000] Grams of the ingredient needed
 * @apiParam {Object[]} [comments] List of the comments posted for the recipe
 * @apiParam {ObjectId} comments.id_author Id of the author of the comment
 * @apiParam {String} comments.name_author Name of the author of the comment
@@ -56,8 +56,8 @@
 * @apiParam {Number} [average_price] [default : 0, min : 0, max : 3] Average cost of the recipe
 * @apiParam {Object[]} [ingredients] List of the ingredients needed for the recipe
 * @apiParam {ObjectId} [ingredients.id_ingredient] Id of the ingredient
-* @apiParam {String} [ingredients.name_ingredient] Name of the ingredient
-* @apiParam {Number} [ingredients.amount_ingredient] [default : 0, min : 0, max : 1000000] Grams of the ingredient needed
+* @apiParam {String} [ingredients.name] Name of the ingredient
+* @apiParam {Number} [ingredients.amount] [default : 0, min : 0, max : 1000000] Grams of the ingredient needed
 * @apiParam {Object[]} [comments] List of the comments posted for the recipe
 * @apiParam {ObjectId} [comments.id_author] Id of the author of the comment
 * @apiParam {String} [comments.name_author] Name of the author of the comment
@@ -94,8 +94,8 @@
 * @apiSuccess {Number} [average_price] [default : 0, min : 0, max : 3] Average cost of the recipe
 * @apiSuccess {Object[]} ingredients List of the ingredients needed for the recipe
 * @apiSuccess {ObjectId} ingredients.id_ingredient Id of the ingredient
-* @apiSuccess {String} ingredients.name_ingredient Name of the ingredient
-* @apiSuccess {Number} [ingredients.amount_ingredient] [default : 0, min : 0, max : 1000000] Grams of the ingredient needed
+* @apiSuccess {String} ingredients.name Name of the ingredient
+* @apiSuccess {Number} [ingredients.amount] [default : 0, min : 0, max : 1000000] Grams of the ingredient needed
 * @apiSuccess {Object[]} [comments] List of the comments posted for the recipe
 * @apiSuccess {ObjectId} comments.id_author Id of the author of the comment
 * @apiSuccess {String} comments.name_author Name of the author of the comment
@@ -139,8 +139,8 @@
 *					}],
 *		"ingredients" : [{
 *						"id_ingredient" : "689ed840d6c25173533g895",
-*						"name_ingredient" : "Pumpkin",
-*						"amount_ingredient" : 100
+*						"name" : "Pumpkin",
+*						"amount" : 100
 *				   	}],
 *		"comments" : [{
 *						"id_author" : "386fc840d6c25173533e546h",
