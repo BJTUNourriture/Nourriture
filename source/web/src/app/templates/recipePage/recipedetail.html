@@ -7,9 +7,9 @@
             </h2>
             <span flex></span>
             <span>Difficulty</span>
-            <ng-md-icon icon="storm"></ng-md-icon>
-            <ng-md-icon icon="storm"></ng-md-icon>
-            <ng-md-icon icon="storm"></ng-md-icon>
+            <ng-md-icon icon="storm" ng-class="{'body-create-Recipe-icon-notselected' : RecipePage.recipe.difficulty > 3}"></ng-md-icon>
+            <ng-md-icon icon="storm" ng-class="{'body-create-Recipe-icon-notselected' : RecipePage.recipe.difficulty > 2}"></ng-md-icon>
+            <ng-md-icon icon="storm" ng-class="{'body-create-Recipe-icon-notselected' : RecipePage.recipe.difficulty > 1}"></ng-md-icon>
          </div>
       </md-toolbar>
    </md-content>
