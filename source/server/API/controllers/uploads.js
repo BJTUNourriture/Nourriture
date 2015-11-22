@@ -1,5 +1,6 @@
 // API/controllers/uploads.js
 
+var current_file_name;
 var path = require('path');
 var multer = require('multer');
 var recipe_thumbnail_photo_storage = multer.diskStorage({
@@ -7,7 +8,8 @@ var recipe_thumbnail_photo_storage = multer.diskStorage({
     cb(null, '../web/src/assets/recipes/thumbnail_pics')
   },
   filename: function (req, file, cb) {
-    cb(null,  Date.now() + '-' + file.fieldname + path.extname(file.originalname))
+    current_file_name = Date.now() + '-' + file.fieldname + path.extname(file.originalname);
+    cb(null,  current_file_name);
   }
 });
 var recipe_thumbnail_photo_upload = multer({ storage : recipe_thumbnail_photo_storage}).single('recipe_thumbnail_picture');
@@ -49,9 +51,10 @@ var recipe_thumbnail_photo_upload = multer({ storage : recipe_thumbnail_photo_st
 */
 exports.postRecipeThumbnailUrl = function(req, res) {
 	recipe_thumbnail_photo_upload(req, res, function(err) {
+    console.log(req.file);
 		if (err)
 			return (res.status(400).send(err));
-		return (res.json({message: 'File Successfully Uploaded!'}));
+		return (res.json({message: "assets/recipes/thumbnail_pics/" + req.file.filename}));
 	})
 }
 

@@ -18,7 +18,7 @@
 
         function recipe_thumbnail_url(file) {
             return (Upload.upload({
-                url: URL_API + '/upload/recipes/photo/thumbnail',
+                url: URL_API + '/api/upload/recipes/photo/thumbnail/',
                 data: {recipe_thumbnail_picture: file}
             }));
         }

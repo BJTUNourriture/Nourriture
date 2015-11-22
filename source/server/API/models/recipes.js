@@ -20,12 +20,10 @@ var recipesSchema = new mongoose.Schema({
 	type : {
 		id_type : {
 			type : mongoose.Schema.ObjectId,
-			required : true,
 			ref : 'Types'
 		},
 		name : {
-			type : String,
-			required : true
+			type : String
 		}
 	},
 	date_posted : {
