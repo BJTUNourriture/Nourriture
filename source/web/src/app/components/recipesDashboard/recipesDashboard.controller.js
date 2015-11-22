@@ -4,9 +4,9 @@
 angular.module('NourritureControllers')
 	.controller('RecipesDashboardController', RecipesDashboardController);
 
-RecipesDashboardController.$inject = ["$scope","$log", "SearchService", "toastr"];
+RecipesDashboardController.$inject = ["$scope","$log", "SearchService", "toastr", "$state"];
 
-function RecipesDashboardController($scope, $log, SearchService, toastr)
+function RecipesDashboardController($scope, $log, SearchService, toastr, $state)
 {
 	var vm = this;
 
@@ -51,6 +51,10 @@ function RecipesDashboardController($scope, $log, SearchService, toastr)
 
 	vm.range = function (number) {
 		return new Array(number);
+	}
+
+	vm.goToRecipePage = function(recipe) {
+		$state.go("main.recipe-page", {"id" : recipe._id});
 	}
 
 	//Search by name
