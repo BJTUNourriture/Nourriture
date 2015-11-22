@@ -55,6 +55,11 @@ router.route('/users/username/:username')
 router.route('/users/register')
     .post(userController.postUser);
 
+router.route('/users/addGroupToUser')
+    .put(userController.addGroupToUser);
+
+router.route('/users/removeGroupToUser')
+    .put(userController.removeGroupToUser);
 
 // add for oAuth
 //   .get(authController.isAuthenticated, userController.getUsers);

@@ -150,6 +150,19 @@
                     }
                 }
             })
+            .state('main.groups-dashboard', {
+                url: 'groups-dashboard',
+                parent: 'main',
+                templateUrl: 'app/templates/groupsDashboard/groupsDashboard.html',
+                controller: 'GroupsDashboardController',
+                controllerAs: 'groupsDashboard',
+                data: {
+                    permissions: {
+                      except: ['guest'],
+                      redirectTo: 'main.homepage'
+                    }
+                }
+            })
             .state('main.logout', {
                 url: 'logout',
                 parent: 'main',

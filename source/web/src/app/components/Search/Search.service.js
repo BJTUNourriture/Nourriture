@@ -12,7 +12,8 @@
 
         var service = {
             ingredients: $resource(URL_API + '/api/search/ingredients/'),
-            recipes : $resource(URL_API + '/api/search/recipes/')
+            recipes : $resource(URL_API + '/api/search/recipes/'),
+            groups : $resource(URL_API + '/api/search/groups/')
         };
 
         return service;
