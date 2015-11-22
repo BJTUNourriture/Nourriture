@@ -123,12 +123,17 @@
 
       vm.hide = function () {
         $mdDialog.hide();
-      }
+      };
 
       vm.goToIngredientPage = function (id_ingredient) {
         $state.go("main.ingredient-page", {id: id_ingredient});
       }
-    }
+    };
+
+    vm.deleteChips = function (chip, index) {
+      $log.log("COUCOU", chip, index);
+    };
+
 
 //Timeout in ms for the moment
     $timeout(getUserProfile, 1000);
