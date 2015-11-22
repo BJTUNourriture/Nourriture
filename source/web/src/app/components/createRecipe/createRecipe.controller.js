@@ -184,6 +184,7 @@ function CreateRecipeController($scope, RecipeService, TagsService, toastr, $log
 					}
 				}
 			}
+			vm.selectedItem["id_ingredient"] = vm.selectedItem["_id"];
 			$log.log(vm.selectedItem);
 			if (vm.selectedItem)
 			{
