@@ -1,7 +1,6 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
-var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
@@ -15,6 +14,8 @@ var routes = require('./routes/index');
 var config = require('./config');
 var mongoose = require('mongoose');
 var app = express();
+if (app.settings.env !== 'test')
+    var logger = require('morgan');
 
 // http://localhost:8101/api/oauth2/authorize?client_id=this_is_my_id&response_type=code&redirect_uri=http://localhost:8101
 /* Init const var */
@@ -41,7 +42,8 @@ var allowCrossDomain = function(req, res, next) {
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+if (app.settings.env !== 'test')
+    app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
