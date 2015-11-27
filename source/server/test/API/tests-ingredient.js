@@ -46,6 +46,20 @@ describe('/api/ingredients', function() {
 	/*End Ingredient Creation*/
 
 	/*Begin Ingredient Retrieval*/
+	it('should retrieve all the ingredients' , function(done) {
+
+		request(url)
+			.get('/api/ingredients/')
+			.end(function(err, res) {
+				  if (err)
+					throw err;
+				res.status.should.be.equal(200);
+				res.body.should.be.lengthOf(1);
+				ingredient_id = res.body[0]._id;
+				done();
+			});
+	});
+
 	it('should retrieve an ingredient by it\'s name' , function(done) {
 
 		request(url)
