@@ -341,6 +341,15 @@ describe('/api/tags', function() {
 			done();
 		})
 	}
+	else
+	{
+		after(function(done) {
+			for (var i in mongoose.connection.collections) {
+		    	mongoose.connection.collections[i].remove(function() {});
+		   	}
+	  		done();
+		})
+	}
 
 });
 

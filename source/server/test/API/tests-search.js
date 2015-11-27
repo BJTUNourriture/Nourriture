@@ -182,15 +182,22 @@ describe('/api/search/ingredients', function() {
 
 	});
 
-	if (standalone_test)
+if (standalone_test)
 	{
-		/*Clears all the collections to have an empty DB*/
-	  	before(function(done) {
-	  		for (var i in mongoose.connection.collections) {
+		/*Disconnects mongoose from the DB*/
+		after(function(done) {
+			mongoose.disconnect();
+			done();
+		})
+	}
+	else
+	{
+		after(function(done) {
+			for (var i in mongoose.connection.collections) {
 		    	mongoose.connection.collections[i].remove(function() {});
 		   	}
 	  		done();
-	 	});
+		})
 	}
 
 	
