@@ -88,6 +88,22 @@ describe('/api/ingredients', function() {
 					done();
 				});
 		});
+
+		it('should not create an ingredient without the name key', function(done) {
+		  	var profile = {
+				lol: 'test'
+			};
+
+			request(url)
+				.post('/api/ingredients')
+				.send(profile)
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(400);
+					done();
+				});
+		});
 	});
 
 	describe('Ingredients Retrieval', function() {
