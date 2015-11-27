@@ -25,7 +25,13 @@ describe('API', function() {
   	require('./API/tests-ingredient');
 
   	//Tests recipes
-  	require('./API/tests-recipe');	
+  	require('./API/tests-recipe');
+
+    //Test Tags
+    require('./API/tests-tag');
+
+    //Test Search
+    require('./API/tests-search');
 
 	/*Disconnects mongoose from the DB*/
 	after(function(done) {
