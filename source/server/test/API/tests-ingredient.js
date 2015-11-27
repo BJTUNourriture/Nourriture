@@ -2,11 +2,30 @@ var should = require('should');
 var request = require('supertest');
 var mongoose = require('mongoose');
 
+/*Checks if App was launched*/
+if (mongoose.connection.readyState === 0)
+{
+	var standalone_test = true;
+	process.env.NODE_ENV = 'test'
+	var app = require('../../app');
+}
+
 /*Url of the server*/
 var url = 'http://localhost:8101';
 
 /*Testing of the /api/ingredients endpoint*/
 describe('/api/ingredients', function() {
+
+	if (standalone_test)
+	{
+		/*Clears all the collections to have an empty DB*/
+	  	before(function(done) {
+	  		for (var i in mongoose.connection.collections) {
+		    	mongoose.connection.collections[i].remove(function() {});
+		   	}
+	  		done();
+	 	});
+	}
 
 	/*Testing vars*/
 	var ingredient_id = "";
@@ -124,6 +143,15 @@ describe('/api/ingredients', function() {
 			});
 	});
 	/*End Ingredient Retrieval*/
+
+	if (standalone_test)
+	{
+		/*Disconnects mongoose from the DB*/
+		after(function(done) {
+			mongoose.disconnect();
+			done();
+		})
+	}
 
 });
 
