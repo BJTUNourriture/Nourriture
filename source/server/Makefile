@@ -21,4 +21,16 @@ test-recipes:
 		mocha --reporter $(REPORTER) $(MOCHA_OPTS) ./test/API/tests-recipe.js
 		@echo Ending Recipes tests
 
+test-tags:
+		clear
+		@echo Starting Tags tests
+		mocha --reporter $(REPORTER) $(MOCHA_OPTS) ./test/API/tests-tag.js
+		@echo Ending Tags tests
+
+test-search:
+		clear
+		@echo Starting Search tests
+		mocha --reporter $(REPORTER) $(MOCHA_OPTS) ./test/API/tests-search.js
+		@echo Ending Search tests
+
 .PHONY: test test-ingredients
