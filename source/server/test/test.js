@@ -5,7 +5,6 @@ var should = require('should');
 var assert = require('assert');
 var request = require('supertest');
 var mongoose = require('mongoose');
-var winston = require('winston');
 var app = require("../app");
 var config = require('../config');
 
@@ -24,6 +23,9 @@ describe('API', function() {
 
   	//Tests ingredients
   	require('./API/tests-ingredient');
+
+  	//Tests recipes
+  	require('./API/tests-recipe');	
 
 	/*Disconnects mongoose from the DB*/
 	after(function(done) {

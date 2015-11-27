@@ -15,4 +15,10 @@ test-ingredients:
 		mocha --reporter $(REPORTER) $(MOCHA_OPTS) ./test/API/tests-ingredient.js
 		@echo Ending Ingredients tests
 
+test-recipes:
+		clear
+		@echo Starting Recipes tests
+		mocha --reporter $(REPORTER) $(MOCHA_OPTS) ./test/API/tests-recipe.js
+		@echo Ending Recipes tests
+
 .PHONY: test test-ingredients
