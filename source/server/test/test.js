@@ -114,6 +114,18 @@ describe('Routing', function() {
 					done();
 				});
 		});
+
+		it('should return 404 on non-existant Id' , function(done) {
+
+			request(url)
+				.get('/api/ingredients/id/'+ mongoose.Types.ObjectId())
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(404);
+					done();
+				});
+		});
 		/*End Ingredient Retrieval*/
 
 	});

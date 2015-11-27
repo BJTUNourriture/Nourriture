@@ -304,13 +304,13 @@ exports.getAllIngredients = function(req, res, next) {
 exports.getIngredientById = function (req, res, flag) {
 	var id = flag === true ? req.body.id : req.params.id;
 	if (!id)
-		return flag === true ? -1 : res.json(400, {message : 'The id musn\'t be null'});
+		return flag === true ? -1 : res.status(400).json({message : 'The id musn\'t be null'});
 	Ingredients.findById(id,
 		function (err, doc) {
 			if (err)
 				return (res.send(err));
 			else if (doc === null)
-				return (res.json(404, {message : 'The id was not found.'}))
+				return (res.status(404).json({message : 'The id was not found.'}))
 			return (res.json(doc));
 		}
 	);
