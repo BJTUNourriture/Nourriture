@@ -25,6 +25,9 @@ describe('Routing', function() {
   	/*Testing of the /api/ingredients endpoint*/
 	describe('/api/ingredients', function() {
 
+		/*Testing vars*/
+		var ingredient_id = "";
+
 		/*Begin Ingredient Creation*/
 		it('should successfully create an ingredient', function(done) {
 		  	var profile = {
@@ -69,6 +72,45 @@ describe('Routing', function() {
 						throw err;
 					res.status.should.be.equal(200);
 					res.body[0].name.should.be.equal("test");
+					ingredient_id = res.body[0]._id;
+					done();
+				});
+		});
+
+		it('should retrieve an ingredient by it\'s partial name' , function(done) {
+
+			request(url)
+				.get('/api/ingredients/name/es')
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(200);
+					res.body[0].name.should.be.equal("test");
+					done();
+				});
+		});
+
+		it('should return 404 on non-existant name' , function(done) {
+
+			request(url)
+				.get('/api/ingredients/name/ass')
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(404);
+					done();
+				});
+		});
+
+		it('should retrieve an ingredient by it\'s Id' , function(done) {
+
+			request(url)
+				.get('/api/ingredients/id/'+ ingredient_id)
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(200);
+					res.body.name.should.be.equal("test");
 					done();
 				});
 		});

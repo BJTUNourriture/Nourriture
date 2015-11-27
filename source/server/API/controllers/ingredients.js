@@ -275,7 +275,7 @@ exports.getAllIngredients = function(req, res, next) {
 			if (err)
 				return (res.send(err));
 			else if (docs.length <= 0)
-				return (res.json(404, {message : 'There are no existing ingredients.'}))
+				return (res.status(404).json({message : 'There are no existing ingredients.'}))
 			return (res.json(docs));
 		}
 	);
@@ -339,7 +339,7 @@ exports.getIngredientById = function (req, res, flag) {
 exports.getIngredientsByName = function (req, res, flag) {
 	var name = flag === true ? req.body.name : req.params.name;
 	if (!name)
-		return flag === true ? -1 : res.json(400, {message : 'The name musn\'t be null'});
+		return flag === true ? -1 : res.status(400).json({message : 'The name musn\'t be null'});
 	Ingredients.find({
 		"name": { "$regex": name, "$options": "i" } 
 		},
@@ -347,7 +347,7 @@ exports.getIngredientsByName = function (req, res, flag) {
 			if (err)
 				return (res.send(err));
 			else if (docs.length <= 0)
-				return (res.json(404, {message : 'The name was not found.'}))
+				return (res.status(404).json({message : 'The name was not found.'}))
 			return (res.json(docs));
 		}
 	);
