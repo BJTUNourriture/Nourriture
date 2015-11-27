@@ -15,15 +15,15 @@ describe('Routing', function() {
   	before(function(done) {
   		for (var i in mongoose.connection.collections) {
 	    	mongoose.connection.collections[i].remove(function() {});
-	   }
+	   	}
   		done();
  	});
 
 	describe('/api/ingredients', function() {
 	
 		it('should successfully create an ingredient', function(done) {
-		  var profile = {
-			  name: 'test'
+		  	var profile = {
+				name: 'test'
 			};
 
 			request(url)
@@ -34,7 +34,7 @@ describe('Routing', function() {
 						throw err;
 					res.status.should.equal(200);
 					done();
-			});
+				});
 		});
 	});
 
