@@ -9,7 +9,7 @@ var winston = require('winston');
 var app = require("../app");
 var config = require('../config');
 
-describe('Routing', function() {
+describe('API', function() {
 
 	/*Url of the server*/
   	var url = 'http://localhost:8101';
