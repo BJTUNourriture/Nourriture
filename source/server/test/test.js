@@ -24,8 +24,8 @@ describe('Routing', function() {
 
   	/*Testing of the /api/ingredients endpoint*/
 	describe('/api/ingredients', function() {
-	
-		/*Tests the creation of an Ingredient*/
+
+		/*Begin Ingredient Creation*/
 		it('should successfully create an ingredient', function(done) {
 		  	var profile = {
 				name: 'test'
@@ -37,7 +37,7 @@ describe('Routing', function() {
 				.end(function(err, res) {
 					  if (err)
 						throw err;
-					res.status.should.equal(200);
+					res.status.should.be.equal(200);
 					done();
 				});
 		});
@@ -53,10 +53,26 @@ describe('Routing', function() {
 				.end(function(err, res) {
 					  if (err)
 						throw err;
-					res.status.should.equal(400);
+					res.status.should.be.equal(400);
 					done();
 				});
 		});
+		/*End Ingredient Creation*/
+
+		/*Begin Ingredient Retrieval*/
+		it('should retrieve an ingredient by it\'s name' , function(done) {
+
+			request(url)
+				.get('/api/ingredients/name/test')
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(200);
+					res.body[0].name.should.be.equal("test");
+					done();
+				});
+		});
+		/*End Ingredient Retrieval*/
 
 	});
 
