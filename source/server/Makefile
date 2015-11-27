@@ -15,4 +15,4 @@ test-ingredients:
 		mocha --reporter $(REPORTER) $(MOCHA_OPTS) ./test/API/tests-ingredient.js
 		@echo Ending Ingredients tests
 
-.PHONY: test test-w
+.PHONY: test test-ingredients
