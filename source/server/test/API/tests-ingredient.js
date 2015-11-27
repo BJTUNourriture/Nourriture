@@ -144,6 +144,29 @@ describe('/api/ingredients', function() {
 	});
 	/*End Ingredient Retrieval*/
 
+	/*Begin Ingredient Update*/
+	it('should update all the ingredient\'s fields by Id' , function(done) {
+
+		request(url)
+			.put('/api/ingredients/id/'+ ingredient_id)
+			.send({
+				"name" : "test2",
+				"description" : "test",
+				"calories" : 1,
+				"fat" : 1,
+				"carbohydrates" : 1,
+				"proteins" : 1
+			})
+			.end(function(err, res) {
+				  if (err)
+					throw err;
+				res.status.should.be.equal(200);
+				res.body.message.should.be.equal("Ingredient successfully updated!");
+				done();
+			});
+	});	
+	/*End Ingredient Update*/
+
 	if (standalone_test)
 	{
 		/*Disconnects mongoose from the DB*/

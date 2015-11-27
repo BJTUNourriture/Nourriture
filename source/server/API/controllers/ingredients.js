@@ -200,7 +200,7 @@ exports.putIngredientByName = function (req, res) {
 }
 
 exports.updateIngredient = function(req, res, err, ingredient) {
-	var fields = ["name", "description", "fat", "carbohydrates", "proteins", "tags"];
+	var fields = ["name", "description", "fat", "carbohydrates", "proteins", "tags", "calories"];
 	var sent_fields = Object.keys(req.body);
 
 	if (err)
