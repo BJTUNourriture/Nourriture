@@ -12,6 +12,8 @@ var multer = require('multer');
 var oauth = require('./routes/oauth');
 var api = require('./routes/api');
 var routes = require('./routes/index');
+var config = require('./config');
+var mongoose = require('mongoose');
 var app = express();
 
 // http://localhost:8101/api/oauth2/authorize?client_id=this_is_my_id&response_type=code&redirect_uri=http://localhost:8101
@@ -20,6 +22,9 @@ PORT = "8101";
 HOSTNAME = "127.0.0.1";
 //jwt secret key set
 app.set('jwtSecret', '18B63D7DDDD8C614227C8F31D8A25DEB92F249C391267DF9A28A5ACC00458837');
+
+//sets the db url depending on the env
+app.set('db_url', config.db[app.settings.env]);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -52,8 +57,8 @@ app.use(session({
     resave: true
 }));
 
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/nourriture');
+//connects to the db
+mongoose.connect(app.get('db_url'));
 
 // Use the passport package in our application
 app.use(passport.initialize());
