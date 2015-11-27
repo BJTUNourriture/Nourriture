@@ -41,6 +41,23 @@ describe('Routing', function() {
 					done();
 				});
 		});
+
+		it('should not create an ingredient with the same name', function(done) {
+		  	var profile = {
+				name: 'test'
+			};
+
+			request(url)
+				.post('/api/ingredients')
+				.send(profile)
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.equal(400);
+					done();
+				});
+		});
+
 	});
 
 	/*Disconnects mongoose from the DB*/

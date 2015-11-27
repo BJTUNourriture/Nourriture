@@ -3,10 +3,12 @@ var router = express.Router();
 var app = express();
 var path = require('path');
 
-router.use(function timeLog(req, res, next) {
-  console.log('Time: ', Date.now());
-  next();
-});
+if (app.get('env') !== 'test') {
+	router.use(function timeLog(req, res, next) {
+	  console.log('Time: ', Date.now());
+	  next();
+	});
+}
 
 // defines the home page route
 router.get('/', function(req, res) {

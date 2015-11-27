@@ -93,7 +93,6 @@ var Ingredients = require('../models/ingredients');
 *
 */
 exports.postIngredient = function (req, res) {
-	console.log(req.body);
 	//binds the new ingredient
 	var ingredient = new Ingredients({
 		name : req.body.name,

@@ -111,33 +111,12 @@ if (app.get('env') === 'development') {
             error: err
         });
     });
-    app.use(function (err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
 }
 
-// production error handler
-// no stacktraces leaked to user
-app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
-});
-
 app.listen(PORT);
-console.log(" App listening on port ", PORT);
-app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
-});
+if (app.get('env') !== 'test')
+{
+    console.log(" App listening on port ", PORT);
+}
 
 module.exports = app;
