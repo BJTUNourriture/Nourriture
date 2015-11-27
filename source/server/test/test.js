@@ -38,4 +38,9 @@ describe('Routing', function() {
 		});
 	});
 
+	after(function(done) {
+		mongoose.disconnect();
+		done();
+	})
+
 });
