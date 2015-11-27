@@ -248,7 +248,7 @@ describe('/api/ingredients', function() {
 			request(url)
 				.put('/api/ingredients/name/test')
 				.send({
-					"top" : "kek",
+					"top" : "kek"
 				})
 				.end(function(err, res) {
 					  if (err)
