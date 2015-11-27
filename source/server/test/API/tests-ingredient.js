@@ -31,14 +31,40 @@ describe('/api/ingredients', function() {
 	var ingredient_id = "";
 
 	describe("Ingredients Creation", function () {
-		it('should successfully create an ingredient', function(done) {
-		  	var profile = {
-				name: 'test'
+		it('should successfully create three ingredients', function(done) {
+		  	var ingredient = {
+				name: "test"
 			};
+
+			var ingredient2 = {
+				name: "testkek"
+			};
+
+			var ingredient3 = {
+				name: "test3"
+			}
 
 			request(url)
 				.post('/api/ingredients')
-				.send(profile)
+				.send(ingredient3)
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(200);
+				});
+
+			request(url)
+				.post('/api/ingredients')
+				.send(ingredient2)
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(200);
+				});
+
+			request(url)
+				.post('/api/ingredients')
+				.send(ingredient)
 				.end(function(err, res) {
 					  if (err)
 						throw err;
@@ -73,8 +99,7 @@ describe('/api/ingredients', function() {
 					  if (err)
 						throw err;
 					res.status.should.be.equal(200);
-					res.body.should.be.lengthOf(1);
-					ingredient_id = res.body[0]._id;
+					res.body.should.be.lengthOf(3);
 					done();
 				});
 		});
@@ -150,7 +175,7 @@ describe('/api/ingredients', function() {
 			request(url)
 				.put('/api/ingredients/id/'+ ingredient_id)
 				.send({
-					"name" : "test2",
+					"name" : "test",
 					"description" : "test",
 					"calories" : 1,
 					"fat" : 1,
@@ -180,6 +205,87 @@ describe('/api/ingredients', function() {
 					done();
 				});
 		});
+
+		it('should update all the ingredient\'s fields by name' , function(done) {
+
+			request(url)
+				.put('/api/ingredients/name/test')
+				.send({
+					"name" : "test",
+					"description" : "test",
+					"calories" : 1,
+					"fat" : 1,
+					"carbohydrates" : 1,
+					"proteins" : 1
+				})
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(200);
+					res.body.message.should.be.equal("Ingredient successfully updated!");
+					done();
+				});
+		});
+
+		it('should not update an ingredient with an unknown key by name' , function(done) {
+
+			request(url)
+				.put('/api/ingredients/name/test')
+				.send({
+					"top" : "kek",
+				})
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(400);
+					done();
+				});
+		});
+	});
+
+	describe('Ingredients Deletion', function() {
+		it('should delete an ingredient by Name' , function(done) {
+
+			request(url)
+				.delete('/api/ingredients/name/testkek')
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(200);
+					res.body.message.should.be.equal("Ingredient succesfully deleted!");
+					done();
+				});
+		});
+
+		it('should delete an ingredient by Id' , function(done) {
+
+			request(url)
+				.delete('/api/ingredients/id/' + ingredient_id)
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(200);
+					res.body.message.should.be.equal("Ingredient succesfully deleted!");
+					done();
+				});
+		});
+
+		it('should delete an ingredient by JSON' , function(done) {
+
+			request(url)
+				.delete('/api/ingredients/')
+				.send({
+					"name" : "test3"
+				})
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(200);
+					res.body.message.should.be.equal("Ingredient succesfully deleted!");
+					done();
+				});
+		});
+
 	});
 
 	if (standalone_test)
