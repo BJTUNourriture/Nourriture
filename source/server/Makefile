@@ -21,4 +21,4 @@ test-recipes:
 		mocha --reporter $(REPORTER) $(MOCHA_OPTS) ./test/API/tests-recipe.js
 		@echo Ending Recipes tests
 
-.PHONY: test test-ingredients
+.PHONY: test test-ingredients test-recipes
