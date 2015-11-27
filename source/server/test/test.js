@@ -13,8 +13,10 @@ describe('Routing', function() {
   	var url = 'http://localhost:8101';
 
   	before(function(done) {
-	    mongoose.createConnection(config.db.test);						
-	    done();
+  		for (var i in mongoose.connection.collections) {
+	    	mongoose.connection.collections[i].remove(function() {});
+	   }
+  		done();
  	});
 
 	describe('/api/ingredients', function() {
