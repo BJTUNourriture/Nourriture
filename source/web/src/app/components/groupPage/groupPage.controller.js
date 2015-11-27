@@ -37,7 +37,7 @@ function GroupPageController($scope, $rootScope, GroupService, UserService, toas
 		.then(vm.getGroup());
 
 		UserService.addGroupToUser
-		.update({id: $localStorage.user_id, "group_id": vm.group._id, "group_name": vm.group.name})
+		.update({id: $localStorage.user_id || $sessionStorage.user_id, "group_id": vm.group._id, "group_name": vm.group.name})
 		.$promise;
 		vm.userIsIn = 1;
 	}
@@ -49,7 +49,7 @@ function GroupPageController($scope, $rootScope, GroupService, UserService, toas
 		.then(vm.getGroup());
 
 		UserService.removeGroupToUser
-		.update({id: $localStorage.user_id, "group_id": vm.group._id, "group_name": vm.group.name})
+		.update({id: $localStorage.user_id || $sessionStorage.user_id, "group_id": vm.group._id, "group_name": vm.group.name})
 		.$promise;
 
 		vm.userIsIn = 0;
