@@ -4,10 +4,12 @@
 div(layout="column" layout-align="center center" layout-fill ng-controller='groupsUserProfileController as groupsUserProfile')
     md-content(flex)
         h1.t-center Groups
-        md-list(flex)
+        md-list(flex ng-if='groupsUserProfile.data.joined_groups')
             md-list-item.md-3-line.md-no-proxy(ng-repeat='group in groupsUserProfile.data.joined_groups' ng-click='groupsUserProfile.goToGroupPage(group.id_group)')
                 div.md-list-item-text
                     ng-md-icon(icon="group_work")
                     div {{group.name}}
                     ng-md-icon(icon="keyboard_arrow_right" class="md-secondary md-hue-3")
                 md-divider
+        md-list.t-center(flex ng-if='!groupsUserProfile.data.joined_groups.length') 
+            span.bold No groups finded

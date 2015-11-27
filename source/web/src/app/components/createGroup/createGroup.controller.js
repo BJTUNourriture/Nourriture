@@ -5,10 +5,10 @@ angular.module('NourritureControllers')
 	.controller('CreateGroupController', CreateGroupController);
 
 
-CreateGroupController.$inject = ["$scope", "GroupService", "UserService", 'TagsService', 'toastr',"$log", "$mdDialog", "$document", "$localStorage"];
+CreateGroupController.$inject = ["$scope", "GroupService", "UserService", 'TagsService', 'toastr',"$log", "$mdDialog", "$document", "$localStorage", "$sessionStorage"];
 
 
-function CreateGroupController($scope, GroupService, UserService, TagsService, toastr, $log, $mdDialog, $document, $localStorage)
+function CreateGroupController($scope, GroupService, UserService, TagsService, toastr, $log, $mdDialog, $document, $localStorage, $sessionStorage)
 {
 	var vm = this;
 
@@ -24,7 +24,7 @@ function CreateGroupController($scope, GroupService, UserService, TagsService, t
 		$log.log("innit");
 		GroupService
 			.groups
-			.save({"name" : $scope.name, "description" : $scope.description, "admin_id": $localStorage.user_id , "tags" : vm.tags_group})
+			.save({"name" : $scope.name, "description" : $scope.description, "admin_id": $localStorage.user_id || $sessionStorage.user_id , "tags" : vm.tags_group})
 			.$promise
 			.then(vm.GroupCreateSuccess, vm.GroupCreateFailure);
 	};
@@ -32,7 +32,7 @@ function CreateGroupController($scope, GroupService, UserService, TagsService, t
 	vm.GroupCreateSuccess = function (data) {
 		$log.log(data.message);
 		UserService.addGroupToUser
-		.update({id: $localStorage.user_id, "group_id": data.group_id, "group_name": $scope.name})
+		.update({id: $localStorage.user_id || $sessionStorage.user_id, "group_id": data.group_id, "group_name": $scope.name})
 		.$promise;
 		toastr.success('You can now access your new group.', 'Group Created!');
 	};
