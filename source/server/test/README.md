@@ -8,7 +8,7 @@ Here you will find the several tests written to test the backend server. They ar
 ├──  test.js
 └──  API/
 	├──  tests-ingredient.js
-	└──	 tests-recipe.js
+	└──  tests-recipe.js
 ```
 
 ## test.js
