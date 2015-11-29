@@ -13,7 +13,7 @@
          </div>
       </md-toolbar>
    </md-content>
-   <md-content class="md-padding" layout="column">
+   <md-content class="md-padding">
       <md-grid-list md-cols-sm="2" md-cols-md="2" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="32px" md-gutter-gt-sm="8px">
          <md-grid-tile class="grid-recipe"
          md-rowspan="2" md-colspan="2" ng-if="RecipePage.recipe.pictures[0].thumbnail_url != null">
@@ -74,6 +74,7 @@
 
 
       </md-grid-list>
+      <div layout="column">
       <h2 class="md-title">Ingredients</h2>
       <md-list>
          <md-list-item class="md-2-line recipe-option" ng-repeat="ing in RecipePage.recipe.ingredients"
@@ -88,6 +89,7 @@
       </md-list>
       <h2 class="md-title">Description</h2>
       <span ng-bind-html="RecipePage.recipe.description"></span>
+    </div>
    </md-content>
    <md-button class="md-primary md-fab md-fab-bottom-right">
       +

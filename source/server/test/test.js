@@ -33,6 +33,9 @@ describe('API', function() {
     //Test Search
     require('./API/tests-search');
 
+    //Test Search
+    require('./API/tests-users');
+
 	/*Disconnects mongoose from the DB*/
 	after(function(done) {
 		mongoose.disconnect();
