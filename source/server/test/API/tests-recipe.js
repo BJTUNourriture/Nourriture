@@ -206,6 +206,19 @@ describe('/api/recipes', function() {
 
 	});
 
+	describe("Recipes Retrieval", function () {
+		it('should retrieve all the recipes', function(done) {
+			request(url)
+				.get('/api/recipes')
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.body.should.be.lengthOf(3);
+					done();
+				});			
+		});
+	});
+
 	if (standalone_test)
 	{
 		/*Disconnects mongoose from the DB*/
