@@ -80,6 +80,9 @@ var Client = require('../models/client');
 */
 
 exports.postClients = function (req, res) {
+
+console.log("Ceci est un post sur les Clients");
+
     var client = new Client();
 
     client.name = req.body.name;
@@ -89,9 +92,9 @@ exports.postClients = function (req, res) {
 
     client.save(function (err) {
         if (err)
-            return res.send(err);
+            return res.status(400).send(err);
 
-        return res.json({message: 'Client successfully created', data: client});
+        return res.status(200).json({message: 'Client successfully created', data: client});
     });
 };
 
@@ -133,8 +136,8 @@ exports.getClients = function (req, res) {
     // Use the Client model to find all clients
     Client.find({userId: req.user._id}, function (err, clients) {
         if (err)
-            return res.send(err);
+            return res.status(400).send(err);
 
-        return res.json(clients);
+        return res.status(200).json(clients);
     });
 };
