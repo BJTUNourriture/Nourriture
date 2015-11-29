@@ -87,7 +87,9 @@ describe('/api/oauth', function () {
 
             var client = new Client({
 
-                name: "OAuth application"
+                name: "OAuth application",
+                id: "Id OAuth",
+                secret: "My super secret key"
             });
 
 
@@ -98,7 +100,7 @@ describe('/api/oauth', function () {
                     .post('/api/clients')
                     .set('Authorization', 'Topkek ' + token)
                     .send(client)
-                    .expect(500)
+                    .expect(200)
                     .end(done);
 
 
