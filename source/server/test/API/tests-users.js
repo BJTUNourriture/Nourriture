@@ -60,6 +60,7 @@ describe('/api/users', function() {
 						  if (err)
 							throw err;
 						res.status.should.be.equal(200);
+						done();
 					});
 		});
 
@@ -76,30 +77,13 @@ describe('/api/users', function() {
 				.end(function(err, res) {
 					  if (err)
 						throw err;
-					res.status.should.be.equal(400);
+					res.status.should.be.equal(401);
 					done();
 				});
 		});
 
-
-// UPDATE USER
-		// it('should not create an tag without the name key and without a flag', function(done) {
-		// 	var user = {
-		// 		"username": "Julien",
-		// 		"email": "julien@usa.gov",
-		// 		"password": "MonMotDePasse"
-		// 	};
-		// 	request(url)
-		// 		.post('/api/users/')
-		// 		.send(user)
-		// 		.end(function(err, res) {
-		// 				if (err)
-		// 				throw err;
-		// 			res.status.should.be.equal(400);
-		// 			done();
-		// 		});
-		// 	});
 	});
+
 
 	describe('Retrive Users', function() {
 			it('should retrive all Users' , function(done) {
@@ -110,24 +94,26 @@ describe('/api/users', function() {
 						  if (err)
 							throw err;
 						res.status.should.be.equal(200);
-						res.body.should.be.lengthOf(2);
 						done();
 					});
 			});
 
+
 			it('should retrieve an user by it\'s name' , function(done) {
 
+
 				request(url)
-					.get('/api/users/name/Julien')
+					.get('/api/users/username/Julien')
 					.end(function(err, res) {
 						  if (err)
 							throw err;
 						res.status.should.be.equal(200);
-						res.body[0].name.should.be.equal("Julien");
-						tag_id = res.body[0]._id;
+						res.body.username.should.be.equal("Julien");
+						tag_id = res.body._id;
 						done();
 					});
 			});
+
 
 			it('should return 404 on non-existant name' , function(done) {
 
@@ -141,19 +127,6 @@ describe('/api/users', function() {
 					});
 			});
 
-			it('should retrieve an User by it\'s Id' , function(done) {
-
-				request(url)
-					.get('/api/users/id/'+ tag_id)
-					.end(function(err, res) {
-						  if (err)
-							throw err;
-						res.status.should.be.equal(200);
-						res.body.name.should.be.equal("Julien");
-						done();
-					});
-			});
-
 			it('should return 404 on non-existant Id for a user' , function(done) {
 
 				request(url)
@@ -161,64 +134,33 @@ describe('/api/users', function() {
 					.end(function(err, res) {
 						  if (err)
 							throw err;
-						res.status.should.be.equal(404);
+						res.status.should.be.equal(401);
 						done();
 					});
 			});
 	});
 
-	describe('User Update', function() {
-		it('should update some users\' fields by Id' , function(done) {
-
-			request(url)
-				.put('/users/users/id/'+ tag_id)
-				.send({
-						 "description": "Ma bio",
-						 "gender": "female",
-						 "pictures" : [{
-						   "thumbnail_url" : "/thumbnails/1.jpg",
-						   "medium_sized_url" : "/medium_sized/1.jpg",
-						   "big_sized_url" : "/big_sized/1.jpg"
-						 }]
-				})
-				.end(function(err, res) {
-					  if (err)
-						throw err;
-					res.status.should.be.equal(200);
-					res.body.message.should.be.equal("User successfully updated!");
-					done();
-				});
-		});
-
-
-
 	describe('User Deletion', function() {
 		it('should delete an User by Name' , function(done) {
 
 			request(url)
-				.delete('/api/users/name/Carolina')
+				.delete('/api/users/username/Julien')
 				.end(function(err, res) {
 					  if (err)
 						throw err;
 					res.status.should.be.equal(200);
-					res.body.message.should.be.equal("Tag succesfully deleted!");
-					done();
+					res.body.message.should.be.equal("User succesfully deleted!");
 				});
+				request(url)
+					.delete('/api/users/username/Carolina')
+					.end(function(err, res) {
+						  if (err)
+							throw err;
+						res.status.should.be.equal(200);
+						res.body.message.should.be.equal("User succesfully deleted!");
+						done();
+					});
 		});
-
-		it('should delete an User by Id' , function(done) {
-
-			request(url)
-				.delete('/api/users/id/' + tag_id)
-				.end(function(err, res) {
-					  if (err)
-						throw err;
-					res.status.should.be.equal(200);
-					res.body.message.should.be.equal("Tag succesfully deleted!");
-					done();
-				});
-		});
-
 	});
 
 	if (standalone_test)
