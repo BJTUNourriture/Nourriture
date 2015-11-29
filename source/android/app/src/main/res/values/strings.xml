@@ -3,4 +3,12 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Drawer def -->
+    <string name="user">MY PROFILE</string>
+    <string name="ingredients">INGREDIENTS</string>
+    <string name="recipes">RECIPES</string>
+    <string name="groups">GROUPS</string>
+    <string name="openDrawer">openDrawe</string>
+    <string name="closeDrawer">closeDrawe</string>
 </resources>

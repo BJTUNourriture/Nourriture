@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/user"
+            android:checked="false"
+            android:icon="@drawable/ic_wheat"
+            android:title="@string/user" />
+
+        <item
+            android:id="@+id/ingredients"
+            android:checked="false"
+            android:icon="@drawable/ic_wheat"
+            android:title="@string/ingredients" />
+
+        <item
+            android:id="@+id/recipes"
+            android:checked="false"
+            android:icon="@drawable/ic_wheat"
+            android:title="@string/recipes" />
+
+        <item
+            android:id="@+id/groups"
+            android:checked="false"
+            android:icon="@drawable/ic_wheat"
+            android:title="@string/groups" />
+
+
+
+
+
+    </group>
+</menu>

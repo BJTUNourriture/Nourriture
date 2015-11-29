@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="PrimaryColor">#444</color>
+    <color name="PrimaryDarkColor">#222</color>
+    <color name="PrimaryColorWhite">#888</color>
+
+    <!--$primary-color: #333;-->
+    <!--$background: #ECECEC;-->
+    <!--$buttonsLinksNormalState: #2EE8E7;-->
+    <!--$buttonsLinksSelectedState: #1CFFB0;-->
+    <!--$headings: #0EE853;-->
+    <!--$dark-headings: #013220;-->
+    <!--$borderBlock: #2E8B57;-->
+    <!--$backgroundBlock: #FFFFFF;-->
+    <!--$wildcardColor: #24BCFF;-->
+    <!--$footerColor: #616161;-->
+    <!--$boxShadowButton: #888;-->
+</resources>
