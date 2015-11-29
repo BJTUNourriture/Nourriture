@@ -185,6 +185,51 @@ describe('/api/types', function() {
 		});
 	});
 
+	describe('Types Deletion', function() {
+		it('should delete a type by Name' , function(done) {
+
+			request(url)
+				.delete('/api/types/name/testkek')
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(200);
+					res.body.message.should.be.equal("Type succesfully deleted!");
+					done();
+				});
+		});
+
+		it('should delete a type by Id' , function(done) {
+
+			request(url)
+				.delete('/api/types/id/' + type_id)
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(200);
+					res.body.message.should.be.equal("Type succesfully deleted!");
+					done();
+				});
+		});
+
+		it('should delete a type by JSON' , function(done) {
+
+			request(url)
+				.delete('/api/types/')
+				.send({
+					"name" : "test3"
+				})
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(200);
+					res.body.message.should.be.equal("Type succesfully deleted!");
+					done();
+				});
+		});
+
+	});
+
 	if (standalone_test)
 	{
 		/*Disconnects mongoose from the DB*/
