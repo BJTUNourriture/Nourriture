@@ -95,9 +95,6 @@ describe('/api/oauth', function () {
                 secret: "My_super_secret_key"
             });
 
-
-            console.log("Save");
-
             request(url)
                 .post('/api/clients')
                 .set('Authorization', 'Topkek ' + token)
