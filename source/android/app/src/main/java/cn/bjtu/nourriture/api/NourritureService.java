@@ -10,7 +10,7 @@ import rx.Observable;
  * 30/11/15
  **/
 public interface NourritureService {
-    String SERVICE_ENDPOINT = "http://192.168.0.101:8101/api";
+    String SERVICE_ENDPOINT = "http://192.168.43.182:8101/api";
 
     @GET("/users/username/{login}")
     Observable<User> getUser(@Path("login") String login);

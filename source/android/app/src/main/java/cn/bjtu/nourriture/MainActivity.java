@@ -98,8 +98,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
-        if (menuItem.isChecked()) menuItem.setChecked(false);
-        else menuItem.setChecked(true);
+//        if (menuItem.isChecked()) menuItem.setChecked(false);
+//        else menuItem.setChecked(true);
 
         //Closing drawer on item click
         drawerLayout.closeDrawers();
