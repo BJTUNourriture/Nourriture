@@ -137,7 +137,7 @@ describe('/api/oauth', function () {
                 .auth('OAuth_application', 'My_super_secret_key')
                 .send(obj_code)
                 .expect(200)
-                .end(done());
+                .end(done);
 
 
         });
