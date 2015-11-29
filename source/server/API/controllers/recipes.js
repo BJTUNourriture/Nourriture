@@ -432,13 +432,13 @@ exports.getAllRecipes = function(req, res) {
 exports.getRecipeById = function (req, res, flag) {
 	var id = flag === true ? req.body.id : req.params.id;
 	if (!id)
-		return flag === true ? -1 : res.json(400, {message : 'The id musn\'t be null'});
+		return flag === true ? -1 : res.status(404).json({message : 'The id musn\'t be null'});
 	Recipes.findById(id,
 		function (err, doc) {
 			if (err)
 				return (res.send(err));
 			else if (doc === null)
-				return (res.json(404, {message : 'The id was not found.'}))
+				return (res.status(404).json({message : 'The id was not found.'}))
 			return (res.json(doc));
 		}
 	);
@@ -467,7 +467,7 @@ exports.getRecipeById = function (req, res, flag) {
 exports.getRecipeByTitle = function (req, res, flag) {
 	var title = flag === true ? req.body.title : req.params.title;
 	if (!title)
-		return flag === true ? -1 : res.json(400, {message : 'The title musn\'t be null'});
+		return flag === true ? -1 : res.status(400).json({message : 'The title musn\'t be null'});
 	Recipes.find({
 		"title": { "$regex": title, "$options": "i" } 
 		},
@@ -475,7 +475,7 @@ exports.getRecipeByTitle = function (req, res, flag) {
 			if (err)
 				return (res.send(err));
 			else if (docs.length <= 0)
-				return (res.json(404, {message : 'The title was not found.'}))
+				return (res.status(404).json({message : 'The title was not found.'}))
 			return (res.json(docs));
 		}
 	);

@@ -1,5 +1,5 @@
 REPORTER = ""
-MOCHA_OPTS = 
+MOCHA_OPTS =
 
 all: test
 
@@ -33,11 +33,34 @@ test-search:
 		mocha --reporter $(REPORTER) $(MOCHA_OPTS) ./test/API/tests-search.js
 		@echo Ending Search tests
 
+test-types:
+		clear
+		@echo Starting Types tests
+		mocha --reporter $(REPORTER) $(MOCHA_OPTS) ./test/API/tests-type.js
+		@echo Ending Types tests
+
+test-types:
+		clear
+		@echo Starting Types tests
+		mocha --reporter $(REPORTER) $(MOCHA_OPTS) ./test/API/tests-type.js
+		@echo Ending Types tests
+
+test-oauth:
+		clear
+		@echo Starting Search tests
+		mocha --reporter $(REPORTER) $(MOCHA_OPTS) ./test/API/tests-oauth.js
+		@echo Ending OAuth tests
+
+test-allergies:
+		clear
+		@echo Starting Allergies tests
+		mocha --reporter $(REPORTER) $(MOCHA_OPTS) ./test/API/tests-allergy.js
+		@echo Ending Allergies tests
+
 test-users:
 		clear
 		@echo Starting Users tests
-		mocha --reporter $(REPORTER) $(MOCHA_OPTS) ./test/API/tests-users.js
+		mocha --reporter $(REPORTER) $(MOCHA_OPTS) ./test/API/tests-user.js
 		@echo Ending Users tests
 
-.PHONY: test test-ingredients test-recipes test-tags test-search test-users
-
+.PHONY: test test-ingredients test-recipes test-tags test-search test-users test-types test-oauth test-allergies
