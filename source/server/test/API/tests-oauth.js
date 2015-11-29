@@ -34,17 +34,20 @@ describe('/api/oauth', function () {
     /*Testing vars*/
     var user_id = "";
     var user_name = "";
+    var token = "";
 
 
     describe("OAuth Creation", function () {
 
-        it('should create Client', function () {
+        var token = null;
 
+        before(function (done) {
             /*Creates a dummy user*/
             var user = new User({
                 email: "test@test.ru",
                 username: "test",
-                password: "test"
+                password: "test",
+                email_verified: true
             });
 
             user.save(function (err) {
@@ -53,30 +56,40 @@ describe('/api/oauth', function () {
 
                 user_id = user._id;
                 user_name = user.username;
-                console.log("test", user_id);
 
-                var client = {
-                    name: "My OAuth Client",
-                    id: "id_client_OAuth",
-                    secret: "My super secret key",
-                    userId: user_id
+
+                var log_user = {
+                    username: user_name,
+                    password: "test"
                 };
 
-                request(url)
-                    .post('/api/clients')
-                    .send(client)
-                    .end(function(err, res) {
-                        if (err) {
-                            console.log("Before request");
 
-                        }
+                request(url)
+                    .post('/api/users/sign-in')
+                    .send(log_user)
+                    .end(function (err, res) {
+                        if (err) {
                             throw err;
-                        res.status.should.be.equal(40000);
+                        }
+
+                        token = res.body.key;
+                        console.log("token = ", res.body.key);
                         done();
+
 
                     });
 
             });
+        });
+
+
+        it('should create Client', function (done) {
+
+
+            request(url)
+                .get('/api/clients')
+                .set('Authorization', 'Topkek ' + token)
+                .expect(200, done);
 
         });
 

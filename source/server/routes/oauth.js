@@ -24,7 +24,7 @@ var verifyJwt = expressJwt({
 
 // Create endpoint handlers for /clients
 router.route('/clients')
-    .post(verifyJwt, clientController.postClients)
+    .post(/*verifyJwt,*/ clientController.postClients)
     .get(verifyJwt, clientController.getClients);
 
 // Create endpoint handlers for oauth2 authorize
