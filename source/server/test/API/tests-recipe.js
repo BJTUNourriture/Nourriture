@@ -275,6 +275,198 @@ describe('/api/recipes', function() {
 		});
 	});
 
+	describe("Recipes Update", function () {
+		it('should update all the recipe\'s fields by id' , function(done) {
+			var updated_recipe = {
+				title : "test2",
+				author_id : user_id,
+				author_name : user_name,
+				date_posted : new Date(Date.now()),
+				date_edited : new Date(Date.now()),
+				difficulty : 1,
+				average_score : 1,
+				time_preparation:  45,
+				average_price : 1,
+				ingredients: [{
+					id_ingredient : ingredient_id,
+					name : ingredient_name,
+					amount : 1
+				}],
+				comments : [{
+					id_author : user_id,
+					name_author : user_name,
+					date_posted : new Date(Date.now()),
+					date_edited : new Date(Date.now()),
+					content : "test",
+					visible : true
+				}],
+				pictures : [{
+					thumbnail_url : "dummy",
+					medium_sized_url : "dummy",
+					big_sized_url : "dummy"
+				}],
+				number_vote : 1,
+				votes : [{
+					vote : 5,
+					id_author : user_id		
+				}]
+			}
+
+			request(url)
+				.put('/api/recipes/id/'+ recipe_id)
+				.send(updated_recipe)
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(200);
+					done();
+				});
+		});
+
+		it('should not update a recipe with an unknown key given by Id' , function(done) {
+			var updated_recipe = {
+				top : "kek",
+				title : "test2",
+				author_id : user_id,
+				author_name : user_name,
+				date_posted : new Date(Date.now()),
+				date_edited : new Date(Date.now()),
+				difficulty : 1,
+				average_score : 1,
+				time_preparation:  45,
+				average_price : 1,
+				ingredients: [{
+					id_ingredient : ingredient_id,
+					name : ingredient_name,
+					amount : 1
+				}],
+				comments : [{
+					id_author : user_id,
+					name_author : user_name,
+					date_posted : new Date(Date.now()),
+					date_edited : new Date(Date.now()),
+					content : "test",
+					visible : true
+				}],
+				pictures : [{
+					thumbnail_url : "dummy",
+					medium_sized_url : "dummy",
+					big_sized_url : "dummy"
+				}],
+				number_vote : 1,
+				votes : [{
+					vote : 5,
+					id_author : user_id		
+				}]
+			}
+
+			request(url)
+				.put('/api/recipes/id/'+ recipe_id)
+				.send(updated_recipe)
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(400);
+					done();
+				});
+		});	
+
+		it('should update all the recipe\'s fields by title' , function(done) {
+			var updated_recipe = {
+				title : "test2",
+				author_id : user_id,
+				author_name : user_name,
+				date_posted : new Date(Date.now()),
+				date_edited : new Date(Date.now()),
+				difficulty : 1,
+				average_score : 1,
+				time_preparation:  45,
+				average_price : 1,
+				ingredients: [{
+					id_ingredient : ingredient_id,
+					name : ingredient_name,
+					amount : 1
+				}],
+				comments : [{
+					id_author : user_id,
+					name_author : user_name,
+					date_posted : new Date(Date.now()),
+					date_edited : new Date(Date.now()),
+					content : "test",
+					visible : true
+				}],
+				pictures : [{
+					thumbnail_url : "dummy",
+					medium_sized_url : "dummy",
+					big_sized_url : "dummy"
+				}],
+				number_vote : 1,
+				votes : [{
+					vote : 5,
+					id_author : user_id		
+				}]
+			}
+
+			request(url)
+				.put('/api/recipes/title/test2')
+				.send(updated_recipe)
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(200);
+					done();
+				});
+		});
+
+		it('should not update a recipe with an unknown key given by title' , function(done) {
+			var updated_recipe = {
+				top : "kek",
+				title : "test2",
+				author_id : user_id,
+				author_name : user_name,
+				date_posted : new Date(Date.now()),
+				date_edited : new Date(Date.now()),
+				difficulty : 1,
+				average_score : 1,
+				time_preparation:  45,
+				average_price : 1,
+				ingredients: [{
+					id_ingredient : ingredient_id,
+					name : ingredient_name,
+					amount : 1
+				}],
+				comments : [{
+					id_author : user_id,
+					name_author : user_name,
+					date_posted : new Date(Date.now()),
+					date_edited : new Date(Date.now()),
+					content : "test",
+					visible : true
+				}],
+				pictures : [{
+					thumbnail_url : "dummy",
+					medium_sized_url : "dummy",
+					big_sized_url : "dummy"
+				}],
+				number_vote : 1,
+				votes : [{
+					vote : 5,
+					id_author : user_id		
+				}]
+			}
+
+			request(url)
+				.put('/api/recipes/title/test2')
+				.send(updated_recipe)
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(400);
+					done();
+				});
+		});
+	});
+
 	if (standalone_test)
 	{
 		/*Disconnects mongoose from the DB*/
