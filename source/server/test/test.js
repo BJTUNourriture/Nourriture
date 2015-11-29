@@ -37,7 +37,10 @@ describe('API', function() {
     require('./API/tests-type');
 
 	//Test OAuth
-	require('./API/tests-oauth');
+    require('./API/tests-oauth');
+
+    //Test allergies
+    require('./API/tests-allergy')
 
 	/*Disconnects mongoose from the DB*/
 	after(function(done) {

@@ -46,5 +46,11 @@ test-oauth:
 		mocha --reporter $(REPORTER) $(MOCHA_OPTS) ./test/API/tests-oauth.js
 		@echo Ending OAuth tests
 
-.PHONY: test test-ingredients test-recipes test-tags test-search  test-types test-oauth
+test-allergies:
+		clear
+		@echo Starting Allergies tests
+		mocha --reporter $(REPORTER) $(MOCHA_OPTS) ./test/API/tests-allergy.js
+		@echo Ending Allergies tests
+
+.PHONY: test test-ingredients test-recipes test-tags test-search  test-types test-oauth test-allergies
 
