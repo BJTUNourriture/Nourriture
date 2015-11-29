@@ -134,8 +134,123 @@ describe('/api/recipes', function() {
 				/*End create dummy user*/
 			});		
 			/*End create a dummy ingredient*/
-
 		});
+
+		it('should not create a recipe without at least an ingredient', function(done) {
+			var recipe = {
+				title: "testos",
+				author_id: user_id,
+				author_name: user_name,
+				ingredients: [],
+				pictures : [{
+					thumbnail_url : "dummy"
+				}]
+			};
+
+			request(url)
+				.post('/api/recipes')
+				.send(recipe)
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(400);
+					done();
+				});
+		});
+
+		it('should not create a recipe without the author infos', function(done) {
+			var recipe = {
+				title: "testos",
+				ingredients: [{
+					id_ingredient : ingredient_id,
+					name : ingredient_name
+				}],
+				pictures : [{
+					thumbnail_url : "dummy"
+				}]
+			};
+
+			request(url)
+				.post('/api/recipes')
+				.send(recipe)
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(400);
+					done();
+				});
+		});
+
+		it('should not create a recipe without the first thumbnail url', function(done) {
+			var recipe = {
+				title: "testos",
+				author_id: user_id,
+				author_name: user_name,
+				ingredients: [{
+					id_ingredient : ingredient_id,
+					name : ingredient_name
+				}],
+				pictures : []
+			};
+
+			request(url)
+				.post('/api/recipes')
+				.send(recipe)
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(400);
+					done();
+				});
+		});
+	});
+
+	describe("Recipes Retrieval", function () {
+		it('should retrieve all the recipes', function(done) {
+			request(url)
+				.get('/api/recipes')
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.body.should.be.lengthOf(3);
+					done();
+				});			
+		});
+
+		it('should retrieve a recipe by its title', function(done) {
+			request(url)
+				.get('/api/recipes/title/test2')
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.body[0].title.should.be.equal("test2");
+					recipe_id = res.body[0]._id;
+					done();
+				});			
+		});
+
+		it('should retrieve a recipe by its partial title', function(done) {
+			request(url)
+				.get('/api/recipes/title/kek')
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.body[0].title.should.be.equal("testkek");
+					done();
+				});			
+		});
+
+		it('should return 404 an non-existant title', function(done) {
+			request(url)
+				.get('/api/recipes/title/pepperoni')
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(404);
+					done();
+				});			
+		});
+
 	});
 
 	if (standalone_test)
