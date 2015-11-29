@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var User = require('../../API/models/users');
 var Ingredients = require('../../API/models/ingredients');
 var Recipes = require('../../API/models/recipes');
+var Groups = require('../../API/models/recipes');
 
 /*Checks if App was launched*/
 if (mongoose.connection.readyState === 0)
@@ -209,6 +210,45 @@ describe('/api/search', function() {
 					user_id = user._id;
 					user_name = user.username;
 
+				var group = {
+					name: "test_1",
+					admin_id: user_id,
+				};
+
+				var group2 = {
+					name: "test_2",
+					admin_id: user_id,
+				};
+
+				var group3 = {
+					name: "test_3",
+					admin_id: user_id,
+				};
+
+				request(url)
+					.post('/api/groups')
+					.send(group)
+					.end(function(err, res) {
+						  if (err)
+							throw err;
+					});
+
+				request(url)
+					.post('/api/groups')
+					.send(group2)
+					.end(function(err, res) {
+						  if (err)
+							throw err;
+					});
+
+				request(url)
+					.post('/api/groups')
+					.send(group3)
+					.end(function(err, res) {
+						  if (err)
+							throw err;
+					});
+
 					var recipe = {
 						title: "recipes_1",
 						author_id: user_id,
@@ -289,7 +329,6 @@ describe('/api/search', function() {
 				.end(function(err, res) {
 					  if (err)
 						throw err;
-					console.log(res.body)
 					res.status.should.be.equal(404)
 					done();
 			});
@@ -391,6 +430,84 @@ describe('/api/search', function() {
 		});
 
 		})
+
+	describe("Search Groups", function () {
+		it('should search all groups', function(done) {
+			var s_groups = {
+			metadata: {
+				"page": 1,
+				"items": 10
+				}}
+
+		request(url)
+			.post('/api/search/groups')
+			.send(s_groups)
+			.end(function(err, res) {
+				  if (err)
+					throw err;
+				res.status.should.be.equal(200);
+				res.body.metadata.total.should.be.equal(3)
+				done();
+			});
+		})
+
+		it('should a group by his name', function(done) {
+			var s_groups = {
+			name :"3",
+			metadata: {
+				"page": 1,
+				"items": 10
+				}}
+
+		request(url)
+			.post('/api/search/groups')
+			.send(s_groups)
+			.end(function(err, res) {
+				  if (err)
+					throw err;
+				res.status.should.be.equal(200);
+				res.body.groups[0].name.should.be.equal("test_3")
+				res.body.metadata.total.should.be.equal(1)
+				done();
+			});
+		})
+
+		it('should return 400 if no metadata', function(done) {
+			var s_groups = {
+			name :"3"}
+
+		request(url)
+			.post('/api/search/groups')
+			.send(s_groups)
+			.end(function(err, res) {
+				  if (err)
+					throw err;
+				res.status.should.be.equal(400);
+				done();
+			});
+		})
+
+		it('should return 404 if no group found', function(done) {
+			var s_groups = {
+			name :"4",
+			metadata: {
+				"page": 1,
+				"items": 10
+				}}
+
+		request(url)
+			.post('/api/search/groups')
+			.send(s_groups)
+			.end(function(err, res) {
+				  if (err)
+					throw err;
+				res.status.should.be.equal(404);
+				done();
+			});
+		})
+
+
+	})
 
 	});
 
