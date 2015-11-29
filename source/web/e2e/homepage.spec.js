@@ -1,8 +1,17 @@
-describe('angularjs homepage todo list', function() {
-  it('should add a todo', function() {
-    browser.get('http://127.0.0.1:3000');
-
+describe('Homepage', function() {
+  it('should have Nourriture as title', function() {
     expect(browser.getTitle()).toEqual("Nourriture");
   });
+
+  it('should display the menu when clicking on the menu icon', function() {
+    var hasClass = function (element, cls) {
+        return element.getAttribute('class').then(function (classes) {
+            return classes.split(' ').indexOf(cls) !== -1;
+        });
+    };
+
+    element(by.css(".icon-menu")).click()
+    expect(hasClass(element(by.name('md-backdrop')), 'md-opaque')).toBe(true);
+  });  
 });
 
