@@ -36,6 +36,9 @@ describe('API', function() {
 	//Test OAuth
 	require('./API/tests-oauth');
 
+    //Tests types
+    require('./API/tests-type');
+
 	/*Disconnects mongoose from the DB*/
 	after(function(done) {
 		mongoose.disconnect();

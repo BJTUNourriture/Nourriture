@@ -28,7 +28,7 @@
 * @apiParamExample {json} Request-Example:
 *     {
 *       "name": "Loukoums",
-*       "description": "Desserts"
+*       "category": "Desserts"
 *     }
 */
 
