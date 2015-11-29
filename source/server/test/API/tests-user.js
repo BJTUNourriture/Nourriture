@@ -12,8 +12,8 @@ if (mongoose.connection.readyState === 0) {
 /*Url of the server*/
 var url = 'http://localhost:8101';
 
-/*Testing of the /api/allergies endpoint*/
-describe('/api/allergies', function () {
+/*Testing of the /api/users endpoint*/
+describe('/api/users', function () {
 
     if (standalone_test) {
         /*Clears all the collections to have an empty DB*/
@@ -26,25 +26,32 @@ describe('/api/allergies', function () {
     }
 
     /*Testing vars*/
-    var allergy_id = "";
+    var user_id = "";
 
-    describe("Allergies Creation", function () {
-        it('should successfully create three allergies', function (done) {
-            var allergy = {
-                name: "egg"
+    describe("Users Creation", function () {
+        it('should successfully create three users', function (done) {
+            var user = {
+                username: "kek",
+                password: "toplamec",
+                email: "top.kek@top.com"
+
             };
 
-            var allergy2 = {
-                name: "tomatoes"
+            var user2 = {
+                username: "JCVD",
+                password: "yolo",
+                email: "jcvd@jcvd.com"
             };
 
-            var allergy3 = {
-                name: "chocolate"
+            var user3 = {
+                username: "TopChef",
+                password: "Kaamelott",
+                email: "Kaamelott@topchef.com"
             }
 
             request(url)
-				.post('/api/allergies')
-				.send(allergy3)
+				.post('/api/users/register')
+				.send(user3)
 				.end(function (err, res) {
 				    if (err)
 				        throw err;
@@ -52,8 +59,8 @@ describe('/api/allergies', function () {
 				});
 
             request(url)
-				.post('/api/allergies')
-				.send(allergy2)
+				.post('/api/users/register')
+				.send(user2)
 				.end(function (err, res) {
 				    if (err)
 				        throw err;
@@ -61,8 +68,8 @@ describe('/api/allergies', function () {
 				});
 
             request(url)
-				.post('/api/allergies')
-				.send(allergy)
+				.post('/api/users/register')
+				.send(user)
 				.end(function (err, res) {
 				    if (err)
 				        throw err;
@@ -71,13 +78,13 @@ describe('/api/allergies', function () {
 				});
         });
 
-        it('should not create an allergy with the same name', function (done) {
+        it('should not create a user with the same username', function (done) {
             var profile = {
-                name: 'egg'
+                username: 'kek'
             };
 
             request(url)
-				.post('/api/allergies')
+				.post('/api/users/register')
 				.send(profile)
 				.end(function (err, res) {
 				    if (err)
@@ -87,13 +94,13 @@ describe('/api/allergies', function () {
 				});
         });
 
-        it('should not create an allergy without the name key', function (done) {
+        it('should not create a user without the username key', function (done) {
             var profile = {
-                lol: 'egg'
+                lol: 'kek'
             };
 
             request(url)
-				.post('/api/allergies')
+				.post('/api/users/register')
 				.send(profile)
 				.end(function (err, res) {
 				    if (err)
@@ -104,11 +111,11 @@ describe('/api/allergies', function () {
         });
     });
 
-    describe('Allergies Retrieval', function () {
-        it('should retrieve all the allergies', function (done) {
+    describe('Users Retrieval', function () {
+        it('should retrieve all the users', function (done) {
 
             request(url)
-				.get('/api/allergies/')
+				.get('/api/users/')
 				.end(function (err, res) {
 				    if (err)
 				        throw err;
@@ -118,37 +125,37 @@ describe('/api/allergies', function () {
 				});
         });
 
-        it('should retrieve an allergy by it\'s name', function (done) {
+        it('should retrieve a user by it\'s username', function (done) {
 
             request(url)
-				.get('/api/allergies/name/egg')
+				.get('/api/users/username/kek')
 				.end(function (err, res) {
 				    if (err)
 				        throw err;
 				    res.status.should.be.equal(200);
-				    res.body[0].name.should.be.equal("egg");
-				    allergy_id = res.body[0]._id;
+				    res.body[0].username.should.be.equal("kek");
+				    user_id = res.body[0]._id;
 				    done();
 				});
         });
 
-        it('should retrieve an allergy by it\'s partial name', function (done) {
+        it('should retrieve a user by it\'s partial username', function (done) {
 
             request(url)
-				.get('/api/allergies/name/eg')
+				.get('/api/users/username/Chef')
 				.end(function (err, res) {
 				    if (err)
 				        throw err;
 				    res.status.should.be.equal(200);
-				    res.body[0].name.should.be.equal("egg");
+				    res.body[0].username.should.be.equal("TopChef");
 				    done();
 				});
         });
 
-        it('should return 404 on non-existant name', function (done) {
+        it('should return 404 on non-existant username', function (done) {
 
             request(url)
-				.get('/api/allergies/name/toto')
+				.get('/api/users/username/toto')
 				.end(function (err, res) {
 				    if (err)
 				        throw err;
@@ -157,15 +164,15 @@ describe('/api/allergies', function () {
 				});
         });
 
-        it('should retrieve an allergy by it\'s Id', function (done) {
+        it('should retrieve a user by it\'s Id', function (done) {
 
             request(url)
-				.get('/api/allergies/id/' + allergy_id)
+				.get('/api/users/id/' + user_id)
 				.end(function (err, res) {
 				    if (err)
 				        throw err;
 				    res.status.should.be.equal(200);
-				    res.body.name.should.be.equal("egg");
+				    res.body.username.should.be.equal("kek");
 				    done();
 				});
         });
@@ -173,7 +180,7 @@ describe('/api/allergies', function () {
         it('should return 404 on non-existant Id', function (done) {
 
             request(url)
-				.get('/api/allergies/id/' + mongoose.Types.ObjectId())
+				.get('/api/users/id/' + mongoose.Types.ObjectId())
 				.end(function (err, res) {
 				    if (err)
 				        throw err;
@@ -183,28 +190,30 @@ describe('/api/allergies', function () {
         });
     });
 
-    describe('Allergy Update', function () {
-        it('should update all the allergy\'s fields by Id', function (done) {
+    describe('User Update', function () {
+        it('should update all the user\'s fields by Id', function (done) {
 
             request(url)
-				.put('/api/allergies/id/' + allergy_id)
+				.put('/api/users/id/' + user_id)
 				.send({
-				    "name": "test",
-				    "description": "test"
+				    "email": "topkek@test.com",
+				    "description": "je suis un top KEK!!!!",
+				    "password": "jechangemonpassword",
+				    "gender": "male"
 				})
 				.end(function (err, res) {
 				    if (err)
 				        throw err;
 				    res.status.should.be.equal(200);
-				    res.body.message.should.be.equal("Allergy successfully updated!");
+				    res.body.message.should.be.equal("user update successfully");
 				    done();
 				});
         });
 
-        it('should not update an allergy with an unknown key by Id', function (done) {
+        it('should not update a user with an unknown key by Id', function (done) {
 
             request(url)
-				.put('/api/allergies/id/' + allergy_id)
+				.put('/api/users/id/' + user_id)
 				.send({
 				    "top": "kek",
 				})
@@ -216,27 +225,28 @@ describe('/api/allergies', function () {
 				});
         });
 
-        it('should update all the allergy\'s fields by name', function (done) {
+        it('should update all the user\'s fields by username', function (done) {
 
             request(url)
-				.put('/api/allergies/name/test')
+				.put('/api/users/username/JCVD')
 				.send({
-				    "name": "test",
-				    "description": "titi"
+				    "email": "test@test.com",
+				    "description": "Jean Claude Van Damme est dans la place baby!",
+				    "gender": "female"
 				})
 				.end(function (err, res) {
 				    if (err)
 				        throw err;
 				    res.status.should.be.equal(200);
-				    res.body.message.should.be.equal("Allergy successfully updated!");
+				    res.body.message.should.be.equal("user update successfully");
 				    done();
 				});
         });
 
-        it('should not update an allergy with an unknown key by name', function (done) {
+        it('should not update a user with an unknown key by username', function (done) {
 
             request(url)
-				.put('/api/allergies/name/test')
+				.put('/api/users/username/JCVD')
 				.send({
 				    "top": "kek"
 				})
@@ -249,45 +259,45 @@ describe('/api/allergies', function () {
         });
     });
 
-    describe('Allergy Deletion', function () {
-        it('should delete an allergy by Name', function (done) {
+    describe('User Deletion', function () {
+        it('should delete a user by Username', function (done) {
 
             request(url)
-				.delete('/api/allergies/name/chocolate')
+				.delete('/api/users/username/JCVD')
 				.end(function (err, res) {
 				    if (err)
 				        throw err;
 				    res.status.should.be.equal(200);
-				    res.body.message.should.be.equal("Allergy succesfully deleted!");
+				    res.body.message.should.be.equal("User succesfully deleted!");
 				    done();
 				});
         });
 
-        it('should delete an allergy by Id', function (done) {
+        it('should delete a user by Id', function (done) {
 
             request(url)
-				.delete('/api/allergies/id/' + allergy_id)
+				.delete('/api/users/id/' + user_id)
 				.end(function (err, res) {
 				    if (err)
 				        throw err;
 				    res.status.should.be.equal(200);
-				    res.body.message.should.be.equal("Allergy succesfully deleted!");
+				    res.body.message.should.be.equal("User succesfully deleted!");
 				    done();
 				});
         });
 
-        it('should delete an allergy by JSON', function (done) {
+        it('should delete a user by JSON', function (done) {
 
             request(url)
-				.delete('/api/allergies/')
+				.delete('/api/users/')
 				.send({
-				    "name": "tomatoes"
+				    "username": "TopChef"
 				})
 				.end(function (err, res) {
 				    if (err)
 				        throw err;
 				    res.status.should.be.equal(200);
-				    res.body.message.should.be.equal("Allergy succesfully deleted!");
+				    res.body.message.should.be.equal("User succesfully deleted!");
 				    done();
 				});
         });
@@ -303,4 +313,4 @@ describe('/api/allergies', function () {
     }
 });
 
-module.exports = "tests-allergy";
+module.exports = "tests-user";

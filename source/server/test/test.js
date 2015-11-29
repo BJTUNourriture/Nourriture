@@ -42,6 +42,9 @@ describe('API', function() {
     //Test allergies
     require('./API/tests-allergy')
 
+    //Test users
+    require('./API/tests-user')
+
 	/*Disconnects mongoose from the DB*/
 	after(function(done) {
 		mongoose.disconnect();

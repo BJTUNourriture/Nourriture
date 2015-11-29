@@ -52,5 +52,11 @@ test-allergies:
 		mocha --reporter $(REPORTER) $(MOCHA_OPTS) ./test/API/tests-allergy.js
 		@echo Ending Allergies tests
 
-.PHONY: test test-ingredients test-recipes test-tags test-search  test-types test-oauth test-allergies
+test-users:
+		clear
+		@echo Starting Users tests
+		mocha --reporter $(REPORTER) $(MOCHA_OPTS) ./test/API/tests-user.js
+		@echo Ending Users tests
+
+.PHONY: test test-ingredients test-recipes test-tags test-search  test-types test-oauth test-allergies test-users
 
