@@ -6338,7 +6338,7 @@
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n  \"name\": \"Loukoums\",\n  \"description\": \"Desserts\"\n}",
+          "content": "{\n  \"name\": \"Loukoums\",\n  \"category\": \"Desserts\"\n}",
           "type": "json"
         }
       ]

@@ -33,5 +33,11 @@ test-search:
 		mocha --reporter $(REPORTER) $(MOCHA_OPTS) ./test/API/tests-search.js
 		@echo Ending Search tests
 
-.PHONY: test test-ingredients test-recipes test-tags test-search
+test-types:
+		clear
+		@echo Starting Types tests
+		mocha --reporter $(REPORTER) $(MOCHA_OPTS) ./test/API/tests-type.js
+		@echo Ending Types tests
+
+.PHONY: test test-ingredients test-recipes test-tags test-search test-types
 
