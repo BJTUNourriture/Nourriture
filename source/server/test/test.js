@@ -33,11 +33,11 @@ describe('API', function() {
     //Test Search
     require('./API/tests-search');
 
-	//Test OAuth
-	require('./API/tests-oauth');
-
     //Tests types
     require('./API/tests-type');
+
+	//Test OAuth
+	require('./API/tests-oauth');
 
 	/*Disconnects mongoose from the DB*/
 	after(function(done) {
