@@ -72,6 +72,117 @@ describe('/api/types', function() {
 					done();
 				});
 		});
+
+		it('should not create a type with the same name', function(done) {
+		  	var profile = {
+				name: 'test'
+			};
+
+			request(url)
+				.post('/api/types')
+				.send(profile)
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(400);
+					done();
+				});
+		});
+
+		it('should not create a type without the name key', function(done) {
+		  	var profile = {
+				lol: 'test'
+			};
+
+			request(url)
+				.post('/api/types')
+				.send(profile)
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(400);
+					done();
+				});
+		});
+	});
+
+	describe("Types Retrieval", function () {
+		it('should retrieve all the types' , function(done) {
+
+			request(url)
+				.get('/api/types/')
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(200);
+					res.body.should.be.lengthOf(3);
+					done();
+				});
+		});
+
+		it('should retrieve a type by it\'s name' , function(done) {
+
+			request(url)
+				.get('/api/types/name/test')
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(200);
+					res.body[0].name.should.be.equal("test");
+					type_id = res.body[0]._id;
+					done();
+				});
+		});
+
+		it('should retrieve a type by it\'s partial name' , function(done) {
+
+			request(url)
+				.get('/api/types/name/kek')
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(200);
+					res.body[0].name.should.be.equal("testkek");
+					done();
+				});
+		});
+
+		it('should return 404 on non-existant name' , function(done) {
+
+			request(url)
+				.get('/api/types/name/ass')
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(404);
+					done();
+				});
+		});
+
+		it('should retrieve a type by it\'s Id' , function(done) {
+
+			request(url)
+				.get('/api/types/id/'+ type_id)
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(200);
+					res.body.name.should.be.equal("test");
+					done();
+				});
+		});
+
+		it('should return 404 on non-existant Id' , function(done) {
+
+			request(url)
+				.get('/api/types/id/'+ mongoose.Types.ObjectId())
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(404);
+					done();
+				});
+		});
 	});
 
 	if (standalone_test)
