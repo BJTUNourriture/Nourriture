@@ -251,6 +251,28 @@ describe('/api/recipes', function() {
 				});			
 		});
 
+		it('should retrieve a recipe by its id', function(done) {
+			request(url)
+				.get('/api/recipes/id/' + recipe_id)
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.body.title.should.be.equal("test2");
+					done();
+				});			
+		});
+
+		it('should return 404 on non-existant Id' , function(done) {
+
+			request(url)
+				.get('/api/recipes/id/'+ mongoose.Types.ObjectId())
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(404);
+					done();
+				});
+		});
 	});
 
 	if (standalone_test)
