@@ -203,7 +203,6 @@ describe('/api/recipes', function() {
 					done();
 				});
 		});
-
 	});
 
 	describe("Recipes Retrieval", function () {
@@ -217,6 +216,41 @@ describe('/api/recipes', function() {
 					done();
 				});			
 		});
+
+		it('should retrieve a recipe by its title', function(done) {
+			request(url)
+				.get('/api/recipes/title/test2')
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.body[0].title.should.be.equal("test2");
+					recipe_id = res.body[0]._id;
+					done();
+				});			
+		});
+
+		it('should retrieve a recipe by its partial title', function(done) {
+			request(url)
+				.get('/api/recipes/title/kek')
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.body[0].title.should.be.equal("testkek");
+					done();
+				});			
+		});
+
+		it('should return 404 an non-existant title', function(done) {
+			request(url)
+				.get('/api/recipes/title/pepperoni')
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(404);
+					done();
+				});			
+		});
+
 	});
 
 	if (standalone_test)
