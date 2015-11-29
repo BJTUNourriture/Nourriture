@@ -13,6 +13,6 @@ describe('Homepage', function() {
 
     element(by.css(".icon-menu")).click()
     expect(hasClass(element(by.name('md-backdrop')), 'md-opaque')).toBe(true);
-  });  
+  });
 });
 

@@ -81,8 +81,6 @@ var Client = require('../models/client');
 
 exports.postClients = function (req, res) {
 
-console.log("Ceci est un post sur les Clients");
-
     var client = new Client();
 
     client.name = req.body.name;

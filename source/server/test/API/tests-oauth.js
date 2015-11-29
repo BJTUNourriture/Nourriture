@@ -7,6 +7,8 @@ var request = require('supertest');
 var mongoose = require('mongoose');
 var User = require('../../API/models/users');
 var Client = require('../../oauth/models/client');
+var Code = require('../../oauth/models/code');
+
 
 /*Checks if App was launched*/
 if (mongoose.connection.readyState === 0) {
@@ -32,9 +34,10 @@ describe('/api/oauth', function () {
     }
 
     /*Testing vars*/
-    var user_id = "";
-    var user_name = "";
-    var token = "";
+    var user_id = null;
+    var user_name = null;
+    var token = null;
+    var id_client = "id_oauth";
 
 
     describe("OAuth Creation", function () {
@@ -85,10 +88,60 @@ describe('/api/oauth', function () {
         it('should create Client', function (done) {
 
 
+            var client = new Client({
+
+                name: "OAuth_application",
+                id: id_client,
+                secret: "My_super_secret_key"
+            });
+
+
+            console.log("Save");
+
             request(url)
-                .get('/api/clients')
+                .post('/api/clients')
                 .set('Authorization', 'Topkek ' + token)
-                .expect(200, done);
+                .send(client)
+                .expect(200)
+                .end(done);
+
+
+        });
+
+        it('should give an autorization code', function (done) {
+
+            var code = new Code({
+                value: "123456",
+                clientId: id_client,
+                redirectUri: "localhost:8101",
+                userId: user_id
+            });
+
+            // Save the auth code and check for errors
+            code.save(function (err) {
+                if (err) {
+                    throw err;
+                }
+                done();
+            });
+
+        });
+
+        it('should give a OAuth token', function (done) {
+
+            var obj_code = {
+                code: "123456",
+                grant_type: "authorization_code",
+                redirect_uri: "localhost:8101"
+            };
+
+            request(url)
+                .post('api/oauth2/token')
+                .auth('OAuth_application', 'My_super_secret_key')
+                .send(obj_code)
+                .expect(200)
+                .end(done());
+
 
         });
 
