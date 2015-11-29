@@ -22,7 +22,7 @@ describe('/api/oauth', function () {
 
     if (standalone_test) {
         /*Clears all the collections to have an empty DB*/
-        before(function (done) {
+        beforeEach(function (done) {
             for (var i in mongoose.connection.collections) {
                 mongoose.connection.collections[i].remove(function () {
                 });
@@ -73,7 +73,6 @@ describe('/api/oauth', function () {
                         }
 
                         token = res.body.key;
-                        console.log("token = ", res.body.key);
                         done();
 
 
