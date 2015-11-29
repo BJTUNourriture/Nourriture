@@ -467,6 +467,51 @@ describe('/api/recipes', function() {
 		});
 	});
 
+	describe("Recipes Deletion", function () {
+		it('should delete a recipe by Name' , function(done) {
+
+			request(url)
+				.delete('/api/recipes/title/testkek')
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(200);
+					res.body.message.should.be.equal("Recipe succesfully deleted!");
+					done();
+				});
+		});
+
+		it('should delete a recipe by Id' , function(done) {
+
+			request(url)
+				.delete('/api/recipes/id/' + recipe_id)
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(200);
+					res.body.message.should.be.equal("Recipe succesfully deleted!");
+					done();
+				});
+		});
+
+		it('should delete a recipe by JSON' , function(done) {
+
+			request(url)
+				.delete('/api/recipes/')
+				.send({
+					"title" : "test"
+				})
+				.end(function(err, res) {
+					  if (err)
+						throw err;
+					res.status.should.be.equal(200);
+					res.body.message.should.be.equal("Recipe succesfully deleted!");
+					done();
+				});
+		});
+
+	});
+
 	if (standalone_test)
 	{
 		/*Disconnects mongoose from the DB*/
