@@ -1,5 +1,6 @@
 describe('Homepage', function() {
   it('should have Nourriture as title', function() {
+    browser.get("http://localhost:3000/");
     expect(browser.getTitle()).toEqual("Nourriture");
   });
 
@@ -12,6 +13,6 @@ describe('Homepage', function() {
 
     element(by.css(".icon-menu")).click()
     expect(hasClass(element(by.name('md-backdrop')), 'md-opaque')).toBe(true);
-  });  
+  });
 });
 

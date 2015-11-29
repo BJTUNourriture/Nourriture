@@ -85,10 +85,23 @@ describe('/api/oauth', function () {
         it('should create Client', function (done) {
 
 
-            request(url)
-                .get('/api/clients')
-                .set('Authorization', 'Topkek ' + token)
-                .expect(200, done);
+            var client = new Client({
+
+                name: "OAuth application"
+            });
+
+
+
+                console.log("Save");
+
+                request(url)
+                    .post('/api/clients')
+                    .set('Authorization', 'Topkek ' + token)
+                    .send(client)
+                    .expect(500)
+                    .end(done);
+
+
 
         });
 
