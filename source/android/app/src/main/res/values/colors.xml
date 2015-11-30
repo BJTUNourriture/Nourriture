@@ -3,6 +3,8 @@
     <color name="PrimaryColor">#444</color>
     <color name="PrimaryDarkColor">#222</color>
     <color name="PrimaryColorWhite">#888</color>
+    <color name="tabColor">#666</color>
+
 
     <!--$primary-color: #333;-->
     <!--$background: #ECECEC;-->

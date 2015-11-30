@@ -1,11 +1,11 @@
 <android.support.v4.widget.DrawerLayout
     android:id="@+id/drawer"
-    android:background="@color/PrimaryColorWhite"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/PrimaryColorWhite"
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
@@ -34,12 +34,12 @@
     </LinearLayout>
 
     <android.support.design.widget.NavigationView
-        android:background="@color/PrimaryColor"
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/PrimaryColor"
         app:headerLayout="@layout/header"
-        app:menu="@menu/drawer"
-        />
+        app:menu="@menu/drawer"/>
+
 </android.support.v4.widget.DrawerLayout>
