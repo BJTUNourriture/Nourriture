@@ -19,7 +19,6 @@ public class ServiceFactory {
                 .setEndpoint(endPoint)
                 .build();
         T service = restAdapter.create(clazz);
-
         return service;
     }
 }

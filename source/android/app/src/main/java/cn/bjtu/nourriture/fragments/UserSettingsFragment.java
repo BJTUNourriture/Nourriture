@@ -2,6 +2,7 @@ package cn.bjtu.nourriture.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ public class UserSettingsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.e(getClass().toString(), "settings called");
         View v = inflater.inflate(R.layout.dummy_fragment, container, false);
         ((TextView) v.findViewById(R.id.dummy)).setText("Settings");
         return v;
