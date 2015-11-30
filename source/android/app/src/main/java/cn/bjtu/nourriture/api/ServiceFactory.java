@@ -1,6 +1,8 @@
 package cn.bjtu.nourriture.api;
 
-import retrofit.RestAdapter;
+import retrofit.GsonConverterFactory;
+import retrofit.Retrofit;
+import retrofit.RxJavaCallAdapterFactory;
 
 /**
  * Author : juliengenoud
@@ -8,15 +10,14 @@ import retrofit.RestAdapter;
  **/
 public class ServiceFactory {
 
-    /**
-     * Creates a retrofit service from an arbitrary class (clazz)
-     * @param clazz Java interface of the retrofit service
-     * @param endPoint REST endpoint url
-     * @return retrofit service with defined endpoint
-     */
-    public static <T> T createRetrofitService(final Class<T> clazz, final String endPoint) {
-        final RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint(endPoint)
+    static String API_IP = "192.168.0.101";
+    static String SERVICE_ENDPOINT = "http://" + API_IP + ":8101/api/";
+
+    public static <T> T createRetrofitService(final Class<T> clazz) {
+        final Retrofit restAdapter = new Retrofit.Builder()
+                .baseUrl(SERVICE_ENDPOINT)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         T service = restAdapter.create(clazz);
         return service;

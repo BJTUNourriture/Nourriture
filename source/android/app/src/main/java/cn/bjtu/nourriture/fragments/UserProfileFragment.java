@@ -36,7 +36,7 @@ public class UserProfileFragment extends Fragment {
 
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
-        NourritureService service = ServiceFactory.createRetrofitService(NourritureService.class, NourritureService.SERVICE_ENDPOINT);
+        NourritureService service = ServiceFactory.createRetrofitService(NourritureService.class);
         service.getUser("Julien")
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -44,7 +44,6 @@ public class UserProfileFragment extends Fragment {
                     @Override
                     public final void onCompleted() {
                         // do nothing
-
                     }
 
                     @Override
@@ -53,7 +52,6 @@ public class UserProfileFragment extends Fragment {
                         Log.e("User", e.getMessage());
                         view.findViewById(R.id.progress).setVisibility(View.GONE);
                         ((TextView) view.findViewById(R.id.user_name)).setText(e.getMessage());
-
                     }
 
                     @Override
