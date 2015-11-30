@@ -4,6 +4,8 @@
     <color name="PrimaryDarkColor">#222</color>
     <color name="PrimaryColorWhite">#888</color>
     <color name="tabColor">#666</color>
+    <color name="touch_effect">#9ccc</color>
+
 
 
     <!--$primary-color: #333;-->

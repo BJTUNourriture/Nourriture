@@ -11,4 +11,5 @@
     <string name="groups">GROUPS</string>
     <string name="openDrawer">openDrawe</string>
     <string name="closeDrawer">closeDrawe</string>
+    <string name="category">CATEGORY</string>
 </resources>

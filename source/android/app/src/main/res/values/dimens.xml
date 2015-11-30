@@ -2,4 +2,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="spacing_nano">2dp</dimen>
+    <dimen name="spacing_double">16dp</dimen>
+    <dimen name="size_avatar_toolbar">10dp</dimen>
 </resources>

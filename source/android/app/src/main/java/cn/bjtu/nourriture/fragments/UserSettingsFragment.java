@@ -16,11 +16,6 @@ import cn.bjtu.nourriture.R;
  **/
 public class UserSettingsFragment extends Fragment {
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
     public static UserSettingsFragment newInstance() {
         UserSettingsFragment fragment = new UserSettingsFragment();
         return fragment;

@@ -32,7 +32,7 @@ public class UserFragement extends Fragment {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         Log.e(getClass().toString(), "userfragment created");
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager);
-        viewPager.setAdapter(new UserFragmentPagerAdapter(getActivity().getSupportFragmentManager(), getActivity()));
+        viewPager.setAdapter(new UserFragmentPagerAdapter(getChildFragmentManager(), getActivity()));
 
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.sliding_tabs);

@@ -28,11 +28,6 @@ public class UserProfileFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.user_fragment, container, false);
@@ -49,16 +44,21 @@ public class UserProfileFragment extends Fragment {
                     @Override
                     public final void onCompleted() {
                         // do nothing
+
                     }
 
                     @Override
                     public final void onError(Throwable e) {
                         e.printStackTrace();
                         Log.e("User", e.getMessage());
+                        view.findViewById(R.id.progress).setVisibility(View.GONE);
+                        ((TextView) view.findViewById(R.id.user_name)).setText(e.getMessage());
+
                     }
 
                     @Override
                     public void onNext(User user) {
+                        view.findViewById(R.id.progress).setVisibility(View.GONE);
                         ((TextView) view.findViewById(R.id.user_id)).setText(user.get_id());
                         ((TextView) view.findViewById(R.id.user_email)).setText(user.getEmail());
                         ((TextView) view.findViewById(R.id.user_name)).setText(user.getUsername());
