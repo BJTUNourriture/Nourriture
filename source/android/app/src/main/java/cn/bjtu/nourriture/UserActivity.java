@@ -15,7 +15,7 @@ import cn.bjtu.nourriture.fragments.IngredientFragment;
 import cn.bjtu.nourriture.fragments.RecipeFragment;
 import cn.bjtu.nourriture.fragments.UserFragement;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class UserActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     //Defining Variables
     private Toolbar toolbar;
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.user_layout);
 
         // Initializing Toolbar and setting it as the actionbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // SET USER SELECTED
         navigationView.getMenu().getItem(0).setChecked(true);
         android.support.v4.app.FragmentTransaction trans1 = getSupportFragmentManager().beginTransaction();
-        trans1.replace(R.id.frame, mUserFragment);
+        trans1.replace(R.id.frame, UserFragement.newInstance());
         trans1.commit();
     }
 
@@ -112,25 +112,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.user:
                 toolbar.setTitle(getString(R.string.user));
                 android.support.v4.app.FragmentTransaction trans1 = getSupportFragmentManager().beginTransaction();
-                trans1.replace(R.id.frame, mUserFragment);
+                trans1.replace(R.id.frame, UserFragement.newInstance());
                 trans1.commit();
                 break;
             case R.id.ingredients:
                 toolbar.setTitle(getString(R.string.ingredients));
                 android.support.v4.app.FragmentTransaction trans2 = getSupportFragmentManager().beginTransaction();
-                trans2.replace(R.id.frame, mIgredientFragment);
+                trans2.replace(R.id.frame, IngredientFragment.newInstance());
                 trans2.commit();
                 break;
             case R.id.recipes:
                 toolbar.setTitle(getString(R.string.recipes));
                 android.support.v4.app.FragmentTransaction trans3 = getSupportFragmentManager().beginTransaction();
-                trans3.replace(R.id.frame, mRecipeFragment);
+                trans3.replace(R.id.frame, RecipeFragment.newInstance());
                 trans3.commit();
                 break;
             case R.id.groups:
                 toolbar.setTitle(getString(R.string.groups));
                 android.support.v4.app.FragmentTransaction trans4 = getSupportFragmentManager().beginTransaction();
-                trans4.replace(R.id.frame, mGroupFragment);
+                trans4.replace(R.id.frame, GroupFragment.newInstance());
                 trans4.commit();
                 break;
             default:

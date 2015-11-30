@@ -15,6 +15,12 @@ import cn.bjtu.nourriture.R;
  **/
 public class IngredientFragment extends Fragment {
 
+    public static IngredientFragment newInstance() {
+        IngredientFragment fragment = new IngredientFragment();
+        return fragment;
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.dummy_fragment,container,false);

@@ -14,6 +14,12 @@ import cn.bjtu.nourriture.R;
  * 30/11/15
  **/
 public class GroupFragment  extends Fragment{
+
+    public static GroupFragment newInstance() {
+        GroupFragment fragment = new GroupFragment();
+        return fragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.dummy_fragment,container,false);

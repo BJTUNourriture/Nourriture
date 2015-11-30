@@ -19,6 +19,12 @@ public class RecipeFragment extends Fragment {
 
     private RecipesAdapter mAdapter;
 
+
+    public static RecipeFragment newInstance() {
+        RecipeFragment fragment = new RecipeFragment();
+        return fragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.recipes_fragment,container,false);

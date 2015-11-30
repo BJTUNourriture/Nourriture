@@ -18,6 +18,13 @@ import cn.bjtu.nourriture.adapters.UserFragmentPagerAdapter;
  **/
 public class UserFragement extends Fragment {
 
+
+    public static UserFragement newInstance() {
+        UserFragement fragment = new UserFragement();
+        return fragment;
+    }
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
