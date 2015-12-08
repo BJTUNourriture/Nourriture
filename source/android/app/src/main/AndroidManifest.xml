@@ -21,7 +21,7 @@
 
         <activity
             android:name=".LoginActivity"
-            android:label="@string/label-login">
+            android:label="@string/label_login">
 
         </activity>
 
