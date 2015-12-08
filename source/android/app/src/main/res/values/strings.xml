@@ -17,5 +17,6 @@
     <!-- Login Actvivty -->
     <string name="username">username</string>
     <string name="password">password</string>
+    <string name="label-login">Login</string>
 
 </resources>
