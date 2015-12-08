@@ -12,4 +12,10 @@
     <string name="openDrawer">openDrawe</string>
     <string name="closeDrawer">closeDrawe</string>
     <string name="category">CATEGORY</string>
+
+
+    <!-- Login Actvivty -->
+    <string name="username">username</string>
+    <string name="password">password</string>
+
 </resources>

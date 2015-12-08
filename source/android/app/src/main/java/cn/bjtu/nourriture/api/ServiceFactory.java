@@ -10,7 +10,7 @@ import retrofit.RxJavaCallAdapterFactory;
  **/
 public class ServiceFactory {
 
-    static String API_IP = "192.168.0.101";
+    static String API_IP = "10.0.2.2";
     static String SERVICE_ENDPOINT = "http://" + API_IP + ":8101/api/";
 
     public static <T> T createRetrofitService(final Class<T> clazz) {
