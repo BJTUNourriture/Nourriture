@@ -14,7 +14,11 @@
     <string name="category">CATEGORY</string>
 
 
-    <!-- Login Actvivty -->
+    <!-- Drawer anonymous -->
+    <string name="login">LOGIN</string>
+    <string name="register">REGISTER</string>
+
+    <!-- Login Fragment -->
     <string name="username">username</string>
     <string name="password">password</string>
     <string name="label_login">Login</string>

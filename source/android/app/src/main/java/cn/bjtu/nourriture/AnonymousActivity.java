@@ -41,7 +41,7 @@ public class AnonymousActivity extends AppCompatActivity implements NavigationVi
         setSupportActionBar(toolbar);
 
         //Initializing NavigationView
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView = (NavigationView) findViewById(R.id.anonymous_navigation_view);
 
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(this);
