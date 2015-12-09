@@ -73,9 +73,13 @@ public class AnonymousActivity extends AppCompatActivity implements NavigationVi
 
         // SET USER SELECTED
         navigationView.getMenu().getItem(0).setChecked(true);
-        android.support.v4.app.FragmentTransaction trans1 = getSupportFragmentManager().beginTransaction();
-        trans1.replace(R.id.frame, LoginFragment.newInstance());
-        trans1.commit();
+        //android.support.v4.app.FragmentTransaction trans1 = getSupportFragmentManager().beginTransaction();
+        // trans1.replace(R.id.frame, LoginFragment.newInstance());
+        // trans1.commit();
+
+        android.support.v4.app.FragmentTransaction trans2 = getSupportFragmentManager().beginTransaction();
+        trans2.replace(R.id.frame, RegisterFragment.newInstance());
+        trans2.commit();
     }
 
     @Override

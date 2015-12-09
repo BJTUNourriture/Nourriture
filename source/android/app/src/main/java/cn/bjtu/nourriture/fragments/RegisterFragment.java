@@ -8,8 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import cn.bjtu.nourriture.R;
+import cn.bjtu.nourriture.api.NourritureService;
+import cn.bjtu.nourriture.api.ServiceFactory;
+import cn.bjtu.nourriture.model.Message;
+import cn.bjtu.nourriture.model.Register;
+import cn.bjtu.nourriture.model.User;
+import retrofit.HttpException;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by sylflo on 12/9/15.
@@ -55,8 +66,46 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Log.d(TAG,  username.getText().toString());
+                Register registerUser = new Register(username.getText().toString(),
+                        password.getText().toString(), email.getText().toString());
 
+                //Log.d(TAG, username.getText().toString());
+                NourritureService service = ServiceFactory.createRetrofitService(NourritureService.class);
+                Observable<Message> observable = service.registerUser(registerUser);
+
+                observable
+                        .subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Subscriber<Message>() {
+                            @Override
+                            public void onCompleted() {
+                                // handle completed
+                                Log.d(TAG, " onCompleted");
+                              /*  Toast.makeText(mContext, "Register success",
+                                        Toast.LENGTH_LONG).show();*/
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                Log.e(TAG, "onError");
+                                // handle error
+
+
+                               /* if (e instanceof HttpException) {
+                                    ErrorLogin error = ErrorUtils.parseError(((HttpException) e).response().errorBody(), ServiceGenerator.getRetrofit());
+                                }*/
+                            }
+
+                            @Override
+                            public void onNext(Message message) {
+                                // handle response
+                                Log.d(TAG, "onNext " + message.getMessage());
+
+                            }
+                        });
+
+
+                //service.registerUser()
             }
         });
 

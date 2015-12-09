@@ -1,7 +1,11 @@
 package cn.bjtu.nourriture.api;
 
+import cn.bjtu.nourriture.model.Message;
+import cn.bjtu.nourriture.model.Register;
 import cn.bjtu.nourriture.model.User;
+import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.POST;
 import retrofit.http.Path;
 import rx.Observable;
 
@@ -13,5 +17,8 @@ public interface NourritureService {
 
     @GET("users/username/{login}")
     Observable<User> getUser(@Path("login") String login);
+
+    @POST("users/register")
+    Observable<Message> registerUser(@Body Register user);
 
 }
