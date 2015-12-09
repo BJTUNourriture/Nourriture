@@ -1,5 +1,6 @@
 package cn.bjtu.nourriture.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import cn.bjtu.nourriture.R;
+import cn.bjtu.nourriture.UserActivity;
 import cn.bjtu.nourriture.api.NourritureService;
 import cn.bjtu.nourriture.api.ServiceFactory;
 import cn.bjtu.nourriture.model.Login;
@@ -88,6 +90,8 @@ public class LoginFragment extends Fragment {
                             @Override
                             public void onNext(Message message) {
                                 Toast.makeText(getContext(), message.getMessage(), Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(getActivity(), UserActivity.class);
+                                startActivity(intent);
                             }
                         });
             }
