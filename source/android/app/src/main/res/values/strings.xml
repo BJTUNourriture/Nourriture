@@ -18,9 +18,12 @@
     <string name="login">LOGIN</string>
     <string name="register">REGISTER</string>
 
-    <!-- Login Fragment -->
+    <!-- Login and Register Fragment -->
     <string name="username">username</string>
+    <string name="email">email</string>
     <string name="password">password</string>
     <string name="label_login">Login</string>
+
+
 
 </resources>
