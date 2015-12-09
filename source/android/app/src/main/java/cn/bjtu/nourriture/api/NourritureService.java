@@ -1,5 +1,8 @@
 package cn.bjtu.nourriture.api;
 
+import android.util.Log;
+
+import cn.bjtu.nourriture.model.Login;
 import cn.bjtu.nourriture.model.Message;
 import cn.bjtu.nourriture.model.Register;
 import cn.bjtu.nourriture.model.User;
@@ -20,5 +23,8 @@ public interface NourritureService {
 
     @POST("users/register")
     Observable<Message> registerUser(@Body Register user);
+
+    @POST("users/sign-in")
+    Observable<Message> loginUser(@Body Login user);
 
 }
