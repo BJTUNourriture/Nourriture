@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/PrimaryColorWhite"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    tools:context=".UserActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
