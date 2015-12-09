@@ -20,7 +20,7 @@
         </activity>
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".fragments.LoginFragment"
             android:label="@string/label_login">
 
         </activity>
