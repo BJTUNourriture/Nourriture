@@ -16,6 +16,8 @@ import cn.bjtu.nourriture.R;
  */
 public class RegisterFragment extends Fragment {
 
+    private static final String TAG = "RegisterFragment";
+
     View inflatedView = null;
     EditText username = null;
     EditText email = null;
@@ -48,6 +50,16 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         Log.e(getClass().toString(), "registerragment created");
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.d(TAG,  username.getText().toString());
+
+            }
+        });
+
 
     }
 
