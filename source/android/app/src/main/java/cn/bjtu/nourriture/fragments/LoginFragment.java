@@ -15,6 +15,9 @@ import cn.bjtu.nourriture.R;
  **/
 public class LoginFragment extends Fragment {
 
+    View inflatedView = null;
+
+
     public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();
         return fragment;
@@ -28,7 +31,13 @@ public class LoginFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.login_fragment, container, false);
+
+        inflatedView = inflater.inflate(R.layout.login_fragment, container, false);
+
+
+
+
+        return inflatedView;
     }
 
     @Override
