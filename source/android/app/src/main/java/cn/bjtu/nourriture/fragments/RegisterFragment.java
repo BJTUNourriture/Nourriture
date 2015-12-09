@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import cn.bjtu.nourriture.R;
 
@@ -13,6 +15,12 @@ import cn.bjtu.nourriture.R;
  * Created by sylflo on 12/9/15.
  */
 public class RegisterFragment extends Fragment {
+
+    View inflatedView = null;
+    EditText username = null;
+    EditText email = null;
+    EditText password = null;
+    Button submit = null;
 
     public static RegisterFragment newInstance() {
         RegisterFragment fragment = new RegisterFragment();
@@ -27,7 +35,14 @@ public class RegisterFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.register_fragment, container, false);
+        this.inflatedView = inflater.inflate(R.layout.register_fragment, container, false);
+
+        username = (EditText) inflatedView.findViewById(R.id.input_register_username);
+        email = (EditText) inflatedView.findViewById(R.id.input_register_email);
+        password = (EditText) inflatedView.findViewById(R.id.input_register_password);
+        submit = (Button) inflatedView.findViewById(R.id.button_register);
+
+        return this.inflatedView;
     }
 
     @Override
