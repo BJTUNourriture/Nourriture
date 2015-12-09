@@ -79,28 +79,18 @@ public class RegisterFragment extends Fragment {
                         .subscribe(new Subscriber<Message>() {
                             @Override
                             public void onCompleted() {
-                                // handle completed
-                                Log.d(TAG, " onCompleted");
-                              /*  Toast.makeText(mContext, "Register success",
-                                        Toast.LENGTH_LONG).show();*/
+                                //Do nothing
                             }
 
                             @Override
                             public void onError(Throwable e) {
-                                Log.e(TAG, "onError");
-                                // handle error
-
-
-                               /* if (e instanceof HttpException) {
-                                    ErrorLogin error = ErrorUtils.parseError(((HttpException) e).response().errorBody(), ServiceGenerator.getRetrofit());
-                                }*/
+                                e.printStackTrace();
+                                Log.e(TAG, e.getMessage());
                             }
 
                             @Override
                             public void onNext(Message message) {
-                                // handle response
-                                Log.d(TAG, "onNext " + message.getMessage());
-
+                                Toast.makeText(getContext(), message.getMessage(), Toast.LENGTH_LONG).show();
                             }
                         });
 
