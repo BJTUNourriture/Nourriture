@@ -6,8 +6,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import cn.bjtu.nourriture.R;
+import cn.bjtu.nourriture.api.NourritureService;
+import cn.bjtu.nourriture.api.ServiceFactory;
+import cn.bjtu.nourriture.model.Login;
+import cn.bjtu.nourriture.model.Message;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Author : juliengenoud
@@ -15,8 +26,12 @@ import cn.bjtu.nourriture.R;
  **/
 public class LoginFragment extends Fragment {
 
-    View inflatedView = null;
+    static final String TAG = "LoginFragment";
 
+    View inflatedView = null;
+    EditText username = null;
+    EditText password = null;
+    Button submit = null;
 
     public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();
@@ -34,15 +49,49 @@ public class LoginFragment extends Fragment {
 
         inflatedView = inflater.inflate(R.layout.login_fragment, container, false);
 
-
-
+        username = (EditText) inflatedView.findViewById(R.id.input_login_username);
+        password = (EditText) inflatedView.findViewById(R.id.input_login_password);
+        submit = (Button) inflatedView.findViewById(R.id.button_login);
 
         return inflatedView;
     }
 
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
-        Log.e(getClass().toString(), "loginfragment created");
+        //Log.e(TAG, "loginfragment created");
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Login user = new Login(username.getText().toString(),
+                        password.getText().toString());
+
+                NourritureService service = ServiceFactory.createRetrofitService(NourritureService.class);
+                Observable<Message> observable = service.loginUser(user);
+
+                observable
+                        .subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Subscriber<Message>() {
+                            @Override
+                            public void onCompleted() {
+                                //Do nothing
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                e.printStackTrace();
+                                Log.e(TAG, e.getMessage());
+                            }
+
+                            @Override
+                            public void onNext(Message message) {
+                                Toast.makeText(getContext(), message.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+            }
+        });
 
     }
 }

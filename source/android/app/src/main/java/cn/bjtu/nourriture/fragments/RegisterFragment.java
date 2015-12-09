@@ -93,8 +93,6 @@ public class RegisterFragment extends Fragment {
                                 Toast.makeText(getContext(), message.getMessage(), Toast.LENGTH_LONG).show();
                             }
                         });
-
-
             }
         });
 
