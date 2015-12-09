@@ -15,6 +15,7 @@ import cn.bjtu.nourriture.fragments.GroupFragment;
 import cn.bjtu.nourriture.fragments.IngredientFragment;
 import cn.bjtu.nourriture.fragments.LoginFragment;
 import cn.bjtu.nourriture.fragments.RecipeFragment;
+import cn.bjtu.nourriture.fragments.RegisterFragment;
 import cn.bjtu.nourriture.fragments.UserFragement;
 
 /**
@@ -108,32 +109,19 @@ public class AnonymousActivity extends AppCompatActivity implements NavigationVi
 
 
             //Replacing the main content with ContentFragment Which is our Inbox View;
-            case R.id.user:
-                toolbar.setTitle(getString(R.string.user));
+            case R.id.login:
+                toolbar.setTitle(getString(R.string.login));
                 android.support.v4.app.FragmentTransaction trans1 = getSupportFragmentManager().beginTransaction();
-                trans1.replace(R.id.frame, UserFragement.newInstance());
+                trans1.replace(R.id.frame, LoginFragment.newInstance());
                 trans1.commit();
                 break;
-       /*     case R.id.ingredients:
-                toolbar.setTitle(getString(R.string.ingredients));
+            case R.id.register:
+                toolbar.setTitle(getString(R.string.register));
                 android.support.v4.app.FragmentTransaction trans2 = getSupportFragmentManager().beginTransaction();
-                trans2.replace(R.id.frame, IngredientFragment.newInstance());
+                trans2.replace(R.id.frame, RegisterFragment.newInstance());
                 trans2.commit();
                 break;
-            case R.id.recipes:
-                toolbar.setTitle(getString(R.string.recipes));
-                android.support.v4.app.FragmentTransaction trans3 = getSupportFragmentManager().beginTransaction();
-                trans3.replace(R.id.frame, RecipeFragment.newInstance());
-                trans3.commit();
-                break;
-            case R.id.groups:
-                toolbar.setTitle(getString(R.string.groups));
-                android.support.v4.app.FragmentTransaction trans4 = getSupportFragmentManager().beginTransaction();
-                trans4.replace(R.id.frame, GroupFragment.newInstance());
-                trans4.commit();
-                break;
-            default:
-                break;*/
+
         }
         return true;
     }
