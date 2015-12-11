@@ -5,6 +5,7 @@ import android.util.Log;
 import cn.bjtu.nourriture.model.Login;
 import cn.bjtu.nourriture.model.Message;
 import cn.bjtu.nourriture.model.Register;
+import cn.bjtu.nourriture.model.Token;
 import cn.bjtu.nourriture.model.User;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -25,6 +26,6 @@ public interface NourritureService {
     Observable<Message> registerUser(@Body Register user);
 
     @POST("users/sign-in")
-    Observable<Message> loginUser(@Body Login user);
+    Observable<Token> loginUser(@Body Login user);
 
 }

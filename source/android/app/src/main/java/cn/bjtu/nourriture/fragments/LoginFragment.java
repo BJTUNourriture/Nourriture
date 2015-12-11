@@ -17,6 +17,7 @@ import cn.bjtu.nourriture.api.NourritureService;
 import cn.bjtu.nourriture.api.ServiceFactory;
 import cn.bjtu.nourriture.model.Login;
 import cn.bjtu.nourriture.model.Message;
+import cn.bjtu.nourriture.model.Token;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -70,12 +71,12 @@ public class LoginFragment extends Fragment {
                         password.getText().toString());
 
                 NourritureService service = ServiceFactory.createRetrofitService(NourritureService.class);
-                Observable<Message> observable = service.loginUser(user);
+                Observable<Token> observable = service.loginUser(user);
 
                 observable
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Subscriber<Message>() {
+                        .subscribe(new Subscriber<Token>() {
                             @Override
                             public void onCompleted() {
                                 //Do nothing
@@ -88,8 +89,8 @@ public class LoginFragment extends Fragment {
                             }
 
                             @Override
-                            public void onNext(Message message) {
-                                Toast.makeText(getContext(), message.getMessage(), Toast.LENGTH_LONG).show();
+                            public void onNext(Token token) {
+                                Toast.makeText(getContext(), token.getUserName(), Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(getActivity(), UserActivity.class);
                                 startActivity(intent);
                             }
