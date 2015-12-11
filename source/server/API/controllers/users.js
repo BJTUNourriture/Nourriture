@@ -477,7 +477,7 @@ exports.getUserById = function (req, res, flag) {
 exports.getUserByName = function (req, res, flag) {
     var name = flag === true ? req.body.username : req.params.username;
     if (!name)
-        return flag === true ? -1 : res.json(400, {message: 'The name musn\'t be null'});
+        return flag === true ? -1 : res.status(400).json({message: 'The name musn\'t be null'});
     User.find({
             "username": {"$regex": name, "$options": "i"}
         },
@@ -485,7 +485,7 @@ exports.getUserByName = function (req, res, flag) {
             if (err)
                 return (res.send(err));
             else if (docs.length <= 0)
-                return (res.json(404, {message: 'The name was not found.'}));
+                return (res.status(404).json({message: 'The name was not found.'}));
 
             user_doc = docs[0].toObject();
             delete user_doc['password'];
@@ -795,7 +795,7 @@ exports.removeGroupToUser = function (req, res) {
 exports.deleteUserById = function (req, res, flag) {
     var id = flag === true ? req.body.id : req.params.id;
     if (!id)
-        return flag === true ? -1 : res.json(400, {message: 'The id musn\'t be null'});
+        return flag === true ? -1 : res.status(400).json({message: 'The id musn\'t be null'});
     User.remove({
             _id: id
         },
@@ -803,7 +803,7 @@ exports.deleteUserById = function (req, res, flag) {
             if (err)
                 return (res.send(err));
             else if (removed.result.n === 0)
-                return (res.json(404, {message: 'The id was not found.'}))
+                return (res.status(404).json({message: 'The id was not found.'}))
             return (res.json({message: 'User succesfully deleted!'}));
         }
     );
@@ -835,7 +835,7 @@ exports.deleteUserById = function (req, res, flag) {
 exports.deleteUserByName = function (req, res, flag) {
     var name = flag === true ? req.body.username : req.params.username;
     if (!name)
-        return flag === true ? -1 : res.json(400, {message: 'The name musn\'t be null'});
+        return flag === true ? -1 : res.status(400).json({message: 'The name musn\'t be null'});
     User.remove({
             username: name
         },
@@ -843,7 +843,7 @@ exports.deleteUserByName = function (req, res, flag) {
             if (err)
                 return (res.send(err));
             else if (removed.result.n === 0)
-                return (res.json(404, {message: 'The name was not found.'}))
+                return (res.status(404).json({message: 'The name was not found.'}))
             return (res.json({message: 'User succesfully deleted!'}));
         }
     );

@@ -257,7 +257,7 @@ exports.getAllAllergies = function(req, res) {
 			if (err)
 				return (res.send(err));
 			else if (docs.length <= 0)
-				return (res.json(404, {message : 'There are no existing allergies.'}))
+				return (res.status(404).json({message : 'There are no existing allergies.'}))
 			return (res.json(docs));
 		}
 	);
@@ -286,13 +286,13 @@ exports.getAllAllergies = function(req, res) {
 exports.getAllergyById = function (req, res, flag) {
 	var id = flag === true ? req.body.id : req.params.id;
 	if (!id)
-		return flag === true ? -1 : res.json(400, {message : 'The id musn\'t be null'});
+		return flag === true ? -1 : res.status(400).json({message : 'The id musn\'t be null'});
 	Allergies.findById(id,
 		function (err, doc) {
 			if (err)
 				return (res.send(err));
 			else if (doc === null)
-				return (res.json(404, {message : 'The id was not found.'}))
+				return (res.status(404).json({message : 'The id was not found.'}))
 			return (res.json(doc));
 		}
 	);
@@ -321,7 +321,7 @@ exports.getAllergyById = function (req, res, flag) {
 exports.getAllergyByName = function (req, res, flag) {
 	var name = flag === true ? req.body.name : req.params.name;
 	if (!name)
-		return flag === true ? -1 : res.json(400, {message : 'The name musn\'t be null'});
+		return flag === true ? -1 : res.status(400).json({message : 'The name musn\'t be null'});
 	Allergies.find({
 		"name": { "$regex": name, "$options": "i" } 
 		},
@@ -329,7 +329,7 @@ exports.getAllergyByName = function (req, res, flag) {
 			if (err)
 				return (res.send(err));
 			else if (docs.length <= 0)
-				return (res.json(404, {message : 'The name was not found.'}))
+				return (res.status(404).json({message : 'The name was not found.'}))
 			return (res.json(docs));
 		}
 	);
@@ -406,7 +406,7 @@ exports.deleteAllergies = function (req, res) {
 exports.deleteAllergyById = function (req, res, flag) {
 	var id = flag === true ? req.body.id : req.params.id;
 	if (!id)
-		return flag === true ? -1 : res.json(400, {message : 'The id musn\'t be null'});
+		return flag === true ? -1 : res.status(400).json({message : 'The id musn\'t be null'});
 	Allergies.remove({
 		_id : id
 		},
@@ -414,7 +414,7 @@ exports.deleteAllergyById = function (req, res, flag) {
 			if (err)
 				return (res.send(err));
 			else if (removed.result.n === 0)
-				return (res.json(404, {message : 'The id was not found.'}))
+				return (res.status(404).json({message : 'The id was not found.'}))
 			return (res.json({message : 'Allergy succesfully deleted!'}));
 		}
 	);
@@ -441,7 +441,7 @@ exports.deleteAllergyById = function (req, res, flag) {
 exports.deleteAllergyByName = function (req, res, flag) {
 	var name = flag === true ? req.body.name : req.params.name;
 	if (!name)
-		return flag === true ? -1 : res.json(400, {message : 'The name musn\'t be null'});
+		return flag === true ? -1 : res.status(400).json({message : 'The name musn\'t be null'});
 	Allergies.remove({
 		name : name
 		},
@@ -449,7 +449,7 @@ exports.deleteAllergyByName = function (req, res, flag) {
 			if (err)
 				return (res.send(err));
 			else if (removed.result.n === 0)
-				return (res.json(404, {message : 'The name was not found.'}))
+				return (res.status(404).json({message : 'The name was not found.'}))
 			return (res.json({message : 'Allergy succesfully deleted!'}));
 		}
 	);

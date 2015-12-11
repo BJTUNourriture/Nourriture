@@ -21,6 +21,7 @@
     <!-- Login and Register Fragment -->
     <string name="username">username</string>
     <string name="email">email</string>
+    <string name="confirm_email">confirm email</string>
     <string name="password">password</string>
     <string name="label_login">Login</string>
 
