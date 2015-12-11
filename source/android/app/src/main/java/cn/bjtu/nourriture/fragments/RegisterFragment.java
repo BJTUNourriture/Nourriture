@@ -121,6 +121,7 @@ public class RegisterFragment extends Fragment {
             requestFocus(email);
             return (false);
         }
+        inputLayoutEmail.setErrorEnabled(false);
         return (true);
     }
 

@@ -27,5 +27,9 @@
     <string name="err_email_pattern">Enter a valid email</string>
     <string name="err_confirm_email">Enter the same email</string>
 
-
+    <!-- Key shared pref -->
+    <string name="token_pref">token</string>
+    <string name="username_pref">username</string>
+    <string name="user_id_pref">user_id</string>
+    
 </resources>
