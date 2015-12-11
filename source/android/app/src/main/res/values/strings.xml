@@ -24,7 +24,8 @@
     <string name="confirm_email">confirm email</string>
     <string name="password">password</string>
     <string name="label_login">Login</string>
-
+    <string name="err_email_pattern">Enter a valid email</string>
+    <string name="err_confirm_email">Enter the same email</string>
 
 
 </resources>

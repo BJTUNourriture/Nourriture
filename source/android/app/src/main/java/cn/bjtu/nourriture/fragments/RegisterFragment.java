@@ -1,11 +1,13 @@
 package cn.bjtu.nourriture.fragments;
 
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -30,6 +32,9 @@ public class RegisterFragment extends Fragment {
     private static final String TAG = "RegisterFragment";
 
     View inflatedView = null;
+
+    TextInputLayout inputLayoutEmail = null;
+
     EditText username = null;
     EditText email = null;
     EditText confirm_email = null;
@@ -52,6 +57,8 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.inflatedView = inflater.inflate(R.layout.register_fragment, container, false);
 
+        inputLayoutEmail = (TextInputLayout) inflatedView.findViewById(R.id.input_layout_register_email);
+
         username = (EditText) inflatedView.findViewById(R.id.input_register_username);
         email = (EditText) inflatedView.findViewById(R.id.input_register_email);
         confirm_email = (EditText) inflatedView.findViewById(R.id.input_confirm_register_email);
@@ -68,6 +75,9 @@ public class RegisterFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (!validateEmail())
+                    return ;
 
                 Register registerUser = new Register(username.getText().toString(),
                         password.getText().toString(), email.getText().toString());
@@ -100,6 +110,24 @@ public class RegisterFragment extends Fragment {
         });
 
 
+    }
+
+    private boolean validateEmail() {
+        String email_test = email.getText().toString().trim();
+
+        if (email_test.isEmpty())
+        {
+            inputLayoutEmail.setError(getString(R.string.err_email_pattern));
+            requestFocus(email);
+            return (false);
+        }
+        return (true);
+    }
+
+    private void requestFocus(View view) {
+        if (view.requestFocus()) {
+            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
     }
 
 }
