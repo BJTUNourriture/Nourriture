@@ -67,7 +67,7 @@ public class AnonymousActivity extends AppCompatActivity implements NavigationVi
 
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
 
-        //calling sync state is necessay or else your hamburger icon wont show up
+        //calling sync state is necessary or else your hamburger icon wont show up
         actionBarDrawerToggle.syncState();
 
 

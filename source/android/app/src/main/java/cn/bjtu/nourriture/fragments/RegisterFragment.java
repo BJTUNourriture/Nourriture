@@ -32,6 +32,8 @@ public class RegisterFragment extends Fragment {
     View inflatedView = null;
     EditText username = null;
     EditText email = null;
+    EditText confirm_email = null;
+
     EditText password = null;
     Button submit = null;
 
@@ -52,6 +54,7 @@ public class RegisterFragment extends Fragment {
 
         username = (EditText) inflatedView.findViewById(R.id.input_register_username);
         email = (EditText) inflatedView.findViewById(R.id.input_register_email);
+        confirm_email = (EditText) inflatedView.findViewById(R.id.input_confirm_register_email);
         password = (EditText) inflatedView.findViewById(R.id.input_register_password);
         submit = (Button) inflatedView.findViewById(R.id.button_register);
 
