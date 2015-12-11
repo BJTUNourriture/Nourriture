@@ -1,6 +1,8 @@
 package cn.bjtu.nourriture.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -90,6 +92,13 @@ public class LoginFragment extends Fragment {
 
                             @Override
                             public void onNext(Token token) {
+                                SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPref.edit();
+                                editor.putString(getString(R.string.token_pref), token.getKey());
+                                editor.putString(getString(R.string.username_pref), token.getUserName());
+                                editor.putString(getString(R.string.user_id_pref), token.getUserId());
+                                editor.commit();
+
                                 Toast.makeText(getContext(), token.getUserName(), Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(getActivity(), UserActivity.class);
                                 startActivity(intent);

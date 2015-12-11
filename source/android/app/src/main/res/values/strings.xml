@@ -24,6 +24,11 @@
     <string name="password">password</string>
     <string name="label_login">Login</string>
 
+    <!-- Key shared pref -->
+    <string name="token_pref">token</string>
+    <string name="username_pref">username</string>
+    <string name="user_id_pref">user_id</string>
+
 
 
 </resources>
