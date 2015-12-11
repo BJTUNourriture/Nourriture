@@ -3,6 +3,7 @@ package cn.bjtu.nourriture.fragments;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +34,10 @@ public class RegisterFragment extends Fragment {
 
     View inflatedView = null;
 
+    TextInputLayout inputLayoutUsername = null;
     TextInputLayout inputLayoutEmail = null;
+    TextInputLayout inputLayoutEmailConfirm = null;
+    TextInputLayout inputLayoutPassword = null;
 
     EditText username = null;
     EditText email = null;
@@ -57,7 +61,10 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.inflatedView = inflater.inflate(R.layout.register_fragment, container, false);
 
+        inputLayoutUsername = (TextInputLayout) inflatedView.findViewById(R.id.input_layout_register_username);
         inputLayoutEmail = (TextInputLayout) inflatedView.findViewById(R.id.input_layout_register_email);
+        inputLayoutEmailConfirm = (TextInputLayout) inflatedView.findViewById(R.id.input_layout_confirm_register_email);
+        inputLayoutPassword = (TextInputLayout) inflatedView.findViewById(R.id.input_layout_register_password);
 
         username = (EditText) inflatedView.findViewById(R.id.input_register_username);
         email = (EditText) inflatedView.findViewById(R.id.input_register_email);
@@ -76,8 +83,11 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (!validateEmail())
-                    return ;
+                if (!validateEmail() ||
+                        !validateUsername() ||
+                        !validateConfirmEmail() ||
+                        !validatePassword())
+                    return;
 
                 Register registerUser = new Register(username.getText().toString(),
                         password.getText().toString(), email.getText().toString());
@@ -112,17 +122,57 @@ public class RegisterFragment extends Fragment {
 
     }
 
+    private boolean validateUsername() {
+        String username_test = username.getText().toString().trim();
+
+        if (username_test.isEmpty() || (username_test.length() < 3 || username_test.length() > 20)) {
+            inputLayoutUsername.setError(getString(R.string.err_username_pattern));
+            requestFocus(email);
+            return (false);
+        }
+        inputLayoutUsername.setErrorEnabled(false);
+        return (true);
+    }
+
     private boolean validateEmail() {
         String email_test = email.getText().toString().trim();
 
-        if (email_test.isEmpty())
-        {
+        if (email_test.isEmpty() || !isValidEmail(email_test)) {
             inputLayoutEmail.setError(getString(R.string.err_email_pattern));
             requestFocus(email);
             return (false);
         }
         inputLayoutEmail.setErrorEnabled(false);
         return (true);
+    }
+
+    private boolean validateConfirmEmail() {
+        String email_confirm_test = confirm_email.getText().toString().trim();
+        String master = email.getText().toString().trim();
+
+        if (!master.equals(email_confirm_test)) {
+            inputLayoutEmailConfirm.setError(getString(R.string.err_email_confirm));
+            requestFocus(email);
+            return (false);
+        }
+        inputLayoutEmailConfirm.setErrorEnabled(false);
+        return (true);
+    }
+
+    private boolean validatePassword() {
+        String password_test = password.getText().toString().trim();
+
+        if (password_test.isEmpty() || (password_test.length() < 6 || password_test.length() > 30)) {
+            inputLayoutPassword.setError(getString(R.string.err_password_pattern));
+            requestFocus(email);
+            return (false);
+        }
+        inputLayoutPassword.setErrorEnabled(false);
+        return (true);
+    }
+
+    private static boolean isValidEmail(String email) {
+        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     private void requestFocus(View view) {
