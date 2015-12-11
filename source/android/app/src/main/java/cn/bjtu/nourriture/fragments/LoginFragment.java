@@ -92,12 +92,14 @@ public class LoginFragment extends Fragment {
 
                             @Override
                             public void onNext(Token token) {
-                                SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sharedPref.edit();
-                                editor.putString(getString(R.string.token_pref), token.getKey());
-                                editor.putString(getString(R.string.username_pref), token.getUserName());
-                                editor.putString(getString(R.string.user_id_pref), token.getUserId());
+
+                                SharedPreferences preferences = getActivity().getSharedPreferences(
+                                        "GLOBAL", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.putString(getString(R.string.username_pref),
+                                        token.getUserName());
                                 editor.commit();
+
 
                                 Toast.makeText(getContext(), token.getUserName(), Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(getActivity(), UserActivity.class);

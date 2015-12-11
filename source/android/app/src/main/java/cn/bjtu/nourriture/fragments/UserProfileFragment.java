@@ -1,5 +1,7 @@
 package cn.bjtu.nourriture.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -22,9 +24,22 @@ import rx.schedulers.Schedulers;
  **/
 public class UserProfileFragment extends Fragment {
 
+    static final String TAG = "UserProfileFragment";
+    String mUsername = null;
+
     public static UserProfileFragment newInstance() {
         UserProfileFragment fragment = new UserProfileFragment();
         return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        SharedPreferences preferences = this.getActivity().getSharedPreferences("GLOBAL",
+                Context.MODE_PRIVATE);
+        mUsername = preferences.getString(getString(R.string.username_pref), null);
+        Log.d(TAG, mUsername);
     }
 
     @Override
@@ -37,7 +52,7 @@ public class UserProfileFragment extends Fragment {
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         NourritureService service = ServiceFactory.createRetrofitService(NourritureService.class);
-        service.getUser("Julien")
+        service.getUser(mUsername)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<User>() {
