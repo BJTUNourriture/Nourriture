@@ -12,6 +12,7 @@
     <string name="openDrawer">openDrawe</string>
     <string name="closeDrawer">closeDrawe</string>
     <string name="category">CATEGORY</string>
+    <string name="logout">LOGOUT</string>
 
 
     <!-- Drawer anonymous -->

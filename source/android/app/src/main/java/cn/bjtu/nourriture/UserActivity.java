@@ -14,6 +14,7 @@ import cn.bjtu.nourriture.fragments.GroupFragment;
 import cn.bjtu.nourriture.fragments.IngredientFragment;
 import cn.bjtu.nourriture.fragments.RecipeFragment;
 import cn.bjtu.nourriture.fragments.UserFragement;
+import cn.bjtu.nourriture.fragments.LogoutFragment;
 
 public class UserActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -132,6 +133,12 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
                 android.support.v4.app.FragmentTransaction trans4 = getSupportFragmentManager().beginTransaction();
                 trans4.replace(R.id.frame, GroupFragment.newInstance());
                 trans4.commit();
+                break;
+            case R.id.logout:
+                toolbar.setTitle(getString(R.string.logout));
+                android.support.v4.app.FragmentTransaction trans5 = getSupportFragmentManager().beginTransaction();
+                trans5.replace(R.id.frame, LogoutFragment.newInstance());
+                trans5.commit();
                 break;
             default:
                 break;
