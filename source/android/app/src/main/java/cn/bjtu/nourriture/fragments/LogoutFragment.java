@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import cn.bjtu.nourriture.AnonymousActivity;
 import cn.bjtu.nourriture.R;
@@ -31,6 +32,7 @@ public class LogoutFragment extends Fragment {
         editor.remove(getString(R.string.user_id_pref));
         editor.apply();
 
+        Toast.makeText(getContext(), "You have been disconnected", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(getActivity(), AnonymousActivity.class);
         startActivity(intent);
     }
