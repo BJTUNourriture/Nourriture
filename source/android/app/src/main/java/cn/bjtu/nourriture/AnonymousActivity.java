@@ -1,5 +1,8 @@
 package cn.bjtu.nourriture;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -7,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,7 +27,7 @@ import cn.bjtu.nourriture.fragments.UserFragement;
  */
 public class AnonymousActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-
+    static final String TAG = "AnonymousActivity";
     //Defining Variables
     private Toolbar toolbar;
     private NavigationView navigationView;
@@ -31,9 +35,20 @@ public class AnonymousActivity extends AppCompatActivity implements NavigationVi
 
     LoginFragment mLoginFragment = new LoginFragment();
 
+    private void checkUserConnected() {
+
+        SharedPreferences preferences = getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
+        if (preferences.getString(getString(R.string.token_pref), null) != null) {
+            Intent intent = new Intent(this, UserActivity.class);
+            startActivity(intent);
+        }
+
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.anonymous_layout);
 
 
@@ -125,5 +140,11 @@ public class AnonymousActivity extends AppCompatActivity implements NavigationVi
 
         }
         return true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        checkUserConnected();
     }
 }

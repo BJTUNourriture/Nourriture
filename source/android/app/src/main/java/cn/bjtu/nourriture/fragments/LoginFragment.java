@@ -98,6 +98,9 @@ public class LoginFragment extends Fragment {
                                 SharedPreferences.Editor editor = preferences.edit();
                                 editor.putString(getString(R.string.username_pref),
                                         token.getUserName());
+                                editor.putString(getString(R.string.token_pref), token.getKey());
+                                editor.putString(getString(R.string.user_id_pref),
+                                        token.getUserId());
                                 editor.commit();
 
 
@@ -110,4 +113,5 @@ public class LoginFragment extends Fragment {
         });
 
     }
+
 }
