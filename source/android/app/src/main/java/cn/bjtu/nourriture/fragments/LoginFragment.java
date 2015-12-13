@@ -4,14 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import cn.bjtu.nourriture.R;
 import cn.bjtu.nourriture.UserActivity;
@@ -34,6 +38,8 @@ public class LoginFragment extends Fragment {
     static final String TAG = "LoginFragment";
 
     View inflatedView = null;
+    TextInputLayout inputLayoutUsername = null;
+    TextInputLayout inputLayoutPassword = null;
     EditText username = null;
     EditText password = null;
     Button submit = null;
@@ -54,6 +60,9 @@ public class LoginFragment extends Fragment {
 
         inflatedView = inflater.inflate(R.layout.login_fragment, container, false);
 
+        inputLayoutUsername = (TextInputLayout) inflatedView.findViewById(R.id.input_layout_login_username);
+        inputLayoutPassword = (TextInputLayout) inflatedView.findViewById(R.id.input_layout_login_password);
+
         username = (EditText) inflatedView.findViewById(R.id.input_login_username);
         password = (EditText) inflatedView.findViewById(R.id.input_login_password);
         submit = (Button) inflatedView.findViewById(R.id.button_login);
@@ -68,6 +77,10 @@ public class LoginFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(!validatePassword() ||
+                        !validateUsername())
+                    return ;
 
                 Login user = new Login(username.getText().toString(),
                         password.getText().toString());
@@ -114,4 +127,33 @@ public class LoginFragment extends Fragment {
 
     }
 
+    private boolean validateUsername() {
+        String username_test = username.getText().toString().trim();
+
+        if (username_test.isEmpty()) {
+            inputLayoutUsername.setError(getString(R.string.err_username_empty));
+            requestFocus(username);
+            return (false);
+        }
+        inputLayoutUsername.setErrorEnabled(false);
+        return (true);
+    }
+
+    private boolean validatePassword() {
+        String password_test = password.getText().toString().trim();
+
+        if (password_test.isEmpty()) {
+            inputLayoutPassword.setError(getString(R.string.err_password_empty));
+            requestFocus(password);
+            return (false);
+        }
+        inputLayoutPassword.setErrorEnabled(false);
+        return (true);
+    }
+
+    private void requestFocus(View view) {
+        if (view.requestFocus()) {
+            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
+    }
 }
