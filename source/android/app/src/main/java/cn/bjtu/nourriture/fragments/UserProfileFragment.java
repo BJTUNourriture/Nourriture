@@ -39,7 +39,6 @@ public class UserProfileFragment extends Fragment {
         SharedPreferences preferences = this.getActivity().getSharedPreferences("GLOBAL",
                 Context.MODE_PRIVATE);
         mUsername = preferences.getString(getString(R.string.username_pref), null);
-        Log.d(TAG, mUsername);
     }
 
     @Override

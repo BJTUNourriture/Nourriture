@@ -19,11 +19,14 @@ import org.w3c.dom.Text;
 
 import cn.bjtu.nourriture.R;
 import cn.bjtu.nourriture.UserActivity;
+import cn.bjtu.nourriture.api.ErrorUtils;
 import cn.bjtu.nourriture.api.NourritureService;
 import cn.bjtu.nourriture.api.ServiceFactory;
+import cn.bjtu.nourriture.model.ErrorLogin;
 import cn.bjtu.nourriture.model.Login;
 import cn.bjtu.nourriture.model.Message;
 import cn.bjtu.nourriture.model.Token;
+import retrofit.HttpException;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -78,9 +81,9 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if(!validatePassword() ||
+                if (!validatePassword() ||
                         !validateUsername())
-                    return ;
+                    return;
 
                 Login user = new Login(username.getText().toString(),
                         password.getText().toString());
@@ -99,8 +102,11 @@ public class LoginFragment extends Fragment {
 
                             @Override
                             public void onError(Throwable e) {
-                                e.printStackTrace();
-                                Log.e(TAG, e.getMessage());
+                                /*e.printStackTrace();
+                                Log.e(TAG, e.getMessage());*/
+                                /*if (e instanceof HttpException) {
+                                    ErrorLogin error = ErrorUtils.parseError(((HttpException) e).response().errorBody(), ServiceGenerator.getRetrofit());
+                                }*/
                             }
 
                             @Override
