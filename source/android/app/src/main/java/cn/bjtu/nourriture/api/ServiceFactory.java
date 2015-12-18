@@ -12,14 +12,19 @@ public class ServiceFactory {
 
     static String API_IP = "10.0.2.2";
     static String SERVICE_ENDPOINT = "http://" + API_IP + ":8101/api/";
+    static Retrofit mRestAdapter = null;
 
     public static <T> T createRetrofitService(final Class<T> clazz) {
-        final Retrofit restAdapter = new Retrofit.Builder()
+        mRestAdapter = new Retrofit.Builder()
                 .baseUrl(SERVICE_ENDPOINT)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
-        T service = restAdapter.create(clazz);
+        T service = mRestAdapter.create(clazz);
         return service;
+    }
+
+    public static Retrofit getRestAdapter() {
+        return mRestAdapter;
     }
 }
