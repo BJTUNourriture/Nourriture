@@ -37,4 +37,7 @@
     <string name="username_pref">username</string>
     <string name="user_id_pref">user_id</string>
 
+    <!-- User profil Fragment -->
+    <string name="basic_info">Basic informations</string>
+
 </resources>
