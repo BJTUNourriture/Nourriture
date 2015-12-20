@@ -10,6 +10,7 @@ import cn.bjtu.nourriture.model.Recipes;
 import cn.bjtu.nourriture.model.Register;
 import cn.bjtu.nourriture.model.Token;
 import cn.bjtu.nourriture.model.User;
+import cn.bjtu.nourriture.model.Ingredients;
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.POST;
@@ -33,5 +34,8 @@ public interface NourritureService {
 
     @POST("users/sign-in")
     Observable<Token> loginUser(@Body Login user);
+
+    @GET("ingredients/")
+    Observable<Ingredients> getIngredients();
 
 }
