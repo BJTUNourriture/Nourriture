@@ -79,8 +79,9 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
                         for (int i = 0; i < recipe.size(); i++) {
                             Log.d(TAG, recipe.get(i).getName());
                             mRecipes.add(new Recipes(recipe.get(i).getName(), recipe.get(i).get_id(), new ColorItem("#84ffff", "#ffffff", "#03a9f4")));
-                            notifyItemChanged(recipe.get(i).get_id());
+                            //notifyItemChanged(recipe.get(i).get_id());
                         }
+                        notifyDataSetChanged();
                     }
                 });
         // get dummy recipes
@@ -119,6 +120,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
                     @Override
                     public void onClick(View v) {
                         mOnItemClickListener.onClick(v, position);
+                        Log.d(TAG, "ALLAHU AKBAR " + position);
                     }
                 });
     }
