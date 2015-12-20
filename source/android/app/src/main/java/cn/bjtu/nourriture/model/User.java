@@ -42,6 +42,8 @@ public class User {
     private String _id;
     private String username;
     private String email;
+    private String first_name;
+    private String last_name;
 
     public String get_id() {
         return _id;
@@ -53,5 +55,13 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getFirstname() {
+        return first_name;
+    }
+
+    public String getLastname() {
+        return last_name;
     }
 }
