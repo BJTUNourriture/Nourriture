@@ -74,8 +74,8 @@ public class UserProfileFragment extends Fragment {
 /*
                         ((TextView) view.findViewById(R.id.user_id)).setText(user.get_id());
 */
-                     /*   ((TextView) view.findViewById(R.id.user_email)).setText(user.getEmail());
-                        ((TextView) view.findViewById(R.id.user_name)).setText(user.getUsername());*/
+                        ((TextView) view.findViewById(R.id.user_email)).setText(user.getEmail());
+                        ((TextView) view.findViewById(R.id.user_name)).setText(user.getUsername());
 
                     }
                 });
