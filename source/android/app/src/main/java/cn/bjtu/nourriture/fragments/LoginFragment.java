@@ -104,9 +104,9 @@ public class LoginFragment extends Fragment {
                             public void onError(Throwable e) {
                                 /*e.printStackTrace();
                                 Log.e(TAG, e.getMessage());*/
-                                /*if (e instanceof HttpException) {
-                                    ErrorLogin error = ErrorUtils.parseError(((HttpException) e).response().errorBody(), ServiceGenerator.getRetrofit());
-                                }*/
+                                if (e instanceof HttpException) {
+                                    ErrorLogin error = ErrorUtils.parseError(((HttpException) e).response().errorBody(), ServiceFactory.getRestAdapter());
+                                }
                             }
 
                             @Override

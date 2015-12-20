@@ -1,25 +1,40 @@
 package cn.bjtu.nourriture.adapters;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.bjtu.nourriture.R;
+import cn.bjtu.nourriture.UserActivity;
+import cn.bjtu.nourriture.api.NourritureService;
+import cn.bjtu.nourriture.api.ServiceFactory;
 import cn.bjtu.nourriture.model.Recipes;
+import cn.bjtu.nourriture.model.Token;
+import retrofit.HttpException;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHolder> {
 
     private final LayoutInflater mLayoutInflater;
     private final Activity mActivity;
     private List<Recipes> mRecipes = new ArrayList<>();
+    private static final String TAG = "Recipes";
 
     private OnItemClickListener mOnItemClickListener;
 
@@ -34,11 +49,46 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
     }
 
     private void updateRecipes(Activity activity) {
+        //Insantiate the non-singleton Nourriture Service
+        NourritureService service = ServiceFactory.createRetrofitService(NourritureService.class);
+
+        //Get all the recipes from the API
+        Observable<List <Recipes>> observable = service.getRecipes();
+
+        observable
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List <Recipes>>() {
+                    @Override
+                    public void onCompleted() {
+                        //Do nothing
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                                Log.e(TAG, e.getMessage());
+                                /*e.printStackTrace();
+                                Log.e(TAG, e.getMessage());*/
+                                /*if (e instanceof HttpException) {
+                                    ErrorLogin error = ErrorUtils.parseError(((HttpException) e).response().errorBody(), ServiceGenerator.getRetrofit());
+                                }*/
+                    }
+
+                    @Override
+                    public void onNext(List <Recipes> recipe) {
+                        for (int i = 0; i < recipe.size(); i++) {
+                            Log.d(TAG, recipe.get(i).getName());
+                            mRecipes.add(new Recipes(recipe.get(i).getName(), recipe.get(i).get_id(), new ColorItem("#84ffff", "#ffffff", "#03a9f4")));
+                            notifyItemChanged(recipe.get(i).get_id());
+                        }
+                    }
+                });
         // get dummy recipes
+        /*
         mRecipes.add(new Recipes("MACARONIS", "000001", new ColorItem("#84ffff", "#ffffff","#03a9f4")));
         mRecipes.add(new Recipes("CHOUX FLEURS", "000002", new ColorItem("#b9f6ca", "#000000","#1de9b6")));
         mRecipes.add(new Recipes("RAVIOLIS", "000003", new ColorItem("#b388ff", "#ffffff","#7e57c2")));
-        mRecipes.add(new Recipes("TRIPES FARCIES AUX ECHALOTTES", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
+        mRecipes.add(new Recipes("TRIPES FARCIES AUX ECHALOTTES", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));*/
 
     }
 
