@@ -133,8 +133,6 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
                 FragmentTransaction ft = ((FragmentActivity) mActivity).getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.frame, RecipePageFragment.newInstance("titre"));
                 ft.commit();
-
-
             }
         });
     }

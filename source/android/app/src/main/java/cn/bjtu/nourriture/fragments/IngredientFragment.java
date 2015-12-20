@@ -12,9 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.bjtu.nourriture.R;
@@ -24,6 +26,7 @@ import cn.bjtu.nourriture.api.NourritureService;
 import cn.bjtu.nourriture.api.ServiceFactory;
 import cn.bjtu.nourriture.model.ErrorLogin;
 import cn.bjtu.nourriture.model.Ingredients;
+import cn.bjtu.nourriture.model.Recipes;
 import cn.bjtu.nourriture.model.Token;
 import retrofit.HttpException;
 import rx.Observable;
@@ -37,6 +40,8 @@ import rx.schedulers.Schedulers;
  **/
 public class IngredientFragment extends Fragment {
 
+    private List<Ingredients> mIngredients = new ArrayList<>();
+
     public static IngredientFragment newInstance() {
         IngredientFragment fragment = new IngredientFragment();
         return fragment;
@@ -45,8 +50,7 @@ public class IngredientFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.dummy_fragment,container,false);
-        ((TextView)v.findViewById(R.id.dummy)).setText("Ingredients");
+        View v = inflater.inflate(R.layout.ingredient_fragment,container,false);
         Log.d("Debug Ingredients", "Enter in Ingredients");
         NourritureService service = ServiceFactory.createRetrofitService(NourritureService.class);
         Observable<List<Ingredients>> observable = service.getIngredients();
@@ -75,11 +79,8 @@ public class IngredientFragment extends Fragment {
                     @Override
                     public void onNext(List <Ingredients> ingredient) {
                         for (int i = 0; i < ingredient.size(); i++) {
-                            Log.d("Nom de l'ingredient", "onNext: " + ingredient.get(i).getName());
-                            Log.d("Desc Ingredient", "onNext: " + ingredient.get(i).getDescription());
-                            Log.d("Fat Ingredient", "onNext: " + ingredient.get(i).getFat());
-                            Log.d("Prot Ingredient", "onNext: " + ingredient.get(i).getProteins());
-                            Log.d("Carb Ingredient", "onNext: " + ingredient.get(i).getCarbohydrates());
+                            mIngredients.add(new Ingredients(ingredient.get(i).getName(), ingredient.get(i).get_id()));
+                            Log.d("Nom de l'ingredient", "onNext: " + mIngredients.get(0).getName());
                         }
                     }
                 });

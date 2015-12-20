@@ -11,6 +11,10 @@ public class Ingredients {
     private Integer carbohydrates;
     private Integer proteins;
 
+    public Ingredients(String Name, String Description) {
+        this.name = Name;
+        this.description = Description;
+    }
 
     public String get_id() {
         return _id;
