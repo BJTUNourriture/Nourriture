@@ -36,6 +36,6 @@ public interface NourritureService {
     Observable<Token> loginUser(@Body Login user);
 
     @GET("ingredients/")
-    Observable<Ingredients> getIngredients();
+    Observable<List <Ingredients>> getIngredients();
 
 }
