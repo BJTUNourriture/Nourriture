@@ -41,7 +41,7 @@ public class RecipeFragment extends Fragment {
         final int spacing = getContext().getResources()
                 .getDimensionPixelSize(R.dimen.spacing_nano);
         categoriesView.addItemDecoration(new OffsetDecoration(spacing));
-        mAdapter = new RecipesAdapter(getActivity());
+        mAdapter = new RecipesAdapter(getActivity(), this);
         mAdapter.setOnItemClickListener(
                 new RecipesAdapter.OnItemClickListener() {
                     @Override

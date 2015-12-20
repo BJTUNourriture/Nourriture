@@ -37,3 +37,6 @@ captures/
 
 ## Directory-based project format:
 .idea/
+
+#ServiceFactory
+app/src/main/java/cn/bjtu/nourriture/api/ServiceFactory.java

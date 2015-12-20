@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +25,9 @@ import cn.bjtu.nourriture.R;
 import cn.bjtu.nourriture.UserActivity;
 import cn.bjtu.nourriture.api.NourritureService;
 import cn.bjtu.nourriture.api.ServiceFactory;
+import cn.bjtu.nourriture.fragments.RecipeFragment;
+import cn.bjtu.nourriture.fragments.RecipePageFragment;
+import cn.bjtu.nourriture.fragments.UserFragement;
 import cn.bjtu.nourriture.model.Recipes;
 import cn.bjtu.nourriture.model.Token;
 import retrofit.HttpException;
@@ -35,6 +40,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
 
     private final LayoutInflater mLayoutInflater;
     private final Activity mActivity;
+    private RecipeFragment mRecipeFragment;
     private List<Recipes> mRecipes = new ArrayList<>();
     private static final String TAG = "Recipes";
 
@@ -44,7 +50,8 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
         void onClick(View view, int position);
     }
 
-    public RecipesAdapter(Activity activity) {
+    public RecipesAdapter(Activity activity, RecipeFragment recipeFragment) {
+        mRecipeFragment = recipeFragment;
         mActivity = activity;
         mLayoutInflater = LayoutInflater.from(activity.getApplicationContext());
         updateRecipes(activity);
@@ -55,12 +62,12 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
         NourritureService service = ServiceFactory.createRetrofitService(NourritureService.class);
 
         //Get all the recipes from the API
-        Observable<List <Recipes>> observable = service.getRecipes();
+        Observable<List<Recipes>> observable = service.getRecipes();
 
         observable
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List <Recipes>>() {
+                .subscribe(new Subscriber<List<Recipes>>() {
                     @Override
                     public void onCompleted() {
                         //Do nothing
@@ -68,7 +75,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
 
                     @Override
                     public void onError(Throwable e) {
-                                Log.e(TAG, e.getMessage());
+                        Log.e(TAG, e.getMessage());
                                 /*e.printStackTrace();
                                 Log.e(TAG, e.getMessage());*/
                                 /*if (e instanceof HttpException) {
@@ -77,7 +84,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
                     }
 
                     @Override
-                    public void onNext(List <Recipes> recipe) {
+                    public void onNext(List<Recipes> recipe) {
                         for (int i = 0; i < recipe.size(); i++) {
                             Log.d(TAG, recipe.get(i).getName());
                             mRecipes.add(new Recipes(recipe.get(i).getName(), recipe.get(i).get_id(), new ColorItem("#84ffff", "#ffffff", "#03a9f4")));
@@ -102,7 +109,6 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
     }
 
 
-    
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         Recipes recipe = mRecipes.get(position);
@@ -118,14 +124,21 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
 
 //        holder.title.setTextColor(getColor(theme.getTextPrimaryColor()));
 //        holder.title.setBackgroundColor(getColor(theme.getPrimaryColor()));
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mOnItemClickListener.onClick(v, position);
-                        Log.d(TAG, "ALLAHU AKBAR " + position);
-                    }
-                });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnItemClickListener.onClick(v, position);
+                Log.d(TAG, "ALLAHU AKBAR " + position);
+
+                FragmentTransaction ft = ((FragmentActivity) mActivity).getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.frame, RecipePageFragment.newInstance("titre"));
+                ft.commit();
+
+
+            }
+        });
     }
+
 
     @Override
     public long getItemId(int position) {
