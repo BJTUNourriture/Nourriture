@@ -77,6 +77,9 @@ public class IngredientFragment extends Fragment {
                         for (int i = 0; i < ingredient.size(); i++) {
                             Log.d("Nom de l'ingredient", "onNext: " + ingredient.get(i).getName());
                             Log.d("Desc Ingredient", "onNext: " + ingredient.get(i).getDescription());
+                            Log.d("Fat Ingredient", "onNext: " + ingredient.get(i).getFat());
+                            Log.d("Prot Ingredient", "onNext: " + ingredient.get(i).getProteins());
+                            Log.d("Carb Ingredient", "onNext: " + ingredient.get(i).getCarbohydrates());
                         }
                     }
                 });
