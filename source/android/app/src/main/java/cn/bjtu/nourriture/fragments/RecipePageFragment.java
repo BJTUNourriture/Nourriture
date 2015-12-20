@@ -39,7 +39,7 @@ public class RecipePageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         inflatedView = inflater.inflate(R.layout.recipe_fragment, container, false);
-        title = (TextView) inflatedView.findViewById(R.id.recipe_page_title);
+        //title = (TextView) inflatedView.findViewById(R.id.recipe_page_title);
         toolbar = (Toolbar) inflatedView.findViewById(R.id.recipe_page_toolbar);
         toolbar.setTitle(mTitle);
         return inflatedView;
