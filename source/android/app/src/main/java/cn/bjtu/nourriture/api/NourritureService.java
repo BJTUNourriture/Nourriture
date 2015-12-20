@@ -2,6 +2,8 @@ package cn.bjtu.nourriture.api;
 
 import android.util.Log;
 
+import java.util.List;
+
 import cn.bjtu.nourriture.model.Login;
 import cn.bjtu.nourriture.model.Message;
 import cn.bjtu.nourriture.model.Recipes;
@@ -24,7 +26,7 @@ public interface NourritureService {
     Observable<User> getUser(@Path("login") String login);
 
     @GET("recipes")
-    Observable<Recipes> getRecipes();
+    Observable<List <Recipes>> getRecipes();
 
     @POST("users/register")
     Observable<Message> registerUser(@Body Register user);
