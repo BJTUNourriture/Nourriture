@@ -4,6 +4,7 @@ import android.util.Log;
 
 import cn.bjtu.nourriture.model.Login;
 import cn.bjtu.nourriture.model.Message;
+import cn.bjtu.nourriture.model.Recipes;
 import cn.bjtu.nourriture.model.Register;
 import cn.bjtu.nourriture.model.Token;
 import cn.bjtu.nourriture.model.User;
@@ -21,6 +22,9 @@ public interface NourritureService {
 
     @GET("users/username/{login}")
     Observable<User> getUser(@Path("login") String login);
+
+    @GET("recipes")
+    Observable<Recipes> getRecipes();
 
     @POST("users/register")
     Observable<Message> registerUser(@Body Register user);

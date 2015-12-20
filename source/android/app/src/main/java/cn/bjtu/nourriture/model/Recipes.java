@@ -10,11 +10,11 @@ public class Recipes  {
 
     private final ColorItem colorItem;
     private String _id;
-    private String name;
+    private String title;
 
-    public Recipes(String name, String _id, ColorItem colorItem) {
+    public Recipes(String title, String _id, ColorItem colorItem) {
         this._id = _id;
-        this.name = name;
+        this.title = title;
         this.colorItem = colorItem;
     }
 
@@ -23,7 +23,7 @@ public class Recipes  {
     }
 
     public String getName() {
-        return name;
+        return title;
     }
 
     public ColorItem getColor() {
