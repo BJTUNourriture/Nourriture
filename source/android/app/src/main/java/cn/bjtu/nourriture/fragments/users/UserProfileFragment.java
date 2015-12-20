@@ -1,4 +1,4 @@
-package cn.bjtu.nourriture.fragments;
+package cn.bjtu.nourriture.fragments.users;
 
 import android.content.Context;
 import android.content.SharedPreferences;

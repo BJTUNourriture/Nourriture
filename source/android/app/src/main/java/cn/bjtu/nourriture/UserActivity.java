@@ -13,7 +13,7 @@ import android.view.View;
 import cn.bjtu.nourriture.fragments.GroupFragment;
 import cn.bjtu.nourriture.fragments.IngredientFragment;
 import cn.bjtu.nourriture.fragments.RecipeFragment;
-import cn.bjtu.nourriture.fragments.UserFragement;
+import cn.bjtu.nourriture.fragments.users.UserFragement;
 import cn.bjtu.nourriture.fragments.LogoutFragment;
 
 public class UserActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -90,9 +90,9 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }

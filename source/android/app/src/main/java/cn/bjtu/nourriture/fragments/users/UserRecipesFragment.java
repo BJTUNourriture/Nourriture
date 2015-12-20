@@ -1,8 +1,7 @@
-package cn.bjtu.nourriture.fragments;
+package cn.bjtu.nourriture.fragments.users;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,20 +11,19 @@ import cn.bjtu.nourriture.R;
 
 /**
  * Author : juliengenoud
- * 30/11/15
+ * 20/12/15
  **/
-public class UserSettingsFragment extends Fragment {
+public class UserRecipesFragment extends Fragment {
 
-    public static UserSettingsFragment newInstance() {
-        UserSettingsFragment fragment = new UserSettingsFragment();
+    public static UserRecipesFragment newInstance() {
+        UserRecipesFragment fragment = new UserRecipesFragment();
         return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.e(getClass().toString(), "settings called");
         View v = inflater.inflate(R.layout.dummy_fragment, container, false);
-        ((TextView) v.findViewById(R.id.dummy)).setText("Settings");
+        ((TextView) v.findViewById(R.id.dummy)).setText("Recipes");
         return v;
     }
 }

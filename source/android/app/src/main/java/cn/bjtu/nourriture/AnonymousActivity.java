@@ -10,17 +10,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import cn.bjtu.nourriture.fragments.GroupFragment;
-import cn.bjtu.nourriture.fragments.IngredientFragment;
 import cn.bjtu.nourriture.fragments.LoginFragment;
-import cn.bjtu.nourriture.fragments.RecipeFragment;
 import cn.bjtu.nourriture.fragments.RegisterFragment;
-import cn.bjtu.nourriture.fragments.UserFragement;
 
 /**
  * Created by sylflo on 12/9/15.
@@ -109,9 +104,9 @@ public class AnonymousActivity extends AppCompatActivity implements NavigationVi
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
