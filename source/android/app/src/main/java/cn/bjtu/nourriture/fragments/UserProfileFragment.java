@@ -64,16 +64,18 @@ public class UserProfileFragment extends Fragment {
                     public final void onError(Throwable e) {
                         e.printStackTrace();
                         Log.e("User", e.getMessage());
-                        view.findViewById(R.id.progress).setVisibility(View.GONE);
-                        ((TextView) view.findViewById(R.id.user_name)).setText(e.getMessage());
+                       /* view.findViewById(R.id.progress).setVisibility(View.GONE);
+                        ((TextView) view.findViewById(R.id.user_name)).setText(e.getMessage());*/
                     }
 
                     @Override
                     public void onNext(User user) {
-                        view.findViewById(R.id.progress).setVisibility(View.GONE);
+                      /*  view.findViewById(R.id.progress).setVisibility(View.GONE);*/
+/*
                         ((TextView) view.findViewById(R.id.user_id)).setText(user.get_id());
-                        ((TextView) view.findViewById(R.id.user_email)).setText(user.getEmail());
-                        ((TextView) view.findViewById(R.id.user_name)).setText(user.getUsername());
+*/
+                     /*   ((TextView) view.findViewById(R.id.user_email)).setText(user.getEmail());
+                        ((TextView) view.findViewById(R.id.user_name)).setText(user.getUsername());*/
 
                     }
                 });
