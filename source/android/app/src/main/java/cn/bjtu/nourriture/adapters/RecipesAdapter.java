@@ -18,7 +18,6 @@ import java.util.List;
 import cn.bjtu.nourriture.R;
 import cn.bjtu.nourriture.api.NourritureService;
 import cn.bjtu.nourriture.api.ServiceFactory;
-import cn.bjtu.nourriture.fragments.RecipeFragment;
 import cn.bjtu.nourriture.fragments.RecipePageFragment;
 import cn.bjtu.nourriture.model.Recipes;
 import rx.Observable;
@@ -30,7 +29,6 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
 
     private final LayoutInflater mLayoutInflater;
     private final Activity mActivity;
-    private RecipeFragment mRecipeFragment;
     private List<Recipes> mRecipes = new ArrayList<>();
     private static final String TAG = "Recipes";
 
@@ -40,8 +38,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
         void onClick(View view, int position);
     }
 
-    public RecipesAdapter(Activity activity, RecipeFragment recipeFragment) {
-        mRecipeFragment = recipeFragment;
+    public RecipesAdapter(Activity activity) {
         mActivity = activity;
         mLayoutInflater = LayoutInflater.from(activity.getApplicationContext());
         updateRecipes(activity);
@@ -84,11 +81,11 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
                     }
                 });
         // get dummy recipes
-        /*
-        mRecipes.add(new Recipes("MACARONIS", "000001", new ColorItem("#84ffff", "#ffffff","#03a9f4")));
-        mRecipes.add(new Recipes("CHOUX FLEURS", "000002", new ColorItem("#b9f6ca", "#000000","#1de9b6")));
-        mRecipes.add(new Recipes("RAVIOLIS", "000003", new ColorItem("#b388ff", "#ffffff","#7e57c2")));
-        mRecipes.add(new Recipes("TRIPES FARCIES AUX ECHALOTTES", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));*/
+
+//        mRecipes.add(new Recipes("MACARONIS", "000001", new ColorItem("#84ffff", "#ffffff","#03a9f4")));
+//        mRecipes.add(new Recipes("CHOUX FLEURS", "000002", new ColorItem("#b9f6ca", "#000000","#1de9b6")));
+//        mRecipes.add(new Recipes("RAVIOLIS", "000003", new ColorItem("#b388ff", "#ffffff","#7e57c2")));
+//        mRecipes.add(new Recipes("TRIPES FARCIES AUX ECHALOTTES", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
 
     }
 

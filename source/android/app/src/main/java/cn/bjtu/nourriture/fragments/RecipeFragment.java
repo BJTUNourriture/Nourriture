@@ -41,7 +41,7 @@ public class RecipeFragment extends Fragment {
         final int spacing = getContext().getResources()
                 .getDimensionPixelSize(R.dimen.spacing_nano);
         categoriesView.addItemDecoration(new OffsetDecoration(spacing));
-        mAdapter = new RecipesAdapter(getActivity(), this);
+        mAdapter = new RecipesAdapter(getActivity());
         mAdapter.setOnItemClickListener(
                 new RecipesAdapter.OnItemClickListener() {
                     @Override
@@ -53,5 +53,9 @@ public class RecipeFragment extends Fragment {
                     }
                 });
         categoriesView.setAdapter(mAdapter);
+
+        if (mAdapter.getItemCount() > 0 && getView() != null) {
+            getView().findViewById(R.id.empty_view).setVisibility(View.GONE);
+        }
     }
 }
