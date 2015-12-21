@@ -1,7 +1,6 @@
 package cn.bjtu.nourriture.fragments.users;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,24 +8,24 @@ import android.view.ViewGroup;
 
 import cn.bjtu.nourriture.R;
 import cn.bjtu.nourriture.adapters.RecipesAdapter;
+import cn.bjtu.nourriture.fragments.RecipeAbstractFragment;
 import cn.bjtu.nourriture.widget.OffsetDecoration;
 
 /**
  * Author : juliengenoud
  * 20/12/15
  **/
-public class UserRecipesFragment extends Fragment {
-
-    private RecipesAdapter mAdapter;
+public class UserRecipesFragment extends RecipeAbstractFragment {
 
     public static UserRecipesFragment newInstance() {
-        UserRecipesFragment fragment = new UserRecipesFragment();
-        return fragment;
+        return new UserRecipesFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.recipes_fragment,container,false);
+        //Toolbar toolbar =  (Toolbar) getActivity().findViewById(R.id.toolbar);
+        // Enable the Up button
         return v;
     }
 
@@ -37,7 +36,7 @@ public class UserRecipesFragment extends Fragment {
     }
 
     private void setUpRecipesGrid(RecyclerView categoriesView) {
-        final int spacing = getContext().getResources()
+        final int spacing = getActivity().getApplicationContext().getResources()
                 .getDimensionPixelSize(R.dimen.spacing_nano);
         categoriesView.addItemDecoration(new OffsetDecoration(spacing));
         mAdapter = new RecipesAdapter(getActivity());
@@ -57,4 +56,6 @@ public class UserRecipesFragment extends Fragment {
             getView().findViewById(R.id.empty_view).setVisibility(View.GONE);
         }
     }
+
+
 }

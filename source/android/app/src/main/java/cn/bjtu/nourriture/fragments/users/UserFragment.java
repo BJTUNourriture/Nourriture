@@ -16,11 +16,11 @@ import cn.bjtu.nourriture.adapters.UserFragmentPagerAdapter;
  * Author : juliengenoud
  * 30/11/15
  **/
-public class UserFragement extends Fragment {
+public class UserFragment extends Fragment {
 
 
-    public static UserFragement newInstance() {
-        UserFragement fragment = new UserFragement();
+    public static UserFragment newInstance() {
+        UserFragment fragment = new UserFragment();
         return fragment;
     }
 

@@ -3,14 +3,15 @@ package cn.bjtu.nourriture.fragments.users;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import cn.bjtu.nourriture.R;
+import cn.bjtu.nourriture.UserActivity;
 import cn.bjtu.nourriture.api.NourritureService;
 import cn.bjtu.nourriture.api.ServiceFactory;
 import cn.bjtu.nourriture.model.User;
@@ -62,8 +63,9 @@ public class UserProfileFragment extends Fragment {
 
                     @Override
                     public final void onError(Throwable e) {
-                        e.printStackTrace();
-                        Log.e("User", e.getMessage());
+
+//                        e.printStackTrace();
+//                        Log.e("User", e.getMessage());
                        /* view.findViewById(R.id.progress).setVisibility(View.GONE);
                         ((TextView) view.findViewById(R.id.user_name)).setText(e.getMessage());*/
                     }
@@ -76,6 +78,9 @@ public class UserProfileFragment extends Fragment {
 */
                         ((TextView) view.findViewById(R.id.user_email)).setText(user.getEmail());
                         ((TextView) view.findViewById(R.id.user_name)).setText(user.getUsername());
+                        NavigationView nv = ((UserActivity) getActivity()).getNavView();
+                        ((TextView) nv.findViewById(R.id.email)).setText(user.getEmail());
+                        ((TextView) nv.findViewById(R.id.username)).setText(user.getUsername());
 
                     }
                 });

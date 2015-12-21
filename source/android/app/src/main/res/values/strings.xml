@@ -39,5 +39,9 @@
 
     <!-- User profil Fragment -->
     <string name="basic_info">Basic informations</string>
+    <string name="search_hint">Search …</string>
+    <string name="search_hint_ingredient">Search Ingredients …</string>
+    <string name="search_hint_recipes">Search Recipes …</string>
+
 
 </resources>
