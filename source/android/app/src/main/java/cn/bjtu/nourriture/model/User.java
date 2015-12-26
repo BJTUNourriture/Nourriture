@@ -5,6 +5,12 @@ package cn.bjtu.nourriture.model;
  * 30/11/15
  **/
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /***
  * {String} _id id of the user
  * {String} username Name of the user
@@ -39,29 +45,281 @@ package cn.bjtu.nourriture.model;
  */
 
 public class User {
-    private String _id;
-    private String username;
+
+    @SerializedName("_id")
+    @Expose
+    private String Id;
+    @SerializedName("email")
+    @Expose
     private String email;
-    private String first_name;
-    private String last_name;
+    @SerializedName("username")
+    @Expose
+    private String username;
+    @SerializedName("__v")
+    @Expose
+    private Integer V;
+    @SerializedName("followed_by")
+    @Expose
+    private List<Object> followedBy = new ArrayList<Object>();
+    @SerializedName("follow")
+    @Expose
+    private List<Object> follow = new ArrayList<Object>();
+    @SerializedName("dislike")
+    @Expose
+    private List<Object> dislike = new ArrayList<Object>();
+    @SerializedName("like")
+    @Expose
+    private List<Object> like = new ArrayList<Object>();
+    @SerializedName("joined_groups")
+    @Expose
+    private List<Object> joinedGroups = new ArrayList<Object>();
+    @SerializedName("pictures")
+    @Expose
+    private List<Object> pictures = new ArrayList<Object>();
+    @SerializedName("religion")
+    @Expose
+    private List<Object> religion = new ArrayList<Object>();
+    @SerializedName("alergy")
+    @Expose
+    private List<Object> alergy = new ArrayList<Object>();
+    @SerializedName("email_verified")
+    @Expose
+    private Boolean emailVerified;
 
-    public String get_id() {
-        return _id;
+    /**
+     *
+     * @return
+     * The Id
+     */
+    public String getId() {
+        return Id;
     }
 
-    public String getUsername() {
-        return username;
+    /**
+     *
+     * @param Id
+     * The _id
+     */
+    public void setId(String Id) {
+        this.Id = Id;
     }
 
+    /**
+     *
+     * @return
+     * The email
+     */
     public String getEmail() {
         return email;
     }
 
-    public String getFirstname() {
-        return first_name;
+    /**
+     *
+     * @param email
+     * The email
+     */
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getLastname() {
-        return last_name;
+    /**
+     *
+     * @return
+     * The username
+     */
+    public String getUsername() {
+        return username;
     }
+
+    /**
+     *
+     * @param username
+     * The username
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     *
+     * @return
+     * The V
+     */
+    public Integer getV() {
+        return V;
+    }
+
+    /**
+     *
+     * @param V
+     * The __v
+     */
+    public void setV(Integer V) {
+        this.V = V;
+    }
+
+    /**
+     *
+     * @return
+     * The followedBy
+     */
+    public List<Object> getFollowedBy() {
+        return followedBy;
+    }
+
+    /**
+     *
+     * @param followedBy
+     * The followed_by
+     */
+    public void setFollowedBy(List<Object> followedBy) {
+        this.followedBy = followedBy;
+    }
+
+    /**
+     *
+     * @return
+     * The follow
+     */
+    public List<Object> getFollow() {
+        return follow;
+    }
+
+    /**
+     *
+     * @param follow
+     * The follow
+     */
+    public void setFollow(List<Object> follow) {
+        this.follow = follow;
+    }
+
+    /**
+     *
+     * @return
+     * The dislike
+     */
+    public List<Object> getDislike() {
+        return dislike;
+    }
+
+    /**
+     *
+     * @param dislike
+     * The dislike
+     */
+    public void setDislike(List<Object> dislike) {
+        this.dislike = dislike;
+    }
+
+    /**
+     *
+     * @return
+     * The like
+     */
+    public List<Object> getLike() {
+        return like;
+    }
+
+    /**
+     *
+     * @param like
+     * The like
+     */
+    public void setLike(List<Object> like) {
+        this.like = like;
+    }
+
+    /**
+     *
+     * @return
+     * The joinedGroups
+     */
+    public List<Object> getJoinedGroups() {
+        return joinedGroups;
+    }
+
+    /**
+     *
+     * @param joinedGroups
+     * The joined_groups
+     */
+    public void setJoinedGroups(List<Object> joinedGroups) {
+        this.joinedGroups = joinedGroups;
+    }
+
+    /**
+     *
+     * @return
+     * The pictures
+     */
+    public List<Object> getPictures() {
+        return pictures;
+    }
+
+    /**
+     *
+     * @param pictures
+     * The pictures
+     */
+    public void setPictures(List<Object> pictures) {
+        this.pictures = pictures;
+    }
+
+    /**
+     *
+     * @return
+     * The religion
+     */
+    public List<Object> getReligion() {
+        return religion;
+    }
+
+    /**
+     *
+     * @param religion
+     * The religion
+     */
+    public void setReligion(List<Object> religion) {
+        this.religion = religion;
+    }
+
+    /**
+     *
+     * @return
+     * The alergy
+     */
+    public List<Object> getAlergy() {
+        return alergy;
+    }
+
+    /**
+     *
+     * @param alergy
+     * The alergy
+     */
+    public void setAlergy(List<Object> alergy) {
+        this.alergy = alergy;
+    }
+
+    /**
+     *
+     * @return
+     * The emailVerified
+     */
+    public Boolean getEmailVerified() {
+        return emailVerified;
+    }
+
+    /**
+     *
+     * @param emailVerified
+     * The email_verified
+     */
+    public void setEmailVerified(Boolean emailVerified) {
+        this.emailVerified = emailVerified;
+    }
+
 }
+
+

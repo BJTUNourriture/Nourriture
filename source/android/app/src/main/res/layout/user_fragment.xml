@@ -68,10 +68,6 @@
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp">
 
-        <!--            <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/basic_info" />-->
 
                     <TextView android:id="@+id/groupname"
                         android:paddingLeft="5dp"
@@ -128,46 +124,11 @@
                         android:layout_below="@+id/user_name"/>
 
 
-
-
-
-
                 </RelativeLayout>
             </LinearLayout>
-
-           <!-- <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                >
-
-                <TextView
-                    android:id="@+id/basic_info"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/basic_info"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="bonjour"
-                    android:id="@+id/user_name"
-                    android:layout_below="@+id/basic_info"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="fuck"
-                    android:gravity="center_horizontal"
-                    android:id="@+id/user_email"
-                    android:layout_below="@+id/user_name"
-                    />
-
-            </RelativeLayout>-->
-
         </android.support.v7.widget.CardView>
+
+
 
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>
