@@ -3,6 +3,7 @@ package cn.bjtu.nourriture.fragments.users;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ import rx.schedulers.Schedulers;
 public class UserProfileFragment extends Fragment {
 
     static final String TAG = "UserProfileFragment";
+    CollapsingToolbarLayout mCollapsingTollbar = null;
     String mUsername = null;
 
     public static UserProfileFragment newInstance() {
@@ -45,12 +47,18 @@ public class UserProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.user_fragment, container, false);
     }
 
 
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
+
+        mCollapsingTollbar =
+                (CollapsingToolbarLayout) getActivity().findViewById(R.id.collapsing_toolbar);
+
+
         NourritureService service = ServiceFactory.createRetrofitService(NourritureService.class);
         service.getUser(mUsername)
                 .subscribeOn(Schedulers.newThread())
@@ -76,6 +84,7 @@ public class UserProfileFragment extends Fragment {
 /*
                         ((TextView) view.findViewById(R.id.user_id)).setText(user.get_id());
 */
+                        mCollapsingTollbar.setTitle(user.getUsername());
                         ((TextView) view.findViewById(R.id.user_email)).setText(user.getEmail());
                         ((TextView) view.findViewById(R.id.user_name)).setText(user.getUsername());
                         NavigationView nv = ((UserActivity) getActivity()).getNavView();
