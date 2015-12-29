@@ -1,0 +1,18 @@
+{
+  "_id": {
+    "$oid": "5667fc97ced75810292cc705"
+  },
+  "email": "dev.chateau@gmail.com",
+  "username": "sylflo",
+  "password": "$2a$05$se26r.cM887mYtzd/t5vNu9pVlHUZMOchQtjat2hTu426BSJKZOTS",
+  "followed_by": [],
+  "follow": [],
+  "dislike": [],
+  "like": [],
+  "joined_groups": [],
+  "pictures": [],
+  "religion": [],
+  "alergy": [],
+  "email_verified": true,
+  "__v": 0
+}

@@ -1,0 +1,13 @@
+{
+  "_id": {
+    "$oid": "56766c4a71fd90d55f83f5ab"
+  },
+  "name": "toto",
+  "description": "oihoihoih",
+  "calories": 100,
+  "fat": 100,
+  "carbohydrates": 100,
+  "proteins": 100,
+  "tags": [],
+  "__v": 0
+}

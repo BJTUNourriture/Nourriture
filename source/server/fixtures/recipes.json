@@ -1,0 +1,43 @@
+{
+  "_id": {
+    "$oid": "56766c6871fd90d55f83f5ac"
+  },
+  "title": "oihoiph",
+  "author_id": {
+    "$oid": "5667fc97ced75810292cc705"
+  },
+  "author_name": "sylflo",
+  "description": "\u003cp\u003edgfb\u003c/p\u003e",
+  "ingredients": [
+    {
+      "_id": {
+        "$oid": "56766c4a71fd90d55f83f5ab"
+      },
+      "name": "toto",
+      "id_ingredient": {
+        "$oid": "56766c4a71fd90d55f83f5ab"
+      },
+      "amount": 10
+    }
+  ],
+  "pictures": [
+    {
+      "thumbnail_url": "assets/images/recipesdummy/no_image.png",
+      "_id": {
+        "$oid": "56766c6971fd90d55f83f5ad"
+      }
+    }
+  ],
+  "votes": [],
+  "number_vote": 0,
+  "average_price": 3,
+  "time_preparation": 0,
+  "average_score": 0,
+  "difficulty": 2,
+  "date_posted": {
+    "$date": "2015-12-20T08:52:56.995Z"
+  },
+  "__v": 0
+}
+{"_id":{"$oid": "567757e2805ee5de045f9ba7"}, "title":"Soupe", "author_id":{"$oid": "5667fc97ced75810292cc705"},"author_name": "sylflo", "description": "\u003cp\u003eSoupe\u003c/p\u003e", "ingredients":[{"_id":{"$oid": "56766c4a71fd90d55f83f5ab"}, "name": "toto", "id_ingredient":{"$oid": "56766c4a71fd90d55f83f5ab"}, "amount": 100}], "pictures":[{"thumbnail_url": "assets/images/recipesdummy/no_image.png", "_id":{"$oid":"567757e2805ee5de045f9ba8"}}], "votes":[], "number_vote": 0, "average_price": 3, "time_preparation": 0, "average_score": 0, "difficulty": 1, "date_posted":{"$date": "2015-12-21T01:37:38.833Z"}, "__v": 0
+}
