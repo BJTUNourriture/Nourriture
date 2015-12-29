@@ -24,8 +24,10 @@ if (app.settings.env !== 'test')
 PORT = "8101";
 
 if (os.hostname() === "sylflo.fr") {
+    console.log(os.hostname());
     HOSTNAME = "sylflo.fr";
 } else {
+    console.log(os.hostname());
     HOSTNAME = "127.0.0.1";
 }
 
