@@ -12,5 +12,6 @@ npm install
 cd /var/www/nourriture.sylflo.fr/Nourriture/source/web
 npm install
 bower install
+gulp config-hostname --env="production"
 gulp build
 sudo /etc/init.d/nginx  restart
