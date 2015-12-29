@@ -1,100 +1,56 @@
 package cn.bjtu.nourriture.fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.SearchView;
-import android.util.Log;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import cn.bjtu.nourriture.R;
-import cn.bjtu.nourriture.api.ErrorUtils;
-import cn.bjtu.nourriture.api.NourritureService;
-import cn.bjtu.nourriture.api.ServiceFactory;
-import cn.bjtu.nourriture.model.ErrorLogin;
-import cn.bjtu.nourriture.model.Ingredients;
-import retrofit.HttpException;
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import cn.bjtu.nourriture.adapters.IngredientsAdapter;
+import cn.bjtu.nourriture.widget.OffsetDecoration;
 
 /**
- * Author : juliengenoud
- * 30/11/15
+ * Author : Tagzz
+ * 26/11/15
  **/
-public class IngredientFragment extends Fragment {
-
-    private List<Ingredients> mIngredients = new ArrayList<>();
+public class IngredientFragment extends IngredientAbstractFragment  {
 
     public static IngredientFragment newInstance() {
-        IngredientFragment fragment = new IngredientFragment();
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        searchItem.setVisible(true);
-
-        SearchView searchView = (SearchView) searchItem.getActionView();
-        // Todo : Add ingredient filter (copy on recipes)
-       // searchView.setOnQueryTextListener(this);
-        searchView.setQueryHint(getString(R.string.search_hint_ingredient));
-
-        super.onCreateOptionsMenu(menu, inflater);
+        return new IngredientFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.ingredient_fragment,container,false);
-        Log.d("Debug Ingredients", "Enter in Ingredients");
-        NourritureService service = ServiceFactory.createRetrofitService(NourritureService.class);
-        Observable<List<Ingredients>> observable = service.getIngredients();
-        Log.d("Debug Ingredients", "After request to API");
+        return v;
+    }
 
-        //Request to API
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        setUpIngredientsGrid((RecyclerView) view.findViewById(R.id.ingredient_recycler));
+        super.onViewCreated(view, savedInstanceState);
+    }
 
-        observable
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List <Ingredients>>() {
+    private void setUpIngredientsGrid(RecyclerView categoriesView) {
+        final int spacing = getActivity().getApplicationContext().getResources()
+                .getDimensionPixelSize(R.dimen.spacing_nano);
+        categoriesView.addItemDecoration(new OffsetDecoration(spacing));
+        mAdapter = new IngredientsAdapter(getActivity());
+        mAdapter.setOnItemClickListener(
+                new IngredientsAdapter.OnItemClickListener() {
                     @Override
-                    public void onCompleted() {
-                        //Do nothing
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                                /*e.printStackTrace();
-                                Log.e(TAG, e.getMessage());*/
-                        if (e instanceof HttpException) {
-                            ErrorLogin error = ErrorUtils.parseError(((HttpException) e).response().errorBody(), ServiceFactory.getRestAdapter());
-                        }
-                    }
-
-                    @Override
-                    public void onNext(List <Ingredients> ingredient) {
-                        for (int i = 0; i < ingredient.size(); i++) {
-                            mIngredients.add(new Ingredients(ingredient.get(i).getName(), ingredient.get(i).get_id()));
-                            Log.d("Nom de l'ingredient", "onNext: " + mIngredients.get(0).getName());
-                        }
+                    public void onClick(View v, int position) {
+//                        Activity activity = getActivity();
+//                        startQuizActivityWithTransition(activity,
+//                                v.findViewById(R.id.category_title),
+//                                mAdapter.getItem(position));
                     }
                 });
+        categoriesView.setAdapter(mAdapter);
 
-        return v;
+        if (mAdapter.getItemCount() > 0 && getView() != null) {
+            getView().findViewById(R.id.empty_view).setVisibility(View.GONE);
+        }
     }
 }
