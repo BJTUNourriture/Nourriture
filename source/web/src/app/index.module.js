@@ -1,4 +1,4 @@
-(function () {
+(function() {
   'use strict';
 
   angular
@@ -30,7 +30,6 @@
       'ngFileUpload',
       'textAngular',
       'NourritureControllers',
-      'NourritureServices',
-      'NourritureHostname'
+      'NourritureServices'
     ]);
 })();
