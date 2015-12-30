@@ -15,7 +15,7 @@ var environment = argv.env || 'server';
 var rename = require("gulp-rename");
 
 
-//var ENV = JSON.parse(fs.readFileSync('./src/app/config-' + environment + '.json', 'utf8')).ENV;
+//var ENV = JSON.parse(fs.readFileSync('src/app/config-' + environment + '.json', 'utf8')).ENV;
 
 
 gulp.task('config-hostname', function () {

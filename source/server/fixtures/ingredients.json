@@ -1,13 +1,13 @@
-{
-  "_id": {
-    "$oid": "56766c4a71fd90d55f83f5ab"
-  },
-  "name": "toto",
-  "description": "oihoihoih",
-  "calories": 100,
-  "fat": 100,
-  "carbohydrates": 100,
-  "proteins": 100,
-  "tags": [],
-  "__v": 0
-}
+{"_id":{"$oid":"56766c4a71fd90d55f83f5ab"},"name":" white rice","description":"white rice","calories":100,"fat":100,"carbohydrates":100,"proteins":100,"tags":[],"__v":0}
+{"_id":{"$oid":"5683a04fb2afb26862f2b4b2"},"name":" flour","description":"flour","calories":100,"fat":100,"carbohydrates":100,"proteins":100,"__v":0}
+{"_id":{"$oid":"5683a04fb2afb26862f2b4b3"},"name":"water","description":"water","calories":100,"fat":100,"carbohydrates":100,"proteins":100,"__v":0}
+{"_id":{"$oid":"5683a056b2afb26862f2b4b4"},"name":"water","description":"water","calories":100,"fat":100,"carbohydrates":100,"proteins":100,"__v":0}
+{"_id":{"$oid":"5683a056b2afb26862f2b4b5"},"name":" flour","description":"flour","calories":100,"fat":100,"carbohydrates":100,"proteins":100,"__v":0}
+{"_id":{"$oid":"5683a6abb2afb26862f2b4b6"},"name":"water","description":"water","calories":100,"fat":100,"carbohydrates":100,"proteins":100,"__v":0}
+{"_id":{"$oid":"5683a6abb2afb26862f2b4b7"},"name":"flour","description":"flour","calories":100,"fat":100,"carbohydrates":100,"proteins":100,"__v":0}
+{"_id":{"$oid":"5683a6abb2afb26862f2b4b8"},"name":"salt","description":"salt","calories":100,"fat":100,"carbohydrates":100,"proteins":100,"__v":0}
+{"_id":{"$oid":"5683a6abb2afb26862f2b4b9"},"name":"milk","description":"milk","calories":100,"fat":100,"carbohydrates":100,"proteins":100,"__v":0}
+{"_id":{"$oid":"5683a6abb2afb26862f2b4ba"},"name":"egg","description":"egg","calories":100,"fat":100,"carbohydrates":100,"proteins":100,"__v":0}
+{"_id":{"$oid":"5683a6abb2afb26862f2b4bb"},"name":"can tuna","description":"undrained","calories":100,"fat":100,"carbohydrates":100,"proteins":100,"__v":0}
+{"_id":{"$oid":"5683a6abb2afb26862f2b4bc"},"name":"lemon juice","description":"lemon juice","calories":100,"fat":100,"carbohydrates":100,"proteins":100,"__v":0}
+{"_id":{"$oid":"5683a6abb2afb26862f2b4bd"},"name":"egg white","description":"egg white","calories":100,"fat":100,"carbohydrates":100,"proteins":100,"__v":0}
