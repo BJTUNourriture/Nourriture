@@ -4,8 +4,6 @@
   angular
     .module("NourritureControllers", []);
 
-  angular
-    .module("NourritureServices", []);
 
   angular
     .module('web',

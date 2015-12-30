@@ -15,28 +15,28 @@ var environment = argv.env || 'server';
 var rename = require("gulp-rename");
 
 
-
-
 //var ENV = JSON.parse(fs.readFileSync('./src/app/config-' + environment + '.json', 'utf8')).ENV;
 
 
 gulp.task('config-hostname', function () {
   gulp.src('src/app/config-' + environment + '.json')
     .pipe(ngConstant({
-      name: 'web',
-      dest: 'config.js'
+      name: 'NourritureServices',
+      dest: 'config.js',
+      merge: true
     }))
     .pipe(rename("index.constants.js"))
     .pipe(gulp.dest('src/app/'));
 });
 
+
 /**
  *  This will load all js or coffee files in the gulp directory
  *  in order to load all gulp tasks
  */
-wrench.readdirSyncRecursive('./gulp').filter(function(file) {
+wrench.readdirSyncRecursive('./gulp').filter(function (file) {
   return (/\.(js|coffee)$/i).test(file);
-}).map(function(file) {
+}).map(function (file) {
   require('./gulp/' + file);
 });
 
