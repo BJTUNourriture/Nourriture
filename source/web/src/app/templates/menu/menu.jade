@@ -7,7 +7,8 @@ div.flex
 					ng-click='sidenav.leftMenuToggle()')
 		md-content.logo-sidenav
 			img(src="assets/images/logo/nourriture.svg")
-		include ./mini-profile.jade
+		span(ng-if="main.authenticated()")
+			include ./mini-profile.jade
 		md-content.item-sidenav
 			div(ng-repeat="item in sidenav.sidenavItems.unrestricted" class="menu-button-link")
 				md-button(ui-sref="{{ item.reference }}" style="overflow: initial;" ).
