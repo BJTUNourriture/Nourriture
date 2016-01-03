@@ -6,6 +6,8 @@
     <color name="tabColor">#666</color>
     <color name="touch_effect">#9ccc</color>
 
+    <color name="transparent">#80000000</color>
+
 
 
     <!--$primary-color: #333;-->

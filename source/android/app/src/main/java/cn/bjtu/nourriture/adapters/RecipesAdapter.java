@@ -1,11 +1,6 @@
 package cn.bjtu.nourriture.adapters;
 
 import android.app.Activity;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -14,34 +9,32 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import cn.bjtu.nourriture.R;
-import cn.bjtu.nourriture.UserActivity;
 import cn.bjtu.nourriture.api.NourritureService;
 import cn.bjtu.nourriture.api.ServiceFactory;
-import cn.bjtu.nourriture.fragments.RecipeFragment;
 import cn.bjtu.nourriture.fragments.RecipePageFragment;
-import cn.bjtu.nourriture.fragments.UserFragement;
 import cn.bjtu.nourriture.model.Recipes;
-import cn.bjtu.nourriture.model.Token;
-import retrofit.HttpException;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHolder> {
+public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHolder> implements Filterable {
 
     private final LayoutInflater mLayoutInflater;
     private final Activity mActivity;
-    private RecipeFragment mRecipeFragment;
     private List<Recipes> mRecipes = new ArrayList<>();
+    private List<Recipes> mfilteredRecipes = new ArrayList<>();
+
     private static final String TAG = "Recipes";
 
     private OnItemClickListener mOnItemClickListener;
@@ -50,8 +43,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
         void onClick(View view, int position);
     }
 
-    public RecipesAdapter(Activity activity, RecipeFragment recipeFragment) {
-        mRecipeFragment = recipeFragment;
+    public RecipesAdapter(Activity activity) {
         mActivity = activity;
         mLayoutInflater = LayoutInflater.from(activity.getApplicationContext());
         updateRecipes(activity);
@@ -75,7 +67,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e(TAG, e.getMessage());
+                        //Log.e(TAG, e.getMessage());
                                 /*e.printStackTrace();
                                 Log.e(TAG, e.getMessage());*/
                                 /*if (e instanceof HttpException) {
@@ -88,17 +80,31 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
                         for (int i = 0; i < recipe.size(); i++) {
                             Log.d(TAG, recipe.get(i).getName());
                             mRecipes.add(new Recipes(recipe.get(i).getName(), recipe.get(i).get_id(), new ColorItem("#84ffff", "#ffffff", "#03a9f4")));
+                            // TODO : need to handle data from fragment !!!
+                            mfilteredRecipes.add(new Recipes(recipe.get(i).getName(), recipe.get(i).get_id(), new ColorItem("#84ffff", "#ffffff", "#03a9f4")));
                             //notifyItemChanged(recipe.get(i).get_id());
                         }
                         notifyDataSetChanged();
                     }
                 });
         // get dummy recipes
-        /*
+
         mRecipes.add(new Recipes("MACARONIS", "000001", new ColorItem("#84ffff", "#ffffff","#03a9f4")));
         mRecipes.add(new Recipes("CHOUX FLEURS", "000002", new ColorItem("#b9f6ca", "#000000","#1de9b6")));
         mRecipes.add(new Recipes("RAVIOLIS", "000003", new ColorItem("#b388ff", "#ffffff","#7e57c2")));
-        mRecipes.add(new Recipes("TRIPES FARCIES AUX ECHALOTTES", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));*/
+        mRecipes.add(new Recipes("TRIPES FARCIES AUX ECHALOTTES", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
+        mRecipes.add(new Recipes("TRIPES FARCIES AUX ECHALOTTES", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
+        mRecipes.add(new Recipes("TRIPES FARCIES AUX ECHALOTTES", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
+
+
+        // TODO : need to handle data from fragment !!!
+        mfilteredRecipes.add(new Recipes("MACARONIS", "000001", new ColorItem("#84ffff", "#ffffff","#03a9f4")));
+        mfilteredRecipes.add(new Recipes("CHOUX FLEURS", "000002", new ColorItem("#b9f6ca", "#000000","#1de9b6")));
+        mfilteredRecipes.add(new Recipes("RAVIOLIS", "000003", new ColorItem("#b388ff", "#ffffff","#7e57c2")));
+        mfilteredRecipes.add(new Recipes("TRIPES FARCIES AUX ECHALOTTES", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
+        mfilteredRecipes.add(new Recipes("TRIPES FARCIES AUX ECHALOTTES", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
+        mfilteredRecipes.add(new Recipes("TRIPES FARCIES AUX ECHALOTTES", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
+
 
     }
 
@@ -133,8 +139,6 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
                 FragmentTransaction ft = ((FragmentActivity) mActivity).getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.frame, RecipePageFragment.newInstance(mRecipes.get(position)));
                 ft.commit();
-
-
             }
         });
     }
@@ -182,6 +186,55 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
             super(container);
             icon = (ImageView) container.findViewById(R.id.recipe_icon);
             title = (TextView) container.findViewById(R.id.recipe_title);
+        }
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new RecipeFilter(this, mfilteredRecipes);
+    }
+
+    private static class RecipeFilter extends Filter {
+
+        private final RecipesAdapter adapter;
+
+        private final List<Recipes> originalList;
+
+        private final List<Recipes> filteredList;
+
+        private RecipeFilter(RecipesAdapter adapter, List<Recipes> originalList) {
+            super();
+            this.adapter = adapter;
+            this.originalList = new LinkedList<>(originalList);
+            this.filteredList = new ArrayList<>();
+        }
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            filteredList.clear();
+            final FilterResults results = new FilterResults();
+
+            if (constraint.length() == 0) {
+                filteredList.addAll(originalList);
+            } else {
+                final String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (final Recipes recipes : originalList) {
+                    if (recipes.getName().toLowerCase().contains(constraint.toString().toLowerCase())) {
+                        filteredList.add(recipes);
+                    }
+                }
+            }
+            results.values = filteredList;
+            results.count = filteredList.size();
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            adapter.mRecipes.clear();
+            adapter.mRecipes.addAll((ArrayList<Recipes>) results.values);
+            adapter.notifyDataSetChanged();
         }
     }
 }

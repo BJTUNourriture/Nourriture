@@ -14,13 +14,22 @@ var routes = require('./routes/index');
 var config = require('./config');
 var mongoose = require('mongoose');
 var app = express();
+var os = require("os");
+
 if (app.settings.env !== 'test')
     var logger = require('morgan');
 
 // http://localhost:8101/api/oauth2/authorize?client_id=this_is_my_id&response_type=code&redirect_uri=http://localhost:8101
 /* Init const var */
 PORT = "8101";
-HOSTNAME = "127.0.0.1";
+
+if (os.hostname() === "sylflo.fr") {
+    HOSTNAME = "sylflo.fr";
+} else {
+    HOSTNAME = "127.0.0.1";
+}
+
+
 //jwt secret key set
 app.set('jwtSecret', '18B63D7DDDD8C614227C8F31D8A25DEB92F249C391267DF9A28A5ACC00458837');
 
@@ -116,9 +125,10 @@ if (app.get('env') === 'development') {
 }
 
 app.listen(PORT);
-if (app.get('env') !== 'test')
+/*if (app.get('env') !== 'test')
 {
+    console.log(os.hostname());
     console.log(" App listening on port ", PORT);
-}
+}*/
 
 module.exports = app;

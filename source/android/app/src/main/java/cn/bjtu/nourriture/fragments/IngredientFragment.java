@@ -1,89 +1,56 @@
 package cn.bjtu.nourriture.fragments;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.List;
 
 import cn.bjtu.nourriture.R;
-import cn.bjtu.nourriture.UserActivity;
-import cn.bjtu.nourriture.api.ErrorUtils;
-import cn.bjtu.nourriture.api.NourritureService;
-import cn.bjtu.nourriture.api.ServiceFactory;
-import cn.bjtu.nourriture.model.ErrorLogin;
-import cn.bjtu.nourriture.model.Ingredients;
-import cn.bjtu.nourriture.model.Token;
-import retrofit.HttpException;
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import cn.bjtu.nourriture.adapters.IngredientsAdapter;
+import cn.bjtu.nourriture.widget.OffsetDecoration;
 
 /**
- * Author : juliengenoud
- * 30/11/15
+ * Author : Tagzz
+ * 26/11/15
  **/
-public class IngredientFragment extends Fragment {
+public class IngredientFragment extends IngredientAbstractFragment  {
 
     public static IngredientFragment newInstance() {
-        IngredientFragment fragment = new IngredientFragment();
-        return fragment;
+        return new IngredientFragment();
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.dummy_fragment,container,false);
-        ((TextView)v.findViewById(R.id.dummy)).setText("Ingredients");
-        Log.d("Debug Ingredients", "Enter in Ingredients");
-        NourritureService service = ServiceFactory.createRetrofitService(NourritureService.class);
-        Observable<List<Ingredients>> observable = service.getIngredients();
-        Log.d("Debug Ingredients", "After request to API");
+        View v = inflater.inflate(R.layout.ingredient_fragment,container,false);
+        return v;
+    }
 
-        //Request to API
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        setUpIngredientsGrid((RecyclerView) view.findViewById(R.id.ingredient_recycler));
+        super.onViewCreated(view, savedInstanceState);
+    }
 
-        observable
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List <Ingredients>>() {
+    private void setUpIngredientsGrid(RecyclerView categoriesView) {
+        final int spacing = getActivity().getApplicationContext().getResources()
+                .getDimensionPixelSize(R.dimen.spacing_nano);
+        categoriesView.addItemDecoration(new OffsetDecoration(spacing));
+        mAdapter = new IngredientsAdapter(getActivity());
+        mAdapter.setOnItemClickListener(
+                new IngredientsAdapter.OnItemClickListener() {
                     @Override
-                    public void onCompleted() {
-                        //Do nothing
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                                /*e.printStackTrace();
-                                Log.e(TAG, e.getMessage());*/
-                        if (e instanceof HttpException) {
-                            ErrorLogin error = ErrorUtils.parseError(((HttpException) e).response().errorBody(), ServiceFactory.getRestAdapter());
-                        }
-                    }
-
-                    @Override
-                    public void onNext(List <Ingredients> ingredient) {
-                        for (int i = 0; i < ingredient.size(); i++) {
-                            Log.d("Nom de l'ingredient", "onNext: " + ingredient.get(i).getName());
-                            Log.d("Desc Ingredient", "onNext: " + ingredient.get(i).getDescription());
-                            Log.d("Fat Ingredient", "onNext: " + ingredient.get(i).getFat());
-                            Log.d("Prot Ingredient", "onNext: " + ingredient.get(i).getProteins());
-                            Log.d("Carb Ingredient", "onNext: " + ingredient.get(i).getCarbohydrates());
-                        }
+                    public void onClick(View v, int position) {
+//                        Activity activity = getActivity();
+//                        startQuizActivityWithTransition(activity,
+//                                v.findViewById(R.id.category_title),
+//                                mAdapter.getItem(position));
                     }
                 });
+        categoriesView.setAdapter(mAdapter);
 
-        return v;
+        if (mAdapter.getItemCount() > 0 && getView() != null) {
+            getView().findViewById(R.id.empty_view).setVisibility(View.GONE);
+        }
     }
 }

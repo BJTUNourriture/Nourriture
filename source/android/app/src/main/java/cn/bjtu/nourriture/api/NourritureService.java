@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.util.List;
 
+import cn.bjtu.nourriture.model.Groups;
 import cn.bjtu.nourriture.model.Login;
 import cn.bjtu.nourriture.model.Message;
 import cn.bjtu.nourriture.model.Recipes;
@@ -37,5 +38,8 @@ public interface NourritureService {
 
     @GET("ingredients/")
     Observable<List <Ingredients>> getIngredients();
+
+    @GET("groups")
+    Observable<List <Groups>> getGroups();
 
 }

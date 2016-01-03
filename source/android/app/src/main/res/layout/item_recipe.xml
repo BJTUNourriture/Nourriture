@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/recipe_icon"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="220dp"
         android:layout_marginBottom="@dimen/size_avatar_toolbar"
         android:contentDescription="@string/category" />
 

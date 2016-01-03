@@ -1,20 +1,25 @@
 package cn.bjtu.nourriture;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import cn.bjtu.nourriture.fragments.GroupFragment;
 import cn.bjtu.nourriture.fragments.IngredientFragment;
-import cn.bjtu.nourriture.fragments.RecipeFragment;
-import cn.bjtu.nourriture.fragments.UserFragement;
 import cn.bjtu.nourriture.fragments.LogoutFragment;
+import cn.bjtu.nourriture.fragments.RecipeFragment;
+import cn.bjtu.nourriture.fragments.users.UserFragment;
 
 public class UserActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -23,7 +28,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
 
-    UserFragement mUserFragment = new UserFragement();
+    UserFragment mUserFragment = new UserFragment();
     IngredientFragment mIgredientFragment = new IngredientFragment();
     RecipeFragment mRecipeFragment = new RecipeFragment();
     GroupFragment mGroupFragment = new GroupFragment();
@@ -49,15 +54,18 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onDrawerClosed(View drawerView) {
-                // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
                 super.onDrawerClosed(drawerView);
             }
 
             @Override
             public void onDrawerOpened(View drawerView) {
-                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
-
                 super.onDrawerOpened(drawerView);
+                // Close keyboard if used
+                View view = getCurrentFocus();
+                if (view != null) {
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
             }
         };
 
@@ -67,19 +75,40 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         //calling sync state is necessay or else your hamburger icon wont show up
         actionBarDrawerToggle.syncState();
 
-
         // SET USER SELECTED
         navigationView.getMenu().getItem(0).setChecked(true);
+
+        // SET FIRST USER SELECTED
         android.support.v4.app.FragmentTransaction trans1 = getSupportFragmentManager().beginTransaction();
-        trans1.replace(R.id.frame, UserFragement.newInstance());
+        trans1.replace(R.id.frame, UserFragment.newInstance());
         trans1.commit();
+
     }
 
-    @Override
+    public NavigationView getNavView() {
+        return navigationView;
+    }
+
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_user, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        searchItem.setVisible(false);
+
+        SearchManager searchManager = (SearchManager) UserActivity.this.getSystemService(Context.SEARCH_SERVICE);
+
+        SearchView searchView = null;
+        if (searchItem != null) {
+            searchView = (SearchView) searchItem.getActionView();
+        }
+        if (searchView != null) {
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(UserActivity.this.getComponentName()));
+        }
+
+
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -90,9 +119,9 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -113,7 +142,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
             case R.id.user:
                 toolbar.setTitle(getString(R.string.user));
                 android.support.v4.app.FragmentTransaction trans1 = getSupportFragmentManager().beginTransaction();
-                trans1.replace(R.id.frame, UserFragement.newInstance());
+                trans1.replace(R.id.frame, UserFragment.newInstance());
                 trans1.commit();
                 break;
             case R.id.ingredients:

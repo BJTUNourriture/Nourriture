@@ -1,7 +1,6 @@
 package cn.bjtu.nourriture.fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,14 +14,10 @@ import cn.bjtu.nourriture.widget.OffsetDecoration;
  * Author : juliengenoud
  * 30/11/15
  **/
-public class RecipeFragment extends Fragment {
-
-    private RecipesAdapter mAdapter;
-
+public class RecipeFragment extends RecipeAbstractFragment  {
 
     public static RecipeFragment newInstance() {
-        RecipeFragment fragment = new RecipeFragment();
-        return fragment;
+        return new RecipeFragment();
     }
 
     @Override
@@ -38,10 +33,10 @@ public class RecipeFragment extends Fragment {
     }
 
     private void setUpRecipesGrid(RecyclerView categoriesView) {
-        final int spacing = getContext().getResources()
+        final int spacing = getActivity().getApplicationContext().getResources()
                 .getDimensionPixelSize(R.dimen.spacing_nano);
         categoriesView.addItemDecoration(new OffsetDecoration(spacing));
-        mAdapter = new RecipesAdapter(getActivity(), this);
+        mAdapter = new RecipesAdapter(getActivity());
         mAdapter.setOnItemClickListener(
                 new RecipesAdapter.OnItemClickListener() {
                     @Override
@@ -53,5 +48,9 @@ public class RecipeFragment extends Fragment {
                     }
                 });
         categoriesView.setAdapter(mAdapter);
+
+        if (mAdapter.getItemCount() > 0 && getView() != null) {
+            getView().findViewById(R.id.empty_view).setVisibility(View.GONE);
+        }
     }
 }
