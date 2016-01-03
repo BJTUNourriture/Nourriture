@@ -20,7 +20,7 @@ import java.util.List;
 import cn.bjtu.nourriture.R;
 import cn.bjtu.nourriture.api.NourritureService;
 import cn.bjtu.nourriture.api.ServiceFactory;
-import cn.bjtu.nourriture.model.Recipes;
+import cn.bjtu.nourriture.model.Recipe;
 import cn.bjtu.nourriture.pages.RecipePageActivity;
 import rx.Observable;
 import rx.Subscriber;
@@ -31,10 +31,10 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
 
     private final LayoutInflater mLayoutInflater;
     private final Activity mActivity;
-    private List<Recipes> mRecipes = new ArrayList<>();
-    private List<Recipes> mfilteredRecipes = new ArrayList<>();
+    private List<Recipe> mRecipes = new ArrayList<>();
+    private List<Recipe> mfilteredRecipes = new ArrayList<>();
 
-    private static final String TAG = "Recipes";
+    private static final String TAG = "Recipe";
 
     private OnItemClickListener mOnItemClickListener;
 
@@ -53,12 +53,12 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
         NourritureService service = ServiceFactory.createRetrofitService(NourritureService.class);
 
         //Get all the recipes from the API
-        Observable<List<Recipes>> observable = service.getRecipes();
+        Observable<List<Recipe>> observable = service.getRecipes();
 
         observable
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<Recipes>>() {
+                .subscribe(new Subscriber<List<Recipe>>() {
                     @Override
                     public void onCompleted() {
                         //Do nothing
@@ -75,34 +75,38 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
                     }
 
                     @Override
-                    public void onNext(List<Recipes> recipe) {
+                    public void onNext(List<Recipe> recipe) {
+                        mActivity.findViewById(R.id.empty_view).setVisibility(View.GONE);
                         for (int i = 0; i < recipe.size(); i++) {
                             Log.d(TAG, recipe.get(i).getName());
-                            mRecipes.add(new Recipes(recipe.get(i).getName(), recipe.get(i).get_id(), new ColorItem("#84ffff", "#ffffff", "#03a9f4")));
                             // TODO : need to handle data from fragment !!!
-                            mfilteredRecipes.add(new Recipes(recipe.get(i).getName(), recipe.get(i).get_id(), new ColorItem("#84ffff", "#ffffff", "#03a9f4")));
+
+                            recipe.get(i).setColorItem(new ColorItem());
+                            mRecipes.add(recipe.get(i));
+                            mfilteredRecipes.add(recipe.get(i));
+
                             //notifyItemChanged(recipe.get(i).get_id());
                         }
                         notifyDataSetChanged();
                     }
                 });
         // get dummy recipes
-
-        mRecipes.add(new Recipes("MACARONIS", "000001", new ColorItem("#84ffff", "#ffffff","#03a9f4")));
-        mRecipes.add(new Recipes("CHOUX FLEURS", "000002", new ColorItem("#b9f6ca", "#000000","#1de9b6")));
-        mRecipes.add(new Recipes("RAVIOLIS", "000003", new ColorItem("#b388ff", "#ffffff","#7e57c2")));
-        mRecipes.add(new Recipes("TRIPES FARCIES AUX ECHALOTTES", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
-        mRecipes.add(new Recipes("TRIPES FARCIES AUX ECHALOTTES", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
-        mRecipes.add(new Recipes("TRIPES FARCIES AUX ECHALOTTES", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
-
-
-        // TODO : need to handle data from fragment !!!
-        mfilteredRecipes.add(new Recipes("MACARONIS", "000001", new ColorItem("#84ffff", "#ffffff","#03a9f4")));
-        mfilteredRecipes.add(new Recipes("CHOUX FLEURS", "000002", new ColorItem("#b9f6ca", "#000000","#1de9b6")));
-        mfilteredRecipes.add(new Recipes("RAVIOLIS", "000003", new ColorItem("#b388ff", "#ffffff","#7e57c2")));
-        mfilteredRecipes.add(new Recipes("TRIPES FARCIES AUX ECHALOTTES", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
-        mfilteredRecipes.add(new Recipes("TRIPES FARCIES AUX ECHALOTTES", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
-        mfilteredRecipes.add(new Recipes("TRIPES FARCIES AUX ECHALOTTES", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
+//
+//        mRecipes.add(new Recipe("MACARONIS", "000001", new ColorItem("#84ffff", "#ffffff","#03a9f4")));
+//        mRecipes.add(new Recipe("CHOUX FLEURS", "000002", new ColorItem("#b9f6ca", "#000000","#1de9b6")));
+//        mRecipes.add(new Recipe("RAVIOLIS", "000003", new ColorItem("#b388ff", "#ffffff","#7e57c2")));
+//        mRecipes.add(new Recipe("TRIPES FARCIES AUX ECHALOTTES", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
+//        mRecipes.add(new Recipe("TRIPES FARCIES AUX ECHALOTTES", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
+//        mRecipes.add(new Recipe("TRIPES FARCIES AUX ECHALOTTES", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
+//
+//
+//        // TODO : need to handle data from fragment !!!
+//        mfilteredRecipes.add(new Recipe("MACARONIS", "000001", new ColorItem("#84ffff", "#ffffff","#03a9f4")));
+//        mfilteredRecipes.add(new Recipe("CHOUX FLEURS", "000002", new ColorItem("#b9f6ca", "#000000","#1de9b6")));
+//        mfilteredRecipes.add(new Recipe("RAVIOLIS", "000003", new ColorItem("#b388ff", "#ffffff","#7e57c2")));
+//        mfilteredRecipes.add(new Recipe("TRIPES FARCIES AUX ECHALOTTES", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
+//        mfilteredRecipes.add(new Recipe("TRIPES FARCIES AUX ECHALOTTES", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
+//        mfilteredRecipes.add(new Recipe("TRIPES FARCIES AUX ECHALOTTES", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
 
 
     }
@@ -116,7 +120,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Recipes recipe = mRecipes.get(position);
+        Recipe recipe = mRecipes.get(position);
 //        setCategoryIcon(recipe, holder.icon);
 //        holder.itemView.setBackgroundColor(getColor(theme.getWindowBackgroundColor()));
 
@@ -157,7 +161,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
         return mRecipes.size();
     }
 
-    public Recipes getItem(int position) {
+    public Recipe getItem(int position) {
         return mRecipes.get(position);
     }
 
@@ -201,11 +205,11 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
 
         private final RecipesAdapter adapter;
 
-        private final List<Recipes> originalList;
+        private final List<Recipe> originalList;
 
-        private final List<Recipes> filteredList;
+        private final List<Recipe> filteredList;
 
-        private RecipeFilter(RecipesAdapter adapter, List<Recipes> originalList) {
+        private RecipeFilter(RecipesAdapter adapter, List<Recipe> originalList) {
             super();
             this.adapter = adapter;
             this.originalList = new LinkedList<>(originalList);
@@ -222,7 +226,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
             } else {
                 final String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for (final Recipes recipes : originalList) {
+                for (final Recipe recipes : originalList) {
                     if (recipes.getName().toLowerCase().contains(constraint.toString().toLowerCase())) {
                         filteredList.add(recipes);
                     }
@@ -236,7 +240,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             adapter.mRecipes.clear();
-            adapter.mRecipes.addAll((ArrayList<Recipes>) results.values);
+            adapter.mRecipes.addAll((ArrayList<Recipe>) results.values);
             adapter.notifyDataSetChanged();
         }
     }

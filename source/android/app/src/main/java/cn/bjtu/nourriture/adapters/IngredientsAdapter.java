@@ -17,7 +17,7 @@ import java.util.List;
 import cn.bjtu.nourriture.R;
 import cn.bjtu.nourriture.api.NourritureService;
 import cn.bjtu.nourriture.api.ServiceFactory;
-import cn.bjtu.nourriture.model.Ingredients;
+import cn.bjtu.nourriture.model.Ingredient;
 import cn.bjtu.nourriture.pages.IngredientPageActivity;
 import rx.Observable;
 import rx.Subscriber;
@@ -28,10 +28,10 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
     private final LayoutInflater mLayoutInflater;
     private final Activity mActivity;
-    private List<Ingredients> mIngredients = new ArrayList<>();
-    private List<Ingredients> mfilteredIngredients = new ArrayList<>();
+    private List<Ingredient> mIngredients = new ArrayList<>();
+    private List<Ingredient> mfilteredIngredients = new ArrayList<>();
 
-    private static final String TAG = "Ingredients";
+    private static final String TAG = "Ingredient";
 
     private OnItemClickListener mOnItemClickListener;
 
@@ -49,13 +49,13 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         //Insantiate the non-singleton Nourriture Service
         NourritureService service = ServiceFactory.createRetrofitService(NourritureService.class);
 
-        //Get all the Ingredients from the API
-        Observable<List<Ingredients>> observable = service.getIngredients();
+        //Get all the Ingredient from the API
+        Observable<List<Ingredient>> observable = service.getIngredients();
 
         observable
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<Ingredients>>() {
+                .subscribe(new Subscriber<List<Ingredient>>() {
                     @Override
                     public void onCompleted() {
                         //Do nothing
@@ -72,17 +72,19 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
                     }
 
                     @Override
-                    public void onNext(List<Ingredients> ingredients) {
+                    public void onNext(List<Ingredient> ingredients) {
+                        mActivity.findViewById(R.id.empty_view).setVisibility(View.GONE);
                         for (int i = 0; i < ingredients.size(); i++) {
                             Log.d(TAG, ingredients.get(i).getName());
-                            mIngredients.add(new Ingredients(ingredients.get(i).getName(), ingredients.get(i).getDescription(), ingredients.get(i).get_id(), new ColorItem("#84ffff", "#ffffff", "#03a9f4")));
+
+                            ingredients.get(i).setColorItem(new ColorItem());
+                            mIngredients.add(ingredients.get(i));
                         }
                         notifyDataSetChanged();
                     }
                 });
         // get dummy ingredient
-
-        mIngredients.add(new Ingredients("Gras De Canard", "TopKek", "000001", new ColorItem("#84ffff", "#ffffff","#03a9f4")));
+//        mIngredients.add(new Ingredient("Gras De Canard", "TopKek", "000001", new ColorItem("#84ffff", "#ffffff","#03a9f4")));
 
     }
 
@@ -95,7 +97,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Ingredients ingredient = mIngredients.get(position);
+        Ingredient ingredient = mIngredients.get(position);
 
 
         holder.icon.setImageResource(R.drawable.food);
@@ -133,7 +135,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         return mIngredients.size();
     }
 
-    public Ingredients getItem(int position) {
+    public Ingredient getItem(int position) {
         return mIngredients.get(position);
     }
 

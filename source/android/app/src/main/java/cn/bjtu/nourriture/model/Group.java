@@ -9,14 +9,14 @@ import cn.bjtu.nourriture.adapters.ColorItem;
  * Author : Benjamin
  * 26/12/15
  **/
-public class Groups implements Parcelable {
+public class Group implements Parcelable {
 
     private ColorItem colorItem;
     private String _id;
     private String name;
     private String description;
 
-    public Groups(String name, String description, String _id, ColorItem colorItem) {
+    public Group(String name, String description, String _id, ColorItem colorItem) {
         this._id = _id;
         this.name = name;
         this.description = description;
@@ -51,20 +51,20 @@ public class Groups implements Parcelable {
         dest.writeString(this.description);
     }
 
-    private Groups(Parcel in) {
+    private Group(Parcel in) {
 //        this.colorItem = in.readParcelable(ColorItem.class.getClassLoader());
         this._id = in.readString();
         this.name = in.readString();
         this.description = in.readString();
     }
 
-    public static final Parcelable.Creator<Groups> CREATOR = new Parcelable.Creator<Groups>() {
-        public Groups createFromParcel(Parcel source) {
-            return new Groups(source);
+    public static final Parcelable.Creator<Group> CREATOR = new Parcelable.Creator<Group>() {
+        public Group createFromParcel(Parcel source) {
+            return new Group(source);
         }
 
-        public Groups[] newArray(int size) {
-            return new Groups[size];
+        public Group[] newArray(int size) {
+            return new Group[size];
         }
     };
 }

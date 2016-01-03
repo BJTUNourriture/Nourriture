@@ -1,17 +1,15 @@
 package cn.bjtu.nourriture.api;
 
-import android.util.Log;
-
 import java.util.List;
 
-import cn.bjtu.nourriture.model.Groups;
+import cn.bjtu.nourriture.model.Group;
 import cn.bjtu.nourriture.model.Login;
 import cn.bjtu.nourriture.model.Message;
-import cn.bjtu.nourriture.model.Recipes;
+import cn.bjtu.nourriture.model.Recipe;
 import cn.bjtu.nourriture.model.Register;
 import cn.bjtu.nourriture.model.Token;
 import cn.bjtu.nourriture.model.User;
-import cn.bjtu.nourriture.model.Ingredients;
+import cn.bjtu.nourriture.model.Ingredient;
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.POST;
@@ -28,7 +26,7 @@ public interface NourritureService {
     Observable<User> getUser(@Path("login") String login);
 
     @GET("recipes")
-    Observable<List <Recipes>> getRecipes();
+    Observable<List <Recipe>> getRecipes();
 
     @POST("users/register")
     Observable<Message> registerUser(@Body Register user);
@@ -37,9 +35,9 @@ public interface NourritureService {
     Observable<Token> loginUser(@Body Login user);
 
     @GET("ingredients/")
-    Observable<List <Ingredients>> getIngredients();
+    Observable<List <Ingredient>> getIngredients();
 
     @GET("groups")
-    Observable<List <Groups>> getGroups();
+    Observable<List <Group>> getGroups();
 
 }

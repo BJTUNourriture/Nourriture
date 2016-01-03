@@ -10,7 +10,8 @@ import retrofit.RxJavaCallAdapterFactory;
  **/
 public class ServiceFactory {
 
-    static String API_IP = "10.0.2.2";
+    static String API_IP = "sylflo.fr";
+    static String API_IP_emulator = "10.0.2.2";
     static String API_IP_maxime = "192.168.198.132";
     static String API_IP_julien = "192.168.0.101";
     static String API_IP_benjamin = "192.168.1.102";

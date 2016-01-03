@@ -17,7 +17,7 @@ import cn.bjtu.nourriture.fragments.users.UserRecipesFragment;
 public class UserFragmentPagerAdapter extends FragmentPagerAdapter {
 
     final int PAGE_COUNT = 3;
-    private String tabTitles[] = new String[]{"Profile", "Recipes", "Groups"};
+    private String tabTitles[] = new String[]{"Profile", "Recipe", "Group"};
     private Context context;
 
     public UserFragmentPagerAdapter(FragmentManager fm, Context context) {

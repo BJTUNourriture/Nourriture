@@ -9,7 +9,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import cn.bjtu.nourriture.R;
-import cn.bjtu.nourriture.model.Groups;
+import cn.bjtu.nourriture.model.Group;
 
 /**
  * Created by Benjamin
@@ -28,7 +28,7 @@ public class GroupPageActivity extends AppCompatActivity {
         setContentView(R.layout.group_layout);
         hideactionbar();
 
-        Groups group = getIntent().getExtras().getParcelable(GroupPageActivity.NAME);
+        Group group = getIntent().getExtras().getParcelable(GroupPageActivity.NAME);
 
         toolbar = (Toolbar) findViewById(R.id.group_page_toolbar);
         toolbar.setTitleTextColor(Color.WHITE);

@@ -9,7 +9,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import cn.bjtu.nourriture.R;
-import cn.bjtu.nourriture.model.Ingredients;
+import cn.bjtu.nourriture.model.Ingredient;
 
 /**
  * Created by Tagzz
@@ -28,7 +28,7 @@ public class IngredientPageActivity extends AppCompatActivity {
         setContentView(R.layout.ingredients_layout);
         hideactionbar();
 
-        Ingredients ingredient = getIntent().getExtras().getParcelable(IngredientPageActivity.NAME);
+        Ingredient ingredient = getIntent().getExtras().getParcelable(IngredientPageActivity.NAME);
 
         toolbar = (Toolbar) findViewById(R.id.ingredient_page_toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
@@ -48,18 +48,9 @@ public class IngredientPageActivity extends AppCompatActivity {
             ((TextView) findViewById(R.id.description)).setText(ingredient.getDescription());
         }
 
-        if (ingredient.getFat() != null) {
-            ((TextView) findViewById(R.id.fat)).setText(ingredient.getFat());
-        }
-
-        if (ingredient.getCarbohydrates() != null) {
-            ((TextView) findViewById(R.id.carbohydrates)).setText(ingredient.getCarbohydrates());
-        }
-
-        if (ingredient.getProteins() != null) {
-            ((TextView) findViewById(R.id.proteins)).setText(ingredient.getProteins());
-        }
-
+        ((TextView) findViewById(R.id.fat)).setText(String.valueOf(ingredient.getFat()));
+        ((TextView) findViewById(R.id.carbohydrates)).setText(String.valueOf(ingredient.getCarbohydrates()));
+        ((TextView) findViewById(R.id.proteins)).setText(String.valueOf(ingredient.getProteins()));
 
     }
 

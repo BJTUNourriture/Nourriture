@@ -8,16 +8,21 @@ import cn.bjtu.nourriture.adapters.ColorItem;
 /**
  * Created by Tagzz on 20/12/2015.
  */
-public class Ingredients implements Parcelable {
+public class Ingredient implements Parcelable {
     private String _id;
     private String name;
     private String description;
-    private ColorItem colorItem;
-    private Integer fat;
-    private Integer carbohydrates;
-    private Integer proteins;
 
-    public Ingredients(String Name, String Description, String _id, ColorItem colorItem) {
+    public void setColorItem(ColorItem colorItem) {
+        this.colorItem = colorItem;
+    }
+
+    private ColorItem colorItem;
+    private int fat;
+    private int carbohydrates;
+    private int proteins;
+
+    public Ingredient(String Name, String Description, String _id, ColorItem colorItem) {
         this._id = _id;
         this.name = Name;
         this.description = Description;
@@ -36,15 +41,15 @@ public class Ingredients implements Parcelable {
         return description;
     }
 
-    public Integer getFat() {
+    public int getFat() {
         return fat;
     }
 
-    public Integer getCarbohydrates() {
+    public int getCarbohydrates() {
         return carbohydrates;
     }
 
-    public Integer getProteins() {
+    public int getProteins() {
         return proteins;
     }
 
@@ -63,28 +68,28 @@ public class Ingredients implements Parcelable {
         dest.writeString(this.name);
         dest.writeString(this.description);
        // dest.writeParcelable(this.colorItem, flags);
-        dest.writeValue(this.fat);
-        dest.writeValue(this.carbohydrates);
-        dest.writeValue(this.proteins);
+        dest.writeInt(this.fat);
+        dest.writeInt(this.carbohydrates);
+        dest.writeInt(this.proteins);
     }
 
-    private Ingredients(Parcel in) {
+    private Ingredient(Parcel in) {
         this._id = in.readString();
         this.name = in.readString();
         this.description = in.readString();
 //        this.colorItem = in.readParcelable(ColorItem.class.getClassLoader());
-        this.fat = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.carbohydrates = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.proteins = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.fat = in.readInt();
+        this.carbohydrates =  in.readInt();
+        this.proteins =  in.readInt();
     }
 
-    public static final Parcelable.Creator<Ingredients> CREATOR = new Parcelable.Creator<Ingredients>() {
-        public Ingredients createFromParcel(Parcel source) {
-            return new Ingredients(source);
+    public static final Parcelable.Creator<Ingredient> CREATOR = new Parcelable.Creator<Ingredient>() {
+        public Ingredient createFromParcel(Parcel source) {
+            return new Ingredient(source);
         }
 
-        public Ingredients[] newArray(int size) {
-            return new Ingredients[size];
+        public Ingredient[] newArray(int size) {
+            return new Ingredient[size];
         }
     };
 }

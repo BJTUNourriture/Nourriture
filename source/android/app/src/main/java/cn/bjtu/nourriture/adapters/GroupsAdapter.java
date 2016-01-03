@@ -17,7 +17,7 @@ import java.util.List;
 import cn.bjtu.nourriture.R;
 import cn.bjtu.nourriture.api.NourritureService;
 import cn.bjtu.nourriture.api.ServiceFactory;
-import cn.bjtu.nourriture.model.Groups;
+import cn.bjtu.nourriture.model.Group;
 import cn.bjtu.nourriture.pages.GroupPageActivity;
 import rx.Observable;
 import rx.Subscriber;
@@ -28,10 +28,10 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.ViewHolder
 
     private final LayoutInflater mLayoutInflater;
     private final Activity mActivity;
-    private List<Groups> mGroups = new ArrayList<>();
-    private List<Groups> mfilteredGroups = new ArrayList<>();
+    private List<Group> mGroups = new ArrayList<>();
+    private List<Group> mfilteredGroups = new ArrayList<>();
 
-    private static final String TAG = "Groups";
+    private static final String TAG = "Group";
 
     private OnItemClickListener mOnItemClickListener;
 
@@ -50,12 +50,12 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.ViewHolder
         NourritureService service = ServiceFactory.createRetrofitService(NourritureService.class);
 
         //Get all the groups from the API
-        Observable<List<Groups>> observable = service.getGroups();
+        Observable<List<Group>> observable = service.getGroups();
 
         observable
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<Groups>>() {
+                .subscribe(new Subscriber<List<Group>>() {
                     @Override
                     public void onCompleted() {
                         //Do nothing
@@ -72,23 +72,24 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.ViewHolder
                     }
 
                     @Override
-                    public void onNext(List<Groups> group) {
+                    public void onNext(List<Group> group) {
+                        mActivity.findViewById(R.id.empty_view).setVisibility(View.GONE);
                         for (int i = 0; i < group.size(); i++) {
                             Log.d(TAG, group.get(i).getName());
-                            mGroups.add(new Groups(group.get(i).getName(), group.get(i).getDescription(), group.get(i).get_id(), new ColorItem("#84ffff", "#ffffff", "#03a9f4")));
+                            mGroups.add(new Group(group.get(i).getName(), group.get(i).getDescription(), group.get(i).get_id(), new ColorItem()));
                         }
                         notifyDataSetChanged();
                     }
                 });
         // get dummy groups
 
-        mGroups.add(new Groups("Mangeur de gras", "Le gras c'est la vie !!!", "000001", new ColorItem("#84ffff", "#ffffff","#03a9f4")));
-        mGroups.add(new Groups("Mangeur de legumes", "Les légumes vous rende utile à la société", "000002", new ColorItem("#b9f6ca", "#000000","#1de9b6")));
-        mGroups.add(new Groups("Mangeur de viande", "Au sommet de la chaine alimentaire", "000003", new ColorItem("#b388ff", "#ffffff","#7e57c2")));
-        mGroups.add(new Groups("Mangeur de tofu", "Mange du tofu, tu mourras vieux et depressif", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
-        mGroups.add(new Groups("Vegan", "Les mangeur de viande iront en enfer","000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
-        mGroups.add(new Groups("Le cannibalisme", "Le cannibalisme c'est la vie, la vie c'est le cannibalisme",  "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
-        
+//        mGroups.add(new Group("Mangeur de gras", "Le gras c'est la vie !!!", "000001", new ColorItem("#84ffff", "#ffffff","#03a9f4")));
+//        mGroups.add(new Group("Mangeur de legumes", "Les légumes vous rende utile à la société", "000002", new ColorItem("#b9f6ca", "#000000","#1de9b6")));
+//        mGroups.add(new Group("Mangeur de viande", "Au sommet de la chaine alimentaire", "000003", new ColorItem("#b388ff", "#ffffff","#7e57c2")));
+//        mGroups.add(new Group("Mangeur de tofu", "Mange du tofu, tu mourras vieux et depressif", "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
+//        mGroups.add(new Group("Vegan", "Les mangeur de viande iront en enfer","000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
+//        mGroups.add(new Group("Le cannibalisme", "Le cannibalisme c'est la vie, la vie c'est le cannibalisme",  "000004", new ColorItem("#ff8a80", "#ffffff","#ff5252")));
+//
     }
 
     @Override
@@ -100,7 +101,7 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Groups group = mGroups.get(position);
+        Group group = mGroups.get(position);
 //        setCategoryIcon(group, holder.icon);
 //        holder.itemView.setBackgroundColor(getColor(theme.getWindowBackgroundColor()));
 
@@ -140,7 +141,7 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.ViewHolder
         return mGroups.size();
     }
 
-    public Groups getItem(int position) {
+    public Group getItem(int position) {
         return mGroups.get(position);
     }
 

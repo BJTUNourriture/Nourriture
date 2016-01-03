@@ -6,9 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import cn.bjtu.nourriture.R;
-import cn.bjtu.nourriture.model.Recipes;
+import cn.bjtu.nourriture.model.Recipe;
 
 /**
  * Created by storm on 12/20/15.
@@ -26,7 +27,7 @@ public class RecipePageActivity extends AppCompatActivity {
         setContentView(R.layout.recipe_layout);
         hideactionbar();
 
-        Recipes recipe = getIntent().getExtras().getParcelable(RecipePageActivity.NAME);
+        Recipe recipe = getIntent().getExtras().getParcelable(RecipePageActivity.NAME);
 
         toolbar = (Toolbar) findViewById(R.id.recipe_page_toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
@@ -42,9 +43,12 @@ public class RecipePageActivity extends AppCompatActivity {
         });
         getSupportActionBar().setTitle(recipe.getName());
 
-//        if (recipe.getDescription() != null) {
-//            ((TextView) findViewById(R.id.description)).setText(recipe.getDescription());
-//        }
+        if (recipe.getDescription() != null) {
+            ((TextView) findViewById(R.id.description)).setText(recipe.getDescription());
+        }
+
+        ((TextView) findViewById(R.id.time)).setText(String.valueOf(recipe.getTime()));
+        ((TextView) findViewById(R.id.price)).setText(String.valueOf(recipe.getPrice()));
     }
 
     private void hideactionbar() {
