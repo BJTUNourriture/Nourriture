@@ -20,8 +20,10 @@ exports.mailOptionsEmailConfirm = function (token, recipient) {
     	from: 'Nourriture ✔ <nourriture.postman@gmail.com>',
     	to: recipient,
     	subject: '✯ Please confirm your email ✯',
-    	html: '<h1>Please confirm your email :</h1><p><a href="http://127.0.0.1:8101/api/users/verify-email/'+token+'">Click here to confirm</a>'
-	}
+    	/*html: '<h1>Please confirm your email :</h1><p><a href="http://127.0.0.1:8101/api/users/verify-email/'+token+'">Click here to confirm</a>'*/
+        html: '<h1>Please confirm your email :</h1><p><a href="http://'+HOSTNAME+'127.0.0.1:8101/api/users/verify-email/'+token+'">Click here to confirm</a>'
+
+    }
 };
 
 exports.transporter = transporter;
