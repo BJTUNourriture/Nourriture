@@ -48,6 +48,19 @@ public class IngredientPageActivity extends AppCompatActivity {
             ((TextView) findViewById(R.id.description)).setText(ingredient.getDescription());
         }
 
+        if (ingredient.getFat() != null) {
+            ((TextView) findViewById(R.id.fat)).setText(ingredient.getFat());
+        }
+
+        if (ingredient.getCarbohydrates() != null) {
+            ((TextView) findViewById(R.id.carbohydrates)).setText(ingredient.getCarbohydrates());
+        }
+
+        if (ingredient.getProteins() != null) {
+            ((TextView) findViewById(R.id.proteins)).setText(ingredient.getProteins());
+        }
+
+
     }
 
     private void hideactionbar() {
