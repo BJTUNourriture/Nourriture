@@ -45,7 +45,7 @@
         //};
 
         ////Timeout in ms for the moment
-        $timeout(getFollower, 1000);
+        $timeout(getFollower, 2000);
         $scope.$watch(angular.bind(vm.data, function () {
             return vm.data;
         }), function (newVal) {

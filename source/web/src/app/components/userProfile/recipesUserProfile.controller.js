@@ -67,7 +67,7 @@
       $state.go("main.recipe-page", {"id" : recipe._id});
     }
 
-    $timeout(getRecipes, 1000);
+    $timeout(getRecipes, 2000);
   }
 
 })();

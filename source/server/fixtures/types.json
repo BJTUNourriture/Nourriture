@@ -1,3 +1,13 @@
 {"_id":{"$oid":"56838bef88322bb81b607d0c"},"name":"Loukoums","category":"Desserts","__v":0}
 {"_id":{"$oid":"56838bf788322bb81b607d0d"},"name":"Cake","category":"Desserts","__v":0}
 {"_id":{"$oid":"56838c0688322bb81b607d0e"},"name":"Cheese","category":"Desserts","__v":0}
+{"_id":{"$oid":"56890157a70a4ee33acea818"},"name":"Beach","caregory":"starter"}
+{"_id":{"$oid":"56890157a70a4ee33acea819"},"name":"Pennington","caregory":"entrees"}
+{"_id":{"$oid":"56890157a70a4ee33acea81a"},"name":"Sullivan","caregory":"starter"}
+{"_id":{"$oid":"56890157a70a4ee33acea81b"},"name":"Wynn","caregory":"starter"}
+{"_id":{"$oid":"56890157a70a4ee33acea81c"},"name":"Hanson","caregory":"dessert"}
+{"_id":{"$oid":"56890157a70a4ee33acea81d"},"name":"Carrillo","caregory":"starter"}
+{"_id":{"$oid":"56890157a70a4ee33acea81e"},"name":"Diaz","caregory":"dessert"}
+{"_id":{"$oid":"56890157a70a4ee33acea81f"},"name":"Cooley","caregory":"entrees"}
+{"_id":{"$oid":"56890157a70a4ee33acea820"},"name":"Hart","caregory":"dessert"}
+{"_id":{"$oid":"56890157a70a4ee33acea821"},"name":"Trujillo","caregory":"dessert"}
