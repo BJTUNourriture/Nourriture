@@ -10,6 +10,8 @@
   /** @ngInject */
   function UserService($log, $resource, URL_API, $sessionStorage, $localStorage) {
 
+    var userInfo = {"username" : null};
+
     var service = {
       user_register: $resource(URL_API + '/api/users/register/'),
       user_signin: $resource(URL_API + '/api/users/sign-in/'),
@@ -18,7 +20,9 @@
       is_authenticated: is_authenticated,
       update_user: $resource(URL_API + '/api/users/id/:id', {id: "@id"}, {'update': {method: 'PUT'}}),
       addGroupToUser : $resource(URL_API + '/api/users/addGroupToUser', {id: "@id"}, {'update': {method: 'PUT'}}),
-      removeGroupToUser : $resource(URL_API + '/api/users/removeGroupToUser', {id: "@id"}, {'update': {method: 'PUT'}})      
+      removeGroupToUser : $resource(URL_API + '/api/users/removeGroupToUser', {id: "@id"}, {'update': {method: 'PUT'}}),
+      get_username : get_username,
+      set_username : set_username
     };
 
     return service;
@@ -27,6 +31,13 @@
       return ($sessionStorage.key || $localStorage.key) ? true : false;
     }
 
+    function set_username(username) {
+      userInfo["username"] = username;
+    }
+
+    function get_username() {
+      return ($sessionStorage.name || $localStorage.name);
+    }
 
   }
 })();

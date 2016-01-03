@@ -12,6 +12,7 @@ angular
 		var vm = this;
 
 		vm.authenticated = UserService.is_authenticated;
+		vm.username = UserService.get_username;
 		$log.log(vm.authenticated);
 	}
 

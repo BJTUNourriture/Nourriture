@@ -2,23 +2,77 @@
   "_id": {
     "$oid": "56766c6871fd90d55f83f5ac"
   },
-  "title": "oihoiph",
+  "title": "Tuna Rice Puff",
   "author_id": {
     "$oid": "5667fc97ced75810292cc705"
   },
   "author_name": "sylflo",
-  "description": "\u003cp\u003edgfb\u003c/p\u003e",
+  "description": "\u003c\u003eBring the rice and water to a boil in a saucepan over high heat. Reduce heat to medium-low, cover, and simmer until the rice is tender, and the liquid has been absorbed, 20 to 25 minutes. (See Cook's Note.)Preheat oven to 350 degrees F (175 degrees C).Melt the butter in a large saucepan over medium-low heat. Whisk in the flour, salt, and pepper; cook and stir for 2 minutes. Gradually whisk the milk into the flour mixture, and bring to a simmer over medium heat. Cook, stirring frequently, until mixture has thickened slightly, about 3 minutes. Remove from heat.Whisk the egg yolks slightly in a medium bowl. Gradually pour a steady stream of the hot milk mixture into the egg yolks, whisking constantly, until you have whisked in about half of the milk mixture. Return the egg yolk mixture to the saucepan with the remaining milk, and whisk until smooth. Cook 2 more minutes, stirring constantly. Remove from heat. Stir the rice, tuna, onion, and lemon juice into the milk mixture.Beat egg whites until foamy in a large glass or metal mixing bowl. Lift your beater or whisk straight up: the egg whites should form a sharp peak that holds its shape; set aside.Gently fold in the egg whites until evenly blended, then pour into a 1 1/2 quart casserole dish.Bake in the preheated oven until the casserole has puffed slightly, is golden brown, and has set in the center, about 40 minutes.\u003c/p\u003e",
   "ingredients": [
     {
       "_id": {
         "$oid": "56766c4a71fd90d55f83f5ab"
       },
-      "name": "toto",
+      "name": "white rice",
       "id_ingredient": {
         "$oid": "56766c4a71fd90d55f83f5ab"
       },
-      "amount": 10
+      "amount": 85
+    }, {
+      "name": "flour",
+      "id_ingredient": {
+        "$oid": "5683a04fb2afb26862f2b4b2"
+      },
+      "amount": 85
+    },
+
+
+    {
+      "name": "salt",
+      "id_ingredient": {
+        "$oid": "5683a6abb2afb26862f2b4b8"
+      },
+      "amount": 85
+    },
+    {
+      "name": "milk",
+      "id_ingredient": {
+        "$oid": "5683a6abb2afb26862f2b4b9"
+      },
+      "amount": 85
+    },
+    {
+      "name": "egg",
+      "id_ingredient": {
+        "$oid": "5683a6abb2afb26862f2b4ba"
+      },
+      "amount": 85
+    },
+    {
+      "name": "can tuna",
+      "id_ingredient": {
+        "$oid": "5683a6abb2afb26862f2b4bb"
+      },
+      "amount": 85
+    },
+    {
+      "name": "lemom juice",
+      "id_ingredient": {
+        "$oid": "5683a6abb2afb26862f2b4bd"
+      },
+      "amount": 85
+    },
+    {
+      "name": "egg white",
+      "id_ingredient": {
+        "$oid": "5683a6abb2afb26862f2b4bd"
+      },
+      "amount": 85
     }
+
+
+
+
   ],
   "pictures": [
     {
@@ -31,7 +85,7 @@
   "votes": [],
   "number_vote": 0,
   "average_price": 3,
-  "time_preparation": 0,
+  "time_preparation": 90,
   "average_score": 0,
   "difficulty": 2,
   "date_posted": {
@@ -39,5 +93,5 @@
   },
   "__v": 0
 }
-{"_id":{"$oid": "567757e2805ee5de045f9ba7"}, "title":"Soupe", "author_id":{"$oid": "5667fc97ced75810292cc705"},"author_name": "sylflo", "description": "\u003cp\u003eSoupe\u003c/p\u003e", "ingredients":[{"_id":{"$oid": "56766c4a71fd90d55f83f5ab"}, "name": "toto", "id_ingredient":{"$oid": "56766c4a71fd90d55f83f5ab"}, "amount": 100}], "pictures":[{"thumbnail_url": "assets/images/recipesdummy/no_image.png", "_id":{"$oid":"567757e2805ee5de045f9ba8"}}], "votes":[], "number_vote": 0, "average_price": 3, "time_preparation": 0, "average_score": 0, "difficulty": 1, "date_posted":{"$date": "2015-12-21T01:37:38.833Z"}, "__v": 0
+{"_id":{"$oid": "567757e2805ee5de045f9ba7"}, "title": "Soupe", "author_id":{"$oid": "5667fc97ced75810292cc705"}, "author_name": "sylflo", "description": "\u003cp\u003eSoupe\u003c/p\u003e", "ingredients":[{"_id":{"$oid": "56766c4a71fd90d55f83f5ab"}, "name": "toto", "id_ingredient":{"$oid": "56766c4a71fd90d55f83f5ab"}, "amount": 100}], "pictures":[{"thumbnail_url": "assets/images/recipesdummy/no_image.png", "_id":{"$oid":"567757e2805ee5de045f9ba8"}}], "votes":[], "number_vote": 0, "average_price": 3, "time_preparation": 0, "average_score": 0, "difficulty": 1, "date_posted":{"$date": "2015-12-21T01:37:38.833Z"}, "__v": 0
 }

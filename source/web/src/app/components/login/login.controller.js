@@ -32,6 +32,7 @@ function LoginController($scope, UserService, toastr, $state, $sessionStorage, $
 			$sessionStorage.user_id = data["user_id"];
 			$sessionStorage.name = data["user_name"];
 		}
+		UserService.set_username(data["user_name"]);
 		$state.go("main.homepage");
 	};
 

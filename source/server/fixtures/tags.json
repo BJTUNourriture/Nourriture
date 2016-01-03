@@ -1,0 +1,3 @@
+{"_id":{"$oid":"56838c4388322bb81b607d0f"},"name":"Yummy","description":"This is yummy","flag":{"name":"Miam","level":7},"__v":0}
+{"_id":{"$oid":"56838cbf88322bb81b607d10"},"name":"Yummy42","description":"This is yummy","flag":{"name":"Miam","level":7},"__v":0}
+{"_id":{"$oid":"56838cc488322bb81b607d11"},"name":"Yummy4242","description":"This is yummy","flag":{"name":"Miam","level":7},"__v":0}

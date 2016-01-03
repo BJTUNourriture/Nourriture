@@ -5,8 +5,19 @@
   "email": "dev.chateau@gmail.com",
   "username": "sylflo",
   "password": "$2a$05$se26r.cM887mYtzd/t5vNu9pVlHUZMOchQtjat2hTu426BSJKZOTS",
-  "followed_by": [],
-  "follow": [],
+  "followed_by": [
+    {
+      "id_person" : "5683887bb5a2d34f118150a2",
+      "username" : "nourriture"
+    }
+  ],
+  "follow": [
+    {
+      "id_person" : "5683887bb5a2d34f118150a2",
+      "username" : "nourriture"
+    }
+
+  ],
   "dislike": [],
   "like": [],
   "joined_groups": [],
@@ -16,3 +27,97 @@
   "email_verified": true,
   "__v": 0
 }
+{"_id":{"$oid": "5683887bb5a2d34f118150a2"}, "email":"nourriture@hotmail.fr", "username": "nourriture", "password": "$2a$05$BjzcT5VgrUw9mdo/3lTXqepAVFS2vBRVTx3OOFeUXd9sDNlr2phYy","followed_by":[], "follow":[], "dislike":[], "like":[], "joined_groups":[], "pictures":[], "religion":[], "alergy":[], "email_verified": true, "__v": 0
+}
+
+{"email":"oborotev@hotmail.fr", "username": "oborotev", "password": "$2a$05$BjzcT5VgrUw9mdo/3lTXqepAVFS2vBRVTx3OOFeUXd9sDNlr2phYy",
+
+"followed_by":[
+
+{
+"id_person" : "5667fc97ced75810292cc705",
+"username" : "sylflo"
+}
+
+],
+
+"follow":[
+{
+"id_person": "5667fc97ced75810292cc705",
+"username": "sylflo"
+}
+],
+
+"dislike":[
+{
+"id_ingredient": "56838a4388322bb81b607cf",
+"name_ingredient": "toto42"
+}
+],
+
+"like": [
+{
+"id_ingredient": "56766c4a71fd90d55f83f5ab",
+"name_ingredient": "toto"
+}
+],
+
+"joined_groups":[
+{
+"id_groups" : "56838dc088322bb81b607d12",
+"name" : "Le gang du gras"
+}
+],
+
+"pictures":[
+{
+"thumbnail_url" : "/thumbnails/1.jpg",
+"medium_sized_url" : "/medium_sized/1.jpg",
+"big_sized_url" : "/big_sized/1.jpg"
+}
+],
+
+"religion":[
+{
+"id_groups" : "56838dc988322bb81b607d15",
+"name" : "Le gang du gras 42"
+}
+],
+
+"alergy":[
+{
+"id_ingredient" : "56838b6288322bb81b607d00",
+"name" : "Nuts"
+}
+],
+
+"email_verified": true, "__v": 0
+}
+
+
+{"email":"corleox@hotmail.fr", "username": "corleox", "password": "$2a$05$BjzcT5VgrUw9mdo/3lTXqepAVFS2vBRVTx3OOFeUXd9sDNlr2phYy","followed_by":[], "follow":[], "dislike":[], "like":[], "joined_groups":[], "pictures":[], "religion":[], "alergy":[], "email_verified": true, "__v": 0
+}
+
+{"email":"garfield@hotmail.fr", "username": "garfield", "password": "$2a$05$BjzcT5VgrUw9mdo/3lTXqepAVFS2vBRVTx3OOFeUXd9sDNlr2phYy","followed_by":[], "follow":[], "dislike":[], "like":[], "joined_groups":[], "pictures":[], "religion":[], "alergy":[], "email_verified": true, "__v": 0
+}
+
+{ "email":"tom@hotmail.fr", "username": "tom", "password": "$2a$05$BjzcT5VgrUw9mdo/3lTXqepAVFS2vBRVTx3OOFeUXd9sDNlr2phYy","followed_by":[], "follow":[], "dislike":[], "like":[], "joined_groups":[], "pictures":[], "religion":[], "alergy":[], "email_verified": true, "__v": 0
+}
+
+{"email":"jerry@hotmail.fr", "username": "jerry", "password": "$2a$05$BjzcT5VgrUw9mdo/3lTXqepAVFS2vBRVTx3OOFeUXd9sDNlr2phYy","followed_by":[], "follow":[], "dislike":[], "like":[], "joined_groups":[], "pictures":[], "religion":[], "alergy":[], "email_verified": true, "__v": 0
+}
+
+{"email":"titi@hotmail.fr", "username": "titi", "password": "$2a$05$BjzcT5VgrUw9mdo/3lTXqepAVFS2vBRVTx3OOFeUXd9sDNlr2phYy","followed_by":[], "follow":[], "dislike":[], "like":[], "joined_groups":[], "pictures":[], "religion":[], "alergy":[], "email_verified": true, "__v": 0
+}
+{"email":"gros.minet@hotmail.fr", "username": "gros_minet", "password": "$2a$05$BjzcT5VgrUw9mdo/3lTXqepAVFS2vBRVTx3OOFeUXd9sDNlr2phYy","followed_by":[], "follow":[], "dislike":[], "like":[], "joined_groups":[], "pictures":[], "religion":[], "alergy":[], "email_verified": true, "__v": 0
+}
+
+{"email":"coyotte@hotmail.fr", "username": "coyotte", "password": "$2a$05$BjzcT5VgrUw9mdo/3lTXqepAVFS2vBRVTx3OOFeUXd9sDNlr2phYy","followed_by":[], "follow":[], "dislike":[], "like":[], "joined_groups":[], "pictures":[], "religion":[], "alergy":[], "email_verified": true, "__v": 0
+}
+
+
+
+
+
+
+
