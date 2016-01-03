@@ -10,7 +10,6 @@ cd /var/www/nourriture.sylflo.fr/Nourriture/source/server
 npm install
 
 cd /var/www/nourriture.sylflo.fr/Nourriture/source/web
-rm -rf /var/www/nourriture.sylflo.fr/Nourriture/source/web/dist/
 npm install
 bower install
 gulp config-hostname --env="production"
