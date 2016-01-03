@@ -31,7 +31,9 @@ public class IngredientPageActivity extends AppCompatActivity {
         Ingredient ingredient = getIntent().getExtras().getParcelable(IngredientPageActivity.NAME);
 
         toolbar = (Toolbar) findViewById(R.id.ingredient_page_toolbar);
-        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setTitleTextColor(new Color().parseColor(ingredient.getColor().getTextColor()));
+        toolbar.setBackgroundColor(new Color().parseColor(ingredient.getColor().getPrimaryColor()));
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

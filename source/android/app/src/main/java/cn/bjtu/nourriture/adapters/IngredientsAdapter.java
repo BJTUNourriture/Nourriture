@@ -1,6 +1,7 @@
 package cn.bjtu.nourriture.adapters;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,7 @@ import cn.bjtu.nourriture.api.NourritureService;
 import cn.bjtu.nourriture.api.ServiceFactory;
 import cn.bjtu.nourriture.model.Ingredient;
 import cn.bjtu.nourriture.pages.IngredientPageActivity;
+import cn.bjtu.nourriture.pages.RecipePageActivity;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -96,7 +98,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         Ingredient ingredient = mIngredients.get(position);
 
 
@@ -112,10 +114,16 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
             @Override
             public void onClick(View v) {
                 mOnItemClickListener.onClick(v, position);
+//
+//                Intent intent = new Intent(mActivity, IngredientPageActivity.class);
+//                intent.putExtra(IngredientPageActivity.NAME, mIngredients.get(position));
+//                mActivity.startActivity(intent);
 
+                holder.name.setTransitionName("title");
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(mActivity, holder.name, "title");
                 Intent intent = new Intent(mActivity, IngredientPageActivity.class);
-                intent.putExtra(IngredientPageActivity.NAME, mIngredients.get(position));
-                mActivity.startActivity(intent);
+                intent.putExtra(RecipePageActivity.NAME, mIngredients.get(position));
+                mActivity.startActivity(intent, options.toBundle());
 
 //                FragmentTransaction ft = ((FragmentActivity) mActivity).getSupportFragmentManager().beginTransaction();
 //                ft.replace(R.id.frame, IngredientPageActivity.newInstance(mIngredients.get(position)));

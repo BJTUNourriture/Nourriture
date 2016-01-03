@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@color/PrimaryDarkColor"
         android:elevation="4dp"
+        android:transitionName="title"
         app:theme="@style/ToolbarColoredBackArrow"/>
 
 

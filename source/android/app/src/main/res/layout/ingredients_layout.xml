@@ -11,6 +11,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:transitionName="title"
         android:background="@color/PrimaryDarkColor"
         android:elevation="4dp"
         app:theme="@style/ToolbarColoredBackArrow"/>

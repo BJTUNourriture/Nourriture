@@ -1,6 +1,7 @@
 package cn.bjtu.nourriture.adapters;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
@@ -119,7 +120,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
 
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         Recipe recipe = mRecipes.get(position);
 //        setCategoryIcon(recipe, holder.icon);
 //        holder.itemView.setBackgroundColor(getColor(theme.getWindowBackgroundColor()));
@@ -143,9 +144,17 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
 //                ft.replace(R.id.frame, RecipePageActivity.newInstance(mRecipes.get(position)));
 //                ft.commit();
 
+
+                holder.title.setTransitionName("title");
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(mActivity, holder.title, "title");
                 Intent intent = new Intent(mActivity, RecipePageActivity.class);
                 intent.putExtra(RecipePageActivity.NAME, mRecipes.get(position));
-                mActivity.startActivity(intent);
+                mActivity.startActivity(intent, options.toBundle());
+
+
+//                Intent intent = new Intent(mActivity, RecipePageActivity.class);
+//                intent.putExtra(RecipePageActivity.NAME, mRecipes.get(position));
+//                mActivity.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(mActivity).toBundle());
             }
         });
     }

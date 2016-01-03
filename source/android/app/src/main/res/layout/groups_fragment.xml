@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="No groups found"
-        android:visibility="visible"/>
+        android:visibility="invisible"/>
 
 
     <android.support.v7.widget.RecyclerView

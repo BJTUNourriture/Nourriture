@@ -59,7 +59,7 @@ public class Recipe implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-       // dest.writeParcelable(this.colorItem, flags);
+        dest.writeParcelable(this.colorItem, flags);
         dest.writeString(this._id);
         dest.writeString(this.title);
         dest.writeString(this.description);
@@ -69,7 +69,7 @@ public class Recipe implements Parcelable {
     }
 
     private Recipe(Parcel in) {
-//        this.colorItem = in.readParcelable(ColorItem.class.getClassLoader());
+        this.colorItem = in.readParcelable(ColorItem.class.getClassLoader());
         this._id = in.readString();
         this.title = in.readString();
         this.description = in.readString();

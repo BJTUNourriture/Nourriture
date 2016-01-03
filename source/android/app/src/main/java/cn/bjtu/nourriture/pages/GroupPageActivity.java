@@ -31,7 +31,9 @@ public class GroupPageActivity extends AppCompatActivity {
         Group group = getIntent().getExtras().getParcelable(GroupPageActivity.NAME);
 
         toolbar = (Toolbar) findViewById(R.id.group_page_toolbar);
-        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setTitleTextColor(new Color().parseColor(group.getColor().getTextColor()));
+        toolbar.setBackgroundColor(new Color().parseColor(group.getColor().getPrimaryColor()));
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

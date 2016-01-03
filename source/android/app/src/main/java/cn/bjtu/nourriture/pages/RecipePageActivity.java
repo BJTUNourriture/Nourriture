@@ -30,7 +30,9 @@ public class RecipePageActivity extends AppCompatActivity {
         Recipe recipe = getIntent().getExtras().getParcelable(RecipePageActivity.NAME);
 
         toolbar = (Toolbar) findViewById(R.id.recipe_page_toolbar);
-        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setTitleTextColor(new Color().parseColor(recipe.getColor().getTextColor()));
+        toolbar.setBackgroundColor(new Color().parseColor(recipe.getColor().getPrimaryColor()));
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

@@ -45,14 +45,14 @@ public class Group implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-//        dest.writeParcelable(this.colorItem, flags);
+        dest.writeParcelable(this.colorItem, flags);
         dest.writeString(this._id);
         dest.writeString(this.name);
         dest.writeString(this.description);
     }
 
     private Group(Parcel in) {
-//        this.colorItem = in.readParcelable(ColorItem.class.getClassLoader());
+        this.colorItem = in.readParcelable(ColorItem.class.getClassLoader());
         this._id = in.readString();
         this.name = in.readString();
         this.description = in.readString();
