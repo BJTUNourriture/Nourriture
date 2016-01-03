@@ -20,7 +20,6 @@ import cn.bjtu.nourriture.api.NourritureService;
 import cn.bjtu.nourriture.api.ServiceFactory;
 import cn.bjtu.nourriture.model.Ingredient;
 import cn.bjtu.nourriture.pages.IngredientPageActivity;
-import cn.bjtu.nourriture.pages.RecipePageActivity;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -122,7 +121,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
                 holder.name.setTransitionName("title");
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(mActivity, holder.name, "title");
                 Intent intent = new Intent(mActivity, IngredientPageActivity.class);
-                intent.putExtra(RecipePageActivity.NAME, mIngredients.get(position));
+                intent.putExtra(IngredientPageActivity.NAME, mIngredients.get(position));
                 mActivity.startActivity(intent, options.toBundle());
 
 //                FragmentTransaction ft = ((FragmentActivity) mActivity).getSupportFragmentManager().beginTransaction();
