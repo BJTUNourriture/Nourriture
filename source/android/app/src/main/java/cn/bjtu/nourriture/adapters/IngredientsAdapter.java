@@ -1,28 +1,24 @@
 package cn.bjtu.nourriture.adapters;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import cn.bjtu.nourriture.R;
 import cn.bjtu.nourriture.api.NourritureService;
 import cn.bjtu.nourriture.api.ServiceFactory;
-import cn.bjtu.nourriture.fragments.IngredientPageFragment;
 import cn.bjtu.nourriture.model.Ingredients;
+import cn.bjtu.nourriture.pages.IngredientPageActivity;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -115,9 +111,13 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
             public void onClick(View v) {
                 mOnItemClickListener.onClick(v, position);
 
-                FragmentTransaction ft = ((FragmentActivity) mActivity).getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.frame, IngredientPageFragment.newInstance(mIngredients.get(position)));
-                ft.commit();
+                Intent intent = new Intent(mActivity, IngredientPageActivity.class);
+                intent.putExtra(IngredientPageActivity.NAME, mIngredients.get(position));
+                mActivity.startActivity(intent);
+
+//                FragmentTransaction ft = ((FragmentActivity) mActivity).getSupportFragmentManager().beginTransaction();
+//                ft.replace(R.id.frame, IngredientPageActivity.newInstance(mIngredients.get(position)));
+//                ft.commit();
             }
         });
     }

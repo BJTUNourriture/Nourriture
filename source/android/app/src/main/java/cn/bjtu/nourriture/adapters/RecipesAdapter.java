@@ -1,9 +1,8 @@
 package cn.bjtu.nourriture.adapters;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,8 +20,8 @@ import java.util.List;
 import cn.bjtu.nourriture.R;
 import cn.bjtu.nourriture.api.NourritureService;
 import cn.bjtu.nourriture.api.ServiceFactory;
-import cn.bjtu.nourriture.fragments.RecipePageFragment;
 import cn.bjtu.nourriture.model.Recipes;
+import cn.bjtu.nourriture.pages.RecipePageActivity;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -136,9 +135,13 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
                 mOnItemClickListener.onClick(v, position);
                 Log.d(TAG, "ALLAHU AKBAR " + position);
 
-                FragmentTransaction ft = ((FragmentActivity) mActivity).getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.frame, RecipePageFragment.newInstance(mRecipes.get(position)));
-                ft.commit();
+//                FragmentTransaction ft = ((FragmentActivity) mActivity).getSupportFragmentManager().beginTransaction();
+//                ft.replace(R.id.frame, RecipePageActivity.newInstance(mRecipes.get(position)));
+//                ft.commit();
+
+                Intent intent = new Intent(mActivity, RecipePageActivity.class);
+                intent.putExtra(RecipePageActivity.NAME, mRecipes.get(position));
+                mActivity.startActivity(intent);
             }
         });
     }
