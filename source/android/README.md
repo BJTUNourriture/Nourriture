@@ -12,8 +12,4 @@ This app is a android client for Nourriture api.
 - [okhttp](https://square.github.io/okhttp/)
 - [retrofit](https://square.github.io/retrofit/)
 - [gson](https://github.com/google/gson)
-- [glide](https://github.com/bumptech/glide)
 - [RxJava](https://github.com/ReactiveX/RxJava)
-- [RxAndroid](https://github.com/ReactiveX/RxAndroid)
-- [RxBinding](https://github.com/JakeWharton/RxBinding)
-- [RxLifecycle](https://github.com/trello/RxLifecycle)
